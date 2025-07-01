@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 - 운천늘봄학교</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">운천늘봄학교</div>
+        <div class="login-tabs">
+            <button type="button" class="login-tab active" data-role="teacher">교사</button>
+            <button type="button" class="login-tab" data-role="parent">학부모</button>
+            <button type="button" class="login-tab" data-role="student">학생</button>
+        </div>
+        <form class="login-form" id="loginForm">
+            <div class="input-group">
+                <input type="text" id="userId" placeholder="아이디" required autocomplete="username">
+            </div>
+            <div class="input-group password-group">
+                <input type="password" id="password" placeholder="비밀번호" required autocomplete="current-password">
+                <button type="button" class="toggle-password" id="togglePassword" title="비밀번호 표시/숨기기" tabindex="-1" aria-label="비밀번호 표시/숨기기">
+                    <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#b0b8c1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="8" ry="5"/><circle cx="12" cy="12" r="2.5"/></svg>
+                </button>
+            </div>
+            <div class="options">
+                <label><input type="checkbox" id="autoLogin"> 자동 로그인</label>
+                <label><input type="checkbox" id="saveId"> 아이디 저장</label>
+                <label style="margin-left:12px;"><input type="checkbox" id="keepLogin"> 로그인 유지</label>
+                <a href="#" class="option-link">비밀번호 찾기</a>
+                <a href="#" class="option-link">FAQ</a>
+            </div>
+            <button type="submit" class="login-btn">로그인</button>
+            <div class="error-message" id="errorMessage"></div>
+        </form>
+        <div class="links">
+            <a href="#">아이디 찾기</a>
+            <span>|</span>
+            <a href="#">비밀번호 찾기</a>
+            <span>|</span>
+            <a href="teacher_signup.html">회원가입</a>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html> 

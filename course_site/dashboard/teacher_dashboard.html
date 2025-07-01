@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강좌관리 - 운천늘봄학교</title>
+    <link rel="stylesheet" href="teacher_dashboard.css">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <aside class="sidebar">
+            <div class="school-name">운천초등학교</div>
+            <div class="profile">
+                <div class="avatar"></div>
+                <div class="profile-info">
+                    <div class="name">박진수님</div>
+                    <div class="edit-profile"><a href="#">[로그아웃] [정보수정]</a></div>
+                </div>
+            </div>
+            <nav class="menu">
+                <a href="#" class="menu-item">홈으로</a>
+                <a href="#" class="menu-item active">강좌등록</a>
+                <a href="#" class="menu-item">고객지원 게시판</a>
+                <a href="#" class="menu-item">학교관리</a>
+                <a href="#" class="menu-item">강좌관리</a>
+                <a href="#" class="menu-item">신청자관리</a>
+                <a href="#" class="menu-item">대기자관리</a>
+                <a href="#" class="menu-item">환불/취소관리</a>
+                <a href="#" class="menu-item">지원금관리</a>
+                <a href="#" class="menu-item">설문관리</a>
+                <a href="#" class="menu-item">환경설정</a>
+                <a href="#" class="menu-item">알림관리</a>
+                <a href="#" class="menu-item">연장신청 <span class="badge">243일 남음</span></a>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="main-header">
+                <div class="school-title">늘봄학교</div>
+                <div class="header-menu">
+                    <button class="header-btn">강좌등록</button>
+                    <button class="header-btn">메뉴얼</button>
+                </div>
+            </header>
+            <section class="notice-box">
+                <span class="notice-icon">!</span>
+                <span class="notice-text">수강신청 시작시간은 학교사정에 따라 제한이 있으므로 가정통신문 발송 전에 반드시 <b>수강신청 기간을 미리 설정</b>하세요. 자주 하는 문의는 <b>"매뉴얼"</b>에 정리되어 있으니 참고하시고 기타 문의사항은 <b>"고객지원 게시판"</b>에 접수 바랍니다.</span>
+            </section>
+            <section class="filter-box">
+                <select><option>구분전체</option></select>
+                <select><option>늘봄과정</option></select>
+                <select><option>상태전체</option></select>
+                <select><option>학년</option></select>
+                <select><option>강좌명</option></select>
+                <input type="text" placeholder="검색어">
+                <button class="search-btn">검색</button>
+                <button class="excel-btn">검색결과엑셀출력</button>
+            </section>
+            <section class="action-btns">
+                <button class="main-btn">강좌 등록</button>
+                <button class="main-btn">강좌 일괄입력</button>
+                <button class="main-btn">강좌 일괄수정</button>
+                <button class="main-btn">강좌 일괄복사</button>
+                <button class="main-btn">강좌 통계</button>
+            </section>
+            <section class="table-section">
+                <table class="course-table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox"></th>
+                            <th>연번</th>
+                            <th>수정</th>
+                            <th>구분</th>
+                            <th>강좌명</th>
+                            <th>강사ID</th>
+                            <th>신청/정원</th>
+                            <th>대기자/정원</th>
+                            <th>학년</th>
+                            <th>운영기간</th>
+                            <th>강의시간</th>
+                            <th>수강료</th>
+                            <th>수강료출력</th>
+                            <th>강사마감</th>
+                            <th>환불마감</th>
+                            <th>상태</th>
+                            <th>삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>312</td>
+                            <td><button class="icon-btn">⚙️</button></td>
+                            <td>7월<br>돌봄</td>
+                            <td>[돌봄] 선택형 돌봄 1부 (월 14:00~14:50)</td>
+                            <td>돌봄전담사</td>
+                            <td>14 / 40</td>
+                            <td>0 / 5</td>
+                            <td>1,2,3,4,5,6</td>
+                            <td>2025-07-01~2025-07-25</td>
+                            <td>월:14:00~14:50</td>
+                            <td>0</td>
+                            <td>Y</td>
+                            <td>Y</td>
+                            <td>Y</td>
+                            <td>종료</td>
+                            <td><button class="icon-btn">🗑️</button></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>311</td>
+                            <td><button class="icon-btn">⚙️</button></td>
+                            <td>7월<br>돌봄</td>
+                            <td>[돌봄] 선택형 돌봄 2부 (월 15:00~15:50)</td>
+                            <td>돌봄전담사</td>
+                            <td>10 / 40</td>
+                            <td>0 / 5</td>
+                            <td>1,2,3,4,5,6</td>
+                            <td>2025-07-01~2025-07-25</td>
+                            <td>월:15:00~15:50</td>
+                            <td>0</td>
+                            <td>Y</td>
+                            <td>Y</td>
+                            <td>Y</td>
+                            <td>종료</td>
+                            <td><button class="icon-btn">🗑️</button></td>
+                        </tr>
+                        <!-- 예시 데이터 추가 가능 -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    <script src="teacher_dashboard.js"></script>
+</body>
+</html> 

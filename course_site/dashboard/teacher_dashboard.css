@@ -1,0 +1,234 @@
+body {
+    margin: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #f4f7fa;
+}
+.dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 220px;
+    background: #2d3e50;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+.school-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    background: #1e88e5;
+    padding: 18px 0;
+    text-align: center;
+    letter-spacing: 1.5px;
+}
+.profile {
+    display: flex;
+    align-items: center;
+    padding: 18px 16px 10px 16px;
+    border-bottom: 1px solid #3a4a5d;
+}
+.avatar {
+    width: 48px;
+    height: 48px;
+    background: #b0c4de;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+.profile-info .name {
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+.profile-info .edit-profile {
+    font-size: 0.92rem;
+    margin-top: 2px;
+}
+.profile-info .edit-profile a {
+    color: #b0c4de;
+    text-decoration: none;
+}
+.menu {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+.menu-item {
+    padding: 12px 24px;
+    color: #e3eaf2;
+    text-decoration: none;
+    font-size: 1.02rem;
+    border-left: 4px solid transparent;
+    transition: background 0.2s, border-color 0.2s;
+}
+.menu-item.active, .menu-item:hover {
+    background: #1e88e5;
+    color: #fff;
+    border-left: 4px solid #42a5f5;
+}
+.badge {
+    background: #ffb300;
+    color: #222;
+    border-radius: 10px;
+    padding: 2px 8px;
+    font-size: 0.85rem;
+    margin-left: 6px;
+}
+.main-content {
+    flex: 1;
+    background: #f4f7fa;
+    padding: 0 0 32px 0;
+    min-width: 0;
+}
+.main-header {
+    background: #2196f3;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 36px 18px 36px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    box-shadow: 0 2px 8px rgba(30,136,229,0.07);
+}
+.header-menu .header-btn {
+    background: #fff;
+    color: #2196f3;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.header-menu .header-btn:hover {
+    background: #e3f0fc;
+    color: #1565c0;
+}
+.notice-box {
+    background: #fff3e0;
+    color: #e65100;
+    margin: 28px 36px 0 36px;
+    padding: 14px 18px;
+    border-radius: 8px;
+    font-size: 1.01rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 4px rgba(255,193,7,0.07);
+}
+.notice-icon {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-right: 8px;
+}
+.notice-text b {
+    color: #1565c0;
+}
+.filter-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 22px 36px 0 36px;
+}
+.filter-box select, .filter-box input[type="text"] {
+    padding: 7px 12px;
+    border: 1.2px solid #b0b8c1;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #fff;
+    color: #222;
+}
+.filter-box .search-btn, .filter-box .excel-btn {
+    background: #1e88e5;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 4px;
+    transition: background 0.2s;
+}
+.filter-box .excel-btn {
+    background: #43a047;
+}
+.filter-box .search-btn:hover {
+    background: #1565c0;
+}
+.filter-box .excel-btn:hover {
+    background: #2e7031;
+}
+.action-btns {
+    display: flex;
+    gap: 8px;
+    margin: 18px 36px 0 36px;
+}
+.main-btn {
+    background: linear-gradient(90deg, #1e88e5 60%, #42a5f5 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(30,136,229,0.07);
+    transition: background 0.2s, box-shadow 0.2s;
+}
+.main-btn:hover {
+    background: linear-gradient(90deg, #1565c0 60%, #1e88e5 100%);
+    box-shadow: 0 2px 8px rgba(30,136,229,0.13);
+}
+.table-section {
+    margin: 24px 36px 0 36px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(30,136,229,0.07);
+    overflow-x: auto;
+}
+.course-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.98rem;
+    min-width: 1200px;
+}
+.course-table th, .course-table td {
+    border: 1px solid #e0e6ed;
+    padding: 10px 8px;
+    text-align: center;
+    background: #fff;
+}
+.course-table th {
+    background: #e3f0fc;
+    font-weight: 700;
+    color: #1565c0;
+}
+.icon-btn {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: #888;
+    transition: color 0.2s;
+}
+.icon-btn:hover {
+    color: #e53935;
+}
+@media (max-width: 900px) {
+    .sidebar {
+        display: none;
+    }
+    .main-header, .notice-box, .filter-box, .action-btns, .table-section {
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 2vw;
+        padding-right: 2vw;
+    }
+    .main-header {
+        padding: 18px 2vw;
+    }
+} 
