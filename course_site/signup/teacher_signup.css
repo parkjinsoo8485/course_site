@@ -1,7 +1,7 @@
 body {
     background: #f7f9fb;
     margin: 0;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'Noto Sans', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', Arial, sans-serif;
 }
 .signup-container {
     max-width: 400px;
@@ -49,6 +49,7 @@ body {
     font-size: 1rem;
     background: #f7f9fb;
     transition: border-color 0.2s;
+    font-family: 'Noto Sans', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', Arial, sans-serif;
 }
 .input-group input:focus {
     border-color: #1e88e5;
@@ -78,6 +79,7 @@ body {
     cursor: pointer;
     transition: background 0.2s;
     margin-top: 8px;
+    font-family: 'Noto Sans', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', Arial, sans-serif;
 }
 .signup-btn:hover {
     background: linear-gradient(90deg, #1565c0 60%, #1e88e5 100%);
