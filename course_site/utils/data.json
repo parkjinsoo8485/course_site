@@ -1,0 +1,108 @@
+{
+  "schools": [
+    {
+      "id": "sch_1",
+      "code": "UNCHON2025",
+      "name": "운천초등학교",
+      "plan": "standard",
+      "status": "active",
+      "expireDate": "2026-12-31",
+      "createdAt": "2026-08-10T12:41:12.226Z"
+    },
+    {
+      "id": "sch_2",
+      "code": "SEOUL2025",
+      "name": "서울늘봄초등학교",
+      "plan": "premium",
+      "status": "active",
+      "expireDate": "2026-11-30",
+      "createdAt": "2026-08-10T12:41:12.228Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "usr_teacher1",
+      "schoolId": "sch_1",
+      "username": "teacher",
+      "name": "박진수",
+      "email": "teacher@unchon.es.kr",
+      "phone": "010-1234-5678",
+      "role": "teacher",
+      "passwordHash": "$2b$10$.T6ynp9RbeTSxy4WM7TT7OYiQO.1gC3719wmo6o3Rv3lRgh1ksCfK",
+      "createdAt": "2026-08-10T12:41:12.392Z"
+    },
+    {
+      "id": "usr_admin1",
+      "schoolId": "sch_1",
+      "username": "schadmin",
+      "name": "학교관리자",
+      "email": "admin@unchon.es.kr",
+      "phone": "010-9999-8888",
+      "role": "school_admin",
+      "passwordHash": "$2b$10$IA2TVEKdMN7tinhUsZ3JXeX9aVtUe71gUJXNrQZwCpNry/VvY.Ou6",
+      "createdAt": "2026-08-10T12:41:12.392Z"
+    }
+  ],
+  "courses": [
+    {
+      "id": "crs_1",
+      "schoolId": "sch_1",
+      "code": "312",
+      "category": "7월 돌봄",
+      "title": "[돌봄] 선택형 돌봄 1부 (월 14:00~14:50)",
+      "teacherName": "돌봄전담사",
+      "applied": 14,
+      "capacity": 40,
+      "waiting": 0,
+      "waitingCapacity": 5,
+      "grade": "1,2,3,4,5,6",
+      "period": "2025-07-01~2025-07-25",
+      "schedule": "월:14:00~14:50",
+      "fee": 0,
+      "feeReceipt": "Y",
+      "teacherClosed": "Y",
+      "refundClosed": "Y",
+      "status": "종료"
+    },
+    {
+      "id": "crs_2",
+      "schoolId": "sch_1",
+      "code": "311",
+      "category": "7월 돌봄",
+      "title": "[돌봄] 선택형 돌봄 2부 (월 15:00~15:50)",
+      "teacherName": "돌봄전담사",
+      "applied": 10,
+      "capacity": 40,
+      "waiting": 0,
+      "waitingCapacity": 5,
+      "grade": "1,2,3,4,5,6",
+      "period": "2025-07-01~2025-07-25",
+      "schedule": "월:15:00~15:50",
+      "fee": 0,
+      "feeReceipt": "Y",
+      "teacherClosed": "Y",
+      "refundClosed": "Y",
+      "status": "종료"
+    },
+    {
+      "id": "crs_3",
+      "schoolId": "sch_1",
+      "code": "313",
+      "category": "방과후 특기적성",
+      "title": "[특기적성] 창의 로봇교실 A반",
+      "teacherName": "김로봇 강사",
+      "applied": 18,
+      "capacity": 20,
+      "waiting": 2,
+      "waitingCapacity": 5,
+      "grade": "1,2,3",
+      "period": "2026-03-01~2026-06-30",
+      "schedule": "화,목:15:00~15:50",
+      "fee": 35000,
+      "feeReceipt": "Y",
+      "teacherClosed": "N",
+      "refundClosed": "N",
+      "status": "모집중"
+    }
+  ]
+}

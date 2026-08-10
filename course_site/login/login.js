@@ -1,69 +1,96 @@
-// login.js
-(() => {
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzxT9aYnXMfHGi7jmqmtvICGFBbYHyPKfmDDEfGJt3N97OVoBqs0Mga0Pf8JaeAmLM/exec';
-  
-    // DOM 캐싱
-    const form          = document.getElementById('loginForm');
-    const userIdInput   = document.getElementById('userId');
-    const pwInput       = document.getElementById('password');
-    const errBox        = document.getElementById('errorMessage');
-    const toggleBtn     = document.getElementById('togglePassword');
-    const eyeIcon       = document.getElementById('eyeIcon');
-    const saveIdChk     = document.getElementById('saveId');
-  
-    /** 페이지 초기화 */
-    window.addEventListener('DOMContentLoaded', () => {
-      // 저장된 아이디 불러오기
-      const savedId = localStorage.getItem('savedUserId');
-      if (savedId) {
-        userIdInput.value = savedId;
-        saveIdChk.checked = true;
+document.addEventListener('DOMContentLoaded', () => {
+  const loginForm = document.getElementById('loginForm');
+  const usernameInput = document.getElementById('username');
+  const passwordInput = document.getElementById('password');
+  const errorBox = document.getElementById('errorBox');
+  const togglePwBtn = document.getElementById('togglePwBtn');
+  const saveIdChk = document.getElementById('saveId');
+  const roleTabs = document.querySelectorAll('.role-tab');
+
+  let currentRole = 'teacher';
+
+  // Role Tab Switch
+  roleTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      roleTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      currentRole = tab.dataset.role;
+
+      // Update placeholder for demo guidance
+      if (currentRole === 'school_admin') {
+        usernameInput.placeholder = '관리자 아이디 (데모: schadmin)';
+        passwordInput.placeholder = '비밀번호 (데모: admin1234)';
+      } else if (currentRole === 'teacher') {
+        usernameInput.placeholder = '교사 아이디 (데모: teacher)';
+        passwordInput.placeholder = '비밀번호 (데모: 12341234)';
+      } else {
+        usernameInput.placeholder = '아이디 입력';
+        passwordInput.placeholder = '비밀번호 입력';
       }
     });
-  
-    /** 비밀번호 표시/숨기기 토글 */
-    toggleBtn.addEventListener('click', () => {
-      const type = pwInput.type === 'password' ? 'text' : 'password';
-      pwInput.type = type;
-      // 눈 아이콘 외형 변경(선택)
-      eyeIcon.setAttribute('stroke', type === 'text' ? '#2c80ff' : '#b0b8c1');
-    });
-  
-    /** 로그인 제출 */
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      errBox.textContent = '';               // 에러 초기화
-  
-      const userId = userIdInput.value.trim();
-      const password = pwInput.value;
-  
-      if (!userId || !password) {
-        errBox.textContent = '아이디와 비밀번호를 모두 입력하세요.';
-        return;
-      }
-  
-      try {
-        const res = await fetch(WEB_APP_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ userId, password })
-        });
-        const data = await res.json();
-  
-        if (data.success) {
-          // 아이디 저장 체크
-          if (saveIdChk.checked) localStorage.setItem('savedUserId', userId);
-          else                   localStorage.removeItem('savedUserId');
-  
-          alert(`${data.name}님, 환영합니다!`);
-          // TODO: 홈으로 이동 or 토큰 저장
-          // location.href = '/dashboard.html';
+  });
+
+  // Load Saved Username
+  const savedUser = localStorage.getItem('savedUsername');
+  if (savedUser) {
+    usernameInput.value = savedUser;
+    saveIdChk.checked = true;
+  }
+
+  // Toggle Password
+  togglePwBtn.addEventListener('click', () => {
+    const isPw = passwordInput.type === 'password';
+    passwordInput.type = isPw ? 'text' : 'password';
+    togglePwBtn.textContent = isPw ? '🔒' : '👁️';
+  });
+
+  // Form Submit
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorBox.style.display = 'none';
+    errorBox.textContent = '';
+
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value;
+
+    if (!username || !password) {
+      showError('아이디와 비밀번호를 모두 입력하세요.');
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password, role: currentRole })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Save ID Check
+        if (saveIdChk.checked) {
+          localStorage.setItem('savedUsername', username);
         } else {
-          errBox.textContent = data.message || '로그인 실패';
+          localStorage.removeItem('savedUsername');
         }
-      } catch (err) {
-        errBox.textContent = '서버 통신 오류: ' + err.message;
+
+        // Store JWT token
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+
+        // Redirect to dashboard
+        window.location.href = '../dashboard/teacher_dashboard.html';
+      } else {
+        showError(data.message || '로그인에 실패했습니다.');
       }
-    });
-  })();
-  
+    } catch (err) {
+      showError('서버와의 통신에 실패했습니다: ' + err.message);
+    }
+  });
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.style.display = 'block';
+  }
+});

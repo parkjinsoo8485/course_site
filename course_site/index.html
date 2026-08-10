@@ -1,29 +1,263 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>방과후 늘봄학교 - 학교 맞춤형 멀티스쿨 SaaS 플랫폼</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      background: radial-gradient(circle at 50% -20%, #312e81 0%, #0f172a 60%, #020617 100%);
+      color: #f8fafc;
+      min-height: 100vh;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 6%;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .brand-logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #818cf8 0%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .nav-btn {
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .hero {
+      text-align: center;
+      padding: 80px 20px 60px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(129, 140, 248, 0.3);
+      border-radius: 9999px;
+      color: #a5b4fc;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-bottom: 24px;
+    }
+    .hero-title {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: #94a3b8;
+      margin-bottom: 40px;
+      font-weight: 400;
+    }
+    .cta-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 24px;
+    }
+    .feature-card {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
+      transition: all 0.3s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(99, 102, 241, 0.4);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(99, 102, 241, 0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+    .plans-section {
+      max-width: 1200px;
+      margin: 80px auto;
+      padding: 0 24px 100px;
+      text-align: center;
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+    .price-card {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 40px 30px;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      position: relative;
+    }
+    .price-card.popular {
+      border: 2px solid #6366f1;
+      box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+    }
+    .popular-badge {
+      position: absolute;
+      top: -14px;
+      right: 24px;
+      background: #6366f1;
+      color: white;
+      padding: 4px 14px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .price-val {
+      font-size: 2.4rem;
+      font-weight: 800;
+      margin: 16px 0;
+      color: white;
+    }
+    .price-features {
+      list-style: none;
+      margin: 24px 0 32px;
+      color: #cbd5e1;
+    }
+    .price-features li {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-  <form id="loginForm" class="bg-white p-8 rounded shadow-md w-full max-w-sm space-y-4">
-    <h2 class="text-2xl font-bold mb-4">Sign In</h2>
-    <div>
-      <label class="block mb-1 font-medium">Email</label>
-      <input type="email" id="email" class="w-full border px-3 py-2 rounded" required />
+<body>
+  <nav class="navbar">
+    <div class="brand-logo">
+      <span>🏫</span> 방과후 늘봄학교
     </div>
-    <div>
-      <label class="block mb-1 font-medium">Password</label>
-      <input type="password" id="password" class="w-full border px-3 py-2 rounded" required />
+    <div class="nav-links">
+      <a href="login/login.html" class="nav-btn btn-secondary" style="color: #0f172a;">로그인</a>
+      <a href="signup/school_register.html" class="nav-btn btn-primary" style="width: auto;">학교 유료 가입</a>
     </div>
-    <div class="flex items-center">
-      <input type="checkbox" id="remember" class="mr-2" />
-      <label for="remember">Remember me</label>
+  </nav>
+
+  <section class="hero animate-fade-in">
+    <div class="hero-badge">✨ 2026 차세대 늘봄학교 운영 관리 스마트 SaaS</div>
+    <h1 class="hero-title">
+      초등학교 방과후·늘봄과정을<br>
+      <span style="background: linear-gradient(135deg, #818cf8, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">가장 스마트하고 안전하게</span> 운영하세요
+    </h1>
+    <p class="hero-subtitle">
+      학교별 독립 멀티스쿨 테넌트 구축부터 강좌 등록, 수강생 및 대기자 자동관리,<br>
+      환불/지원금 관리 및 엑셀 내보내기까지 단 하나의 솔루션으로 해결합니다.
+    </p>
+    <div class="cta-group">
+      <a href="signup/school_register.html" class="btn-primary" style="width: auto; padding: 16px 36px;">
+        🚀 학교 유료 가입 신청
+      </a>
+      <a href="login/login.html" class="btn-secondary" style="width: auto; padding: 16px 32px; background: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.2);">
+        교사/관리자 로그인
+      </a>
     </div>
-    <div id="error" class="text-red-500 text-sm"></div>
-    <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Login</button>
-  </form>
-  <script src="login.js"></script>
+  </section>
+
+  <section class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🔒</div>
+      <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: white;">학교별 데이터 철저 격리</h3>
+      <p style="color: #94a3b8;">고유 학교 코드를 기반으로 각 초등학교 데이터가 엄격하게 독립 관리되어 안전합니다.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: white;">실시간 대기자 & 정원 자동 제어</h3>
+      <p style="color: #94a3b8;">선착순 수강신청과 정원 초과 시 자동으로 대기열로 전환되는 스마트 인원 관리.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: white;">원클릭 엑셀 및 리포트 출력</h3>
+      <p style="color: #94a3b8;">보고용 서식 그대로 수강 명단, 강좌 목록, 정산 내역을 원클릭 엑셀로 추출합니다.</p>
+    </div>
+  </section>
+
+  <section class="plans-section">
+    <h2 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 12px;">학교 구독 서비스 요금제</h2>
+    <p style="color: #94a3b8;">학교 규모 및 강좌 수에 맞춰 최적화된 구독 플랜을 선택하세요.</p>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3 style="font-size: 1.4rem; color: white;">Basic</h3>
+        <p style="color: #94a3b8; font-size: 0.9rem;">소규모 학급/단과형 과정</p>
+        <div class="price-val">₩50,000<span style="font-size: 1rem; color: #94a3b8;"> /월</span></div>
+        <ul class="price-features">
+          <li>✓ 최대 20개 강좌 운영</li>
+          <li>✓ 교사 계정 최대 10개</li>
+          <li>✓ 대기자 자동 관리</li>
+          <li>✓ 원클릭 엑셀 내보내기</li>
+        </ul>
+        <a href="signup/school_register.html?plan=basic" class="btn-secondary" style="text-align: center; margin-top: auto;">구독 가입하기</a>
+      </div>
+
+      <div class="price-card popular">
+        <div class="popular-badge">가장 인기</div>
+        <h3 style="font-size: 1.4rem; color: white;">Standard</h3>
+        <p style="color: #94a3b8; font-size: 0.9rem;">중·대형 초등학교 늘봄/방과후 과정</p>
+        <div class="price-val">₩120,000<span style="font-size: 1rem; color: #94a3b8;"> /월</span></div>
+        <ul class="price-features">
+          <li>✓ 최대 100개 강좌 운영</li>
+          <li>✓ 교사 계정 무제한</li>
+          <li>✓ 학부모/학생 통합 조회</li>
+          <li>✓ 지원금 및 환불 자동 정산</li>
+          <li>✓ 우선 고객지원</li>
+        </ul>
+        <a href="signup/school_register.html?plan=standard" class="btn-primary" style="text-align: center; margin-top: auto;">구독 가입하기</a>
+      </div>
+
+      <div class="price-card">
+        <h3 style="font-size: 1.4rem; color: white;">Premium</h3>
+        <p style="color: #94a3b8; font-size: 0.9rem;">교육청/거점형 통합 늘봄센터</p>
+        <div class="price-val">₩250,000<span style="font-size: 1rem; color: #94a3b8;"> /월</span></div>
+        <ul class="price-features">
+          <li>✓ 강좌 수 무제한</li>
+          <li>✓ 전담 엔지니어 맞춤 구축</li>
+          <li>✓ 커스텀 통계 보고서 지원</li>
+          <li>✓ SLA 99.9% 보장</li>
+        </ul>
+        <a href="signup/school_register.html?plan=premium" class="btn-secondary" style="text-align: center; margin-top: auto;">구독 가입하기</a>
+      </div>
+    </div>
+  </section>
 </body>
-</html> 
+</html>

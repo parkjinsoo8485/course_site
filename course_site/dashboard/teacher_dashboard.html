@@ -1,135 +1,233 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>강좌관리 - 운천늘봄학교</title>
-    <link rel="stylesheet" href="teacher_dashboard.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>강좌 관리 대시보드 - 방과후 늘봄학교</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="teacher_dashboard.css">
 </head>
 <body>
-    <div class="dashboard-wrapper">
-        <aside class="sidebar">
-            <div class="school-name">운천초등학교</div>
-            <div class="profile">
-                <div class="avatar"></div>
-                <div class="profile-info">
-                    <div class="name">박진수님</div>
-                    <div class="edit-profile"><a href="#">[로그아웃] [정보수정]</a></div>
-                </div>
-            </div>
-            <nav class="menu">
-                <a href="#" class="menu-item">홈으로</a>
-                <a href="#" class="menu-item active">강좌등록</a>
-                <a href="#" class="menu-item">고객지원 게시판</a>
-                <a href="#" class="menu-item">학교관리</a>
-                <a href="#" class="menu-item">강좌관리</a>
-                <a href="#" class="menu-item">신청자관리</a>
-                <a href="#" class="menu-item">대기자관리</a>
-                <a href="#" class="menu-item">환불/취소관리</a>
-                <a href="#" class="menu-item">지원금관리</a>
-                <a href="#" class="menu-item">설문관리</a>
-                <a href="#" class="menu-item">환경설정</a>
-                <a href="#" class="menu-item">알림관리</a>
-                <a href="#" class="menu-item">연장신청 <span class="badge">243일 남음</span></a>
-            </nav>
-        </aside>
-        <main class="main-content">
-            <header class="main-header">
-                <div class="school-title">늘봄학교</div>
-                <div class="header-menu">
-                    <button class="header-btn">강좌등록</button>
-                    <button class="header-btn">메뉴얼</button>
-                </div>
-            </header>
-            <section class="notice-box">
-                <span class="notice-icon">!</span>
-                <span class="notice-text">수강신청 시작시간은 학교사정에 따라 제한이 있으므로 가정통신문 발송 전에 반드시 <b>수강신청 기간을 미리 설정</b>하세요. 자주 하는 문의는 <b>"매뉴얼"</b>에 정리되어 있으니 참고하시고 기타 문의사항은 <b>"고객지원 게시판"</b>에 접수 바랍니다.</span>
-            </section>
-            <section class="filter-box">
-                <select><option>구분전체</option></select>
-                <select><option>늘봄과정</option></select>
-                <select><option>상태전체</option></select>
-                <select><option>학년</option></select>
-                <select><option>강좌명</option></select>
-                <input type="text" placeholder="검색어">
-                <button class="search-btn">검색</button>
-                <button class="excel-btn">검색결과엑셀출력</button>
-            </section>
-            <section class="action-btns">
-                <button class="main-btn">강좌 등록</button>
-                <button class="main-btn">강좌 일괄입력</button>
-                <button class="main-btn">강좌 일괄수정</button>
-                <button class="main-btn">강좌 일괄복사</button>
-                <button class="main-btn">강좌 통계</button>
-            </section>
-            <section class="table-section">
-                <table class="course-table">
-                    <thead>
-                        <tr>
-                            <th><input type="checkbox"></th>
-                            <th>연번</th>
-                            <th>수정</th>
-                            <th>구분</th>
-                            <th>강좌명</th>
-                            <th>강사ID</th>
-                            <th>신청/정원</th>
-                            <th>대기자/정원</th>
-                            <th>학년</th>
-                            <th>운영기간</th>
-                            <th>강의시간</th>
-                            <th>수강료</th>
-                            <th>수강료출력</th>
-                            <th>강사마감</th>
-                            <th>환불마감</th>
-                            <th>상태</th>
-                            <th>삭제</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>312</td>
-                            <td><button class="icon-btn">⚙️</button></td>
-                            <td>7월<br>돌봄</td>
-                            <td>[돌봄] 선택형 돌봄 1부 (월 14:00~14:50)</td>
-                            <td>돌봄전담사</td>
-                            <td>14 / 40</td>
-                            <td>0 / 5</td>
-                            <td>1,2,3,4,5,6</td>
-                            <td>2025-07-01~2025-07-25</td>
-                            <td>월:14:00~14:50</td>
-                            <td>0</td>
-                            <td>Y</td>
-                            <td>Y</td>
-                            <td>Y</td>
-                            <td>종료</td>
-                            <td><button class="icon-btn">🗑️</button></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>311</td>
-                            <td><button class="icon-btn">⚙️</button></td>
-                            <td>7월<br>돌봄</td>
-                            <td>[돌봄] 선택형 돌봄 2부 (월 15:00~15:50)</td>
-                            <td>돌봄전담사</td>
-                            <td>10 / 40</td>
-                            <td>0 / 5</td>
-                            <td>1,2,3,4,5,6</td>
-                            <td>2025-07-01~2025-07-25</td>
-                            <td>월:15:00~15:50</td>
-                            <td>0</td>
-                            <td>Y</td>
-                            <td>Y</td>
-                            <td>Y</td>
-                            <td>종료</td>
-                            <td><button class="icon-btn">🗑️</button></td>
-                        </tr>
-                        <!-- 예시 데이터 추가 가능 -->
-                    </tbody>
-                </table>
-            </section>
-        </main>
+  <div class="dashboard-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="school-title" id="schoolTitle">운천초등학교</div>
+        <span class="plan-tag" id="planBadge">Standard Plan</span>
+      </div>
+
+      <div class="profile-card">
+        <div class="avatar-circle" id="userAvatar">박</div>
+        <div class="profile-info">
+          <div class="user-name" id="userName">박진수 선생님</div>
+          <div class="user-role" id="userRole">교사</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active">
+          <span>📚</span> 강좌 등록/관리
+        </a>
+        <a href="#" class="nav-item">
+          <span>👥</span> 수강 신청자 관리
+        </a>
+        <a href="#" class="nav-item">
+          <span>⏳</span> 대기자 관리
+        </a>
+        <a href="#" class="nav-item">
+          <span>💰</span> 환불 / 지원금 정산
+        </a>
+        <a href="#" class="nav-item" id="renewSubscriptionBtn">
+          <span>💳</span> 구독 연장 <span class="days-badge" id="daysLeftBadge">0일 남음</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="logoutBtn" class="logout-btn">
+          <span>🚪</span> 로그아웃
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Header -->
+      <header class="top-header">
+        <div class="header-left">
+          <h2>늘봄과정 강좌 등록 및 인원 관리</h2>
+          <p>학교별 수강인원, 대기자 현황을 실시간으로 통합 관리합니다.</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn-primary" id="openAddCourseModalBtn" style="width: auto;">
+            ✨ + 신규 강좌 등록
+          </button>
+        </div>
+      </header>
+
+      <!-- Expire Warning Banner -->
+      <div id="expireBanner" class="warning-banner" style="display: none;">
+        <span>⚠️ 학교 구독 서비스 잔여일이 얼마 남지 않았습니다. 서둘러 갱신해 주세요.</span>
+        <button id="bannerRenewBtn" class="btn-secondary" style="font-size: 0.8rem; padding: 4px 12px;">지금 연장하기</button>
+      </div>
+
+      <!-- Metric Cards Grid -->
+      <section class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-icon" style="background: #eef2ff; color: #4f46e5;">📘</div>
+          <div class="metric-data">
+            <span class="label">총 등록 강좌</span>
+            <span class="value" id="statTotalCourses">0</span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon" style="background: #ecfdf5; color: #10b981;">👨‍🎓</div>
+          <div class="metric-data">
+            <span class="label">총 수강 신청인원</span>
+            <span class="value" id="statTotalApplied">0</span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon" style="background: #fffbe6; color: #d97706;">⏳</div>
+          <div class="metric-data">
+            <span class="label">총 대기자 수</span>
+            <span class="value" id="statTotalWaiting">0</span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon" style="background: #fdf2f8; color: #db2777;">🟢</div>
+          <div class="metric-data">
+            <span class="label">모집중 강좌</span>
+            <span class="value" id="statRecruiting">0</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Filter Controls -->
+      <section class="filter-card">
+        <div class="filter-inputs">
+          <select id="filterCategory" class="input-style" style="width: 160px;">
+            <option value="">구분 전체</option>
+            <option value="돌봄">늘봄/돌봄과정</option>
+            <option value="특기적성">특기적성</option>
+          </select>
+          <select id="filterStatus" class="input-style" style="width: 140px;">
+            <option value="">상태 전체</option>
+            <option value="모집중">모집중</option>
+            <option value="종료">종료</option>
+          </select>
+          <input type="text" id="filterKeyword" class="input-style" placeholder="강좌명 또는 강사명 검색..." style="flex: 1;">
+          <button class="btn-secondary" id="searchBtn">검색</button>
+          <button class="btn-secondary" id="excelExportBtn" style="background: #10b981; color: white; border: none;">
+            📊 엑셀 내보내기
+          </button>
+        </div>
+      </section>
+
+      <!-- Course Table Area -->
+      <section class="table-card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th><input type="checkbox" id="selectAll"></th>
+              <th>연번</th>
+              <th>구분</th>
+              <th>강좌명</th>
+              <th>강사명</th>
+              <th>신청 / 정원</th>
+              <th>대기 / 정원</th>
+              <th>대상 학년</th>
+              <th>강의 시간</th>
+              <th>수강료</th>
+              <th>상태</th>
+              <th>관리</th>
+            </tr>
+          </thead>
+          <tbody id="courseTableBody">
+            <!-- Dynamic Injection -->
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal: Add New Course -->
+  <div class="modal-overlay" id="addCourseModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>✨ 신규 강좌 등록</h3>
+        <button class="close-btn" id="closeCourseModalBtn">&times;</button>
+      </div>
+      <form id="addCourseForm">
+        <div class="form-group">
+          <label>구분 *</label>
+          <input type="text" id="newCategory" class="input-style" placeholder="예: 7월 돌봄, 특기적성" required>
+        </div>
+        <div class="form-group">
+          <label>강좌명 *</label>
+          <input type="text" id="newTitle" class="input-style" placeholder="예: [돌봄] 창의 미공예반" required>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label>강사명 *</label>
+            <input type="text" id="newTeacher" class="input-style" placeholder="이름 또는 강사구분" required>
+          </div>
+          <div class="form-group">
+            <label>대상 학년</label>
+            <input type="text" id="newGrade" class="input-style" placeholder="1,2,3학년">
+          </div>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label>모집 정원</label>
+            <input type="number" id="newCapacity" class="input-style" value="20" required>
+          </div>
+          <div class="form-group">
+            <label>대기 정원</label>
+            <input type="number" id="newWaitingCapacity" class="input-style" value="5">
+          </div>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label>강의 시간</label>
+            <input type="text" id="newSchedule" class="input-style" placeholder="월,수:14:00~14:50">
+          </div>
+          <div class="form-group">
+            <label>수강료 (원)</label>
+            <input type="number" id="newFee" class="input-style" value="0">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" id="cancelCourseBtn">취소</button>
+          <button type="submit" class="btn-primary" style="width: auto;">등록하기</button>
+        </div>
+      </form>
     </div>
-    <script src="teacher_dashboard.js"></script>
+  </div>
+
+  <!-- Modal: Subscription Extension -->
+  <div class="modal-overlay" id="renewModal">
+    <div class="modal-content" style="max-width: 420px;">
+      <div class="modal-header">
+        <h3>💳 학교 구독 연장 신청</h3>
+        <button class="close-btn" id="closeRenewModalBtn">&times;</button>
+      </div>
+      <div style="padding: 10px 0;">
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 16px;">
+          학교 맞춤형 플랜 연장으로 늘봄학교 시스템 서비스를 안정적으로 지속 관리하실 수 있습니다.
+        </p>
+        <div class="form-group">
+          <label>구독 기간 선택</label>
+          <select id="renewMonths" class="input-style">
+            <option value="12">1년 연장 (12개월) - 10% 할인</option>
+            <option value="6">6개월 연장</option>
+            <option value="24">2년 연장 (24개월) - 20% 할인</option>
+          </select>
+        </div>
+        <button class="btn-primary" id="confirmRenewBtn" style="margin-top: 12px;">연장 결제 승인</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="teacher_dashboard.js"></script>
 </body>
-</html> 
+</html>

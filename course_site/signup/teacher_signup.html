@@ -1,53 +1,120 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>교사용 회원가입 - 운천늘봄학교</title>
-    <link rel="stylesheet" href="teacher_signup.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>교사 회원가입 - 방과후 늘봄학교</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    body {
+      background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f172a 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .signup-box {
+      width: 100%;
+      max-width: 480px;
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+      padding: 44px 36px;
+    }
+    .title-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .title-header h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .school-verify-row {
+      display: flex;
+      gap: 8px;
+    }
+    .school-status-badge {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 6px;
+      display: none;
+    }
+    .error-box {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: var(--danger);
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 20px;
+      display: none;
+    }
+  </style>
 </head>
 <body>
-    <div class="signup-container">
-        <div class="signup-title">교사용 회원가입</div>
-        <form class="signup-form" id="signupForm">
-            <div class="input-group">
-                <label for="name">이름</label>
-                <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
-            </div>
-            <div class="input-group">
-                <label for="userid">아이디</label>
-                <input type="text" id="userid" name="userid" placeholder="아이디를 입력하세요" required autocomplete="username">
-            </div>
-            <div class="input-group">
-                <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required autocomplete="new-password">
-            </div>
-            <div class="input-group">
-                <label for="password2">비밀번호 확인</label>
-                <input type="password" id="password2" name="password2" placeholder="비밀번호를 다시 입력하세요" required autocomplete="new-password">
-            </div>
-            <div class="input-group">
-                <label for="email">이메일</label>
-                <input type="email" id="email" name="email" placeholder="이메일을 입력하세요" required>
-            </div>
-            <div class="input-group">
-                <label for="phone">휴대폰번호</label>
-                <input type="tel" id="phone" name="phone" placeholder="휴대폰번호를 입력하세요" required>
-            </div>
-            <div class="input-group">
-                <label for="school">학교명</label>
-                <input type="text" id="school" name="school" value="운천늘봄학교" readonly>
-            </div>
-            <div class="input-group terms">
-                <label><input type="checkbox" id="terms" required> <span>이용약관 및 개인정보처리방침에 동의합니다.</span></label>
-            </div>
-            <div class="error-message" id="errorMessage"></div>
-            <button type="submit" class="signup-btn">회원가입</button>
-        </form>
-        <div class="login-link">
-            이미 계정이 있으신가요? <a href="login.html">로그인</a>
-        </div>
+  <div class="signup-box animate-fade-in">
+    <div class="title-header">
+      <h1>👨‍🏫 교사 회원가입</h1>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">소속 학교 코드 입력 후 가입하실 수 있습니다.</p>
     </div>
-    <script src="teacher_signup.js"></script>
+
+    <div class="error-box" id="errorBox"></div>
+
+    <form id="teacherForm">
+      <div class="form-group">
+        <label for="schoolCode">소속 학교 코드 *</label>
+        <div class="school-verify-row">
+          <input type="text" id="schoolCode" class="input-style" placeholder="예: UNCHON2025" required style="text-transform: uppercase;">
+          <button type="button" id="verifyBtn" class="btn-secondary" style="width: 100px; shrink: 0;">조회</button>
+        </div>
+        <div id="schoolBadge" class="school-status-badge"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="name">성함 *</label>
+        <input type="text" id="name" class="input-style" placeholder="선생님 성함 입력" required>
+      </div>
+
+      <div class="form-group">
+        <label for="username">아이디 *</label>
+        <input type="text" id="username" class="input-style" placeholder="사용할 아이디" required autocomplete="username">
+      </div>
+
+      <div class="form-group">
+        <label for="password">비밀번호 *</label>
+        <input type="password" id="password" class="input-style" placeholder="비밀번호 입력" required autocomplete="new-password">
+      </div>
+
+      <div class="form-group">
+        <label for="passwordConfirm">비밀번호 확인 *</label>
+        <input type="password" id="passwordConfirm" class="input-style" placeholder="비밀번호 재입력" required autocomplete="new-password">
+      </div>
+
+      <div class="form-group">
+        <label for="email">이메일 *</label>
+        <input type="email" id="email" class="input-style" placeholder="teacher@school.es.kr" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">연락처</label>
+        <input type="tel" id="phone" class="input-style" placeholder="010-0000-0000">
+      </div>
+
+      <div class="form-group" style="flex-direction: row; gap: 8px; align-items: center; margin-top: 10px;">
+        <input type="checkbox" id="terms" required style="accent-color: var(--primary);">
+        <label for="terms" style="font-weight: 400; font-size: 0.9rem;">개인정보 처리방침 동의 *</label>
+      </div>
+
+      <button type="submit" class="btn-primary" style="margin-top: 16px;">가입 완료</button>
+    </form>
+
+    <div style="text-align: center; margin-top: 24px; font-size: 0.9rem; color: var(--text-muted);">
+      이미 계정이 있으신가요? <a href="../login/login.html">로그인하기</a>
+    </div>
+  </div>
+
+  <script src="teacher_signup.js"></script>
 </body>
-</html> 
+</html>

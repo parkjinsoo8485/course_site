@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>학교 유료 가입 & 플랜 선택 - 방과후 늘봄학교</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    body {
+      background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f172a 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .register-container {
+      width: 100%;
+      max-width: 680px;
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+      padding: 48px 40px;
+    }
+    .title-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .title-header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .title-header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    .form-section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin: 24px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+    }
+    .plan-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 600px) {
+      .plan-selector { grid-template-columns: 1fr; }
+    }
+    .plan-box {
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    .plan-box.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+    .plan-box h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+    .plan-box .price {
+      font-size: 0.9rem;
+      color: var(--primary);
+      font-weight: 700;
+      margin-top: 4px;
+    }
+    .payment-methods {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .pay-btn {
+      flex: 1;
+      padding: 12px;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.9rem;
+    }
+    .pay-btn.selected {
+      border-color: #0f172a;
+      background: #f8fafc;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .error-box {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: var(--danger);
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-container animate-fade-in">
+    <div class="title-header">
+      <h1>🏫 학교 유료 가입 & 플랜 설정</h1>
+      <p>신규 초등학교 등록 후 멀티스쿨 관리 기능을 바로 이용하실 수 있습니다.</p>
+    </div>
+
+    <div class="error-box" id="errorBox"></div>
+
+    <form id="schoolForm">
+      <div class="form-section-title">1. 학교 기본 정보</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="schoolName">학교명 *</label>
+          <input type="text" id="schoolName" class="input-style" placeholder="예: 운천초등학교" required>
+        </div>
+        <div class="form-group">
+          <label for="schoolCode">학교 영문 고유 코드 *</label>
+          <input type="text" id="schoolCode" class="input-style" placeholder="예: UNCHON2025" required style="text-transform: uppercase;">
+        </div>
+      </div>
+
+      <div class="form-section-title">2. 최고 관리자 계정 생성</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="adminUsername">관리자 아이디 *</label>
+          <input type="text" id="adminUsername" class="input-style" placeholder="아이디" required>
+        </div>
+        <div class="form-group">
+          <label for="adminPassword">비밀번호 *</label>
+          <input type="password" id="adminPassword" class="input-style" placeholder="8자 이상" required>
+        </div>
+        <div class="form-group">
+          <label for="adminName">담당자 성함 *</label>
+          <input type="text" id="adminName" class="input-style" placeholder="홍길동" required>
+        </div>
+        <div class="form-group">
+          <label for="email">이메일 주소 *</label>
+          <input type="email" id="email" class="input-style" placeholder="admin@school.es.kr" required>
+        </div>
+      </div>
+
+      <div class="form-section-title">3. 구독 플랜 선택 (연간 구독)</div>
+      <div class="plan-selector">
+        <div class="plan-box" data-plan="basic">
+          <h4>Basic</h4>
+          <div class="price">월 50,000원</div>
+        </div>
+        <div class="plan-box selected" data-plan="standard">
+          <h4>Standard</h4>
+          <div class="price">월 120,000원</div>
+        </div>
+        <div class="plan-box" data-plan="premium">
+          <h4>Premium</h4>
+          <div class="price">월 250,000원</div>
+        </div>
+      </div>
+
+      <div class="form-section-title">4. 결제 수단 선택 (데모 결제 연동)</div>
+      <div class="payment-methods">
+        <button type="button" class="pay-btn selected" data-pay="card">💳 신용/체크카드</button>
+        <button type="button" class="pay-btn" data-pay="kakaopay">💛 카카오페이</button>
+        <button type="button" class="pay-btn" data-pay="tosspay">🔵 토스페이</button>
+      </div>
+
+      <button type="submit" class="btn-primary" style="margin-top: 10px;">
+        🚀 결제 및 학교 등록 완료
+      </button>
+
+      <div style="text-align: center; margin-top: 20px; font-size: 0.9rem;">
+        이미 등록된 학교이신가요? <a href="../login/login.html">로그인하기</a>
+      </div>
+    </form>
+  </div>
+
+  <script src="school_register.js"></script>
+</body>
+</html>
