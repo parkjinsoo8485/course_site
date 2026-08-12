@@ -88,6 +88,144 @@ const defaultData = {
       refundClosed: 'N',
       status: '모집중'
     }
+  ],
+  applicants: [
+    {
+      id: 'app_1',
+      schoolId: 'sch_1',
+      studentName: '김민준',
+      gradeClass: '1학년 2반',
+      parentPhone: '010-2345-6789',
+      courseId: 'crs_3',
+      courseTitle: '[특기적성] 창의 로봇교실 A반',
+      appliedAt: '2026-03-02 10:15',
+      subsidyType: '자유수강권',
+      paymentStatus: '결제완료',
+      status: '승인'
+    },
+    {
+      id: 'app_2',
+      schoolId: 'sch_1',
+      studentName: '이서연',
+      gradeClass: '2학년 1반',
+      parentPhone: '010-3456-7890',
+      courseId: 'crs_3',
+      courseTitle: '[특기적성] 창의 로봇교실 A반',
+      appliedAt: '2026-03-02 11:30',
+      subsidyType: '늘봄 지원금',
+      paymentStatus: '지원금 수령',
+      status: '승인'
+    },
+    {
+      id: 'app_3',
+      schoolId: 'sch_1',
+      studentName: '박지후',
+      gradeClass: '1학년 3반',
+      parentPhone: '010-4567-8901',
+      courseId: 'crs_1',
+      courseTitle: '[돌봄] 선택형 돌봄 1부 (월 14:00~14:50)',
+      appliedAt: '2026-03-03 09:40',
+      subsidyType: '늘봄 무상지원',
+      paymentStatus: '무상',
+      status: '승인'
+    },
+    {
+      id: 'app_4',
+      schoolId: 'sch_1',
+      studentName: '최예은',
+      gradeClass: '3학년 4반',
+      parentPhone: '010-5678-9012',
+      courseId: 'crs_3',
+      courseTitle: '[특기적성] 창의 로봇교실 A반',
+      appliedAt: '2026-03-04 14:20',
+      subsidyType: '일반 자부담',
+      paymentStatus: '결제대기',
+      status: '신청대기'
+    }
+  ],
+  waitlist: [
+    {
+      id: 'wt_1',
+      schoolId: 'sch_1',
+      rank: 1,
+      studentName: '정현우',
+      gradeClass: '2학년 3반',
+      parentPhone: '010-6789-0123',
+      courseId: 'crs_3',
+      courseTitle: '[특기적성] 창의 로봇교실 A반',
+      appliedAt: '2026-03-05 16:05',
+      status: '대기중'
+    },
+    {
+      id: 'wt_2',
+      schoolId: 'sch_1',
+      rank: 2,
+      studentName: '한소율',
+      gradeClass: '1학년 1반',
+      parentPhone: '010-7890-1234',
+      courseId: 'crs_3',
+      courseTitle: '[특기적성] 창의 로봇교실 A반',
+      appliedAt: '2026-03-05 17:22',
+      status: '대기중'
+    },
+    {
+      id: 'wt_3',
+      schoolId: 'sch_1',
+      rank: 1,
+      studentName: '윤우진',
+      gradeClass: '4학년 2반',
+      parentPhone: '010-8901-2345',
+      courseId: 'crs_2',
+      courseTitle: '[돌봄] 선택형 돌봄 2부 (월 15:00~15:50)',
+      appliedAt: '2026-03-06 08:50',
+      status: '대기중'
+    }
+  ],
+  settlements: [
+    {
+      id: 'stl_1',
+      schoolId: 'sch_1',
+      type: '자유수강권 지원금',
+      studentName: '김민준',
+      courseTitle: '[특기적성] 창의 로봇교실 A반',
+      amount: 35000,
+      requestedAt: '2026-03-10',
+      status: '정산완료',
+      note: '지자체 1분기 보조금 정산 완료'
+    },
+    {
+      id: 'stl_2',
+      schoolId: 'sch_1',
+      type: '늘봄 무상 지원금',
+      studentName: '이서연',
+      courseTitle: '[돌봄] 선택형 돌봄 1부',
+      amount: 40000,
+      requestedAt: '2026-03-11',
+      status: '정산대기',
+      note: '늘봄 전담 지원금 3월분 정산 신청'
+    },
+    {
+      id: 'stl_3',
+      schoolId: 'sch_1',
+      type: '수강료 환불',
+      studentName: '강도윤',
+      courseTitle: '[특기적성] 창의 로봇교실 A반',
+      amount: 17500,
+      requestedAt: '2026-03-12',
+      status: '환불완료',
+      note: '타지역 전출로 인한 50% 중도 환불'
+    },
+    {
+      id: 'stl_4',
+      schoolId: 'sch_1',
+      type: '수강료 환불',
+      studentName: '오하은',
+      courseTitle: '[특기적성] 창의 로봇교실 A반',
+      amount: 35000,
+      requestedAt: '2026-03-12',
+      status: '환불신청',
+      note: '개인 사정 수강 취소 요청'
+    }
   ]
 };
 
@@ -254,6 +392,101 @@ class JSONDatabase {
       const removed = this.data.courses.splice(index, 1);
       this.save();
       return removed[0];
+    }
+    return null;
+  }
+
+  // Applicant Operations
+  getApplicantsBySchool(schoolId) {
+    return (this.data.applicants || []).filter(a => a.schoolId === schoolId);
+  }
+
+  updateApplicantStatus(applicantId, schoolId, status) {
+    const applicant = (this.data.applicants || []).find(a => a.id === applicantId && a.schoolId === schoolId);
+    if (applicant) {
+      applicant.status = status;
+      this.save();
+      return applicant;
+    }
+    return null;
+  }
+
+  deleteApplicant(applicantId, schoolId) {
+    const index = (this.data.applicants || []).findIndex(a => a.id === applicantId && a.schoolId === schoolId);
+    if (index !== -1) {
+      const removed = this.data.applicants.splice(index, 1);
+      this.save();
+      return removed[0];
+    }
+    return null;
+  }
+
+  // Waitlist Operations
+  getWaitlistBySchool(schoolId) {
+    return (this.data.waitlist || []).filter(w => w.schoolId === schoolId);
+  }
+
+  promoteWaitlist(waitlistId, schoolId) {
+    const index = (this.data.waitlist || []).findIndex(w => w.id === waitlistId && w.schoolId === schoolId);
+    if (index !== -1) {
+      const item = this.data.waitlist.splice(index, 1)[0];
+      // Convert to applicant
+      const newApplicant = {
+        id: 'app_' + Date.now(),
+        schoolId: schoolId,
+        studentName: item.studentName,
+        gradeClass: item.gradeClass,
+        parentPhone: item.parentPhone,
+        courseId: item.courseId,
+        courseTitle: item.courseTitle,
+        appliedAt: new Date().toISOString().replace('T', ' ').slice(0, 16),
+        subsidyType: '일반 자부담',
+        paymentStatus: '결제대기',
+        status: '승인'
+      };
+      if (!this.data.applicants) this.data.applicants = [];
+      this.data.applicants.unshift(newApplicant);
+      this.save();
+      return newApplicant;
+    }
+    return null;
+  }
+
+  deleteWaitlist(waitlistId, schoolId) {
+    const index = (this.data.waitlist || []).findIndex(w => w.id === waitlistId && w.schoolId === schoolId);
+    if (index !== -1) {
+      const removed = this.data.waitlist.splice(index, 1);
+      this.save();
+      return removed[0];
+    }
+    return null;
+  }
+
+  // Settlement Operations
+  getSettlementsBySchool(schoolId) {
+    return (this.data.settlements || []).filter(s => s.schoolId === schoolId);
+  }
+
+  createSettlement(schoolId, data) {
+    const newSettlement = {
+      id: 'stl_' + Date.now(),
+      schoolId: schoolId,
+      requestedAt: new Date().toISOString().split('T')[0],
+      status: '정산대기',
+      ...data
+    };
+    if (!this.data.settlements) this.data.settlements = [];
+    this.data.settlements.unshift(newSettlement);
+    this.save();
+    return newSettlement;
+  }
+
+  updateSettlementStatus(settlementId, schoolId, status) {
+    const settlement = (this.data.settlements || []).find(s => s.id === settlementId && s.schoolId === schoolId);
+    if (settlement) {
+      settlement.status = status;
+      this.save();
+      return settlement;
     }
     return null;
   }

@@ -4,9 +4,9 @@
       "id": "sch_1",
       "code": "UNCHON2025",
       "name": "운천초등학교",
-      "plan": "standard",
+      "plan": "premium",
       "status": "active",
-      "expireDate": "2026-12-31",
+      "expireDate": "2027-12-26",
       "createdAt": "2026-08-10T12:41:12.226Z"
     },
     {
@@ -44,6 +44,26 @@
     }
   ],
   "courses": [
+    {
+      "id": "crs_1786546687102",
+      "code": "672",
+      "applied": 0,
+      "waiting": 0,
+      "feeReceipt": "Y",
+      "teacherClosed": "N",
+      "refundClosed": "N",
+      "status": "모집중",
+      "schoolId": "sch_1",
+      "category": "테스트",
+      "title": "ㅇ",
+      "teacherName": "ㅇ",
+      "capacity": 20,
+      "waitingCapacity": 5,
+      "grade": "ㅇ",
+      "period": "2026-03-01~2026-06-30",
+      "schedule": "월,수:14:00~14:50",
+      "fee": 0
+    },
     {
       "id": "crs_1",
       "schoolId": "sch_1",

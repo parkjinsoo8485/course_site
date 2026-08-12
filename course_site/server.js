@@ -315,6 +315,84 @@ app.post('/api/subscription/renew', authenticateToken, (req, res) => {
   });
 });
 
+// ==================== APPLICANT APIs ====================
+
+// GET /api/applicants
+app.get('/api/applicants', authenticateToken, (req, res) => {
+  const applicants = db.getApplicantsBySchool(req.user.schoolId);
+  return res.json({ success: true, applicants });
+});
+
+// PUT /api/applicants/:id/status
+app.put('/api/applicants/:id/status', authenticateToken, (req, res) => {
+  const { status } = req.body;
+  const updated = db.updateApplicantStatus(req.params.id, req.user.schoolId, status);
+  if (!updated) return res.status(404).json({ success: false, message: '신청자를 찾을 수 없습니다.' });
+  return res.json({ success: true, applicant: updated, message: '신청자 상태가 변경되었습니다.' });
+});
+
+// DELETE /api/applicants/:id
+app.delete('/api/applicants/:id', authenticateToken, (req, res) => {
+  const deleted = db.deleteApplicant(req.params.id, req.user.schoolId);
+  if (!deleted) return res.status(404).json({ success: false, message: '신청자를 찾을 수 없습니다.' });
+  return res.json({ success: true, message: '수강 신청 정보가 삭제되었습니다.' });
+});
+
+// ==================== WAITLIST APIs ====================
+
+// GET /api/waitlist
+app.get('/api/waitlist', authenticateToken, (req, res) => {
+  const waitlist = db.getWaitlistBySchool(req.user.schoolId);
+  return res.json({ success: true, waitlist });
+});
+
+// POST /api/waitlist/:id/promote
+app.post('/api/waitlist/:id/promote', authenticateToken, (req, res) => {
+  const promoted = db.promoteWaitlist(req.params.id, req.user.schoolId);
+  if (!promoted) return res.status(404).json({ success: false, message: '대기자를 찾을 수 없습니다.' });
+  return res.json({ success: true, applicant: promoted, message: '대기자가 수강 신청자로 전환 승인되었습니다!' });
+});
+
+// DELETE /api/waitlist/:id
+app.delete('/api/waitlist/:id', authenticateToken, (req, res) => {
+  const deleted = db.deleteWaitlist(req.params.id, req.user.schoolId);
+  if (!deleted) return res.status(404).json({ success: false, message: '대기자를 찾을 수 없습니다.' });
+  return res.json({ success: true, message: '대기자 명단에서 취소 삭제되었습니다.' });
+});
+
+// ==================== SETTLEMENT APIs ====================
+
+// GET /api/settlements
+app.get('/api/settlements', authenticateToken, (req, res) => {
+  const settlements = db.getSettlementsBySchool(req.user.schoolId);
+  return res.json({ success: true, settlements });
+});
+
+// POST /api/settlements
+app.post('/api/settlements', authenticateToken, (req, res) => {
+  const { type, studentName, courseTitle, amount, note } = req.body;
+  if (!type || !studentName || !amount) {
+    return res.status(400).json({ success: false, message: '구분, 학생명, 금액을 입력해 주세요.' });
+  }
+
+  const newSettlement = db.createSettlement(req.user.schoolId, {
+    type,
+    studentName,
+    courseTitle: courseTitle || '기타',
+    amount: parseInt(amount) || 0,
+    note: note || ''
+  });
+  return res.json({ success: true, settlement: newSettlement, message: '정산/환불 신청건이 신규 등록되었습니다.' });
+});
+
+// PUT /api/settlements/:id/status
+app.put('/api/settlements/:id/status', authenticateToken, (req, res) => {
+  const { status } = req.body;
+  const updated = db.updateSettlementStatus(req.params.id, req.user.schoolId, status);
+  if (!updated) return res.status(404).json({ success: false, message: '정산 항목을 찾을 수 없습니다.' });
+  return res.json({ success: true, settlement: updated, message: '정산 상태가 변경되었습니다.' });
+});
+
 // Serve static files
 app.use(express.static(path.join(__dirname)));
 
