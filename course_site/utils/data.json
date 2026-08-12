@@ -47,7 +47,7 @@
     {
       "id": "crs_1786546687102",
       "code": "672",
-      "applied": 0,
+      "applied": 1,
       "waiting": 0,
       "feeReceipt": "Y",
       "teacherClosed": "N",
@@ -71,7 +71,7 @@
       "category": "7월 돌봄",
       "title": "[돌봄] 선택형 돌봄 1부 (월 14:00~14:50)",
       "teacherName": "돌봄전담사",
-      "applied": 14,
+      "applied": 15,
       "capacity": 40,
       "waiting": 0,
       "waitingCapacity": 5,
@@ -123,6 +123,174 @@
       "teacherClosed": "N",
       "refundClosed": "N",
       "status": "모집중"
+    }
+  ],
+  "applicants": [
+    {
+      "id": "app_1786547974218",
+      "schoolId": "sch_1",
+      "studentName": "김민준Minjun Kim",
+      "gradeClass": "1학년 2반1-2",
+      "parentPhone": "010-2345-6789010-1234-5678",
+      "courseId": "crs_1786546687102",
+      "courseTitle": "ㅇ",
+      "appliedAt": "2026-08-12 15:19",
+      "subsidyType": "자유수강권",
+      "paymentStatus": "지원금 수령",
+      "voucherBalance": 600000,
+      "materialPaid": "N",
+      "status": "승인"
+    },
+    {
+      "id": "app_1786547905591",
+      "schoolId": "sch_1",
+      "studentName": "김민준",
+      "gradeClass": "1학년 2반",
+      "parentPhone": "010-2345-6789",
+      "courseId": "crs_1",
+      "courseTitle": "[돌봄] 선택형 돌봄 1부 (월 14:00~14:50)",
+      "appliedAt": "2026-08-12 15:18",
+      "subsidyType": "자유수강권",
+      "paymentStatus": "지원금 수령",
+      "voucherBalance": 600000,
+      "materialPaid": "N",
+      "status": "승인"
+    },
+    {
+      "id": "app_1",
+      "schoolId": "sch_1",
+      "studentName": "김민준",
+      "gradeClass": "1학년 2반",
+      "parentPhone": "010-2345-6789",
+      "courseId": "crs_3",
+      "courseTitle": "[특기적성] 창의 로봇교실 A반",
+      "appliedAt": "2026-03-02 10:15",
+      "subsidyType": "자유수강권",
+      "paymentStatus": "결제완료",
+      "status": "승인"
+    },
+    {
+      "id": "app_2",
+      "schoolId": "sch_1",
+      "studentName": "이서연",
+      "gradeClass": "2학년 1반",
+      "parentPhone": "010-3456-7890",
+      "courseId": "crs_3",
+      "courseTitle": "[특기적성] 창의 로봇교실 A반",
+      "appliedAt": "2026-03-02 11:30",
+      "subsidyType": "늘봄 지원금",
+      "paymentStatus": "지원금 수령",
+      "status": "승인"
+    },
+    {
+      "id": "app_3",
+      "schoolId": "sch_1",
+      "studentName": "박지후",
+      "gradeClass": "1학년 3반",
+      "parentPhone": "010-4567-8901",
+      "courseId": "crs_1",
+      "courseTitle": "[돌봄] 선택형 돌봄 1부 (월 14:00~14:50)",
+      "appliedAt": "2026-03-03 09:40",
+      "subsidyType": "늘봄 무상지원",
+      "paymentStatus": "무상",
+      "status": "승인"
+    },
+    {
+      "id": "app_4",
+      "schoolId": "sch_1",
+      "studentName": "최예은",
+      "gradeClass": "3학년 4반",
+      "parentPhone": "010-5678-9012",
+      "courseId": "crs_3",
+      "courseTitle": "[특기적성] 창의 로봇교실 A반",
+      "appliedAt": "2026-03-04 14:20",
+      "subsidyType": "일반 자부담",
+      "paymentStatus": "결제대기",
+      "status": "신청대기"
+    }
+  ],
+  "waitlist": [
+    {
+      "id": "wt_1",
+      "schoolId": "sch_1",
+      "rank": 1,
+      "studentName": "정현우",
+      "gradeClass": "2학년 3반",
+      "parentPhone": "010-6789-0123",
+      "courseId": "crs_3",
+      "courseTitle": "[특기적성] 창의 로봇교실 A반",
+      "appliedAt": "2026-03-05 16:05",
+      "status": "대기중"
+    },
+    {
+      "id": "wt_2",
+      "schoolId": "sch_1",
+      "rank": 2,
+      "studentName": "한소율",
+      "gradeClass": "1학년 1반",
+      "parentPhone": "010-7890-1234",
+      "courseId": "crs_3",
+      "courseTitle": "[특기적성] 창의 로봇교실 A반",
+      "appliedAt": "2026-03-05 17:22",
+      "status": "대기중"
+    },
+    {
+      "id": "wt_3",
+      "schoolId": "sch_1",
+      "rank": 1,
+      "studentName": "윤우진",
+      "gradeClass": "4학년 2반",
+      "parentPhone": "010-8901-2345",
+      "courseId": "crs_2",
+      "courseTitle": "[돌봄] 선택형 돌봄 2부 (월 15:00~15:50)",
+      "appliedAt": "2026-03-06 08:50",
+      "status": "대기중"
+    }
+  ],
+  "settlements": [
+    {
+      "id": "stl_1",
+      "schoolId": "sch_1",
+      "type": "자유수강권 지원금",
+      "studentName": "김민준",
+      "courseTitle": "[특기적성] 창의 로봇교실 A반",
+      "amount": 35000,
+      "requestedAt": "2026-03-10",
+      "status": "정산완료",
+      "note": "지자체 1분기 보조금 정산 완료"
+    },
+    {
+      "id": "stl_2",
+      "schoolId": "sch_1",
+      "type": "늘봄 무상 지원금",
+      "studentName": "이서연",
+      "courseTitle": "[돌봄] 선택형 돌봄 1부",
+      "amount": 40000,
+      "requestedAt": "2026-03-11",
+      "status": "정산대기",
+      "note": "늘봄 전담 지원금 3월분 정산 신청"
+    },
+    {
+      "id": "stl_3",
+      "schoolId": "sch_1",
+      "type": "수강료 환불",
+      "studentName": "강도윤",
+      "courseTitle": "[특기적성] 창의 로봇교실 A반",
+      "amount": 17500,
+      "requestedAt": "2026-03-12",
+      "status": "환불완료",
+      "note": "타지역 전출로 인한 50% 중도 환불"
+    },
+    {
+      "id": "stl_4",
+      "schoolId": "sch_1",
+      "type": "수강료 환불",
+      "studentName": "오하은",
+      "courseTitle": "[특기적성] 창의 로봇교실 A반",
+      "amount": 35000,
+      "requestedAt": "2026-03-12",
+      "status": "환불신청",
+      "note": "개인 사정 수강 취소 요청"
     }
   ]
 }

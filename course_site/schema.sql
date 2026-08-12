@@ -40,6 +40,8 @@ CREATE TABLE IF NOT EXISTS courses (
   period VARCHAR(128),
   schedule VARCHAR(128),
   fee INT DEFAULT 0,
+  material_fee INT DEFAULT 0,
+  auto_renew VARCHAR(8) DEFAULT 'Y',
   fee_receipt VARCHAR(8) DEFAULT 'Y',
   teacher_closed VARCHAR(8) DEFAULT 'N',
   refund_closed VARCHAR(8) DEFAULT 'N',
@@ -59,6 +61,8 @@ CREATE TABLE IF NOT EXISTS applicants (
   applied_at VARCHAR(64) NOT NULL,
   subsidy_type VARCHAR(64) DEFAULT '일반 자부담',
   payment_status VARCHAR(64) DEFAULT '결제대기',
+  voucher_balance INT DEFAULT 600000,
+  material_paid VARCHAR(8) DEFAULT 'N',
   status VARCHAR(32) DEFAULT '승인',
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );

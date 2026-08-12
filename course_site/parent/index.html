@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>늘봄학교 학부모 모바일 수강신청 포털</title>
+  <link rel="stylesheet" href="parent_style.css">
+</head>
+<body>
+  <div class="mobile-container">
+    <!-- Header -->
+    <header class="mobile-header">
+      <span class="school-tag" id="parentSchoolTag">🏫 운천초등학교</span>
+      <h1>늘봄/방과후학교 모바일 수강신청</h1>
+      <p>10초 만에 원클릭 수강 신청 및 실시간 대기 조회</p>
+    </header>
+
+    <!-- Nav Tabs -->
+    <nav class="nav-tabs-mobile">
+      <button class="tab-btn-mobile active" data-tab="apply">📝 수강신청</button>
+      <button class="tab-btn-mobile" data-tab="my">📱 내 신청/대기 내역</button>
+    </nav>
+
+    <!-- Content -->
+    <main class="mobile-content">
+      <!-- Toast Alert -->
+      <div id="toastAlert" class="alert-toast"></div>
+
+      <!-- Parent Auth Card -->
+      <section class="auth-card">
+        <h3>📱 학부모 1초 본인인증 & 자녀 정보</h3>
+        <div class="form-group-mobile">
+          <label>보호자 연락처 *</label>
+          <input type="tel" id="parentPhone" class="input-mobile" placeholder="010-1234-5678" value="010-2345-6789">
+        </div>
+        <div class="form-group-mobile">
+          <label>학생(자녀) 이름 *</label>
+          <input type="text" id="parentStudentName" class="input-mobile" placeholder="예: 김민준" value="김민준">
+        </div>
+        <div class="form-group-mobile">
+          <label>학년 / 반</label>
+          <input type="text" id="parentGradeClass" class="input-mobile" placeholder="예: 1학년 2반" value="1학년 2반">
+        </div>
+        <div class="form-group-mobile">
+          <label>수강료 지원 구분</label>
+          <select id="parentSubsidyType" class="input-mobile">
+            <option value="자유수강권">자유수강권 (연 60만원 한도)</option>
+            <option value="늘봄 지원금">늘봄전담 지원금 (무상)</option>
+            <option value="일반 자부담">일반 자부담</option>
+          </select>
+        </div>
+        <button id="lookupMyAppsBtn" class="btn-mobile-primary" style="margin-top: 6px; background: #6366f1;">
+          🔍 내 자녀 신청/대기 현황 조회
+        </button>
+      </section>
+
+      <!-- TAB 1: APPLY LIST -->
+      <div id="tab-apply-view" class="tab-view-pane">
+        <h3 style="font-size: 1rem; margin-bottom: 12px;">📚 개설 강좌 목록 (실시간 좌석)</h3>
+        <div id="parentCourseList">
+          <!-- Dynamic Course Cards -->
+        </div>
+      </div>
+
+      <!-- TAB 2: MY APPLICATIONS -->
+      <div id="tab-my-view" class="tab-view-pane" style="display: none;">
+        <h3 style="font-size: 1rem; margin-bottom: 12px;">✅ 수강 신청 승인 내역</h3>
+        <div id="myApplicantList" style="margin-bottom: 20px;">
+          <!-- Dynamic -->
+        </div>
+
+        <h3 style="font-size: 1rem; margin-bottom: 12px;">⌛ 대기자 명단 내역</h3>
+        <div id="myWaitlistList">
+          <!-- Dynamic -->
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="parent_app.js"></script>
+</body>
+</html>

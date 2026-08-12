@@ -260,7 +260,9 @@ document.addEventListener('DOMContentLoaded', () => {
       capacity: document.getElementById('newCapacity').value,
       waitingCapacity: document.getElementById('newWaitingCapacity').value,
       schedule: document.getElementById('newSchedule').value.trim(),
-      fee: document.getElementById('newFee').value
+      fee: document.getElementById('newFee').value,
+      materialFee: document.getElementById('newMaterialFee') ? document.getElementById('newMaterialFee').value : 0,
+      autoRenew: document.getElementById('newAutoRenew') ? document.getElementById('newAutoRenew').value : 'Y'
     };
 
     try {
@@ -286,6 +288,25 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('서버 등록 실패');
     }
   });
+
+  const autoRenewCoursesBtn = document.getElementById('autoRenewCoursesBtn');
+  if (autoRenewCoursesBtn) {
+    autoRenewCoursesBtn.addEventListener('click', async () => {
+      if (confirm('월별 수강 자동 연장을 실행하시겠습니까?\n자동 연동 설정된 강좌의 수강생이 이월 연장 처리됩니다.')) {
+        try {
+          const res = await fetch('/api/courses/auto-renew', {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          const data = await res.json();
+          alert(`🎉 ${data.message}`);
+          fetchCourses();
+        } catch (err) {
+          alert('자동 연장 처리 중 오류가 발생했습니다.');
+        }
+      }
+    });
+  }
 
   // Excel Download (.xlsx)
   excelExportBtn.addEventListener('click', () => {

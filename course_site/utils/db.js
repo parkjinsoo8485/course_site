@@ -375,6 +375,9 @@ class JSONDatabase {
       code: String(Math.floor(100 + Math.random() * 900)),
       applied: 0,
       waiting: 0,
+      fee: parseInt(courseData.fee) || 0,
+      materialFee: parseInt(courseData.materialFee) || 0,
+      autoRenew: courseData.autoRenew || 'Y',
       feeReceipt: 'Y',
       teacherClosed: 'N',
       refundClosed: 'N',
@@ -384,6 +387,17 @@ class JSONDatabase {
     this.data.courses.unshift(newCourse);
     this.save();
     return newCourse;
+  }
+
+  autoRenewCourses(schoolId) {
+    const courses = this.getCoursesBySchool(schoolId);
+    let renewedCount = 0;
+    courses.forEach(c => {
+      if (c.autoRenew === 'Y' && c.applied > 0) {
+        renewedCount += c.applied;
+      }
+    });
+    return renewedCount;
   }
 
   deleteCourse(courseId, schoolId) {
@@ -396,9 +410,98 @@ class JSONDatabase {
     return null;
   }
 
-  // Applicant Operations
+  // Applicant & Parent Operations
   getApplicantsBySchool(schoolId) {
     return (this.data.applicants || []).filter(a => a.schoolId === schoolId);
+  }
+
+  getApplicantsByParentPhone(phone, schoolId) {
+    const cleanPhone = phone.replace(/[^0-9]/g, '');
+    const applicants = (this.data.applicants || []).filter(a => {
+      const p = (a.parentPhone || '').replace(/[^0-9]/g, '');
+      return (!schoolId || a.schoolId === schoolId) && p === cleanPhone;
+    });
+    const waitlist = (this.data.waitlist || []).filter(w => {
+      const p = (w.parentPhone || '').replace(/[^0-9]/g, '');
+      return (!schoolId || w.schoolId === schoolId) && p === cleanPhone;
+    });
+    return { applicants, waitlist };
+  }
+
+  // Parent One-Click Application with Time Overlap Check
+  applyCourseParent(schoolId, appData) {
+    const { studentName, gradeClass, parentPhone, courseId, subsidyType } = appData;
+    const course = this.data.courses.find(c => c.id === courseId && c.schoolId === schoolId);
+    if (!course) return { error: '해당 강좌를 찾을 수 없습니다.' };
+
+    // 1. Time Overlap Check (시간표 겹침 방지)
+    const existingApps = (this.data.applicants || []).filter(a => 
+      a.schoolId === schoolId && 
+      a.studentName === studentName && 
+      a.status === '승인'
+    );
+
+    for (const existing of existingApps) {
+      const targetCourse = this.data.courses.find(c => c.id === existing.courseId);
+      if (targetCourse && targetCourse.schedule && course.schedule) {
+        // Compare day/time overlap (e.g. 월 vs 월)
+        const targetDays = targetCourse.schedule.split(':')[0] || '';
+        const currentDays = course.schedule.split(':')[0] || '';
+        const daysOverlap = targetDays.split(',').some(d => currentDays.includes(d));
+        
+        if (daysOverlap) {
+          return { 
+            error: `시간표가 중복됩니다! 이미 '${targetCourse.title}' (${targetCourse.schedule}) 강좌가 동일 요일에 등록되어 있습니다.` 
+          };
+        }
+      }
+    }
+
+    // 2. Capacity Check (정원/대기 판별)
+    const nowStr = new Date().toISOString().replace('T', ' ').slice(0, 16);
+
+    if (course.applied < course.capacity) {
+      // Add to Applicants
+      const newApp = {
+        id: 'app_' + Date.now(),
+        schoolId,
+        studentName,
+        gradeClass: gradeClass || '1학년',
+        parentPhone,
+        courseId: course.id,
+        courseTitle: course.title,
+        appliedAt: nowStr,
+        subsidyType: subsidyType || '일반 자부담',
+        paymentStatus: subsidyType === '자유수강권' ? '지원금 수령' : '결제대기',
+        voucherBalance: 600000,
+        materialPaid: 'N',
+        status: '승인'
+      };
+      course.applied += 1;
+      this.data.applicants.unshift(newApp);
+      this.save();
+      return { success: true, isWaitlist: false, applicant: newApp, message: '🎉 수강 신청이 성공적으로 완료되었습니다!' };
+    } else {
+      // Add to Waitlist
+      const currentWaitCount = (this.data.waitlist || []).filter(w => w.courseId === course.id).length;
+      const newWait = {
+        id: 'wt_' + Date.now(),
+        schoolId,
+        rank: currentWaitCount + 1,
+        studentName,
+        gradeClass: gradeClass || '1학년',
+        parentPhone,
+        courseId: course.id,
+        courseTitle: course.title,
+        appliedAt: nowStr,
+        status: '대기중'
+      };
+      course.waiting += 1;
+      if (!this.data.waitlist) this.data.waitlist = [];
+      this.data.waitlist.push(newWait);
+      this.save();
+      return { success: true, isWaitlist: true, waitlist: newWait, message: `⚠️ 정원 초과로 대기 순번 #${newWait.rank}순위로 등록되었습니다.` };
+    }
   }
 
   updateApplicantStatus(applicantId, schoolId, status) {

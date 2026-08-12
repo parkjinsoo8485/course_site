@@ -272,6 +272,8 @@ app.post('/api/courses', authenticateToken, (req, res) => {
       period: period || '2026-03-01~2026-06-30',
       schedule: schedule || '월,수:14:00~14:50',
       fee: parseInt(fee) || 0,
+      materialFee: parseInt(req.body.materialFee) || 0,
+      autoRenew: req.body.autoRenew || 'Y',
       status: '모집중'
     });
 
@@ -279,6 +281,61 @@ app.post('/api/courses', authenticateToken, (req, res) => {
   } catch (err) {
     return res.status(500).json({ success: false, message: '강좌 등록 중 오류가 발생했습니다.' });
   }
+});
+
+// POST /api/courses/auto-renew (수강 자동 연장)
+app.post('/api/courses/auto-renew', authenticateToken, (req, res) => {
+  const renewed = db.autoRenewCourses(req.user.schoolId);
+  return res.json({ success: true, message: `월별 수강 자동 연장이 완료되었습니다. (총 ${renewed}건 연장)` });
+});
+
+// ==================== PARENT PORTAL APIs (공공/학부모 전용) ====================
+
+// GET /api/parent/courses?schoolCode=UNCHON2025
+app.get('/api/parent/courses', (req, res) => {
+  const schoolCode = (req.query.schoolCode || 'UNCHON2025').trim().toUpperCase();
+  const school = db.findSchoolByCode(schoolCode);
+  if (!school) return res.status(404).json({ success: false, message: '학교를 찾을 수 없습니다.' });
+
+  const courses = db.getCoursesBySchool(school.id);
+  return res.json({ success: true, schoolName: school.name, schoolId: school.id, courses });
+});
+
+// GET /api/parent/lookup?phone=010-1234-5678&schoolCode=UNCHON2025
+app.get('/api/parent/lookup', (req, res) => {
+  const { phone, schoolCode } = req.query;
+  if (!phone) return res.status(400).json({ success: false, message: '보호자 연락처를 입력하세요.' });
+
+  const school = db.findSchoolByCode((schoolCode || 'UNCHON2025').toUpperCase());
+  const schoolId = school ? school.id : null;
+
+  const data = db.getApplicantsByParentPhone(phone, schoolId);
+  return res.json({ success: true, ...data });
+});
+
+// POST /api/parent/apply (시간표 겹침 방지 검증 포함 수강신청)
+app.post('/api/parent/apply', (req, res) => {
+  const { schoolCode, studentName, gradeClass, parentPhone, courseId, subsidyType } = req.body;
+  if (!studentName || !parentPhone || !courseId) {
+    return res.status(400).json({ success: false, message: '학생명, 연락처, 강좌를 모두 입력하세요.' });
+  }
+
+  const school = db.findSchoolByCode((schoolCode || 'UNCHON2025').toUpperCase());
+  if (!school) return res.status(404).json({ success: false, message: '학교 코드가 유효하지 않습니다.' });
+
+  const result = db.applyCourseParent(school.id, {
+    studentName,
+    gradeClass,
+    parentPhone,
+    courseId,
+    subsidyType
+  });
+
+  if (result.error) {
+    return res.status(400).json({ success: false, message: result.error });
+  }
+
+  return res.json(result);
 });
 
 // DELETE /api/courses/:id
