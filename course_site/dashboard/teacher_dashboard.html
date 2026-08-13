@@ -71,6 +71,9 @@
             <p>학교별 수강인원, 대기자 현황을 실시간으로 통합 관리합니다.</p>
           </div>
           <div class="header-actions" style="display:flex; gap:10px;">
+            <button class="btn-secondary" id="executeLotteryBtn" style="background:#8b5cf6; color:white; border:none;">
+              🎲 추첨제 추첨 실행
+            </button>
             <button class="btn-secondary" id="autoRenewCoursesBtn" style="background:#4f46e5; color:white; border:none;">
               🔄 월별 수강 자동 연장 실행
             </button>
@@ -328,6 +331,9 @@
             </select>
             <input type="text" id="settlementFilterKeyword" class="input-style" placeholder="학생명 또는 강좌명 검색..." style="flex: 1;">
             <button class="btn-secondary" id="settlementSearchBtn">검색</button>
+            <button class="btn-primary" id="edufineExportBtn" style="background:#059669; width:auto;">
+              📊 에듀파인 강사료/수용비 엑셀 출력
+            </button>
           </div>
         </section>
 

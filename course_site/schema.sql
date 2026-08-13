@@ -107,3 +107,46 @@ CREATE TABLE IF NOT EXISTS attendance (
   status VARCHAR(32) DEFAULT '출석', -- 출석, 결석, 조퇴
   notified_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
+
+-- 8. 클래스별 Q&A 게시판 (qa_board)
+CREATE TABLE IF NOT EXISTS qa_board (
+  id VARCHAR(64) PRIMARY KEY,
+  school_id VARCHAR(64) REFERENCES schools(id) ON DELETE CASCADE,
+  course_id VARCHAR(64) REFERENCES courses(id) ON DELETE CASCADE,
+  course_title VARCHAR(128) NOT NULL,
+  author_name VARCHAR(64) NOT NULL,
+  author_role VARCHAR(32) DEFAULT 'parent',
+  title VARCHAR(256) NOT NULL,
+  content TEXT NOT NULL,
+  reply TEXT,
+  replied_at TIMESTAMP WITH TIME ZONE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 9. 하교/귀가 일정표 (safety_schedules)
+CREATE TABLE IF NOT EXISTS safety_schedules (
+  id VARCHAR(64) PRIMARY KEY,
+  school_id VARCHAR(64) REFERENCES schools(id) ON DELETE CASCADE,
+  student_name VARCHAR(64) NOT NULL,
+  grade_class VARCHAR(64) NOT NULL,
+  parent_phone VARCHAR(32) NOT NULL,
+  day_of_week VARCHAR(16) NOT NULL, -- 월, 화, 수, 목, 금
+  return_time VARCHAR(32) NOT NULL, -- 예: 16:30
+  pickup_person VARCHAR(64) NOT NULL, -- 예: 어머니 자차, 학원차량
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 10. 결석 및 조퇴 신청 (absence_requests)
+CREATE TABLE IF NOT EXISTS absence_requests (
+  id VARCHAR(64) PRIMARY KEY,
+  school_id VARCHAR(64) REFERENCES schools(id) ON DELETE CASCADE,
+  student_name VARCHAR(64) NOT NULL,
+  parent_phone VARCHAR(32) NOT NULL,
+  course_id VARCHAR(64) REFERENCES courses(id) ON DELETE CASCADE,
+  course_title VARCHAR(128) NOT NULL,
+  absence_date DATE NOT NULL,
+  type VARCHAR(32) DEFAULT '결석', -- 결석, 조퇴
+  reason TEXT NOT NULL,
+  status VARCHAR(32) DEFAULT '승인대기',
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);

@@ -16,9 +16,12 @@
     </header>
 
     <!-- Nav Tabs -->
-    <nav class="nav-tabs-mobile">
+    <nav class="nav-tabs-mobile" style="overflow-x: auto;">
       <button class="tab-btn-mobile active" data-tab="apply">📝 수강신청</button>
-      <button class="tab-btn-mobile" data-tab="my">📱 내 신청/대기 내역</button>
+      <button class="tab-btn-mobile" data-tab="my">📱 내 신청/대기</button>
+      <button class="tab-btn-mobile" data-tab="safety">🚌 귀가일정표</button>
+      <button class="tab-btn-mobile" data-tab="absence">🤒 결석신청</button>
+      <button class="tab-btn-mobile" data-tab="qa">💬 클래스Q&A</button>
     </nav>
 
     <!-- Content -->
@@ -73,6 +76,70 @@
         <div id="myWaitlistList">
           <!-- Dynamic -->
         </div>
+      </div>
+
+      <!-- TAB 3: SAFETY RETURN SCHEDULE -->
+      <div id="tab-safety-view" class="tab-view-pane" style="display: none;">
+        <h3 style="font-size: 1rem; margin-bottom: 12px;">🚌 자녀 하교/귀가 일정 등록</h3>
+        <div class="auth-card">
+          <div class="form-group-mobile">
+            <label>귀가 요일 *</label>
+            <input type="text" id="retDay" class="input-mobile" value="월,수,금" placeholder="예: 월,수,금">
+          </div>
+          <div class="form-group-mobile">
+            <label>귀가 예정 시간 *</label>
+            <input type="text" id="retTime" class="input-mobile" value="16:30" placeholder="예: 16:30">
+          </div>
+          <div class="form-group-mobile">
+            <label>동행/픽업 구체방법 *</label>
+            <input type="text" id="retPickup" class="input-mobile" value="어머니 직접 동행 귀가" placeholder="예: 어머니 자차, 학원차량">
+          </div>
+          <button id="saveReturnScheduleBtn" class="btn-mobile-primary" style="margin-top: 6px;">
+            💾 귀가 일정표 등록하기
+          </button>
+        </div>
+        <div id="safetyScheduleList"></div>
+      </div>
+
+      <!-- TAB 4: ABSENCE REQUEST -->
+      <div id="tab-absence-view" class="tab-view-pane" style="display: none;">
+        <h3 style="font-size: 1rem; margin-bottom: 12px;">🤒 결석 및 조퇴 신청서 제출</h3>
+        <div class="auth-card">
+          <div class="form-group-mobile">
+            <label>해당 강좌 선택</label>
+            <input type="text" id="absCourseTitle" class="input-mobile" value="[특기적성] 창의 로봇교실 A반">
+          </div>
+          <div class="form-group-mobile">
+            <label>결석/조퇴 예정일자 *</label>
+            <input type="date" id="absDate" class="input-mobile">
+          </div>
+          <div class="form-group-mobile">
+            <label>신청 사유 *</label>
+            <textarea id="absReason" class="input-mobile" rows="3" placeholder="병원 진료 또는 가정 사정 등 사유 입력"></textarea>
+          </div>
+          <button id="submitAbsenceBtn" class="btn-mobile-primary" style="margin-top: 6px; background: #ef4444;">
+            📩 결석 신청서 전달하기
+          </button>
+        </div>
+      </div>
+
+      <!-- TAB 5: CLASS Q&A -->
+      <div id="tab-qa-view" class="tab-view-pane" style="display: none;">
+        <h3 style="font-size: 1rem; margin-bottom: 12px;">💬 담당 강사 1:1 Q&A 문의</h3>
+        <div class="auth-card">
+          <div class="form-group-mobile">
+            <label>문의 제목 *</label>
+            <input type="text" id="qaTitle" class="input-mobile" placeholder="제목을 입력해 주세요.">
+          </div>
+          <div class="form-group-mobile">
+            <label>문의 내용 *</label>
+            <textarea id="qaContent" class="input-mobile" rows="3" placeholder="강사님께 전달할 질문 입력"></textarea>
+          </div>
+          <button id="submitQABtn" class="btn-mobile-primary" style="margin-top: 6px; background: #4f46e5;">
+            💬 질문 작성하기
+          </button>
+        </div>
+        <div id="parentQAList"></div>
       </div>
     </main>
   </div>

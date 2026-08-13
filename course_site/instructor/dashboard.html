@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>강사 전용 LMS 대시보드 - 방과후 늘봄학교</title>
+  <link rel="stylesheet" href="instructor_style.css">
+</head>
+<body>
+  <div class="inst-layout">
+    <!-- Instructor Sidebar Navigation -->
+    <aside class="inst-sidebar">
+      <div class="inst-brand">🧑‍🏫 강사 LMS 포털</div>
+      <nav class="inst-nav">
+        <a href="#" class="inst-nav-item active" data-tab="home"><span>🏠</span> 대시보드 홈</a>
+        <a href="#" class="inst-nav-item" data-tab="courses"><span>⚽</span> 내 강좌 관리</a>
+        <a href="#" class="inst-nav-item" data-tab="students"><span>👥</span> 수강생 & 재료비</a>
+        <a href="#" class="inst-nav-item" data-tab="waitlist"><span>⏳</span> 대기자 승인</a>
+        <a href="../teacher/attendance.html" target="_blank" class="inst-nav-item"><span>✅</span> 모바일 출석부 ↗</a>
+        <a href="#" class="inst-nav-item" data-tab="refund"><span>💸</span> 일할 환불 계산기</a>
+        <a href="#" class="inst-nav-item" data-tab="qa"><span>💬</span> 클래스 Q&A 소통</a>
+      </nav>
+      <div style="padding-top: 10px; border-top: 1px solid #334155;">
+        <button id="instLogoutBtn" style="width: 100%; padding: 10px; background: #dc2626; color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">
+          로그아웃
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="inst-main">
+      <header class="inst-header">
+        <div>
+          <h2>늘봄학교 강사 통합 관리자 시스템</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">강좌 운영, 정산, 출석 및 학부모 소통을 한눈에 관리합니다.</p>
+        </div>
+        <div style="font-weight: 700; color: var(--primary);" id="instProfName">김로봇 강사님</div>
+      </header>
+
+      <!-- TAB 1: HOME DASHBOARD -->
+      <div id="tab-home" class="inst-tab-pane">
+        <div class="inst-metrics-grid">
+          <div class="inst-metric-card">
+            <span style="color: var(--text-muted); font-size: 0.85rem;">총 담당 강좌</span>
+            <div class="inst-metric-value" id="instCourseCount">0개</div>
+          </div>
+          <div class="inst-metric-card">
+            <span style="color: var(--text-muted); font-size: 0.85rem;">총 담당 수강생</span>
+            <div class="inst-metric-value" id="instStudentCount">0명</div>
+          </div>
+          <div class="inst-metric-card">
+            <span style="color: var(--text-muted); font-size: 0.85rem;">이번 달 예상 정산액 (80%)</span>
+            <div class="inst-metric-value" id="instRevenueCount">0원</div>
+          </div>
+        </div>
+
+        <div class="inst-card">
+          <h3>📘 내 담당 강좌 현황</h3>
+          <table class="inst-table">
+            <thead>
+              <tr>
+                <th>구분</th>
+                <th>강좌명</th>
+                <th>수강인원 / 정원</th>
+                <th>강의시간</th>
+                <th>수강료</th>
+                <th>재료비</th>
+                <th>자동연장</th>
+              </tr>
+            </thead>
+            <tbody id="instCourseTable">
+              <!-- Dynamic -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 2: REFUND CALCULATOR -->
+      <div id="tab-refund" class="inst-tab-pane" style="display: none;">
+        <div class="inst-card" style="max-width: 540px;">
+          <h3>💸 법정 일할 환불액 자동 계산기</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">
+            소비자분쟁해결기준에 따른 중도 취소 수강생의 잔여일수 환불액을 계산합니다.
+          </p>
+          <div style="margin-bottom: 12px;">
+            <label style="font-size: 0.85rem; font-weight: 700;">전체 수강료 (원)</label>
+            <input type="number" id="calcFee" class="input-mobile" value="35000" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 8px;">
+          </div>
+          <div style="margin-bottom: 12px;">
+            <label style="font-size: 0.85rem; font-weight: 700;">전체 총 수업일수</label>
+            <input type="number" id="calcTotalDays" class="input-mobile" value="20" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 8px;">
+          </div>
+          <div style="margin-bottom: 16px;">
+            <label style="font-size: 0.85rem; font-weight: 700;">수강 완료 수업일수</label>
+            <input type="number" id="calcAttendedDays" class="input-mobile" value="5" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 8px;">
+          </div>
+          <button id="runCalcBtn" style="width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">
+            🧮 환불액 즉시 계산하기
+          </button>
+          <div id="calcResultBox" style="margin-top: 16px; padding: 16px; background: #eef2ff; border-radius: 8px; font-weight: 700; color: var(--primary); display: none;"></div>
+        </div>
+      </div>
+
+      <!-- TAB 3: Q&A COMMUNITY -->
+      <div id="tab-qa" class="inst-tab-pane" style="display: none;">
+        <div class="inst-card">
+          <h3>💬 학부모 클래스 Q&A 문의 현황</h3>
+          <div id="instQAList" style="margin-top: 16px;">
+            <!-- Dynamic -->
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="instructor_app.js"></script>
+</body>
+</html>

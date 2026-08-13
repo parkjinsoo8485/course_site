@@ -25,12 +25,166 @@ document.addEventListener('DOMContentLoaded', () => {
       tabPanes.forEach(p => p.style.display = 'none');
       if (target === 'apply') {
         document.getElementById('tab-apply-view').style.display = 'block';
-      } else {
+      } else if (target === 'my') {
         document.getElementById('tab-my-view').style.display = 'block';
         fetchMyApplications();
+      } else if (target === 'safety') {
+        document.getElementById('tab-safety-view').style.display = 'block';
+        fetchSafetySchedules();
+      } else if (target === 'absence') {
+        document.getElementById('tab-absence-view').style.display = 'block';
+      } else if (target === 'qa') {
+        document.getElementById('tab-qa-view').style.display = 'block';
+        fetchParentQA();
       }
     });
   });
+
+  // Safety Return Schedule Event
+  const saveReturnScheduleBtn = document.getElementById('saveReturnScheduleBtn');
+  if (saveReturnScheduleBtn) {
+    saveReturnScheduleBtn.addEventListener('click', async () => {
+      const studentName = parentStudentNameInput.value.trim();
+      const gradeClass = parentGradeClassInput.value.trim();
+      const parentPhone = parentPhoneInput.value.trim();
+      const dayOfWeek = document.getElementById('retDay').value.trim();
+      const returnTime = document.getElementById('retTime').value.trim();
+      const pickupPerson = document.getElementById('retPickup').value.trim();
+
+      try {
+        const res = await fetch('/api/safety/return-schedules', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            schoolCode, studentName, gradeClass, parentPhone, dayOfWeek, returnTime, pickupPerson
+          })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast('🎉 자녀 귀가 일정표가 등록되었습니다.', false);
+          fetchSafetySchedules();
+        }
+      } catch (err) {
+        showToast('등록 실패', true);
+      }
+    });
+  }
+
+  async function fetchSafetySchedules() {
+    const studentName = parentStudentNameInput.value.trim();
+    try {
+      const res = await fetch(`/api/safety/return-schedules?studentName=${encodeURIComponent(studentName)}&schoolCode=${schoolCode}`);
+      const data = await res.json();
+      if (data.success) {
+        const container = document.getElementById('safetyScheduleList');
+        container.innerHTML = '';
+        data.schedules.forEach(s => {
+          const card = document.createElement('div');
+          card.className = 'course-card-mobile';
+          card.innerHTML = `
+            <div style="font-weight:700;">🚌 ${s.studentName} (${s.gradeClass})</div>
+            <div style="font-size:0.85rem; color:#64748b; margin-top:4px;">요일: ${s.dayOfWeek} | 귀가시간: ${s.returnTime}</div>
+            <div style="font-size:0.85rem; color:#4f46e5; font-weight:700; margin-top:4px;">동행: ${s.pickupPerson}</div>
+          `;
+          container.appendChild(card);
+        });
+      }
+    } catch (err) {}
+  }
+
+  // Absence Submit Event
+  const submitAbsenceBtn = document.getElementById('submitAbsenceBtn');
+  if (submitAbsenceBtn) {
+    submitAbsenceBtn.addEventListener('click', async () => {
+      const studentName = parentStudentNameInput.value.trim();
+      const parentPhone = parentPhoneInput.value.trim();
+      const courseTitle = document.getElementById('absCourseTitle').value.trim();
+      const absenceDate = document.getElementById('absDate').value;
+      const reason = document.getElementById('absReason').value.trim();
+
+      if (!absenceDate || !reason) {
+        showToast('결석일자와 사유를 입력하세요.', true);
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/safety/absence', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            schoolCode, studentName, parentPhone, courseTitle, absenceDate, type: '결석', reason
+          })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast('🎉 결석 신청서가 강사님께 제출되었습니다.', false);
+          document.getElementById('absReason').value = '';
+        }
+      } catch (err) {
+        showToast('제출 실패', true);
+      }
+    });
+  }
+
+  // Q&A Submit Event
+  const submitQABtn = document.getElementById('submitQABtn');
+  if (submitQABtn) {
+    submitQABtn.addEventListener('click', async () => {
+      const authorName = `${parentStudentNameInput.value.trim()} 보호자`;
+      const title = document.getElementById('qaTitle').value.trim();
+      const content = document.getElementById('qaContent').value.trim();
+
+      if (!title || !content) {
+        showToast('제목과 내용을 입력해 주세요.', true);
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/qa', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            schoolCode, courseId: 'crs_3', courseTitle: '[특기적성] 창의 로봇교실 A반', authorName, title, content
+          })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast('🎉 질문이 등록되었습니다.', false);
+          document.getElementById('qaTitle').value = '';
+          document.getElementById('qaContent').value = '';
+          fetchParentQA();
+        }
+      } catch (err) {
+        showToast('질문 등록 실패', true);
+      }
+    });
+  }
+
+  async function fetchParentQA() {
+    try {
+      const res = await fetch(`/api/qa?schoolCode=${schoolCode}`);
+      const data = await res.json();
+      if (data.success) {
+        const container = document.getElementById('parentQAList');
+        container.innerHTML = '';
+        data.questions.forEach(q => {
+          const card = document.createElement('div');
+          card.className = 'course-card-mobile';
+          card.innerHTML = `
+            <div style="font-weight:700; font-size:0.95rem;">Q. ${q.title}</div>
+            <div style="font-size:0.8rem; color:#64748b; margin-top:2px;">${q.authorName} | ${q.createdAt}</div>
+            <div style="font-size:0.85rem; margin-top:6px; background:#f8fafc; padding:8px; border-radius:6px;">${q.content}</div>
+            ${q.reply ? `
+              <div style="background:#ecfdf5; color:#065f46; padding:8px; border-radius:6px; font-size:0.85rem; margin-top:6px;">
+                <strong>A. 강사 답변 (${q.repliedAt}):</strong><br>${q.reply}
+              </div>
+            ` : `<div style="font-size:0.75rem; color:#f59e0b; margin-top:4px;">⏳ 강사 답변 대기중</div>`}
+          `;
+          container.appendChild(card);
+        });
+      }
+    } catch (err) {}
+  }
 
   // 1. Fetch Public Course List
   async function fetchPublicCourses() {

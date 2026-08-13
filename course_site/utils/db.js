@@ -641,6 +641,196 @@ class JSONDatabase {
     this.save();
     return createdLogs;
   }
+
+  // Q&A Board Operations
+  getQABoard(schoolId, courseId) {
+    if (!this.data.qaBoard) {
+      this.data.qaBoard = [
+        {
+          id: 'qa_1',
+          schoolId: 'sch_1',
+          courseId: 'crs_3',
+          courseTitle: '[특기적성] 창의 로봇교실 A반',
+          authorName: '김민준 보호자',
+          authorRole: 'parent',
+          title: '3월 준비물 및 교재 관련 문의드립니다.',
+          content: '로봇 교재 키트를 별도 구매해야 하는지 늘봄 무상 지원금에 포함되어 있는지 궁금합니다.',
+          reply: '안녕하세요! 로봇 키트 교재비(10,000원)는 수강 신청 시 재료비 항목에 자동 계산되며, 자유수강권 및 늘봄 지원금으로 함께 차감 정산됩니다.',
+          repliedAt: '2026-03-03 14:20',
+          createdAt: '2026-03-03 10:15'
+        }
+      ];
+    }
+    return (this.data.qaBoard || []).filter(q => 
+      q.schoolId === schoolId && (!courseId || q.courseId === courseId)
+    );
+  }
+
+  createQA(schoolId, data) {
+    if (!this.data.qaBoard) this.data.qaBoard = [];
+    const newQA = {
+      id: 'qa_' + Date.now(),
+      schoolId,
+      createdAt: new Date().toISOString().replace('T', ' ').slice(0, 16),
+      reply: null,
+      repliedAt: null,
+      ...data
+    };
+    this.data.qaBoard.unshift(newQA);
+    this.save();
+    return newQA;
+  }
+
+  replyQA(qaId, replyText) {
+    const qa = (this.data.qaBoard || []).find(q => q.id === qaId);
+    if (qa) {
+      qa.reply = replyText;
+      qa.repliedAt = new Date().toISOString().replace('T', ' ').slice(0, 16);
+      this.save();
+      return qa;
+    }
+    return null;
+  }
+
+  // Safety & Return Schedule Operations
+  getSafetySchedules(schoolId, studentName) {
+    if (!this.data.safetySchedules) {
+      this.data.safetySchedules = [
+        {
+          id: 'sft_1',
+          schoolId: 'sch_1',
+          studentName: '김민준',
+          gradeClass: '1학년 2반',
+          parentPhone: '010-2345-6789',
+          dayOfWeek: '월,수,금',
+          returnTime: '16:30',
+          pickupPerson: '어머니 직접 동행 귀가'
+        }
+      ];
+    }
+    return (this.data.safetySchedules || []).filter(s => 
+      s.schoolId === schoolId && (!studentName || s.studentName.includes(studentName))
+    );
+  }
+
+  saveSafetySchedule(schoolId, data) {
+    if (!this.data.safetySchedules) this.data.safetySchedules = [];
+    const newSchedule = {
+      id: 'sft_' + Date.now(),
+      schoolId,
+      createdAt: new Date().toISOString().split('T')[0],
+      ...data
+    };
+    this.data.safetySchedules.unshift(newSchedule);
+    this.save();
+    return newSchedule;
+  }
+
+  // Absence Requests
+  getAbsenceRequests(schoolId) {
+    if (!this.data.absenceRequests) {
+      this.data.absenceRequests = [
+        {
+          id: 'abs_1',
+          schoolId: 'sch_1',
+          studentName: '김민준',
+          parentPhone: '010-2345-6789',
+          courseTitle: '[특기적성] 창의 로봇교실 A반',
+          absenceDate: '2026-03-25',
+          type: '결석',
+          reason: '가정 사유 병원 진료로 인한 결석 신청',
+          status: '승인완료'
+        }
+      ];
+    }
+    return (this.data.absenceRequests || []).filter(a => a.schoolId === schoolId);
+  }
+
+  createAbsenceRequest(schoolId, data) {
+    if (!this.data.absenceRequests) this.data.absenceRequests = [];
+    const newAbs = {
+      id: 'abs_' + Date.now(),
+      schoolId,
+      status: '승인완료',
+      createdAt: new Date().toISOString().split('T')[0],
+      ...data
+    };
+    this.data.absenceRequests.unshift(newAbs);
+    this.save();
+    return newAbs;
+  }
+
+  // Financials & Edufine Export
+  getEdufineExport(schoolId) {
+    const courses = this.getCoursesBySchool(schoolId);
+    const result = courses.map((c, idx) => {
+      const totalRevenue = (c.applied || 0) * (c.fee || 0);
+      const instructorFee = Math.round(totalRevenue * 0.8); // 80% 강사료
+      const accommodationFee = totalRevenue - instructorFee; // 20% 학교 수용비
+      const totalMaterial = (c.applied || 0) * (c.materialFee || 0);
+
+      return {
+        '연번': idx + 1,
+        '강사명': c.teacherName,
+        '강좌명': c.title,
+        '수강인원': c.applied,
+        '수강료(원)': c.fee,
+        '총 징수액(원)': totalRevenue,
+        '에듀파인 강사료(80%)': instructorFee,
+        '에듀파인 수용비(20%)': accommodationFee,
+        '교재재료비 총액(원)': totalMaterial
+      };
+    });
+    return result;
+  }
+
+  // Fractional Pro-Rata Refund Calculator
+  calculateRefundAmount(fee, totalDays, attendedDays) {
+    const feeNum = parseInt(fee) || 0;
+    const total = parseInt(totalDays) || 20;
+    const attended = parseInt(attendedDays) || 0;
+    if (attended <= 0) return feeNum; // 100% 전액 환불
+    if (attended >= total) return 0; // 0원 환불 (수업 종료)
+
+    const remainingDays = total - attended;
+    const refundAmt = Math.round((feeNum / total) * remainingDays);
+    return refundAmt;
+  }
+
+  // Lottery Execution Engine
+  executeLottery(schoolId, courseId) {
+    const course = (this.data.courses || []).find(c => c.id === courseId && c.schoolId === schoolId);
+    if (!course) return { error: '강좌를 찾을 수 없습니다.' };
+
+    const applicants = (this.data.applicants || []).filter(a => a.courseId === courseId && a.schoolId === schoolId);
+    const capacity = course.capacity || 20;
+
+    // Shuffle applicants randomly
+    const shuffled = [...applicants].sort(() => Math.random() - 0.5);
+
+    let winCount = 0;
+    let waitCount = 0;
+
+    shuffled.forEach((a, idx) => {
+      if (idx < capacity) {
+        a.status = '승인';
+        winCount++;
+      } else {
+        a.status = '신청대기';
+        waitCount++;
+      }
+    });
+
+    this.save();
+    return {
+      success: true,
+      courseTitle: course.title,
+      totalApplied: applicants.length,
+      winCount,
+      waitCount,
+      message: `🎲 '${course.title}' 강좌 추첨이 완료되었습니다. (당첨: ${winCount}명, 대기: ${waitCount}명)`
+    };
+  }
 }
 
 module.exports = new JSONDatabase();

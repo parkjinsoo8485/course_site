@@ -206,7 +206,7 @@
       "appliedAt": "2026-03-04 14:20",
       "subsidyType": "일반 자부담",
       "paymentStatus": "결제대기",
-      "status": "신청대기"
+      "status": "승인"
     }
   ],
   "waitlist": [
@@ -313,6 +313,33 @@
       "date": "2026-08-12",
       "status": "조퇴",
       "notifiedAt": "2026-08-12T15:23:52.329Z"
+    }
+  ],
+  "qaBoard": [
+    {
+      "id": "qa_1786621036765",
+      "schoolId": "sch_1",
+      "createdAt": "2026-08-13 11:37",
+      "reply": null,
+      "repliedAt": null,
+      "courseId": "crs_3",
+      "courseTitle": "[특기적성] 창의 로봇교실 A반",
+      "authorName": "이서연 보호자",
+      "title": "다음 주 강의 준비물 관련 문의",
+      "content": "다음 주 수업에 별도 필기도구가 필요한가요?"
+    }
+  ],
+  "safetySchedules": [
+    {
+      "id": "sft_1786621036768",
+      "schoolId": "sch_1",
+      "createdAt": "2026-08-13",
+      "studentName": "김민준",
+      "gradeClass": "1학년 2반",
+      "parentPhone": "010-2345-6789",
+      "dayOfWeek": "월,수,금",
+      "returnTime": "16:30",
+      "pickupPerson": "어머니 자차 동행"
     }
   ]
 }

@@ -301,9 +301,50 @@ document.addEventListener('DOMContentLoaded', () => {
           const data = await res.json();
           alert(`🎉 ${data.message}`);
           fetchCourses();
+  const executeLotteryBtn = document.getElementById('executeLotteryBtn');
+  if (executeLotteryBtn) {
+    executeLotteryBtn.addEventListener('click', async () => {
+      if (confirm('정원 초과 강좌의 공정 무작위 추첨을 실행하시겠습니까?\n추첨 완료 후 당첨자는 자동 승인되며, 미당첨자는 대기 순번이 할당됩니다.')) {
+        try {
+          const res = await fetch('/api/lottery/execute', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ courseId: 'crs_3' })
+          });
+          const data = await res.json();
+          if (data.success) {
+            alert(data.message);
+            fetchCourses();
+          } else {
+            alert(data.message || '추첨 실행 실패');
+          }
         } catch (err) {
-          alert('자동 연장 처리 중 오류가 발생했습니다.');
+          alert('추첨 처리 중 오류가 발생했습니다.');
         }
+      }
+    });
+  }
+
+  const edufineExportBtn = document.getElementById('edufineExportBtn');
+  if (edufineExportBtn) {
+    edufineExportBtn.addEventListener('click', async () => {
+      try {
+        const res = await fetch('/api/financials/edufine', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await res.json();
+
+        if (data.success && data.edufineData) {
+          const worksheet = XLSX.utils.json_to_sheet(data.edufineData);
+          const workbook = XLSX.utils.book_new();
+          XLSX.utils.book_append_sheet(workbook, worksheet, '에듀파인 강사료수용비집계');
+          XLSX.writeFile(workbook, `에듀파인_늘봄학교_강사료수용비정산_${new Date().toISOString().split('T')[0]}.xlsx`);
+        }
+      } catch (err) {
+        alert('에듀파인 엑셀 출력 실패');
       }
     });
   }

@@ -474,6 +474,131 @@ app.post('/api/attendance/check', authenticateToken, (req, res) => {
   });
 });
 
+// ==================== ADVANCED OPERATIONAL & LMS APIs ====================
+
+// POST /api/lottery/execute (추첨제 추첨 실행)
+app.post('/api/lottery/execute', authenticateToken, (req, res) => {
+  const { courseId } = req.body;
+  if (!courseId) return res.status(400).json({ success: false, message: '강좌 ID를 지정해 주세요.' });
+
+  const result = db.executeLottery(req.user.schoolId, courseId);
+  if (result.error) return res.status(400).json({ success: false, message: result.error });
+
+  return res.json(result);
+});
+
+// GET /api/financials/edufine (에듀파인 강사료/수용비 엑셀 집계)
+app.get('/api/financials/edufine', authenticateToken, (req, res) => {
+  const edufineData = db.getEdufineExport(req.user.schoolId);
+  return res.json({ success: true, edufineData });
+});
+
+// POST /api/financials/refund-calculate (소비자분쟁기준 일할 환불 계산기)
+app.post('/api/financials/refund-calculate', (req, res) => {
+  const { fee, totalDays, attendedDays } = req.body;
+  const refundAmount = db.calculateRefundAmount(fee, totalDays, attendedDays);
+  return res.json({
+    success: true,
+    refundAmount,
+    message: `전체 ${totalDays}일 중 ${attendedDays}일 수강 후 취소: 환불 예정 금액은 ${refundAmount.toLocaleString()}원 입니다.`
+  });
+});
+
+// GET & POST /api/qa (클래스 Q&A 게시판)
+app.get('/api/qa', (req, res) => {
+  const { courseId, schoolCode } = req.query;
+  const school = db.findSchoolByCode((schoolCode || 'UNCHON2025').toUpperCase());
+  const schoolId = school ? school.id : 'sch_1';
+
+  const questions = db.getQABoard(schoolId, courseId);
+  return res.json({ success: true, questions });
+});
+
+app.post('/api/qa', (req, res) => {
+  const { courseId, courseTitle, authorName, title, content, schoolCode } = req.body;
+  if (!courseId || !title || !content) {
+    return res.status(400).json({ success: false, message: '제목과 내용을 입력해 주세요.' });
+  }
+
+  const school = db.findSchoolByCode((schoolCode || 'UNCHON2025').toUpperCase());
+  const schoolId = school ? school.id : 'sch_1';
+
+  const newQA = db.createQA(schoolId, {
+    courseId,
+    courseTitle: courseTitle || '늘봄 강좌',
+    authorName: authorName || '학부모',
+    title,
+    content
+  });
+
+  return res.json({ success: true, qa: newQA, message: 'Q&A 질문이 등록되었습니다.' });
+});
+
+app.put('/api/qa/:id/reply', authenticateToken, (req, res) => {
+  const { reply } = req.body;
+  const updated = db.replyQA(req.params.id, reply);
+  if (!updated) return res.status(404).json({ success: false, message: '질문을 찾을 수 없습니다.' });
+  return res.json({ success: true, qa: updated, message: '강사 답변이 등록되었습니다.' });
+});
+
+// GET & POST /api/safety/return-schedules (귀가 일정표)
+app.get('/api/safety/return-schedules', (req, res) => {
+  const { studentName, schoolCode } = req.query;
+  const school = db.findSchoolByCode((schoolCode || 'UNCHON2025').toUpperCase());
+  const schoolId = school ? school.id : 'sch_1';
+
+  const schedules = db.getSafetySchedules(schoolId, studentName);
+  return res.json({ success: true, schedules });
+});
+
+app.post('/api/safety/return-schedules', (req, res) => {
+  const { studentName, gradeClass, parentPhone, dayOfWeek, returnTime, pickupPerson, schoolCode } = req.body;
+  if (!studentName || !returnTime || !pickupPerson) {
+    return res.status(400).json({ success: false, message: '학생명, 귀가시간, 동행자를 입력하세요.' });
+  }
+
+  const school = db.findSchoolByCode((schoolCode || 'UNCHON2025').toUpperCase());
+  const schoolId = school ? school.id : 'sch_1';
+
+  const newSched = db.saveSafetySchedule(schoolId, {
+    studentName,
+    gradeClass: gradeClass || '1학년',
+    parentPhone: parentPhone || '010-0000-0000',
+    dayOfWeek: dayOfWeek || '월~금',
+    returnTime,
+    pickupPerson
+  });
+
+  return res.json({ success: true, schedule: newSched, message: '귀가 일정표가 저장되었습니다.' });
+});
+
+// GET & POST /api/safety/absence (결석 및 조퇴 신청)
+app.get('/api/safety/absence', authenticateToken, (req, res) => {
+  const absenceList = db.getAbsenceRequests(req.user.schoolId);
+  return res.json({ success: true, absenceList });
+});
+
+app.post('/api/safety/absence', (req, res) => {
+  const { studentName, parentPhone, courseTitle, absenceDate, type, reason, schoolCode } = req.body;
+  if (!studentName || !absenceDate || !reason) {
+    return res.status(400).json({ success: false, message: '학생명, 결석일자, 사유를 입력하세요.' });
+  }
+
+  const school = db.findSchoolByCode((schoolCode || 'UNCHON2025').toUpperCase());
+  const schoolId = school ? school.id : 'sch_1';
+
+  const newAbs = db.createAbsenceRequest(schoolId, {
+    studentName,
+    parentPhone: parentPhone || '010-0000-0000',
+    courseTitle: courseTitle || '늘봄 강좌',
+    absenceDate,
+    type: type || '결석',
+    reason
+  });
+
+  return res.json({ success: true, absence: newAbs, message: '결석/조퇴 신청이 담당 선생님께 전달되었습니다.' });
+});
+
 // Serve static files
 app.use(express.static(path.join(__dirname)));
 
