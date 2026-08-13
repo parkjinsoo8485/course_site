@@ -67,7 +67,10 @@
 
       <!-- TAB 2: MY APPLICATIONS -->
       <div id="tab-my-view" class="tab-view-pane" style="display: none;">
-        <h3 style="font-size: 1rem; margin-bottom: 12px;">✅ 수강 신청 승인 내역</h3>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
+          <h3 style="font-size: 1rem;">✅ 수강 신청 승인 내역</h3>
+          <button id="openRefundCalcBtn" class="btn-secondary" style="font-size:0.75rem; padding:4px 8px;">🧮 일할 환불금액 계산기</button>
+        </div>
         <div id="myApplicantList" style="margin-bottom: 20px;">
           <!-- Dynamic -->
         </div>
@@ -121,6 +124,8 @@
             📩 결석 신청서 전달하기
           </button>
         </div>
+        <h3 style="font-size: 1rem; margin-top:20px; margin-bottom: 12px;">📋 결석 및 조퇴 신청 내역</h3>
+        <div id="parentAbsenceList"></div>
       </div>
 
       <!-- TAB 5: CLASS Q&A -->
@@ -144,6 +149,57 @@
     </main>
   </div>
 
+  <!-- Course Detail Modal -->
+  <div id="courseDetailModal" class="modal-backdrop" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modalCourseTitle">강좌 상세 정보</h3>
+        <button class="modal-close-btn" id="closeDetailModalBtn">&times;</button>
+      </div>
+      <div id="modalCourseContent" style="font-size: 0.9rem; line-height: 1.6; color: #334155;">
+        <!-- Dynamic Details -->
+      </div>
+      <div style="margin-top: 20px; text-align: right;">
+        <button id="closeDetailModalBtn2" class="btn-secondary">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Refund Calculator Modal -->
+  <div id="refundCalcModal" class="modal-backdrop" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>🧮 소비자분쟁기준 일할 환불 계산기</h3>
+        <button class="modal-close-btn" id="closeRefundModalBtn">&times;</button>
+      </div>
+      <div style="font-size:0.85rem; color:#64748b; margin-bottom:12px;">
+        수강 취소 시 총 수강일수와 출석일수를 입력하여 일할 계산 환불액을 사전에 조회합니다.
+      </div>
+      <div class="form-group-mobile">
+        <label>수강료 (원)</label>
+        <input type="number" id="calcFee" class="input-mobile" value="35000">
+      </div>
+      <div class="form-group-mobile">
+        <label>총 수강 일수 (일)</label>
+        <input type="number" id="calcTotalDays" class="input-mobile" value="20">
+      </div>
+      <div class="form-group-mobile">
+        <label>출석/경과 일수 (일)</label>
+        <input type="number" id="calcAttendedDays" class="input-mobile" value="4">
+      </div>
+      <button id="runRefundCalcBtn" class="btn-mobile-primary" style="margin-top: 6px; background:#059669;">
+        📊 환불 예상금액 계산하기
+      </button>
+
+      <div id="refundResultBox" style="display:none; margin-top:14px; padding:12px; background:#ecfdf5; border:1px solid #a7f3d0; border-radius:10px; font-weight:700; color:#065f46; text-align:center;">
+      </div>
+      <div style="margin-top: 16px; text-align: right;">
+        <button id="closeRefundModalBtn2" class="btn-secondary">닫기</button>
+      </div>
+    </div>
+  </div>
+
   <script src="parent_app.js"></script>
 </body>
 </html>
+

@@ -338,6 +338,29 @@ app.post('/api/parent/apply', (req, res) => {
   return res.json(result);
 });
 
+// POST /api/parent/cancel (학부모 원클릭 수강/대기 취소)
+app.post('/api/parent/cancel', (req, res) => {
+  const { applicantId, waitlistId, parentPhone } = req.body;
+  if (!parentPhone) {
+    return res.status(400).json({ success: false, message: '보호자 연락처가 필요합니다.' });
+  }
+
+  if (applicantId) {
+    const canceled = db.cancelApplicantParent(applicantId, parentPhone);
+    if (!canceled) return res.status(404).json({ success: false, message: '신청 정보를 찾을 수 없습니다.' });
+    return res.json({ success: true, message: '수강 신청이 정상적으로 취소(환불 신청)되었습니다.' });
+  }
+
+  if (waitlistId) {
+    const canceled = db.cancelWaitlistParent(waitlistId, parentPhone);
+    if (!canceled) return res.status(404).json({ success: false, message: '대기 정보를 찾을 수 없습니다.' });
+    return res.json({ success: true, message: '대기자 신청이 취소 처리되었습니다.' });
+  }
+
+  return res.status(400).json({ success: false, message: '취소할 대상 항목이 선택되지 않았습니다.' });
+});
+
+
 // DELETE /api/courses/:id
 app.delete('/api/courses/:id', authenticateToken, (req, res) => {
   const courseId = req.params.id;
@@ -598,6 +621,38 @@ app.post('/api/safety/absence', (req, res) => {
 
   return res.json({ success: true, absence: newAbs, message: '결석/조퇴 신청이 담당 선생님께 전달되었습니다.' });
 });
+
+// GET /api/parent/absence (학부모 신청 결석 내역 조회)
+app.get('/api/parent/absence', (req, res) => {
+  const { phone, schoolCode } = req.query;
+  const school = db.findSchoolByCode((schoolCode || 'UNCHON2025').toUpperCase());
+  const schoolId = school ? school.id : 'sch_1';
+
+  const absenceList = db.getAbsenceRequests(schoolId, phone);
+  return res.json({ success: true, absenceList });
+});
+
+// DELETE /api/parent/absence/:id
+app.delete('/api/parent/absence/:id', (req, res) => {
+  const deleted = db.deleteAbsenceRequest(req.params.id);
+  if (!deleted) return res.status(404).json({ success: false, message: '결석 신청건을 찾을 수 없습니다.' });
+  return res.json({ success: true, message: '결석/조퇴 신청이 취소되었습니다.' });
+});
+
+// DELETE /api/safety/return-schedules/:id
+app.delete('/api/safety/return-schedules/:id', (req, res) => {
+  const deleted = db.deleteSafetySchedule(req.params.id);
+  if (!deleted) return res.status(404).json({ success: false, message: '귀가 일정을 찾을 수 없습니다.' });
+  return res.json({ success: true, message: '귀가 일정표가 삭제되었습니다.' });
+});
+
+// DELETE /api/parent/qa/:id
+app.delete('/api/parent/qa/:id', (req, res) => {
+  const deleted = db.deleteQA(req.params.id);
+  if (!deleted) return res.status(404).json({ success: false, message: '질문 게시글을 찾을 수 없습니다.' });
+  return res.json({ success: true, message: '질문이 삭제되었습니다.' });
+});
+
 
 // Serve static files
 app.use(express.static(path.join(__dirname)));

@@ -726,8 +726,19 @@ class JSONDatabase {
     return newSchedule;
   }
 
+  deleteSafetySchedule(id) {
+    if (!this.data.safetySchedules) return false;
+    const index = this.data.safetySchedules.findIndex(s => s.id === id);
+    if (index !== -1) {
+      this.data.safetySchedules.splice(index, 1);
+      this.save();
+      return true;
+    }
+    return false;
+  }
+
   // Absence Requests
-  getAbsenceRequests(schoolId) {
+  getAbsenceRequests(schoolId, parentPhone) {
     if (!this.data.absenceRequests) {
       this.data.absenceRequests = [
         {
@@ -743,7 +754,9 @@ class JSONDatabase {
         }
       ];
     }
-    return (this.data.absenceRequests || []).filter(a => a.schoolId === schoolId);
+    return (this.data.absenceRequests || []).filter(a => 
+      a.schoolId === schoolId && (!parentPhone || a.parentPhone === parentPhone)
+    );
   }
 
   createAbsenceRequest(schoolId, data) {
@@ -759,6 +772,61 @@ class JSONDatabase {
     this.save();
     return newAbs;
   }
+
+  deleteAbsenceRequest(id) {
+    if (!this.data.absenceRequests) return false;
+    const index = this.data.absenceRequests.findIndex(a => a.id === id);
+    if (index !== -1) {
+      this.data.absenceRequests.splice(index, 1);
+      this.save();
+      return true;
+    }
+    return false;
+  }
+
+  deleteQA(id) {
+    if (!this.data.qaBoard) return false;
+    const index = this.data.qaBoard.findIndex(q => q.id === id);
+    if (index !== -1) {
+      this.data.qaBoard.splice(index, 1);
+      this.save();
+      return true;
+    }
+    return false;
+  }
+
+  cancelApplicantParent(applicantId, phone) {
+    if (!this.data.applicants) return null;
+    const index = this.data.applicants.findIndex(a => a.id === applicantId && (!phone || a.parentPhone === phone));
+    if (index !== -1) {
+      const removed = this.data.applicants.splice(index, 1)[0];
+      // Decrement course applied count if > 0
+      const course = (this.data.courses || []).find(c => c.id === removed.courseId);
+      if (course && course.applied > 0) {
+        course.applied -= 1;
+      }
+      this.save();
+      return removed;
+    }
+    return null;
+  }
+
+  cancelWaitlistParent(waitlistId, phone) {
+    if (!this.data.waitlist) return null;
+    const index = this.data.waitlist.findIndex(w => w.id === waitlistId && (!phone || w.parentPhone === phone));
+    if (index !== -1) {
+      const removed = this.data.waitlist.splice(index, 1)[0];
+      // Decrement course waiting count if > 0
+      const course = (this.data.courses || []).find(c => c.id === removed.courseId);
+      if (course && course.waiting > 0) {
+        course.waiting -= 1;
+      }
+      this.save();
+      return removed;
+    }
+    return null;
+  }
+
 
   // Financials & Edufine Export
   getEdufineExport(schoolId) {

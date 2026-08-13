@@ -6,7 +6,7 @@
       "name": "운천초등학교",
       "plan": "premium",
       "status": "active",
-      "expireDate": "2027-12-26",
+      "expireDate": "2028-06-23",
       "createdAt": "2026-08-10T12:41:12.226Z"
     },
     {
@@ -47,7 +47,7 @@
     {
       "id": "crs_1786546687102",
       "code": "672",
-      "applied": 1,
+      "applied": 2,
       "waiting": 0,
       "feeReceipt": "Y",
       "teacherClosed": "N",
@@ -71,7 +71,7 @@
       "category": "7월 돌봄",
       "title": "[돌봄] 선택형 돌봄 1부 (월 14:00~14:50)",
       "teacherName": "돌봄전담사",
-      "applied": 15,
+      "applied": 14,
       "capacity": 40,
       "waiting": 0,
       "waitingCapacity": 5,
@@ -111,7 +111,7 @@
       "category": "방과후 특기적성",
       "title": "[특기적성] 창의 로봇교실 A반",
       "teacherName": "김로봇 강사",
-      "applied": 18,
+      "applied": 19,
       "capacity": 20,
       "waiting": 2,
       "waitingCapacity": 5,
@@ -127,6 +127,64 @@
   ],
   "applicants": [
     {
+      "id": "app_1786622981388",
+      "schoolId": "sch_1",
+      "studentName": "김민준",
+      "gradeClass": "1학년 2반",
+      "parentPhone": "010-2345-6789",
+      "courseId": "crs_3",
+      "courseTitle": "[특기적성] 창의 로봇교실 A반",
+      "appliedAt": "2026-08-13 12:09",
+      "subsidyType": "자유수강권",
+      "paymentStatus": "지원금 수령",
+      "voucherBalance": 600000,
+      "materialPaid": "N",
+      "status": "승인"
+    },
+    {
+      "id": "app_1786622966216",
+      "schoolId": "sch_1",
+      "studentName": "김민준",
+      "gradeClass": "1학년 2반",
+      "parentPhone": "010-2345-6789",
+      "courseId": "crs_1786546687102",
+      "courseTitle": "ㅇ",
+      "appliedAt": "2026-08-13 12:09",
+      "subsidyType": "자유수강권",
+      "paymentStatus": "지원금 수령",
+      "voucherBalance": 600000,
+      "materialPaid": "N",
+      "status": "승인"
+    },
+    {
+      "id": "app_1786622097372",
+      "schoolId": "sch_1",
+      "studentName": "정현우",
+      "gradeClass": "2학년 3반",
+      "parentPhone": "010-6789-0123",
+      "courseId": "crs_3",
+      "courseTitle": "[특기적성] 창의 로봇교실 A반",
+      "appliedAt": "2026-08-13 11:54",
+      "subsidyType": "일반 자부담",
+      "paymentStatus": "결제대기",
+      "status": "승인"
+    },
+    {
+      "id": "app_1786622070002",
+      "schoolId": "sch_1",
+      "studentName": "???",
+      "gradeClass": "2?? 1?",
+      "parentPhone": "010-9999-1111",
+      "courseId": "crs_3",
+      "courseTitle": "[특기적성] 창의 로봇교실 A반",
+      "appliedAt": "2026-08-13 11:54",
+      "subsidyType": "?? ???",
+      "paymentStatus": "결제대기",
+      "voucherBalance": 600000,
+      "materialPaid": "N",
+      "status": "승인"
+    },
+    {
       "id": "app_1786547974218",
       "schoolId": "sch_1",
       "studentName": "김민준Minjun Kim",
@@ -139,34 +197,6 @@
       "paymentStatus": "지원금 수령",
       "voucherBalance": 600000,
       "materialPaid": "N",
-      "status": "승인"
-    },
-    {
-      "id": "app_1786547905591",
-      "schoolId": "sch_1",
-      "studentName": "김민준",
-      "gradeClass": "1학년 2반",
-      "parentPhone": "010-2345-6789",
-      "courseId": "crs_1",
-      "courseTitle": "[돌봄] 선택형 돌봄 1부 (월 14:00~14:50)",
-      "appliedAt": "2026-08-12 15:18",
-      "subsidyType": "자유수강권",
-      "paymentStatus": "지원금 수령",
-      "voucherBalance": 600000,
-      "materialPaid": "N",
-      "status": "승인"
-    },
-    {
-      "id": "app_1",
-      "schoolId": "sch_1",
-      "studentName": "김민준",
-      "gradeClass": "1학년 2반",
-      "parentPhone": "010-2345-6789",
-      "courseId": "crs_3",
-      "courseTitle": "[특기적성] 창의 로봇교실 A반",
-      "appliedAt": "2026-03-02 10:15",
-      "subsidyType": "자유수강권",
-      "paymentStatus": "결제완료",
       "status": "승인"
     },
     {
@@ -211,18 +241,6 @@
   ],
   "waitlist": [
     {
-      "id": "wt_1",
-      "schoolId": "sch_1",
-      "rank": 1,
-      "studentName": "정현우",
-      "gradeClass": "2학년 3반",
-      "parentPhone": "010-6789-0123",
-      "courseId": "crs_3",
-      "courseTitle": "[특기적성] 창의 로봇교실 A반",
-      "appliedAt": "2026-03-05 16:05",
-      "status": "대기중"
-    },
-    {
       "id": "wt_2",
       "schoolId": "sch_1",
       "rank": 2,
@@ -248,6 +266,17 @@
     }
   ],
   "settlements": [
+    {
+      "id": "stl_1786622097296",
+      "schoolId": "sch_1",
+      "requestedAt": "2026-08-13",
+      "status": "????",
+      "type": "????? ???",
+      "studentName": "?????",
+      "courseTitle": "?????",
+      "amount": 30000,
+      "note": "??? ??"
+    },
     {
       "id": "stl_1",
       "schoolId": "sch_1",
@@ -313,9 +342,51 @@
       "date": "2026-08-12",
       "status": "조퇴",
       "notifiedAt": "2026-08-12T15:23:52.329Z"
+    },
+    {
+      "id": "att_1786622097381_wlnyt",
+      "schoolId": "sch_1",
+      "courseId": "crs_3",
+      "studentName": "???",
+      "parentPhone": "010-3456-7890",
+      "date": "2026-08-13",
+      "status": "??",
+      "notifiedAt": "2026-08-13T11:54:57.381Z"
+    },
+    {
+      "id": "att_1786622316299_r69b2",
+      "schoolId": "sch_1",
+      "courseId": "crs_1786546687102",
+      "studentName": "김민준Minjun Kim",
+      "parentPhone": "010-2345-6789010-1234-5678",
+      "date": "2026-08-13",
+      "status": "출석",
+      "notifiedAt": "2026-08-13T12:03:29.622Z"
+    },
+    {
+      "id": "att_1786622609622_dtsk0",
+      "schoolId": "sch_1",
+      "courseId": "crs_1786546687102",
+      "studentName": "김민수",
+      "parentPhone": "010-2345-6789",
+      "date": "2026-08-13",
+      "status": "출석",
+      "notifiedAt": "2026-08-13T12:03:29.622Z"
     }
   ],
   "qaBoard": [
+    {
+      "id": "qa_1786622097395",
+      "schoolId": "sch_1",
+      "createdAt": "2026-08-13 11:54",
+      "reply": "??? ?????.",
+      "repliedAt": "2026-08-13 11:54",
+      "courseId": "crs_3",
+      "courseTitle": "????",
+      "authorName": "??? ???",
+      "title": "QA ??? ??",
+      "content": "??? ?????."
+    },
     {
       "id": "qa_1786621036765",
       "schoolId": "sch_1",
@@ -331,6 +402,28 @@
   ],
   "safetySchedules": [
     {
+      "id": "sft_1786622514078",
+      "schoolId": "sch_1",
+      "createdAt": "2026-08-13",
+      "studentName": "김민준",
+      "gradeClass": "1학년 2반",
+      "parentPhone": "010-2345-6789",
+      "dayOfWeek": "화,목",
+      "returnTime": "17:00",
+      "pickupPerson": "아빠 자차 픽업"
+    },
+    {
+      "id": "sft_1786622097416",
+      "schoolId": "sch_1",
+      "createdAt": "2026-08-13",
+      "studentName": "???",
+      "gradeClass": "2?? 1?",
+      "parentPhone": "010-9999-1111",
+      "dayOfWeek": "?,?",
+      "returnTime": "16:00",
+      "pickupPerson": "??? ???"
+    },
+    {
       "id": "sft_1786621036768",
       "schoolId": "sch_1",
       "createdAt": "2026-08-13",
@@ -340,6 +433,32 @@
       "dayOfWeek": "월,수,금",
       "returnTime": "16:30",
       "pickupPerson": "어머니 자차 동행"
+    }
+  ],
+  "absenceRequests": [
+    {
+      "id": "abs_1786622514084",
+      "schoolId": "sch_1",
+      "status": "승인완료",
+      "createdAt": "2026-08-13",
+      "studentName": "김민준",
+      "parentPhone": "010-2345-6789",
+      "courseTitle": "[특기적성] 창의 로봇교실 A반",
+      "absenceDate": "2026-03-30",
+      "type": "결석",
+      "reason": "가정 사정 연차 여행"
+    },
+    {
+      "id": "abs_1786622097411",
+      "schoolId": "sch_1",
+      "status": "승인완료",
+      "createdAt": "2026-08-13",
+      "studentName": "???",
+      "parentPhone": "010-9999-1111",
+      "courseTitle": "????",
+      "absenceDate": "2026-08-20",
+      "type": "??",
+      "reason": "?? ??"
     }
   ]
 }

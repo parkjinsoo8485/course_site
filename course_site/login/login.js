@@ -79,8 +79,17 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
 
-        // Redirect to dashboard
-        window.location.href = '../dashboard/teacher_dashboard.html';
+        // Redirect to dashboard based on role
+        const role = data.user.role;
+        if (role === 'teacher' || role === 'school_admin') {
+          window.location.href = '../dashboard/teacher_dashboard.html';
+        } else if (role === 'instructor') {
+          window.location.href = '../instructor/dashboard.html';
+        } else if (role === 'parent' || role === 'student') {
+          window.location.href = '../parent/index.html';
+        } else {
+          window.location.href = '../dashboard/teacher_dashboard.html';
+        }
       } else {
         showError(data.message || '로그인에 실패했습니다.');
       }

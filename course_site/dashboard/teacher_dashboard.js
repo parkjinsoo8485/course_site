@@ -301,6 +301,13 @@ document.addEventListener('DOMContentLoaded', () => {
           const data = await res.json();
           alert(`🎉 ${data.message}`);
           fetchCourses();
+        } catch (err) {
+          alert('자동 연장 처리 중 오류가 발생했습니다.');
+        }
+      }
+    });
+  }
+
   const executeLotteryBtn = document.getElementById('executeLotteryBtn');
   if (executeLotteryBtn) {
     executeLotteryBtn.addEventListener('click', async () => {
