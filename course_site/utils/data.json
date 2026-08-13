@@ -292,5 +292,27 @@
       "status": "환불신청",
       "note": "개인 사정 수강 취소 요청"
     }
+  ],
+  "attendance": [
+    {
+      "id": "att_1786548232329_5plbl",
+      "schoolId": "sch_1",
+      "courseId": "crs_3",
+      "studentName": "김민준",
+      "parentPhone": "010-2345-6789",
+      "date": "2026-08-12",
+      "status": "출석",
+      "notifiedAt": "2026-08-12T15:23:52.329Z"
+    },
+    {
+      "id": "att_1786548232329_9k6gu",
+      "schoolId": "sch_1",
+      "courseId": "crs_3",
+      "studentName": "이서연",
+      "parentPhone": "010-3456-7890",
+      "date": "2026-08-12",
+      "status": "조퇴",
+      "notifiedAt": "2026-08-12T15:23:52.329Z"
+    }
   ]
 }

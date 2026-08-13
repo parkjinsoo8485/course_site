@@ -593,6 +593,54 @@ class JSONDatabase {
     }
     return null;
   }
+
+  // Attendance Operations
+  getAttendanceByCourseAndDate(schoolId, courseId, date) {
+    const targetDate = date || new Date().toISOString().split('T')[0];
+    const records = (this.data.attendance || []).filter(a => 
+      a.schoolId === schoolId && 
+      (!courseId || a.courseId === courseId) && 
+      a.date === targetDate
+    );
+    return records;
+  }
+
+  recordAttendance(schoolId, courseId, records) {
+    if (!this.data.attendance) this.data.attendance = [];
+    const targetDate = new Date().toISOString().split('T')[0];
+    const createdLogs = [];
+
+    records.forEach(r => {
+      // Find existing or update
+      const existingIdx = this.data.attendance.findIndex(a => 
+        a.schoolId === schoolId && 
+        a.courseId === courseId && 
+        a.studentName === r.studentName && 
+        a.date === targetDate
+      );
+
+      const logObj = {
+        id: existingIdx !== -1 ? this.data.attendance[existingIdx].id : 'att_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+        schoolId,
+        courseId,
+        studentName: r.studentName,
+        parentPhone: r.parentPhone || '',
+        date: targetDate,
+        status: r.status || '출석',
+        notifiedAt: new Date().toISOString()
+      };
+
+      if (existingIdx !== -1) {
+        this.data.attendance[existingIdx] = logObj;
+      } else {
+        this.data.attendance.push(logObj);
+      }
+      createdLogs.push(logObj);
+    });
+
+    this.save();
+    return createdLogs;
+  }
 }
 
 module.exports = new JSONDatabase();

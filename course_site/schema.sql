@@ -95,3 +95,15 @@ CREATE TABLE IF NOT EXISTS settlements (
   note TEXT,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
+
+-- 7. 출석부 및 등하교 안심 알림 테이블 (attendance)
+CREATE TABLE IF NOT EXISTS attendance (
+  id VARCHAR(64) PRIMARY KEY,
+  school_id VARCHAR(64) REFERENCES schools(id) ON DELETE CASCADE,
+  course_id VARCHAR(64) REFERENCES courses(id) ON DELETE CASCADE,
+  student_name VARCHAR(64) NOT NULL,
+  parent_phone VARCHAR(32) NOT NULL,
+  date DATE NOT NULL,
+  status VARCHAR(32) DEFAULT '출석', -- 출석, 결석, 조퇴
+  notified_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);

@@ -450,6 +450,30 @@ app.put('/api/settlements/:id/status', authenticateToken, (req, res) => {
   return res.json({ success: true, settlement: updated, message: '정산 상태가 변경되었습니다.' });
 });
 
+// ==================== ATTENDANCE APIs (강사 모바일 출석부 & 알림) ====================
+
+// GET /api/attendance?courseId=...&date=...
+app.get('/api/attendance', authenticateToken, (req, res) => {
+  const { courseId, date } = req.query;
+  const records = db.getAttendanceByCourseAndDate(req.user.schoolId, courseId, date);
+  return res.json({ success: true, records });
+});
+
+// POST /api/attendance/check
+app.post('/api/attendance/check', authenticateToken, (req, res) => {
+  const { courseId, records } = req.body;
+  if (!courseId || !Array.isArray(records)) {
+    return res.status(400).json({ success: false, message: '강좌 및 출석 데이터를 전송해 주세요.' });
+  }
+
+  const logs = db.recordAttendance(req.user.schoolId, courseId, records);
+  return res.json({
+    success: true,
+    logs,
+    message: `🎉 ${records.length}명의 출석이 기록되었으며, 카카오 알림톡(안심 등하교) 통보가 전송되었습니다.`
+  });
+});
+
 // Serve static files
 app.use(express.static(path.join(__dirname)));
 
