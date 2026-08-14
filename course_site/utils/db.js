@@ -226,6 +226,11 @@ const defaultData = {
       status: '환불신청',
       note: '개인 사정 수강 취소 요청'
     }
+  ],
+  students: [
+    { id: 'stu_1', name: '김민준', gradeClass: '1학년 2반 5번', parentPhone: '010-2345-6789' },
+    { id: 'stu_2', name: '김서진', gradeClass: '3학년 1반 12번', parentPhone: '010-2345-6789' },
+    { id: 'stu_3', name: '김예나', gradeClass: '7학년 12반 31번 (신입생)', parentPhone: '010-2345-6789' }
   ]
 };
 
@@ -275,6 +280,10 @@ class JSONDatabase {
       try {
         const fileData = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
         this.data = { ...defaultData, ...fileData };
+        if (!this.data.users || this.data.users.length === 0) {
+          this.data.users = [...defaultData.users];
+          this.save();
+        }
       } catch (err) {
         console.error('Failed to load DB file, using default seed:', err);
         this.save();
@@ -369,24 +378,392 @@ class JSONDatabase {
     return this.data.courses.filter(c => c.schoolId === schoolId);
   }
 
+  // dbdbschool 호환 강좌 목록 및 필터링
+  getLecturesBySchool(schoolId, filters = {}) {
+    let courses = this.getCoursesBySchool(schoolId);
+
+    if (filters.category && filters.category !== '전체') {
+      courses = courses.filter(c => c.category === filters.category);
+    }
+
+    if (filters.status && filters.status !== '전체') {
+      courses = courses.filter(c => {
+        if (filters.status === 'OUTPUT' || filters.status === '출력') return c.status === '모집중' || c.status === '출력' || c.status === 'OUTPUT';
+        if (filters.status === 'CLOSED' || filters.status === '종료') return c.status === '종료' || c.status === 'CLOSED';
+        if (filters.status === 'WAITING' || filters.status === '대기') return c.status === '대기' || c.status === 'WAITING';
+        return c.status === filters.status;
+      });
+    }
+
+    if (filters.keyword) {
+      const kw = filters.keyword.toLowerCase();
+      courses = courses.filter(c => 
+        (c.title && c.title.toLowerCase().includes(kw)) ||
+        (c.teacherName && c.teacherName.toLowerCase().includes(kw)) ||
+        (c.code && c.code.toLowerCase().includes(kw))
+      );
+    }
+
+    // Map dbdbschool standardized response format with Chapter 3 complete attributes
+    return courses.map(c => {
+      const fee = parseInt(c.fee || c.tuitionFee) || 0;
+      const costFacility = c.costFacility !== undefined ? parseInt(c.costFacility) : Math.round(fee * 0.2);
+      const costInstructor = c.costInstructor !== undefined ? parseInt(c.costInstructor) : (fee - costFacility);
+
+      return {
+        id: c.id,
+        schoolId: c.schoolId,
+        code: c.code || '101',
+        category: c.category || '2026년 1분기',
+        neulbomType: c.neulbomType || '방과후',
+        title: c.title,
+        instructor: c.teacherName || c.instructor || '담당 강사',
+        teacherId: c.teacherId || 'inst_1',
+        targetGrade: c.grade || c.targetGrade || '전학년',
+        department: c.department || '',
+        groupLimit: c.groupLimit || '',
+        capacity: c.capacity || 20,
+        waitingCapacity: c.waitingCapacity || 5,
+        enrolledCount: c.applied || 0,
+        waitingCount: c.waiting || 0,
+        tuitionFee: fee,
+        costInstructor: costInstructor,
+        costFacility: costFacility,
+        textbookFee: parseInt(c.textbookFee) || 0,
+        materialFee: parseInt(c.materialFee) || 0,
+        dayOfWeek: (c.schedule || '').split(':')[0] || '월,수',
+        scheduleTime: (c.schedule || '').split(':')[1] || '14:00~14:50',
+        schedule: c.schedule || '월:14:00~14:50',
+        location: c.classroom || c.location || '방과후 교실',
+        period: c.period || '2026-03-01~2026-06-30',
+        totalHours: parseInt(c.totalHours) || 12,
+        allowTimeConflict: c.allowTimeConflict === 'Y' || c.allowTimeConflict === true,
+        noSameTeacher: c.noSameTeacher === 'Y' || c.noSameTeacher === true,
+        subsidyExcludeTuition: c.subsidyExcludeTuition || '',
+        subsidyExcludeTextbook: c.subsidyExcludeTextbook || '',
+        subsidyExcludeMaterial: c.subsidyExcludeMaterial || '',
+        maxSubsidyAmount: parseInt(c.maxSubsidyAmount) || 0,
+        description: c.description || '',
+        status: (c.status === '모집중' || c.status === 'OUTPUT' || c.status === '출력') ? 'OUTPUT' : ((c.status === '종료' || c.status === 'CLOSED') ? 'CLOSED' : 'WAITING'),
+        statusText: (c.status === '모집중' || c.status === 'OUTPUT' || c.status === '출력') ? '출력' : ((c.status === '종료' || c.status === 'CLOSED') ? '종료' : '대기'),
+        autoRenew: c.autoRenew === 'Y' || c.autoRenew === true,
+        instructorClosed: c.teacherClosed === 'Y' || c.instructorClosed === true,
+        teacherClosed: c.teacherClosed === 'Y' ? 'Y' : 'N',
+        refundClosed: c.refundClosed === 'Y' || c.refundClosed === true,
+        feeReceipt: c.feeReceipt || 'Y',
+        teacherEditable: c.teacherEditable || 'N'
+      };
+    });
+  }
+
   createCourse(courseData) {
+    const fee = parseInt(courseData.fee || courseData.tuitionFee) || 0;
+    const costFacility = courseData.costFacility !== undefined ? parseInt(courseData.costFacility) : Math.round(fee * 0.2);
+    const costInstructor = courseData.costInstructor !== undefined ? parseInt(courseData.costInstructor) : (fee - costFacility);
+
     const newCourse = {
-      id: 'crs_' + Date.now(),
-      code: String(Math.floor(100 + Math.random() * 900)),
-      applied: 0,
-      waiting: 0,
-      fee: parseInt(courseData.fee) || 0,
+      id: 'crs_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+      schoolId: courseData.schoolId || 'sch_1',
+      code: courseData.code || String(Math.floor(100 + Math.random() * 900)),
+      category: courseData.category || '2026년 1분기',
+      neulbomType: courseData.neulbomType || '방과후',
+      title: courseData.title,
+      teacherId: courseData.teacherId || 'inst_1',
+      teacherName: courseData.teacherName || courseData.instructor || '강사',
+      grade: courseData.grade || courseData.targetGrade || '전학년',
+      department: courseData.department || '',
+      groupLimit: courseData.groupLimit || '',
+      applied: parseInt(courseData.applied) || 0,
+      capacity: parseInt(courseData.capacity) || 20,
+      waiting: parseInt(courseData.waiting) || 0,
+      waitingCapacity: parseInt(courseData.waitingCapacity) || 5,
+      period: courseData.period || '2026-03-01~2026-06-30',
+      schedule: courseData.schedule || `${courseData.dayOfWeek || '월'}:${courseData.scheduleTime || '14:00~14:50'}`,
+      allowTimeConflict: (courseData.allowTimeConflict === 'Y' || courseData.allowTimeConflict === true) ? 'Y' : 'N',
+      noSameTeacher: (courseData.noSameTeacher === 'Y' || courseData.noSameTeacher === true) ? 'Y' : 'N',
+      totalHours: parseInt(courseData.totalHours) || 12,
+      classroom: courseData.classroom || courseData.location || '방과후 교실',
+      location: courseData.classroom || courseData.location || '방과후 교실',
+      fee: fee,
+      costInstructor: costInstructor,
+      costFacility: costFacility,
+      textbookFee: parseInt(courseData.textbookFee) || 0,
       materialFee: parseInt(courseData.materialFee) || 0,
+      subsidyExcludeTuition: courseData.subsidyExcludeTuition || '',
+      subsidyExcludeTextbook: courseData.subsidyExcludeTextbook || '',
+      subsidyExcludeMaterial: courseData.subsidyExcludeMaterial || '',
+      maxSubsidyAmount: parseInt(courseData.maxSubsidyAmount) || 0,
+      description: courseData.description || '',
       autoRenew: courseData.autoRenew || 'Y',
-      feeReceipt: 'Y',
-      teacherClosed: 'N',
-      refundClosed: 'N',
-      status: '모집중',
-      ...courseData
+      feeReceipt: courseData.feeReceipt || 'Y',
+      teacherClosed: courseData.teacherClosed || 'N',
+      refundClosed: courseData.refundClosed || 'N',
+      teacherEditable: courseData.teacherEditable || 'N',
+      status: (courseData.status === 'OUTPUT' || courseData.status === '출력' || courseData.status === '모집중') ? '출력' : ((courseData.status === 'CLOSED' || courseData.status === '종료') ? '종료' : '대기'),
+      createdAt: new Date().toISOString()
     };
     this.data.courses.unshift(newCourse);
     this.save();
     return newCourse;
+  }
+
+  // 3.2 단일 강좌 복사 (Course Clone)
+  copyCourse(schoolId, courseId, overrides = {}) {
+    const orig = this.data.courses.find(c => c.id === courseId && c.schoolId === schoolId);
+    if (!orig) return null;
+
+    const copyData = {
+      ...orig,
+      ...overrides,
+      title: overrides.title || `${orig.title} (복사본)`,
+      applied: 0,
+      waiting: 0,
+      status: '대기',
+      teacherClosed: 'N',
+      refundClosed: 'N'
+    };
+    delete copyData.id;
+    return this.createCourse(copyData);
+  }
+
+  // 3.3 23개 컬럼 강좌 일괄등록 파서 및 일괄입력 (Batch Upload)
+  batchUploadCourses(schoolId, rows) {
+    if (!Array.isArray(rows)) return { count: 0, courses: [] };
+    const createdCourses = [];
+
+    rows.forEach(r => {
+      const title = r.title || r['강좌명'];
+      if (!title) return;
+
+      const fee = parseInt(r.fee || r['수강료'] || 0);
+      const costFacility = r.costFacility !== undefined ? parseInt(r.costFacility) : (r['수용비'] !== undefined ? parseInt(r['수용비']) : Math.round(fee * 0.2));
+      const costInstructor = fee - costFacility;
+
+      const courseObj = {
+        schoolId,
+        neulbomType: r.neulbomType || r['늘봄과정'] || '방과후',
+        groupLimit: r.groupLimit || r['중복제한그룹'] || '',
+        department: r.department || r['대상학과'] || '',
+        teacherId: r.teacherId || r['강사아이디'] || 'inst_1',
+        teacherName: r.teacherName || r['강사명'] || r.teacherId || '담당 강사',
+        noSameTeacher: (r.noSameTeacher === 'Y' || r['강사중복불가'] === 'Y') ? 'Y' : 'N',
+        grade: r.grade || r['대상학년'] || '1,2,3,4,5,6',
+        schedule: r.schedule || r['강의시간'] || '월:14:00~14:50',
+        allowTimeConflict: (r.allowTimeConflict === 'Y' || r['강의시간중복허용'] === 'Y') ? 'Y' : 'N',
+        capacity: parseInt(r.capacity || r['정원'] || 20),
+        waitingCapacity: parseInt(r.waitingCapacity || r['대기정원'] || 5),
+        period: r.period || r['운영기간'] || '2026-03-01~2026-06-30',
+        totalHours: parseInt(r.totalHours || r['총시수'] || 12),
+        classroom: r.classroom || r['강의실'] || '방과후 교실',
+        fee: fee,
+        costInstructor: costInstructor,
+        costFacility: costFacility,
+        textbookFee: parseInt(r.textbookFee || r['교재비'] || 0),
+        materialFee: parseInt(r.materialFee || r['재료비'] || 0),
+        subsidyExcludeTuition: r.subsidyExcludeTuition || r['지원금차감제외(수강료)'] || '',
+        subsidyExcludeTextbook: r.subsidyExcludeTextbook || r['지원금차감제외(교재비)'] || '',
+        subsidyExcludeMaterial: r.subsidyExcludeMaterial || r['지원금차감제외(재료비)'] || '',
+        maxSubsidyAmount: parseInt(r.maxSubsidyAmount || r['최대지원금액'] || 0),
+        description: r.description || r['내용'] || '',
+        category: r.category || r['강좌구분'] || '2026년 1분기',
+        title: title,
+        status: '출력'
+      };
+
+      const created = this.createCourse(courseObj);
+      createdCourses.push(created);
+    });
+
+    return { count: createdCourses.length, courses: createdCourses };
+  }
+
+  // 3.4 강좌 통계 (구분별 상태, 수강료 출력, 강사마감, 강사편집)
+  getCourseStatistics(schoolId) {
+    const courses = this.getCoursesBySchool(schoolId);
+    const categoryStats = {};
+
+    courses.forEach(c => {
+      const cat = c.category || '기본구분';
+      if (!categoryStats[cat]) {
+        categoryStats[cat] = {
+          category: cat,
+          total: 0,
+          outputCount: 0,
+          closedCount: 0,
+          waitingCount: 0,
+          feeVisibleCount: 0,
+          teacherClosedCount: 0,
+          teacherEditableCount: 0,
+          totalApplied: 0,
+          totalCapacity: 0
+        };
+      }
+
+      categoryStats[cat].total += 1;
+      const st = c.status;
+      if (st === '모집중' || st === '출력' || st === 'OUTPUT') categoryStats[cat].outputCount += 1;
+      else if (st === '종료' || st === 'CLOSED') categoryStats[cat].closedCount += 1;
+      else if (st === '대기' || st === 'WAITING') categoryStats[cat].waitingCount += 1;
+
+      if (c.feeReceipt !== 'N') categoryStats[cat].feeVisibleCount += 1;
+      if (c.teacherClosed === 'Y') categoryStats[cat].teacherClosedCount += 1;
+      if (c.teacherEditable === 'Y') categoryStats[cat].teacherEditableCount += 1;
+
+      categoryStats[cat].totalApplied += (c.applied || 0);
+      categoryStats[cat].totalCapacity += (c.capacity || 0);
+    });
+
+    return Object.values(categoryStats);
+  }
+
+  // 3.9 강좌 수용비를 신청자 수용비에 일괄 적용하기
+  applyFacilityFeeToApplicants(schoolId, category) {
+    const courses = this.getCoursesBySchool(schoolId).filter(c => !category || category === '전체' || c.category === category);
+    const courseMap = {};
+    courses.forEach(c => {
+      const fee = parseInt(c.fee) || 0;
+      const costFacility = c.costFacility !== undefined ? parseInt(c.costFacility) : Math.round(fee * 0.2);
+      courseMap[c.id] = costFacility;
+    });
+
+    let updatedCount = 0;
+    (this.data.applicants || []).forEach(app => {
+      if (app.schoolId === schoolId && courseMap[app.courseId] !== undefined) {
+        app.costFacility = courseMap[app.courseId];
+        updatedCount++;
+      }
+    });
+    this.save();
+    return updatedCount;
+  }
+
+  // 3.11 나이스(NEIS) 연계용 수강료 데이터 추출
+  getNeisExportData(schoolId, category) {
+    const courses = this.getCoursesBySchool(schoolId).filter(c => !category || category === '전체' || c.category === category);
+    return courses.map(c => {
+      const fee = parseInt(c.fee) || 0;
+      const costFacility = c.costFacility !== undefined ? parseInt(c.costFacility) : Math.round(fee * 0.2);
+      const costInstructor = fee - costFacility;
+
+      return {
+        courseCode: c.code || '101',
+        courseName: c.title,
+        instructorName: c.teacherName || '담당 강사',
+        targetGrade: c.grade || '전학년',
+        enrolledCount: c.applied || 0,
+        tuitionTotal: fee,
+        costInstructor: costInstructor,
+        costFacility: costFacility,
+        textbookFee: parseInt(c.textbookFee) || 0,
+        materialFee: parseInt(c.materialFee) || 0,
+        totalHours: parseInt(c.totalHours) || 12,
+        period: c.period || ''
+      };
+    });
+  }
+
+  // 3.12 에듀파인(Edufine) 세입 징수용 데이터 추출
+  getEdufineExportData(schoolId, category) {
+    const courses = this.getCoursesBySchool(schoolId).filter(c => !category || category === '전체' || c.category === category);
+    return courses.map(c => {
+      const fee = parseInt(c.fee) || 0;
+      const applied = c.applied || 0;
+      const costFacility = c.costFacility !== undefined ? parseInt(c.costFacility) : Math.round(fee * 0.2);
+      const costInstructor = fee - costFacility;
+      const totalCollected = fee * applied;
+      const totalInstructor = costInstructor * applied;
+      const totalFacility = costFacility * applied;
+      const totalMaterial = ((parseInt(c.materialFee) || 0) + (parseInt(c.textbookFee) || 0)) * applied;
+
+      return {
+        category: c.category || '2026년 1분기',
+        courseName: c.title,
+        instructorName: c.teacherName || '담당 강사',
+        applied: applied,
+        unitTuition: fee,
+        totalCollected: totalCollected,
+        totalInstructorPay: totalInstructor,
+        totalFacilityIncome: totalFacility,
+        totalMaterialIncome: totalMaterial
+      };
+    });
+  }
+
+  // 일괄 복사 기능 (이전 분기/월 강좌 복사)
+  batchCopyLectures(schoolId, sourceCategory, targetCategory, copyFees = true) {
+    const sourceCourses = this.data.courses.filter(c => c.schoolId === schoolId && c.category === sourceCategory);
+    if (sourceCourses.length === 0) return [];
+
+    const newCourses = [];
+    sourceCourses.forEach((src, idx) => {
+      const copy = {
+        ...src,
+        id: 'crs_' + Date.now() + '_' + idx,
+        category: targetCategory,
+        applied: 0,
+        waiting: 0,
+        fee: copyFees ? src.fee : 0,
+        costInstructor: copyFees ? src.costInstructor : 0,
+        costFacility: copyFees ? src.costFacility : 0,
+        materialFee: copyFees ? src.materialFee : 0,
+        textbookFee: copyFees ? src.textbookFee : 0,
+        status: '출력',
+        teacherClosed: 'N',
+        refundClosed: 'N',
+        createdAt: new Date().toISOString()
+      };
+      this.data.courses.unshift(copy);
+      newCourses.push(copy);
+    });
+    this.save();
+    return newCourses;
+  }
+
+  // 강좌 상태 일괄 변경 (OUTPUT, CLOSED, WAITING)
+  updateLectureStatusBatch(schoolId, courseIds, targetStatus) {
+    let updatedCount = 0;
+    const statusMap = {
+      'OUTPUT': '출력',
+      'CLOSED': '종료',
+      'WAITING': '대기'
+    };
+    const dbStatus = statusMap[targetStatus] || targetStatus;
+
+    this.data.courses.forEach(c => {
+      if (c.schoolId === schoolId && (courseIds === 'ALL' || courseIds.includes(c.id))) {
+        c.status = dbStatus;
+        updatedCount++;
+      }
+    });
+    this.save();
+    return updatedCount;
+  }
+
+  // 강사 마감 일괄 토글
+  toggleTeacherLockBatch(schoolId, courseIds, lockState) {
+    let updatedCount = 0;
+    const isLock = lockState === 'Y' || lockState === true;
+    this.data.courses.forEach(c => {
+      if (c.schoolId === schoolId && (courseIds === 'ALL' || courseIds.includes(c.id))) {
+        c.teacherClosed = isLock ? 'Y' : 'N';
+        c.instructorClosed = isLock;
+        updatedCount++;
+      }
+    });
+    this.save();
+    return updatedCount;
+  }
+
+  // 강사 마감 토글
+  toggleInstructorClosed(schoolId, courseId) {
+    const course = this.data.courses.find(c => c.id === courseId && c.schoolId === schoolId);
+    if (!course) return null;
+
+    const isClosed = course.teacherClosed === 'Y' || course.instructorClosed === true;
+    course.teacherClosed = isClosed ? 'N' : 'Y';
+    course.instructorClosed = !isClosed;
+    this.save();
+    return { id: course.id, instructorClosed: course.instructorClosed, teacherClosed: course.teacherClosed };
   }
 
   autoRenewCourses(schoolId) {
@@ -409,6 +786,7 @@ class JSONDatabase {
     }
     return null;
   }
+
 
   // Applicant & Parent Operations
   getApplicantsBySchool(schoolId) {
@@ -899,6 +1277,645 @@ class JSONDatabase {
       message: `🎲 '${course.title}' 강좌 추첨이 완료되었습니다. (당첨: ${winCount}명, 대기: ${waitCount}명)`
     };
   }
+
+  // SMS Templates & Bulk Send
+  getSmsTemplates() {
+    return [
+      { id: 'tpl_1', title: '수강신청 확정 안내', content: '[운천초] #{학생명} 학생의 #{강좌명} 수강 신청이 최종 승인되었습니다.' },
+      { id: 'tpl_2', title: '휴강 및 보강 안내', content: '[운천초] #{강좌명} 강좌의 #{날짜} 수업이 학교 행사로 휴강되며 #{보강일}에 보강이 진행됩니다.' },
+      { id: 'tpl_3', title: '등하교 안심 알림', content: '[안심알림] #{학생명} 학생이 #{시간}에 #{강좌명} 방과후 교실을 출발하여 하교합니다.' },
+      { id: 'tpl_4', title: '수강료 및 재료비 납부 안내', content: '[운천초] #{강좌명} 수강료 #{금액}원이 스쿨뱅킹으로 인출될 예정입니다.' }
+    ];
+  }
+
+  sendBulkSms(schoolId, { recipientCount, templateId, message }) {
+    if (!this.data.smsLogs) this.data.smsLogs = [];
+    const log = {
+      id: 'sms_' + Date.now(),
+      schoolId,
+      recipientCount: parseInt(recipientCount) || 1,
+      templateId: templateId || 'custom',
+      message: message || '알림 메시지',
+      sentAt: new Date().toISOString().replace('T', ' ').slice(0, 16),
+      status: '전송완료 (카카오 알림톡)'
+    };
+    this.data.smsLogs.unshift(log);
+    this.save();
+    return log;
+  }
+
+  getSmsHistory(schoolId) {
+    if (!this.data.smsLogs) {
+      this.data.smsLogs = [
+        {
+          id: 'sms_1001',
+          schoolId: 'sch_1',
+          recipientCount: 24,
+          templateId: 'tpl_1',
+          message: '[운천초] 1분기 방과후학교 수강 확정 안내가 전송되었습니다.',
+          sentAt: '2026-03-01 10:00',
+          status: '전송완료 (카카오 알림톡)'
+        }
+      ];
+    }
+    return (this.data.smsLogs || []).filter(s => s.schoolId === schoolId);
+  }
+
+  // Applicant approval & Grade Transfer
+  updateApplicantStatus(schoolId, applicantId, status) {
+    const applicant = (this.data.applicants || []).find(a => a.id === applicantId && a.schoolId === schoolId);
+    if (!applicant) return null;
+    applicant.status = status;
+    this.save();
+    return applicant;
+  }
+
+  transferGradeClass(schoolId, fromGrade, toGrade) {
+    let transferredCount = 0;
+    (this.data.applicants || []).forEach(a => {
+      if (a.schoolId === schoolId && a.gradeClass.includes(fromGrade)) {
+        a.gradeClass = a.gradeClass.replace(fromGrade, toGrade);
+        transferredCount++;
+      }
+    });
+    this.save();
+    return transferredCount;
+  }
+
+  approveAbsenceRequest(id, status = '승인완료') {
+    const abs = (this.data.absenceRequests || []).find(a => a.id === id);
+    if (!abs) return null;
+    abs.status = status;
+    this.save();
+    return abs;
+  }
+
+  // FAQ & Guide
+  getFaqList() {
+    return [
+      { id: 'faq_1', category: '수강신청', question: '수강 신청 시간표 중복 시 어떻게 처리되나요?', answer: '동일 요일/시간대 강좌는 자동 중복 감지 엔진에 의해 신청이 차단되며 경고 메시지가 출력됩니다.' },
+      { id: 'faq_2', category: '정산 및 환불', question: '중도 포기 시 수강료 환불 기준은 어떻게 되나요?', answer: '소비자분쟁해결기준에 따라 총 수업일수 대비 미수강 일수를 일할 계산하여 자동 환불금이 산출됩니다.' },
+      { id: 'faq_3', category: '추첨 시스템', question: '정원 초과 강좌의 자동 추첨은 어떻게 진행되나요?', answer: '추첨 실행 엔진 버튼 클릭 시 난수 알로그림으로 정원 당첨자와 대기 1, 2, 3 순번이 자동 부여됩니다.' },
+      { id: 'faq_4', category: '에듀파인 연동', question: '에듀파인 집계 파일은 어떤 형식으로 추출되나요?', answer: '학교 수용비(20%) 및 강사료(80%)가 자동 분류된 엑셀(.xlsx / .csv) 파일로 즉시 다운로드됩니다.' }
+    ];
+  }
+
+  // Official Manual Section 2.7~2.11 Settings
+  getBasicSettings(schoolId) {
+    if (!this.data.basicSettings) {
+      this.data.basicSettings = {
+        serviceName: '늘봄·방과후학교',
+        defaultCategory: '2026년 1분기',
+        timeCheckMode: '시간',
+        courseSortOrder: '가나다순',
+        nealbomProcess: '사용',
+        feeSplitMode: '수용비분리',
+        acceptanceRate: 20,
+        instructorRate: 80,
+        lotteryEnabled: true,
+        allowWaitingList: true,
+        showWaitingRank: true,
+        supportFundEnabled: true,
+        refundMode: '일할/분할계산'
+      };
+    }
+    return this.data.basicSettings;
+  }
+
+  updateBasicSettings(data) {
+    this.data.basicSettings = { ...this.getBasicSettings(), ...data };
+    this.save();
+    return this.data.basicSettings;
+  }
+
+  getInstructorPermissions() {
+    if (!this.data.instructorPermissions) {
+      this.data.instructorPermissions = {
+        showWaitingCourses: true,
+        allowCourseAdd: false,
+        allowViewAllCourses: true,
+        allowAddStudent: true,
+        allowDeleteStudent: true,
+        allowMoveStudent: true,
+        allowEditFees: true,
+        showStudentContacts: true
+      };
+    }
+    return this.data.instructorPermissions;
+  }
+
+  updateInstructorPermissions(data) {
+    this.data.instructorPermissions = { ...this.getInstructorPermissions(), ...data };
+    this.save();
+    return this.data.instructorPermissions;
+  }
+
+  getAttendanceOptions() {
+    if (!this.data.attendanceOptions) {
+      this.data.attendanceOptions = {
+        approverName: '운천초등학교장',
+        signatureImage: '',
+        printOrientation: '가로',
+        onlineAttendance: true,
+        parentAttendanceView: true
+      };
+    }
+    return this.data.attendanceOptions;
+  }
+
+  updateAttendanceOptions(data) {
+    this.data.attendanceOptions = { ...this.getAttendanceOptions(), ...data };
+    this.save();
+    return this.data.attendanceOptions;
+  }
+
+  // --- Official Manual Section 2 Implementation ---
+
+  // 2.2 & 2.3 Service Administrator & Staff Management
+  getStaff(schoolId) {
+    if (!this.data.staff) {
+      this.data.staff = [
+        { id: 'stf_1', schoolId: 'sch_1', name: '김교무', username: '김교무', role: 'service_admin', permissions: ['교직원관리', '학생관리', '강좌관리'] },
+        { id: 'stf_2', schoolId: 'sch_1', name: '이연구', username: '이연구', role: 'staff', permissions: ['학생관리'] },
+        { id: 'stf_3', schoolId: 'sch_1', name: '박방과', username: '박방과', role: 'service_admin', permissions: ['교직원관리', '학생관리', '강좌관리', '정산관리'] }
+      ];
+    }
+    return (this.data.staff || []).filter(s => !schoolId || s.schoolId === schoolId);
+  }
+
+  addStaff(schoolId, staffData) {
+    if (!this.data.staff) this.data.staff = [];
+    const newStaff = {
+      id: 'stf_' + Date.now(),
+      schoolId: schoolId || 'sch_1',
+      name: staffData.name,
+      username: staffData.username || staffData.name,
+      role: staffData.role || 'staff',
+      permissions: staffData.permissions || ['학생관리'],
+      createdAt: new Date().toISOString()
+    };
+    this.data.staff.push(newStaff);
+    this.save();
+    return newStaff;
+  }
+
+  assignServiceAdmin(schoolId, staffId, permissions) {
+    const staff = (this.data.staff || []).find(s => s.id === staffId && s.schoolId === schoolId);
+    if (!staff) return null;
+    staff.role = 'service_admin';
+    if (permissions) staff.permissions = permissions;
+    this.save();
+    return staff;
+  }
+
+  // 2.4.1 Temporary Student Rules (신학기 임시학적: 7학년 생월반 생일번)
+  generateTempStudent(schoolId, { name, birthDate, phone }) {
+    // birthDate format: YYYY-MM-DD or MM-DD
+    const parts = birthDate.split('-');
+    let month = 1;
+    let day = 1;
+    if (parts.length === 3) {
+      month = parseInt(parts[1], 10);
+      day = parseInt(parts[2], 10);
+    } else if (parts.length === 2) {
+      month = parseInt(parts[0], 10);
+      day = parseInt(parts[1], 10);
+    }
+
+    const tempGradeClass = `7학년 ${month}반`;
+    const tempStudentNum = day;
+    const tempStudentRecord = {
+      id: 'temp_stu_' + Date.now(),
+      schoolId: schoolId || 'sch_1',
+      name,
+      gradeClass: `${tempGradeClass} ${tempStudentNum}번`,
+      grade: 7,
+      classNum: month,
+      studentNum: day,
+      birthDate,
+      parentPhone: phone || '010-2345-6789',
+      phone: phone || '',
+      isTemp: true,
+      initialPassword: '1234',
+      createdAt: new Date().toISOString()
+    };
+
+    if (!this.data.students || this.data.students.length === 0) {
+      this.data.students = [
+        { id: 'stu_1', name: '김민준', gradeClass: '1학년 2반 5번', parentPhone: '010-2345-6789' },
+        { id: 'stu_2', name: '김서진', gradeClass: '3학년 1반 12번', parentPhone: '010-2345-6789' },
+        { id: 'stu_3', name: '김예나', gradeClass: '7학년 12반 31번 (신입생)', parentPhone: '010-2345-6789' }
+      ];
+    }
+    this.data.students.push(tempStudentRecord);
+    this.save();
+    return tempStudentRecord;
+  }
+
+  // 2.4.1 Multi-Child Account Sharing (다자녀 로그인 공유 및 전환)
+  getMultiChildAccounts(parentPhone) {
+    const defaultList = [
+      { id: 'stu_1', name: '김민준', gradeClass: '1학년 2반 5번', parentPhone: '010-2345-6789' },
+      { id: 'stu_2', name: '김서진', gradeClass: '3학년 1반 12번', parentPhone: '010-2345-6789' },
+      { id: 'stu_3', name: '김예나', gradeClass: '7학년 12반 31번 (신입생)', parentPhone: '010-2345-6789' }
+    ];
+    if (!this.data.students || this.data.students.length === 0) {
+      this.data.students = [...defaultList];
+      this.save();
+    }
+    const cleanPhone = (parentPhone || '010-2345-6789').replace(/[^0-9]/g, '');
+    const matched = this.data.students.filter(s => (s.parentPhone || s.phone || '').replace(/[^0-9]/g, '') === cleanPhone);
+    return matched.length > 0 ? matched : defaultList;
+  }
+
+  // 2.5 Homeroom Teacher Management (담임 등록 & 비밀번호 초기화)
+  getHomeroomTeachers(schoolId) {
+    if (!this.data.homeroomTeachers) {
+      this.data.homeroomTeachers = [
+        { id: 'hr_1', schoolId: 'sch_1', name: '김담임', username: '김담임', assignedClass: '1학년 1반', phone: '010-1111-2222' },
+        { id: 'hr_2', schoolId: 'sch_1', name: '이담임', username: '이담임', assignedClass: '1학년 2반', phone: '010-3333-4444' },
+        { id: 'hr_3', schoolId: 'sch_1', name: '박담임', username: '박담임', assignedClass: '2학년 1반', phone: '010-5555-6666' }
+      ];
+    }
+    return (this.data.homeroomTeachers || []).filter(h => !schoolId || h.schoolId === schoolId);
+  }
+
+  addHomeroomTeacher(schoolId, hrData) {
+    if (!this.data.homeroomTeachers) this.data.homeroomTeachers = [];
+    const newHR = {
+      id: 'hr_' + Date.now(),
+      schoolId: schoolId || 'sch_1',
+      name: hrData.name,
+      username: hrData.username || hrData.name,
+      assignedClass: hrData.assignedClass || '1학년 1반',
+      phone: hrData.phone || '',
+      initialPassword: '1234',
+      createdAt: new Date().toISOString()
+    };
+    this.data.homeroomTeachers.push(newHR);
+    this.save();
+    return newHR;
+  }
+
+  // 2.6 Instructors & Banking ID Grouping (동일 강사 ID 스쿨뱅킹 묶음 징수)
+  getInstructors(schoolId) {
+    if (!this.data.instructors) {
+      this.data.instructors = [
+        { id: 'inst_1', schoolId: 'sch_1', instructorId: '홍길동', name: '홍길동', subject: '로봇과학', phone: '010-7777-8888', isMain: true },
+        { id: 'inst_2', schoolId: 'sch_1', instructorId: '홍길동', name: '홍길동 (보조강사: 이보조)', subject: '로봇과학B반', phone: '010-7777-8889', isMain: false },
+        { id: 'inst_3', schoolId: 'sch_1', instructorId: '이창의', name: '이창의', subject: '창의미술', phone: '010-8888-9999', isMain: true }
+      ];
+    }
+    return (this.data.instructors || []).filter(i => !schoolId || i.schoolId === schoolId);
+  }
+
+  getInstructorBankingGroups(schoolId) {
+    const instructors = this.getInstructors(schoolId);
+    const courses = this.getCoursesBySchool(schoolId);
+    const grouped = {};
+
+    courses.forEach(c => {
+      const instName = c.teacherName || '기타';
+      if (!grouped[instName]) {
+        grouped[instName] = {
+          instructorName: instName,
+          courses: [],
+          totalTuition: 0,
+          totalMaterial: 0,
+          totalCombined: 0
+        };
+      }
+      const tuition = (c.applied || 0) * (c.fee || 0);
+      const material = (c.applied || 0) * (c.materialFee || 0);
+      grouped[instName].courses.push(c.title);
+      grouped[instName].totalTuition += tuition;
+      grouped[instName].totalMaterial += material;
+      grouped[instName].totalCombined += (tuition + material);
+    });
+
+    return Object.values(grouped);
+  }
+
+  // 2.10 SMS Sender & Credit Management (발신번호 등록, 충전, 발송시간 제한)
+  getSmsConfig(schoolId) {
+    if (!this.data.smsConfig) {
+      this.data.smsConfig = {
+        schoolId: schoolId || 'sch_1',
+        senderNumber: '02-1234-5678',
+        isApproved: true,
+        freeCredits: 1000,
+        usedCredits: 24,
+        allowSendStart: '08:00',
+        allowSendEnd: '20:00',
+        commonFooter: '[운천초 늘봄·방과후학교 지원센터]'
+      };
+    }
+    return this.data.smsConfig;
+  }
+
+  updateSmsConfig(schoolId, data) {
+    this.data.smsConfig = { ...this.getSmsConfig(schoolId), ...data };
+    this.save();
+    return this.data.smsConfig;
+  }
+
+  // 2.11.3 Overlap Restriction Groups (중복제한그룹 - 돌봄 맞춤형 신청 차단 코드)
+  getRestrictionGroups(schoolId) {
+    if (!this.data.restrictionGroups) {
+      this.data.restrictionGroups = [
+        { id: 'rg_a', schoolId: 'sch_1', code: 'a', name: '맞춤형 A그룹 (월/수)', description: '돌봄 학생 맞춤형 강좌 1차 차단 코드' },
+        { id: 'rg_b', schoolId: 'sch_1', code: 'b', name: '맞춤형 B그룹 (화/목)', description: '돌봄 학생 맞춤형 강좌 2차 차단 코드' },
+        { id: 'rg_c', schoolId: 'sch_1', code: 'c', name: '맞춤형 C그룹 (금)', description: '돌봄 학생 맞춤형 강좌 3차 차단 코드' }
+      ];
+    }
+    return (this.data.restrictionGroups || []).filter(r => !schoolId || r.schoolId === schoolId);
+  }
+
+  addRestrictionGroup(schoolId, { code, name, description }) {
+    if (!this.data.restrictionGroups) this.data.restrictionGroups = [];
+    const newGroup = {
+      id: 'rg_' + Date.now(),
+      schoolId: schoolId || 'sch_1',
+      code: code.trim(),
+      name: name.trim(),
+      description: description || ''
+    };
+    this.data.restrictionGroups.push(newGroup);
+    this.save();
+    return newGroup;
+  }
+
+  // 2.11.4 Notice Text Settings (안내글 설정: 로그인, 신청화면, 출석부 하단)
+  getNoticeSettings(schoolId) {
+    if (!this.data.noticeSettings) {
+      this.data.noticeSettings = {
+        loginTopText: '2026학년도 운천초등학교 늘봄·방과후학교 신청 포털입니다.',
+        loginBottomText: '※ 초기 비밀번호는 1234이며 최초 로그인 시 즉시 변경하셔야 합니다.',
+        applyGuideText: '※ 수강신청은 분 단위 시간표 중복 여부를 자동 검사하며 정원 초과 시 대기로 접수됩니다.',
+        attendanceFooterText: '※ 출석 확인 서명은 학교보관용 결재 규정에 따라 효력이 발생합니다.'
+      };
+    }
+    return this.data.noticeSettings;
+  }
+
+  updateNoticeSettings(schoolId, data) {
+    this.data.noticeSettings = { ...this.getNoticeSettings(schoolId), ...data };
+    this.save();
+    return this.data.noticeSettings;
+  }
+
+  // --- Additional Live dbdbschool Submodel Data Stores ---
+
+  // 1. Waitlist Management (/af/ad_wait/lists)
+  getWaitlist(schoolId) {
+    if (!this.data.waitlist) {
+      this.data.waitlist = [
+        { id: 'wait_1', schoolId: 'sch_1', studentName: '이지우', gradeClass: '1학년 3반', parentPhone: '010-3333-4444', courseTitle: '[특기적성] 창의 로봇교실 A반', rank: 1, appliedAt: '2026-03-02 10:05:22', status: '대기중' },
+        { id: 'wait_2', schoolId: 'sch_1', studentName: '최예준', gradeClass: '2학년 1반', parentPhone: '010-5555-6666', courseTitle: '[특기적성] 창의 로봇교실 A반', rank: 2, appliedAt: '2026-03-02 10:08:14', status: '대기중' },
+        { id: 'wait_3', schoolId: 'sch_1', studentName: '정하은', gradeClass: '3학년 2반', parentPhone: '010-7777-9999', courseTitle: '01. [특기] 바이올린 A반', rank: 1, appliedAt: '2026-03-02 10:12:00', status: '대기중' }
+      ];
+    }
+    return (this.data.waitlist || []).filter(w => !schoolId || w.schoolId === schoolId);
+  }
+
+  getAllSchools() {
+    return this.data.schools || [];
+  }
+
+  promoteWaitlist(waitId) {
+    if (!this.data.waitlist) this.getWaitlist();
+    let item = (this.data.waitlist || []).find(w => w.id === waitId);
+    if (!item && (this.data.waitlist || []).length > 0) {
+      item = this.data.waitlist[0];
+    }
+    if (!item) return null;
+    item.status = '승격완료';
+    const newApp = {
+      id: 'app_' + Date.now(),
+      schoolId: item.schoolId || 'sch_1',
+      studentName: item.studentName,
+      gradeClass: item.gradeClass,
+      parentPhone: item.parentPhone,
+      courseTitle: item.courseTitle,
+      subsidyType: '일반',
+      paymentStatus: '결제대기',
+      status: '수강승인',
+      appliedAt: new Date().toISOString()
+    };
+    if (!this.data.applicants) this.data.applicants = [];
+    this.data.applicants.push(newApp);
+    this.save();
+    return newApp;
+  }
+
+  // 2. Attendance Stats & Stamp Printing (/af/ad_att/stat)
+  getAttendanceStats(schoolId) {
+    if (!this.data.attendanceStats) {
+      this.data.attendanceStats = [
+        { courseId: 'crs_1', courseTitle: '[돌봄] 선택형 돌봄 1부', teacherName: '돌봄전담사', enrolled: 14, targetDays: 20, attendedSum: 270, absentSum: 10, attRate: '96.4%', stampStatus: '직인날인완료' },
+        { courseId: 'crs_2', courseTitle: '[돌봄] 선택형 돌봄 2부', teacherName: '돌봄전담사', enrolled: 10, targetDays: 20, attendedSum: 195, absentSum: 5, attRate: '97.5%', stampStatus: '직인날인완료' },
+        { courseId: 'crs_3', courseTitle: '[특기적성] 창의 로봇교실 A반', teacherName: '김로봇 강사', enrolled: 18, targetDays: 12, attendedSum: 210, absentSum: 6, attRate: '97.2%', stampStatus: '서명대기' }
+      ];
+    }
+    return this.data.attendanceStats;
+  }
+
+  // 3. Refunds & Cancellation Management (/af/ad_ref/lists)
+  getRefunds(schoolId) {
+    if (!this.data.refunds) {
+      this.data.refunds = [
+        { id: 'ref_1', schoolId: 'sch_1', studentName: '박서준', gradeClass: '2학년 2반', courseTitle: '[특기적성] 창의 로봇교실 A반', fee: 35000, totalDays: 12, attendedDays: 3, rule: '1/3경과전(2/3환불)', refundAmount: 23330, status: '환불완료', requestedAt: '2026-03-10' },
+        { id: 'ref_2', schoolId: 'sch_1', studentName: '윤도현', gradeClass: '3학년 1반', courseTitle: '01. [특기] 바이올린 A반', fee: 30000, totalDays: 12, attendedDays: 5, rule: '1/2경과전(1/2환불)', refundAmount: 15000, status: '처리대기', requestedAt: '2026-03-15' }
+      ];
+    }
+    return (this.data.refunds || []).filter(r => !schoolId || r.schoolId === schoolId);
+  }
+
+  addRefund(schoolId, refundData) {
+    if (!this.data.refunds) this.data.refunds = [];
+    const newRef = {
+      id: 'ref_' + Date.now(),
+      schoolId: schoolId || 'sch_1',
+      studentName: refundData.studentName,
+      gradeClass: refundData.gradeClass || '',
+      courseTitle: refundData.courseTitle,
+      fee: parseInt(refundData.fee) || 0,
+      totalDays: parseInt(refundData.totalDays) || 12,
+      attendedDays: parseInt(refundData.attendedDays) || 0,
+      rule: refundData.rule || '일할계산',
+      refundAmount: parseInt(refundData.refundAmount) || 0,
+      status: refundData.status || '처리대기',
+      requestedAt: new Date().toISOString().slice(0, 10)
+    };
+    this.data.refunds.push(newRef);
+    this.save();
+    return newRef;
+  }
+
+  // 4. Absences & Dismissal Pickup (/af/ad_abs/lists)
+  getAbsences(schoolId) {
+    if (!this.data.absences) {
+      this.data.absences = [
+        { id: 'abs_1', schoolId: 'sch_1', studentName: '김민준', gradeClass: '1학년 2반', parentPhone: '010-2345-6789', type: '결석', reason: '감기몸살 병결', date: '2026-03-16', status: '승인완료', returnCompanion: '학부모 자진귀가' },
+        { id: 'abs_2', schoolId: 'sch_1', studentName: '이서아', gradeClass: '1학년 1반', parentPhone: '010-3456-7890', type: '조퇴', reason: '병원 진료 (15:30 귀가)', date: '2026-03-17', status: '신청대기', returnCompanion: '조모(010-1111-2222)' }
+      ];
+    }
+    return (this.data.absences || []).filter(a => !schoolId || a.schoolId === schoolId);
+  }
+
+  updateAbsenceStatus(id, status) {
+    const item = (this.data.absences || []).find(a => a.id === id);
+    if (item) {
+      item.status = status;
+      this.save();
+    }
+    return item;
+  }
+
+  // 5. Notifications & Push Records (/af/notification/lists, /af/spush/lists)
+  getNotifications(schoolId) {
+    if (!this.data.notifications) {
+      this.data.notifications = [
+        { id: 'noti_1', schoolId: 'sch_1', type: '알림톡', recipientCount: 24, title: '2026학년도 방과후학교 수강신청 안내', status: '성공 24건', sentAt: '2026-03-01 09:00:15', sender: '02-1234-5678' },
+        { id: 'noti_2', schoolId: 'sch_1', type: 'SMS', recipientCount: 18, title: '[특기적성] 로봇교실 개강 준비물 안내', status: '성공 18건', sentAt: '2026-03-05 14:20:00', sender: '02-1234-5678' }
+      ];
+    }
+    return (this.data.notifications || []).filter(n => !schoolId || n.schoolId === schoolId);
+  }
+
+  getPushNotifications(schoolId) {
+    if (!this.data.pushNotifications) {
+      this.data.pushNotifications = [
+        { id: 'push_1', schoolId: 'sch_1', title: '오늘의 방과후 수업 알림', body: '15:00 창의 로봇교실 A반 수업이 시작됩니다.', targetRole: '학생/학부모', readCount: 18, sentAt: '2026-03-10 14:30:00' },
+        { id: 'push_2', schoolId: 'sch_1', title: '결석 신청 승인 안내', body: '신청하신 3월 16일 결석이 안전하게 승인되었습니다.', targetRole: '학부모', readCount: 1, sentAt: '2026-03-16 08:45:10' }
+      ];
+    }
+    return (this.data.pushNotifications || []).filter(p => !schoolId || p.schoolId === schoolId);
+  }
+
+  // 6. Service Extension (/af/ad_extension/lists)
+  getServiceExtensions(schoolId) {
+    if (!this.data.extensions) {
+      this.data.extensions = [
+        { id: 'ext_1', schoolId: 'sch_1', serviceName: '방과후학교 늘봄 포털', termName: '2026학년도 1학기', startDate: '2026-03-01', endDate: '2026-08-31', status: '사용중', cost: '무료(공공도입)' },
+        { id: 'ext_2', schoolId: 'sch_1', serviceName: 'SMS/알림톡 부가서비스', termName: '2026학년도 연간', startDate: '2026-03-01', endDate: '2027-02-28', status: '충전완료 (잔여 976건)', cost: '포인트' }
+      ];
+    }
+    return (this.data.extensions || []).filter(e => !schoolId || e.schoolId === schoolId);
+  }
+
+  // 7. Subsidies 4-Submodels (/af/ad_free2_stu, /af/ad_free2_app, /af/ad_free2_cfg, /af/ad_free2_cfg/free1)
+  getSubsidyStudents(schoolId) {
+    if (!this.data.subsidyStudents) {
+      this.data.subsidyStudents = [
+        { id: 'sub_stu_1', schoolId: 'sch_1', studentName: '김지원', gradeClass: '1학년 1반', parentPhone: '010-4444-5555', rank: '1순위(국민기초)', annualBudget: 600000, usedAmount: 140000, balance: 460000, status: '지원가능' },
+        { id: 'sub_stu_2', schoolId: 'sch_1', studentName: '박하늘', gradeClass: '2학년 3반', parentPhone: '010-6666-7777', rank: '2순위(한부모)', annualBudget: 600000, usedAmount: 210000, balance: 390000, status: '지원가능' },
+        { id: 'sub_stu_3', schoolId: 'sch_1', studentName: '이동건', gradeClass: '3학년 1반', parentPhone: '010-8888-9999', rank: '3순위(차상위)', annualBudget: 600000, usedAmount: 600000, balance: 0, status: '한도소진' }
+      ];
+    }
+    return (this.data.subsidyStudents || []).filter(s => !schoolId || s.schoolId === schoolId);
+  }
+
+  getSubsidyApplicants(schoolId) {
+    if (!this.data.subsidyApplicants) {
+      this.data.subsidyApplicants = [
+        { id: 'sub_app_1', schoolId: 'sch_1', studentName: '김지원', courseTitle: '[특기적성] 창의 로봇교실 A반', fee: 35000, subsidizedAmount: 35000, outOfPocket: 0, deductionDate: '2026-03-02', subsidyType: '자유수강권' },
+        { id: 'sub_app_2', schoolId: 'sch_1', studentName: '박하늘', courseTitle: '01. [특기] 바이올린 A반', fee: 30000, subsidizedAmount: 30000, outOfPocket: 0, deductionDate: '2026-03-02', subsidyType: '자유수강권' }
+      ];
+    }
+    return (this.data.subsidyApplicants || []).filter(s => !schoolId || s.schoolId === schoolId);
+  }
+
+  getSubsidyRanks(schoolId) {
+    if (!this.data.subsidyRanks) {
+      this.data.subsidyRanks = [
+        { rankNumber: 1, name: '1순위 (국민기초생활수급자)', limitAmount: 600000, isPriority: true, note: '수강료/재료비 100% 우선 지원' },
+        { rankNumber: 2, name: '2순위 (한부모가족보호대상자)', limitAmount: 600000, isPriority: true, note: '연 60만원 한도 내 전액 지원' },
+        { rankNumber: 3, name: '3순위 (법정 차상위계층)', limitAmount: 600000, isPriority: false, note: '예산 범위 내 지원' },
+        { rankNumber: 4, name: '4순위 (학교장 추천 다자녀/특수)', limitAmount: 300000, isPriority: false, note: '학교 자체 심사 지원' }
+      ];
+    }
+    return this.data.subsidyRanks;
+  }
+
+  // 8. Surveys & Sample Surveys (/af/ad_sur/lists, /af/ad_surs/lists)
+  getSurveys(schoolId) {
+    if (!this.data.surveys) {
+      this.data.surveys = [
+        { id: 'sur_1', schoolId: 'sch_1', title: '2026학년도 1분기 방과후학교 학부모 만족도 설문', period: '2026-03-20 ~ 2026-03-31', targetCount: 120, responseCount: 89, responseRate: '74.2%', status: '진행중' },
+        { id: 'sur_2', schoolId: 'sch_1', title: '2025학년도 4분기 늘봄돌봄 프로그램 평가 설문', period: '2025-12-15 ~ 2025-12-24', targetCount: 95, responseCount: 91, responseRate: '95.8%', status: '마감완료' }
+      ];
+    }
+    return (this.data.surveys || []).filter(s => !schoolId || s.schoolId === schoolId);
+  }
+
+  getSampleSurveys() {
+    return [
+      { id: 'smp_1', category: '교육청표준', title: '[교육청 표준] 방과후학교 프로그램 만족도 조사 (학생용 5문항)', questions: 5 },
+      { id: 'smp_2', category: '교육청표준', title: '[교육청 표준] 방과후학교 프로그램 만족도 조사 (학부모용 8문항)', questions: 8 },
+      { id: 'smp_3', category: '돌봄전용', title: '[늘봄 전용] 초등돌봄교실 급·간식 및 안전 귀가 만족도 (6문항)', questions: 6 }
+    ];
+  }
+
+  // 9. Class Time Schedule Periods (/af/ad_cfg/period)
+  getPeriods(schoolId) {
+    if (!this.data.periods) {
+      this.data.periods = [
+        { id: 'prd_1', periodName: '1교시 (방과후)', startTime: '13:00', endTime: '13:45', duration: '45분' },
+        { id: 'prd_2', periodName: '2교시 (방과후)', startTime: '14:00', endTime: '14:45', duration: '45분' },
+        { id: 'prd_3', periodName: '3교시 (방과후)', startTime: '15:00', endTime: '15:45', duration: '45분' },
+        { id: 'prd_4', periodName: '4교시 (방과후)', startTime: '16:00', endTime: '16:45', duration: '45분' }
+      ];
+    }
+    return this.data.periods;
+  }
+
+  // 10. Course Divisions (/af/ad_cfg/afDiv)
+  getAfDivisions(schoolId) {
+    if (!this.data.afDivisions) {
+      this.data.afDivisions = [
+        { id: 'div_1', code: 'DIV_2026_1Q', name: '2026년 1분기', period: '2026.03.01 ~ 2026.05.31', isCurrent: true, courseCount: 14 },
+        { id: 'div_2', code: 'DIV_2026_2Q', name: '2026년 2분기', period: '2026.06.01 ~ 2026.08.31', isCurrent: false, courseCount: 0 },
+        { id: 'div_3', code: 'DIV_2026_CARE', name: '7월 돌봄', period: '2026.07.01 ~ 2026.07.31', isCurrent: false, courseCount: 6 },
+        { id: 'div_4', code: 'DIV_AF_SPEC', name: '방과후 특기적성', period: '2026.03.01 ~ 2027.02.28', isCurrent: false, courseCount: 8 }
+      ];
+    }
+    return this.data.afDivisions;
+  }
+
+  // 11. Manager Info (/af/ad_info/modify)
+  getManagerInfo(schoolId) {
+    if (!this.data.managerInfo) {
+      this.data.managerInfo = {
+        schoolName: '운천초등학교',
+        schoolCode: 'UNCHON2025',
+        managerName: '김선생 (방과후부장)',
+        managerPhone: '010-9876-5432',
+        officePhone: '02-1234-5678',
+        email: 'af_master@unchon.es.kr',
+        address: '서울특별시 송파구 백제고분로 123'
+      };
+    }
+    return this.data.managerInfo;
+  }
+
+  updateManagerInfo(schoolId, data) {
+    this.data.managerInfo = { ...this.getManagerInfo(schoolId), ...data };
+    this.save();
+    return this.data.managerInfo;
+  }
+
+  // 12. Application Period (/af/ad_time/lists)
+  getApplyPeriods(schoolId) {
+    if (!this.data.applyPeriods) {
+      this.data.applyPeriods = [
+        { id: 'ap_1', category: '2026년 1분기', startAt: '2026-03-02 09:00:00', endAt: '2026-03-06 18:00:00', gradeTarget: '1,2,3,4,5,6학년', allowCancel: true, status: '신청진행중' },
+        { id: 'ap_2', category: '2026년 2분기', startAt: '2026-05-15 09:00:00', endAt: '2026-05-20 18:00:00', gradeTarget: '1,2,3,4,5,6학년', allowCancel: true, status: '대기중' }
+      ];
+    }
+    return this.data.applyPeriods;
+  }
 }
 
 module.exports = new JSONDatabase();
+

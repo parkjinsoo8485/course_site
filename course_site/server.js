@@ -289,6 +289,424 @@ app.post('/api/courses/auto-renew', authenticateToken, (req, res) => {
   return res.json({ success: true, message: `월별 수강 자동 연장이 완료되었습니다. (총 ${renewed}건 연장)` });
 });
 
+// ==================== dbdbschool (/af/ad_lec/lists/sn/[school_id]) CLONE APIs ====================
+
+// Helper to resolve school ID or SN code
+const resolveSchoolId = (schoolIdParam) => {
+  if (!schoolIdParam || schoolIdParam === '3267' || schoolIdParam === 'default') {
+    return 'sch_1';
+  }
+  const foundByCode = db.findSchoolByCode(schoolIdParam.toUpperCase());
+  if (foundByCode) return foundByCode.id;
+  const foundById = db.findSchoolById(schoolIdParam);
+  if (foundById) return foundById.id;
+  return 'sch_1';
+};
+
+// GET /api/af/ad_lec/lists/sn/:school_id (강좌 목록 조회)
+app.get('/api/af/ad_lec/lists/sn/:school_id', (req, res) => {
+  try {
+    const schoolId = resolveSchoolId(req.params.school_id);
+    const { category, status, keyword } = req.query;
+
+    const lectures = db.getLecturesBySchool(schoolId, { category, status, keyword });
+    const school = db.findSchoolById(schoolId);
+
+    return res.json({
+      success: true,
+      sn: req.params.school_id,
+      school: school ? { id: school.id, name: school.name, code: school.code } : { id: 'sch_1', name: '운천초등학교', code: 'UNCHON2025' },
+      totalCount: lectures.length,
+      lectures
+    });
+  } catch (err) {
+    console.error('dbdbschool API Error:', err);
+    return res.status(500).json({ success: false, message: '강좌 목록을 불러오는 중 오류가 발생했습니다.' });
+  }
+});
+
+// POST /api/af/ad_lec/create (강좌 신규 등록)
+app.post('/api/af/ad_lec/create', (req, res) => {
+  try {
+    const { schoolId, category, title, instructor, targetGrade, capacity, waitingCapacity, tuitionFee, materialFee, dayOfWeek, scheduleTime, location } = req.body;
+    const targetSchoolId = resolveSchoolId(schoolId);
+
+    if (!title || !instructor) {
+      return res.status(400).json({ success: false, message: '강좌명과 강사명은 필수 항목입니다.' });
+    }
+
+    const newCourse = db.createCourse({
+      schoolId: targetSchoolId,
+      category: category || '2026년 1분기',
+      title,
+      instructor,
+      teacherName: instructor,
+      targetGrade: targetGrade || '전학년',
+      capacity: parseInt(capacity) || 20,
+      waitingCapacity: parseInt(waitingCapacity) || 5,
+      tuitionFee: parseInt(tuitionFee) || 0,
+      fee: parseInt(tuitionFee) || 0,
+      materialFee: parseInt(materialFee) || 0,
+      dayOfWeek: dayOfWeek || '월',
+      scheduleTime: scheduleTime || '14:00~14:50',
+      schedule: `${dayOfWeek || '월'}:${scheduleTime || '14:00~14:50'}`,
+      location: location || '방과후 교실',
+      status: 'OUTPUT'
+    });
+
+    return res.json({ success: true, lecture: newCourse, message: `'${title}' 강좌가 성공적으로 등록되었습니다.` });
+  } catch (err) {
+    console.error('Create Lecture Error:', err);
+    return res.status(500).json({ success: false, message: '강좌 등록 중 오류가 발생했습니다.' });
+  }
+});
+
+// POST /api/af/ad_lec/batch-copy (이전 분기/월 강좌 및 수강료 일괄 복사)
+app.post('/api/af/ad_lec/batch-copy', (req, res) => {
+  try {
+    const { schoolId, sourceCategory, targetCategory, copyFees } = req.body;
+    const targetSchoolId = resolveSchoolId(schoolId);
+
+    if (!sourceCategory || !targetCategory) {
+      return res.status(400).json({ success: false, message: '원본 구분과 대상 구분을 모두 입력하세요.' });
+    }
+
+    const copied = db.batchCopyLectures(targetSchoolId, sourceCategory, targetCategory, copyFees !== false);
+    return res.json({
+      success: true,
+      copiedCount: copied.length,
+      message: `'${sourceCategory}'의 ${copied.length}개 강좌가 '${targetCategory}'(으)로 일괄 복사되었습니다.`
+    });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: '일괄 복사 중 오류가 발생했습니다.' });
+  }
+});
+
+// PATCH /api/af/ad_lec/status (강좌 상태 일괄 변경: OUTPUT / CLOSED / WAITING)
+app.patch('/api/af/ad_lec/status', (req, res) => {
+  try {
+    const { schoolId, courseIds, status } = req.body;
+    const targetSchoolId = resolveSchoolId(schoolId);
+
+    if (!courseIds || !Array.isArray(courseIds) || !status) {
+      return res.status(400).json({ success: false, message: '변경할 강좌 ID 목록과 상태 값을 전달하세요.' });
+    }
+
+    const updatedCount = db.updateLectureStatusBatch(targetSchoolId, courseIds, status);
+    return res.json({
+      success: true,
+      updatedCount,
+      message: `${updatedCount}개 강좌의 상태가 '${status}'(으)로 일괄 변경되었습니다.`
+    });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: '강좌 상태 변경 중 오류가 발생했습니다.' });
+  }
+});
+
+// PATCH /api/af/ad_lec/instructor-close (강사 마감 여부 토글)
+app.patch('/api/af/ad_lec/instructor-close', (req, res) => {
+  try {
+    const { schoolId, courseId } = req.body;
+    const targetSchoolId = resolveSchoolId(schoolId);
+
+    const result = db.toggleInstructorClosed(targetSchoolId, courseId);
+    if (!result) return res.status(404).json({ success: false, message: '해당 강좌를 찾을 수 없습니다.' });
+
+    return res.json({
+      success: true,
+      instructorClosed: result.instructorClosed,
+      message: `강사 마감 상태가 변경되었습니다.`
+    });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: '강사 마감 상태 처리 중 오류가 발생했습니다.' });
+  }
+});
+
+// POST /api/af/ad_lec/copy (3.2 단일 강좌 복사)
+app.post('/api/af/ad_lec/copy', (req, res) => {
+  try {
+    const { schoolId, courseId, overrides } = req.body;
+    const targetSchoolId = resolveSchoolId(schoolId);
+
+    if (!courseId) {
+      return res.status(400).json({ success: false, message: '복사할 강좌 ID를 전달하세요.' });
+    }
+
+    const copied = db.copyCourse(targetSchoolId, courseId, overrides || {});
+    if (!copied) return res.status(404).json({ success: false, message: '원본 강좌를 찾을 수 없습니다.' });
+
+    return res.json({
+      success: true,
+      course: copied,
+      message: `'${copied.title}' 강좌가 성공적으로 복사 생성되었습니다.`
+    });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: '강좌 복사 중 오류가 발생했습니다.' });
+  }
+});
+
+// POST /api/af/ad_lec/batch-upload (3.3 23개 컬럼 강좌 일괄등록 파서)
+app.post('/api/af/ad_lec/batch-upload', (req, res) => {
+  try {
+    const { schoolId, rows } = req.body;
+    const targetSchoolId = resolveSchoolId(schoolId);
+
+    if (!rows || !Array.isArray(rows) || rows.length === 0) {
+      return res.status(400).json({ success: false, message: '업로드할 강좌 데이터 행이 없습니다.' });
+    }
+
+    const result = db.batchUploadCourses(targetSchoolId, rows);
+    return res.json({
+      success: true,
+      count: result.count,
+      courses: result.courses,
+      message: `총 ${result.count}개 강좌가 성공적으로 일괄 등록되었습니다.`
+    });
+  } catch (err) {
+    console.error('Batch upload error:', err);
+    return res.status(500).json({ success: false, message: '강좌 일괄 등록 중 오류가 발생했습니다.' });
+  }
+});
+
+// GET /api/af/ad_lec/stats (3.4 강좌 통계)
+app.get('/api/af/ad_lec/stats', (req, res) => {
+  try {
+    const schoolId = resolveSchoolId(req.query.schoolId);
+    const stats = db.getCourseStatistics(schoolId);
+    return res.json({ success: true, stats });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: '강좌 통계를 불러오는 중 오류가 발생했습니다.' });
+  }
+});
+
+// POST /api/af/ad_lec/apply-facility-fee (3.9 강좌 수용비 신청자 일괄 적용)
+app.post('/api/af/ad_lec/apply-facility-fee', (req, res) => {
+  try {
+    const { schoolId, category } = req.body;
+    const targetSchoolId = resolveSchoolId(schoolId);
+
+    const updatedCount = db.applyFacilityFeeToApplicants(targetSchoolId, category);
+    return res.json({
+      success: true,
+      updatedCount,
+      message: `총 ${updatedCount}명의 신청자에게 강좌 수용비가 성공적으로 일괄 적용되었습니다.`
+    });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: '수용비 일괄 적용 중 오류가 발생했습니다.' });
+  }
+});
+
+// POST /api/af/ad_lec/batch-teacher-lock (2.8 & 3.4 강사마감 일괄 설정)
+app.post('/api/af/ad_lec/batch-teacher-lock', (req, res) => {
+  try {
+    const { schoolId, courseIds, lockState } = req.body;
+    const targetSchoolId = resolveSchoolId(schoolId);
+
+    const updatedCount = db.toggleTeacherLockBatch(targetSchoolId, courseIds || 'ALL', lockState);
+    return res.json({
+      success: true,
+      updatedCount,
+      message: `${updatedCount}개 강좌의 강사 마감 상태가 '${lockState ? '마감(Y)' : '해제(N)'}'(으)로 일괄 변경되었습니다.`
+    });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: '강사 마감 일괄 처리 중 오류가 발생했습니다.' });
+  }
+});
+
+// GET /api/af/ad_lec/export-neis (3.11 나이스 연계 강사기준 엑셀 데이터)
+app.get('/api/af/ad_lec/export-neis', (req, res) => {
+  try {
+    const schoolId = resolveSchoolId(req.query.schoolId);
+    const category = req.query.category;
+    const rows = db.getNeisExportData(schoolId, category);
+    return res.json({ success: true, count: rows.length, rows });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: '나이스 데이터 추출 중 오류가 발생했습니다.' });
+  }
+});
+
+// GET /api/af/ad_lec/export-edufine (3.12 에듀파인 수납 집계 엑셀 데이터)
+app.get('/api/af/ad_lec/export-edufine', (req, res) => {
+  try {
+    const schoolId = resolveSchoolId(req.query.schoolId);
+    const category = req.query.category;
+    const rows = db.getEdufineExportData(schoolId, category);
+    return res.json({ success: true, count: rows.length, rows });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: '에듀파인 데이터 추출 중 오류가 발생했습니다.' });
+  }
+});
+
+// POST /api/af/ad_lec/lottery (추첨 실행)
+app.post('/api/af/ad_lec/lottery', (req, res) => {
+  try {
+    const { schoolId, courseId } = req.body;
+    const targetSchoolId = resolveSchoolId(schoolId);
+
+    const result = db.executeLottery(targetSchoolId, courseId);
+    if (result.error) return res.status(400).json({ success: false, message: result.error });
+
+    return res.json({ success: true, ...result });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: '추첨 실행 중 오류가 발생했습니다.' });
+  }
+});
+
+// POST /api/courses/check-conflict (시간표 수강신청 중복 감지 API)
+app.post('/api/courses/check-conflict', (req, res) => {
+  try {
+    const { studentName, parentPhone, dayOfWeek, scheduleTime, schoolId } = req.body;
+    const targetSchoolId = resolveSchoolId(schoolId);
+
+    const cleanPhone = (parentPhone || '').replace(/[^0-9]/g, '');
+    const applicants = db.getApplicantsBySchool(targetSchoolId).filter(a => {
+      const p = (a.parentPhone || '').replace(/[^0-9]/g, '');
+      return a.studentName === studentName && p === cleanPhone && a.status === '승인';
+    });
+
+    let conflictFound = false;
+    let conflictCourseTitle = '';
+
+    applicants.forEach(app => {
+      const course = db.getCoursesBySchool(targetSchoolId).find(c => c.id === app.courseId);
+      if (course && course.schedule) {
+        const [cDays] = course.schedule.split(':');
+        if (dayOfWeek && cDays && dayOfWeek.split(',').some(d => cDays.includes(d))) {
+          conflictFound = true;
+          conflictCourseTitle = course.title;
+        }
+      }
+    });
+
+    if (conflictFound) {
+      return res.json({
+        hasConflict: true,
+        message: `시간표 중복 경고: 이미 동일 요일에 '${conflictCourseTitle}' 강좌가 신청되어 있습니다.`
+      });
+    }
+
+    return res.json({ hasConflict: false, message: '수강 가능한 시간대입니다.' });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: '시간표 검사 중 오류가 발생했습니다.' });
+  }
+});
+
+// POST /api/refunds/calculate (일할/주할 분할 환불 금액 계산 API)
+app.post('/api/refunds/calculate', (req, res) => {
+  try {
+    const { tuitionFee, totalDays, attendedDays } = req.body;
+    const refundAmount = db.calculateRefundAmount(tuitionFee, totalDays, attendedDays);
+    return res.json({
+      success: true,
+      tuitionFee: parseInt(tuitionFee) || 0,
+      totalDays: parseInt(totalDays) || 20,
+      attendedDays: parseInt(attendedDays) || 0,
+      refundAmount,
+      message: `전체 ${totalDays}일 중 ${attendedDays}일 수강 후 예상 환불액: ${refundAmount.toLocaleString()}원`
+    });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: '환불 금액 계산 중 오류가 발생했습니다.' });
+  }
+});
+// GET /api/af/ad_stu/lists/sn/:school_id (수강 신청자 명단)
+app.get('/api/af/ad_stu/lists/sn/:school_id', (req, res) => {
+  const schoolId = resolveSchoolId(req.params.school_id);
+  const applicants = db.getApplicantsBySchool(schoolId);
+  const waitlist = db.data.waitlist ? db.data.waitlist.filter(w => w.schoolId === schoolId) : [];
+  return res.json({ success: true, applicants, waitlist });
+});
+
+// PATCH /api/af/ad_stu/approval (수강 승인 / 강제 취소)
+app.patch('/api/af/ad_stu/approval', (req, res) => {
+  const { schoolId, applicantId, status } = req.body;
+  const targetSchoolId = resolveSchoolId(schoolId);
+  const updated = db.updateApplicantStatus(targetSchoolId, applicantId, status || '승인');
+  if (!updated) return res.status(404).json({ success: false, message: '신청 내역을 찾을 수 없습니다.' });
+  return res.json({ success: true, applicant: updated, message: `수강 상태가 '${status}'(으)로 변경되었습니다.` });
+});
+
+// POST /api/af/ad_stu/transfer (학생 학적 일괄 이관)
+app.post('/api/af/ad_stu/transfer', (req, res) => {
+  const { schoolId, fromGrade, toGrade } = req.body;
+  const targetSchoolId = resolveSchoolId(schoolId);
+  const count = db.transferGradeClass(targetSchoolId, fromGrade || '1학년', toGrade || '2학년');
+  return res.json({ success: true, transferredCount: count, message: `${count}명의 학생 학적이 '${toGrade}'(으)로 이관되었습니다.` });
+});
+
+// GET /api/af/ad_sms/templates (알림톡 템플릿 목록)
+app.get('/api/af/ad_sms/templates', (req, res) => {
+  const templates = db.getSmsTemplates();
+  return res.json({ success: true, templates });
+});
+
+// POST /api/af/ad_sms/send (카카오 알림톡 / SMS 단체 발송)
+app.post('/api/af/ad_sms/send', (req, res) => {
+  const { schoolId, recipientCount, templateId, message } = req.body;
+  const targetSchoolId = resolveSchoolId(schoolId);
+  const log = db.sendBulkSms(targetSchoolId, { recipientCount, templateId, message });
+  return res.json({ success: true, log, message: `${log.recipientCount}명에게 카카오 알림톡 발송이 완료되었습니다.` });
+});
+
+// GET /api/af/ad_sms/history/sn/:school_id (발송 이력)
+app.get('/api/af/ad_sms/history/sn/:school_id', (req, res) => {
+  const schoolId = resolveSchoolId(req.params.school_id);
+  const logs = db.getSmsHistory(schoolId);
+  return res.json({ success: true, logs });
+});
+
+// PATCH /api/af/ad_safety/absence/approve (결석/조퇴 승인 처리)
+app.patch('/api/af/ad_safety/absence/approve', (req, res) => {
+  const { id, status } = req.body;
+  const updated = db.approveAbsenceRequest(id, status || '승인완료');
+  if (!updated) return res.status(404).json({ success: false, message: '결석 신청건을 찾을 수 없습니다.' });
+  return res.json({ success: true, absence: updated, message: '결석/조퇴 신청이 승인 처리되었습니다.' });
+});
+
+// GET /api/af/ad_faq/main (FAQ 및 매뉴얼 가이드 목록)
+app.get('/api/af/ad_faq/main', (req, res) => {
+  const faqs = db.getFaqList();
+  return res.json({ success: true, faqs });
+});
+
+// GET /api/settings/basic (기본설정 - 매뉴얼 2.7)
+app.get('/api/settings/basic', (req, res) => {
+  const settings = db.getBasicSettings();
+  return res.json({ success: true, settings });
+});
+
+// POST /api/settings/basic (기본설정 저장)
+app.post('/api/settings/basic', (req, res) => {
+  const settings = db.updateBasicSettings(req.body);
+  return res.json({ success: true, settings, message: '기본 설정이 성공적으로 저장되었습니다.' });
+});
+
+// GET /api/settings/instructor-permissions (강사권한 - 매뉴얼 2.8)
+app.get('/api/settings/instructor-permissions', (req, res) => {
+  const permissions = db.getInstructorPermissions();
+  return res.json({ success: true, permissions });
+});
+
+// POST /api/settings/instructor-permissions (강사권한 저장)
+app.post('/api/settings/instructor-permissions', (req, res) => {
+  const permissions = db.updateInstructorPermissions(req.body);
+  return res.json({ success: true, permissions, message: '강사 권한 옵션이 저극 반영되었습니다.' });
+});
+
+// GET /api/settings/attendance-options (출석부옵션 - 매뉴얼 2.9)
+app.get('/api/settings/attendance-options', (req, res) => {
+  const options = db.getAttendanceOptions();
+  return res.json({ success: true, options });
+});
+
+// POST /api/settings/attendance-options (출석부옵션 저장)
+app.post('/api/settings/attendance-options', (req, res) => {
+  const options = db.updateAttendanceOptions(req.body);
+  return res.json({ success: true, options, message: '출석부 설정이 저장되었습니다.' });
+});
+
+
+
+
 // ==================== PARENT PORTAL APIs (공공/학부모 전용) ====================
 
 // GET /api/parent/courses?schoolCode=UNCHON2025
@@ -646,16 +1064,336 @@ app.delete('/api/safety/return-schedules/:id', (req, res) => {
   return res.json({ success: true, message: '귀가 일정표가 삭제되었습니다.' });
 });
 
-// DELETE /api/parent/qa/:id
-app.delete('/api/parent/qa/:id', (req, res) => {
-  const deleted = db.deleteQA(req.params.id);
-  if (!deleted) return res.status(404).json({ success: false, message: '질문 게시글을 찾을 수 없습니다.' });
-  return res.json({ success: true, message: '질문이 삭제되었습니다.' });
+// ---------------- Section 2 (Official Manual) Endpoints ----------------
+
+// 2.2 & 2.3 Staff & Service Administrators
+app.get('/api/manual/staff', (req, res) => {
+  const staff = db.getStaff('sch_1');
+  return res.json({ success: true, staff });
 });
 
+app.post('/api/manual/staff', (req, res) => {
+  const { name, role, permissions } = req.body;
+  if (!name) return res.status(400).json({ success: false, message: '교직원 이름을 입력하세요.' });
+  const newStaff = db.addStaff('sch_1', { name, role, permissions });
+  return res.json({ success: true, staff: newStaff, message: `교직원 '${name}'님이 등록되었습니다.` });
+});
 
-// Serve static files
+app.post('/api/manual/service-admin', (req, res) => {
+  const { staffId, permissions } = req.body;
+  const admin = db.assignServiceAdmin('sch_1', staffId, permissions);
+  if (!admin) return res.status(404).json({ success: false, message: '교직원을 찾을 수 없습니다.' });
+  return res.json({ success: true, admin, message: `'${admin.name}'님이 서비스 관리자로 지정되었습니다.` });
+});
+
+// 2.4.1 Temporary Student Generator (7학년 생월반 생일번)
+app.post('/api/manual/temp-student', (req, res) => {
+  const { name, birthDate, phone } = req.body;
+  if (!name || !birthDate) return res.status(400).json({ success: false, message: '학생 이름과 생년월일을 입력하세요.' });
+  const tempStudent = db.generateTempStudent('sch_1', { name, birthDate, phone });
+  return res.json({
+    success: true,
+    student: tempStudent,
+    message: `[신학기 임시학적] '${name}' 학생에게 '${tempStudent.gradeClass}'이(가) 부여되었습니다.`
+  });
+});
+
+// 2.4.1 Multi-Child Account Sharing
+app.get('/api/manual/multi-child', (req, res) => {
+  const { phone } = req.query;
+  const children = db.getMultiChildAccounts(phone || '010-2345-6789');
+  return res.json({ success: true, children });
+});
+
+// 2.5 Homeroom Teacher Management
+app.get('/api/manual/homeroom', (req, res) => {
+  const teachers = db.getHomeroomTeachers('sch_1');
+  return res.json({ success: true, teachers });
+});
+
+app.post('/api/manual/homeroom', (req, res) => {
+  const { name, assignedClass, phone } = req.body;
+  if (!name || !assignedClass) return res.status(400).json({ success: false, message: '담임 교사명과 담당 학급을 입력하세요.' });
+  const newHR = db.addHomeroomTeacher('sch_1', { name, assignedClass, phone });
+  return res.json({ success: true, teacher: newHR, message: `'${name}' 선생님이 '${assignedClass}' 담임으로 등록되었습니다.` });
+});
+
+// 2.6 Instructors & Banking ID Grouping
+app.get('/api/manual/instructors', (req, res) => {
+  const instructors = db.getInstructors('sch_1');
+  return res.json({ success: true, instructors });
+});
+
+app.get('/api/manual/instructor-banking-groups', (req, res) => {
+  const groups = db.getInstructorBankingGroups('sch_1');
+  return res.json({ success: true, groups });
+});
+
+// 2.10 SMS Settings
+app.get('/api/manual/sms-config', (req, res) => {
+  const config = db.getSmsConfig('sch_1');
+  return res.json({ success: true, config });
+});
+
+app.post('/api/manual/sms-config', (req, res) => {
+  const updated = db.updateSmsConfig('sch_1', req.body);
+  return res.json({ success: true, config: updated, message: '문자 및 발신번호 설정이 저장되었습니다.' });
+});
+
+// 2.11.3 Overlap Restriction Groups
+app.get('/api/manual/restriction-groups', (req, res) => {
+  const groups = db.getRestrictionGroups('sch_1');
+  return res.json({ success: true, groups });
+});
+
+app.post('/api/manual/restriction-groups', (req, res) => {
+  const { code, name, description } = req.body;
+  if (!code || !name) return res.status(400).json({ success: false, message: '그룹 코드와 그룹명을 입력하세요.' });
+  const newGroup = db.addRestrictionGroup('sch_1', { code, name, description });
+  return res.json({ success: true, group: newGroup, message: `중복제한그룹 [${code}] '${name}'이(가) 등록되었습니다.` });
+});
+
+// 2.11.4 Notice Text Settings
+app.get('/api/manual/notice-settings', (req, res) => {
+  const settings = db.getNoticeSettings('sch_1');
+  return res.json({ success: true, settings });
+});
+
+app.post('/api/manual/notice-settings', (req, res) => {
+  const updated = db.updateNoticeSettings('sch_1', req.body);
+  return res.json({ success: true, settings: updated, message: '안내글 설정이 저장되었습니다.' });
+});
+
+// ==================== Live dbdbschool 29 Submodels REST APIs ====================
+
+// 1. 대기자관리 (/af/ad_wait/lists)
+app.get('/api/af/ad_wait/lists', (req, res) => {
+  const waitlist = db.getWaitlist('sch_1');
+  return res.json({ success: true, count: waitlist.length, waitlist });
+});
+
+app.post('/api/af/ad_wait/promote', (req, res) => {
+  const { waitId } = req.body;
+  const promoted = db.promoteWaitlist(waitId);
+  if (promoted) {
+    return res.json({ success: true, message: `'${promoted.studentName}' 학생이 대기에서 정규 수강생으로 승격되었습니다.`, promoted });
+  }
+  return res.status(404).json({ success: false, message: '대기자를 찾을 수 없습니다.' });
+});
+
+// 2. 출석부관리 (/af/ad_att/stat)
+app.get('/api/af/ad_att/stat', (req, res) => {
+  const stats = db.getAttendanceStats('sch_1');
+  return res.json({ success: true, stats });
+});
+
+app.post('/api/af/ad_att/stamp', (req, res) => {
+  const { courseId } = req.body;
+  return res.json({ success: true, message: `선택 강좌의 ${new Date().getMonth() + 1}월 출석부에 학교장 직인이 날인 처리되었습니다.` });
+});
+
+// 3. 환불/취소관리 (/af/ad_ref/lists)
+app.get('/api/af/ad_ref/lists', (req, res) => {
+  const refunds = db.getRefunds('sch_1');
+  return res.json({ success: true, count: refunds.length, refunds });
+});
+
+app.post('/api/af/ad_ref/create', (req, res) => {
+  const newRef = db.addRefund('sch_1', req.body);
+  return res.json({ success: true, message: `'${newRef.studentName}' 학생의 환불 요청(${newRef.refundAmount.toLocaleString()}원)이 등록되었습니다.`, refund: newRef });
+});
+
+// 4. 결석/귀가신청 (/af/ad_abs/lists)
+app.get('/api/af/ad_abs/lists', (req, res) => {
+  const absences = db.getAbsences('sch_1');
+  return res.json({ success: true, count: absences.length, absences });
+});
+
+app.post('/api/af/ad_abs/status', (req, res) => {
+  const { id, status } = req.body;
+  const updated = db.updateAbsenceStatus(id, status);
+  return res.json({ success: true, message: `결석/조퇴 신청이 '${status}' 처리되었습니다.`, item: updated });
+});
+
+// 5. 강사관리 (/af/ad_tea/lists)
+app.get('/api/af/ad_tea/lists', (req, res) => {
+  const teachers = db.getInstructors('sch_1');
+  return res.json({ success: true, count: teachers.length, teachers });
+});
+
+// 6. 알림관리 (/af/notification/lists)
+app.get('/api/af/notification/lists', (req, res) => {
+  const notifications = db.getNotifications('sch_1');
+  return res.json({ success: true, count: notifications.length, notifications });
+});
+
+// 7. 푸시알림관리 (/af/spush/lists)
+app.get('/api/af/spush/lists', (req, res) => {
+  const pushNotifications = db.getPushNotifications('sch_1');
+  return res.json({ success: true, count: pushNotifications.length, pushNotifications });
+});
+
+app.post('/api/af/spush/send', (req, res) => {
+  const { title, body } = req.body;
+  return res.json({ success: true, message: `[${title}] 모바일 앱 푸시 알림이 전체 학생/학부모에게 발송되었습니다.` });
+});
+
+// 8. 연장신청 (/af/ad_extension/lists)
+app.get('/api/af/ad_extension/lists', (req, res) => {
+  const extensions = db.getServiceExtensions('sch_1');
+  return res.json({ success: true, extensions });
+});
+
+// 9. 지원금관리 4개 서브엔드포인트
+app.get('/api/af/ad_free2_stu/lists', (req, res) => {
+  const students = db.getSubsidyStudents('sch_1');
+  return res.json({ success: true, students });
+});
+
+app.get('/api/af/ad_free2_app/lists', (req, res) => {
+  const applicants = db.getSubsidyApplicants('sch_1');
+  return res.json({ success: true, applicants });
+});
+
+app.get('/api/af/ad_free2_cfg/main', (req, res) => {
+  return res.json({
+    success: true,
+    config: {
+      annualLimit: 600000,
+      priorityPolicy: '자유수강권 > 늘봄무상지원금 > 바우처',
+      autoDeduct: true,
+      excludeMaterials: false
+    }
+  });
+});
+
+app.get('/api/af/ad_free2_cfg/free1', (req, res) => {
+  const ranks = db.getSubsidyRanks('sch_1');
+  return res.json({ success: true, ranks });
+});
+
+// 10. 설문관리 2개 서브엔드포인트
+app.get('/api/af/ad_sur/lists', (req, res) => {
+  const surveys = db.getSurveys('sch_1');
+  return res.json({ success: true, surveys });
+});
+
+app.get('/api/af/ad_surs/lists', (req, res) => {
+  const sampleSurveys = db.getSampleSurveys();
+  return res.json({ success: true, sampleSurveys });
+});
+
+// 11. 환경설정 서브엔드포인트
+app.get('/api/af/ad_cfg/period', (req, res) => {
+  const periods = db.getPeriods('sch_1');
+  return res.json({ success: true, periods });
+});
+
+app.get('/api/af/ad_cfg/afDiv', (req, res) => {
+  const divisions = db.getAfDivisions('sch_1');
+  return res.json({ success: true, divisions });
+});
+
+app.get('/api/af/ad_time/lists', (req, res) => {
+  const periods = db.getApplyPeriods('sch_1');
+  return res.json({ success: true, periods });
+});
+
+app.get('/api/af/ad_info/modify', (req, res) => {
+  const info = db.getManagerInfo('sch_1');
+  return res.json({ success: true, info });
+});
+
+app.post('/api/af/ad_info/modify', (req, res) => {
+  const updated = db.updateManagerInfo('sch_1', req.body);
+  return res.json({ success: true, message: '담당자 및 학교 정보가 성공적으로 수정되었습니다.', info: updated });
+});
+
+app.post('/api/af/ad_cfg/clear', (req, res) => {
+  return res.json({ success: true, message: '선택하신 운영구분의 신청/수납/출결 데이터가 안전하게 초기화되었습니다.' });
+});
+
+// 12. 학교관리 (/sczigi/service/lists)
+app.get('/api/sczigi/service/lists', (req, res) => {
+  const schools = db.getAllSchools();
+  return res.json({ success: true, schools });
+});
+
+// 13. Manual & FAQ Master Endpoints (/af/ad_faq/main)
+const manualData = require('./utils/manualData');
+
+app.get('/api/manual/all', (req, res) => {
+  return res.json({
+    success: true,
+    operations: manualData.OPERATIONS_STEPS,
+    templates: manualData.TEMPLATE_DOWNLOADS,
+    manuals: manualData.MANUAL_DOWNLOADS,
+    faqs: manualData.FAQ_CATEGORIES
+  });
+});
+
+app.get('/api/manual/doc/:id', (req, res) => {
+  const { id } = req.params;
+  const docIdNum = parseInt(id, 10);
+  const op = manualData.OPERATIONS_STEPS.find(o => o.docId === docIdNum || o.num === docIdNum);
+  if (op) {
+    return res.json({ success: true, doc: op });
+  }
+  // Find in FAQs or manuals
+  let foundFaq = null;
+  for (const cat of manualData.FAQ_CATEGORIES) {
+    const item = cat.items.find(i => i.docId === docIdNum || String(i.docId) === id);
+    if (item) {
+      foundFaq = { title: item.q, content: `### ${item.q}\n\n상세 운영 지침 및 표준 절차입니다.\n\n1. 관련 메뉴로 이동합니다.\n2. 관리자 권한으로 설정값을 점검하고 변경합니다.\n3. 확인 버튼을 클릭하여 저장합니다.` };
+      break;
+    }
+  }
+  if (foundFaq) {
+    return res.json({ success: true, doc: foundFaq });
+  }
+  return res.json({
+    success: true,
+    doc: {
+      title: `매뉴얼 문서 (ID: ${id})`,
+      content: `### 디비디비스쿨 공식 매뉴얼 문서\n\n- 문서 번호: ${id}\n- 해당 기능에 대한 상세 가이드 및 팁이 수록되어 있습니다.`
+    }
+  });
+});
+
+app.get('/api/manual/download/:fileId', (req, res) => {
+  const { fileId } = req.params;
+  let filename = `${fileId}.zip`;
+  if (fileId.includes('mp4')) filename = 'student_guide.mp4';
+  if (fileId.includes('banner')) filename = 'dbdbschool_banner.png';
+  if (fileId.includes('popup')) filename = 'dbdbschool_popup.png';
+  
+  res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+  res.setHeader('Content-Type', 'application/octet-stream');
+  return res.send(Buffer.from(`DBDBSCHOOL MANUAL FILE DATA: ${fileId}`));
+});
+
+// Official dbdbschool URL direct handler: /help/go_data/num/:num/data/:type
+app.get('/help/go_data/num/:num/data/:type', (req, res) => {
+  const { num, type } = req.params;
+  if (type === 'video' || type === 'mov') {
+    return res.redirect(`https://www.youtube.com/results?search_query=dbdbschool+manual+${num}`);
+  }
+  return res.redirect(`/api/manual/doc/${num}`);
+});
+
+// Serve static files first
 app.use(express.static(path.join(__dirname)));
+
+// dbdbschool Page Routing Fallback Middleware (Matches all live dbdbschool URL patterns)
+app.use((req, res, next) => {
+  if (req.path && (req.path.startsWith('/af/') || req.path.startsWith('/sczigi/'))) {
+    if (req.path.endsWith('.js') || req.path.endsWith('.css') || req.path.endsWith('.png') || req.path.endsWith('.ico') || req.path.endsWith('.jpg')) {
+      return next();
+    }
+    return res.sendFile(path.join(__dirname, 'af', 'ad_lec', 'lists', 'sn', 'index.html'));
+  }
+  next();
+});
 
 const PORT = process.env.PORT || 3005;
 app.listen(PORT, () => {

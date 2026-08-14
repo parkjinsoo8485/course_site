@@ -1,0 +1,207 @@
+// Prisma Schema for dbdbschool After-School Management System & LMS
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  school_admin
+  teacher
+  parent
+}
+
+enum LectureStatus {
+  OUTPUT   // 출력 (수강 신청 가능)
+  CLOSED   // 종료 (신청 마감, 조회만 가능)
+  WAITING  // 대기 (비공개 또는 준비중)
+}
+
+enum SubsidyType {
+  GENERAL       // 일반 자부담
+  LOW_INCOME    // 저소득층지원
+  MULTI_CHILD   // 다자녀지원
+  SPECIAL_ED    // 특수교육지원
+  FULL_SUBSIDY  // 전액지원
+}
+
+// 학교 정보 모델
+model School {
+  id               String            @id @default(uuid())
+  code             String            @unique // 학교 코드 (예: UNCHON2025, SN 3267 매핑)
+  name             String            // 학교명
+  plan             String            @default("standard")
+  status           String            @default("active")
+  expireDate       DateTime
+  lectures         Lecture[]
+  users            User[]
+  applicants       Applicant[]
+  waitlists        Waitlist[]
+  settlements      Settlement[]
+  attendances      Attendance[]
+  qaBoards         QABoard[]
+  safetySchedules  SafetySchedule[]
+  absenceRequests  AbsenceRequest[]
+  createdAt        DateTime          @default(now())
+}
+
+// 사용자 모델 (학교 관리자, 강사, 학부모)
+model User {
+  id        String   @id @default(uuid())
+  schoolId  String
+  username  String   @unique
+  name      String
+  email     String
+  phone     String?
+  role      Role     @default(teacher)
+  password  String
+  school    School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+// 강좌 관리 모델 (dbdbschool /af/ad_lec/lists 호환)
+model Lecture {
+  id               String        @id @default(uuid())
+  schoolId         String
+  code             String?       // 강좌 코드 (예: 312, 313)
+  category         String        // 강좌구분 (예: 2026년 1분기, 3월 돌봄, 정규 등)
+  title            String        // 강좌명
+  instructor       String        // 강사명
+  targetGrade      String        // 대상 학년 (예: 1,2,3,4,5,6 전체 등)
+  capacity         Int           // 수강 정원
+  waitingCapacity  Int           @default(5) // 대기 정원
+  enrolledCount    Int           @default(0) // 현재 신청 인원
+  waitingCount     Int           @default(0) // 현재 대기 인원
+  tuitionFee       Int           // 수강료
+  materialFee      Int           @default(0) // 재료비/교재비
+  dayOfWeek        String        // 강의 요일 (예: 월,수,금)
+  scheduleTime     String        // 강의 시간 (예: 14:00~14:50)
+  location         String        // 강의실
+  period           String        // 운영 기간 (예: 2026-03-01~2026-06-30)
+  status           LectureStatus @default(OUTPUT) // 상태 (출력, 종료, 대기)
+  autoRenew        Boolean       @default(true)   // 자동 연장 여부
+  feeReceipt       Boolean       @default(true)   // 영수증 발행 대상 여부
+  instructorClosed Boolean       @default(false)  // 강사 마감 여부
+  refundClosed     Boolean       @default(false)  // 환불 마감 여부
+  lotteryCompleted Boolean       @default(false)  // 추첨 완료 여부
+  edufineCode      String?       // 에듀파인 예산 과목 코드
+  school           School        @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  applicants       Applicant[]
+  waitlists        Waitlist[]
+  attendances      Attendance[]
+  qaBoards         QABoard[]
+  absenceRequests  AbsenceRequest[]
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+}
+
+// 수강 신청자 모델
+model Applicant {
+  id            String      @id @default(uuid())
+  schoolId      String
+  lectureId     String
+  studentName   String
+  gradeClass    String
+  parentPhone   String
+  subsidyType   SubsidyType @default(GENERAL)
+  paymentStatus String      @default("결제대기")
+  materialPaid  Boolean     @default(false)
+  status        String      @default("승인")
+  school        School      @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  lecture       Lecture     @relation(fields: [lectureId], references: [id], onDelete: Cascade)
+  createdAt     DateTime    @default(now())
+}
+
+// 대기자 명단 모델
+model Waitlist {
+  id          String   @id @default(uuid())
+  schoolId    String
+  lectureId   String
+  rank        Int      @default(1)
+  studentName String
+  gradeClass  String
+  parentPhone String
+  status      String   @default("대기중")
+  school      School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  lecture     Lecture  @relation(fields: [lectureId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+}
+
+// 정산 및 환불 모델
+model Settlement {
+  id          String   @id @default(uuid())
+  schoolId    String
+  type        String   // 환불, 수강료 정산, 재료비 정산
+  studentName String
+  courseTitle String
+  amount      Int      @default(0)
+  requestedAt DateTime
+  status      String   @default("정산대기")
+  note        String?
+  school      School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+}
+
+// 출석부 모델
+model Attendance {
+  id          String   @id @default(uuid())
+  schoolId    String
+  lectureId   String
+  studentName String
+  parentPhone String
+  date        DateTime
+  status      String   @default("출석") // 출석, 결석, 조퇴
+  notifiedAt  DateTime @default(now())
+  school      School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  lecture     Lecture  @relation(fields: [lectureId], references: [id], onDelete: Cascade)
+}
+
+// 클래스별 Q&A 게시판
+model QABoard {
+  id         String    @id @default(uuid())
+  schoolId   String
+  lectureId  String
+  authorName String
+  authorRole String    @default("parent")
+  title      String
+  content    String
+  reply      String?
+  repliedAt  DateTime?
+  school     School    @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  lecture    Lecture   @relation(fields: [lectureId], references: [id], onDelete: Cascade)
+  createdAt  DateTime  @default(now())
+}
+
+// 등하교/귀가 일정표
+model SafetySchedule {
+  id           String   @id @default(uuid())
+  schoolId     String
+  studentName  String
+  gradeClass   String
+  parentPhone  String
+  dayOfWeek    String   // 월, 화, 수, 목, 금
+  returnTime   String   // 예: 16:30
+  pickupPerson String   // 어머니 자차, 학원 차량 등
+  school       School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+}
+
+// 결석 및 조퇴 신청
+model AbsenceRequest {
+  id          String   @id @default(uuid())
+  schoolId    String
+  lectureId   String
+  studentName String
+  parentPhone String
+  absenceDate DateTime
+  type        String   @default("결석")
+  reason      String
+  status      String   @default("승인대기")
+  school      School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  lecture     Lecture  @relation(fields: [lectureId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+}

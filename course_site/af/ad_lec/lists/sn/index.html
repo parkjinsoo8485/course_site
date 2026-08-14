@@ -1,0 +1,1827 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>방과후학교 프로그램 관리자 시스템 | 디비디비스쿨 통합 플랫폼</title>
+  <link rel="stylesheet" href="/af/ad_lec/lists/sn/admin_lec.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- 1. TOP GLOBAL BLUE NAVBAR -->
+  <header class="top-navbar">
+    <div class="school-title" id="topSchoolTitle">광주풍향초등학교</div>
+    <div class="center-selector" onclick="alert('운영 서비스 전환 메뉴가 열립니다.')">
+      <span>늘봄학교</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem;"></i>
+    </div>
+    <div class="right-controls">
+      <select id="roleSwitcher" style="background:#1d4ed8; color:white; border:1px solid #60a5fa; border-radius:3px; padding:3px 8px; font-size:0.8rem;" onchange="switchRole(this.value)">
+        <option value="school_admin" selected>학교 관리자 (Admin)</option>
+        <option value="teacher">강사 (Instructor)</option>
+        <option value="parent">학생/학부모 (Parent)</option>
+      </select>
+      <span style="cursor:pointer;" onclick="alert('로그아웃 되었습니다.')"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</span>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+    <!-- 2. SIDEBAR NAVIGATION -->
+    <aside class="sidebar">
+      <!-- User Profile Header Card -->
+      <div class="user-profile-card">
+        <div class="user-profile-header">
+          <div class="user-avatar-circle"><i class="fa-solid fa-user"></i></div>
+          <div class="user-name-text">관리자(김혜련)님 <span class="badge-bell"><i class="fa-solid fa-bell"></i> 0</span></div>
+        </div>
+        <div class="user-links">
+          <a href="#" onclick="alert('로그아웃 되었습니다.')">[로그아웃]</a>
+          <a href="/af/ad_info/modify/sn/3267" onclick="switchSubmodelView(event, 'ad_info_modify', '/af/ad_info/modify/sn/3267')">[정보수정]</a>
+        </div>
+        <div class="user-action-buttons">
+          <button class="btn-home" onclick="window.location.href='/'"><i class="fa-solid fa-house"></i> 홈으로</button>
+          <button class="btn-course-reg" onclick="openAddModal()"><i class="fa-solid fa-plus"></i> 강좌등록</button>
+        </div>
+      </div>
+
+      <!-- Navigation Menus (Exact dbdbschool Live Order) -->
+      <ul class="sidebar-menu" id="adminSidebar">
+        <li class="subitem" id="sub_ad_faq_main">
+          <a href="/af/ad_faq/main/sn/3267" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')">
+            <span class="menu-label"><i class="fa-solid fa-book"></i> 매뉴얼</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_qanda_lists">
+          <a href="/af/qanda/lists/sn/3267" onclick="switchSubmodelView(event, 'qanda_lists', '/af/qanda/lists/sn/3267')">
+            <span class="menu-label"><i class="fa-solid fa-comments"></i> 고객지원 게시판</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_sczigi_service_lists">
+          <a href="/sczigi/service/lists/sn/3267" onclick="switchSubmodelView(event, 'sczigi_service_lists', '/sczigi/service/lists/sn/3267')">
+            <span class="menu-label"><i class="fa-solid fa-school" style="color:#ef4444;"></i> 학교관리</span>
+          </a>
+        </li>
+        <li class="subitem active" id="sub_ad_lec_lists">
+          <a href="/af/ad_lec/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_lec_lists', '/af/ad_lec/lists/sn/3267')">
+            <span class="menu-label"><i class="fa-solid fa-futbol"></i> 강좌관리</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_ad_app_lists">
+          <a href="/af/ad_app/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_app_lists', '/af/ad_app/lists/sn/3267')">
+            <span class="menu-label"><i class="fa-solid fa-user-group"></i> 신청자관리</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_ad_wait_lists">
+          <a href="/af/ad_wait/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_wait_lists', '/af/ad_wait/lists/sn/3267')">
+            <span class="menu-label"><i class="fa-solid fa-user-clock"></i> 대기자관리</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_ad_att_stat">
+          <a href="/af/ad_att/stat/sn/3267" onclick="switchSubmodelView(event, 'ad_att_stat', '/af/ad_att/stat/sn/3267')">
+            <span class="menu-label"><i class="fa-solid fa-square-check"></i> 출석부관리</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_ad_ref_lists">
+          <a href="/af/ad_ref/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_ref_lists', '/af/ad_ref/lists/sn/3267')">
+            <span class="menu-label"><i class="fa-solid fa-user-minus"></i> 환불/취소관리</span>
+          </a>
+        </li>
+
+        <!-- 지원금관리 ∨ -->
+        <li class="has-submenu" id="menu_ad_subsidy">
+          <a onclick="toggleSubmenu(this)">
+            <span class="menu-label"><i class="fa-solid fa-building-columns"></i> 지원금관리</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          </a>
+          <ul class="submenu-list">
+            <li class="subitem" id="sub_ad_free2_stu"><a href="/af/ad_free2_stu/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_free2_stu', '/af/ad_free2_stu/lists/sn/3267')">대상자관리</a></li>
+            <li class="subitem" id="sub_ad_free2_app"><a href="/af/ad_free2_app/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_free2_app', '/af/ad_free2_app/lists/sn/3267')">수강자관리</a></li>
+            <li class="subitem" id="sub_ad_free2_cfg_main"><a href="/af/ad_free2_cfg/main/sn/3267" onclick="switchSubmodelView(event, 'ad_free2_cfg_main', '/af/ad_free2_cfg/main/sn/3267')">지원금설정</a></li>
+            <li class="subitem" id="sub_ad_free2_cfg_free1"><a href="/af/ad_free2_cfg/free1/sn/3267" onclick="switchSubmodelView(event, 'ad_free2_cfg_free1', '/af/ad_free2_cfg/free1/sn/3267')">순위구분설정</a></li>
+          </ul>
+        </li>
+
+        <li class="subitem" id="sub_ad_abs_lists">
+          <a href="/af/ad_abs/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_abs_lists', '/af/ad_abs/lists/sn/3267')">
+            <span class="menu-label"><i class="fa-solid fa-calendar-xmark"></i> 결석/귀가신청</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_ad_tea_lists">
+          <a href="/af/ad_tea/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_tea_lists', '/af/ad_tea/lists/sn/3267')">
+            <span class="menu-label"><i class="fa-solid fa-briefcase"></i> 강사관리</span>
+          </a>
+        </li>
+
+        <!-- 설문관리 ∨ -->
+        <li class="has-submenu" id="menu_ad_survey">
+          <a onclick="toggleSubmenu(this)">
+            <span class="menu-label"><i class="fa-solid fa-chart-pie"></i> 설문관리</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          </a>
+          <ul class="submenu-list">
+            <li class="subitem" id="sub_ad_sur_lists"><a href="/af/ad_sur/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_sur_lists', '/af/ad_sur/lists/sn/3267')">설문</a></li>
+            <li class="subitem" id="sub_ad_surs_lists"><a href="/af/ad_surs/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_surs_lists', '/af/ad_surs/lists/sn/3267')">샘플설문</a></li>
+          </ul>
+        </li>
+
+        <!-- 환경설정 ∨ -->
+        <li class="has-submenu" id="menu_ad_config">
+          <a onclick="toggleSubmenu(this)">
+            <span class="menu-label"><i class="fa-solid fa-gear"></i> 환경설정</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          </a>
+          <ul class="submenu-list">
+            <li class="subitem" id="sub_ad_cfg_main"><a href="/af/ad_cfg/main/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_main', '/af/ad_cfg/main/sn/3267')">기본설정</a></li>
+            <li class="subitem" id="sub_ad_time_lists"><a href="/af/ad_time/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_time_lists', '/af/ad_time/lists/sn/3267')">신청기간</a></li>
+            <li class="subitem" id="sub_ad_cfg_period"><a href="/af/ad_cfg/period/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_period', '/af/ad_cfg/period/sn/3267')">강의시간</a></li>
+            <li class="subitem" id="sub_ad_cfg_afDiv"><a href="/af/ad_cfg/afDiv/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_afDiv', '/af/ad_cfg/afDiv/sn/3267')">강좌구분</a></li>
+            <li class="subitem" id="sub_ad_cfg_appLiGrp"><a href="/af/ad_cfg/appLiGrp/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_appLiGrp', '/af/ad_cfg/appLiGrp/sn/3267')">중복제한그룹</a></li>
+            <li class="subitem" id="sub_ad_verify_main"><a href="/af/ad_verify/main/sn/3267" onclick="switchSubmodelView(event, 'ad_verify_main', '/af/ad_verify/main/sn/3267')">학적검증</a></li>
+            <li class="subitem" id="sub_ad_neis_edufine_lists"><a href="/af/ad_neis_edufine/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_neis_edufine_lists', '/af/ad_neis_edufine/lists/sn/3267')">나이스/에듀파인 설정</a></li>
+            <li class="subitem" id="sub_ad_cfg_message"><a href="/af/ad_cfg/message/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_message', '/af/ad_cfg/message/sn/3267')">안내글설정</a></li>
+            <li class="subitem" id="sub_ad_cfg_clear"><a href="/af/ad_cfg/clear/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_clear', '/af/ad_cfg/clear/sn/3267')">초기화</a></li>
+            <li class="subitem" id="sub_ad_info_modify"><a href="/af/ad_info/modify/sn/3267" onclick="switchSubmodelView(event, 'ad_info_modify', '/af/ad_info/modify/sn/3267')">담당자정보</a></li>
+          </ul>
+        </li>
+
+        <li class="subitem" id="sub_notification_lists">
+          <a href="/af/notification/lists/sn/3267" onclick="switchSubmodelView(event, 'notification_lists', '/af/notification/lists/sn/3267')">
+            <span class="menu-label"><i class="fa-solid fa-volume-high"></i> 알림관리</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_spush_lists">
+          <a href="/af/spush/lists/sn/3267" onclick="switchSubmodelView(event, 'spush_lists', '/af/spush/lists/sn/3267')">
+            <span class="menu-label"><i class="fa-solid fa-bell"></i> 푸시알림관리</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_ad_extension_lists">
+          <a href="/af/ad_extension/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_extension_lists', '/af/ad_extension/lists/sn/3267')">
+            <span class="menu-label"><i class="fa-solid fa-calendar-check"></i> 연장신청 <span class="badge-days">198일 남음</span></span>
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- 3. MAIN CONTENT PANELS -->
+    <main class="main-content">
+      <!-- Top Page Title Area -->
+      <div class="page-title-box">
+        <h1 id="viewMainTitle"><i class="fa-solid fa-file-lines"></i> 강좌관리</h1>
+        <div class="subtitle">광주풍향초등학교 늘봄학교</div>
+      </div>
+
+      <!-- ==================== 1. 강좌관리 (/af/ad_lec/lists) ==================== -->
+      <div class="submodel-panel active" id="panel_ad_lec_lists">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">목록</div>
+            <div class="helper-badges">
+              <a href="/af/ad_faq/main/sn/3267" class="helper-btn" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')"><i class="fa-solid fa-file-lines"></i> 매뉴얼</a>
+              <button class="helper-btn" onclick="openAddModal()"><i class="fa-solid fa-play"></i> 강좌등록</button>
+              <button class="helper-btn" onclick="alert('월마감 & 다음달 준비절차 가이드가 열립니다.')"><i class="fa-solid fa-download"></i> 월마감 & 다음달 준비절차</button>
+            </div>
+          </div>
+
+          <div class="alert-box">
+            <i class="fa-solid fa-circle-info"></i>
+            <div>
+              <strong>수강신청 시작시간은 학교수 제한이 있으므로 <a href="/af/ad_time/lists/sn/3267" style="color:#2563eb; text-decoration:underline;" onclick="switchSubmodelView(event, 'ad_time_lists', '/af/ad_time/lists/sn/3267')">수강신청 기간을 미리 설정</a>하세요.</strong><br>
+              자주 하는 질문이 "매뉴얼"에 정리되어 있으니 이곳을 참고하시고 기타 문의사항은 "<a href="/af/qanda/lists/sn/3267" style="color:#2563eb; text-decoration:underline;" onclick="switchSubmodelView(event, 'qanda_lists', '/af/qanda/lists/sn/3267')">고객지원 게시판</a>"에 접수 바랍니다.
+            </div>
+          </div>
+
+          <!-- Filter Container -->
+          <div class="filter-container">
+            <select id="categoryFilter" onchange="loadLectures()">
+              <option value="26년 8월" selected>26년 8월</option>
+              <option value="26년 9월">26년 9월</option>
+              <option value="2026년 1분기">2026년 1분기</option>
+              <option value="전체">전체 구분</option>
+            </select>
+            <select id="neulbomFilter">
+              <option value="=늘봄과정=">=늘봄과정=</option>
+              <option value="방과후">방과후</option>
+              <option value="맞춤형">맞춤형</option>
+              <option value="돌봄">돌봄</option>
+            </select>
+            <select id="statusFilter" onchange="loadLectures()">
+              <option value="전체">=상태전체=</option>
+              <option value="OUTPUT">출력</option>
+              <option value="CLOSED">종료</option>
+              <option value="WAITING">대기</option>
+            </select>
+            <select id="gradeFilter">
+              <option value="=학년=">=학년=</option>
+              <option value="1">1학년</option>
+              <option value="2">2학년</option>
+              <option value="3">3학년</option>
+            </select>
+            <select id="searchTypeFilter">
+              <option value="강좌명">강좌명</option>
+              <option value="강사명">강사명</option>
+            </select>
+            <input type="text" id="searchKeyword" placeholder="검색어" onkeyup="if(event.key==='Enter') loadLectures()">
+            <button class="btn-db btn-db-gray" onclick="loadLectures()">검색</button>
+            <button class="btn-db btn-db-gray" onclick="document.getElementById('searchKeyword').value=''; loadLectures();">전체</button>
+            <button class="btn-db btn-db-green" onclick="exportToExcel()"><i class="fa-solid fa-file-excel"></i> 검색결과엑셀출력</button>
+          </div>
+
+          <!-- Action Buttons Bar -->
+          <div class="btn-action-group">
+            <div>
+              <button class="btn-db btn-db-green" onclick="alert('출석부 인쇄 미리보기가 열립니다.')"><i class="fa-solid fa-print"></i> 출석부 출력</button>
+            </div>
+            <div style="display:flex; gap:5px; flex-wrap:wrap;">
+              <button class="btn-db btn-db-blue" onclick="openAddModal()"><i class="fa-solid fa-plus"></i> 강좌 등록</button>
+              <button class="btn-db btn-db-orange" onclick="openBatchUploadModal()"><i class="fa-solid fa-file-import"></i> 강좌 일괄입력</button>
+              <button class="btn-db btn-db-cyan" onclick="batchToggleTeacherLock(true)"><i class="fa-solid fa-pen-to-square"></i> 강좌 일괄수정</button>
+              <button class="btn-db btn-db-cyan" onclick="openBatchCopyModal()"><i class="fa-solid fa-clone"></i> 강좌 일괄복사</button>
+              <button class="btn-db btn-db-gray" onclick="switchSubmodelView(event, 'ad_lec_stats', '/af/ad_lec/stats/sn/3267')"><i class="fa-solid fa-chart-simple"></i> 강좌 통계</button>
+            </div>
+          </div>
+
+          <!-- Table Container -->
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th style="width:30px;"><input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)"></th>
+                  <th>연번</th>
+                  <th>수정</th>
+                  <th>구분(늘봄과정)</th>
+                  <th>강좌명↑</th>
+                  <th>강사ID</th>
+                  <th>신청/정원</th>
+                  <th>대기자/정원</th>
+                  <th>학년</th>
+                  <th>운영기간</th>
+                  <th>강의시간</th>
+                  <th>수강료</th>
+                  <th>수강료출력</th>
+                  <th>강사마감</th>
+                  <th>강사편집</th>
+                  <th>환불마감</th>
+                  <th>상태</th>
+                  <th>삭제</th>
+                </tr>
+              </thead>
+              <tbody id="lectureTbody">
+                <tr><td colspan="18" class="center" style="padding:40px;">데이터를 불러오는 중입니다...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="bottom-notice-box">
+            <ul>
+              <li>수강신청 전 각 강좌의 상태를 "출력"으로 설정해야 학생 화면에 노출됩니다.</li>
+              <li>강좌 복사 시 수강료 및 시간표가 다음 분기로 자동 이관됩니다.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 2. 신청자관리 (/af/ad_app/lists) ==================== -->
+      <div class="submodel-panel" id="panel_ad_app_lists" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">신청목록</div>
+            <div class="helper-badges">
+              <a href="/af/ad_faq/main/sn/3267" class="helper-btn" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')"><i class="fa-solid fa-file-lines"></i> 매뉴얼</a>
+              <button class="helper-btn" onclick="alert('신청자 등록 팝업')"><i class="fa-solid fa-download"></i> 신청자 등록</button>
+              <button class="helper-btn" onclick="alert('수강신청 테스트 모드로 진입합니다.')"><i class="fa-solid fa-play"></i> 수강신청 테스트</button>
+              <button class="helper-btn" onclick="alert('스쿨뱅킹 CSV가 다운로드됩니다.')"><i class="fa-solid fa-play"></i> 스쿨뱅킹 파일 다운로드</button>
+            </div>
+          </div>
+
+          <div class="filter-container">
+            <select id="appCategoryFilter" onchange="loadApplicants()"><option>26년 8월</option><option>전체</option></select>
+            <select id="appNeulbomFilter"><option>=늘봄과정=</option><option>돌봄</option><option>방과후</option></select>
+            <select id="appCourseSelect"><option>=강좌전체=</option></select>
+            <select id="appGradeFilter"><option>=학년=</option><option>1</option><option>2</option><option>3</option></select>
+            <select id="appClassFilter"><option>=반=</option><option>1</option><option>2</option><option>3</option></select>
+            <select><option>이름</option></select>
+            <input type="text" id="appSearchInput" placeholder="검색어" onkeyup="if(event.key==='Enter') loadApplicants()">
+            <button class="btn-db btn-db-gray" onclick="loadApplicants()">검색</button>
+            <button class="btn-db btn-db-gray" onclick="loadApplicants()">전체</button>
+            <button class="btn-db btn-db-green" onclick="exportToExcel()"><i class="fa-solid fa-file-excel"></i> 검색결과출력</button>
+          </div>
+
+          <div class="btn-action-group">
+            <div>
+              <button class="btn-db btn-db-outline" onclick="switchSubmodelView(event, 'ad_wait_lists', '/af/ad_wait/lists/sn/3267')"><i class="fa-solid fa-clock-rotate-left"></i> 대기자목록</button>
+            </div>
+            <div style="display:flex; gap:5px; flex-wrap:wrap;">
+              <button class="btn-db btn-db-blue" onclick="alert('신청자 등록')">신청자동록</button>
+              <button class="btn-db btn-db-orange" onclick="alert('신청자 일괄입력')">신청자일괄입력</button>
+              <button class="btn-db btn-db-orange" onclick="alert('수강료 일괄입력')">수강료입력</button>
+              <button class="btn-db btn-db-cyan" onclick="alert('신청자 복사')">신청자복사</button>
+              <button class="btn-db btn-db-gray" onclick="alert('추가/취소자 조회')">추가/취소자조회</button>
+              <button class="btn-db btn-db-gray" onclick="alert('미신청자 목록')">미신청자목록</button>
+              <button class="btn-db btn-db-green" onclick="exportToExcel()">신청결과엑셀출력</button>
+              <button class="btn-db btn-db-green" onclick="alert('수강신청서 출력')">수강신청서출력</button>
+              <button class="btn-db btn-db-green" onclick="alert('고지서 출력')">고지서출력</button>
+              <button class="btn-db btn-db-green" onclick="alert('시간표 출력')">시간표출력</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th style="width:30px;"><input type="checkbox" id="selectAllApps" onchange="toggleSelectAllApps(this)"></th>
+                  <th>연번</th>
+                  <th>구분(늘봄과정)</th>
+                  <th>강좌명</th>
+                  <th>학년</th>
+                  <th>반</th>
+                  <th>번호↑</th>
+                  <th>이름</th>
+                  <th>연락처</th>
+                  <th>수강료</th>
+                  <th>수용비</th>
+                  <th>강사료</th>
+                  <th>교재비</th>
+                  <th>재료비</th>
+                  <th>합계</th>
+                  <th>등록일자</th>
+                  <th>삭제</th>
+                </tr>
+              </thead>
+              <tbody id="studentTbody">
+                <tr><td colspan="17" class="center" style="padding:40px;">수강생 데이터를 불러오는 중입니다...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 3. 대기자관리 (/af/ad_wait/lists) ==================== -->
+      <div class="submodel-panel" id="panel_ad_wait_lists" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">대기자 목록</div>
+            <div class="helper-badges">
+              <a href="/af/ad_faq/main/sn/3267" class="helper-btn" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')"><i class="fa-solid fa-file-lines"></i> 매뉴얼</a>
+              <button class="helper-btn" onclick="alert('대기자 관리')"><i class="fa-solid fa-play"></i> 대기자 관리</button>
+            </div>
+          </div>
+
+          <div class="filter-container">
+            <select><option>26년 8월</option></select>
+            <select><option>=늘봄과정=</option></select>
+            <select><option>=강좌전체=</option></select>
+            <select><option>=학년=</option></select>
+            <select><option>=반=</option></select>
+            <select><option>이름</option></select>
+            <input type="text" placeholder="검색어">
+            <button class="btn-db btn-db-gray" onclick="loadWaitlist()">검색</button>
+            <button class="btn-db btn-db-gray" onclick="loadWaitlist()">전체</button>
+          </div>
+
+          <div class="btn-action-group">
+            <div>
+              <button class="btn-db btn-db-outline" onclick="switchSubmodelView(event, 'ad_app_lists', '/af/ad_app/lists/sn/3267')">신청자목록</button>
+            </div>
+            <div style="display:flex; gap:5px;">
+              <button class="btn-db btn-db-blue" onclick="alert('대기자 등록')">대기자동록</button>
+              <button class="btn-db btn-db-orange" onclick="alert('대기자 일괄입력')">대기자일괄입력</button>
+              <button class="btn-db btn-db-cyan" onclick="alert('대기자 복사')">대기자복사</button>
+              <button class="btn-db btn-db-green" onclick="exportToExcel()">신청결과엑셀출력</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th style="width:30px;"><input type="checkbox"></th>
+                  <th>순위</th>
+                  <th>신청</th>
+                  <th>구분(늘봄과정)</th>
+                  <th>강좌명</th>
+                  <th>학년</th>
+                  <th>반</th>
+                  <th>번호</th>
+                  <th>이름</th>
+                  <th>연락처</th>
+                  <th>등록일자</th>
+                  <th>삭제</th>
+                </tr>
+              </thead>
+              <tbody id="waitlistTbody">
+                <tr><td colspan="12" class="center" style="padding:40px;">대기자 목록을 불러오는 중입니다...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 4. 출석부관리 (/af/ad_att/stat) ==================== -->
+      <div class="submodel-panel" id="panel_ad_att_stat" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">일일현황</div>
+            <div class="helper-badges">
+              <a href="/af/ad_faq/main/sn/3267" class="helper-btn" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')"><i class="fa-solid fa-file-lines"></i> 매뉴얼</a>
+              <button class="helper-btn" onclick="alert('출석부 관리')"><i class="fa-solid fa-download"></i> 출석부 관리</button>
+            </div>
+          </div>
+
+          <div class="filter-container">
+            <select><option>26년 8월</option></select>
+            <select><option>=늘봄과정=</option></select>
+            <input type="text" placeholder="강좌명">
+            <button class="btn-db btn-db-gray" onclick="loadAttendance()">검색</button>
+            <button class="btn-db btn-db-gray" onclick="loadAttendance()">전체</button>
+          </div>
+
+          <div class="btn-action-group">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span>⏱ <strong>기준일자</strong></span>
+              <input type="date" value="2026-08-14" style="height:30px; padding:2px 8px; border:1px solid #cbd5e1; border-radius:3px;">
+              <label style="font-size:0.85rem; color:#475569;"><input type="checkbox"> 강의시간(요일)이 일치하는 강좌만 보기</label>
+            </div>
+            <div style="display:flex; gap:5px;">
+              <button class="btn-db btn-db-blue" onclick="loadAttendance()">강좌별현황</button>
+              <button class="btn-db btn-db-green" onclick="batchStampAttendance()">출석부출력</button>
+              <button class="btn-db btn-db-green" onclick="alert('교육일지 출력')">교육일지출력</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th style="width:30px;"><input type="checkbox"></th>
+                  <th>연번</th>
+                  <th>구분(늘봄과정)</th>
+                  <th>강좌명</th>
+                  <th>운영기간</th>
+                  <th>강의시간</th>
+                  <th>출석</th>
+                  <th>지각</th>
+                  <th>조퇴</th>
+                  <th>결석</th>
+                  <th>출결합계</th>
+                  <th>신청인원</th>
+                  <th>입실시간</th>
+                  <th>퇴실시간</th>
+                  <th>관리사항 및 학생안전</th>
+                  <th>출결마감</th>
+                </tr>
+              </thead>
+              <tbody id="attendanceTbody">
+                <tr><td colspan="16" class="center" style="padding:40px;">출석부 통계를 불러오는 중입니다...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 5. 환불/취소관리 (/af/ad_ref/lists) ==================== -->
+      <div class="submodel-panel" id="panel_ad_ref_lists" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">신청목록</div>
+            <div class="helper-badges">
+              <a href="/af/ad_faq/main/sn/3267" class="helper-btn" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')"><i class="fa-solid fa-file-lines"></i> 매뉴얼</a>
+              <button class="helper-btn" onclick="openRefundCalculator()"><i class="fa-solid fa-play"></i> 환불/취소관리</button>
+            </div>
+          </div>
+
+          <div class="filter-container">
+            <span style="font-weight:700;">강좌</span>
+            <select><option>26년 8월</option></select>
+            <select><option>=늘봄과정=</option></select>
+            <select><option>= 강좌전체 =</option></select>
+            <button class="btn-db btn-db-blue" onclick="openRefundCalculator()">환불/취소자등록</button>
+            <button class="btn-db btn-db-orange" onclick="alert('환불/취소 일괄등록')">환불/취소일괄등록</button>
+          </div>
+
+          <div class="filter-container" style="margin-top:-6px;">
+            <select><option>=학년=</option></select>
+            <select><option>=반=</option></select>
+            <input type="text" placeholder="이름">
+            <button class="btn-db btn-db-gray" onclick="loadRefunds()">검색</button>
+            <button class="btn-db btn-db-gray" onclick="loadRefunds()">전체</button>
+            <button class="btn-db btn-db-green" onclick="exportToExcel()"><i class="fa-solid fa-file-excel"></i> 검색결과출력</button>
+          </div>
+
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th>연번</th>
+                  <th>신청상태</th>
+                  <th>신청유형(지원금)</th>
+                  <th>구분(늘봄과정)</th>
+                  <th>강좌명</th>
+                  <th>학년</th>
+                  <th>반</th>
+                  <th>번호</th>
+                  <th>이름</th>
+                  <th>연락처</th>
+                  <th>최종수강일</th>
+                  <th>수강료(환불금액)</th>
+                  <th>수용비(환불금액)</th>
+                  <th>교재비(환불금액)</th>
+                  <th>재료비(환불금액)</th>
+                  <th>징수 전 취소</th>
+                  <th>적용일자</th>
+                  <th>비고</th>
+                  <th>등록일자</th>
+                  <th>삭제</th>
+                </tr>
+              </thead>
+              <tbody id="refundTbody">
+                <tr><td colspan="20" class="center" style="padding:40px;">환불 목록을 불러오는 중입니다...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="bottom-notice-box">
+            <ul>
+              <li>신청상태가 '접수'인 경우에만 취소할 수 있습니다.</li>
+              <li>신청상태('강사확인'): 강사가 환불/취소 관련 내용을 확인 후 관리자에 제출한 상태입니다.</li>
+              <li>신청상태('처리완료'): 관리자가 환불/취소 관련 처리를 완료한 후 행정실에 제출 한 상태입니다.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 6. 결석/귀가신청 (/af/ad_abs/lists) ==================== -->
+      <div class="submodel-panel" id="panel_ad_abs_lists" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">목록</div>
+          </div>
+
+          <div class="filter-container">
+            <label style="margin-right:10px;"><input type="radio" name="absDate" checked> 일자전체</label>
+            <label style="margin-right:15px;"><input type="radio" name="absDate"> 일자검색</label>
+            <input type="date" style="height:30px;"> ~ <input type="date" style="height:30px;">
+          </div>
+
+          <div class="filter-container" style="margin-top:-6px;">
+            <select><option>=신청유형=</option><option>결석</option><option>귀가</option></select>
+            <select><option>=학년=</option></select>
+            <select><option>=반=</option></select>
+            <input type="text" placeholder="이름">
+            <button class="btn-db btn-db-gray" onclick="loadAbsences()">검색</button>
+            <button class="btn-db btn-db-gray" onclick="loadAbsences()">전체</button>
+            <button class="btn-db btn-db-green" onclick="exportToExcel()">검색결과출력</button>
+            <button class="btn-db btn-db-blue" onclick="openSafetyModal()"><i class="fa-solid fa-plus"></i> 등록</button>
+          </div>
+
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th>연번</th>
+                  <th>수정</th>
+                  <th>학년</th>
+                  <th>반</th>
+                  <th>번호</th>
+                  <th>이름</th>
+                  <th>신청유형</th>
+                  <th>일자(시간)</th>
+                  <th>사유</th>
+                  <th>귀가 동행자</th>
+                  <th>연락처</th>
+                  <th>등록일자</th>
+                  <th>삭제</th>
+                </tr>
+              </thead>
+              <tbody id="absenceTbody">
+                <tr><td colspan="13" class="center" style="padding:40px;">결석/귀가 신청 데이터를 불러오는 중입니다...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="bottom-notice-box">
+            <ul>
+              <li>최근 1년 데이터를 확인하실 수 있습니다.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 7. 강사관리 (/af/ad_tea/lists) ==================== -->
+      <div class="submodel-panel" id="panel_ad_tea_lists" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">목록</div>
+            <div class="helper-badges">
+              <a href="/af/ad_faq/main/sn/3267" class="helper-btn" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')"><i class="fa-solid fa-file-lines"></i> 매뉴얼</a>
+              <button class="helper-btn" onclick="alert('강사 등록')"><i class="fa-solid fa-play"></i> 강사 등록</button>
+            </div>
+          </div>
+
+          <div class="filter-container">
+            <select><option>이름</option></select>
+            <input type="text" placeholder="검색어입력">
+            <button class="btn-db btn-db-gray" onclick="loadTeachers()">검색</button>
+            <button class="btn-db btn-db-gray" onclick="loadTeachers()">전체</button>
+          </div>
+
+          <div class="btn-action-group">
+            <div></div>
+            <div style="display:flex; gap:5px;">
+              <button class="btn-db btn-db-blue" onclick="alert('강사 등록')">강사 등록</button>
+              <button class="btn-db btn-db-orange" onclick="alert('강사 일괄입력')">강사 일괄입력</button>
+              <button class="btn-db btn-db-green" onclick="exportToExcel()">검색결과엑셀출력</button>
+              <button class="btn-db btn-db-green" onclick="alert('시간표 출력')">시간표출력</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th style="width:30px;"><input type="checkbox"></th>
+                  <th>연번</th>
+                  <th>수정</th>
+                  <th>아이디</th>
+                  <th>이름</th>
+                  <th>휴대폰</th>
+                  <th>마지막 로그인</th>
+                  <th>임시비번</th>
+                  <th>본인인증</th>
+                  <th>2단계인증</th>
+                  <th>약관동의</th>
+                  <th>상태</th>
+                  <th>삭제</th>
+                </tr>
+              </thead>
+              <tbody id="teacherTbody">
+                <tr><td colspan="13" class="center" style="padding:40px;">강사 목록을 불러오는 중입니다...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 8. 알림관리 (/af/notification/lists) ==================== -->
+      <div class="submodel-panel" id="panel_notification_lists" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">알림목록</div>
+            <div class="helper-badges">
+              <a href="/af/ad_faq/main/sn/3267" class="helper-btn" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')"><i class="fa-solid fa-file-lines"></i> 매뉴얼</a>
+              <button class="helper-btn" onclick="alert('알림 관리')"><i class="fa-solid fa-download"></i> 알림 관리</button>
+            </div>
+          </div>
+
+          <div class="filter-container">
+            <select><option>=알림구분=</option></select>
+            <select><option>=대상구분=</option></select>
+            <select><option>제목</option></select>
+            <input type="text" placeholder="검색어">
+            <button class="btn-db btn-db-gray" onclick="loadNotifications()">검색</button>
+            <button class="btn-db btn-db-gray" onclick="loadNotifications()">전체</button>
+          </div>
+
+          <div class="btn-action-group">
+            <div></div>
+            <button class="btn-db btn-db-blue" onclick="alert('신규 알림 등록')">등록</button>
+          </div>
+
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th>연번</th>
+                  <th>알림구분</th>
+                  <th>대상구분</th>
+                  <th>제목</th>
+                  <th>등록일자</th>
+                </tr>
+              </thead>
+              <tbody id="notificationTbody">
+                <tr><td colspan="5" class="center" style="padding:40px;">알림 이력을 불러오는 중입니다...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 9. 푸시알림관리 (/af/spush/lists) ==================== -->
+      <div class="submodel-panel" id="panel_spush_lists" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">목록</div>
+            <div class="helper-badges">
+              <a href="/af/ad_faq/main/sn/3267" class="helper-btn" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')"><i class="fa-solid fa-file-lines"></i> 매뉴얼</a>
+              <button class="helper-btn" onclick="alert('푸시 알림 관리')"><i class="fa-solid fa-download"></i> 푸시 알림 관리</button>
+            </div>
+          </div>
+
+          <div class="filter-container">
+            <input type="text" id="pushTitleInput" placeholder="제목" style="width:250px;">
+            <button class="btn-db btn-db-gray" onclick="loadPushNotifications()">검색하기</button>
+            <button class="btn-db btn-db-gray" onclick="loadPushNotifications()">전체보기</button>
+          </div>
+
+          <div class="btn-action-group">
+            <div></div>
+            <div style="display:flex; gap:5px;">
+              <button class="btn-db btn-db-blue" onclick="submitPushNotification(event)"><i class="fa-solid fa-paper-plane"></i> 알림전송</button>
+              <button class="btn-db btn-db-green" onclick="alert('앱 설치현황 보고서가 출력됩니다.')">설치현황출력</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th>연번</th>
+                  <th>대상</th>
+                  <th>제목</th>
+                  <th>전송 및 결과보기</th>
+                  <th>전송ID</th>
+                  <th>전송일자</th>
+                  <th>등록일자</th>
+                  <th>삭제</th>
+                </tr>
+              </thead>
+              <tbody id="pushTbody">
+                <tr><td colspan="8" class="center" style="padding:40px;">푸시 발송 이력을 불러오는 중입니다...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="bottom-notice-box">
+            <ul>
+              <li>전송 상세 내역은 '전송 및 결과보기' 링크 클릭 후 확인 바랍니다.</li>
+              <li>삭제하는 경우 사용자 앱에서도 내역 확인이 불가능합니다.</li>
+              <li>등록(전송)된 지 1년 이상 된 알림은 예고 없이 삭제될 수 있습니다.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 10. 연장신청 (/af/ad_extension/lists) ==================== -->
+      <div class="submodel-panel" id="panel_ad_extension_lists" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">신청목록</div>
+          </div>
+
+          <div class="bottom-notice-box" style="margin-top:0; margin-bottom:14px; border-left:4px solid #3b82f6;">
+            <ol style="padding-left:18px; margin:0;">
+              <li>"연장신청" 버튼을 클릭합니다.</li>
+              <li>이용 금액 옆에 있는 "견적서 다운로드" 버튼을 클릭해서 견적서를 다운로드 합니다.</li>
+              <li>품의 여부에 "품의 예정"으로 체크하고 "신청" 버튼을 클릭하면 연장신청 접수가 됩니다.</li>
+              <li>다운받은 "견적서"를 기초로 "학내 품의"하고 품의가 완료되면 "품의 완료" 버튼을 클릭해주세요.</li>
+            </ol>
+          </div>
+
+          <div class="btn-action-group">
+            <label style="font-size:0.85rem; color:#2563eb;"><input type="checkbox" checked> 품의가 완료된 경우 '품의완료' 버튼을 꼭 클릭해 주세요.</label>
+            <button class="btn-db btn-db-green" onclick="alert('서비스 연장신청 접수가 완료되었습니다.')"><i class="fa-solid fa-calendar-plus"></i> 연장신청</button>
+          </div>
+
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th>시작일자</th>
+                  <th>종료일자</th>
+                  <th>기간</th>
+                  <th>이용금액</th>
+                  <th>전달 내용</th>
+                  <th>신청일자</th>
+                  <th>견적서</th>
+                  <th>품의여부</th>
+                  <th>상태</th>
+                </tr>
+              </thead>
+              <tbody id="extensionTbody">
+                <tr><td colspan="9" class="center" style="padding:30px;">연장 계약 목록을 불러오는 중입니다...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 11. 학교관리 (/sczigi/service/lists) ==================== -->
+      <div class="submodel-panel" id="panel_sczigi_service_lists" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">학교관리</div>
+          </div>
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th>학교 고유코드</th>
+                  <th>학교명</th>
+                  <th>이용 플랜</th>
+                  <th>서비스 상태</th>
+                  <th>만료 예정일</th>
+                </tr>
+              </thead>
+              <tbody id="schoolTbody">
+                <tr><td colspan="5" class="center" style="padding:30px;">학교 정보를 불러오는 중입니다...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 12. 지원금관리 > 대상자관리 (/af/ad_free2_stu) ==================== -->
+      <div class="submodel-panel" id="panel_ad_free2_stu" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">목록</div>
+            <div class="helper-badges">
+              <a href="/af/ad_faq/main/sn/3267" class="helper-btn" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')"><i class="fa-solid fa-file-lines"></i> 매뉴얼</a>
+              <button class="helper-btn" onclick="alert('지원금 관리')"><i class="fa-solid fa-download"></i> 지원금 관리</button>
+            </div>
+          </div>
+
+          <div class="filter-container">
+            <select><option>=지원금전체=</option></select>
+            <select><option>=순위전체=</option></select>
+            <select><option>=순위구분전체=</option></select>
+            <select><option>=학년=</option></select>
+            <select><option>=반=</option></select>
+            <input type="text" placeholder="이름">
+            <button class="btn-db btn-db-gray" onclick="loadSubsidyStudents()">검색</button>
+            <button class="btn-db btn-db-gray" onclick="loadSubsidyStudents()">전체</button>
+          </div>
+
+          <div class="btn-action-group">
+            <div></div>
+            <div style="display:flex; gap:5px;">
+              <button class="btn-db btn-db-blue" onclick="alert('대상자 등록')">대상자등록</button>
+              <button class="btn-db btn-db-orange" onclick="alert('대상자 일괄입력')">대상자일괄입력</button>
+              <button class="btn-db btn-db-green" onclick="exportToExcel()">검색결과출력</button>
+              <button class="btn-db btn-db-green" onclick="alert('전교생기준대상자출력')">전교생기준대상자출력</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th rowspan="2" style="width:30px;"><input type="checkbox"></th>
+                  <th rowspan="2">연번</th>
+                  <th rowspan="2">수정</th>
+                  <th rowspan="2">학년</th>
+                  <th rowspan="2">반</th>
+                  <th rowspan="2">번호↑</th>
+                  <th rowspan="2">이름</th>
+                  <th colspan="4" style="background:#e0f2fe; color:#0369a1;">1학년 지원금</th>
+                  <th colspan="4" style="background:#fef3c7; color:#92400e;">3학년 지원금</th>
+                  <th rowspan="2">순위</th>
+                  <th rowspan="2">순위구분</th>
+                  <th rowspan="2">선지정대상자</th>
+                  <th colspan="3" style="background:#dcfce7; color:#166534;">자유수강권</th>
+                </tr>
+                <tr>
+                  <th>총액</th><th>사용액</th><th>잔액</th><th>지원기간</th>
+                  <th>총액</th><th>사용액</th><th>잔액</th><th>지원기간</th>
+                  <th>총액</th><th>사용액</th><th>잔액</th>
+                </tr>
+              </thead>
+              <tbody id="subsidyStuTbody">
+                <tr><td colspan="19" class="center" style="padding:40px;">지원금 대상자를 불러오는 중입니다...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 13. 지원금관리 > 수강자관리 (/af/ad_free2_app) ==================== -->
+      <div class="submodel-panel" id="panel_ad_free2_app" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">수강자 지원금 차감 내역</div>
+          </div>
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th>학생명</th>
+                  <th>신청 강좌명</th>
+                  <th>수강료</th>
+                  <th>지원금 차감액</th>
+                  <th>본인부담금</th>
+                  <th>차감 일자</th>
+                  <th>지원 구분</th>
+                </tr>
+              </thead>
+              <tbody id="subsidyAppTbody">
+                <tr><td colspan="7" class="center" style="padding:40px;">지원금 차감 내역을 불러오는 중입니다...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 14. 지원금관리 > 지원금설정 (/af/ad_free2_cfg/main) ==================== -->
+      <div class="submodel-panel" id="panel_ad_free2_cfg_main" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">지원금설정</div>
+            <button class="btn-db btn-db-blue" onclick="alert('지원금 차감 순서 변경 팝업')">지원금 차감 순서 변경</button>
+          </div>
+
+          <table class="db-table" style="margin-top:10px;">
+            <tbody>
+              <tr style="background:#fef9c3;">
+                <td style="width:200px; font-weight:700;">지원금명(2) ☑</td>
+                <td><input type="text" value="1학년 지원금" style="height:30px; width:250px; padding:2px 8px;"></td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;">사용여부 ☑</td>
+                <td><label><input type="radio" name="subUse" checked> 사용</label> <label style="margin-left:12px;"><input type="radio" name="subUse"> 사용안함</label></td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;">지원방식 ☑</td>
+                <td><label><input type="radio" name="subMode" checked> 잔여 금액에서 차감</label> <label style="margin-left:12px;"><input type="radio" name="subMode"> 강좌별 고정 금액 차감</label></td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;">지원기간(월)</td>
+                <td>
+                  <label><input type="checkbox" checked> 3월</label> <label><input type="checkbox" checked> 4월</label> <label><input type="checkbox" checked> 5월</label>
+                  <label><input type="checkbox" checked> 6월</label> <label><input type="checkbox" checked> 7월</label> <label><input type="checkbox" checked> 8월</label>
+                  <label><input type="checkbox" checked> 9월</label> <label><input type="checkbox" checked> 10월</label> <label><input type="checkbox" checked> 11월</label>
+                  <label><input type="checkbox" checked> 12월</label> <label><input type="checkbox" checked> 1월</label> <label><input type="checkbox" checked> 2월</label>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;">지원항목 ☑</td>
+                <td><label><input type="checkbox" checked> 수강료</label> ( <label><input type="checkbox"> 수용비 지원 안함</label> ) <label style="margin-left:10px;"><input type="checkbox" checked> 교재비</label> <label style="margin-left:10px;"><input type="checkbox" checked> 재료비</label></td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;">월 최대 지원 금액</td>
+                <td><input type="number" value="720000" style="height:30px; width:150px; padding:2px 8px;"> 원 (강좌 합산) <span style="color:#64748b; font-size:0.8rem;">('0'원인 경우 제한 없이 지원됩니다)</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="margin-top:15px; text-align:center;">
+            <button class="btn-db btn-db-blue" style="padding:0 24px; height:34px;" onclick="alert('지원금 설정이 저장되었습니다.')"><i class="fa-solid fa-check"></i> 저장</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 15. 지원금관리 > 순위구분설정 (/af/ad_free2_cfg/free1) ==================== -->
+      <div class="submodel-panel" id="panel_ad_free2_cfg_free1" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">자유수강권 > 순위구분설정</div>
+          </div>
+
+          <div style="display:flex; gap:4px; margin-bottom:12px;">
+            <button class="btn-db btn-db-blue">1순위</button>
+            <button class="btn-db btn-db-outline" onclick="alert('2순위 탭')">2순위</button>
+            <button class="btn-db btn-db-outline" onclick="alert('3순위 탭')">3순위</button>
+            <button class="btn-db btn-db-outline" onclick="alert('4순위 탭')">4순위</button>
+            <button class="btn-db btn-db-outline" onclick="alert('기타 탭')">기타</button>
+          </div>
+
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th>연번</th>
+                  <th>사용</th>
+                  <th>코드명</th>
+                  <th>적용</th>
+                  <th>출력순서</th>
+                  <th>삭제</th>
+                </tr>
+              </thead>
+              <tbody id="subsidyRankTbody">
+                <tr><td colspan="6" class="center" style="padding:30px;">순위 구성을 불러오는 중입니다...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 16. 설문관리 > 설문 (/af/ad_sur/lists) ==================== -->
+      <div class="submodel-panel" id="panel_ad_sur_lists" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">목록</div>
+            <div class="helper-badges">
+              <a href="/af/ad_faq/main/sn/3267" class="helper-btn" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')"><i class="fa-solid fa-file-lines"></i> 매뉴얼</a>
+              <button class="helper-btn" onclick="alert('설문관리')"><i class="fa-solid fa-play"></i> 설문관리</button>
+              <button class="helper-btn" onclick="alert('설문조사 가정통신문 양식 다운로드')"><i class="fa-solid fa-download"></i> 설문조사 가정통신문</button>
+            </div>
+          </div>
+
+          <div class="btn-action-group">
+            <button class="btn-db btn-db-blue" onclick="alert('신규 설문지 등록 팝업')">등록</button>
+          </div>
+
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th style="width:30px;"><input type="checkbox"></th>
+                  <th>연번</th>
+                  <th>수정</th>
+                  <th>설문구분</th>
+                  <th>강좌구분</th>
+                  <th>늘봄과정</th>
+                  <th>제목</th>
+                  <th>참여구분</th>
+                  <th>대상학년</th>
+                  <th>문항</th>
+                  <th>참여자</th>
+                  <th>설문기간</th>
+                  <th>삭제</th>
+                </tr>
+              </thead>
+              <tbody id="surveyTbody">
+                <tr><td colspan="13" class="center" style="padding:40px;">설문 목록을 불러오는 중입니다...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="margin-top:12px; display:flex; gap:6px;">
+            <select style="height:30px;"><option>=== 일괄적용 ===</option></select>
+            <button class="btn-db btn-db-gray" onclick="alert('선택 설문 일괄 적용')">적용하기</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 17. 설문관리 > 샘플설문 (/af/ad_surs/lists) ==================== -->
+      <div class="submodel-panel" id="panel_ad_surs_lists" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">샘플 설문 템플릿</div>
+          </div>
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th>분류</th>
+                  <th>표준 설문 템플릿 명칭</th>
+                  <th>문항 수</th>
+                  <th>설문지 복제 사용</th>
+                </tr>
+              </thead>
+              <tbody id="sampleSurveyTbody">
+                <tr><td colspan="4" class="center" style="padding:30px;">샘플 설문 템플릿을 불러오는 중입니다...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 18. 환경설정 > 기본설정 (/af/ad_cfg/main) ==================== -->
+      <div class="submodel-panel" id="panel_ad_cfg_main" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">기본설정</div>
+            <div class="helper-badges">
+              <a href="/af/ad_faq/main/sn/3267" class="helper-btn" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')"><i class="fa-solid fa-file-lines"></i> 매뉴얼</a>
+              <button class="helper-btn" onclick="alert('기본설정 가이드')"><i class="fa-solid fa-play"></i> 기본설정</button>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:4px; margin-bottom:12px;">
+            <button class="btn-db btn-db-blue">기본설정</button>
+            <button class="btn-db btn-db-outline" onclick="alert('강사권한 탭')">강사권한</button>
+            <button class="btn-db btn-db-outline" onclick="alert('출석부옵션 탭')">출석부옵션</button>
+            <button class="btn-db btn-db-outline" onclick="alert('문자설정 탭')">문자설정</button>
+          </div>
+
+          <table class="db-table">
+            <tbody>
+              <tr>
+                <td style="width:200px; font-weight:700; color:#2563eb;">학교명</td>
+                <td>광주풍향초등학교</td>
+              </tr>
+              <tr>
+                <td style="font-weight:700; color:#2563eb;">서비스 이용 기간</td>
+                <td>2025-05-09 ~ 2027-02-28</td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;">서비스명 선택</td>
+                <td>
+                  <label><input type="radio" name="srvName"> 방과후학교</label>
+                  <label style="margin-left:10px;"><input type="radio" name="srvName" checked> 늘봄학교</label>
+                  <label style="margin-left:10px;"><input type="radio" name="srvName"> 초등돌봄교육</label>
+                  <label style="margin-left:10px;"><input type="radio" name="srvName"> 초등방과후돌봄</label>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;">서비스 관리자</td>
+                <td>
+                  <div style="display:flex; gap:8px; align-items:center;">
+                    <select size="3" style="width:120px;"><option>박진수</option></select>
+                    <div style="display:flex; flex-direction:column; gap:4px;">
+                      <button class="btn-db btn-db-gray" style="height:24px; padding:0 8px;" onclick="alert('관리자 추가')"><i class="fa-solid fa-plus"></i> 추가</button>
+                      <button class="btn-db btn-db-gray" style="height:24px; padding:0 8px;" onclick="alert('관리자 삭제')"><i class="fa-solid fa-trash"></i> 삭제</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;">강좌구분 기본 선택</td>
+                <td>
+                  <select><option>26년 8월</option></select>
+                  <select><option>= 늘봄과정(선택안함) =</option></select>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;">결석/조기귀가 신청</td>
+                <td>
+                  <label><input type="radio" name="absUse" checked> 사용</label> ( <label><input type="checkbox"> 조기귀가 신청은 불가능</label> )
+                  <label style="margin-left:12px;"><input type="radio" name="absUse"> 사용안함</label>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="margin-top:15px; text-align:center;">
+            <button class="btn-db btn-db-blue" style="padding:0 24px; height:34px;" onclick="alert('기본설정이 저장되었습니다.')"><i class="fa-solid fa-check"></i> 저장</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 19. 환경설정 > 신청기간 (/af/ad_time/lists) ==================== -->
+      <div class="submodel-panel" id="panel_ad_time_lists" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">신청기간 > 목록</div>
+            <div class="helper-badges">
+              <a href="/af/ad_faq/main/sn/3267" class="helper-btn" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')"><i class="fa-solid fa-file-lines"></i> 매뉴얼</a>
+              <button class="helper-btn" onclick="alert('신청기간 설정')"><i class="fa-solid fa-play"></i> 신청기간</button>
+            </div>
+          </div>
+
+          <div class="alert-box">
+            <i class="fa-solid fa-circle-info"></i>
+            <div><strong>수강신청 시작시간은 학교수 제한이 있으므로 <a href="/af/ad_time/lists/sn/3267" style="color:#2563eb;" onclick="switchSubmodelView(event, 'ad_time_lists', '/af/ad_time/lists/sn/3267')">가정통신문 발송 전에 반드시 수강신청 기간을 미리 설정</a>하세요.</strong></div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th>학년</th>
+                  <th>신청기간</th>
+                  <th>강좌구분 기본선택</th>
+                  <th>수정</th>
+                  <th>삭제</th>
+                </tr>
+              </thead>
+              <tbody id="applyPeriodTbody">
+                <tr><td colspan="5" class="center" style="padding:30px;">신청 기간을 불러오는 중입니다...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 20. 환경설정 > 강의시간 (/af/ad_cfg/period) ==================== -->
+      <div class="submodel-panel" id="panel_ad_cfg_period" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">강의시간 설정</div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th>연번</th>
+                  <th>사용</th>
+                  <th>코드명 (시작시간~종료시간)</th>
+                  <th>적용</th>
+                  <th>출력순서</th>
+                  <th>삭제</th>
+                </tr>
+              </thead>
+              <tbody id="periodTbody">
+                <tr><td colspan="6" class="center" style="padding:30px;">강의시간표를 불러오는 중입니다...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 21. 환경설정 > 강좌구분 (/af/ad_cfg/afDiv) ==================== -->
+      <div class="submodel-panel" id="panel_ad_cfg_afDiv" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">강좌구분 설정</div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th>연번</th>
+                  <th>사용</th>
+                  <th>코드명</th>
+                  <th>적용</th>
+                  <th>출력순서</th>
+                  <th>삭제</th>
+                </tr>
+              </thead>
+              <tbody id="afDivTbody">
+                <tr><td colspan="6" class="center" style="padding:30px;">강좌구분을 불러오는 중입니다...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="bottom-notice-box">
+            <ul>
+              <li>"사용"에 check 되어 있는 경우에만 강좌 등록 시 출력됩니다.</li>
+              <li>코드를 삭제하는 경우 기존에 등록된 강좌 데이터에도 영향을 끼칠 수 있으므로 되도록 "사용" 여부를 조정하여 사용하시기 바랍니다.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 22. 환경설정 > 중복제한그룹 (/af/ad_cfg/appLiGrp) ==================== -->
+      <div class="submodel-panel" id="panel_ad_cfg_appLiGrp" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">중복제한그룹 설정</div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th>연번</th>
+                  <th>사용</th>
+                  <th>코드명</th>
+                  <th>신청 가능 강좌 수</th>
+                  <th>적용</th>
+                  <th>출력순서</th>
+                  <th>삭제</th>
+                </tr>
+              </thead>
+              <tbody id="restrGroupTbody">
+                <tr><td colspan="7" class="center" style="padding:30px;">중복제한그룹을 불러오는 중입니다...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 23. 환경설정 > 학적검증 (/af/ad_verify/main) ==================== -->
+      <div class="submodel-panel" id="panel_ad_verify_main" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">학적검증</div>
+            <div class="helper-badges">
+              <a href="/af/ad_faq/main/sn/3267" class="helper-btn" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')"><i class="fa-solid fa-file-lines"></i> 매뉴얼</a>
+              <button class="helper-btn" onclick="alert('학적검증')"><i class="fa-solid fa-download"></i> 학적검증</button>
+            </div>
+          </div>
+
+          <table class="db-table">
+            <tbody>
+              <tr>
+                <td style="width:200px; font-weight:700;">강좌 신청자 데이터</td>
+                <td>
+                  <select><option>=구분전체=</option></select>
+                  <button class="btn-db btn-db-gray" onclick="alert('신청자 데이터 검증 완료 (100% 일치)')"><i class="fa-solid fa-magnifying-glass"></i> 검증하기</button>
+                  <span style="color:#64748b; font-size:0.8rem; margin-left:8px;">- 신청자 데이터를 검증합니다.</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;">강좌 대기자 데이터</td>
+                <td>
+                  <select><option>=구분전체=</option></select>
+                  <button class="btn-db btn-db-gray" onclick="alert('대기자 데이터 검증 완료')"><i class="fa-solid fa-magnifying-glass"></i> 검증하기</button>
+                  <span style="color:#64748b; font-size:0.8rem; margin-left:8px;">- 대기자 데이터를 검증합니다.</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;">온라인 출석부 데이터</td>
+                <td>
+                  <select><option>=구분전체=</option></select>
+                  <button class="btn-db btn-db-gray" onclick="alert('출석부 데이터 검증 완료')"><i class="fa-solid fa-magnifying-glass"></i> 검증하기</button>
+                  <span style="color:#64748b; font-size:0.8rem; margin-left:8px;">- 온라인 출석부 데이터를 검증합니다.</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;">환불 신청자 데이터</td>
+                <td>
+                  <select><option>=구분전체=</option></select>
+                  <button class="btn-db btn-db-gray" onclick="alert('환불 데이터 검증 완료')"><i class="fa-solid fa-magnifying-glass"></i> 검증하기</button>
+                  <span style="color:#64748b; font-size:0.8rem; margin-left:8px;">- 환불 신청자 데이터를 검증합니다.</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="bottom-notice-box">
+            <ul>
+              <li>방과후학교를 운영 중에 기존에 등록된 학생의 학적을 변경하거나, 삭제 후 재입력한 경우 검증이 필요합니다.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 24. 환경설정 > 나이스/에듀파인 설정 (/af/ad_neis_edufine/lists) ==================== -->
+      <div class="submodel-panel" id="panel_ad_neis_edufine_lists" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">
+              <button class="btn-db btn-db-blue" onclick="alert('공통항목설정')">공통항목설정</button>
+            </div>
+            <div style="display:flex; gap:5px;">
+              <button class="btn-db btn-db-orange" onclick="alert('일괄입력')">일괄입력</button>
+              <button class="btn-db btn-db-green" onclick="exportEdufine()"><i class="fa-solid fa-file-excel"></i> 검색결과엑셀출력</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th rowspan="2">연번</th>
+                  <th rowspan="2">수정</th>
+                  <th rowspan="2">강사 아이디</th>
+                  <th rowspan="2">강사 이름</th>
+                  <th colspan="3" style="background:#e0f2fe; color:#0369a1;">나이스</th>
+                  <th colspan="3" style="background:#fef3c7; color:#92400e;">에듀파인</th>
+                </tr>
+                <tr>
+                  <th>수강료 강좌명</th><th>교재비 강좌명</th><th>재료비 강좌명</th>
+                  <th>수강료 납입금명</th><th>교재비 납입금명</th><th>재료비 납입금명</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="center">1</td>
+                  <td class="center"><button class="table-icon-btn gear"><i class="fa-solid fa-gear"></i></button></td>
+                  <td>김강사</td><td>김로봇</td>
+                  <td>창의로봇</td><td>로봇교재</td><td>로봇키트</td>
+                  <td>창의로봇수강료</td><td>로봇교재비</td><td>로봇재료비</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="bottom-notice-box">
+            <ul>
+              <li>나이스 수강료 입력용 엑셀 파일 출력 시 강좌명에 출력될 내용을 강사별로 설정합니다.</li>
+              <li>에듀파인 감면자 입력용 엑셀 파일 출력 시 납입금명에 출력될 내용을 강사별로 설정합니다.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 25. 환경설정 > 안내글설정 (/af/ad_cfg/message) ==================== -->
+      <div class="submodel-panel" id="panel_ad_cfg_message" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">안내글 설정</div>
+            <div class="helper-badges">
+              <a href="/af/ad_faq/main/sn/3267" class="helper-btn" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')"><i class="fa-solid fa-file-lines"></i> 매뉴얼</a>
+              <button class="helper-btn" onclick="alert('안내글 설정 가이드')"><i class="fa-solid fa-play"></i> 안내글 설정</button>
+            </div>
+          </div>
+
+          <table class="db-table">
+            <tbody>
+              <tr>
+                <td style="width:200px; font-weight:700;"><i class="fa-solid fa-check" style="color:#22c55e;"></i> 학생 로그인 화면<br><span style="font-size:0.8rem; color:#64748b;">상단 글</span></td>
+                <td><textarea id="noticeLoginTop" style="width:100%; height:70px; border:1px solid #cbd5e1; padding:6px;">* 학년, 반, 번호, 이름 입력 후 초기비밀번호 1234, 변경했을 경우 변경된 비밀번호 입력 로그인&#10;* 반드시 강사와 소통 가능한 연락처 입력, 공개해 주시기 바랍니다.&#10;* 2학기 신청 기간: {8.21.(금), 09:00~23.(일), 23:59까지}내에 신청해 주시기 바랍니다.</textarea></td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;"><i class="fa-solid fa-check" style="color:#22c55e;"></i> 학생 신청 화면<br><span style="font-size:0.8rem; color:#64748b;">상단 글</span></td>
+                <td><textarea id="noticeApplyGuide" style="width:100%; height:70px; border:1px solid #cbd5e1; padding:6px;">* 신청 가능한 시간대를 잘 확인 후 신청해 주시기 바랍니다.&#10;* 시간이 중복되거나 한 요일에만 신청하는 경우도 안되므로 신청 가능한 시간대에 신청해 주시고 강사와 수업 참여 협의하시면 됩니다.</textarea></td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;"><i class="fa-solid fa-check" style="color:#22c55e;"></i> 출석부 엑셀파일<br><span style="font-size:0.8rem; color:#64748b;">하단 글</span></td>
+                <td><textarea id="noticeAttendanceFooter" style="width:100%; height:70px; border:1px solid #cbd5e1; padding:6px;">※ 출석부 작성 시 유의 사항&#10;1) 매시간 출결상황을 확인하여 결석생이 있을 시는 <비고란>에 사유를 기록하여 관리한다.&#10;2) 표기 방법 : 출석 ○, 지각 ・ 조퇴 △, 결석 ×</textarea></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="margin-top:15px; text-align:center;">
+            <button class="btn-db btn-db-blue" style="padding:0 24px; height:34px;" onclick="saveNoticeSettings(event)"><i class="fa-solid fa-check"></i> 저장</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 26. 환경설정 > 초기화 (/af/ad_cfg/clear) ==================== -->
+      <div class="submodel-panel" id="panel_ad_cfg_clear" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">데이터 초기화</div>
+          </div>
+
+          <table class="db-table">
+            <tbody>
+              <tr>
+                <td style="width:240px; font-weight:700;">강사 데이터</td>
+                <td>
+                  <button class="btn-db btn-db-gray" onclick="if(confirm('강사 데이터를 삭제하시겠습니까?')) alert('강사 데이터가 삭제되었습니다.')"><i class="fa-solid fa-trash"></i> 삭제하기</button>
+                  <span style="color:#ef4444; font-size:0.8rem; margin-left:8px;">- 등록된 모든 강사 데이터를 삭제합니다.</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;">강좌 및 신청 데이터</td>
+                <td>
+                  <select><option>=구분전체=</option></select>
+                  <button class="btn-db btn-db-gray" onclick="if(confirm('강좌 및 신청 데이터를 삭제하시겠습니까?')) alert('강좌 및 신청 데이터가 삭제되었습니다.')"><i class="fa-solid fa-trash"></i> 삭제하기</button>
+                  <span style="color:#ef4444; font-size:0.8rem; margin-left:8px;">- 강좌 및 관련된 신청자,대기자,환불/취소자,출석부,추첨결과 데이터를 모두 삭제합니다.</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;">신청자 데이터</td>
+                <td>
+                  <select><option>=구분전체=</option></select>
+                  <button class="btn-db btn-db-gray" onclick="if(confirm('신청자 데이터를 삭제하시겠습니까?')) alert('신청자 데이터가 삭제되었습니다.')"><i class="fa-solid fa-trash"></i> 삭제하기</button>
+                  <span style="color:#ef4444; font-size:0.8rem; margin-left:8px;">- 신청 데이터를 삭제합니다.</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;">대기자 데이터</td>
+                <td>
+                  <select><option>=구분전체=</option></select>
+                  <button class="btn-db btn-db-gray" onclick="if(confirm('대기자 데이터를 삭제하시겠습니까?')) alert('대기자 데이터가 삭제되었습니다.')"><i class="fa-solid fa-trash"></i> 삭제하기</button>
+                  <span style="color:#ef4444; font-size:0.8rem; margin-left:8px;">- 대기자 데이터를 삭제합니다.</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;">출석부 데이터</td>
+                <td>
+                  <select><option>=구분전체=</option></select>
+                  <button class="btn-db btn-db-gray" onclick="if(confirm('출석부 데이터를 삭제하시겠습니까?')) alert('출석부 데이터가 삭제되었습니다.')"><i class="fa-solid fa-trash"></i> 삭제하기</button>
+                  <span style="color:#ef4444; font-size:0.8rem; margin-left:8px;">- 출석부 데이터를 삭제합니다.</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="bottom-notice-box">
+            <ul>
+              <li>삭제된 데이터는 복구가 불가능 합니다. 신중히 결정 후 실행하시기 바랍니다.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 27. 환경설정 > 담당자정보 (/af/ad_info/modify) ==================== -->
+      <div class="submodel-panel" id="panel_ad_info_modify" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">담당자 정보</div>
+          </div>
+
+          <div style="font-size:0.83rem; color:#2563eb; margin-bottom:10px;">
+            ☑ 표시가 있는 항목은 반드시 입력해야 합니다.
+          </div>
+
+          <form onsubmit="saveManagerInfo(event)">
+            <table class="db-table">
+              <tbody>
+                <tr>
+                  <td style="width:200px; font-weight:700;">학교명</td>
+                  <td>광주풍향초등학교</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:700;">성명 ☑</td>
+                  <td><input type="text" id="infoManagerName" value="김혜련" style="height:30px; width:220px; padding:2px 8px;"></td>
+                </tr>
+                <tr>
+                  <td style="font-weight:700;">전화 ☑</td>
+                  <td><input type="text" id="infoOfficePhone" value="062-609-1182" style="height:30px; width:220px; padding:2px 8px;"></td>
+                </tr>
+                <tr>
+                  <td style="font-weight:700;">휴대폰 ☑</td>
+                  <td>
+                    <input type="text" id="infoManagerPhone" value="010-2494-1479" style="height:30px; width:220px; padding:2px 8px;">
+                    <div style="font-size:0.8rem; color:#64748b; margin-top:2px;">※ 서비스 운영에 관련된 안내를 문자메시지로 전달받으실 수 있습니다.</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-weight:700;">이메일 ☑</td>
+                  <td>
+                    <input type="email" id="infoEmail" value="khh147979@naver.com" style="height:30px; width:300px; padding:2px 8px;">
+                    <div style="font-size:0.8rem; color:#64748b; margin-top:2px;">※ 서비스 운영에 관련된 안내를 이메일로 전달받으실 수 있습니다.</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div style="margin-top:15px; text-align:center; display:flex; justify-content:center; gap:8px;">
+              <button type="button" class="btn-db btn-db-outline" onclick="history.back()">취소</button>
+              <button type="submit" class="btn-db btn-db-blue"><i class="fa-solid fa-check"></i> 수정 & 확인 완료</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ==================== 28. 고객지원 게시판 (/af/qanda/lists) ==================== -->
+      <div class="submodel-panel" id="panel_qanda_lists" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">고객지원 Q&A 게시판</div>
+          </div>
+          <div class="table-responsive">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th>강좌명</th>
+                  <th>작성자</th>
+                  <th>질문 제목</th>
+                  <th>답변 상태</th>
+                  <th>작성일</th>
+                  <th>답변</th>
+                </tr>
+              </thead>
+              <tbody id="qaTbody">
+                <tr><td colspan="6" class="center" style="padding:40px;">Q&A 질문 목록을 불러오는 중입니다...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 29. 매뉴얼 (FAQ) (/af/ad_faq/main) ==================== -->
+      <div class="submodel-panel" id="panel_ad_faq_main" style="display: none;">
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title"><i class="fa-solid fa-book-open" style="color:#2563eb;"></i> 디비디비스쿨 매뉴얼 & 자주 묻는 질문 (FAQ)</div>
+            <div class="helper-badges">
+              <button class="btn-db btn-db-blue" onclick="downloadManualZip()"><i class="fa-solid fa-download"></i> 매뉴얼 다운로드</button>
+              <button class="btn-db btn-db-coral" onclick="openVideoPlayer('https://www.youtube.com/embed/videoseries?list=PLA-pyXX5hMe9nkqFKeJKOCtGwlIVD2Ck2', '디비디비스쿨 공식 동영상 매뉴얼 전체 재생목록')"><i class="fa-solid fa-play"></i> 동영상 매뉴얼</button>
+            </div>
+          </div>
+
+          <div class="alert-box" style="background:#fef2f2; border:1px solid #fee2e2; color:#b91c1c; font-weight:600;">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span>※ 아래 내용을 먼저 확인 후 고객지원 게시판을 이용하시기 바랍니다.</span>
+          </div>
+
+          <!-- Top Grid: Operations (8 cols) & Downloads (4 cols) -->
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 24px;">
+            <!-- Left: 수강신청 운영 절차 (1 ~ 23) -->
+            <div style="border: 1px solid #cbd5e1; border-radius: 4px; background: #ffffff;">
+              <div style="background: #f1f5f9; padding: 10px 14px; font-weight: 700; border-bottom: 1px solid #cbd5e1; display:flex; justify-content:space-between; align-items:center;">
+                <span><i class="fa-solid fa-list-ol" style="color:#2563eb;"></i> 수강신청 운영 절차 (1 ~ 23)</span>
+                <span style="font-size:0.75rem; color:#64748b;">클릭 시 상세 지침/동영상이 열립니다</span>
+              </div>
+              <div id="operationsListContainer" style="padding: 6px 12px; max-height: 650px; overflow-y: auto;">
+                <!-- Dynamically loaded via loadFaqList() -->
+              </div>
+            </div>
+
+            <!-- Right: 양식 다운로드 & 매뉴얼 다운로드 -->
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <!-- 1. 양식 다운로드 -->
+              <div style="border: 1px solid #cbd5e1; border-radius: 4px; background: #ffffff;">
+                <div style="background: #f1f5f9; padding: 10px 14px; font-weight: 700; border-bottom: 1px solid #cbd5e1;">
+                  <i class="fa-solid fa-file-arrow-down" style="color:#16a34a;"></i> 양식 다운로드
+                </div>
+                <div id="templateDownloadsContainer" style="padding: 10px 14px;">
+                  <!-- Template downloads -->
+                </div>
+              </div>
+
+              <!-- 2. 매뉴얼 다운로드 -->
+              <div style="border: 1px solid #cbd5e1; border-radius: 4px; background: #ffffff;">
+                <div style="background: #f1f5f9; padding: 10px 14px; font-weight: 700; border-bottom: 1px solid #cbd5e1;">
+                  <i class="fa-solid fa-book" style="color:#ea580c;"></i> 매뉴얼 다운로드
+                </div>
+                <div id="manualDownloadsContainer" style="padding: 10px 14px;">
+                  <!-- Manual downloads -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom: FAQ Categories Grid -->
+          <div style="border-top: 2px solid #e2e8f0; padding-top: 18px;">
+            <h3 style="font-size: 1.1rem; color: #1e293b; margin-bottom: 14px; display:flex; align-items:center; gap:8px;">
+              <i class="fa-solid fa-circle-question" style="color:#0284c7;"></i> 자주 묻는 질문 (FAQ)
+            </h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;" id="faqGridContainer">
+              <div id="faqColLeft" style="display:flex; flex-direction:column; gap:14px;"></div>
+              <div id="faqColRight" style="display:flex; flex-direction:column; gap:14px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <footer class="site-footer">
+        Copyright ⓒ <strong>xmecca.com</strong> All Rights Reserved. &nbsp;|&nbsp; ✉ dbdbschool@naver.com
+      </footer>
+    </main>
+  </div>
+
+  <!-- Modals (Add, Batch Upload, Batch Copy, Course Copy, Safety) -->
+  <div class="modal-backdrop" id="addModal">
+    <div class="modal-box" style="max-width: 650px;">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-plus-circle"></i> 방과후학교/늘봄 강좌 신규 등록</h3>
+        <button class="close-btn" onclick="closeAddModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="addCourseForm" onsubmit="submitAddCourse(event)">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+            <div>
+              <label style="font-weight:600;">운영 구분 *</label>
+              <select id="addCategory" class="form-control" style="width:100%; height:32px;" required>
+                <option value="26년 8월">26년 8월</option>
+                <option value="26년 9월">26년 9월</option>
+                <option value="2026년 1분기">2026년 1분기</option>
+              </select>
+            </div>
+            <div>
+              <label style="font-weight:600;">늘봄과정 분류</label>
+              <select id="addNeulbomType" class="form-control" style="width:100%; height:32px;">
+                <option value="돌봄">돌봄</option>
+                <option value="방과후">방과후</option>
+                <option value="맞춤형">맞춤형</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-bottom: 10px;">
+            <label style="font-weight:600;">강좌명 *</label>
+            <input type="text" id="addTitle" class="form-control" placeholder="예: (금) 돌봄 4부" style="width:100%; height:32px;" required>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+            <div>
+              <label style="font-weight:600;">강사명 (ID) *</label>
+              <input type="text" id="addInstructor" class="form-control" value="돌봄전담사" style="width:100%; height:32px;" required>
+            </div>
+            <div>
+              <label style="font-weight:600;">대상 학년 *</label>
+              <input type="text" id="addTargetGrade" class="form-control" value="1,2,3" style="width:100%; height:32px;" required>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+            <div>
+              <label style="font-weight:600;">수강 정원 *</label>
+              <input type="number" id="addCapacity" class="form-control" value="20" style="width:100%; height:32px;" required>
+            </div>
+            <div>
+              <label style="font-weight:600;">대기 정원 *</label>
+              <input type="number" id="addWaitingCapacity" class="form-control" value="5" style="width:100%; height:32px;" required>
+            </div>
+            <div>
+              <label style="font-weight:600;">총시수 *</label>
+              <input type="number" id="addTotalHours" class="form-control" value="12" style="width:100%; height:32px;" required>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+            <div>
+              <label style="font-weight:600;">수강료 (원)</label>
+              <input type="number" id="addTuitionFee" class="form-control" value="0" style="width:100%; height:32px;">
+            </div>
+            <div>
+              <label style="font-weight:600;">교재비 (원)</label>
+              <input type="number" id="addTextbookFee" class="form-control" value="0" style="width:100%; height:32px;">
+            </div>
+            <div>
+              <label style="font-weight:600;">재료비 (원)</label>
+              <input type="number" id="addMaterialFee" class="form-control" value="0" style="width:100%; height:32px;">
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px;">
+            <div>
+              <label style="font-weight:600;">강의 요일 *</label>
+              <input type="text" id="addDayOfWeek" class="form-control" value="금" style="width:100%; height:32px;" required>
+            </div>
+            <div>
+              <label style="font-weight:600;">강의 시간 *</label>
+              <input type="text" id="addScheduleTime" class="form-control" value="12:00~16:00" style="width:100%; height:32px;" required>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: flex-end; gap: 6px;">
+            <button type="button" class="btn-db btn-db-outline" onclick="closeAddModal()">취소</button>
+            <button type="submit" class="btn-db btn-db-blue"><i class="fa-solid fa-check"></i> 강좌 등록 완료</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 23-Column Batch Upload Modal -->
+  <div class="modal-backdrop" id="batchUploadModal">
+    <div class="modal-box" style="max-width: 680px;">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-file-excel"></i> 23개 표준 컬럼 강좌 일괄등록</h3>
+        <button class="close-btn" onclick="closeBatchUploadModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="color:#64748b; font-size:0.85rem; margin-top:0;">엑셀/CSV 데이터(쉼표 구분)를 붙여넣으세요.</p>
+        <textarea id="batchUploadTextarea" style="width:100%; height:160px; font-family:monospace; font-size:0.8rem; padding:8px; border:1px solid #cbd5e1;"></textarea>
+        <div style="display:flex; justify-content:space-between; margin-top:12px;">
+          <button type="button" class="btn-db btn-db-green" onclick="downloadSample23ColExcel()"><i class="fa-solid fa-download"></i> 샘플 서식 다운로드</button>
+          <div>
+            <button type="button" class="btn-db btn-db-outline" onclick="closeBatchUploadModal()">취소</button>
+            <button type="button" class="btn-db btn-db-blue" onclick="submitBatchUpload(event)"><i class="fa-solid fa-upload"></i> 일괄등록 실행</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Batch Copy Modal -->
+  <div class="modal-backdrop" id="batchCopyModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-clone"></i> 강좌 일괄복사</h3>
+        <button class="close-btn" onclick="closeBatchCopyModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="submitBatchCopy(event)">
+          <div style="margin-bottom:12px;">
+            <label style="font-weight:600;">원본 강좌 구분</label>
+            <select id="copySourceCategory" style="width:100%; height:32px;"><option value="26년 8월">26년 8월</option></select>
+          </div>
+          <div style="margin-bottom:12px;">
+            <label style="font-weight:600;">복사 대상 구분명 (신규 생성)</label>
+            <input type="text" id="copyTargetCategory" value="26년 9월" style="width:100%; height:32px;" required>
+          </div>
+          <div style="margin-bottom:16px;">
+            <label><input type="checkbox" id="copyFeesCheck" checked> 수강료 및 시간표 설정값 동시 복사</label>
+          </div>
+          <div style="display:flex; justify-content:flex-end; gap:6px;">
+            <button type="button" class="btn-db btn-db-outline" onclick="closeBatchCopyModal()">취소</button>
+            <button type="submit" class="btn-db btn-db-blue"><i class="fa-solid fa-clone"></i> 일괄복사 실행</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Course Copy Modal -->
+  <div class="modal-backdrop" id="courseCopyModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-clone"></i> 단일 강좌 복제</h3>
+        <button class="close-btn" onclick="closeCourseCopyModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="submitCourseCopy(event)">
+          <input type="hidden" id="copySourceCourseId">
+          <div style="margin-bottom:12px;">
+            <label style="font-weight:600;">신규 강좌명</label>
+            <input type="text" id="copyNewCourseTitle" style="width:100%; height:32px;" required>
+          </div>
+          <div style="margin-bottom:16px;">
+            <label style="font-weight:600;">대상 구분</label>
+            <select id="copyTargetCategorySelect" style="width:100%; height:32px;"><option value="26년 9월">26년 9월</option></select>
+          </div>
+          <div style="display:flex; justify-content:flex-end; gap:6px;">
+            <button type="button" class="btn-db btn-db-outline" onclick="closeCourseCopyModal()">취소</button>
+            <button type="submit" class="btn-db btn-db-blue">복사 완료</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Video Player Modal -->
+  <div class="modal-backdrop" id="manualVideoModal">
+    <div class="modal-box" style="max-width: 800px; width: 95%;">
+      <div class="modal-header">
+        <h3 id="manualVideoTitle"><i class="fa-solid fa-play-circle" style="color:#ef4444;"></i> 동영상 매뉴얼</h3>
+        <button class="close-btn" onclick="closeVideoPlayer()">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 0; background: #000;">
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+          <iframe id="manualVideoIframe" style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div style="padding: 10px 16px; background: #f8fafc; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size:0.82rem; color:#64748b;">※ 디비디비스쿨 공식 유튜브 채널과 실시간 연동됩니다.</span>
+        <button type="button" class="btn-db btn-db-outline" onclick="closeVideoPlayer()">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Document Viewer Modal -->
+  <div class="modal-backdrop" id="manualDocModal">
+    <div class="modal-box" style="max-width: 850px; width: 95%; max-height: 90vh; display: flex; flex-direction: column;">
+      <div class="modal-header">
+        <h3 id="manualDocTitle"><i class="fa-solid fa-file-lines" style="color:#2563eb;"></i> 매뉴얼 상세 지침</h3>
+        <button class="close-btn" onclick="closeDocViewer()">&times;</button>
+      </div>
+      <div class="modal-body" id="manualDocContent" style="padding: 20px 24px; overflow-y: auto; font-size: 0.92rem; line-height: 1.7; color: #334155;">
+        <!-- Loaded dynamically -->
+      </div>
+      <div style="padding: 10px 18px; background: #f8fafc; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between;">
+        <button type="button" class="btn-db btn-db-green" onclick="window.print()"><i class="fa-solid fa-print"></i> 인쇄하기</button>
+        <button type="button" class="btn-db btn-db-outline" onclick="closeDocViewer()">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Client Script -->
+  <script src="/af/ad_lec/lists/sn/admin_lec.js"></script>
+</body>
+</html>
