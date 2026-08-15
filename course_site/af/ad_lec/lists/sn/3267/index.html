@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+  <meta name="description" content="광주풍향초등학교 늘봄학교·방과후학교 수강신청 및 통합 관리 포털">
+  <title>늘봄학교 - 광주풍향초등학교 로그인 및 수강신청</title>
+
+  <!-- External Styles & Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/af/ad_lec/lists/sn/3267/dbdbschool_style.css">
+</head>
+<body>
+
+  <div class="login-container">
+    <!-- Header -->
+    <header class="login-header">
+      <h1>
+        <span class="s_name">광주풍향초등학교</span>
+        늘봄학교
+      </h1>
+      <div class="s_servie_box">
+        <a href="javascript:void(0);" class="off btn_icon" id="btnServiceIcon" title="다른 서비스 둘러보기">
+          <i class="fa-solid fa-grid-2-plus"></i>
+          <span>서비스</span>
+        </a>
+        <div class="m_box" id="serviceMenuBox">
+          <div class="arrow"></div>
+          <h4>늘봄학교 / 방과후 서비스 목록</h4>
+          <ul>
+            <li>
+              <a href="javascript:void(0);" onclick="selectRoleTab('2')">
+                <i class="fa-solid fa-school-flag"></i>
+                <span>늘봄학교</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" onclick="selectRoleTab('catalog')">
+                <i class="fa-solid fa-shapes"></i>
+                <span>방과후학교</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" onclick="selectRoleTab('1')">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span>교직원포털</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" onclick="selectRoleTab('4')">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <span>강사포털</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" onclick="selectRoleTab('catalog')">
+                <i class="fa-solid fa-list-check"></i>
+                <span>수강신청</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Card Body -->
+    <div class="login_box">
+
+      <!-- Role Selection Tabs -->
+      <ul class="choice_user" id="roleChoiceTabs">
+        <li class="login_user_grp1">
+          <a href="javascript:void(0);" data-grp="1">
+            <i class="fa-solid fa-user-tie"></i> 교직원
+          </a>
+        </li>
+        <li class="login_user_grp2">
+          <a href="javascript:void(0);" data-grp="2" class="on">
+            <i class="fa-solid fa-child"></i> 학생
+          </a>
+        </li>
+        <li class="login_user_grp4">
+          <a href="javascript:void(0);" data-grp="4">
+            <i class="fa-solid fa-chalkboard-user"></i> 강사
+          </a>
+        </li>
+        <li class="login_user_grp_catalog">
+          <a href="javascript:void(0);" data-grp="catalog">
+            <i class="fa-solid fa-book-open"></i> 강좌목록
+          </a>
+        </li>
+      </ul>
+
+      <!-- Form Container -->
+      <form id="fm_edit" onsubmit="handleFormSubmit(event);" autocomplete="off">
+        <input type="hidden" id="login_user_grp" name="login_user_grp" value="2">
+
+        <!-- TAB 1: 교직원 (Faculty/Staff) -->
+        <div class="user_off login_user_grp1_view" style="display: none;">
+          <ul class="in_box">
+            <li>
+              <div class="input-with-icon">
+                <i class="fa">아이디</i>
+                <input type="text" name="login_id" id="login_id" placeholder="아이디를 입력하세요. (데모: teacher)" class="form-control" value="teacher">
+              </div>
+            </li>
+            <li>
+              <div class="input-with-icon">
+                <i class="fa">비밀번호</i>
+                <input type="password" name="login_passwd" id="login_passwd" placeholder="비밀번호를 입력하세요. (데모: 12341234)" class="form-control" value="12341234">
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- TAB 2: 학생 (Student/Parent) - Default Active -->
+        <div class="user_off login_user_grp2_view" style="display: block;">
+          <ul class="in_box">
+            <li>
+              <!-- Top Notice Text -->
+              <div id="stu_log_top_txt">
+                <p>• 학년, 반, 번호, 이름 입력 후 초기비밀번호 1234, 변경했을 경우 변경된 비밀번호 입력 로그인</p>
+                <p>• 반드시 강사와 소통 가능한 연락처 입력, 공개해 주시기 바랍니다.</p>
+                <p>• <strong>2학기 신청 기간: {8.21.(금), 09:00 ~ 8.23.(일), 23:59까지}</strong> 내에 신청해 주시기 바랍니다.</p>
+              </div>
+
+              <!-- Student Grade / Class / Bunho Selects -->
+              <div class="student-select-grid">
+                <select name="login_stu_grade" id="login_stu_grade" class="form-control" required>
+                  <option value="">=학년=</option>
+                  <option value="1" selected>1학년</option>
+                  <option value="2">2학년</option>
+                  <option value="3">3학년</option>
+                  <option value="4">4학년</option>
+                  <option value="5">5학년</option>
+                  <option value="6">6학년</option>
+                </select>
+                <select name="login_stu_class" id="login_stu_class" class="form-control" required>
+                  <option value="">=반=</option>
+                  <script>
+                    for(let i=1; i<=12; i++) {
+                      const sel = i === 2 ? 'selected' : '';
+                      document.write(`<option value="${i}" ${sel}>${i}반</option>`);
+                    }
+                  </script>
+                </select>
+                <select name="login_stu_bunho" id="login_stu_bunho" class="form-control" required>
+                  <option value="">=번호=</option>
+                  <script>
+                    for(let i=1; i<=30; i++) {
+                      const sel = i === 5 ? 'selected' : '';
+                      document.write(`<option value="${i}" ${sel}>${i}번</option>`);
+                    }
+                  </script>
+                </select>
+              </div>
+            </li>
+            <li>
+              <div class="input-with-icon">
+                <i class="fa">이름</i>
+                <input type="text" name="login_stu_name" id="login_stu_name" placeholder="이름을 입력하세요." class="form-control" value="김민준" required>
+              </div>
+            </li>
+            <li>
+              <div class="input-with-icon">
+                <i class="fa">비밀번호</i>
+                <input type="password" name="login_stu_passwd" id="login_stu_passwd" placeholder="비밀번호를 입력하세요." class="form-control" value="1234" required>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- TAB 3: 강사 (Lecturer) -->
+        <div class="user_off login_user_grp4_view" style="display: none;">
+          <ul class="in_box">
+            <li>
+              <div class="input-with-icon">
+                <i class="fa">아이디</i>
+                <input type="text" name="login_lecturer_id" id="login_lecturer_id" placeholder="아이디를 입력하세요. (데모: teacher)" class="form-control" value="teacher">
+              </div>
+            </li>
+            <li>
+              <div class="input-with-icon">
+                <i class="fa">비밀번호</i>
+                <input type="password" name="login_lecturer_passwd" id="login_lecturer_passwd" placeholder="비밀번호를 입력하세요. (데모: 12341234)" class="form-control" value="12341234">
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- TAB 4: 강좌목록 (Course Catalog View) -->
+        <div class="user_off catalog_view" style="display: none;">
+          <div class="catalog-section">
+            <div class="filter-bar">
+              <select id="filterGrade" onchange="filterCourses()">
+                <option value="">모든 학년</option>
+                <option value="1">1학년</option>
+                <option value="2">2학년</option>
+                <option value="3">3학년</option>
+                <option value="4">4학년</option>
+                <option value="5">5학년</option>
+                <option value="6">6학년</option>
+              </select>
+
+              <select id="filterDay" onchange="filterCourses()">
+                <option value="">모든 요일</option>
+                <option value="월">월요일</option>
+                <option value="화">화요일</option>
+                <option value="수">수요일</option>
+                <option value="목">목요일</option>
+                <option value="금">금요일</option>
+              </select>
+
+              <input type="text" id="filterKeyword" placeholder="강좌명 검색..." onkeyup="filterCourses()">
+            </div>
+
+            <div class="catalog-table-wrapper">
+              <table class="catalog-table">
+                <thead>
+                  <tr>
+                    <th>구분</th>
+                    <th>강좌명</th>
+                    <th>대상</th>
+                    <th>시간</th>
+                    <th>강사</th>
+                    <th>정원/대기</th>
+                    <th>수강료</th>
+                    <th>신청/상세</th>
+                  </tr>
+                </thead>
+                <tbody id="courseTableBody">
+                  <!-- Dynamic Courses -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons Area (Hidden in Catalog View) -->
+        <div class="login_btn" id="loginActionsArea">
+          <div class="options-row">
+            <label>
+              <input type="checkbox" name="save_id" id="save_id" checked>
+              아이디저장
+            </label>
+            <label>
+              <input type="checkbox" name="remember" id="remember" onclick="toggleRememberHelp()">
+              로그인유지
+            </label>
+            <span class="mypass_find_sm_more">
+              <a href="javascript:void(0);" onclick="openModal('pwdModal')">비밀번호찾기</a>
+              <a href="javascript:void(0);" onclick="openModal('faqModal')">FAQ</a>
+            </span>
+          </div>
+
+          <div class="remember_help" id="rememberHelpBox">
+            <span></span>
+            개인정보 보호를 위해 <strong>개인 PC에서만 사용하세요.</strong>
+          </div>
+
+          <p>
+            <input type="submit" id="btn_submit" value="로그인" class="go_btn login_user_grp2">
+          </p>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      Copyright ⓒ <a href="http://www.xmecca.com" target="_blank">xmecca.com</a> All Rights Reserved.
+    </footer>
+  </div>
+
+  <!-- Modal 1: FAQ Modal -->
+  <div class="modal-overlay" id="faqModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-circle-question"></i> 자주 묻는 질문 (FAQ)</h3>
+        <button class="modal-close-btn" onclick="closeModal('faqModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h4 style="font-size: 14px; margin-bottom: 8px; color: #1e3a8a;">Q1. 초기 비밀번호는 무엇인가요?</h4>
+        <p style="margin-bottom: 14px; color: #475569;">학생 초기 비밀번호는 <strong>1234</strong> 입니다. 변경하신 경우 설정한 비밀번호를 입력해주세요.</p>
+
+        <h4 style="font-size: 14px; margin-bottom: 8px; color: #1e3a8a;">Q2. 2학기 수강신청 기간은 언제인가요?</h4>
+        <p style="margin-bottom: 14px; color: #475569;">8.21.(금) 09:00 부터 8.23.(일) 23:59까지이며 선착순 및 늘봄 우선순위 대상자가 적용됩니다.</p>
+
+        <h4 style="font-size: 14px; margin-bottom: 8px; color: #1e3a8a;">Q3. 수강료 환불 및 일할 정산 기준은?</h4>
+        <p style="margin-bottom: 14px; color: #475569;">학교 방과후학교 운영 조례에 의하여 사유발생일 기준 미실시 수업 일수를 계산하여 일할 환불됩니다.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-modal-close" onclick="closeModal('faqModal')">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Password Find Modal -->
+  <div class="modal-overlay" id="pwdModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-key"></i> 비밀번호 찾기 안내</h3>
+        <button class="modal-close-btn" onclick="closeModal('pwdModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: 12px; color: #334155;">학생 및 교직원 계정의 비밀번호를 잊으셨을 경우, 본인인증 또는 담임교사/늘봄 전담사 선생님께 초기화를 요청하실 수 있습니다.</p>
+        <div style="background: #f1f5f9; padding: 12px; border-radius: 6px; font-size: 12px; color: #475569;">
+          📍 광주풍향초등학교 늘봄지원센터 문의: 062-520-3267<br>
+          📍 운영시간: 평일 09:00 ~ 17:00
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-modal-close" onclick="closeModal('pwdModal')">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Syllabus Detail Modal -->
+  <div class="modal-overlay" id="syllabusModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modalCourseTitle">강좌 상세 안내 및 강의계획서</h3>
+        <button class="modal-close-btn" onclick="closeModal('syllabusModal')">&times;</button>
+      </div>
+      <div class="modal-body" id="modalSyllabusBody">
+        <!-- Dynamic content loaded via JS -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn-modal-close" onclick="closeModal('syllabusModal')">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Logic -->
+  <script>
+    let currentCourses = [];
+
+    // Service Switcher Menu Toggle
+    document.getElementById('btnServiceIcon').addEventListener('click', function(e) {
+      e.stopPropagation();
+      const menuBox = document.getElementById('serviceMenuBox');
+      menuBox.classList.toggle('show');
+      this.classList.toggle('on');
+    });
+
+    document.addEventListener('click', function() {
+      document.getElementById('serviceMenuBox').classList.remove('show');
+      document.getElementById('btnServiceIcon').classList.remove('on');
+    });
+
+    // Remember Login Tooltip Toggle
+    function toggleRememberHelp() {
+      const chk = document.getElementById('remember');
+      const box = document.getElementById('rememberHelpBox');
+      if (chk.checked) {
+        box.classList.add('show');
+      } else {
+        box.classList.remove('show');
+      }
+    }
+
+    // Modal Control
+    function openModal(id) {
+      document.getElementById(id).classList.add('show');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('show');
+    }
+
+    // Role Tab Switcher Helper
+    function selectRoleTab(grp) {
+      const roleTabs = document.querySelectorAll('#roleChoiceTabs li a');
+      roleTabs.forEach(tab => {
+        tab.classList.remove('on');
+        if (tab.getAttribute('data-grp') === grp) {
+          tab.classList.add('on');
+        }
+      });
+
+      document.getElementById('login_user_grp').value = grp;
+
+      document.querySelector('.login_user_grp1_view').style.display = 'none';
+      document.querySelector('.login_user_grp2_view').style.display = 'none';
+      document.querySelector('.login_user_grp4_view').style.display = 'none';
+      document.querySelector('.catalog_view').style.display = 'none';
+      
+      const actionsArea = document.getElementById('loginActionsArea');
+      const submitBtn = document.getElementById('btn_submit');
+
+      submitBtn.className = 'go_btn';
+
+      if (grp === '1') {
+        document.querySelector('.login_user_grp1_view').style.display = 'block';
+        actionsArea.style.display = 'block';
+        submitBtn.classList.add('login_user_grp1');
+        submitBtn.value = '교직원 로그인';
+      } else if (grp === '2') {
+        document.querySelector('.login_user_grp2_view').style.display = 'block';
+        actionsArea.style.display = 'block';
+        submitBtn.classList.add('login_user_grp2');
+        submitBtn.value = '학생 로그인';
+      } else if (grp === '4') {
+        document.querySelector('.login_user_grp4_view').style.display = 'block';
+        actionsArea.style.display = 'block';
+        submitBtn.classList.add('login_user_grp4');
+        submitBtn.value = '강사 로그인';
+      } else if (grp === 'catalog') {
+        document.querySelector('.catalog_view').style.display = 'block';
+        actionsArea.style.display = 'none';
+        loadCourses();
+      }
+    }
+
+    const roleTabs = document.querySelectorAll('#roleChoiceTabs li a');
+    roleTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        const grp = this.getAttribute('data-grp');
+        selectRoleTab(grp);
+      });
+    });
+
+    // Handle Login Form Submit
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+      const grp = document.getElementById('login_user_grp').value;
+
+      if (grp === '2') { // 학생 로그인
+        const grade = document.getElementById('login_stu_grade').value;
+        const cls = document.getElementById('login_stu_class').value;
+        const bunho = document.getElementById('login_stu_bunho').value;
+        const name = document.getElementById('login_stu_name').value.trim();
+        const passwd = document.getElementById('login_stu_passwd').value;
+
+        if (!grade || !cls || !bunho || !name || !passwd) {
+          alert('학년, 반, 번호, 이름 및 비밀번호를 모두 입력해 주세요.');
+          return false;
+        }
+
+        // Save student context to localStorage
+        const studentInfo = {
+          schoolCode: '3267',
+          schoolName: '광주풍향초등학교',
+          name: name,
+          gradeClass: `${grade}학년 ${cls}반 ${bunho}번`,
+          phone: '010-3267-0001',
+          subsidyType: '늘봄전담 지원금'
+        };
+        localStorage.setItem('parentAuthInfo', JSON.stringify(studentInfo));
+
+        alert(`[로그인 성공]\n\n${studentInfo.schoolName} ${studentInfo.gradeClass} ${studentInfo.name} 학생님 환영합니다!`);
+        window.location.href = '/parent/index.html';
+        return false;
+      } else if (grp === '1' || grp === '4') { // 교직원 or 강사 로그인
+        const username = grp === '1' ? document.getElementById('login_id').value.trim() : document.getElementById('login_lecturer_id').value.trim();
+        const password = grp === '1' ? document.getElementById('login_passwd').value : document.getElementById('login_lecturer_passwd').value;
+
+        try {
+          const res = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+          });
+          const data = await res.json();
+          if (data.success) {
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
+            alert(`${data.user.name}님 환영합니다!`);
+            if (grp === '4' || data.user.role === 'teacher') {
+              window.location.href = '/dashboard/teacher_dashboard.html';
+            } else {
+              window.location.href = '/dashboard/teacher_dashboard.html';
+            }
+          } else {
+            alert(data.message || '로그인에 실패했습니다.');
+          }
+        } catch (err) {
+          console.error(err);
+          alert('서버통신 오류가 발생했습니다.');
+        }
+        return false;
+      }
+    }
+
+    // Fetch Courses from API
+    async function loadCourses() {
+      try {
+        const res = await fetch('/api/dbdbschool/3267/courses');
+        const data = await res.json();
+        if (data.success) {
+          currentCourses = data.courses;
+          renderCourses(currentCourses);
+        }
+      } catch (err) {
+        console.error("Failed to load courses", err);
+      }
+    }
+
+    // Render Courses Table
+    function renderCourses(courses) {
+      const tbody = document.getElementById('courseTableBody');
+      if (!courses || courses.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" style="padding:20px;">검색된 강좌가 없습니다.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = courses.map((c, idx) => {
+        const isFull = c.enrolled >= c.capacity;
+        return `
+          <tr>
+            <td><span class="tag-badge ${c.category === '늘봄' ? 'tag-neulbom' : 'tag-afterschool'}">${c.category}</span></td>
+            <td style="font-weight: 700; text-align: left;">${c.title}</td>
+            <td>${c.targetGrade}</td>
+            <td>${c.schedule}</td>
+            <td>${c.instructor}</td>
+            <td><strong style="color:${isFull ? '#e11d48' : '#2563eb'};">${c.enrolled}</strong> / ${c.capacity} (${c.waitlist}대기)</td>
+            <td>${c.fee}</td>
+            <td>
+              <div style="display:flex; gap:4px; justify-content:center;">
+                <button class="btn-detail" onclick="viewSyllabus(${idx})">보기</button>
+                ${isFull ? 
+                  `<button class="btn-detail" style="background:#f59e0b;" onclick="enrollCourse('${c.id}', true)">대기신청</button>` :
+                  `<button class="btn-detail" style="background:#16a34a;" onclick="enrollCourse('${c.id}', false)">수강신청</button>`
+                }
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Direct Course Enrollment Action
+    async function enrollCourse(courseId, isWaitlist) {
+      const studentName = prompt("신청자(학생) 이름을 입력하세요:", "김민준");
+      if (!studentName) return;
+
+      try {
+        const res = await fetch('/api/dbdbschool/3267/enroll', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ courseId, studentName, isWaitlist })
+        });
+        const data = await res.json();
+        if (data.success) {
+          alert(data.message);
+          loadCourses(); // Refresh list
+        } else {
+          alert(data.message || '신청 처리에 실패했습니다.');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('신청 처리 중 오류가 발생했습니다.');
+      }
+    }
+
+    // Filter Courses
+    function filterCourses() {
+      const grade = document.getElementById('filterGrade').value;
+      const day = document.getElementById('filterDay').value;
+      const kw = document.getElementById('filterKeyword').value.trim().toLowerCase();
+
+      const filtered = currentCourses.filter(c => {
+        const matchGrade = !grade || c.targetGrade.includes(grade);
+        const matchDay = !day || c.schedule.includes(day);
+        const matchKw = !kw || c.title.toLowerCase().includes(kw) || c.instructor.toLowerCase().includes(kw);
+        return matchGrade && matchDay && matchKw;
+      });
+
+      renderCourses(filtered);
+    }
+
+    // View Syllabus Modal
+    function viewSyllabus(index) {
+      const c = currentCourses[index];
+      if (!c) return;
+
+      document.getElementById('modalCourseTitle').innerText = `[${c.category}] ${c.title} 강의계획서`;
+      document.getElementById('modalSyllabusBody').innerHTML = `
+        <div style="margin-bottom: 16px; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px;">
+          <p><strong>• 대상 학년:</strong> ${c.targetGrade}</p>
+          <p><strong>• 강의 시간:</strong> ${c.schedule}</p>
+          <p><strong>• 담당 강사:</strong> ${c.instructor} (${c.location})</p>
+          <p><strong>• 수강료 및 교재비:</strong> ${c.fee} / ${c.materialFee}</p>
+          <p><strong>• Edufine 결재 코드:</strong> ${c.edufineCode || 'ED-2026-AF3267'}</p>
+        </div>
+
+        <h4 style="font-size: 14px; margin-bottom: 8px; color: #1e3a8a;">📅 차시별 수업 계획 (12주차 과정)</h4>
+        <table style="width:100%; border-collapse:collapse; font-size:12px; margin-bottom:12px;">
+          <thead>
+            <tr style="background:#f1f5f9;">
+              <th style="border:1px solid #cbd5e1; padding:6px;">주차</th>
+              <th style="border:1px solid #cbd5e1; padding:6px;">주제 및 학습 내용</th>
+              <th style="border:1px solid #cbd5e1; padding:6px;">준비물</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="border:1px solid #e2e8f0; text-align:center; padding:6px;">1주차</td>
+              <td style="border:1px solid #e2e8f0; padding:6px;">오리엔테이션 및 안전 교육, 기초 이론</td>
+              <td style="border:1px solid #e2e8f0; text-align:center; padding:6px;">필기도구</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #e2e8f0; text-align:center; padding:6px;">2~4주차</td>
+              <td style="border:1px solid #e2e8f0; padding:6px;">기본 원리 습득 및 응용 실습 훈련</td>
+              <td style="border:1px solid #e2e8f0; text-align:center; padding:6px;">실습 교재</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #e2e8f0; text-align:center; padding:6px;">5~8주차</td>
+              <td style="border:1px solid #e2e8f0; padding:6px;">창의적 탐구 활동 및 심화 프로젝트 작업</td>
+              <td style="border:1px solid #e2e8f0; text-align:center; padding:6px;">교구재 세트</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid #e2e8f0; text-align:center; padding:6px;">9~12주차</td>
+              <td style="border:1px solid #e2e8f0; padding:6px;">최종 결과물 발표, 작품 전시 및 학부모 공개수업</td>
+              <td style="border:1px solid #e2e8f0; text-align:center; padding:6px;">발표 자료</td>
+            </tr>
+          </tbody>
+        </table>
+      `;
+
+      openModal('syllabusModal');
+    }
+
+    // Initial Auto Load
+    document.addEventListener('DOMContentLoaded', () => {
+      loadCourses();
+    });
+  </script>
+</body>
+</html>

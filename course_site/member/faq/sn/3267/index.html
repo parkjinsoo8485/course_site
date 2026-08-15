@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+  <title>늘봄학교 - 광주풍향초등학교 FAQ</title>
+
+  <!-- External Styles & Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/af/ad_lec/lists/sn/3267/dbdbschool_style.css">
+  <style>
+    .faq-item {
+      border-bottom: 1px solid #e2e8f0;
+      padding: 14px 0;
+    }
+    .faq-question {
+      font-weight: 700;
+      font-size: 14px;
+      color: #1e293b;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .faq-question i {
+      color: #3b82f6;
+    }
+    .faq-answer {
+      display: none;
+      margin-top: 10px;
+      padding: 12px;
+      background: #f8fafc;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #475569;
+      line-height: 1.6;
+    }
+    .faq-answer.show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <!-- Header -->
+    <header class="login-header">
+      <h1>
+        <span class="s_name">광주풍향초등학교</span>
+        늘봄학교 FAQ
+      </h1>
+      <div class="s_servie_box">
+        <a href="/af/ad_lec/lists/sn/3267/" class="btn_icon">
+          <i class="fa-solid fa-house"></i>
+          <span>홈으로</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Card Body -->
+    <div class="login_box">
+      <!-- Tabs -->
+      <ul class="choice_user">
+        <li><a href="/af/ad_lec/lists/sn/3267/">로그인</a></li>
+        <li class="list"><a href="/member/findpw/sn/3267/">비밀번호찾기</a></li>
+        <li><a href="javascript:void(0);" class="on">FAQ</a></li>
+      </ul>
+
+      <div style="padding: 20px 5%; background: #ffffff;">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <i class="fa-solid fa-circle-question"></i>
+            <span>Q1. 비밀번호를 잃어버렸어요.</span>
+          </div>
+          <div class="faq-answer">
+            - 사용자 정보에 휴대폰 번호를 등록해 놓은 경우 "비밀번호찾기"를 이용해서 휴대폰으로 임시 비밀번호를 발급받아 로그인할 수 있습니다.<br>
+            - 등록된 휴대폰 번호가 없는 경우, 학교 늘봄지원센터(062-520-3267) 담당자에게 문의하여 안내받으시기 바랍니다.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <i class="fa-solid fa-circle-question"></i>
+            <span>Q2. 로그인 시 "사용자 정보가 올바르지 않습니다" 메시지가 출력됩니다.</span>
+          </div>
+          <div class="faq-answer">
+            - 학생, 교직원, 강사 정보는 학교 담당자가 등록을 해주어야 이용할 수 있습니다.<br>
+            - 학년, 반, 번호, 이름이 일치하는지 다시 확인하거나 담임 선생님께 학적 등록 여부를 확인하세요.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <i class="fa-solid fa-circle-question"></i>
+            <span>Q3. 2학기 늘봄/방과후 수강신청은 어떻게 하나요?</span>
+          </div>
+          <div class="faq-answer">
+            - 수강신청 기간 {8.21.(금) 09:00 ~ 8.23.(일) 23:59} 내에 학생 계정으로 로그인 후 [강좌목록] 탭에서 원하는 강좌의 [수강신청] 버튼을 클릭하세요.<br>
+            - 정원이 초과된 경우 [대기신청] 버튼이 자동으로 활성화됩니다.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <i class="fa-solid fa-circle-question"></i>
+            <span>Q4. 모바일 및 스마트폰 접속 방법은?</span>
+          </div>
+          <div class="faq-answer">
+            - 본 시스템은 반응형 웹 디자인을 지원하므로 앱 다운로드 없이 스마트폰 브라우저로 접속하여 동일하게 이용하실 수 있습니다.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      Copyright ⓒ <a href="http://www.xmecca.com" target="_blank">xmecca.com</a> All Rights Reserved.
+    </footer>
+  </div>
+
+  <script>
+    function toggleFaq(el) {
+      const answer = el.nextElementSibling;
+      answer.classList.toggle('show');
+    }
+  </script>
+</body>
+</html>

@@ -32,7 +32,7 @@
       <div class="user-profile-card">
         <div class="user-profile-header">
           <div class="user-avatar-circle"><i class="fa-solid fa-user"></i></div>
-          <div class="user-name-text">관리자(김혜련)님 <span class="badge-bell"><i class="fa-solid fa-bell"></i> 0</span></div>
+          <div class="user-name-text">관리자(박진수)님 <span class="badge-bell"><i class="fa-solid fa-bell"></i> 0</span></div>
         </div>
         <div class="user-links">
           <a href="#" onclick="alert('로그아웃 되었습니다.')">[로그아웃]</a>
@@ -1490,7 +1490,7 @@
                 </tr>
                 <tr>
                   <td style="font-weight:700;">성명 ☑</td>
-                  <td><input type="text" id="infoManagerName" value="김혜련" style="height:30px; width:220px; padding:2px 8px;"></td>
+                  <td><input type="text" id="infoManagerName" value="박진수" style="height:30px; width:220px; padding:2px 8px;"></td>
                 </tr>
                 <tr>
                   <td style="font-weight:700;">전화 ☑</td>
@@ -1563,37 +1563,39 @@
             <span>※ 아래 내용을 먼저 확인 후 고객지원 게시판을 이용하시기 바랍니다.</span>
           </div>
 
-          <!-- Top Grid: Operations (8 cols) & Downloads (4 cols) -->
-          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 24px;">
-            <!-- Left: 수강신청 운영 절차 (1 ~ 23) -->
-            <div style="border: 1px solid #cbd5e1; border-radius: 4px; background: #ffffff;">
-              <div style="background: #f1f5f9; padding: 10px 14px; font-weight: 700; border-bottom: 1px solid #cbd5e1; display:flex; justify-content:space-between; align-items:center;">
-                <span><i class="fa-solid fa-list-ol" style="color:#2563eb;"></i> 수강신청 운영 절차 (1 ~ 23)</span>
-                <span style="font-size:0.75rem; color:#64748b;">클릭 시 상세 지침/동영상이 열립니다</span>
+          <!-- Top Grid: Operations (50%) & Downloads (50%) - Perfectly matched without empty whitespace -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; align-items: start;">
+            <!-- Left: 수강신청 운영 절차 (1 ~ 23) (50% 폭) -->
+            <div style="border: 1px solid #cbd5e1; border-radius: 6px; background: #ffffff; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04);">
+              <div style="background: #f1f5f9; padding: 8px 12px; font-weight: 700; border-bottom: 1px solid #cbd5e1; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size: 0.88rem; color: #1e293b;"><i class="fa-solid fa-list-ol" style="color:#2563eb;"></i> 수강신청 운영 절차 (1 ~ 23)</span>
+                <span style="font-size:0.75rem; color:#2563eb; font-weight: 700; background: #eff6ff; border: 1px solid #dbeafe; padding: 2px 8px; border-radius: 12px;">23단계</span>
               </div>
-              <div id="operationsListContainer" style="padding: 6px 12px; max-height: 650px; overflow-y: auto;">
+              <div id="operationsListContainer" style="padding: 4px 10px;">
                 <!-- Dynamically loaded via loadFaqList() -->
               </div>
             </div>
 
-            <!-- Right: 양식 다운로드 & 매뉴얼 다운로드 -->
+            <!-- Right: 양식 다운로드 & 매뉴얼 다운로드 (50% 폭) -->
             <div style="display: flex; flex-direction: column; gap: 16px;">
               <!-- 1. 양식 다운로드 -->
-              <div style="border: 1px solid #cbd5e1; border-radius: 4px; background: #ffffff;">
-                <div style="background: #f1f5f9; padding: 10px 14px; font-weight: 700; border-bottom: 1px solid #cbd5e1;">
-                  <i class="fa-solid fa-file-arrow-down" style="color:#16a34a;"></i> 양식 다운로드
+              <div style="border: 1px solid #cbd5e1; border-radius: 6px; background: #ffffff; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04);">
+                <div style="background: #f1f5f9; padding: 10px 14px; font-weight: 700; border-bottom: 1px solid #cbd5e1; display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size: 0.9rem; color: #1e293b;"><i class="fa-solid fa-file-arrow-down" style="color:#16a34a;"></i> 양식 다운로드</span>
+                  <span style="font-size:0.75rem; color:#16a34a; font-weight: 700; background: #f0fdf4; border: 1px solid #dcfce7; padding: 2px 8px; border-radius: 12px;">3건</span>
                 </div>
-                <div id="templateDownloadsContainer" style="padding: 10px 14px;">
+                <div id="templateDownloadsContainer" style="padding: 6px 12px;">
                   <!-- Template downloads -->
                 </div>
               </div>
 
               <!-- 2. 매뉴얼 다운로드 -->
-              <div style="border: 1px solid #cbd5e1; border-radius: 4px; background: #ffffff;">
-                <div style="background: #f1f5f9; padding: 10px 14px; font-weight: 700; border-bottom: 1px solid #cbd5e1;">
-                  <i class="fa-solid fa-book" style="color:#ea580c;"></i> 매뉴얼 다운로드
+              <div style="border: 1px solid #cbd5e1; border-radius: 6px; background: #ffffff; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04);">
+                <div style="background: #f1f5f9; padding: 10px 14px; font-weight: 700; border-bottom: 1px solid #cbd5e1; display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size: 0.9rem; color: #1e293b;"><i class="fa-solid fa-book" style="color:#ea580c;"></i> 매뉴얼 다운로드</span>
+                  <span style="font-size:0.75rem; color:#ea580c; font-weight: 700; background: #fff7ed; border: 1px solid #ffedd5; padding: 2px 8px; border-radius: 12px;">5건</span>
                 </div>
-                <div id="manualDownloadsContainer" style="padding: 10px 14px;">
+                <div id="manualDownloadsContainer" style="padding: 6px 12px;">
                   <!-- Manual downloads -->
                 </div>
               </div>
@@ -1825,3 +1827,4 @@
   <script src="/af/ad_lec/lists/sn/admin_lec.js"></script>
 </body>
 </html>
+

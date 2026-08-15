@@ -1,0 +1,665 @@
+/* dbdbschool.kr Clone CSS - 광주풍향초등학교 늘봄학교 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background: #f5f5f4;
+  font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  color: #333333;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Container */
+.login-container {
+  margin: 60px auto 100px;
+  width: 100%;
+  max-width: 580px;
+  position: relative;
+  padding: 0 15px;
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    margin: 20px auto 60px;
+  }
+}
+
+/* Header */
+.login-header {
+  width: 100%;
+  height: 80px;
+  background: #34495e;
+  padding: 12px 20px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  position: relative;
+  color: #ffffff;
+}
+
+.login-header h1 {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.login-header .s_name {
+  font-size: 15px;
+  color: #d9dbde;
+  font-weight: 400;
+  display: block;
+}
+
+/* Service Switcher Box */
+.s_servie_box {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.s_servie_box a.btn_icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 85px;
+  height: 80px;
+  background: #617487;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 0.2s ease;
+  border-top-right-radius: 4px;
+}
+
+.s_servie_box a.btn_icon:hover,
+.s_servie_box a.btn_icon.on {
+  background: #e13d27;
+  text-decoration: none;
+}
+
+.s_servie_box a.btn_icon i {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+/* Service Menu Box Popup */
+.m_box {
+  position: absolute;
+  right: 0;
+  top: 85px;
+  width: 320px;
+  background: #ffffff;
+  display: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  z-index: 9999;
+  padding: 15px;
+}
+
+.m_box.show {
+  display: block;
+}
+
+.m_box .arrow {
+  position: absolute;
+  top: -8px;
+  right: 35px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #ffffff;
+}
+
+.m_box h4 {
+  font-size: 14px;
+  color: #34495e;
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.m_box ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.m_box ul li a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 5px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #475569;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.m_box ul li a:hover {
+  background: #eff6ff;
+  border-color: #3b82f6;
+  color: #1d4ed8;
+  text-decoration: none;
+}
+
+.m_box ul li a i {
+  font-size: 18px;
+  margin-bottom: 6px;
+  color: #3b82f6;
+}
+
+/* Login Card Body */
+.login_box {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  border-top: none;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Role Choice Tabs */
+ul.choice_user {
+  list-style: none;
+  display: flex;
+  width: 90%;
+  margin: 0 5%;
+  padding-top: 20px;
+  gap: 6px;
+}
+
+ul.choice_user li {
+  flex: 1;
+  text-align: center;
+}
+
+ul.choice_user li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #555555;
+  background: #f8f8f8;
+  border: 1px solid #cccccc;
+  border-bottom: none;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+ul.choice_user li a i {
+  font-size: 14px;
+}
+
+/* Active Tab Themes */
+ul.choice_user li.login_user_grp1 a.on {
+  color: #229e56;
+  background: #ffffff;
+  border-top: 2px solid #229e56;
+  border-left: 1px solid #229e56;
+  border-right: 1px solid #229e56;
+  font-weight: 700;
+}
+
+ul.choice_user li.login_user_grp2 a.on {
+  color: #3b80bd;
+  background: #ffffff;
+  border-top: 2px solid #3b80bd;
+  border-left: 1px solid #3b80bd;
+  border-right: 1px solid #3b80bd;
+  font-weight: 700;
+}
+
+ul.choice_user li.login_user_grp4 a.on {
+  color: #d3651b;
+  background: #ffffff;
+  border-top: 2px solid #d3651b;
+  border-left: 1px solid #d3651b;
+  border-right: 1px solid #d3651b;
+  font-weight: 700;
+}
+
+ul.choice_user li.login_user_grp_catalog a.on {
+  color: #4f46e5;
+  background: #ffffff;
+  border-top: 2px solid #4f46e5;
+  border-left: 1px solid #4f46e5;
+  border-right: 1px solid #4f46e5;
+  font-weight: 700;
+}
+
+/* Tab Input Container */
+ul.in_box {
+  list-style: none;
+  width: 100%;
+  background: #f7f7f7;
+  padding: 20px 5% 25px 5%;
+  border-top: 1px solid #cccccc;
+}
+
+ul.in_box li {
+  margin-bottom: 12px;
+  position: relative;
+}
+
+ul.in_box li:last-child {
+  margin-bottom: 0;
+}
+
+/* Inputs with Icons */
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-with-icon i.fa {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 85px;
+  background: #f8f8f8;
+  border: 1px solid #cccccc;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  color: #555555;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  z-index: 2;
+}
+
+.input-with-icon i.fa span {
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+.input-with-icon input.form-control {
+  width: 100%;
+  height: 38px;
+  padding-left: 95px !important;
+  padding-right: 12px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 13px;
+  outline: none;
+  background: #ffffff;
+}
+
+.input-with-icon input.form-control:focus {
+  border-color: #3b80bd;
+}
+
+/* Student Select Group */
+.student-select-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.student-select-grid select {
+  height: 38px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  padding: 0 8px;
+  font-size: 13px;
+  background: #ffffff;
+  outline: none;
+}
+
+.student-select-grid select:focus {
+  border-color: #3b80bd;
+}
+
+/* Student Notice Text Box */
+#stu_log_top_txt {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 4px;
+  padding: 12px 14px;
+  font-size: 12px;
+  color: #1e3a8a;
+  line-height: 1.6;
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+
+#stu_log_top_txt p {
+  margin-bottom: 4px;
+}
+
+#stu_log_top_txt p:last-child {
+  margin-bottom: 0;
+}
+
+/* Login Buttons & Actions Area */
+.login_btn {
+  width: 100%;
+  padding: 18px 5% 25px 5%;
+  background: #ffffff;
+  border-top: 1px solid #cccccc;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.options-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 13px;
+  color: #666666;
+  margin-bottom: 12px;
+}
+
+.options-row label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.options-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.mypass_find_sm_more {
+  margin-left: auto;
+  font-size: 12px;
+}
+
+.mypass_find_sm_more a {
+  color: #3e7eb6;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+/* Help Alert Box for Remember Login */
+.remember_help {
+  display: none;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  font-size: 12px;
+  padding: 10px 14px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.remember_help.show {
+  display: block;
+}
+
+/* Dynamic Submit Buttons */
+input.go_btn {
+  width: 100%;
+  height: 44px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+input.go_btn:hover {
+  opacity: 0.92;
+}
+
+input.login_user_grp1 {
+  background: #2ecc71;
+  border-bottom: 4px solid #27ae60;
+}
+
+input.login_user_grp2 {
+  background: #4791d2;
+  border-bottom: 4px solid #3b80bd;
+}
+
+input.login_user_grp4 {
+  background: #f37b2b;
+  border-bottom: 4px solid #d3651b;
+}
+
+input.login_user_grp_catalog {
+  background: #4f46e5;
+  border-bottom: 4px solid #3730a3;
+}
+
+/* Read-Only Badge Banner */
+.read-only-badge-banner {
+  background: #fffbeeb0;
+  border: 1px solid #fde68a;
+  color: #92400e;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+/* Read-Only Course Catalog Section */
+.catalog-section {
+  padding: 20px 5%;
+  background: #ffffff;
+  border-top: 1px solid #cccccc;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.filter-bar select, .filter-bar input {
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.filter-bar select {
+  min-width: 110px;
+  background: #ffffff;
+}
+
+.filter-bar input {
+  flex: 1;
+  min-width: 150px;
+}
+
+.catalog-table-wrapper {
+  overflow-x: auto;
+}
+
+.catalog-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.catalog-table th {
+  background: #f1f5f9;
+  color: #334155;
+  padding: 10px 8px;
+  font-weight: 700;
+  border: 1px solid #cbd5e1;
+  text-align: center;
+}
+
+.catalog-table td {
+  padding: 10px 8px;
+  border: 1px solid #e2e8f0;
+  text-align: center;
+  color: #475569;
+}
+
+.catalog-table tr:hover {
+  background: #f8fafc;
+}
+
+.tag-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.tag-neulbom {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.tag-afterschool {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.btn-detail {
+  padding: 4px 10px;
+  background: #4f46e5;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-detail:hover {
+  background: #4338ca;
+}
+
+/* Footer */
+#footer {
+  text-align: center;
+  padding: 24px 0;
+  font-size: 12px;
+  color: #7E756B;
+}
+
+#footer a {
+  color: #f7931d;
+  font-weight: 700;
+}
+
+/* Modal Popup Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+}
+
+.modal-overlay.show {
+  display: flex;
+}
+
+.modal-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 600px;
+  max-height: 85vh;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modal-header {
+  background: #34495e;
+  color: #ffffff;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.modal-footer {
+  padding: 12px 20px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  text-align: right;
+}
+
+.btn-modal-close {
+  padding: 8px 18px;
+  background: #64748b;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-modal-close:hover {
+  background: #475569;
+}
