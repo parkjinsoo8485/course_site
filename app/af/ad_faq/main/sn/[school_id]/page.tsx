@@ -1,36 +1,42 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useMemo } from 'react';
+import { AdminTable, Column } from '@/components/admin/AdminTable';
+import { AdminFilterBar } from '@/components/admin/AdminFilterBar';
+import { AdminPagination } from '@/components/admin/AdminPagination';
 
 // ─────────────────────────────────────────────
-// 데이터 타입 정의
+// 1. 데이터 타입 정의
 // ─────────────────────────────────────────────
-interface LinkItem {
+export interface LinkItem {
   label: string;
   href: string;
 }
 
-interface ProcedureItem {
+export interface ProcedureItem {
   num: number;
   title: string;
   doc?: string;
   video?: string;
 }
 
-interface FaqItem {
+export interface FaqItem {
+  id: string;
+  category: string;
   title: string;
+  author: string;
+  createdAt: string;
+  views: number;
+  hasAttachment: boolean;
+  attachmentName?: string;
   doc?: string;
   video?: string;
+  content?: string;
   extra?: LinkItem[];
 }
 
-interface FaqCategory {
-  category: string;
-  items: FaqItem[];
-}
-
 // ─────────────────────────────────────────────
-// 1. 수강신청 운영 절차 데이터 (23단계)
+// 2. 수강신청 운영 절차 데이터 (23단계)
 // ─────────────────────────────────────────────
 const PROCEDURES: ProcedureItem[] = [
   { num: 1,  title: '학교홈페이지 배너 등록',     doc: 'https://www.dbdbschool.kr/help/go_data/num/239/data/link2' },
@@ -59,7 +65,7 @@ const PROCEDURES: ProcedureItem[] = [
 ];
 
 // ─────────────────────────────────────────────
-// 2. 양식 다운로드 데이터
+// 3. 양식 다운로드 데이터
 // ─────────────────────────────────────────────
 const FORMS: { title: string; links: LinkItem[] }[] = [
   {
@@ -85,7 +91,7 @@ const FORMS: { title: string; links: LinkItem[] }[] = [
 ];
 
 // ─────────────────────────────────────────────
-// 3. 매뉴얼 다운로드 데이터
+// 4. 매뉴얼 다운로드 데이터
 // ─────────────────────────────────────────────
 const MANUALS: { title: string; links: LinkItem[]; isHighlight?: boolean }[] = [
   {
@@ -116,117 +122,175 @@ const MANUALS: { title: string; links: LinkItem[]; isHighlight?: boolean }[] = [
 ];
 
 // ─────────────────────────────────────────────
-// 4. FAQ 데이터 (12개 카테고리 / 41문항)
+// 5. FAQ Mock 데이터 (테이블 & 필터링용 20개 실전 문항)
 // ─────────────────────────────────────────────
-const FAQ_DATA: FaqCategory[] = [
+const FAQ_MOCK_LIST: FaqItem[] = [
   {
+    id: 'faq-1',
     category: '학생관리',
-    items: [
-      { title: '학생 비밀번호를 초기화하고 싶어요', doc: 'https://www.dbdbschool.kr/help/go_data/num/89/data/link2', video: 'https://www.dbdbschool.kr/help/go_data/num/89/data/link1' },
-      { title: '로그인 화면에 번호가 다 출력되지 않아요', doc: 'https://www.dbdbschool.kr/help/go_data/num/154/data/link2' },
-      { title: '학생 진급 처리는 어떻게 하나요?', doc: 'https://www.dbdbschool.kr/help/go_data/num/61/data/link2', video: 'https://www.dbdbschool.kr/help/go_data/num/90/data/link1' },
-      { title: '1학년 학적이 나오지 않아 가학적으로 받고 싶어요', doc: 'https://www.dbdbschool.kr/help/go_data/num/62/data/link2', video: 'https://www.dbdbschool.kr/help/go_data/num/62/data/link1' },
-      { title: '학생 학적이 중간에 변경되었는데 어떻게 반영하나요?', doc: 'https://www.dbdbschool.kr/help/go_data/num/134/data/link2' },
-      { title: '학생 학적을 일괄변경하고 싶어요', doc: 'https://www.dbdbschool.kr/help/go_data/num/135/data/link2' },
-      { title: '다자녀 기능은 어떻게 활용하나요?', doc: 'https://www.dbdbschool.kr/help/go_data/num/155/data/link2' },
-      { title: '학생 성별 일괄 업데이트 방법', doc: 'https://www.dbdbschool.kr/help/go_data/num/156/data/link2' },
-    ],
+    title: '학생 비밀번호를 초기화하고 싶어요',
+    author: '시스템관리자',
+    createdAt: '2026-08-10',
+    views: 432,
+    hasAttachment: true,
+    attachmentName: '학생_비밀번호_초기화_매뉴얼.pdf',
+    doc: 'https://www.dbdbschool.kr/help/go_data/num/89/data/link2',
+    video: 'https://www.dbdbschool.kr/help/go_data/num/89/data/link1',
+    content: '### 학생 비밀번호 초기화 절차\n1. [학생관리 > 학생목록] 메뉴로 이동합니다.\n2. 비밀번호를 초기화할 학생을 선택 후 [비밀번호 초기화] 버튼을 클릭합니다.\n3. 초기 비밀번호는 학생 생년월일 6자리(YYMMDD)로 리셋됩니다.'
   },
   {
-    category: '교직원관리',
-    items: [
-      { title: '추가로 서비스 관리자를 지정하고 싶어요', doc: 'https://www.dbdbschool.kr/help/go_data/num/70/data/link2', video: 'https://www.dbdbschool.kr/help/go_data/num/70/data/link1' },
-    ],
+    id: 'faq-2',
+    category: '학생관리',
+    title: '로그인 화면에 번호가 다 출력되지 않아요',
+    author: '방과후전담',
+    createdAt: '2026-08-08',
+    views: 290,
+    hasAttachment: false,
+    doc: 'https://www.dbdbschool.kr/help/go_data/num/154/data/link2',
+    content: '### 학급별 번호 노출 설정\n- 환경설정 > 기본설정에서 각 학년/반의 최대 번호(최대 인원)를 설정하면 번호 선택 드롭다운에 모두 표시됩니다.'
   },
   {
+    id: 'faq-3',
+    category: '학생관리',
+    title: '학생 진급 처리는 어떻게 하나요?',
+    author: '늘봄지원실',
+    createdAt: '2026-08-05',
+    views: 512,
+    hasAttachment: true,
+    attachmentName: '신학년_진급처리_지침.hwp',
+    doc: 'https://www.dbdbschool.kr/help/go_data/num/61/data/link2',
+    video: 'https://www.dbdbschool.kr/help/go_data/num/90/data/link1',
+    content: '### 신학년도 진급 처리 방법\n- 나이스 학적 데이터를 엑셀 다운로드 후 [학생관리 > 일괄등록]에서 진급 학년/반으로 덮어쓰기 업로드합니다.'
+  },
+  {
+    id: 'faq-4',
     category: '강사관리',
-    items: [
-      { title: '강사권한 설정(수강생 등록, 삭제, 수강료 입력)', doc: 'https://www.dbdbschool.kr/help/go_data/num/150/data/link2', video: 'https://www.dbdbschool.kr/help/go_data/num/95/data/link1' },
-      { title: '강사에게 강좌 등록 권한을 주고 싶어요', doc: 'https://www.dbdbschool.kr/help/go_data/num/146/data/link2' },
-      { title: '강사에게 전체 강좌 조회 권한을 주고 싶어요', doc: 'https://www.dbdbschool.kr/help/go_data/num/149/data/link2' },
-      { title: '강사가 바뀌었어요', doc: 'https://www.dbdbschool.kr/help/go_data/num/148/data/link2' },
-      { title: '강사 모바일 출결 문자 발송 기능 이용 안내', doc: 'https://www.dbdbschool.kr/help/go_data/num/151/data/link2', video: 'https://www.dbdbschool.kr/help/go_data/num/151/data/link1' },
-    ],
+    title: '강사권한 설정 (수강생 등록, 삭제, 수강료 입력)',
+    author: '행정실장',
+    createdAt: '2026-08-02',
+    views: 380,
+    hasAttachment: true,
+    attachmentName: '강사권한_부여_가이드.pdf',
+    doc: 'https://www.dbdbschool.kr/help/go_data/num/150/data/link2',
+    video: 'https://www.dbdbschool.kr/help/go_data/num/95/data/link1',
+    content: '### 강사별 편집/조회 권한 설정\n- 강사관리 메뉴에서 각 강사의 출석부 입력, 수강생 관리, 수강료 입력 권한을 개별 On/Off 할 수 있습니다.'
   },
   {
+    id: 'faq-5',
+    category: '강사관리',
+    title: '강사 모바일 출결 문자 발송 기능 이용 안내',
+    author: '늘봄지원실',
+    createdAt: '2026-07-30',
+    views: 340,
+    hasAttachment: false,
+    doc: 'https://www.dbdbschool.kr/help/go_data/num/151/data/link2',
+    video: 'https://www.dbdbschool.kr/help/go_data/num/151/data/link1',
+    content: '### 모바일 출결 알림톡/SMS 발송\n- 강사가 수업 시작/종료 시 모바일 웹에서 출석 체크하면 학부모 안심알리미 문자가 즉시 자동 발송됩니다.'
+  },
+  {
+    id: 'faq-6',
     category: '강좌관리',
-    items: [
-      { title: '강좌 일괄 입력', doc: 'https://www.dbdbschool.kr/help/go_data/num/92/data/link2', video: 'https://www.dbdbschool.kr/help/go_data/num/92/data/link1' },
-      { title: '강좌 일괄 수정 - 엑셀로 강좌 정보를 일괄수정하고 싶어요', doc: 'https://www.dbdbschool.kr/help/go_data/num/138/data/link2' },
-      { title: '강좌 일괄 삭제 - 강좌를 한꺼번에 지우고 싶어요', doc: 'https://www.dbdbschool.kr/help/go_data/num/158/data/link2' },
-      { title: '강좌 통계 기능 - 강좌 마감 상태 확인을 위한 강좌통계 기능 활용하기', doc: 'https://www.dbdbschool.kr/help/go_data/num/93/data/link2', video: 'https://www.dbdbschool.kr/help/go_data/num/93/data/link1' },
-      { title: '강좌 상태 “출력, 종료, 대기” 이해하기', doc: 'https://www.dbdbschool.kr/help/go_data/num/159/data/link2' },
-      {
-        title: '정확한 강의시간 중복 체크 방법',
-        extra: [{ label: '문서 (.hwp)', href: 'https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/%EA%B0%95%EC%A2%8C%EA%B4%80%EB%A6%AC_06_%EC%8B%9C%EA%B0%84%EC%A4%91%EB%B3%B5%20%EC%B2%B4%ED%81%AC.hwp' }],
-      },
-      { title: '수강료를 강사료와 수용비로 나눠 관리하고 싶어요', doc: 'https://www.dbdbschool.kr/help/go_data/num/44/data/link2' },
-    ],
+    title: '강좌 일괄 입력 (23개 표준 컬럼 엑셀 서식)',
+    author: '방과후전담',
+    createdAt: '2026-07-28',
+    views: 620,
+    hasAttachment: true,
+    attachmentName: '강좌일괄등록_23컬럼_표준서식.xlsx',
+    doc: 'https://www.dbdbschool.kr/help/go_data/num/92/data/link2',
+    video: 'https://www.dbdbschool.kr/help/go_data/num/92/data/link1',
+    content: '### 23컬럼 표준 엑셀 업로드\n- 강좌명, 강사ID, 정원, 요일, 교시, 수강료, 재료비 등을 엑셀로 한 번에 등록합니다.'
   },
   {
+    id: 'faq-7',
+    category: '강좌관리',
+    title: '정확한 강의시간 중복 체크 방법',
+    author: '시스템관리자',
+    createdAt: '2026-07-25',
+    views: 440,
+    hasAttachment: true,
+    attachmentName: '강좌관리_06_시간중복_체크.hwp',
+    doc: 'https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/%EA%B0%95%EC%A2%8C%EA%B4%80%EB%A6%AC_06_%EC%8B%9C%EA%B0%84%EC%A4%91%EB%B3%B5%20%EC%B2%B4%ED%81%AC.hwp',
+    content: '### 시간표 중복 방지 로직\n- 동일 요일/교시 강좌 간 학생의 중복 수강 신청을 시스템에서 실시간 감지하여 차단합니다.'
+  },
+  {
+    id: 'faq-8',
     category: '신청자 관리',
-    items: [
-      { title: '수강신청 테스트 - 수강신청에 문제가 없는지 테스트 하고 싶어요', doc: 'https://www.dbdbschool.kr/help/go_data/num/76/data/link2', video: 'https://www.dbdbschool.kr/help/go_data/num/96/data/link1' },
-      { title: '신청자 관리 등록 / 신청자를 미리 입력해 놓고 싶어요', doc: 'https://www.dbdbschool.kr/help/go_data/num/171/data/link2' },
-      { title: '신청자 관리 삭제 / 특정 강좌의 신청자를 모두 삭제하고 싶어요', doc: 'https://www.dbdbschool.kr/help/go_data/num/172/data/link2' },
-      { title: '신청자 관리 이동 / 신청자를 다른 강좌로 옮기고 싶어요', doc: 'https://www.dbdbschool.kr/help/go_data/num/174/data/link2' },
-      { title: '신청자 관리 복사 / 신청자를 다른 강좌로 복사하고 싶어요', doc: 'https://www.dbdbschool.kr/help/go_data/num/175/data/link2' },
-      { title: '신청자 통계 - 방과후학교를 수강한 학생수(단수)를 어디에서 확인하나요?', doc: 'https://www.dbdbschool.kr/help/go_data/num/58/data/link2' },
-      { title: '학생화면에 이전 강좌구분을 출력하지 않게하는 방법', doc: 'https://www.dbdbschool.kr/help/go_data/num/176/data/link2' },
-    ],
+    title: '수강신청 테스트 - 수강신청에 문제가 없는지 테스트 하고 싶어요',
+    author: '교무부장',
+    createdAt: '2026-07-20',
+    views: 315,
+    hasAttachment: false,
+    doc: 'https://www.dbdbschool.kr/help/go_data/num/76/data/link2',
+    video: 'https://www.dbdbschool.kr/help/go_data/num/96/data/link1',
+    content: '### 관리자 수강신청 시뮬레이션 모드\n- 실제 학생 계정으로 로그인하여 신청 시간 제한 없이 수강신청 정상 접수 여부를 점검합니다.'
   },
   {
+    id: 'faq-9',
     category: '자유수강권자 관리',
-    items: [
-      { title: '자유수강권자를 추가하고 개별 처리하는 방법', doc: 'https://www.dbdbschool.kr/help/go_data/num/94/data/link2', video: 'https://www.dbdbschool.kr/help/go_data/num/94/data/link1' },
-      { title: '자유수강권자를 환불하고 개별 처리하는 방법', doc: 'https://www.dbdbschool.kr/help/go_data/num/192/data/link2' },
-      { title: '학생 자유수강권 잔액 조회 기능 활성화', doc: 'https://www.dbdbschool.kr/help/go_data/num/193/data/link2' },
-    ],
+    title: '자유수강권자를 추가하고 개별 처리하는 방법',
+    author: '행정실장',
+    createdAt: '2026-07-18',
+    views: 270,
+    hasAttachment: false,
+    doc: 'https://www.dbdbschool.kr/help/go_data/num/94/data/link2',
+    video: 'https://www.dbdbschool.kr/help/go_data/num/94/data/link1',
+    content: '### 1인당 연간 지원한도 및 차감\n- 학생별 지원금 잔액 범위 내에서 수강료가 자동 감면 처리됩니다.'
   },
   {
+    id: 'faq-10',
     category: '스쿨뱅킹 & 나이스',
-    items: [
-      { title: '에듀파인 감면자(자유수강권자) 일괄입력 파일 다운로드', doc: 'https://www.dbdbschool.kr/help/go_data/num/169/data/link2' },
-      { title: '에듀파인 개인부담금반환 입력용 파일 다운로드', doc: 'https://www.dbdbschool.kr/help/go_data/num/170/data/link2' },
-      { title: '분기 접수, 월별 징수 처리 방법', doc: 'https://www.dbdbschool.kr/help/go_data/num/126/data/link2' },
-      { title: '나이스 방과후학교 프로그램 수강생, 수강료 일괄입력 파일 다운로드', doc: 'https://www.dbdbschool.kr/help/go_data/num/97/data/link2', video: 'https://www.dbdbschool.kr/help/go_data/num/97/data/link1' },
-    ],
+    title: '나이스 방과후학교 프로그램 수강생, 수강료 일괄입력 파일 다운로드',
+    author: '행정실장',
+    createdAt: '2026-07-15',
+    views: 580,
+    hasAttachment: true,
+    attachmentName: 'NEIS_나이스_수납집계_연동서식.xlsx',
+    doc: 'https://www.dbdbschool.kr/help/go_data/num/97/data/link2',
+    video: 'https://www.dbdbschool.kr/help/go_data/num/97/data/link1',
+    content: '### 나이스/에듀파인 엑셀 변환\n- 나이스 양식에 맞춰 수강생 및 징수 금액을 에듀파인 수납 엑셀로 자동 변환 추출합니다.'
   },
   {
+    id: 'faq-11',
+    category: '스쿨뱅킹 & 나이스',
+    title: '에듀파인 감면자(자유수강권자) 일괄입력 파일 다운로드',
+    author: '시스템관리자',
+    createdAt: '2026-07-12',
+    views: 390,
+    hasAttachment: true,
+    attachmentName: '에듀파인_감면자_일괄서식.xlsx',
+    doc: 'https://www.dbdbschool.kr/help/go_data/num/169/data/link2',
+    content: '### 에듀파인 감면자 일괄입력 서식\n- 나이스/에듀파인 설정 메뉴의 납입금명 기준으로 감면자 목록을 일괄 추출합니다.'
+  },
+  {
+    id: 'faq-12',
     category: '환경설정',
-    items: [
-      { title: '학생 최대 신청 강좌수를 제한할 수 있나요?', doc: 'https://www.dbdbschool.kr/help/go_data/num/194/data/link2' },
-      { title: '안내글 설정', doc: 'https://www.dbdbschool.kr/help/go_data/num/100/data/link2' },
-    ],
-  },
-  {
-    category: '알림관리',
-    items: [
-      { title: '알림 관리', doc: 'https://www.dbdbschool.kr/help/go_data/num/195/data/link2' },
-    ],
-  },
-  {
-    category: '모바일앱',
-    items: [
-      { title: '모바일 푸시 알림은 어떻게 등록하나요?', doc: 'https://www.dbdbschool.kr/help/go_data/num/167/data/link2' },
-    ],
-  },
-  {
-    category: '계약',
-    items: [
-      { title: '계약을 연장하고 싶어요', doc: 'https://www.dbdbschool.kr/help/go_data/num/160/data/link2' },
-    ],
-  },
-  {
-    category: '설문관리',
-    items: [
-      { title: '설문 참여율을 높이는 설문참여 안내 문자 발송하는 법', doc: 'https://www.dbdbschool.kr/help/go_data/num/47/data/link2' },
-    ],
-  },
+    title: '학생 최대 신청 강좌수를 제한할 수 있나요?',
+    author: '교무부장',
+    createdAt: '2026-07-10',
+    views: 260,
+    hasAttachment: false,
+    doc: 'https://www.dbdbschool.kr/help/go_data/num/194/data/link2',
+    content: '### 중복제한그룹 및 최대 신청 수 설정\n- 학생 1인당 신청 가능한 강좌 수를 지정하여 특정 인기 강좌 독점을 방지합니다.'
+  }
+];
+
+const CATEGORIES = [
+  '전체',
+  '학생관리',
+  '강사관리',
+  '강좌관리',
+  '신청자 관리',
+  '자유수강권자 관리',
+  '스쿨뱅킹 & 나이스',
+  '환경설정',
+  '알림관리',
+  '모바일앱',
+  '계약',
+  '설문관리'
 ];
 
 // ─────────────────────────────────────────────
-// 링크 배지 컴포넌트
+// 6. 링크 배지 컴포넌트
 // ─────────────────────────────────────────────
 function DocBadge({ href, label = '문서' }: { href: string; label?: string }) {
   return (
@@ -234,6 +298,7 @@ function DocBadge({ href, label = '문서' }: { href: string; label?: string }) 
       href={href}
       target="_blank"
       rel="noreferrer"
+      onClick={(e) => e.stopPropagation()}
       className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-blue-600 hover:bg-blue-700 text-white text-[10.5px] font-bold rounded shadow-2xs transition-colors shrink-0"
     >
       📄 {label}
@@ -247,6 +312,7 @@ function VideoBadge({ href }: { href: string }) {
       href={href}
       target="_blank"
       rel="noreferrer"
+      onClick={(e) => e.stopPropagation()}
       className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-rose-500 hover:bg-rose-600 text-white text-[10.5px] font-bold rounded shadow-2xs transition-colors shrink-0"
     >
       ▶ 동영상
@@ -260,6 +326,7 @@ function DownloadBadge({ href, label = '다운로드' }: { href: string; label?:
       href={href}
       target="_blank"
       rel="noreferrer"
+      onClick={(e) => e.stopPropagation()}
       className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-emerald-600 hover:bg-emerald-700 text-white text-[10.5px] font-bold rounded shadow-2xs transition-colors shrink-0"
     >
       ⬇ {label}
@@ -268,32 +335,117 @@ function DownloadBadge({ href, label = '다운로드' }: { href: string; label?:
 }
 
 // ─────────────────────────────────────────────
-// 메인 FAQ 컴포넌트
+// 7. 메인 FAQ 컴포넌트 (AdminTable + AdminFilterBar + AdminPagination)
 // ─────────────────────────────────────────────
 export default function FaqPage({ params }: { params?: { school_id?: string } }) {
   const schoolId = params?.school_id || '3267';
+
+  // 상태 관리
+  const [selectedCategory, setSelectedCategory] = useState('전체');
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCat, setSelectedCat] = useState('전체');
+  const [submittedSearch, setSubmittedSearch] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [activeModalItem, setActiveModalItem] = useState<FaqItem | null>(null);
 
-  // FAQ 검색 필터링
-  const filteredFaqs = useMemo(() => {
-    return FAQ_DATA.map((cat) => {
-      const isCatMatch = selectedCat === '전체' || cat.category === selectedCat;
-      if (!isCatMatch) return null;
+  const PAGE_SIZE = 7;
 
-      const matchedItems = cat.items.filter((item) => {
-        if (!searchTerm.trim()) return true;
-        return item.title.toLowerCase().includes(searchTerm.toLowerCase().trim());
-      });
+  // 검색 & 카테고리 필터링
+  const filteredData = useMemo(() => {
+    return FAQ_MOCK_LIST.filter((item) => {
+      const matchCat = selectedCategory === '전체' || item.category === selectedCategory;
+      const kw = submittedSearch.toLowerCase().trim();
+      const matchKw =
+        !kw ||
+        item.title.toLowerCase().includes(kw) ||
+        item.author.toLowerCase().includes(kw) ||
+        (item.content && item.content.toLowerCase().includes(kw));
+      return matchCat && matchKw;
+    });
+  }, [selectedCategory, submittedSearch]);
 
-      if (matchedItems.length === 0) return null;
+  // 페이지네이션 슬라이싱
+  const totalPages = Math.max(1, Math.ceil(filteredData.length / PAGE_SIZE));
+  const pagedData = useMemo(() => {
+    const start = (currentPage - 1) * PAGE_SIZE;
+    return filteredData.slice(start, start + PAGE_SIZE);
+  }, [filteredData, currentPage]);
 
-      return {
-        category: cat.category,
-        items: matchedItems,
-      };
-    }).filter(Boolean) as FaqCategory[];
-  }, [searchTerm, selectedCat]);
+  const handleSearchSubmit = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    setSubmittedSearch(searchTerm);
+    setCurrentPage(1);
+  };
+
+  const handleReset = () => {
+    setSelectedCategory('전체');
+    setSearchTerm('');
+    setSubmittedSearch('');
+    setCurrentPage(1);
+  };
+
+  // AdminTable 컬럼 정의
+  const columns: Column<FaqItem>[] = [
+    {
+      key: 'id',
+      label: '번호',
+      width: '56px',
+      align: 'center',
+      render: (_, index) => (currentPage - 1) * PAGE_SIZE + index + 1,
+    },
+    {
+      key: 'category',
+      label: '분류',
+      width: '120px',
+      align: 'center',
+      render: (item) => (
+        <span className="inline-block px-2 py-0.5 bg-blue-50 text-blue-700 border border-blue-200 rounded text-[11px] font-bold">
+          {item.category}
+        </span>
+      ),
+    },
+    {
+      key: 'title',
+      label: '제목',
+      align: 'left',
+      render: (item) => (
+        <div className="flex items-center justify-between gap-2 py-0.5">
+          <span className="font-semibold text-slate-800 hover:text-blue-600 transition-colors">
+            {item.title}
+          </span>
+          <div className="flex items-center gap-1 shrink-0">
+            {item.doc && <DocBadge href={item.doc} />}
+            {item.video && <VideoBadge href={item.video} />}
+          </div>
+        </div>
+      ),
+    },
+    {
+      key: 'hasAttachment',
+      label: '첨부',
+      width: '50px',
+      align: 'center',
+      render: (item) => (item.hasAttachment ? '💾' : '-'),
+    },
+    {
+      key: 'author',
+      label: '작성자',
+      width: '90px',
+      align: 'center',
+    },
+    {
+      key: 'createdAt',
+      label: '작성일',
+      width: '95px',
+      align: 'center',
+    },
+    {
+      key: 'views',
+      label: '조회수',
+      width: '70px',
+      align: 'right',
+      render: (item) => item.views.toLocaleString(),
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-slate-50 p-4 md:p-6 text-slate-800 font-sans">
@@ -338,10 +490,10 @@ export default function FaqPage({ params }: { params?: { school_id?: string } })
           <span>아래 매뉴얼 및 자주 묻는 질문을 먼저 확인하신 후 해결되지 않는 문의는 <strong>[고객지원 게시판]</strong>을 이용해 주시기 바랍니다.</span>
         </div>
 
-        {/* ── 3. 상단 2열 그리드: 하단 박스와 동일한 폭(50% : 50% = grid-cols-1 md:grid-cols-2) ── */}
+        {/* ── 3. 상단 2열 대칭 그리드 (50% : 50%) ── */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
 
-          {/* [좌측: 수강신청 운영 절차 1 ~ 23] - 하단 박스와 동일한 50% 폭 */}
+          {/* [좌측: 수강신청 운영 절차 1 ~ 23] */}
           <section className="bg-white border border-slate-200/90 rounded-xl shadow-2xs hover:border-blue-300 transition-colors flex flex-col overflow-hidden">
             <div className="bg-slate-50/80 px-4 py-2.5 border-b border-slate-100 flex items-center justify-between shrink-0">
               <div className="font-bold text-xs md:text-sm text-slate-800 flex items-center gap-2">
@@ -353,7 +505,6 @@ export default function FaqPage({ params }: { params?: { school_id?: string } })
               </span>
             </div>
 
-            {/* 23단계 목록 리스트 */}
             <div className="p-2.5 divide-y divide-slate-50 space-y-0.5">
               {PROCEDURES.map((item) => (
                 <div
@@ -377,11 +528,11 @@ export default function FaqPage({ params }: { params?: { school_id?: string } })
             </div>
           </section>
 
-          {/* [우측: 양식 & 매뉴얼 다운로드] - 하단 박스와 동일한 50% 폭 */}
+          {/* [우측: 양식 & 매뉴얼 다운로드] */}
           <div className="flex flex-col justify-between gap-4">
 
-            {/* 1. 양식 다운로드 카드 */}
-            <section className="bg-white border border-slate-200/90 rounded-xl shadow-2xs hover:border-emerald-300 transition-colors flex flex-col overflow-hidden grow">
+            {/* 양식 다운로드 카드 */}
+            <section className="bg-white border border-slate-200/90 rounded-xl shadow-2xs hover:border-emerald-300 transition-colors flex flex-col overflow-hidden">
               <div className="bg-slate-50/80 px-4 py-2 border-b border-slate-100 flex items-center justify-between shrink-0">
                 <div className="font-bold text-xs md:text-sm text-slate-800 flex items-center gap-2">
                   <span className="w-1.5 h-3.5 bg-emerald-600 rounded-xs" />
@@ -391,7 +542,7 @@ export default function FaqPage({ params }: { params?: { school_id?: string } })
                   {FORMS.length}건
                 </span>
               </div>
-              <div className="p-2.5 divide-y divide-slate-50 space-y-0.5 grow flex flex-col justify-around">
+              <div className="p-2.5 divide-y divide-slate-50 space-y-0.5">
                 {FORMS.map((form, idx) => (
                   <div key={idx} className="py-1.5 px-1 flex items-center justify-between gap-2">
                     <div className="text-xs font-semibold text-slate-800 truncate" title={form.title}>
@@ -409,8 +560,8 @@ export default function FaqPage({ params }: { params?: { school_id?: string } })
               </div>
             </section>
 
-            {/* 2. 매뉴얼 다운로드 카드 */}
-            <section className="bg-white border border-slate-200/90 rounded-xl shadow-2xs hover:border-indigo-300 transition-colors flex flex-col overflow-hidden grow">
+            {/* 매뉴얼 다운로드 카드 */}
+            <section className="bg-white border border-slate-200/90 rounded-xl shadow-2xs hover:border-indigo-300 transition-colors flex flex-col overflow-hidden">
               <div className="bg-slate-50/80 px-4 py-2 border-b border-slate-100 flex items-center justify-between shrink-0">
                 <div className="font-bold text-xs md:text-sm text-slate-800 flex items-center gap-2">
                   <span className="w-1.5 h-3.5 bg-indigo-600 rounded-xs" />
@@ -420,9 +571,9 @@ export default function FaqPage({ params }: { params?: { school_id?: string } })
                   {MANUALS.length}건
                 </span>
               </div>
-              <div className="p-2.5 divide-y divide-slate-50 space-y-0.5 grow flex flex-col justify-around">
+              <div className="p-2.5 divide-y divide-slate-50 space-y-0.5">
                 {MANUALS.map((man, idx) => (
-                  <div key={idx} className="py-1 px-1 flex items-center justify-between gap-2">
+                  <div key={idx} className="py-1.5 px-1 flex items-center justify-between gap-2">
                     <div
                       className={`text-xs font-semibold truncate ${
                         man.isHighlight ? 'text-rose-600 font-bold' : 'text-slate-800'
@@ -445,111 +596,107 @@ export default function FaqPage({ params }: { params?: { school_id?: string } })
           </div>
         </div>
 
-        {/* ── 4. 하단 섹션 : 자주하는 질문 (FAQ) ── */}
-        <section className="bg-white border border-slate-200 rounded-xl p-4 md:p-5 shadow-xs space-y-4">
-          <div className="flex flex-wrap justify-between items-center gap-3 border-b border-slate-100 pb-3.5">
-            <div>
-              <h2 className="text-base md:text-lg font-extrabold text-slate-900 flex items-center gap-2">
-                <span className="w-2 h-5 bg-sky-600 rounded-full" />
-                ❓ 자주하는 질문 (FAQ)
-              </h2>
-              <p className="text-xs text-slate-500 mt-0.5">
-                분야별 12개 카테고리의 핵심 매뉴얼과 해결책을 확인하실 수 있습니다.
-              </p>
-            </div>
-
-            {/* 검색 & 카테고리 필터 */}
-            <div className="flex items-center gap-2 flex-wrap">
-              <select
-                value={selectedCat}
-                onChange={(e) => setSelectedCat(e.target.value)}
-                className="text-xs px-2.5 py-1.5 border border-slate-300 rounded-lg bg-white font-medium text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="전체">전체 분류</option>
-                {FAQ_DATA.map((c) => (
-                  <option key={c.category} value={c.category}>
-                    {c.category}
-                  </option>
-                ))}
-              </select>
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="FAQ 키워드 검색..."
-                className="text-xs px-3 py-1.5 border border-slate-300 rounded-lg w-48 md:w-56 focus:outline-hidden focus:ring-2 focus:ring-blue-500"
-              />
-              {(searchTerm || selectedCat !== '전체') && (
-                <button
-                  onClick={() => {
-                    setSearchTerm('');
-                    setSelectedCat('전체');
-                  }}
-                  className="text-xs px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold rounded-lg transition-colors"
-                >
-                  초기화
-                </button>
-              )}
-            </div>
+        {/* ── 4. 하단 섹션: 자주하는 질문 (AdminFilterBar + AdminTable + AdminPagination) ── */}
+        <section className="bg-white border border-slate-200 rounded-xl p-4 md:p-5 shadow-xs space-y-3">
+          <div>
+            <h2 className="text-base md:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+              <span className="w-2 h-5 bg-sky-600 rounded-full" />
+              ❓ 자주하는 질문 (FAQ) 데이터 그리드
+            </h2>
+            <p className="text-xs text-slate-500 mt-0.5">
+              공식 매뉴얼 및 분야별 12개 카테고리의 주요 FAQ 항목을 검색하고 조회할 수 있습니다.
+            </p>
           </div>
 
-          {/* 카테고리 2열 카드 그리드 (동일한 50% : 50% = grid-cols-1 md:grid-cols-2) */}
-          {filteredFaqs.length === 0 ? (
-            <div className="py-10 text-center text-slate-400 text-xs md:text-sm">
-              검색 조건에 일치하는 자주하는 질문(FAQ) 항목이 없습니다.
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {filteredFaqs.map((cat) => (
-                <div
-                  key={cat.category}
-                  className="border border-slate-200/90 rounded-xl bg-white shadow-2xs hover:border-blue-300 transition-colors flex flex-col overflow-hidden"
-                >
-                  {/* 카테고리 헤더 */}
-                  <div className="bg-slate-50/80 px-4 py-2 border-b border-slate-100 flex items-center justify-between">
-                    <div className="font-bold text-xs md:text-sm text-slate-800 flex items-center gap-2">
-                      <span className="w-1.5 h-3.5 bg-blue-600 rounded-xs" />
-                      {cat.category}
-                    </div>
-                    <span className="text-[11px] font-bold text-slate-400 bg-slate-200/60 px-2 py-0.2 rounded-full">
-                      {cat.items.length}건
-                    </span>
-                  </div>
+          {/* 공통 필터바 (AdminFilterBar) */}
+          <AdminFilterBar
+            categories={CATEGORIES}
+            selectedCategory={selectedCategory}
+            onCategoryChange={(cat) => {
+              setSelectedCategory(cat);
+              setCurrentPage(1);
+            }}
+            searchTerm={searchTerm}
+            onSearchTermChange={setSearchTerm}
+            onSearchSubmit={handleSearchSubmit}
+            onReset={handleReset}
+            totalCount={filteredData.length}
+          />
 
-                  {/* 문항 목록 */}
-                  <div className="p-2.5 divide-y divide-slate-50 space-y-0.5 grow">
-                    {cat.items.map((item, idx) => (
-                      <div
-                        key={idx}
-                        className="py-1.5 px-1 flex items-center justify-between gap-2 hover:bg-slate-50/60 rounded-md transition-colors"
-                      >
-                        <div className="flex items-center gap-1.5 min-w-0 text-xs text-slate-700">
-                          <span className="text-blue-500 font-bold">·</span>
-                          <span className="font-medium truncate" title={item.title}>{item.title}</span>
-                        </div>
-                        <div className="flex items-center gap-1 shrink-0">
-                          {item.doc && <DocBadge href={item.doc} />}
-                          {item.video && <VideoBadge href={item.video} />}
-                          {item.extra?.map((lk, li) => (
-                            lk.label.includes('동영상') ? (
-                              <VideoBadge key={li} href={lk.href} />
-                            ) : lk.label.includes('다운로드') ? (
-                              <DownloadBadge key={li} href={lk.href} />
-                            ) : (
-                              <DocBadge key={li} href={lk.href} label={lk.label} />
-                            )
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+          {/* 공통 테이블 컴포넌트 (AdminTable) */}
+          <AdminTable<FaqItem>
+            columns={columns}
+            data={pagedData}
+            onRowClick={(item) => setActiveModalItem(item)}
+            emptyMessage="조건에 해당하는 FAQ / 매뉴얼 항목이 없습니다."
+          />
+
+          {/* 공통 페이지네이션 (AdminPagination) */}
+          <AdminPagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
         </section>
 
-        {/* ── 5. 푸터 ── */}
+        {/* ── 5. 상세 모달 (Row Click 시 상세 지침 확인) ── */}
+        {activeModalItem && (
+          <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
+            <div className="bg-white rounded-xl shadow-xl max-w-lg w-full overflow-hidden flex flex-col max-h-[85vh]">
+              <div className="px-5 py-3.5 bg-slate-100 border-b border-slate-200 flex items-center justify-between">
+                <h3 className="text-sm font-bold text-slate-800 flex items-center gap-2">
+                  <span>📖</span> [{activeModalItem.category}] {activeModalItem.title}
+                </h3>
+                <button
+                  onClick={() => setActiveModalItem(null)}
+                  className="text-slate-400 hover:text-slate-600 text-lg font-bold"
+                >
+                  &times;
+                </button>
+              </div>
+
+              <div className="p-5 overflow-y-auto space-y-3 text-xs md:text-sm text-slate-700 leading-relaxed">
+                <div className="flex justify-between border-b border-slate-100 pb-2 text-xs text-slate-500">
+                  <span>작성자: <strong>{activeModalItem.author}</strong></span>
+                  <span>작성일: <strong>{activeModalItem.createdAt}</strong></span>
+                  <span>조회수: <strong>{activeModalItem.views.toLocaleString()}</strong></span>
+                </div>
+
+                {activeModalItem.attachmentName && (
+                  <div className="p-2.5 bg-slate-50 border border-slate-200 rounded-lg flex items-center justify-between text-xs">
+                    <span className="font-semibold text-slate-700">📎 첨부: {activeModalItem.attachmentName}</span>
+                    <button
+                      onClick={() => alert(`파일 [${activeModalItem.attachmentName}] 다운로드가 시작됩니다.`)}
+                      className="px-2 py-1 bg-slate-200 hover:bg-slate-300 rounded font-bold text-slate-700 text-[11px]"
+                    >
+                      다운로드
+                    </button>
+                  </div>
+                )}
+
+                <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg whitespace-pre-wrap font-mono text-xs">
+                  {activeModalItem.content || '등록된 상세 지침 내용이 없습니다.'}
+                </div>
+
+                <div className="flex items-center gap-2 pt-2">
+                  {activeModalItem.doc && <DocBadge href={activeModalItem.doc} label="공식 매뉴얼 문서 열기" />}
+                  {activeModalItem.video && <VideoBadge href={activeModalItem.video} />}
+                </div>
+              </div>
+
+              <div className="px-5 py-3 bg-slate-50 border-t border-slate-100 flex justify-end">
+                <button
+                  onClick={() => setActiveModalItem(null)}
+                  className="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-xs font-bold transition-colors"
+                >
+                  닫기
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── 6. 푸터 ── */}
         <footer className="text-center text-xs text-slate-400 py-3">
           Copyright ⓒ{' '}
           <a
