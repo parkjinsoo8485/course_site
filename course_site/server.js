@@ -1657,23 +1657,549 @@ app.use((req, res, next) => {
     const directIndexPath = path.join(__dirname, 'sczigi', cleanPath, 'index.html');
     const directHtmlPath = path.join(__dirname, 'sczigi', `${cleanPath}.html`);
     const fallbackSnPath = path.join(__dirname, 'sczigi', cleanPath, 'sn', '3267', 'index.html');
-    if (fs.existsSync(directIndexPath)) {
-      return res.sendFile(directIndexPath);
-    }
-    if (fs.existsSync(directHtmlPath)) {
-      return res.sendFile(directHtmlPath);
-    }
-    if (fs.existsSync(fallbackSnPath)) {
-      return res.sendFile(fallbackSnPath);
+    if (fs.existsSync(directIndexPath)) return res.sendFile(directIndexPath);
+    if (fs.existsSync(directHtmlPath)) return res.sendFile(directHtmlPath);
+    if (fs.existsSync(fallbackSnPath)) return res.sendFile(fallbackSnPath);
+  }
+
+  if (req.path && req.path.startsWith('/af/')) {
+    const cleanPath = req.path.replace(/^\/af\//, '').replace(/\/$/, '');
+    const directIndexPath = path.join(__dirname, 'af', cleanPath, 'index.html');
+    const directHtmlPath = path.join(__dirname, 'af', `${cleanPath}.html`);
+    const fallbackSnPath = path.join(__dirname, 'af', cleanPath, 'sn', '3267', 'index.html');
+    const exactFile = path.join(__dirname, req.path.replace(/\/$/, ''), 'index.html');
+    if (fs.existsSync(exactFile)) return res.sendFile(exactFile);
+    if (fs.existsSync(directIndexPath)) return res.sendFile(directIndexPath);
+    if (fs.existsSync(directHtmlPath)) return res.sendFile(directHtmlPath);
+    if (fs.existsSync(fallbackSnPath)) return res.sendFile(fallbackSnPath);
+  }
+
+// ==================== APPLICANT MANAGEMENT (ad_app) API & ROUTES ====================
+let applicantDb = [
+  {
+    id: 'app_712',
+    seq: 712,
+    period: '26년 8월 늘봄',
+    courseId: 'c_1',
+    courseTitle: '(금) 돌봄 4부',
+    instructorName: '김민지',
+    grade: 1,
+    classNum: 1,
+    studentNum: 10,
+    gradeClass: '1학년 1반',
+    studentName: '오하율',
+    parentPhone: '010-3718-3500',
+    tuitionFee: 0,
+    accommodationFee: 0,
+    teacherFee: 0,
+    bookFee: 0,
+    materialFee: 0,
+    totalFee: 0,
+    subsidyType: '늘봄 무상지원',
+    paymentStatus: '무상',
+    status: '승인',
+    appliedAt: '2026-07-10 15:28:38',
+    bankName: '농협',
+    schoolBankingAccount: '302-1234-5678-01',
+    depositorName: '오태양',
+    memo: ''
+  },
+  {
+    id: 'app_711',
+    seq: 711,
+    period: '26년 8월 늘봄',
+    courseId: 'c_1',
+    courseTitle: '(금) 돌봄 4부',
+    instructorName: '김민지',
+    grade: 1,
+    classNum: 1,
+    studentNum: 11,
+    gradeClass: '1학년 1반',
+    studentName: '이소윤',
+    parentPhone: '010-3718-3500',
+    tuitionFee: 0,
+    accommodationFee: 0,
+    teacherFee: 0,
+    bookFee: 0,
+    materialFee: 0,
+    totalFee: 0,
+    subsidyType: '늘봄 무상지원',
+    paymentStatus: '무상',
+    status: '승인',
+    appliedAt: '2026-07-10 15:26:54',
+    bankName: '국민은행',
+    schoolBankingAccount: '648201-01-234567',
+    depositorName: '이진수',
+    memo: ''
+  },
+  {
+    id: 'app_710',
+    seq: 710,
+    period: '26년 8월 늘봄',
+    courseId: 'c_1',
+    courseTitle: '(금) 돌봄 4부',
+    instructorName: '김민지',
+    grade: 1,
+    classNum: 1,
+    studentNum: 13,
+    gradeClass: '1학년 1반',
+    studentName: '이치린',
+    parentPhone: '010-9876-5432',
+    tuitionFee: 0,
+    accommodationFee: 0,
+    teacherFee: 0,
+    bookFee: 0,
+    materialFee: 0,
+    totalFee: 0,
+    subsidyType: '늘봄 무상지원',
+    paymentStatus: '무상',
+    status: '승인',
+    appliedAt: '2026-07-10 15:27:53',
+    bankName: '신한은행',
+    schoolBankingAccount: '110-234-567890',
+    depositorName: '이동현',
+    memo: ''
+  },
+  {
+    id: 'app_709',
+    seq: 709,
+    period: '26년 8월 늘봄',
+    courseId: 'c_1',
+    courseTitle: '(금) 돌봄 4부',
+    instructorName: '김민지',
+    grade: 1,
+    classNum: 1,
+    studentNum: 14,
+    gradeClass: '1학년 1반',
+    studentName: '장희조',
+    parentPhone: '010-5334-7217',
+    tuitionFee: 0,
+    accommodationFee: 0,
+    teacherFee: 0,
+    bookFee: 0,
+    materialFee: 0,
+    totalFee: 0,
+    subsidyType: '늘봄 무상지원',
+    paymentStatus: '무상',
+    status: '승인',
+    appliedAt: '2026-07-10 15:29:29',
+    bankName: '카카오뱅크',
+    schoolBankingAccount: '3333-01-9876543',
+    depositorName: '장성식',
+    memo: ''
+  },
+  {
+    id: 'app_708',
+    seq: 708,
+    period: '26년 8월 늘봄',
+    courseId: 'c_1',
+    courseTitle: '(금) 돌봄 4부',
+    instructorName: '김민지',
+    grade: 1,
+    classNum: 1,
+    studentNum: 17,
+    gradeClass: '1학년 1반',
+    studentName: '최다연',
+    parentPhone: '010-5219-2196',
+    tuitionFee: 0,
+    accommodationFee: 0,
+    teacherFee: 0,
+    bookFee: 0,
+    materialFee: 0,
+    totalFee: 0,
+    subsidyType: '늘봄 지원금',
+    paymentStatus: '결제완료',
+    status: '승인',
+    appliedAt: '2026-07-10 15:27:16',
+    bankName: '우리은행',
+    schoolBankingAccount: '1002-123-456789',
+    depositorName: '최병서',
+    memo: ''
+  },
+  {
+    id: 'app_707',
+    seq: 707,
+    period: '26년 8월 늘봄',
+    courseId: 'c_1',
+    courseTitle: '(금) 돌봄 4부',
+    instructorName: '김민지',
+    grade: 1,
+    classNum: 1,
+    studentNum: 18,
+    gradeClass: '1학년 1반',
+    studentName: '최연우',
+    parentPhone: '010-1122-3344',
+    tuitionFee: 35000,
+    accommodationFee: 0,
+    teacherFee: 0,
+    bookFee: 0,
+    materialFee: 0,
+    totalFee: 35000,
+    subsidyType: '일반 자부담',
+    paymentStatus: '결제완료',
+    status: '승인',
+    appliedAt: '2026-07-10 15:27:36',
+    bankName: '농협',
+    schoolBankingAccount: '351-0123-4567-89',
+    depositorName: '최민수',
+    memo: ''
+  },
+  {
+    id: 'app_706',
+    seq: 706,
+    period: '26년 8월 늘봄',
+    courseId: 'c_1',
+    courseTitle: '(금) 돌봄 4부',
+    instructorName: '김민지',
+    grade: 1,
+    classNum: 1,
+    studentNum: 19,
+    gradeClass: '1학년 1반',
+    studentName: '최유나',
+    parentPhone: '010-3373-3683',
+    tuitionFee: 35000,
+    accommodationFee: 0,
+    teacherFee: 0,
+    bookFee: 0,
+    materialFee: 0,
+    totalFee: 35000,
+    subsidyType: '일반 자부담',
+    paymentStatus: '결제대기',
+    status: '신청대기',
+    appliedAt: '2026-07-10 15:31:04',
+    bankName: '하나은행',
+    schoolBankingAccount: '123-910111-12131',
+    depositorName: '최광철',
+    memo: ''
+  },
+  {
+    id: 'app_705',
+    seq: 705,
+    period: '26년 8월 늘봄',
+    courseId: 'c_1',
+    courseTitle: '(금) 돌봄 4부',
+    instructorName: '김민지',
+    grade: 1,
+    classNum: 2,
+    studentNum: 2,
+    gradeClass: '1학년 2반',
+    studentName: '김혼성',
+    parentPhone: '010-9073-5302',
+    tuitionFee: 0,
+    accommodationFee: 0,
+    teacherFee: 0,
+    bookFee: 0,
+    materialFee: 0,
+    totalFee: 0,
+    subsidyType: '늘봄 무상지원',
+    paymentStatus: '무상',
+    status: '승인',
+    appliedAt: '2026-07-10 15:28:24',
+    bankName: '기업은행',
+    schoolBankingAccount: '010-9073-5302',
+    depositorName: '김성태',
+    memo: ''
+  },
+  {
+    id: 'app_704',
+    seq: 704,
+    period: '26년 8월 늘봄',
+    courseId: 'c_1',
+    courseTitle: '(금) 돌봄 4부',
+    instructorName: '김민지',
+    grade: 1,
+    classNum: 2,
+    studentNum: 3,
+    gradeClass: '1학년 2반',
+    studentName: '노수지',
+    parentPhone: '010-5445-0930',
+    tuitionFee: 0,
+    accommodationFee: 0,
+    teacherFee: 0,
+    bookFee: 0,
+    materialFee: 0,
+    totalFee: 0,
+    subsidyType: '늘봄 무상지원',
+    paymentStatus: '무상',
+    status: '승인',
+    appliedAt: '2026-07-10 15:28:20',
+    bankName: '농협',
+    schoolBankingAccount: '301-4455-6677-88',
+    depositorName: '노철웅',
+    memo: ''
+  }
+];
+
+let availableCoursesList = [
+  { id: 'c_1', title: '(금) 돌봄 4부', teacherName: '김민지', fee: 0, category: '돌봄' },
+  { id: 'c_2', title: '(월) 맞춤형 AI코딩교실', teacherName: '박코딩', fee: 35000, category: '맞춤형' },
+  { id: 'c_3', title: '(화/목) 창의로봇교실', teacherName: '이로봇', fee: 40000, category: '방과후' },
+  { id: 'c_4', title: '(수) K-POP 방송댄스', teacherName: '정댄스', fee: 30000, category: '방과후' }
+];
+
+app.get(['/af/ad_app/lists/sn/3267', '/af/ad_app/lists/sn/3267/'], (req, res) => {
+  return res.sendFile(path.join(__dirname, 'af', 'ad_app', 'lists', 'sn', '3267', 'index.html'));
+});
+
+app.get('/api/courses/sn/3267', (req, res) => {
+  return res.json({ success: true, courses: availableCoursesList });
+});
+
+app.get('/api/student/search', (req, res) => {
+  const { grade, classNum, keyword } = req.query;
+  const sampleStudents = [
+    { studentName: '김도하', grade: 1, classNum: 1, studentNum: 1, parentPhone: '010-1234-5678' },
+    { studentName: '김민준', grade: 1, classNum: 1, studentNum: 2, parentPhone: '010-2345-6789' },
+    { studentName: '박서아', grade: 1, classNum: 2, studentNum: 5, parentPhone: '010-3456-7890' },
+    { studentName: '이준우', grade: 2, classNum: 1, studentNum: 12, parentPhone: '010-4567-8901' },
+    { studentName: '정지우', grade: 2, classNum: 2, studentNum: 8, parentPhone: '010-5678-9012' }
+  ];
+
+  let filtered = sampleStudents;
+  if (grade) filtered = filtered.filter(s => String(s.grade) === String(grade));
+  if (classNum) filtered = filtered.filter(s => String(s.classNum) === String(classNum));
+  if (keyword) {
+    const kw = keyword.toLowerCase();
+    filtered = filtered.filter(s => s.studentName.toLowerCase().includes(kw) || s.parentPhone.includes(kw));
+  }
+  return res.json({ success: true, students: filtered });
+});
+
+app.get('/api/af/ad_app/lists/sn/3267', (req, res) => {
+  const { courseId, grade, paymentStatus, keyword } = req.query;
+  let items = [...applicantDb];
+
+  if (courseId) {
+    items = items.filter(a => a.courseId === courseId);
+  }
+  if (grade) {
+    items = items.filter(a => String(a.grade) === String(grade));
+  }
+  if (paymentStatus) {
+    items = items.filter(a => a.paymentStatus === paymentStatus);
+  }
+  if (keyword) {
+    const kw = keyword.toLowerCase();
+    items = items.filter(a => 
+      a.studentName.toLowerCase().includes(kw) ||
+      (a.gradeClass && a.gradeClass.toLowerCase().includes(kw)) ||
+      (a.parentPhone && a.parentPhone.includes(kw)) ||
+      (a.courseTitle && a.courseTitle.toLowerCase().includes(kw))
+    );
+  }
+
+  const stats = {
+    totalCount: items.length,
+    approvedCount: items.filter(a => a.status === '승인').length,
+    waitingCount: items.filter(a => a.status === '신청대기' || a.paymentStatus === '결제대기').length,
+    totalTuitionFee: items.reduce((sum, a) => sum + (a.totalFee || 0), 0),
+    totalCollectedFee: items.filter(a => a.paymentStatus === '결제완료').reduce((sum, a) => sum + (a.totalFee || 0), 0)
+  };
+
+  return res.json({ success: true, items, stats });
+});
+
+app.post('/api/af/ad_app/create', (req, res) => {
+  const body = req.body;
+  const nextSeq = applicantDb.length > 0 ? Math.max(...applicantDb.map(a => a.seq || 0)) + 1 : 700;
+  const newId = `app_${nextSeq}`;
+  const now = new Date();
+  const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+
+  const tuitionFee = parseInt(body.tuitionFee) || 0;
+  const materialFee = parseInt(body.materialFee) || 0;
+  const bookFee = parseInt(body.bookFee) || 0;
+  const accommodationFee = parseInt(body.accommodationFee) || 0;
+  const totalFee = tuitionFee + materialFee + bookFee + accommodationFee;
+
+  const newItem = {
+    id: newId,
+    seq: nextSeq,
+    period: body.period || '26년 8월 늘봄',
+    courseId: body.courseId || 'c_1',
+    courseTitle: body.courseTitle || '(금) 돌봄 4부',
+    instructorName: body.instructorName || '김민지',
+    grade: parseInt(body.gradeClass) || 1,
+    classNum: 1,
+    studentNum: parseInt(body.studentNum) || 1,
+    gradeClass: body.gradeClass || '1학년 1반',
+    studentName: body.studentName || '신규학생',
+    parentPhone: body.parentPhone || '010-0000-0000',
+    tuitionFee,
+    accommodationFee,
+    teacherFee: 0,
+    bookFee,
+    materialFee,
+    totalFee,
+    subsidyType: body.subsidyType || '일반 자부담',
+    paymentStatus: body.paymentStatus || (totalFee === 0 ? '무상' : '결제대기'),
+    status: body.status || '승인',
+    appliedAt: dateStr,
+    bankName: body.bankName || '',
+    schoolBankingAccount: body.schoolBankingAccount || '',
+    depositorName: body.depositorName || '',
+    memo: body.memo || ''
+  };
+
+  applicantDb.unshift(newItem);
+  return res.json({ success: true, message: '신청자가 성공적으로 등록되었습니다.', item: newItem });
+});
+
+app.get('/api/af/ad_app/view/:id', (req, res) => {
+  const item = applicantDb.find(a => a.id === req.params.id);
+  if (!item) {
+    return res.status(404).json({ success: false, message: '해당 신청 내역을 찾을 수 없습니다.' });
+  }
+  return res.json({ success: true, item });
+});
+
+app.post('/api/af/ad_app/update', (req, res) => {
+  const { id, studentName, gradeClass, parentPhone, paymentStatus, status, tuitionFee, materialFee, schoolBankingAccount, memo } = req.body;
+  const item = applicantDb.find(a => a.id === id);
+  if (!item) {
+    return res.status(404).json({ success: false, message: '해당 신청 내역을 찾을 수 없습니다.' });
+  }
+
+  if (studentName !== undefined) item.studentName = studentName;
+  if (gradeClass !== undefined) item.gradeClass = gradeClass;
+  if (parentPhone !== undefined) item.parentPhone = parentPhone;
+  if (paymentStatus !== undefined) item.paymentStatus = paymentStatus;
+  if (status !== undefined) item.status = status;
+  if (tuitionFee !== undefined) item.tuitionFee = parseInt(tuitionFee) || 0;
+  if (materialFee !== undefined) item.materialFee = parseInt(materialFee) || 0;
+  item.totalFee = (item.tuitionFee || 0) + (item.materialFee || 0) + (item.bookFee || 0) + (item.accommodationFee || 0);
+  if (schoolBankingAccount !== undefined) item.schoolBankingAccount = schoolBankingAccount;
+  if (memo !== undefined) item.memo = memo;
+
+  return res.json({ success: true, message: '신청자 정보가 저장되었습니다.', item });
+});
+
+app.post('/api/af/ad_app/delete', (req, res) => {
+  const { id } = req.body;
+  applicantDb = applicantDb.filter(a => a.id !== id);
+  return res.json({ success: true, message: '해당 신청 내역이 삭제되었습니다.' });
+});
+
+app.post('/api/af/ad_app/batch-upload', (req, res) => {
+  const { items } = req.body;
+  if (!Array.isArray(items) || items.length === 0) {
+    return res.status(400).json({ success: false, message: '일괄 등록할 명단이 올바르지 않습니다.' });
+  }
+
+  let count = 0;
+  const now = new Date();
+  const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+
+  for (const it of items) {
+    const nextSeq = applicantDb.length > 0 ? Math.max(...applicantDb.map(a => a.seq || 0)) + 1 : 700;
+    const tFee = parseInt(it.tuitionFee) || 35000;
+    const mFee = parseInt(it.materialFee) || 0;
+
+    const newItem = {
+      id: `app_${nextSeq}`,
+      seq: nextSeq,
+      period: '26년 8월 늘봄',
+      courseId: it.courseId || 'c_1',
+      courseTitle: it.courseTitle || '신청 강좌',
+      instructorName: it.instructorName || '담당강사',
+      grade: parseInt(it.gradeClass) || 1,
+      classNum: 1,
+      studentNum: parseInt(it.studentNum) || 1,
+      gradeClass: it.gradeClass || '1학년 1반',
+      studentName: it.studentName || '학생',
+      parentPhone: it.parentPhone || '010-0000-0000',
+      tuitionFee: tFee,
+      accommodationFee: 0,
+      teacherFee: 0,
+      bookFee: 0,
+      materialFee: mFee,
+      totalFee: tFee + mFee,
+      subsidyType: '일반 자부담',
+      paymentStatus: '결제대기',
+      status: '승인',
+      appliedAt: dateStr,
+      bankName: '',
+      schoolBankingAccount: '',
+      depositorName: '',
+      memo: '엑셀 일괄입력'
+    };
+    applicantDb.unshift(newItem);
+    count++;
+  }
+
+  return res.json({ success: true, count, message: `${count}명의 수강 신청이 일괄 등록되었습니다.` });
+});
+
+app.post('/api/af/ad_app/batch-fee', (req, res) => {
+  const { courseId, tuitionFee, materialFee } = req.body;
+  let updatedCount = 0;
+  const tFee = parseInt(tuitionFee) || 0;
+  const mFee = parseInt(materialFee) || 0;
+
+  for (const item of applicantDb) {
+    if (!courseId || item.courseId === courseId) {
+      item.tuitionFee = tFee;
+      item.materialFee = mFee;
+      item.totalFee = tFee + mFee + (item.bookFee || 0) + (item.accommodationFee || 0);
+      updatedCount++;
     }
   }
 
-  if (req.path && (req.path.startsWith('/af/') || req.path.startsWith('/sczigi/'))) {
-    if (req.path.endsWith('.js') || req.path.endsWith('.css') || req.path.endsWith('.png') || req.path.endsWith('.ico') || req.path.endsWith('.jpg')) {
-      return next();
-    }
-    return res.sendFile(path.join(__dirname, 'af', 'ad_lec', 'lists', 'sn', 'index.html'));
+  return res.json({ success: true, updatedCount, message: `${updatedCount}건의 수강료가 일괄 적용되었습니다.` });
+});
+
+app.post('/api/af/ad_app/copy', (req, res) => {
+  const { sourceCourseId, targetCourseId, feeOption, clearTarget } = req.body;
+  const sourceCourse = availableCoursesList.find(c => c.id === sourceCourseId);
+  const targetCourse = availableCoursesList.find(c => c.id === targetCourseId);
+
+  if (!sourceCourse || !targetCourse) {
+    return res.status(400).json({ success: false, message: '원본 또는 대상 강좌가 존재하지 않습니다.' });
   }
+
+  if (clearTarget) {
+    applicantDb = applicantDb.filter(a => a.courseId !== targetCourseId);
+  }
+
+  const sourceItems = applicantDb.filter(a => a.courseId === sourceCourseId);
+  let count = 0;
+
+  for (const item of sourceItems) {
+    const nextSeq = Math.max(...applicantDb.map(a => a.seq || 0), 700) + 1;
+    const copiedItem = {
+      ...item,
+      id: `app_${nextSeq}`,
+      seq: nextSeq,
+      courseId: targetCourse.id,
+      courseTitle: targetCourse.title,
+      instructorName: targetCourse.teacherName,
+      appliedAt: new Date().toISOString().replace('T', ' ').substring(0, 19)
+    };
+
+    if (feeOption === 'target') {
+      copiedItem.tuitionFee = targetCourse.fee || 0;
+      copiedItem.totalFee = copiedItem.tuitionFee + (copiedItem.materialFee || 0);
+    }
+
+    applicantDb.unshift(copiedItem);
+    count++;
+  }
+
+  return res.json({ success: true, copiedCount: count, message: `${sourceCourse.title}의 신청자 ${count}명이 ${targetCourse.title} (으)로 복사되었습니다.` });
+});
+
+app.get('/api/af/ad_app/school-banking/csv/sn/3267', (req, res) => {
+  let csvContent = '\uFEFF연번,학년반,번호,학생명,강좌명,수강료,수용비,교재비,재료비,합계,결제상태,스쿨뱅킹계좌,예금주\n';
+  for (const a of applicantDb) {
+    csvContent += `"${a.seq}","${a.gradeClass || ''}","${a.studentNum || ''}","${a.studentName || ''}","${a.courseTitle || ''}","${a.tuitionFee || 0}","${a.accommodationFee || 0}","${a.bookFee || 0}","${a.materialFee || 0}","${a.totalFee || 0}","${a.paymentStatus || ''}","${a.schoolBankingAccount || ''}","${a.depositorName || ''}"\n`;
+  }
+
+  res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+  res.setHeader('Content-Disposition', 'attachment; filename="school_banking_list_3267.csv"');
+  return res.send(csvContent);
+});
+
+// dbdbschool Page Routing Fallback Middleware (Matches all live dbdbschool URL patterns)
   if (req.path && req.path.startsWith('/admin/') && !req.path.includes('.')) {
     return res.sendFile(path.join(__dirname, 'admin', 'index.html'));
   }

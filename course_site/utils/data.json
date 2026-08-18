@@ -960,6 +960,18 @@
       "paymentStatus": "결제대기",
       "status": "수강승인",
       "appliedAt": "2026-08-18T07:25:21.394Z"
+    },
+    {
+      "id": "app_1787096523082",
+      "schoolId": "sch_1",
+      "studentName": "정현우",
+      "gradeClass": "2학년 3반",
+      "parentPhone": "010-6789-0123",
+      "courseTitle": "[특기적성] 창의 로봇교실 A반",
+      "subsidyType": "일반",
+      "paymentStatus": "결제대기",
+      "status": "수강승인",
+      "appliedAt": "2026-08-18T23:42:03.082Z"
     }
   ],
   "waitlist": [
@@ -1193,6 +1205,21 @@
       "isTemp": true,
       "initialPassword": "1234",
       "createdAt": "2026-08-18T07:25:21.760Z"
+    },
+    {
+      "id": "temp_stu_1787096540511",
+      "schoolId": "sch_1",
+      "name": "홍길동",
+      "gradeClass": "7학년 12반 31번",
+      "grade": 7,
+      "classNum": 12,
+      "studentNum": 31,
+      "birthDate": "2019-12-31",
+      "parentPhone": "010-2345-6789",
+      "phone": "010-2345-6789",
+      "isTemp": true,
+      "initialPassword": "1234",
+      "createdAt": "2026-08-18T23:42:20.511Z"
     }
   ],
   "basicSettings": {
@@ -1315,6 +1342,17 @@
         "학생관리"
       ],
       "createdAt": "2026-08-18T07:25:21.756Z"
+    },
+    {
+      "id": "stf_1787096540507",
+      "schoolId": "sch_1",
+      "name": "최선생",
+      "username": "최선생",
+      "role": "staff",
+      "permissions": [
+        "학생관리"
+      ],
+      "createdAt": "2026-08-18T23:42:20.507Z"
     }
   ],
   "homeroomTeachers": [
@@ -1367,6 +1405,16 @@
       "phone": "010-9999-1111",
       "initialPassword": "1234",
       "createdAt": "2026-08-18T07:25:21.763Z"
+    },
+    {
+      "id": "hr_1787096540515",
+      "schoolId": "sch_1",
+      "name": "정담임",
+      "username": "정담임",
+      "assignedClass": "3학년 2반",
+      "phone": "010-9999-1111",
+      "initialPassword": "1234",
+      "createdAt": "2026-08-18T23:42:20.515Z"
     }
   ],
   "instructors": [
@@ -1439,6 +1487,13 @@
     },
     {
       "id": "rg_1787037921768",
+      "schoolId": "sch_1",
+      "code": "d",
+      "name": "토요방과후 그룹",
+      "description": "토요일 강좌 중복 차단"
+    },
+    {
+      "id": "rg_1787096540520",
       "schoolId": "sch_1",
       "code": "d",
       "name": "토요방과후 그룹",
