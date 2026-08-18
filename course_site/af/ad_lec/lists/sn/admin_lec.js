@@ -1691,3 +1691,238 @@ function escHtml(str) {
 
 window.loadFaqList = loadFaqList;
 
+let QA_MOCK_DATA = [
+  {
+    id: 2,
+    title: '2026학년도 1학기 늘봄학교 만족도 조사 설문지',
+    author: '김혜련',
+    hp1: '010',
+    hp2: '2494',
+    hp3: '1479',
+    phone: '010-2494-1479',
+    tel: '062-609-1182',
+    email: 'khh147979@naver.com',
+    createdAt: '2026-06-01',
+    status: '완료',
+    answerDate: '06/01',
+    content: '2026학년도 바뀐 설문지 보내드립니다.\n감사합니다.',
+    answerContent: '자료 올려 주셔서 감사합니다.\n4가지 샘플 설문에 등록해드렸습니다.\n확인 바랍니다.',
+    fileName: '2026학년도1학기늘봄학교만족도조사설문지.hwp'
+  },
+  {
+    id: 1,
+    title: '지원금 스쿨뱅킹 현황',
+    author: '관리자',
+    hp1: '010',
+    hp2: '1234',
+    hp3: '5678',
+    phone: '010-1234-5678',
+    tel: '062-609-1180',
+    email: 'admin@school.go.kr',
+    createdAt: '2025-06-13',
+    status: '완료',
+    answerDate: '06/13',
+    content: '지원금 스쿨뱅킹 이체 현황 및 자동 차감 설정 관련 문의입니다.',
+    answerContent: '안녕하세요. 지원금 스쿨뱅킹 처리 내역 조회가 완료되었습니다.'
+  }
+];
+
+let activeQaId = null;
+
+function loadQaList() {
+  const tbody = document.getElementById('qaTbody');
+  if (!tbody) return;
+
+  const statusFilter = document.getElementById('qaStatusFilter') ? document.getElementById('qaStatusFilter').value : 'all';
+  const searchType = document.getElementById('qaSearchType') ? document.getElementById('qaSearchType').value : 'sub_con';
+  const keyword = document.getElementById('qaSearchKeyword') ? document.getElementById('qaSearchKeyword').value.trim().toLowerCase() : '';
+
+  const filtered = QA_MOCK_DATA.filter(item => {
+    let matchStatus = true;
+    if (statusFilter !== 'all' && statusFilter !== '=진행상태=') {
+      if (statusFilter === '2' || statusFilter === '완료') matchStatus = item.status === '완료';
+      else if (statusFilter === '0' || statusFilter === '접수') matchStatus = item.status === '접수';
+      else if (statusFilter === '1' || statusFilter === '처리중') matchStatus = item.status === '처리중';
+    }
+
+    if (!keyword) return matchStatus;
+
+    let matchKeyword = false;
+    if (searchType === 'subject') matchKeyword = item.title.toLowerCase().includes(keyword);
+    else if (searchType === 'contents') matchKeyword = (item.content || '').toLowerCase().includes(keyword);
+    else if (searchType === 'author') matchKeyword = (item.author || '').toLowerCase().includes(keyword);
+    else matchKeyword = item.title.toLowerCase().includes(keyword) || (item.content || '').toLowerCase().includes(keyword);
+
+    return matchStatus && matchKeyword;
+  });
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" style="padding:40px; text-align:center; color:#999;">등록된 문의사항이 없습니다.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = filtered.map(item => `
+    <tr style="border-bottom:1px solid #eeeeee; cursor:pointer;" onclick="openQaDetailModal(${item.id})">
+      <td style="padding:10px; color:#555;">${item.id}</td>
+      <td style="padding:10px; text-align:left; color:#333; font-weight:bold;">${escHtml(item.title)}</td>
+      <td style="padding:10px; color:#666;">${item.createdAt}</td>
+      <td style="padding:10px; color:#e67e22; font-weight:bold;">${item.status}</td>
+      <td style="padding:10px; color:#666;">${item.answerDate || '-'}</td>
+    </tr>
+  `).join('');
+}
+
+function filterQaList() {
+  loadQaList();
+}
+
+function resetQaFilter() {
+  if (document.getElementById('qaStatusFilter')) document.getElementById('qaStatusFilter').value = 'all';
+  if (document.getElementById('qaSearchType')) document.getElementById('qaSearchType').value = 'sub_con';
+  if (document.getElementById('qaSearchKeyword')) document.getElementById('qaSearchKeyword').value = '';
+  loadQaList();
+}
+
+function openQaWriteModal() {
+  const modal = document.getElementById('qaWriteModal');
+  if (modal) modal.style.display = 'flex';
+}
+
+function closeQaWriteModal() {
+  const modal = document.getElementById('qaWriteModal');
+  if (modal) modal.style.display = 'none';
+}
+
+function submitQaWrite(e) {
+  if (e) e.preventDefault();
+  const author = document.getElementById('qaNewAuthor')?.value || '김혜련';
+  const hp1 = document.getElementById('qaNewHp1')?.value || '010';
+  const hp2 = document.getElementById('qaNewHp2')?.value || '2494';
+  const hp3 = document.getElementById('qaNewHp3')?.value || '1479';
+  const tel = document.getElementById('qaNewPhone')?.value || '062-609-1182';
+  const email = document.getElementById('qaNewEmail')?.value || 'khh147979@naver.com';
+  const subject = document.getElementById('qaNewSubject')?.value || '';
+  const contents = document.getElementById('qaNewContents')?.value || '';
+  const fileInput = document.getElementById('qaNewFile');
+  const fileName = (fileInput && fileInput.files && fileInput.files[0]) ? fileInput.files[0].name : '';
+
+  if (!subject.trim()) {
+    alert('제목을 입력해 주세요.');
+    return;
+  }
+
+  const nextId = Math.max(...QA_MOCK_DATA.map(q => q.id), 0) + 1;
+  const now = new Date();
+  const createdAt = now.toISOString().split('T')[0];
+  const answerDate = `${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')}`;
+
+  const newItem = {
+    id: nextId,
+    title: subject.trim(),
+    author,
+    hp1,
+    hp2,
+    hp3,
+    phone: `${hp1}-${hp2}-${hp3}`,
+    tel,
+    email,
+    createdAt,
+    status: '완료',
+    answerDate,
+    content: contents,
+    fileName: fileName || undefined
+  };
+
+  QA_MOCK_DATA.unshift(newItem);
+  closeQaWriteModal();
+  loadQaList();
+  alert('문의사항이 성공적으로 등록되었습니다.');
+}
+
+function openQaDetailModal(id) {
+  const item = QA_MOCK_DATA.find(q => q.id === id);
+  if (!item) return;
+
+  activeQaId = id;
+  const modal = document.getElementById('qaDetailModal');
+  if (!modal) return;
+
+  document.getElementById('qaDetailId').value = item.id;
+  document.getElementById('qaDetailAuthor').innerText = item.author || '김혜련';
+  document.getElementById('qaDetailPhone').innerText = item.phone || '010-2494-1479';
+  if (document.getElementById('qaDetailTel')) document.getElementById('qaDetailTel').innerText = item.tel || '062-609-1182';
+  document.getElementById('qaDetailEmail').innerText = item.email || 'khh147979@naver.com';
+  document.getElementById('qaDetailSubject').innerText = item.title;
+  document.getElementById('qaDetailContents').innerText = item.content || item.title;
+
+  const statusEl = document.getElementById('qaDetailStatus');
+  if (statusEl) {
+    statusEl.innerText = item.status;
+    statusEl.style.color = item.status === '완료' ? '#e67e22' : '#555';
+  }
+
+  const fileRow = document.getElementById('qaDetailFileRow');
+  const fileCell = document.getElementById('qaDetailFiles');
+  if (item.fileName) {
+    if (fileRow) fileRow.style.display = '';
+    if (fileCell) fileCell.innerHTML = `<a href="#" onclick="alert('[다운로드] ${escHtml(item.fileName)}'); return false;" style="color:#2563eb; text-decoration:underline;">📎 ${escHtml(item.fileName)}</a>`;
+  } else {
+    if (fileRow) fileRow.style.display = 'none';
+  }
+
+  const replyTextarea = document.getElementById('qaReplyTextarea');
+  if (replyTextarea) replyTextarea.value = item.answerContent || '';
+
+  modal.style.display = 'flex';
+}
+
+function closeQaDetailModal() {
+  const modal = document.getElementById('qaDetailModal');
+  if (modal) modal.style.display = 'none';
+  activeQaId = null;
+}
+
+function saveQaReply() {
+  if (!activeQaId) return;
+  const item = QA_MOCK_DATA.find(q => q.id === activeQaId);
+  if (!item) return;
+
+  const replyText = document.getElementById('qaReplyTextarea')?.value || '';
+  const replyStatusSelect = document.getElementById('qaReplyStatusSelect')?.value || '2';
+  
+  let statusStr = '완료';
+  if (replyStatusSelect === '0') statusStr = '접수';
+  else if (replyStatusSelect === '1') statusStr = '처리중';
+
+  item.answerContent = replyText;
+  item.status = statusStr;
+  item.answerDate = `${String(new Date().getMonth() + 1).padStart(2, '0')}/${String(new Date().getDate()).padStart(2, '0')}`;
+
+  closeQaDetailModal();
+  loadQaList();
+  alert('답변이 성공적으로 저장되었습니다.');
+}
+
+function deleteCurrentQaItem() {
+  if (!activeQaId) return;
+  if (confirm('해당 문의글을 삭제하시겠습니까?')) {
+    QA_MOCK_DATA = QA_MOCK_DATA.filter(q => q.id !== activeQaId);
+    closeQaDetailModal();
+    loadQaList();
+    alert('문의글이 삭제되었습니다.');
+  }
+}
+
+window.loadQaList = loadQaList;
+window.filterQaList = filterQaList;
+window.resetQaFilter = resetQaFilter;
+window.openQaWriteModal = openQaWriteModal;
+window.closeQaWriteModal = closeQaWriteModal;
+window.submitQaWrite = submitQaWrite;
+window.openQaDetailModal = openQaDetailModal;
+window.closeQaDetailModal = closeQaDetailModal;
+window.saveQaReply = saveQaReply;
+window.deleteCurrentQaItem = deleteCurrentQaItem;
+
+
+

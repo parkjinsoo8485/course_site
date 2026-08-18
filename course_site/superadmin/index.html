@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>최고 관리자 다중 학교 모니터링 센터 - 디비디비스쿨</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Malgun Gothic', '맑은 고딕', 'Noto Sans KR', sans-serif; background-color: #ecf0f5; color: #333; font-size: 13px; min-height: 100vh; display: flex; flex-direction: column; }
+    a { color: inherit; text-decoration: none; }
+    
+    #header { height: 50px; background-color: #1e293b; color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 4px rgba(0,0,0,0.15); }
+    #logo { font-size: 16px; font-weight: bold; display: flex; align-items: center; gap: 8px; color: #38bdf8; }
+    .header-badge { background: #0284c7; color: #fff; font-size: 11px; font-weight: bold; padding: 3px 8px; border-radius: 4px; }
+    .header-user { font-size: 12px; display: flex; align-items: center; gap: 12px; color: #94a3b8; }
+    .btn-school-test { background: #334155; color: #fff; font-size: 12px; font-weight: bold; padding: 6px 12px; border-radius: 4px; border: 1px solid #475569; cursor: pointer; transition: 0.2s; }
+    .btn-school-test:hover { background: #475569; }
+
+    #container { display: flex; flex: 1; min-height: calc(100vh - 50px); }
+    #sidebar { width: 230px; background-color: #0f172a; color: #94a3b8; flex-shrink: 0; border-right: 1px solid #1e293b; }
+    .user_box { padding: 16px; background-color: #1e293b; border-bottom: 1px solid #334155; display: flex; align-items: center; gap: 12px; }
+    .user_avatar { width: 40px; height: 40px; border-radius: 50%; background: #0284c7; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px; }
+    .user_name { font-size: 13px; font-weight: bold; color: #f8fafc; }
+    .user_role { font-size: 11px; color: #38bdf8; margin-top: 2px; }
+    
+    ul.menu { list-style: none; padding: 10px 0; }
+    ul.menu > li > a { display: flex; align-items: center; gap: 12px; padding: 12px 20px; color: #cbd5e1; font-weight: bold; border-left: 4px solid transparent; transition: 0.15s; }
+    ul.menu > li > a:hover, ul.menu > li > a.on { background-color: #1e293b; color: #38bdf8; border-left-color: #38bdf8; }
+    
+    #content { flex: 1; padding: 24px; max-width: 1440px; }
+    .page-title { font-size: 20px; font-weight: bold; color: #0f172a; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; }
+
+    /* KPI Grid */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .kpi-card { background: #fff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 18px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .kpi-label { font-size: 12px; color: #64748b; font-weight: bold; margin-bottom: 4px; }
+    .kpi-value { font-size: 24px; font-weight: bold; color: #0f172a; }
+    .kpi-icon { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+
+    /* School Cards Grid */
+    .section-subtitle { font-size: 14px; font-weight: bold; color: #334155; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .school-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin-bottom: 24px; }
+    .school-card { background: #fff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 14px; cursor: pointer; transition: 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .school-card:hover, .school-card.active { border-color: #0284c7; box-shadow: 0 0 0 2px rgba(2,132,199,0.2); }
+    .school-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .school-name { font-weight: bold; font-size: 13.5px; color: #0f172a; }
+    .badge-pending { background: #ef4444; color: #fff; font-size: 10px; font-weight: bold; padding: 2px 7px; border-radius: 10px; }
+    .badge-ok { background: #dcfce7; color: #15803d; font-size: 10px; font-weight: bold; padding: 2px 7px; border-radius: 10px; }
+
+    /* Q&A Panel */
+    .panel { background: #fff; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .panel-header { background: #f8fafc; padding: 14px 18px; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .panel-title { font-size: 15px; font-weight: bold; color: #0f172a; display: flex; align-items: center; gap: 8px; }
+    .filter-group { display: flex; align-items: center; gap: 8px; }
+    .select-box, .input-search { height: 32px; padding: 0 10px; font-size: 12px; border: 1px solid #cbd5e1; border-radius: 4px; background: #fff; }
+    .btn-search { height: 32px; padding: 0 14px; background: #0284c7; color: #fff; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; }
+    .btn-search:hover { background: #0369a1; }
+
+    /* Data Table */
+    .table-container { overflow-x: auto; }
+    table.data-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; }
+    table.data-table th { background: #f1f5f9; color: #475569; font-weight: bold; padding: 12px 14px; border-bottom: 1px solid #e2e8f0; }
+    table.data-table td { padding: 12px 14px; border-bottom: 1px solid #e2e8f0; color: #334155; }
+    table.data-table tr:hover { background: #f8fafc; }
+    
+    .status-badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; text-align: center; }
+    .status-done { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+    .status-processing { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+    .status-received { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+
+    .btn-action { padding: 4px 10px; font-size: 11.5px; font-weight: bold; border-radius: 3px; border: none; cursor: pointer; }
+    .btn-reply { background: #16a34a; color: #fff; }
+    .btn-reply:hover { background: #15803d; }
+    .btn-edit { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
+    .btn-edit:hover { background: #e2e8f0; }
+
+    /* Modal Overlay */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.6); backdrop-filter: blur(2px); z-index: 2000; align-items: center; justify-content: center; padding: 16px; }
+    .modal-card { background: #fff; width: 100%; max-width: 680px; border-radius: 6px; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3); }
+    .modal-header { background: #0284c7; color: #fff; padding: 14px 18px; font-weight: bold; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
+    .modal-close { background: none; border: none; color: #fff; font-size: 20px; font-weight: bold; cursor: pointer; }
+    .modal-body { padding: 18px; max-height: 75vh; overflow-y: auto; }
+    .modal-footer { background: #f8fafc; padding: 12px 18px; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; }
+
+    .btn-db { padding: 6px 14px; font-size: 12px; font-weight: bold; border-radius: 3px; border: none; cursor: pointer; }
+    .btn-db-green { background: #16a34a; color: #fff; }
+    .btn-db-green:hover { background: #15803d; }
+    .btn-db-coral { background: #dc2626; color: #fff; }
+    .btn-db-coral:hover { background: #b91c1c; }
+    .btn-db-gray { background: #64748b; color: #fff; }
+    .btn-db-gray:hover { background: #475569; }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div id="header">
+    <div id="logo">
+      <i class="fa-solid fa-building-columns"></i>
+      <span>디비디비스쿨 통합 플랫폼</span>
+      <span class="header-badge">Super Admin</span>
+    </div>
+    <div class="header-user">
+      <span><i class="fa-solid fa-user-shield"></i> 최고 관리자 (전체학교 관제센터)</span>
+      <a href="/af/qanda/lists/sn/3267" class="btn-school-test"><i class="fa-solid fa-school"></i> 학교 관리자 페이지 테스트</a>
+    </div>
+  </div>
+
+  <div id="container">
+    <!-- Sidebar -->
+    <div id="sidebar">
+      <div class="user_box">
+        <div class="user_avatar">SA</div>
+        <div>
+          <div class="user_name">최고 관리자</div>
+          <div class="user_role">통합 시스템 관리자</div>
+        </div>
+      </div>
+      <ul class="menu">
+        <li><a href="/superadmin" class="on"><i class="fa-solid fa-chart-line"></i> <span>다중 학교 관제센터</span></a></li>
+        <li><a href="/superadmin/schools"><i class="fa-solid fa-school"></i> <span>전체 학교 관리</span></a></li>
+        <li><a href="/superadmin/qna"><i class="fa-solid fa-headset"></i> <span>고객지원 문의 게시판</span></a></li>
+      </ul>
+    </div>
+
+    <!-- Content -->
+    <div id="content">
+      <div class="page-title">
+        <div>
+          🏛️ 최고 관리자 다중 학교 모니터링 대시보드
+          <div style="font-size:12px; color:#64748b; font-weight:normal; margin-top:4px;">
+            전체 등록 학교의 운영 현황을 모니터링하고, 학교 관리자가 작성한 문의사항에 답변을 등록 및 관리합니다.
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI Summary Cards -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div>
+            <div class="kpi-label">모니터링 학교 수</div>
+            <div class="kpi-value">4개 학교</div>
+          </div>
+          <div class="kpi-icon" style="background:#e0f2fe; color:#0284c7;"><i class="fa-solid fa-school"></i></div>
+        </div>
+        <div class="kpi-card">
+          <div>
+            <div class="kpi-label">총 개설 강좌 수</div>
+            <div class="kpi-value">58개 강좌</div>
+          </div>
+          <div class="kpi-icon" style="background:#dcfce7; color:#15803d;"><i class="fa-solid fa-book-open"></i></div>
+        </div>
+        <div class="kpi-card">
+          <div>
+            <div class="kpi-label">총 수강 학생 수</div>
+            <div class="kpi-value">1,420 명</div>
+          </div>
+          <div class="kpi-icon" style="background:#f3e8ff; color:#9333ea;"><i class="fa-solid fa-user-graduate"></i></div>
+        </div>
+        <div class="kpi-card">
+          <div>
+            <div class="kpi-label">고객지원 답변 대기</div>
+            <div class="kpi-value" style="color:#dc2626;" id="statPendingVal">1 건</div>
+          </div>
+          <div class="kpi-icon" style="background:#fee2e2; color:#dc2626;"><i class="fa-solid fa-comment-dots"></i></div>
+        </div>
+      </div>
+
+      <!-- School Cards Grid -->
+      <div class="section-subtitle">
+        <i class="fa-solid fa-map-location-dot"></i> 학교별 운영 현황 모니터링
+      </div>
+      <div class="school-grid" id="schoolCardGrid">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Q&A Management Panel -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <i class="fa-solid fa-comments"></i> 최고 관리자 고객지원 문의 답변 및 상태 관리 센터
+          </div>
+          <div class="filter-group">
+            <label style="font-weight:bold; color:#475569;">학교 선택:</label>
+            <select class="select-box" id="schoolFilterSelect" onchange="filterQnaTable()">
+              <option value="전체">전체 학교 보기</option>
+              <option value="광주풍향초등학교">광주풍향초등학교</option>
+              <option value="서울초등학교">서울초등학교</option>
+              <option value="부산초등학교">부산초등학교</option>
+              <option value="대구초등학교">대구초등학교</option>
+            </select>
+
+            <label style="font-weight:bold; color:#475569; margin-left:6px;">진행상태:</label>
+            <select class="select-box" id="statusFilterSelect" onchange="filterQnaTable()">
+              <option value="전체">전체 상태</option>
+              <option value="접수">접수 (미답변)</option>
+              <option value="처리중">처리중</option>
+              <option value="완료">완료 (답변완료)</option>
+            </select>
+
+            <input type="text" class="input-search" id="searchInput" placeholder="검색어 입력..." onkeyup="filterQnaTable()">
+            <button type="button" class="btn-search" onclick="filterQnaTable()"><i class="fa-solid fa-magnifying-glass"></i> 검색</button>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width:50px; text-align:center;">연번</th>
+                <th style="width:140px;">학교명</th>
+                <th>문의 제목</th>
+                <th style="width:100px;">작성자</th>
+                <th style="width:90px; text-align:center;">등록일자</th>
+                <th style="width:90px; text-align:center;">진행상태</th>
+                <th style="width:90px; text-align:center;">답변일자</th>
+                <th style="width:110px; text-align:center;">답변 관리</th>
+              </tr>
+            </thead>
+            <tbody id="qnaTbody">
+              <!-- Rendered by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Super Admin Reply Modal -->
+  <div class="modal-overlay" id="superAdminReplyModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div><i class="fa-solid fa-headset"></i> [최고 관리자] 고객지원 문의 답변 작성 및 상태 관리</div>
+        <button class="modal-close" onclick="closeReplyModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <table style="width:100%; border-collapse:collapse; border:1px solid #e2e8f0; font-size:12px; margin-bottom:14px;">
+          <tbody>
+            <tr>
+              <td style="width:80px; background:#f8fafc; font-weight:bold; padding:8px 10px; border:1px solid #e2e8f0;">학교명</td>
+              <td style="padding:8px 10px; font-weight:bold; color:#0284c7; border:1px solid #e2e8f0;" id="modalSchoolName"></td>
+              <td style="width:80px; background:#f8fafc; font-weight:bold; padding:8px 10px; border:1px solid #e2e8f0;">등록일자</td>
+              <td style="padding:8px 10px; font-mono font-size:11px; border:1px solid #e2e8f0;" id="modalCreatedAt"></td>
+            </tr>
+            <tr>
+              <td style="background:#f8fafc; font-weight:bold; padding:8px 10px; border:1px solid #e2e8f0;">작성자</td>
+              <td style="padding:8px 10px; border:1px solid #e2e8f0;" id="modalAuthor"></td>
+              <td style="background:#f8fafc; font-weight:bold; padding:8px 10px; border:1px solid #e2e8f0;">연락처</td>
+              <td style="padding:8px 10px; font-mono font-size:11px; border:1px solid #e2e8f0;" id="modalPhone"></td>
+            </tr>
+            <tr>
+              <td style="background:#f8fafc; font-weight:bold; padding:8px 10px; border:1px solid #e2e8f0;">제목</td>
+              <td colspan="3" style="padding:8px 10px; font-weight:bold; color:#0f172a; border:1px solid #e2e8f0;" id="modalTitle"></td>
+            </tr>
+            <tr>
+              <td style="background:#f8fafc; font-weight:bold; padding:8px 10px; border:1px solid #e2e8f0; vertical-align:top;">문의 내용</td>
+              <td colspan="3" style="padding:10px; line-height:1.6; white-space:pre-wrap; background:#f9fafb; border:1px solid #e2e8f0;" id="modalContent"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Answer Box -->
+        <div style="background:#fbfbfb; border:1px solid #e2e8f0; padding:14px; border-radius:4px;">
+          <div style="display:flex; justify-between; align-items:center; margin-bottom:8px;">
+            <h4 style="margin:0; font-size:13px; color:#0284c7; font-weight:bold;"><i class="fa-solid fa-reply"></i> 최고 관리자 답장 작성</h4>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <label style="font-weight:bold; font-size:12px;">진행상태:</label>
+              <select id="modalStatusSelect" style="height:28px; padding:2px 8px; font-size:12px; border:1px solid #cbd5e1; border-radius:3px;">
+                <option value="접수">접수</option>
+                <option value="처리중">처리중</option>
+                <option value="완료">완료</option>
+              </select>
+            </div>
+          </div>
+          <textarea id="modalReplyText" placeholder="학교 관리자에게 전달할 답장 내용을 작성해 주세요..." style="width:100%; height:90px; padding:8px; font-size:12px; border:1px solid #cbd5e1; border-radius:3px; resize:vertical;"></textarea>
+          <div style="display:flex; justify-content:flex-end; margin-top:10px;">
+            <button type="button" class="btn-db btn-db-green" onclick="saveSuperAdminReply()"><i class="fa-solid fa-paper-plane"></i> 답변 저장하기</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-db btn-db-coral" onclick="deleteCurrentInquiry()">삭제</button>
+        <button type="button" class="btn-db btn-db-gray" onclick="closeReplyModal()">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let allQnaData = [
+      {
+        id: 3,
+        schoolId: '1001',
+        schoolName: '서울초등학교',
+        title: '2026학년도 늘봄학교 교재 수량 변경 요청건',
+        author: '박상현',
+        phone: '010-9876-5432',
+        email: 'park1001@seoul.es.kr',
+        createdAt: '2026-08-17',
+        status: '접수',
+        answerDate: null,
+        content: '늘봄학교 교실 추가로 인한 로봇교실 교재 20세트 추가 요청드립니다.'
+      },
+      {
+        id: 2,
+        schoolId: '3267',
+        schoolName: '광주풍향초등학교',
+        title: '2026학년도 1학기 늘봄학교 만족도 조사 설문지',
+        author: '김혜련',
+        phone: '010-2494-1479',
+        email: 'khh147979@naver.com',
+        createdAt: '2026-06-01',
+        status: '완료',
+        answerDate: '06/01',
+        content: '2026학년도 바뀐 설문지 보내드립니다.\n감사합니다.',
+        answerContent: '자료 올려 주셔서 감사합니다.\n4가지 샘플 설문에 등록해드렸습니다.\n확인 바랍니다.'
+      },
+      {
+        id: 1,
+        schoolId: '3267',
+        schoolName: '광주풍향초등학교',
+        title: '지원금 스쿨뱅킹 현황',
+        author: '관리자',
+        phone: '010-1234-5678',
+        email: 'admin@school.go.kr',
+        createdAt: '2025-06-13',
+        status: '완료',
+        answerDate: '06/13',
+        content: '지원금 스쿨뱅킹 이체 현황 및 자동 차감 설정 관련 문의입니다.',
+        answerContent: '안녕하세요. 지원금 스쿨뱅킹 처리 내역 조회가 완료되었습니다.'
+      }
+    ];
+
+    let currentSelectedQna = null;
+
+    const schoolsData = [
+      { id: '3267', name: '광주풍향초등학교', courses: 18, students: 450 },
+      { id: '1001', name: '서울초등학교', courses: 14, students: 320 },
+      { id: '1002', name: '부산초등학교', courses: 12, students: 280 },
+      { id: '1003', name: '대구초등학교', courses: 14, students: 370 }
+    ];
+
+    async function loadApiQnas() {
+      try {
+        const res = await fetch('/api/af/qanda/lists');
+        const data = await res.json();
+        if (data && data.qnas) {
+          allQnaData = data.qnas;
+        }
+      } catch (err) {
+        console.warn('Using local store fallback:', err);
+      }
+      renderSchoolCards();
+      filterQnaTable();
+    }
+
+    function renderSchoolCards() {
+      const grid = document.getElementById('schoolCardGrid');
+      let pendingTotal = 0;
+
+      grid.innerHTML = schoolsData.map(s => {
+        const pendingCount = allQnaData.filter(q => 
+          (q.schoolName === s.name || q.schoolId === s.id) && (q.status === '접수' || q.status === '처리중')
+        ).length;
+
+        if (pendingCount > 0) pendingTotal += pendingCount;
+
+        return `
+          <div class="school-card" onclick="selectSchoolFilter('${s.name}')">
+            <div class="school-header">
+              <div class="school-name">${s.name}</div>
+              ${pendingCount > 0 ? `<span class="badge-pending">신규문의 ${pendingCount}</span>` : `<span class="badge-ok">정상운영</span>`}
+            </div>
+            <div style="font-size:11.5px; color:#64748b; margin-top:4px;">
+              <div>개설 강좌: <strong>${s.courses}개</strong></div>
+              <div>수강 학생: <strong>${s.students}명</strong></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('statPendingVal').innerText = `${pendingTotal} 건`;
+    }
+
+    function selectSchoolFilter(schoolName) {
+      document.getElementById('schoolFilterSelect').value = schoolName;
+      filterQnaTable();
+    }
+
+    function filterQnaTable() {
+      const schoolFilter = document.getElementById('schoolFilterSelect').value;
+      const statusFilter = document.getElementById('statusFilterSelect').value;
+      const searchVal = document.getElementById('searchInput').value.toLowerCase().trim();
+
+      const filtered = allQnaData.filter(q => {
+        const matchSchool = schoolFilter === '전체' || q.schoolName === schoolFilter || q.schoolId === schoolFilter;
+        const matchStatus = statusFilter === '전체' || q.status === statusFilter;
+        const matchSearch = !searchVal || 
+          (q.title || '').toLowerCase().includes(searchVal) ||
+          (q.author || '').toLowerCase().includes(searchVal) ||
+          (q.schoolName || '').toLowerCase().includes(searchVal);
+
+        return matchSchool && matchStatus && matchSearch;
+      });
+
+      const tbody = document.getElementById('qnaTbody');
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:20px; color:#94a3b8;">조건에 대화하는 문의사항이 없습니다.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(q => {
+        const statusClass = q.status === '완료' ? 'status-done' : (q.status === '처리중' ? 'status-processing' : 'status-received');
+        const schoolName = q.schoolName || '광주풍향초등학교';
+        return `
+          <tr>
+            <td style="text-align:center; font-family:monospace; color:#64748b;">${q.id}</td>
+            <td style="font-weight:bold; color:#334155;"><span style="background:#f1f5f9; padding:2px 6px; border-radius:3px; border:1px solid #e2e8f0;">${schoolName}</span></td>
+            <td style="font-weight:bold; color:#0f172a; cursor:pointer;" onclick="openReplyModal(${q.id})">${q.title}</td>
+            <td style="color:#475569;">${q.author}</td>
+            <td style="text-align:center; font-family:monospace; color:#64748b;">${q.createdAt}</td>
+            <td style="text-align:center;"><span class="status-badge ${statusClass}">${q.status}</span></td>
+            <td style="text-align:center; font-family:monospace; color:#64748b;">${q.answerDate || '-'}</td>
+            <td style="text-align:center;">
+              <button class="btn-action ${q.answerContent ? 'btn-edit' : 'btn-reply'}" onclick="openReplyModal(${q.id})">
+                ${q.answerContent ? '답변 수정' : '✍️ 답변 작성'}
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function openReplyModal(id) {
+      currentSelectedQna = allQnaData.find(q => q.id === id);
+      if (!currentSelectedQna) return;
+
+      document.getElementById('modalSchoolName').innerText = currentSelectedQna.schoolName || '광주풍향초등학교';
+      document.getElementById('modalCreatedAt').innerText = currentSelectedQna.createdAt;
+      document.getElementById('modalAuthor').innerText = currentSelectedQna.author;
+      document.getElementById('modalPhone').innerText = currentSelectedQna.phone || '010-2494-1479';
+      document.getElementById('modalTitle').innerText = currentSelectedQna.title;
+      document.getElementById('modalContent').innerText = currentSelectedQna.content || currentSelectedQna.title;
+      document.getElementById('modalStatusSelect').value = currentSelectedQna.status || '완료';
+      document.getElementById('modalReplyText').value = currentSelectedQna.answerContent || '';
+
+      document.getElementById('superAdminReplyModal').style.display = 'flex';
+    }
+
+    function closeReplyModal() {
+      document.getElementById('superAdminReplyModal').style.display = 'none';
+      currentSelectedQna = null;
+    }
+
+    async function saveSuperAdminReply() {
+      if (!currentSelectedQna) return;
+      const text = document.getElementById('modalReplyText').value.trim();
+      const status = document.getElementById('modalStatusSelect').value;
+
+      if (!text) {
+        alert('답변 내용을 작성해 주세요.');
+        return;
+      }
+
+      const now = new Date();
+      const answerDateStr = `${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')}`;
+
+      currentSelectedQna.answerContent = text;
+      currentSelectedQna.status = status;
+      currentSelectedQna.answerDate = answerDateStr;
+
+      try {
+        await fetch('/api/af/qanda/reply', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: currentSelectedQna.id, answerContent: text, status: status })
+        });
+      } catch (e) {
+        console.error('API sync error:', e);
+      }
+
+      alert('최고 관리자 답변이 성공적으로 저장되었습니다. 학교 페이지에 즉시 반영됩니다.');
+      closeReplyModal();
+      loadApiQnas();
+    }
+
+    async function deleteCurrentInquiry() {
+      if (!currentSelectedQna) return;
+      if (confirm(`'${currentSelectedQna.title}' 문의글을 삭제하시겠습니까?`)) {
+        try {
+          await fetch(`/api/af/qanda/delete/${currentSelectedQna.id}`, { method: 'DELETE' });
+        } catch (e) {}
+        allQnaData = allQnaData.filter(q => q.id !== currentSelectedQna.id);
+        closeReplyModal();
+        loadApiQnas();
+        alert('문의글이 삭제되었습니다.');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadApiQnas);
+  </script>
+</body>
+</html>

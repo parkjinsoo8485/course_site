@@ -1,0 +1,10 @@
+{
+  "name": "course_site_root",
+  "version": "1.0.0",
+  "description": "dbdbschool SaaS Platform Root",
+  "scripts": {
+    "start": "npm --prefix course_site start",
+    "dev": "npm --prefix course_site start",
+    "test": "node course_site/scratch/test_live_sidebar_renewal.js"
+  }
+}

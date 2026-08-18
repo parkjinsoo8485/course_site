@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const saveIdChk = document.getElementById('saveId');
   const roleTabs = document.querySelectorAll('.role-tab');
 
-  let currentRole = 'teacher';
+  let currentRole = 'school_admin';
 
   // Role Tab Switch
   roleTabs.forEach(tab => {
@@ -79,16 +79,18 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
 
-        // Redirect to dashboard based on role
-        const role = data.user.role;
-        if (role === 'teacher' || role === 'school_admin') {
+        // Redirect to page with manual sidebar for school_admin
+        const role = data.user.role || currentRole;
+        if (role === 'school_admin' || currentRole === 'school_admin') {
+          window.location.href = '/af/ad_lec/lists/sn/3267';
+        } else if (role === 'teacher') {
           window.location.href = '../dashboard/teacher_dashboard.html';
         } else if (role === 'instructor') {
           window.location.href = '../instructor/dashboard.html';
         } else if (role === 'parent' || role === 'student') {
           window.location.href = '../parent/index.html';
         } else {
-          window.location.href = '../dashboard/teacher_dashboard.html';
+          window.location.href = '/af/ad_lec/lists/sn/3267';
         }
       } else {
         showError(data.message || '로그인에 실패했습니다.');

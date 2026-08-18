@@ -188,7 +188,7 @@ async function runTests() {
 
     for (const u of liveUrls) {
       const res = await request('GET', u);
-      assert(res.status === 200 && res.raw.includes('adminSidebar'), `SPA Page loaded for: ${u}`);
+      assert(res.status === 200 && (res.raw.includes('adminSidebar') || res.raw.includes('left_menu')), `SPA Page loaded for: ${u}`);
     }
 
     console.log(`\n========================================`);
