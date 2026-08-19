@@ -5,41 +5,41 @@ let currentSubmodelKey = 'ad_lec_lists';
 
 const submodelTitles = {
   // 단독 대메뉴 (13개)
-  ad_faq_main: '<i class="fa-solid fa-book"></i> 매뉴얼 (FAQ) (/af/ad_faq/main)',
-  qanda_lists: '<i class="fa-solid fa-comments"></i> 고객지원 게시판 (/af/qanda/lists)',
-  sczigi_service_lists: '<i class="fa-solid fa-school"></i> 학교관리 (/sczigi/service/lists)',
-  ad_lec_lists: '<i class="fa-solid fa-book-open"></i> 강좌관리 (/af/ad_lec/lists)',
-  ad_app_lists: '<i class="fa-solid fa-users"></i> 신청자관리 (/af/ad_app/lists)',
-  ad_wait_lists: '<i class="fa-solid fa-clock-rotate-left"></i> 대기자관리 (/af/ad_wait/lists)',
-  ad_att_stat: '<i class="fa-solid fa-signature"></i> 출석부관리 (/af/ad_att/stat)',
-  ad_ref_lists: '<i class="fa-solid fa-calculator"></i> 환불/취소관리 (/af/ad_ref/lists)',
-  ad_abs_lists: '<i class="fa-solid fa-user-xmark"></i> 결석/귀가신청 (/af/ad_abs/lists)',
-  ad_tea_lists: '<i class="fa-solid fa-chalkboard-user"></i> 강사관리 (/af/ad_tea/lists)',
-  notification_lists: '<i class="fa-solid fa-paper-plane"></i> 알림관리 (/af/notification/lists)',
-  spush_lists: '<i class="fa-solid fa-bell"></i> 푸시알림관리 (/af/spush/lists)',
-  ad_extension_lists: '<i class="fa-solid fa-calendar-plus"></i> 연장신청 (/af/ad_extension/lists)',
+  ad_faq_main: '<i class="fa-solid fa-book"></i> 매뉴얼 (FAQ)',
+  qanda_lists: '<i class="fa-solid fa-comments"></i> 고객지원 게시판',
+  sczigi_service_lists: '<i class="fa-solid fa-school"></i> 학교관리',
+  ad_lec_lists: '<i class="fa-solid fa-book-open"></i> 강좌관리',
+  ad_app_lists: '<i class="fa-solid fa-users"></i> 신청자관리',
+  ad_wait_lists: '<i class="fa-solid fa-clock-rotate-left"></i> 대기자관리',
+  ad_att_stat: '<i class="fa-solid fa-signature"></i> 출석부관리',
+  ad_ref_lists: '<i class="fa-solid fa-calculator"></i> 환불/취소관리',
+  ad_abs_lists: '<i class="fa-solid fa-user-xmark"></i> 결석/귀가신청',
+  ad_tea_lists: '<i class="fa-solid fa-chalkboard-user"></i> 강사관리',
+  notification_lists: '<i class="fa-solid fa-paper-plane"></i> 알림관리',
+  spush_lists: '<i class="fa-solid fa-bell"></i> 푸시알림관리',
+  ad_extension_lists: '<i class="fa-solid fa-calendar-plus"></i> 연장신청',
 
   // 지원금관리 (4개)
-  ad_free2_stu: '<i class="fa-solid fa-hand-holding-dollar"></i> 지원금관리 > 대상자관리 (/af/ad_free2_stu/lists)',
-  ad_free2_app: '<i class="fa-solid fa-receipt"></i> 지원금관리 > 수강자관리 (/af/ad_free2_app/lists)',
-  ad_free2_cfg_main: '<i class="fa-solid fa-sliders"></i> 지원금관리 > 지원금설정 (/af/ad_free2_cfg/main)',
-  ad_free2_cfg_free1: '<i class="fa-solid fa-ranking-star"></i> 지원금관리 > 순위구분설정 (/af/ad_free2_cfg/free1)',
+  ad_free2_stu: '<i class="fa-solid fa-hand-holding-dollar"></i> 지원금관리 > 대상자관리',
+  ad_free2_app: '<i class="fa-solid fa-receipt"></i> 지원금관리 > 수강자관리',
+  ad_free2_cfg_main: '<i class="fa-solid fa-sliders"></i> 지원금관리 > 지원금설정',
+  ad_free2_cfg_free1: '<i class="fa-solid fa-ranking-star"></i> 지원금관리 > 순위구분설정',
 
   // 설문관리 (2개)
-  ad_sur_lists: '<i class="fa-solid fa-square-poll-vertical"></i> 설문관리 > 설문 (/af/ad_sur/lists)',
-  ad_surs_lists: '<i class="fa-solid fa-list-check"></i> 설문관리 > 샘플설문 (/af/ad_surs/lists)',
+  ad_sur_lists: '<i class="fa-solid fa-square-poll-vertical"></i> 설문관리 > 설문',
+  ad_surs_lists: '<i class="fa-solid fa-list-check"></i> 설문관리 > 샘플설문',
 
   // 환경설정 (10개)
-  ad_cfg_main: '<i class="fa-solid fa-gear"></i> 환경설정 > 기본설정 (/af/ad_cfg/main)',
-  ad_time_lists: '<i class="fa-solid fa-calendar-days"></i> 환경설정 > 신청기간 (/af/ad_time/lists)',
-  ad_cfg_period: '<i class="fa-solid fa-clock"></i> 환경설정 > 강의시간 (/af/ad_cfg/period)',
-  ad_cfg_afDiv: '<i class="fa-solid fa-layer-group"></i> 환경설정 > 강좌구분 (/af/ad_cfg/afDiv)',
-  ad_cfg_appLiGrp: '<i class="fa-solid fa-ban"></i> 환경설정 > 중복제한그룹 (/af/ad_cfg/appLiGrp)',
-  ad_verify_main: '<i class="fa-solid fa-user-check"></i> 환경설정 > 학적검증 (/af/ad_verify/main)',
-  ad_neis_edufine_lists: '<i class="fa-solid fa-file-invoice-dollar"></i> 환경설정 > 나이스/에듀파인 설정 (/af/ad_neis_edufine/lists)',
-  ad_cfg_message: '<i class="fa-solid fa-bullhorn"></i> 환경설정 > 안내글설정 (/af/ad_cfg/message)',
-  ad_cfg_clear: '<i class="fa-solid fa-triangle-exclamation"></i> 환경설정 > 초기화 (/af/ad_cfg/clear)',
-  ad_info_modify: '<i class="fa-solid fa-id-card"></i> 환경설정 > 담당자정보 (/af/ad_info/modify)'
+  ad_cfg_main: '<i class="fa-solid fa-gear"></i> 환경설정 > 기본설정',
+  ad_time_lists: '<i class="fa-solid fa-calendar-days"></i> 환경설정 > 신청기간',
+  ad_cfg_period: '<i class="fa-solid fa-clock"></i> 환경설정 > 강의시간',
+  ad_cfg_afDiv: '<i class="fa-solid fa-layer-group"></i> 환경설정 > 강좌구분',
+  ad_cfg_appLiGrp: '<i class="fa-solid fa-ban"></i> 환경설정 > 중복제한그룹',
+  ad_verify_main: '<i class="fa-solid fa-user-check"></i> 환경설정 > 학적검증',
+  ad_neis_edufine_lists: '<i class="fa-solid fa-file-invoice-dollar"></i> 환경설정 > 나이스/에듀파인 설정',
+  ad_cfg_message: '<i class="fa-solid fa-bullhorn"></i> 환경설정 > 안내글설정',
+  ad_cfg_clear: '<i class="fa-solid fa-triangle-exclamation"></i> 환경설정 > 초기화',
+  ad_info_modify: '<i class="fa-solid fa-id-card"></i> 환경설정 > 담당자정보'
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1236,25 +1236,6 @@ async function openRefundCalculator() {
   }
 }
 
-async function loadQaList() {
-  try {
-    const res = await fetch(`/api/qa?schoolCode=UNCHON2025`);
-    const data = await res.json();
-    const tbody = document.getElementById('qaTbody');
-    if (tbody && data.questions) {
-      tbody.innerHTML = data.questions.map(qa => `
-        <tr>
-          <td><strong>${qa.courseTitle}</strong></td>
-          <td>${qa.authorName} (${qa.authorRole})</td>
-          <td>${qa.title}</td>
-          <td><span class="badge ${qa.reply ? 'badge-OUTPUT' : 'badge-WAITING'}">${qa.reply ? '답변완료' : '미답변'}</span></td>
-          <td>${(qa.createdAt || '').slice(0, 10)}</td>
-          <td style="text-align: center;"><button class="btn btn-primary" style="padding:4px 8px; font-size:0.8rem;" onclick="alert('Q&A 답변 작성 창이 열립니다.')">답변</button></td>
-        </tr>
-      `).join('');
-    }
-  } catch (e) { console.error('loadQaList Error:', e); }
-}
 
 async function loadFaqList() {
   try {
@@ -1739,9 +1720,19 @@ let QA_MOCK_DATA = [
 
 let activeQaId = null;
 
-function loadQaList() {
+async function loadQaList() {
   const tbody = document.getElementById('qaTbody');
   if (!tbody) return;
+
+  try {
+    const res = await fetch(`/api/af/qanda/lists?schoolId=${encodeURIComponent(SCHOOL_SN)}`);
+    const data = await res.json();
+    if (data && data.qnas) {
+      QA_MOCK_DATA = data.qnas;
+    }
+  } catch (err) {
+    console.warn('Using local QA fallback:', err);
+  }
 
   const statusFilter = document.getElementById('qaStatusFilter') ? document.getElementById('qaStatusFilter').value : 'all';
   const searchType = document.getElementById('qaSearchType') ? document.getElementById('qaSearchType').value : 'sub_con';
@@ -1751,7 +1742,7 @@ function loadQaList() {
     let matchStatus = true;
     if (statusFilter !== 'all' && statusFilter !== '=진행상태=') {
       if (statusFilter === '2' || statusFilter === '완료') matchStatus = item.status === '완료';
-      else if (statusFilter === '0' || statusFilter === '접수') matchStatus = item.status === '접수';
+      else if (statusFilter === '0' || statusFilter === '접수' || statusFilter === '대기') matchStatus = (item.status === '접수' || item.status === '대기');
       else if (statusFilter === '1' || statusFilter === '처리중') matchStatus = item.status === '처리중';
     }
 
@@ -1771,15 +1762,22 @@ function loadQaList() {
     return;
   }
 
-  tbody.innerHTML = filtered.map(item => `
-    <tr style="border-bottom:1px solid #eeeeee; cursor:pointer;" onclick="openQaDetailModal(${item.id})">
-      <td style="padding:10px; color:#555;">${item.id}</td>
-      <td style="padding:10px; text-align:left; color:#333; font-weight:bold;">${escHtml(item.title)}</td>
-      <td style="padding:10px; color:#666;">${item.createdAt}</td>
-      <td style="padding:10px; color:#e67e22; font-weight:bold;">${item.status}</td>
-      <td style="padding:10px; color:#666;">${item.answerDate || '-'}</td>
-    </tr>
-  `).join('');
+  tbody.innerHTML = filtered.map(item => {
+    let statusDisplay = item.status || '접수';
+    let statusColor = '#e67e22'; // orange for 접수/대기
+    if (statusDisplay === '완료') statusColor = '#16a34a'; // green for 완료
+    else if (statusDisplay === '처리중') statusColor = '#2563eb'; // blue for 처리중
+
+    return `
+      <tr style="border-bottom:1px solid #eeeeee; cursor:pointer;" onclick="openQaDetailModal(${item.id})">
+        <td style="padding:10px; color:#555;">${item.id}</td>
+        <td style="padding:10px; text-align:left; color:#333; font-weight:bold;">${escHtml(item.title)}</td>
+        <td style="padding:10px; color:#666;">${item.createdAt}</td>
+        <td style="padding:10px; color:${statusColor}; font-weight:bold;">${statusDisplay}</td>
+        <td style="padding:10px; color:#666;">${item.answerDate || '-'}</td>
+      </tr>
+    `;
+  }).join('');
 }
 
 function filterQaList() {
@@ -1803,7 +1801,7 @@ function closeQaWriteModal() {
   if (modal) modal.style.display = 'none';
 }
 
-function submitQaWrite(e) {
+async function submitQaWrite(e) {
   if (e) e.preventDefault();
   const author = document.getElementById('qaNewAuthor')?.value || '김혜련';
   const hp1 = document.getElementById('qaNewHp1')?.value || '010';
@@ -1824,7 +1822,6 @@ function submitQaWrite(e) {
   const nextId = Math.max(...QA_MOCK_DATA.map(q => q.id), 0) + 1;
   const now = new Date();
   const createdAt = now.toISOString().split('T')[0];
-  const answerDate = `${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')}`;
 
   const newItem = {
     id: nextId,
@@ -1837,16 +1834,38 @@ function submitQaWrite(e) {
     tel,
     email,
     createdAt,
-    status: '완료',
-    answerDate,
+    status: '접수',
+    answerDate: null,
     content: contents,
     fileName: fileName || undefined
   };
 
+  try {
+    await fetch('/api/af/qanda/write', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title: subject.trim(),
+        author,
+        hp1,
+        hp2,
+        hp3,
+        tel,
+        email,
+        content: contents,
+        fileName: fileName || undefined,
+        schoolId: SCHOOL_SN,
+        schoolName: '광주풍향초등학교'
+      })
+    });
+  } catch (err) {
+    console.error('API sync error:', err);
+  }
+
   QA_MOCK_DATA.unshift(newItem);
   closeQaWriteModal();
   loadQaList();
-  alert('문의사항이 성공적으로 등록되었습니다.');
+  alert('문의사항이 성공적으로 등록되었습니다. (진행상태: 접수)');
 }
 
 function openQaDetailModal(id) {
@@ -1864,11 +1883,17 @@ function openQaDetailModal(id) {
   document.getElementById('qaDetailEmail').innerText = item.email || 'khh147979@naver.com';
   document.getElementById('qaDetailSubject').innerText = item.title;
   document.getElementById('qaDetailContents').innerText = item.content || item.title;
+  if (document.getElementById('qaDetailDate')) document.getElementById('qaDetailDate').innerText = item.createdAt || '';
+
+  const curStatus = item.status || '접수';
+  const isDone = curStatus === '완료';
+  const isProcessing = curStatus === '처리중';
 
   const statusEl = document.getElementById('qaDetailStatus');
   if (statusEl) {
-    statusEl.innerText = item.status;
-    statusEl.style.color = item.status === '완료' ? '#e67e22' : '#555';
+    statusEl.innerText = curStatus;
+    statusEl.style.color = isDone ? '#16a34a' : (isProcessing ? '#2563eb' : '#e67e22');
+    statusEl.style.fontWeight = 'bold';
   }
 
   const fileRow = document.getElementById('qaDetailFileRow');
@@ -1880,8 +1905,50 @@ function openQaDetailModal(id) {
     if (fileRow) fileRow.style.display = 'none';
   }
 
-  const replyTextarea = document.getElementById('qaReplyTextarea');
-  if (replyTextarea) replyTextarea.value = item.answerContent || '';
+  const readOnlyBox = document.getElementById('qaAnswerReadOnlyBox');
+  const answerStatusBadge = document.getElementById('qaAnswerStatusBadge');
+  const answerContentDisplay = document.getElementById('qaAnswerContentDisplay');
+
+  if (item.answerContent && isDone) {
+    if (readOnlyBox) {
+      readOnlyBox.style.display = 'block';
+      readOnlyBox.style.background = '#f0fdf4';
+      readOnlyBox.style.borderColor = '#bbf7d0';
+    }
+    if (answerStatusBadge) {
+      answerStatusBadge.innerText = '진행상태: 완료';
+      answerStatusBadge.style.background = '#16a34a';
+    }
+    if (answerContentDisplay) {
+      answerContentDisplay.innerText = item.answerContent;
+    }
+  } else if (isProcessing) {
+    if (readOnlyBox) {
+      readOnlyBox.style.display = 'block';
+      readOnlyBox.style.background = '#eff6ff';
+      readOnlyBox.style.borderColor = '#bfdbfe';
+    }
+    if (answerStatusBadge) {
+      answerStatusBadge.innerText = '진행상태: 처리중';
+      answerStatusBadge.style.background = '#2563eb';
+    }
+    if (answerContentDisplay) {
+      answerContentDisplay.innerText = item.answerContent || '최고 관리자가 문의사항을 확인하여 처리 중입니다.';
+    }
+  } else {
+    if (readOnlyBox) {
+      readOnlyBox.style.display = 'block';
+      readOnlyBox.style.background = '#fffbeb';
+      readOnlyBox.style.borderColor = '#fef3c7';
+    }
+    if (answerStatusBadge) {
+      answerStatusBadge.innerText = '진행상태: 접수';
+      answerStatusBadge.style.background = '#e67e22';
+    }
+    if (answerContentDisplay) {
+      answerContentDisplay.innerHTML = '<span style="color:#94a3b8; font-style:italic;">최고 관리자가 문의를 확인하고 답변을 준비 중입니다.</span>';
+    }
+  }
 
   modal.style.display = 'flex';
 }
@@ -1933,6 +2000,35 @@ window.openQaDetailModal = openQaDetailModal;
 window.closeQaDetailModal = closeQaDetailModal;
 window.saveQaReply = saveQaReply;
 window.deleteCurrentQaItem = deleteCurrentQaItem;
+
+function openAfAdminInfoModal() {
+  const modal = document.getElementById('afAdminInfoModal');
+  if (modal) modal.style.display = 'flex';
+}
+
+function closeAfAdminInfoModal() {
+  const modal = document.getElementById('afAdminInfoModal');
+  if (modal) modal.style.display = 'none';
+}
+
+function handleAfAdminInfoSave(e) {
+  if (e) e.preventDefault();
+  const name = document.getElementById('afAdminInfoName')?.value || '박진수';
+  closeAfAdminInfoModal();
+  alert('관리자(' + name + ') 정보가 성공적으로 수정되었습니다.');
+}
+
+function handleAfUserLogout(e) {
+  if (e) e.preventDefault();
+  if (confirm('로그아웃 하시겠습니까?')) {
+    window.location.href = '/af/ad_lec/lists/sn/3267';
+  }
+}
+
+window.openAfAdminInfoModal = openAfAdminInfoModal;
+window.closeAfAdminInfoModal = closeAfAdminInfoModal;
+window.handleAfAdminInfoSave = handleAfAdminInfoSave;
+window.handleAfUserLogout = handleAfUserLogout;
 
 
 

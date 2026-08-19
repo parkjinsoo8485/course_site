@@ -1582,6 +1582,13 @@ let serverQnaList = [
 ];
 
 app.get('/api/af/qanda/lists', (req, res) => {
+  const { schoolId } = req.query;
+  // If schoolId is provided (e.g. from School Admin page), return only that school's inquiries
+  if (schoolId) {
+    const filtered = serverQnaList.filter(q => String(q.schoolId) === String(schoolId));
+    return res.json({ success: true, qnas: filtered });
+  }
+  // Super Admin view: returns all inquiries across all tenant schools
   return res.json({ success: true, qnas: serverQnaList });
 });
 
@@ -1591,10 +1598,13 @@ app.post('/api/af/qanda/write', (req, res) => {
   const now = new Date();
   const createdAt = now.toISOString().split('T')[0];
 
+  const targetSchoolId = String(schoolId || '3267');
+  const targetSchoolName = schoolName || (targetSchoolId === '3267' ? '광주풍향초등학교' : (targetSchoolId === '1001' ? '서울초등학교' : (targetSchoolId === '1002' ? '부산초등학교' : '대구초등학교')));
+
   const newItem = {
     id: nextId,
-    schoolId: schoolId || '3267',
-    schoolName: schoolName || '광주풍향초등학교',
+    schoolId: targetSchoolId,
+    schoolName: targetSchoolName,
     title: title || '문의사항',
     author: author || '김혜련',
     hp1: hp1 || '010',

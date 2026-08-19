@@ -91,11 +91,15 @@ body {
 
 .sidebar {
   width: 240px;
+  height: calc(100vh - 52px);
+  position: sticky;
+  top: 52px;
   background-color: var(--sidebar-bg);
   border-right: 1px solid var(--sidebar-border);
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  z-index: 100;
 }
 
 /* User Profile Header Card */
@@ -104,6 +108,7 @@ body {
   background: #ffffff;
   border-bottom: 1px solid var(--sidebar-border);
   text-align: center;
+  flex-shrink: 0;
 }
 
 .user-profile-header {
@@ -139,44 +144,52 @@ body {
   font-size: 0.72rem;
   padding: 1px 6px;
   font-weight: 700;
+  margin-left: 4px;
 }
 
 .user-links {
+  margin-top: 6px;
   font-size: 0.78rem;
   color: #64748b;
-  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
 }
 
 .user-links a {
   color: #64748b;
   text-decoration: none;
-  margin: 0 4px;
 }
-.user-links a:hover { color: #0284c7; }
+.user-links a:hover {
+  color: #0284c7;
+  text-decoration: underline;
+}
 
 .user-action-buttons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   gap: 6px;
+  margin-top: 12px;
 }
 
 .btn-home {
-  background: #22c55e;
+  flex: 1;
+  background: #2563eb;
   color: white;
   border: none;
-  padding: 7px 0;
+  padding: 6px 0;
   border-radius: 4px;
   font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
 }
-.btn-home:hover { background: #16a34a; }
+.btn-home:hover { background: #1d4ed8; }
 
 .btn-course-reg {
+  flex: 1;
   background: #f43f5e;
   color: white;
   border: none;
-  padding: 7px 0;
+  padding: 6px 0;
   border-radius: 4px;
   font-size: 0.85rem;
   font-weight: 700;
@@ -189,6 +202,24 @@ body {
   list-style: none;
   padding: 0;
   margin: 0;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Custom Slim Scrollbar for Sidebar Menu */
+.sidebar-menu::-webkit-scrollbar {
+  width: 6px;
+}
+.sidebar-menu::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+.sidebar-menu::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+.sidebar-menu::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
 
 .sidebar-menu li {

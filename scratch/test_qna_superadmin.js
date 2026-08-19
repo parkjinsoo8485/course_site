@@ -136,6 +136,14 @@ async function runSuperAdminQnaTests() {
     '8. Re-fetched Q&A list shows updated item with status "완료" and valid answerDate'
   );
 
+  // 7. API Test: Tenant School Isolation Test (e.g. schoolId=1001 must NOT see schoolId=3267)
+  const isolatedListRes = await request('GET', '/api/af/qanda/lists?schoolId=1001');
+  const hasOtherSchool = isolatedListRes.body.qnas.some((q) => q.schoolId !== '1001');
+  assert(
+    isolatedListRes.status === 200 && !hasOtherSchool && isolatedListRes.body.qnas.length > 0,
+    '9. Tenant School Isolation verified: School 1001 cannot see inquiries of other schools'
+  );
+
   console.log('\n========================================');
   console.log(`🎉 SUPER ADMIN Q&A VERIFICATION: ${passed}/${total} passed (${Math.round((passed / total) * 100)}%)`);
   console.log('========================================\n');
