@@ -15,9 +15,86 @@ const JWT_SECRET = process.env.JWT_SECRET || 'neulbom_saas_super_secret_jwt_key_
 // Middleware
 app.use(cors());
 app.use(helmet({
+  contentSecurityPolicy: false,
+  crossOriginEmbedderPolicy: false
+}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Tuition Pay Entry Page (/af/ad_pay/edit/...)
+app.get(/^\/af\/ad_pay\/edit/, (req, res) => {
+  return res.sendFile(path.join(__dirname, 'af', 'ad_pay', 'edit', 'sn', '3267', 'index.html'));
+});
+
+// GET /api/af/ad_pay/data/sn/3267
+app.get('/api/af/ad_pay/data/sn/:sn', (req, res) => {
+  const { sld, sln } = req.query;
+  const currentSld = sld || '10';
+  const currentSln = sln || '1552375';
+
+  let students = applicantDb.filter(a => String(a.courseId) === String(currentSln));
+  if (students.length === 0) {
+    students = applicantDb;
+  }
+
+  return res.json({
+    success: true,
+    schoolName: '광주풍향초등학교',
+    currentSld,
+    currentSln,
+    courses: payCoursesList,
+    students
+  });
+});
+
+// POST /api/af/ad_pay/update-single
+app.post('/api/af/ad_pay/update-single', (req, res) => {
+  const { applicantId, tuitionFee, accommodationFee, bookFee, materialFee } = req.body;
+  const applicant = applicantDb.find(a => a.id === applicantId);
+  if (!applicant) {
+    return res.status(404).json({ success: false, message: '학생을 찾을 수 없습니다.' });
+  }
+
+  applicant.tuitionFee = Number(tuitionFee) || 0;
+  applicant.accommodationFee = Number(accommodationFee) || 0;
+  applicant.bookFee = Number(bookFee) || 0;
+  applicant.materialFee = Number(materialFee) || 0;
+  applicant.totalFee = applicant.tuitionFee + applicant.accommodationFee + applicant.bookFee + applicant.materialFee;
+  applicant.teacherFee = Math.floor(applicant.tuitionFee * 0.7);
+
+  return res.json({ success: true, applicant });
+});
+
+// POST /api/af/ad_pay/update-bulk
+app.post('/api/af/ad_pay/update-bulk', (req, res) => {
+  const { lec_num, students } = req.body;
+  
+  if (!students || !Array.isArray(students)) {
+    return res.status(400).json({ success: false, message: '잘못된 요청입니다.' });
+  }
+
+  students.forEach(updateData => {
+    const applicant = applicantDb.find(a => a.id === updateData.id);
+    if (applicant) {
+      applicant.tuitionFee = Number(updateData.tuitionFee) || 0;
+      applicant.accommodationFee = Number(updateData.accommodationFee) || 0;
+      applicant.bookFee = Number(updateData.bookFee) || 0;
+      applicant.materialFee = Number(updateData.materialFee) || 0;
+      applicant.totalFee = applicant.tuitionFee + applicant.accommodationFee + applicant.bookFee + applicant.materialFee;
+      applicant.teacherFee = Math.floor(applicant.tuitionFee * 0.7);
+    }
+  });
+
+  return res.json({ success: true, message: '일괄 저장되었습니다.' });
+});
+
+// Middleware
+app.use(cors());
+app.use(helmet({
   contentSecurityPolicy: false // Allow loading inline scripts & cdn resources for smooth developer demo
 }));
 app.use(express.json());
+
 app.use('/api', sczigiRoutes);
 
 // Auth Limiter
@@ -1680,257 +1757,297 @@ app.use((req, res, next) => {
 
 // ==================== APPLICANT MANAGEMENT (ad_app) API & ROUTES ====================
 let applicantDb = [
+  // (금) 돌봄 4부 (Course 1552375) - 19명
+  { id: '21016254', seq: 19, period: '26년 8월 늘봄', courseId: '1552375', courseTitle: '(금) 돌봄 4부', instructorName: '돌봄전담사', grade: 1, classNum: 1, studentNum: 10, gradeClass: '1학년 1반', studentName: '오하율', parentPhone: '010-1234-5670', tuitionFee: 40000, accommodationFee: 2000, teacherFee: 28000, bookFee: 15000, materialFee: 5000, totalFee: 62000, addDate: '', subsidyType: '늘봄 무상지원', paymentStatus: '무상', status: '승인', appliedAt: '2026-07-10 15:28:38', bankName: '농협', schoolBankingAccount: '302-1234-5678-01', depositorName: '오태양', memo: '' },
+  { id: '21016237', seq: 18, period: '26년 8월 늘봄', courseId: '1552375', courseTitle: '(금) 돌봄 4부', instructorName: '돌봄전담사', grade: 1, classNum: 1, studentNum: 11, gradeClass: '1학년 1반', studentName: '이소윤', parentPhone: '010-3718-3500', tuitionFee: 40000, accommodationFee: 2000, teacherFee: 28000, bookFee: 15000, materialFee: 5000, totalFee: 62000, addDate: '', subsidyType: '늘봄 무상지원', paymentStatus: '무상', status: '승인', appliedAt: '2026-07-10 15:26:54', bankName: '국민은행', schoolBankingAccount: '648201-01-234567', depositorName: '이진수', memo: '' },
+  { id: '21016247', seq: 17, period: '26년 8월 늘봄', courseId: '1552375', courseTitle: '(금) 돌봄 4부', instructorName: '돌봄전담사', grade: 1, classNum: 1, studentNum: 13, gradeClass: '1학년 1반', studentName: '이채린', parentPhone: '010-2345-6781', tuitionFee: 40000, accommodationFee: 2000, teacherFee: 28000, bookFee: 15000, materialFee: 5000, totalFee: 62000, addDate: '', subsidyType: '늘봄 무상지원', paymentStatus: '무상', status: '승인', appliedAt: '2026-07-10 15:27:53', bankName: '신한은행', schoolBankingAccount: '110-234-567890', depositorName: '이동현', memo: '' },
+  { id: '21016260', seq: 16, period: '26년 8월 늘봄', courseId: '1552375', courseTitle: '(금) 돌봄 4부', instructorName: '돌봄전담사', grade: 1, classNum: 1, studentNum: 14, gradeClass: '1학년 1반', studentName: '장희준', parentPhone: '010-5334-7217', tuitionFee: 40000, accommodationFee: 2000, teacherFee: 28000, bookFee: 15000, materialFee: 5000, totalFee: 62000, addDate: '', subsidyType: '늘봄 무상지원', paymentStatus: '무상', status: '승인', appliedAt: '2026-07-10 15:29:29', bankName: '카카오뱅크', schoolBankingAccount: '3333-01-9876543', depositorName: '장성식', memo: '' },
+  { id: '21016240', seq: 15, period: '26년 8월 늘봄', courseId: '1552375', courseTitle: '(금) 돌봄 4부', instructorName: '돌봄전담사', grade: 1, classNum: 1, studentNum: 17, gradeClass: '1학년 1반', studentName: '최다연', parentPhone: '010-5219-2196', tuitionFee: 40000, accommodationFee: 2000, teacherFee: 28000, bookFee: 15000, materialFee: 5000, totalFee: 62000, addDate: '', subsidyType: '늘봄 지원금', paymentStatus: '결제완료', status: '승인', appliedAt: '2026-07-10 15:27:16', bankName: '우리은행', schoolBankingAccount: '1002-123-456789', depositorName: '최병서', memo: '' },
+  { id: '21016242', seq: 14, period: '26년 8월 늘봄', courseId: '1552375', courseTitle: '(금) 돌봄 4부', instructorName: '돌봄전담사', grade: 1, classNum: 1, studentNum: 18, gradeClass: '1학년 1반', studentName: '최연우', parentPhone: '010-3456-7892', tuitionFee: 40000, accommodationFee: 2000, teacherFee: 28000, bookFee: 15000, materialFee: 5000, totalFee: 62000, addDate: '', subsidyType: '일반 자부담', paymentStatus: '결제완료', status: '승인', appliedAt: '2026-07-10 15:27:36', bankName: '농협', schoolBankingAccount: '351-0123-4567-89', depositorName: '최민수', memo: '' },
+  { id: '21016276', seq: 13, period: '26년 8월 늘봄', courseId: '1552375', courseTitle: '(금) 돌봄 4부', instructorName: '돌봄전담사', grade: 1, classNum: 1, studentNum: 19, gradeClass: '1학년 1반', studentName: '최유나', parentPhone: '010-3373-3683', tuitionFee: 40000, accommodationFee: 2000, teacherFee: 28000, bookFee: 15000, materialFee: 5000, totalFee: 62000, addDate: '', subsidyType: '일반 자부담', paymentStatus: '결제대기', status: '신청대기', appliedAt: '2026-07-10 15:31:04', bankName: '하나은행', schoolBankingAccount: '123-910111-12131', depositorName: '최광철', memo: '' },
+  { id: '21016252', seq: 12, period: '26년 8월 늘봄', courseId: '1552375', courseTitle: '(금) 돌봄 4부', instructorName: '돌봄전담사', grade: 1, classNum: 2, studentNum: 2, gradeClass: '1학년 2반', studentName: '김은성', parentPhone: '010-9073-5302', tuitionFee: 40000, accommodationFee: 2000, teacherFee: 28000, bookFee: 15000, materialFee: 5000, totalFee: 62000, addDate: '', subsidyType: '늘봄 무상지원', paymentStatus: '무상', status: '승인', appliedAt: '2026-07-10 15:28:24', bankName: '기업은행', schoolBankingAccount: '010-9073-5302', depositorName: '김성태', memo: '' },
+  { id: '21016250', seq: 11, period: '26년 8월 늘봄', courseId: '1552375', courseTitle: '(금) 돌봄 4부', instructorName: '돌봄전담사', grade: 1, classNum: 2, studentNum: 5, gradeClass: '1학년 2반', studentName: '노슬찬', parentPhone: '010-5445-0930', tuitionFee: 40000, accommodationFee: 2000, teacherFee: 28000, bookFee: 15000, materialFee: 5000, totalFee: 62000, addDate: '', subsidyType: '늘봄 무상지원', paymentStatus: '무상', status: '승인', appliedAt: '2026-07-10 15:28:20', bankName: '농협', schoolBankingAccount: '301-4455-6677-88', depositorName: '노철웅', memo: '' },
+  { id: '21016257', seq: 10, period: '26년 8월 늘봄', courseId: '1552375', courseTitle: '(금) 돌봄 4부', instructorName: '돌봄전담사', grade: 1, classNum: 2, studentNum: 7, gradeClass: '1학년 2반', studentName: '배지안', parentPhone: '010-4567-8901', tuitionFee: 40000, accommodationFee: 2000, teacherFee: 28000, bookFee: 15000, materialFee: 5000, totalFee: 62000, addDate: '', subsidyType: '늘봄 무상지원', paymentStatus: '무상', status: '승인', appliedAt: '2026-07-10 15:29:10', bankName: '국민은행', schoolBankingAccount: '445501-01-334455', depositorName: '배영호', memo: '' },
+  { id: '21016266', seq: 9, period: '26년 8월 늘봄', courseId: '1552375', courseTitle: '(금) 돌봄 4부', instructorName: '돌봄전담사', grade: 1, classNum: 2, studentNum: 8, gradeClass: '1학년 2반', studentName: '소하윤', parentPhone: '010-5678-9012', tuitionFee: 40000, accommodationFee: 2000, teacherFee: 28000, bookFee: 15000, materialFee: 5000, totalFee: 62000, addDate: '', subsidyType: '늘봄 무상지원', paymentStatus: '무상', status: '승인', appliedAt: '2026-07-10 15:29:45', bankName: '신한은행', schoolBankingAccount: '110-345-678901', depositorName: '소진우', memo: '' },
+  { id: '21016262', seq: 8, period: '26년 8월 늘봄', courseId: '1552375', courseTitle: '(금) 돌봄 4부', instructorName: '돌봄전담사', grade: 1, classNum: 2, studentNum: 14, gradeClass: '1학년 2반', studentName: '임지유', parentPhone: '010-6789-0123', tuitionFee: 40000, accommodationFee: 2000, teacherFee: 28000, bookFee: 15000, materialFee: 5000, totalFee: 62000, addDate: '', subsidyType: '늘봄 무상지원', paymentStatus: '무상', status: '승인', appliedAt: '2026-07-10 15:30:12', bankName: '우리은행', schoolBankingAccount: '1002-345-678901', depositorName: '임태훈', memo: '' },
+  { id: '21016290', seq: 7, period: '26년 8월 늘봄', courseId: '1552375', courseTitle: '(금) 돌봄 4부', instructorName: '돌봄전담사', grade: 2, classNum: 1, studentNum: 12, gradeClass: '2학년 1반', studentName: '장무재', parentPhone: '010-7890-1234', tuitionFee: 40000, accommodationFee: 2000, teacherFee: 28000, bookFee: 15000, materialFee: 5000, totalFee: 62000, addDate: '', subsidyType: '늘봄 무상지원', paymentStatus: '무상', status: '승인', appliedAt: '2026-07-10 15:30:40', bankName: '하나은행', schoolBankingAccount: '123-456789-01234', depositorName: '장호진', memo: '' },
+  { id: '21016282', seq: 6, period: '26년 8월 늘봄', courseId: '1552375', courseTitle: '(금) 돌봄 4부', instructorName: '돌봄전담사', grade: 2, classNum: 2, studentNum: 3, gradeClass: '2학년 2반', studentName: '국민준', parentPhone: '010-8901-2345', tuitionFee: 40000, accommodationFee: 2000, teacherFee: 28000, bookFee: 15000, materialFee: 5000, totalFee: 62000, addDate: '', subsidyType: '늘봄 무상지원', paymentStatus: '무상', status: '승인', appliedAt: '2026-07-10 15:31:05', bankName: '농협', schoolBankingAccount: '302-3456-7890-12', depositorName: '국동현', memo: '' },
+  { id: '21016288', seq: 5, period: '26년 8월 늘봄', courseId: '1552375', courseTitle: '(금) 돌봄 4부', instructorName: '돌봄전담사', grade: 2, classNum: 2, studentNum: 5, gradeClass: '2학년 2반', studentName: '김도아', parentPhone: '010-9012-3456', tuitionFee: 40000, accommodationFee: 2000, teacherFee: 28000, bookFee: 15000, materialFee: 5000, totalFee: 62000, addDate: '', subsidyType: '늘봄 무상지원', paymentStatus: '무상', status: '승인', appliedAt: '2026-07-10 15:31:30', bankName: '카카오뱅크', schoolBankingAccount: '3333-02-1234567', depositorName: '김상우', memo: '' },
+  { id: '21016279', seq: 4, period: '26년 8월 늘봄', courseId: '1552375', courseTitle: '(금) 돌봄 4부', instructorName: '돌봄전담사', grade: 2, classNum: 2, studentNum: 13, gradeClass: '2학년 2반', studentName: '홍은재', parentPhone: '010-0123-4567', tuitionFee: 40000, accommodationFee: 2000, teacherFee: 28000, bookFee: 15000, materialFee: 5000, totalFee: 62000, addDate: '', subsidyType: '늘봄 무상지원', paymentStatus: '무상', status: '승인', appliedAt: '2026-07-10 15:32:00', bankName: '기업은행', schoolBankingAccount: '010-0123-4567', depositorName: '홍성민', memo: '' },
+  { id: '21016318', seq: 3, period: '26년 8월 늘봄', courseId: '1552375', courseTitle: '(금) 돌봄 4부', instructorName: '돌봄전담사', grade: 2, classNum: 3, studentNum: 2, gradeClass: '2학년 3반', studentName: '김지민', parentPhone: '010-1234-9876', tuitionFee: 40000, accommodationFee: 2000, teacherFee: 28000, bookFee: 15000, materialFee: 5000, totalFee: 62000, addDate: '', subsidyType: '늘봄 무상지원', paymentStatus: '무상', status: '승인', appliedAt: '2026-07-10 15:32:25', bankName: '신한은행', schoolBankingAccount: '110-456-789012', depositorName: '김병철', memo: '' },
+  { id: '21016286', seq: 2, period: '26년 8월 늘봄', courseId: '1552375', courseTitle: '(금) 돌봄 4부', instructorName: '돌봄전담사', grade: 2, classNum: 3, studentNum: 6, gradeClass: '2학년 3반', studentName: '이서린', parentPhone: '010-2345-8765', tuitionFee: 40000, accommodationFee: 2000, teacherFee: 28000, bookFee: 15000, materialFee: 5000, totalFee: 62000, addDate: '', subsidyType: '늘봄 무상지원', paymentStatus: '무상', status: '승인', appliedAt: '2026-07-10 15:32:50', bankName: '국민은행', schoolBankingAccount: '556601-01-445566', depositorName: '이재혁', memo: '' },
+  { id: '21016297', seq: 1, period: '26년 8월 늘봄', courseId: '1552375', courseTitle: '(금) 돌봄 4부', instructorName: '돌봄전담사', grade: 2, classNum: 3, studentNum: 9, gradeClass: '2학년 3반', studentName: '이용준', parentPhone: '010-3456-7654', tuitionFee: 40000, accommodationFee: 2000, teacherFee: 28000, bookFee: 15000, materialFee: 5000, totalFee: 62000, addDate: '', subsidyType: '늘봄 무상지원', paymentStatus: '무상', status: '승인', appliedAt: '2026-07-10 15:33:15', bankName: '농협', schoolBankingAccount: '302-5678-9012-34', depositorName: '이광수', memo: '' },
+
+  // 컴퓨터 월,수 1부 (Course 1552319) - 15명
+  { id: '21017001', seq: 15, period: '26년 8월 늘봄', courseId: '1552319', courseTitle: '컴퓨터 월,수 1부', instructorName: '김윤정', grade: 1, classNum: 1, studentNum: 1, gradeClass: '1학년 1반', studentName: '강건우', parentPhone: '010-1111-2222', tuitionFee: 38000, accommodationFee: 1900, teacherFee: 36100, bookFee: 15000, materialFee: 0, totalFee: 53000, addDate: '2026-08-01', subsidyType: '일반 자부담', paymentStatus: '결제완료', status: '승인', appliedAt: '2026-07-10 16:01:00', bankName: '국민은행', schoolBankingAccount: '111-222-333333', depositorName: '강태진', memo: '' },
+  { id: '21017002', seq: 14, period: '26년 8월 늘봄', courseId: '1552319', courseTitle: '컴퓨터 월,수 1부', instructorName: '김윤정', grade: 1, classNum: 1, studentNum: 3, gradeClass: '1학년 1반', studentName: '김도하', parentPhone: '010-1234-5678', tuitionFee: 38000, accommodationFee: 1900, teacherFee: 36100, bookFee: 15000, materialFee: 0, totalFee: 53000, addDate: '2026-08-01', subsidyType: '일반 자부담', paymentStatus: '결제완료', status: '승인', appliedAt: '2026-07-10 16:02:10', bankName: '신한은행', schoolBankingAccount: '222-333-444444', depositorName: '김도일', memo: '' },
+  { id: '21017003', seq: 13, period: '26년 8월 늘봄', courseId: '1552319', courseTitle: '컴퓨터 월,수 1부', instructorName: '김윤정', grade: 1, classNum: 2, studentNum: 4, gradeClass: '1학년 2반', studentName: '박서아', parentPhone: '010-3456-7890', tuitionFee: 38000, accommodationFee: 1900, teacherFee: 36100, bookFee: 15000, materialFee: 0, totalFee: 53000, addDate: '2026-08-01', subsidyType: '일반 자부담', paymentStatus: '결제완료', status: '승인', appliedAt: '2026-07-10 16:03:00', bankName: '우리은행', schoolBankingAccount: '333-444-555555', depositorName: '박진철', memo: '' },
+  { id: '21017004', seq: 12, period: '26년 8월 늘봄', courseId: '1552319', courseTitle: '컴퓨터 월,수 1부', instructorName: '김윤정', grade: 2, classNum: 1, studentNum: 6, gradeClass: '2학년 1반', studentName: '이준우', parentPhone: '010-4567-8901', tuitionFee: 38000, accommodationFee: 1900, teacherFee: 36100, bookFee: 15000, materialFee: 0, totalFee: 53000, addDate: '2026-08-01', subsidyType: '늘봄 지원금', paymentStatus: '결제완료', status: '승인', appliedAt: '2026-07-10 16:04:15', bankName: '하나은행', schoolBankingAccount: '444-555-666666', depositorName: '이동주', memo: '' },
+  { id: '21017005', seq: 11, period: '26년 8월 늘봄', courseId: '1552319', courseTitle: '컴퓨터 월,수 1부', instructorName: '김윤정', grade: 2, classNum: 2, studentNum: 8, gradeClass: '2학년 2반', studentName: '정지우', parentPhone: '010-5678-9012', tuitionFee: 38000, accommodationFee: 1900, teacherFee: 36100, bookFee: 15000, materialFee: 0, totalFee: 53000, addDate: '2026-08-01', subsidyType: '일반 자부담', paymentStatus: '결제대기', status: '승인', appliedAt: '2026-07-10 16:05:00', bankName: '기업은행', schoolBankingAccount: '555-666-777777', depositorName: '정우성', memo: '' },
+
+  // 로봇과학 1부 (Course 1552305) - 14명
+  { id: '21018001', seq: 14, period: '26년 8월 늘봄', courseId: '1552305', courseTitle: '로봇과학 1부', instructorName: '최정호', grade: 1, classNum: 1, studentNum: 5, gradeClass: '1학년 1반', studentName: '조민재', parentPhone: '010-6789-1234', tuitionFee: 42000, accommodationFee: 2100, teacherFee: 39900, bookFee: 20000, materialFee: 15000, totalFee: 77000, addDate: '2026-08-01', subsidyType: '일반 자부담', paymentStatus: '결제완료', status: '승인', appliedAt: '2026-07-10 16:10:00', bankName: '농협', schoolBankingAccount: '302-8888-9999-01', depositorName: '조성태', memo: '' },
+  { id: '21018002', seq: 13, period: '26년 8월 늘봄', courseId: '1552305', courseTitle: '로봇과학 1부', instructorName: '최정호', grade: 2, classNum: 2, studentNum: 11, gradeClass: '2학년 2반', studentName: '한서준', parentPhone: '010-7890-2345', tuitionFee: 42000, accommodationFee: 2100, teacherFee: 39900, bookFee: 20000, materialFee: 15000, totalFee: 77000, addDate: '2026-08-01', subsidyType: '일반 자부담', paymentStatus: '결제완료', status: '승인', appliedAt: '2026-07-10 16:11:00', bankName: '신한은행', schoolBankingAccount: '110-888-999999', depositorName: '한영호', memo: '' },
+  { id: '21018003', seq: 12, period: '26년 8월 늘봄', courseId: '1552305', courseTitle: '로봇과학 1부', instructorName: '최정호', grade: 3, classNum: 1, studentNum: 7, gradeClass: '3학년 1반', studentName: '황지호', parentPhone: '010-8901-3456', tuitionFee: 42000, accommodationFee: 2100, teacherFee: 39900, bookFee: 20000, materialFee: 15000, totalFee: 77000, addDate: '2026-08-01', subsidyType: '늘봄 지원금', paymentStatus: '결제완료', status: '승인', appliedAt: '2026-07-10 16:12:00', bankName: '국민은행', schoolBankingAccount: '999-000-111111', depositorName: '황인수', memo: '' },
+
+  // 댄스 2부 (Course 1552303) - 16명
+  { id: '21019001', seq: 16, period: '26년 8월 늘봄', courseId: '1552303', courseTitle: '댄스 2부', instructorName: '김지향', grade: 2, classNum: 1, studentNum: 4, gradeClass: '2학년 1반', studentName: '문채원', parentPhone: '010-9012-4567', tuitionFee: 30000, accommodationFee: 1500, teacherFee: 28500, bookFee: 0, materialFee: 0, totalFee: 30000, addDate: '2026-08-01', subsidyType: '일반 자부담', paymentStatus: '결제완료', status: '승인', appliedAt: '2026-07-10 16:20:00', bankName: '카카오뱅크', schoolBankingAccount: '3333-05-6789012', depositorName: '문재학', memo: '' },
+  { id: '21019002', seq: 15, period: '26년 8월 늘봄', courseId: '1552303', courseTitle: '댄스 2부', instructorName: '김지향', grade: 3, classNum: 2, studentNum: 9, gradeClass: '3학년 2반', studentName: '윤서진', parentPhone: '010-0123-5678', tuitionFee: 30000, accommodationFee: 1500, teacherFee: 28500, bookFee: 0, materialFee: 0, totalFee: 30000, addDate: '2026-08-01', subsidyType: '일반 자부담', paymentStatus: '결제대기', status: '승인', appliedAt: '2026-07-10 16:21:00', bankName: '우리은행', schoolBankingAccount: '1002-999-888777', depositorName: '윤정우', memo: '' },
+
+  // 바이올린 1부 (Course 1552315) - 8명
+  { id: '21020001', seq: 8, period: '26년 8월 늘봄', courseId: '1552315', courseTitle: '바이올린 1부', instructorName: '천윤아', grade: 1, classNum: 2, studentNum: 10, gradeClass: '1학년 2반', studentName: '서예린', parentPhone: '010-1234-7777', tuitionFee: 45000, accommodationFee: 2250, teacherFee: 42750, bookFee: 18000, materialFee: 10000, totalFee: 73000, addDate: '2026-08-01', subsidyType: '일반 자부담', paymentStatus: '결제완료', status: '승인', appliedAt: '2026-07-10 16:30:00', bankName: '신한은행', schoolBankingAccount: '110-555-444333', depositorName: '서동진', memo: '' },
+  { id: '21020002', seq: 7, period: '26년 8월 늘봄', courseId: '1552315', courseTitle: '바이올린 1부', instructorName: '천윤아', grade: 2, classNum: 3, studentNum: 8, gradeClass: '2학년 3반', studentName: '안유진', parentPhone: '010-2345-8888', tuitionFee: 45000, accommodationFee: 2250, teacherFee: 42750, bookFee: 18000, materialFee: 10000, totalFee: 73000, addDate: '2026-08-01', subsidyType: '늘봄 지원금', paymentStatus: '결제완료', status: '승인', appliedAt: '2026-07-10 16:31:00', bankName: '국민은행', schoolBankingAccount: '555-888-222111', depositorName: '안진우', memo: '' },
+
+  // 창의수학 1부 (Course 1552328) - 17명
+  { id: '21021001', seq: 17, period: '26년 8월 늘봄', courseId: '1552328', courseTitle: '창의수학 1부', instructorName: '김경아', grade: 1, classNum: 1, studentNum: 8, gradeClass: '1학년 1반', studentName: '남궁민', parentPhone: '010-3456-9999', tuitionFee: 35000, accommodationFee: 1750, teacherFee: 33250, bookFee: 12000, materialFee: 5000, totalFee: 52000, addDate: '2026-08-01', subsidyType: '일반 자부담', paymentStatus: '결제완료', status: '승인', appliedAt: '2026-07-10 16:40:00', bankName: '농협', schoolBankingAccount: '302-1111-2222-33', depositorName: '남궁혁', memo: '' },
+  { id: '21021002', seq: 16, period: '26년 8월 늘봄', courseId: '1552328', courseTitle: '창의수학 1부', instructorName: '김경아', grade: 2, classNum: 1, studentNum: 15, gradeClass: '2학년 1반', studentName: '탁승우', parentPhone: '010-4567-0000', tuitionFee: 35000, accommodationFee: 1750, teacherFee: 33250, bookFee: 12000, materialFee: 5000, totalFee: 52000, addDate: '2026-08-01', subsidyType: '일반 자부담', paymentStatus: '결제대기', status: '승인', appliedAt: '2026-07-10 16:41:00', bankName: '하나은행', schoolBankingAccount: '123-777-888999', depositorName: '탁영호', memo: '' },
+
+  // 바둑 1부 (Course 1552313) - 8명
+  { id: '21022001', seq: 8, period: '26년 8월 늘봄', courseId: '1552313', courseTitle: '바둑 1부', instructorName: '박경도', grade: 1, classNum: 2, studentNum: 9, gradeClass: '1학년 2반', studentName: '주원진', parentPhone: '010-5678-1111', tuitionFee: 32000, accommodationFee: 1600, teacherFee: 30400, bookFee: 8000, materialFee: 0, totalFee: 40000, addDate: '2026-08-01', subsidyType: '일반 자부담', paymentStatus: '결제완료', status: '승인', appliedAt: '2026-07-10 16:50:00', bankName: '기업은행', schoolBankingAccount: '010-5678-1111', depositorName: '주태수', memo: '' },
+
+  // (월) 맞춤형 AI코딩교실 (Course c_2)
+  { id: '21023001', seq: 10, period: '26년 8월 늘봄', courseId: 'c_2', courseTitle: '(월) 맞춤형 AI코딩교실', instructorName: '박코딩', grade: 2, classNum: 2, studentNum: 1, gradeClass: '2학년 2반', studentName: '강태양', parentPhone: '010-6789-2222', tuitionFee: 35000, accommodationFee: 1750, teacherFee: 33250, bookFee: 0, materialFee: 10000, totalFee: 45000, addDate: '2026-08-01', subsidyType: '일반 자부담', paymentStatus: '결제완료', status: '승인', appliedAt: '2026-07-10 17:00:00', bankName: '카카오뱅크', schoolBankingAccount: '3333-09-8877665', depositorName: '강선우', memo: '' },
+
+  // (화/목) 창의로봇교실 (Course c_3)
+  { id: '21024001', seq: 9, period: '26년 8월 늘봄', courseId: 'c_3', courseTitle: '(화/목) 창의로봇교실', instructorName: '이로봇', grade: 3, classNum: 1, studentNum: 2, gradeClass: '3학년 1반', studentName: '구본승', parentPhone: '010-7890-3333', tuitionFee: 40000, accommodationFee: 2000, teacherFee: 38000, bookFee: 0, materialFee: 15000, totalFee: 55000, addDate: '2026-08-01', subsidyType: '일반 자부담', paymentStatus: '결제완료', status: '승인', appliedAt: '2026-07-10 17:10:00', bankName: '농협', schoolBankingAccount: '302-3333-4444-55', depositorName: '구자명', memo: '' }
+];
+
+let payCoursesList = [
   {
-    id: 'app_712',
-    seq: 712,
-    period: '26년 8월 늘봄',
-    courseId: 'c_1',
-    courseTitle: '(금) 돌봄 4부',
-    instructorName: '김민지',
-    grade: 1,
-    classNum: 1,
-    studentNum: 10,
-    gradeClass: '1학년 1반',
-    studentName: '오하율',
-    parentPhone: '',
-    tuitionFee: 0,
-    accommodationFee: 0,
-    teacherFee: 0,
-    bookFee: 0,
-    materialFee: 0,
-    totalFee: 0,
-    subsidyType: '늘봄 무상지원',
-    paymentStatus: '무상',
-    status: '승인',
-    appliedAt: '2026-07-10 15:28:38',
-    bankName: '농협',
-    schoolBankingAccount: '302-1234-5678-01',
-    depositorName: '오태양',
-    memo: ''
+    "value": "1552375",
+    "text": "[26년 8월] (금) 돌봄 4부(돌봄전담사,19명)"
   },
   {
-    id: 'app_711',
-    seq: 711,
-    period: '26년 8월 늘봄',
-    courseId: 'c_1',
-    courseTitle: '(금) 돌봄 4부',
-    instructorName: '김민지',
-    grade: 1,
-    classNum: 1,
-    studentNum: 11,
-    gradeClass: '1학년 1반',
-    studentName: '이소윤',
-    parentPhone: '010-3718-3500',
-    tuitionFee: 0,
-    accommodationFee: 0,
-    teacherFee: 0,
-    bookFee: 0,
-    materialFee: 0,
-    totalFee: 0,
-    subsidyType: '늘봄 무상지원',
-    paymentStatus: '무상',
-    status: '승인',
-    appliedAt: '2026-07-10 15:26:54',
-    bankName: '국민은행',
-    schoolBankingAccount: '648201-01-234567',
-    depositorName: '이진수',
-    memo: ''
+    "value": "1552291",
+    "text": "[26년 8월] (금)돌봄 1부(돌봄전담사,5명)"
   },
   {
-    id: 'app_710',
-    seq: 710,
-    period: '26년 8월 늘봄',
-    courseId: 'c_1',
-    courseTitle: '(금) 돌봄 4부',
-    instructorName: '김민지',
-    grade: 1,
-    classNum: 1,
-    studentNum: 13,
-    gradeClass: '1학년 1반',
-    studentName: '이채린',
-    parentPhone: '',
-    tuitionFee: 0,
-    accommodationFee: 0,
-    teacherFee: 0,
-    bookFee: 0,
-    materialFee: 0,
-    totalFee: 0,
-    subsidyType: '늘봄 무상지원',
-    paymentStatus: '무상',
-    status: '승인',
-    appliedAt: '2026-07-10 15:27:53',
-    bankName: '신한은행',
-    schoolBankingAccount: '110-234-567890',
-    depositorName: '이동현',
-    memo: ''
+    "value": "1552292",
+    "text": "[26년 8월] (금)돌봄 2부(돌봄전담사,12명)"
   },
   {
-    id: 'app_709',
-    seq: 709,
-    period: '26년 8월 늘봄',
-    courseId: 'c_1',
-    courseTitle: '(금) 돌봄 4부',
-    instructorName: '김민지',
-    grade: 1,
-    classNum: 1,
-    studentNum: 14,
-    gradeClass: '1학년 1반',
-    studentName: '장희준',
-    parentPhone: '010-5334-7217',
-    tuitionFee: 0,
-    accommodationFee: 0,
-    teacherFee: 0,
-    bookFee: 0,
-    materialFee: 0,
-    totalFee: 0,
-    subsidyType: '늘봄 무상지원',
-    paymentStatus: '무상',
-    status: '승인',
-    appliedAt: '2026-07-10 15:29:29',
-    bankName: '카카오뱅크',
-    schoolBankingAccount: '3333-01-9876543',
-    depositorName: '장성식',
-    memo: ''
+    "value": "1552293",
+    "text": "[26년 8월] (금)돌봄 3부(돌봄전담사,20명)"
   },
   {
-    id: 'app_708',
-    seq: 708,
-    period: '26년 8월 늘봄',
-    courseId: 'c_1',
-    courseTitle: '(금) 돌봄 4부',
-    instructorName: '김민지',
-    grade: 1,
-    classNum: 1,
-    studentNum: 17,
-    gradeClass: '1학년 1반',
-    studentName: '최다연',
-    parentPhone: '010-5219-2196',
-    tuitionFee: 0,
-    accommodationFee: 0,
-    teacherFee: 0,
-    bookFee: 0,
-    materialFee: 0,
-    totalFee: 0,
-    subsidyType: '늘봄 지원금',
-    paymentStatus: '결제완료',
-    status: '승인',
-    appliedAt: '2026-07-10 15:27:16',
-    bankName: '우리은행',
-    schoolBankingAccount: '1002-123-456789',
-    depositorName: '최병서',
-    memo: ''
+    "value": "1552374",
+    "text": "[26년 8월] (목) 돌봄 4부(돌봄전담사,20명)"
   },
   {
-    id: 'app_707',
-    seq: 707,
-    period: '26년 8월 늘봄',
-    courseId: 'c_1',
-    courseTitle: '(금) 돌봄 4부',
-    instructorName: '김민지',
-    grade: 1,
-    classNum: 1,
-    studentNum: 18,
-    gradeClass: '1학년 1반',
-    studentName: '최인우',
-    parentPhone: '',
-    tuitionFee: 0,
-    accommodationFee: 0,
-    teacherFee: 0,
-    bookFee: 0,
-    materialFee: 0,
-    totalFee: 0,
-    subsidyType: '일반 자부담',
-    paymentStatus: '결제완료',
-    status: '승인',
-    appliedAt: '2026-07-10 15:27:36',
-    bankName: '농협',
-    schoolBankingAccount: '351-0123-4567-89',
-    depositorName: '최민수',
-    memo: ''
+    "value": "1552288",
+    "text": "[26년 8월] (목)돌봄 1부(돌봄전담사,2명)"
   },
   {
-    id: 'app_706',
-    seq: 706,
-    period: '26년 8월 늘봄',
-    courseId: 'c_1',
-    courseTitle: '(금) 돌봄 4부',
-    instructorName: '김민지',
-    grade: 1,
-    classNum: 1,
-    studentNum: 19,
-    gradeClass: '1학년 1반',
-    studentName: '최유나',
-    parentPhone: '010-3373-3683',
-    tuitionFee: 0,
-    accommodationFee: 0,
-    teacherFee: 0,
-    bookFee: 0,
-    materialFee: 0,
-    totalFee: 0,
-    subsidyType: '일반 자부담',
-    paymentStatus: '결제대기',
-    status: '신청대기',
-    appliedAt: '2026-07-10 15:31:04',
-    bankName: '하나은행',
-    schoolBankingAccount: '123-910111-12131',
-    depositorName: '최광철',
-    memo: ''
+    "value": "1552289",
+    "text": "[26년 8월] (목)돌봄 2부(돌봄전담사,4명)"
   },
   {
-    id: 'app_705',
-    seq: 705,
-    period: '26년 8월 늘봄',
-    courseId: 'c_1',
-    courseTitle: '(금) 돌봄 4부',
-    instructorName: '김민지',
-    grade: 1,
-    classNum: 2,
-    studentNum: 2,
-    gradeClass: '1학년 2반',
-    studentName: '김윤성',
-    parentPhone: '010-9073-5302',
-    tuitionFee: 0,
-    accommodationFee: 0,
-    teacherFee: 0,
-    bookFee: 0,
-    materialFee: 0,
-    totalFee: 0,
-    subsidyType: '늘봄 무상지원',
-    paymentStatus: '무상',
-    status: '승인',
-    appliedAt: '2026-07-10 15:28:24',
-    bankName: '기업은행',
-    schoolBankingAccount: '010-9073-5302',
-    depositorName: '김성태',
-    memo: ''
+    "value": "1552290",
+    "text": "[26년 8월] (목)돌봄 3부(돌봄전담사,10명)"
   },
   {
-    id: 'app_704',
-    seq: 704,
-    period: '26년 8월 늘봄',
-    courseId: 'c_1',
-    courseTitle: '(금) 돌봄 4부',
-    instructorName: '김민지',
-    grade: 1,
-    classNum: 2,
-    studentNum: 3,
-    gradeClass: '1학년 2반',
-    studentName: '노수지',
-    parentPhone: '010-5445-0930',
-    tuitionFee: 0,
-    accommodationFee: 0,
-    teacherFee: 0,
-    bookFee: 0,
-    materialFee: 0,
-    totalFee: 0,
-    subsidyType: '늘봄 무상지원',
-    paymentStatus: '무상',
-    status: '승인',
-    appliedAt: '2026-07-10 15:28:20',
-    bankName: '농협',
-    schoolBankingAccount: '301-4455-6677-88',
-    depositorName: '노철웅',
-    memo: ''
+    "value": "1552284",
+    "text": "[26년 8월] (수)돌봄 1부(돌봄전담사,1명)"
+  },
+  {
+    "value": "1552285",
+    "text": "[26년 8월] (수)돌봄 2부(돌봄전담사,4명)"
+  },
+  {
+    "value": "1552286",
+    "text": "[26년 8월] (수)돌봄 3부(돌봄전담사,10명)"
+  },
+  {
+    "value": "1552287",
+    "text": "[26년 8월] (수)돌봄 4부(돌봄전담사,20명)"
+  },
+  {
+    "value": "1552277",
+    "text": "[26년 8월] (월)돌봄 1부(돌봄전담사,1명)"
+  },
+  {
+    "value": "1552278",
+    "text": "[26년 8월] (월)돌봄 2부(돌봄전담사,4명)"
+  },
+  {
+    "value": "1552279",
+    "text": "[26년 8월] (월)돌봄 3부(돌봄전담사,10명)"
+  },
+  {
+    "value": "1552280",
+    "text": "[26년 8월] (월)돌봄 4부(돌봄전담사,20명)"
+  },
+  {
+    "value": "1552373",
+    "text": "[26년 8월] (화) 돌봄 4부(돌봄전담사,20명)"
+  },
+  {
+    "value": "1552281",
+    "text": "[26년 8월] (화)돌봄 1부(돌봄전담사,2명)"
+  },
+  {
+    "value": "1552282",
+    "text": "[26년 8월] (화)돌봄 2부(돌봄전담사,4명)"
+  },
+  {
+    "value": "1552283",
+    "text": "[26년 8월] (화)돌봄 3부(돌봄전담사,10명)"
+  },
+  {
+    "value": "1552299",
+    "text": "[26년 8월] 논술 1부(박지숙,17명)"
+  },
+  {
+    "value": "1552300",
+    "text": "[26년 8월] 논술 2부(박지숙,11명)"
+  },
+  {
+    "value": "1552301",
+    "text": "[26년 8월] 논술 3부(박지숙,0명)"
+  },
+  {
+    "value": "1552297",
+    "text": "[26년 8월] 놀이체육 1부(강태연,11명)"
+  },
+  {
+    "value": "1552296",
+    "text": "[26년 8월] 놀이체육 2부(강태연,15명)"
+  },
+  {
+    "value": "1552324",
+    "text": "[26년 8월] 뉴스포츠 1부(박지연,30명)"
+  },
+  {
+    "value": "1552325",
+    "text": "[26년 8월] 뉴스포츠 2부(박지연,20명)"
+  },
+  {
+    "value": "1552302",
+    "text": "[26년 8월] 댄스 1부(김지향,0명)"
+  },
+  {
+    "value": "1552303",
+    "text": "[26년 8월] 댄스 2부(김지향,16명)"
+  },
+  {
+    "value": "1552304",
+    "text": "[26년 8월] 댄스 3부(김지향,6명)"
+  },
+  {
+    "value": "1552295",
+    "text": "[26년 8월] 독후활동미술놀이 1부(임은희,9명)"
+  },
+  {
+    "value": "1552294",
+    "text": "[26년 8월] 독후활동미술놀이 2부(임은희,20명)"
+  },
+  {
+    "value": "1552305",
+    "text": "[26년 8월] 로봇과학 1부(최정호,14명)"
+  },
+  {
+    "value": "1552306",
+    "text": "[26년 8월] 로봇과학 2부(최정호,22명)"
+  },
+  {
+    "value": "1552307",
+    "text": "[26년 8월] 로봇과학 3부(최정호,6명)"
+  },
+  {
+    "value": "1552313",
+    "text": "[26년 8월] 바둑 1부(박경도,8명)"
+  },
+  {
+    "value": "1552314",
+    "text": "[26년 8월] 바둑 2부(박경도,4명)"
+  },
+  {
+    "value": "1552315",
+    "text": "[26년 8월] 바이올린 1부(천윤아,8명)"
+  },
+  {
+    "value": "1552316",
+    "text": "[26년 8월] 바이올린 2부(천윤아,11명)"
+  },
+  {
+    "value": "1552326",
+    "text": "[26년 8월] 생활영어 1부(서인경,9명)"
+  },
+  {
+    "value": "1552327",
+    "text": "[26년 8월] 생활영어 2부(서인경,4명)"
+  },
+  {
+    "value": "1552298",
+    "text": "[26년 8월] 아침늘봄 (월~금 08:00~08:40)(이금진,5명)"
+  },
+  {
+    "value": "1552308",
+    "text": "[26년 8월] 주산 1부(박은화,8명)"
+  },
+  {
+    "value": "1552309",
+    "text": "[26년 8월] 주산 2부(박은화,2명)"
+  },
+  {
+    "value": "1552310",
+    "text": "[26년 8월] 주산 3부(박은화,3명)"
+  },
+  {
+    "value": "1552317",
+    "text": "[26년 8월] 창의미술 1부(김언주,20명)"
+  },
+  {
+    "value": "1552318",
+    "text": "[26년 8월] 창의미술 2부(김언주,10명)"
+  },
+  {
+    "value": "1552275",
+    "text": "[26년 8월] 창의보드 1부(정진화,10명)"
+  },
+  {
+    "value": "1552276",
+    "text": "[26년 8월] 창의보드 2부(정진화,18명)"
+  },
+  {
+    "value": "1552328",
+    "text": "[26년 8월] 창의수학 1부(김경아,17명)"
+  },
+  {
+    "value": "1552329",
+    "text": "[26년 8월] 창의수학 2부(김경아,12명)"
+  },
+  {
+    "value": "1552319",
+    "text": "[26년 8월] 컴퓨터 월,수 1부(김윤정,15명)"
+  },
+  {
+    "value": "1552320",
+    "text": "[26년 8월] 컴퓨터 월,수 2부(김윤정,29명)"
+  },
+  {
+    "value": "1552321",
+    "text": "[26년 8월] 컴퓨터 월,수 3부(김윤정,22명)"
+  },
+  {
+    "value": "1552322",
+    "text": "[26년 8월] 컴퓨터 화,목 1부(김윤정,22명)"
+  },
+  {
+    "value": "1552323",
+    "text": "[26년 8월] 컴퓨터 화,목 2부(김윤정,29명)"
+  },
+  {
+    "value": "1552429",
+    "text": "[26년 8월] 컴퓨터 화,목 3부(김윤정,28명)"
+  },
+  {
+    "value": "1552311",
+    "text": "[26년 8월] 한자 1부(김재표,13명)"
+  },
+  {
+    "value": "1552312",
+    "text": "[26년 8월] 한자 2부(김재표,10명)"
   }
 ];
 
@@ -1943,6 +2060,106 @@ let availableCoursesList = [
   { id: 'c_6', title: '(화/목) 생명과학실험', teacherId: 'song_sci', teacherName: '송과학', fee: 42000, materialFee: 18000, category: '맞춤형', period: '26년 8월', operatingPeriod: '2026.08.01 ~ 2026.08.31', schedule: '화, 목 14:00~14:50', capacity: 15, waitingCapacity: 5, targetGrade: [1, 2, 3, 4] },
   { id: 'c_7', title: '(금) 늘봄 미술교실', teacherId: 'han_art', teacherName: '한미술', fee: 0, materialFee: 8000, category: '돌봄', period: '26년 8월', operatingPeriod: '2026.08.01 ~ 2026.08.31', schedule: '금 15:00~15:50', capacity: 20, waitingCapacity: 5, targetGrade: [1, 2] }
 ];
+
+
+// Tuition Pay Entry Page (/af/ad_pay/edit/...)
+app.get(/^\/af\/ad_pay\/edit/, (req, res) => {
+  return res.sendFile(path.join(__dirname, 'af', 'ad_pay', 'edit', 'sn', '3267', 'index.html'));
+});
+
+// GET /api/af/ad_pay/data/sn/3267
+app.get('/api/af/ad_pay/data/sn/:sn', (req, res) => {
+  const { sld, sln } = req.query;
+  const currentSld = sld || '10';
+  const currentSln = sln || '1552375';
+
+  // Filter or return students for the selected course
+  // In demo mode, if the course is default 1552375 or matched, return all 19 students
+  let students = applicantDb.filter(a => String(a.courseId) === String(currentSln));
+  if (students.length === 0) {
+    // If selecting another course from list, map sample students for rich experience
+    students = applicantDb;
+  }
+
+  return res.json({
+    success: true,
+    schoolName: '광주풍향초등학교',
+    currentSld,
+    currentSln,
+    courses: payCoursesList,
+    students
+  });
+});
+
+// POST /api/af/ad_pay/update-single
+app.post('/api/af/ad_pay/update-single', (req, res) => {
+  const { id, lec_num, lec_pay, lec_use_cost, lec_pay_item, lec_pay_book, add_date } = req.body;
+  if (!id) {
+    return res.status(400).json({ success: false, message: '학생 식별자가 없습니다.' });
+  }
+
+  const student = applicantDb.find(a => String(a.id) === String(id));
+  if (!student) {
+    return res.status(404).json({ success: false, message: '해당 학생 정보를 찾을 수 없습니다.' });
+  }
+
+  const pay = parseInt(lec_pay) || 0;
+  const useCost = parseInt(lec_use_cost) || 0;
+  const book = parseInt(lec_pay_book) || 0;
+  const item = parseInt(lec_pay_item) || 0;
+
+  if (useCost > pay) {
+    return res.status(400).json({ success: false, message: '수용비는 수강료보다 클 수 없습니다.' });
+  }
+
+  student.tuitionFee = pay;
+  student.accommodationFee = useCost;
+  student.teacherFee = pay - useCost;
+  student.bookFee = book;
+  student.materialFee = item;
+  student.addDate = add_date || '';
+  student.totalFee = pay + book + item;
+
+  return res.json({
+    success: true,
+    message: '수정되었습니다.',
+    student
+  });
+});
+
+// POST /api/af/ad_pay/update-bulk
+app.post('/api/af/ad_pay/update-bulk', (req, res) => {
+  const { lec_num, students } = req.body;
+  if (!students || !Array.isArray(students)) {
+    return res.status(400).json({ success: false, message: '업데이트할 학생 데이터가 올바르지 않습니다.' });
+  }
+
+  let updatedCount = 0;
+  for (const st of students) {
+    const target = applicantDb.find(a => String(a.id) === String(st.id));
+    if (target) {
+      const pay = parseInt(st.lec_pay) || 0;
+      const useCost = parseInt(st.lec_use_cost) || 0;
+      const book = parseInt(st.lec_pay_book) || 0;
+      const item = parseInt(st.lec_pay_item) || 0;
+
+      target.tuitionFee = pay;
+      target.accommodationFee = useCost;
+      target.teacherFee = Math.max(0, pay - useCost);
+      target.bookFee = book;
+      target.materialFee = item;
+      target.addDate = st.add_date || '';
+      target.totalFee = pay + book + item;
+      updatedCount++;
+    }
+  }
+
+  return res.json({
+    success: true,
+    updatedCount,
+    message: '수정되었습니다.'
+  });
+});
 
 app.get(['/af/ad_app/lists/sn/3267', '/af/ad_app/lists/sn/3267/'], (req, res) => {
   return res.sendFile(path.join(__dirname, 'af', 'ad_app', 'lists', 'sn', '3267', 'index.html'));
@@ -1965,14 +2182,50 @@ app.get('/api/courses/sn/3267', (req, res) => {
 app.get('/api/student/search', (req, res) => {
   const { grade, classNum, keyword } = req.query;
   const sampleStudents = [
+    // 1학년
     { studentId: 'stu_1', studentName: '김도하', grade: 1, classNum: 1, studentNum: 1, parentPhone: '010-1234-5678' },
     { studentId: 'stu_2', studentName: '김민준', grade: 1, classNum: 1, studentNum: 2, parentPhone: '010-2345-6789' },
-    { studentId: 'stu_3', studentName: '박서아', grade: 1, classNum: 2, studentNum: 5, parentPhone: '010-3456-7890' },
-    { studentId: 'stu_4', studentName: '노수지', grade: 1, classNum: 2, studentNum: 3, parentPhone: '010-5445-0930' },
-    { studentId: 'stu_5', studentName: '최다연', grade: 1, classNum: 1, studentNum: 17, parentPhone: '010-5219-2196' },
-    { studentId: 'stu_6', studentName: '최유나', grade: 1, classNum: 1, studentNum: 19, parentPhone: '010-3373-3683' },
-    { studentId: 'stu_7', studentName: '이준우', grade: 2, classNum: 1, studentNum: 12, parentPhone: '010-4567-8901' },
-    { studentId: 'stu_8', studentName: '정지우', grade: 2, classNum: 2, studentNum: 8, parentPhone: '010-5678-9012' }
+    { studentId: 'stu_3', studentName: '박서아', grade: 1, classNum: 1, studentNum: 3, parentPhone: '010-3456-7890' },
+    { studentId: 'stu_4', studentName: '오하율', grade: 1, classNum: 1, studentNum: 10, parentPhone: '010-1234-5670' },
+    { studentId: 'stu_5', studentName: '이소윤', grade: 1, classNum: 1, studentNum: 11, parentPhone: '010-3718-3500' },
+    { studentId: 'stu_6', studentName: '이채린', grade: 1, classNum: 1, studentNum: 13, parentPhone: '010-2345-6781' },
+    { studentId: 'stu_7', studentName: '장희준', grade: 1, classNum: 1, studentNum: 14, parentPhone: '010-5334-7217' },
+    { studentId: 'stu_8', studentName: '최다연', grade: 1, classNum: 1, studentNum: 17, parentPhone: '010-5219-2196' },
+    { studentId: 'stu_9', studentName: '최유나', grade: 1, classNum: 1, studentNum: 19, parentPhone: '010-3373-3683' },
+    { studentId: 'stu_10', studentName: '김은성', grade: 1, classNum: 2, studentNum: 2, parentPhone: '010-9073-5302' },
+    { studentId: 'stu_11', studentName: '노슬찬', grade: 1, classNum: 2, studentNum: 5, parentPhone: '010-5445-0930' },
+    { studentId: 'stu_12', studentName: '배지안', grade: 1, classNum: 2, studentNum: 7, parentPhone: '010-4567-8901' },
+    { studentId: 'stu_13', studentName: '소하윤', grade: 1, classNum: 2, studentNum: 8, parentPhone: '010-5678-9012' },
+    { studentId: 'stu_14', studentName: '임지유', grade: 1, classNum: 2, studentNum: 14, parentPhone: '010-6789-0123' },
+
+    // 2학년
+    { studentId: 'stu_15', studentName: '장무재', grade: 2, classNum: 1, studentNum: 12, parentPhone: '010-7890-1234' },
+    { studentId: 'stu_16', studentName: '이준우', grade: 2, classNum: 1, studentNum: 6, parentPhone: '010-4567-8901' },
+    { studentId: 'stu_17', studentName: '국민준', grade: 2, classNum: 2, studentNum: 3, parentPhone: '010-8901-2345' },
+    { studentId: 'stu_18', studentName: '김도아', grade: 2, classNum: 2, studentNum: 5, parentPhone: '010-9012-3456' },
+    { studentId: 'stu_19', studentName: '정지우', grade: 2, classNum: 2, studentNum: 8, parentPhone: '010-5678-9012' },
+    { studentId: 'stu_20', studentName: '홍은재', grade: 2, classNum: 2, studentNum: 13, parentPhone: '010-0123-4567' },
+    { studentId: 'stu_21', studentName: '김지민', grade: 2, classNum: 3, studentNum: 2, parentPhone: '010-1234-9876' },
+    { studentId: 'stu_22', studentName: '이서린', grade: 2, classNum: 3, studentNum: 6, parentPhone: '010-2345-8765' },
+    { studentId: 'stu_23', studentName: '이용준', grade: 2, classNum: 3, studentNum: 9, parentPhone: '010-3456-7654' },
+
+    // 3학년
+    { studentId: 'stu_24', studentName: '구본승', grade: 3, classNum: 1, studentNum: 2, parentPhone: '010-7890-3333' },
+    { studentId: 'stu_25', studentName: '황지호', grade: 3, classNum: 1, studentNum: 7, parentPhone: '010-8901-3456' },
+    { studentId: 'stu_26', studentName: '윤서진', grade: 3, classNum: 2, studentNum: 9, parentPhone: '010-0123-5678' },
+    { studentId: 'stu_27', studentName: '송하은', grade: 3, classNum: 2, studentNum: 14, parentPhone: '010-1122-3344' },
+
+    // 4학년
+    { studentId: 'stu_28', studentName: '박시우', grade: 4, classNum: 1, studentNum: 4, parentPhone: '010-2233-4455' },
+    { studentId: 'stu_29', studentName: '유가은', grade: 4, classNum: 2, studentNum: 11, parentPhone: '010-3344-5566' },
+
+    // 5학년
+    { studentId: 'stu_30', studentName: '정태윤', grade: 5, classNum: 1, studentNum: 9, parentPhone: '010-4455-6677' },
+    { studentId: 'stu_31', studentName: '한서율', grade: 5, classNum: 2, studentNum: 15, parentPhone: '010-5566-7788' },
+
+    // 6학년
+    { studentId: 'stu_32', studentName: '고은우', grade: 6, classNum: 1, studentNum: 3, parentPhone: '010-6677-8899' },
+    { studentId: 'stu_33', studentName: '민채아', grade: 6, classNum: 2, studentNum: 12, parentPhone: '010-7788-9900' }
   ];
 
   let filtered = sampleStudents;
