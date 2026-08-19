@@ -1,0 +1,443 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>신청자 일괄입력 - 신청자관리 - 늘봄학교</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/af/ad_lec/lists/sn/admin_lec.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans KR','맑은 고딕','Malgun Gothic',sans-serif; background:#f8fafc; color:#333; font-size:12px; min-height:100vh; display:flex; flex-direction:column; }
+    a { color:inherit; text-decoration:none; }
+    .admin-layout { display:flex; flex:1; min-height:calc(100vh - 52px); }
+    .main-content { flex:1; padding:16px 20px; background:#fff; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; padding:5px 10px; font-size:12px; font-weight:bold; border-radius:3px; cursor:pointer; border:1px solid #ccc; background:#fff; color:#333; gap:4px; white-space:nowrap; }
+    .btn:hover { background:#f4f4f4; }
+    .btn-default { background:#fff; color:#333; border-color:#ccc; }
+    .btn-danger { background:#d9534f; color:#fff; border-color:#d43f3a; }
+    .btn-danger:hover { background:#c9302c; }
+    .page-title-box { display:flex; align-items:flex-start; justify-content:space-between; border-bottom:2px solid #337ab7; padding-bottom:8px; margin-bottom:16px; }
+    .page-title-box h1 { font-size:17px; font-weight:bold; color:#222; display:flex; align-items:center; gap:8px; }
+    .page-title-box .subtitle { font-size:12px; color:#666; margin-top:2px; }
+    .page-title-box .right-shortcut a { display:flex; flex-direction:column; align-items:center; font-size:11px; color:#337ab7; gap:2px; }
+    .panel_main { border:1px solid #dcdcdc; border-radius:3px; margin-bottom:16px; }
+    .panel-heading { background:#f5f5f5; border-bottom:1px solid #dcdcdc; padding:8px 12px; font-size:13px; font-weight:bold; color:#333; border-radius:3px 3px 0 0; }
+    .panel-body { padding:10px 12px; font-size:12px; color:#555; }
+    .fa.required { color:#d9534f; font-style:normal; }
+    .fa.required::before { content:'*'; font-size:11px; }
+    table.table-bordered { width:100%; border-collapse:collapse; font-size:12px; }
+    table.table-bordered th, table.table-bordered td { border:1px solid #dcdcdc; padding:8px 10px; vertical-align:middle; }
+    table.table-bordered th { background:#f5f5f5; font-weight:bold; color:#333; width:160px; }
+    .form-control { border:1px solid #ccc; border-radius:3px; padding:4px 6px; font-size:12px; color:#333; background:#fff; height:28px; }
+    .form-control:focus { outline:none; border-color:#66afe9; }
+    input[type=radio] { cursor:pointer; }
+    label { cursor:pointer; margin-right:10px; font-weight:normal; }
+    input[type=file] { font-size:12px; }
+    .link_type { color:#337ab7; border-bottom:1px dashed #337ab7; }
+    .link_type:hover { color:#23527c; }
+    .text-danger { color:#d9534f; }
+    .text-center { text-align:center; }
+    .MAT30 { margin-top:20px; }
+    .MAT20 { margin-top:12px; }
+    .help_box { background:#fcf8e3; border:1px solid #faebcc; color:#8a6d3b; padding:10px 14px; border-radius:3px; font-size:12px; line-height:1.7; margin-top:10px; }
+    .help_box ul { list-style:disc; padding-left:18px; }
+    .modal-backdrop-dbs { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:3000; justify-content:center; align-items:center; }
+    .modal-box-dbs { background:#fff; border-radius:4px; width:720px; max-width:95vw; box-shadow:0 4px 24px rgba(0,0,0,0.3); overflow:hidden; }
+    .modal-header-dbs { background:#337ab7; color:#fff; padding:10px 14px; font-size:13px; font-weight:bold; display:flex; justify-content:space-between; align-items:center; }
+    .modal-body-dbs { padding:16px; }
+    .error_msg { color:#d9534f; font-size:11px; margin-top:2px; }
+    .font-12 { font-size:12px; }
+    #footer { background:#fff; border-top:1px solid #d2d6de; padding:10px; text-align:center; font-size:11.5px; color:#666; margin-top:auto; }
+  </style>
+</head>
+<body>
+  <header class="top-navbar">
+    <div class="school-title" style="cursor:pointer;" onclick="window.location.href='/sczigi/service/lists/sn/3267'">광주풍향초등학교</div>
+    <div class="center-selector" style="position:relative;">
+      <button onclick="toggleDd(event)" style="background:rgba(255,255,255,0.15);border:none;color:white;font-size:0.88rem;font-weight:bold;padding:4px 10px;border-radius:3px;cursor:pointer;display:flex;align-items:center;gap:6px;">
+        <span>늘봄학교</span> <i class="fa-solid fa-chevron-down" style="font-size:0.75rem;"></i>
+      </button>
+      <div id="afDd" style="display:none;position:absolute;top:36px;left:0;background:#fff;color:#333;border:1px solid #ddd;border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,0.15);min-width:170px;z-index:1100;padding:4px 0;">
+        <a href="/af/ad_lec/lists/sn/3267" style="display:block;padding:8px 12px;font-size:12px;font-weight:bold;color:#3c8dbc;background:#f0f7fd;"><i class="fa-solid fa-chart-line" style="margin-right:6px;"></i>늘봄학교 (현재)</a>
+        <a href="/sczigi/service/lists/sn/3267" style="display:block;padding:8px 12px;font-size:12px;color:#333;font-weight:bold;"><i class="fa-solid fa-school" style="color:#3c8dbc;margin-right:6px;"></i>학교관리 돌아가기</a>
+      </div>
+    </div>
+    <div class="right-controls">
+      <select style="background:#1d4ed8;color:white;border:1px solid #60a5fa;border-radius:3px;padding:3px 8px;font-size:0.8rem;">
+        <option selected>학교 관리자 (Admin)</option>
+        <option>강사 (Instructor)</option>
+        <option>학생/학부모 (Parent)</option>
+      </select>
+      <span style="cursor:pointer;" onclick="location.href='/login'"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</span>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+    <aside class="sidebar">
+      <div class="user-profile-card">
+        <div class="user-profile-header">
+          <div class="user-avatar-circle"><i class="fa-solid fa-user"></i></div>
+          <div class="user-name-text">관리자(박진수)님 <span class="badge-bell"><i class="fa-solid fa-bell"></i> 0</span></div>
+        </div>
+        <div class="user-links">
+          <a href="/login">[로그아웃]</a>
+          <a href="/member/profile">[정보수정]</a>
+        </div>
+        <div class="user-action-buttons">
+          <button class="btn-home" onclick="location.href='/sczigi/service/lists/sn/3267'" style="background:#3c8dbc;color:#fff;font-weight:bold;"><i class="fa-solid fa-school"></i> 학교관리</button>
+          <button class="btn-course-reg" onclick="location.href='/af/ad_lec/lists/sn/3267'"><i class="fa-solid fa-plus"></i> 강좌등록</button>
+        </div>
+      </div>
+      <ul class="sidebar-menu" id="adminSidebar">
+        <li class="subitem"><a href="/af/ad_faq/main/sn/3267"><span class="menu-label"><i class="fa-solid fa-book"></i> 매뉴얼</span></a></li>
+        <li class="subitem"><a href="/af/qanda/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-comments"></i> 고객지원 게시판</span></a></li>
+        <li class="subitem"><a href="/sczigi/service/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-school" style="color:#e03131;"></i> 학교관리</span></a></li>
+        <li class="subitem"><a href="/af/ad_lec/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-futbol" style="color:#e03131;"></i> <strong style="color:#e03131;">강좌관리</strong></span></a></li>
+        <li class="subitem active" id="sub_ad_app_lists"><a href="/af/ad_app/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-users"></i> 신청자관리</span></a></li>
+        <li class="subitem"><a href="/af/ad_wait/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-user-clock"></i> 대기자관리</span></a></li>
+        <li class="subitem"><a href="/af/ad_att/stat/sn/3267"><span class="menu-label"><i class="fa-solid fa-square-check"></i> 출석부관리</span></a></li>
+        <li class="subitem"><a href="/af/ad_ref/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-user-minus"></i> 환불/취소관리</span></a></li>
+        <li class="has-submenu" id="menu_ad_subsidy">
+          <a onclick="this.parentElement.classList.toggle('open')">
+            <span class="menu-label"><i class="fa-solid fa-building-columns"></i> 지원금관리</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          </a>
+          <ul class="submenu-list">
+            <li class="subitem"><a href="/af/ad_free2_stu/lists/sn/3267">대상자관리</a></li>
+            <li class="subitem"><a href="/af/ad_free2_app/lists/sn/3267">수강자관리</a></li>
+            <li class="subitem"><a href="/af/ad_free2_cfg/main/sn/3267">지원금설정</a></li>
+            <li class="subitem"><a href="/af/ad_free2_cfg/free1/sn/3267">순위구분설정</a></li>
+          </ul>
+        </li>
+        <li class="subitem"><a href="/af/ad_abs/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-calendar-xmark"></i> 결석/귀가신청</span></a></li>
+        <li class="subitem"><a href="/af/ad_tea/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-briefcase"></i> 강사관리</span></a></li>
+        <li class="has-submenu" id="menu_ad_survey">
+          <a onclick="this.parentElement.classList.toggle('open')">
+            <span class="menu-label"><i class="fa-solid fa-chart-pie"></i> 설문관리</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          </a>
+          <ul class="submenu-list">
+            <li class="subitem"><a href="/af/ad_sur/lists/sn/3267">설문</a></li>
+            <li class="subitem"><a href="/af/ad_surs/lists/sn/3267">샘플설문</a></li>
+          </ul>
+        </li>
+        <li class="has-submenu" id="menu_ad_cfg">
+          <a onclick="this.parentElement.classList.toggle('open')">
+            <span class="menu-label"><i class="fa-solid fa-gear"></i> 환경설정</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          </a>
+          <ul class="submenu-list">
+            <li class="subitem"><a href="/af/ad_cfg/main/sn/3267">기본설정</a></li>
+            <li class="subitem"><a href="/af/ad_time/lists/sn/3267">신청기간</a></li>
+            <li class="subitem"><a href="/af/ad_cfg/period/sn/3267">강의시간</a></li>
+            <li class="subitem"><a href="/af/ad_cfg/afDiv/sn/3267">강좌구분</a></li>
+            <li class="subitem"><a href="/af/ad_cfg/appLiGrp/sn/3267">중복제한그룹</a></li>
+            <li class="subitem"><a href="/af/ad_verify/main/sn/3267">학적검증</a></li>
+            <li class="subitem"><a href="/af/ad_neis_edufine/lists/sn/3267">나이스/에듀파인 설정</a></li>
+            <li class="subitem"><a href="/af/ad_cfg/message/sn/3267">안내글설정</a></li>
+            <li class="subitem"><a href="/af/ad_cfg/clear/sn/3267">초기화</a></li>
+            <li class="subitem"><a href="/af/ad_info/modify/sn/3267">담당자정보</a></li>
+          </ul>
+        </li>
+        <li class="subitem"><a href="/af/notification/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-volume-high"></i> 알림관리</span></a></li>
+        <li class="subitem"><a href="/af/spush/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-bell"></i> 푸시알림관리</span></a></li>
+        <li class="subitem"><a href="/af/ad_extension/lists/sn/3267" style="display:flex;align-items:center;justify-content:space-between;">
+          <span class="menu-label"><i class="fa-solid fa-calendar-check"></i> 연장신청</span>
+          <span class="badge" style="background:#2563eb;color:#fff;font-size:11px;font-weight:bold;padding:2px 8px;border-radius:12px;margin-left:auto;">198일 남음</span>
+        </a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <div class="page-title-box">
+        <div>
+          <h1><i class="fa-solid fa-file-alt"></i> 신청자관리</h1>
+          <div class="subtitle">광주풍향초등학교 늘봄학교</div>
+        </div>
+        <div class="right-shortcut">
+          <a href="/af/ad_lec/lists/sn/3267">
+            <i class="fa-solid fa-futbol" style="font-size:20px;color:#337ab7;"></i>
+            <span>강좌관리</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="panel_main">
+        <div class="panel-heading">신청자 일괄입력</div>
+        <div class="panel-body">
+          <p class="MAT20">
+            <i class="fa required" title="필수항목"></i>
+            <span class="font-12"> 표시가 있는 항목은 반드시 입력해야 합니다.</span>
+          </p>
+        </div>
+
+        <form action="/af/ad_app/input/p/1/sn/3267" name="fm_edit" id="fm_edit" target="input_iframe" onsubmit="return fm_edit_check(this);" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+          <input type="hidden" name="csrf_test_name" value="demo_csrf_token">
+          <table class="table table-bordered table-hover" style="margin:0;">
+            <tr>
+              <th width="160">강좌구분</th>
+              <td style="position:relative;">
+                <select name="lec_div" id="lec_div" onchange="search_lec_list(this);" class="form-control" style="max-width:200px;">
+                  <option value="">= 전체 =</option>
+                  <option value="5">3월</option>
+                  <option value="6">26년 4월</option>
+                  <option value="7">26년 5월</option>
+                  <option value="8">26년 6월</option>
+                  <option value="9">26년 7월</option>
+                  <option value="10" selected>26년 8월</option>
+                  <option value="11">26년 9월</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th width="160" style="min-width:73px;">강좌 <span><i class="fa required" title="필수항목"></i></span></th>
+              <td>
+                <select name="lec_num" id="lec_num" class="form-control" style="max-width:500px;">
+                  <option value="">-강좌선택-</option>
+                  <option value="1552375">[26년 8월] (금) 돌봄 4부(돌봄전담사,19명)</option>
+                  <option value="1552291">[26년 8월] (금)돌봄 1부(돌봄전담사,5명)</option>
+                  <option value="1552292">[26년 8월] (금)돌봄 2부(돌봄전담사,12명)</option>
+                  <option value="1552293">[26년 8월] (금)돌봄 3부(돌봄전담사,20명)</option>
+                  <option value="1552374">[26년 8월] (목) 돌봄 4부(돌봄전담사,20명)</option>
+                  <option value="1552288">[26년 8월] (목)돌봄 1부(돌봄전담사,2명)</option>
+                  <option value="1552289">[26년 8월] (목)돌봄 2부(돌봄전담사,4명)</option>
+                  <option value="1552290">[26년 8월] (목)돌봄 3부(돌봄전담사,10명)</option>
+                  <option value="1552284">[26년 8월] (수)돌봄 1부(돌봄전담사,1명)</option>
+                  <option value="1552285">[26년 8월] (수)돌봄 2부(돌봄전담사,4명)</option>
+                  <option value="1552286">[26년 8월] (수)돌봄 3부(돌봄전담사,10명)</option>
+                  <option value="1552287">[26년 8월] (수)돌봄 4부(돌봄전담사,20명)</option>
+                  <option value="1552277">[26년 8월] (월)돌봄 1부(돌봄전담사,1명)</option>
+                  <option value="1552278">[26년 8월] (월)돌봄 2부(돌봄전담사,4명)</option>
+                  <option value="1552279">[26년 8월] (월)돌봄 3부(돌봄전담사,10명)</option>
+                  <option value="1552280">[26년 8월] (월)돌봄 4부(돌봄전담사,20명)</option>
+                  <option value="1552373">[26년 8월] (화) 돌봄 4부(돌봄전담사,20명)</option>
+                  <option value="1552281">[26년 8월] (화)돌봄 1부(돌봄전담사,2명)</option>
+                  <option value="1552282">[26년 8월] (화)돌봄 2부(돌봄전담사,4명)</option>
+                  <option value="1552283">[26년 8월] (화)돌봄 3부(돌봄전담사,10명)</option>
+                  <option value="1552299">[26년 8월] 논술 1부(박지숙,17명)</option>
+                  <option value="1552300">[26년 8월] 논술 2부(박지숙,11명)</option>
+                  <option value="1552301">[26년 8월] 논술 3부(박지숙,0명)</option>
+                  <option value="1552297">[26년 8월] 놀이체육 1부(강태연,11명)</option>
+                  <option value="1552296">[26년 8월] 놀이체육 2부(강태연,15명)</option>
+                  <option value="1552324">[26년 8월] 뉴스포츠 1부(박지연,30명)</option>
+                  <option value="1552325">[26년 8월] 뉴스포츠 2부(박지연,20명)</option>
+                  <option value="1552302">[26년 8월] 댄스 1부(김지향,0명)</option>
+                  <option value="1552303">[26년 8월] 댄스 2부(김지향,16명)</option>
+                  <option value="1552304">[26년 8월] 댄스 3부(김지향,6명)</option>
+                  <option value="1552295">[26년 8월] 독후활동미술놀이 1부(임은희,9명)</option>
+                  <option value="1552294">[26년 8월] 독후활동미술놀이 2부(임은희,20명)</option>
+                  <option value="1552305">[26년 8월] 로봇과학 1부(최정호,14명)</option>
+                  <option value="1552306">[26년 8월] 로봇과학 2부(최정호,22명)</option>
+                  <option value="1552307">[26년 8월] 로봇과학 3부(최정호,6명)</option>
+                  <option value="1552313">[26년 8월] 바둑 1부(박경도,8명)</option>
+                  <option value="1552314">[26년 8월] 바둑 2부(박경도,4명)</option>
+                  <option value="1552315">[26년 8월] 바이올린 1부(천윤아,8명)</option>
+                  <option value="1552316">[26년 8월] 바이올린 2부(천윤아,11명)</option>
+                  <option value="1552326">[26년 8월] 생활영어 1부(서인경,9명)</option>
+                  <option value="1552327">[26년 8월] 생활영어 2부(서인경,4명)</option>
+                  <option value="1552298">[26년 8월] 아침늘봄 (월~금 08:00~08:40)(이금진,5명)</option>
+                  <option value="1552308">[26년 8월] 주산 1부(박은화,8명)</option>
+                  <option value="1552309">[26년 8월] 주산 2부(박은화,2명)</option>
+                  <option value="1552310">[26년 8월] 주산 3부(박은화,3명)</option>
+                  <option value="1552317">[26년 8월] 창의미술 1부(김언주,20명)</option>
+                  <option value="1552318">[26년 8월] 창의미술 2부(김언주,10명)</option>
+                  <option value="1552275">[26년 8월] 창의보드 1부(정진화,10명)</option>
+                  <option value="1552276">[26년 8월] 창의보드 2부(정진화,18명)</option>
+                  <option value="1552328">[26년 8월] 창의수학 1부(김경아,17명)</option>
+                  <option value="1552329">[26년 8월] 창의수학 2부(김경아,12명)</option>
+                  <option value="1552319">[26년 8월] 컴퓨터 월,수 1부(김윤정,15명)</option>
+                  <option value="1552320">[26년 8월] 컴퓨터 월,수 2부(김윤정,29명)</option>
+                  <option value="1552321">[26년 8월] 컴퓨터 월,수 3부(김윤정,22명)</option>
+                  <option value="1552322">[26년 8월] 컴퓨터 화,목 1부(김윤정,22명)</option>
+                  <option value="1552323">[26년 8월] 컴퓨터 화,목 2부(김윤정,29명)</option>
+                  <option value="1552429">[26년 8월] 컴퓨터 화,목 3부(김윤정,28명)</option>
+                  <option value="1552311">[26년 8월] 한자 1부(김재표,13명)</option>
+                  <option value="1552312">[26년 8월] 한자 2부(김재표,10명)</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th>데이터 형식 <span><i class="fa required" title="필수항목"></i></span></th>
+              <td>
+                <input type="radio" name="excel_gubun" value="1" id="excel_gubun_1" checked onclick="chk_excel_gubun();">
+                &nbsp;<label for="excel_gubun_1">기본</label>
+                <input type="radio" name="excel_gubun" value="2" id="excel_gubun_2" onclick="chk_excel_gubun();">
+                &nbsp;<label for="excel_gubun_2">스쿨뱅킹 파일</label>
+                <div class="error_msg error_excel_gubun"></div>
+              </td>
+            </tr>
+            <tr id="tr_pay_gubun" style="display:none;">
+              <th>대상금액 구분 <span><i class="fa required" title="필수항목"></i></span></th>
+              <td>
+                <input type="radio" name="pay_gubun" value="1" id="pay_gubun_1" checked onclick="chk_pay_gubun();">
+                &nbsp;<label for="pay_gubun_1">수강료</label>
+                <input type="radio" name="pay_gubun" value="2" id="pay_gubun_2" onclick="chk_pay_gubun();">
+                &nbsp;<label for="pay_gubun_2">교재비</label>
+                <input type="radio" name="pay_gubun" value="3" id="pay_gubun_3" onclick="chk_pay_gubun();">
+                &nbsp;<label for="pay_gubun_3">재료비</label>
+                <div class="error_msg error_pay_gubun"></div>
+              </td>
+            </tr>
+            <tr>
+              <th>엑셀 데이터 파일 <span><i class="fa required" title="필수항목"></i></span></th>
+              <td>
+                <input id="userfile" name="userfile" type="file" title="데이터파일">
+                &nbsp;
+                <span>(일괄입력 샘플 :
+                  <span id="file_sample1"><a href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/after/sample/afterAppInput.xlsx?220519" class="link_type" target="_blank">afterAppInput.xlsx</a></span><span id="file_sample2" style="display:none;"><a href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/after/sample/afterAppInput2.xls" class="link_type" target="_blank">afterAppInput2.xls</a></span>)
+                </span>
+                <div>
+                  <i class="fa-solid fa-circle-question"></i>
+                  <a href="#" target="_blank" style="border-bottom:1px dashed;color:#337ab7;">한셀로 만들어진 엑셀파일은 변환 후 사용할 수 있습니다.</a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th>기존 신청자 <span><i class="fa required" title="필수항목"></i></span></th>
+              <td>
+                <input type="radio" name="input_type" id="input_type_add" value="add" checked>
+                <label for="input_type_add">추가 입력(수정)</label>
+                &nbsp;&nbsp;
+                <input type="radio" name="input_type" id="input_type_clear" value="clear">
+                <label for="input_type_clear">전체 삭제 후 입력</label>
+              </td>
+            </tr>
+            <tr>
+              <th>참고사항</th>
+              <td>
+                <div id="help_sample1">
+                  ※ 샘플파일(기본) 참고사항<br>
+                  &nbsp;&nbsp;- <span class="text-danger">첫 번째 줄의 내용은 변경할 수 없습니다.</span><br>
+                  &nbsp;&nbsp;- <span class="text-danger">학년 : 필수</span> 항목입니다.<br>
+                  &nbsp;&nbsp;- <span class="text-danger">학과 : 학과 설정이 되어 있는 경우에만 필수</span> 항목입니다.<br>
+                  &nbsp;&nbsp;- <span class="text-danger">반 : 필수</span> 항목입니다.<br>
+                  &nbsp;&nbsp;- <span class="text-danger">번호 : 필수</span> 항목입니다.<br>
+                  &nbsp;&nbsp;- <span class="text-danger">이름 : 필수</span> 항목입니다.<br>
+                  &nbsp;&nbsp;- <span class="text-danger">수강료 : 필수</span> 항목입니다.<br>
+                  &nbsp;&nbsp;- <span class="text-danger">수용비 : 수용비 입력 기능을 사용하는 경우에만 필수</span> 항목입니다.<br>
+                  &nbsp;&nbsp;- <span class="text-danger">교재비 : 필수</span> 항목입니다.<br>
+                  &nbsp;&nbsp;- <span class="text-danger">재료비 : 필수</span> 항목입니다.<br>
+                </div>
+                <div id="help_sample2" style="display:none;">
+                  ※ 샘플파일(에듀파인) 참고사항<br>
+                  &nbsp;&nbsp;- <span class="text-danger">첫 번째 줄의 내용은 변경할 수 없습니다.</span><br>
+                  &nbsp;&nbsp;- <span class="text-danger">*학년 : 필수</span> 항목입니다.<br>
+                  &nbsp;&nbsp;- <span class="text-danger">*학과 : 학과 설정이 되어 있는 경우에만 필수</span> 항목입니다.<br>
+                  &nbsp;&nbsp;- <span class="text-danger">*반 : 필수</span> 항목입니다.<br>
+                  &nbsp;&nbsp;- <span class="text-danger">*번호 : 필수</span> 항목입니다.<br>
+                  &nbsp;&nbsp;- <span class="text-danger">*성명 : 필수</span> 항목입니다.<br>
+                  &nbsp;&nbsp;- <span class="text-danger">*대상금액 : 필수</span> 항목입니다.<br>
+                  &nbsp;&nbsp;- 학년, 학과, 반, 번호가 같은 기존 데이터는 <span class="text-danger">선택된 대상금액이 수정됩니다.</span><br>
+                </div>
+              </td>
+            </tr>
+          </table>
+
+          <p class="text-center MAT30" style="padding-bottom:16px;">
+            <input type="button" value="취소" onclick="location.href='/af/ad_app/lists/sn/3267';" class="btn btn-default" id="btn_cancel">
+            <input type="submit" value="등록" class="btn btn-danger" id="btn_submit">
+          </p>
+        </form>
+      </div>
+
+      <div class="help_box">
+        <ul>
+          <li>학과를 입력하는 경우 <span class="text-danger">환경설정 &gt; 학과설정 &gt; 코드명</span>과 일치하도록 입력해 주세요.</li>
+          <li>학생 데이터가 <span class="text-danger">존재하지 않는 경우 입력되지 않습니다</span>.</li>
+          <li>수강료, 교재비, 재료비가 <span class="text-danger">공백</span>으로 되어 있는 경우 <span class="text-danger">강좌에 설정된 값으로 적용됩니다</span>.</li>
+          <li>이미 신청되어 있는 경우, <span class="text-danger">수강료 정보만 수정됩니다</span>.</li>
+          <li>해당 강좌의 대상학년, 대상학과, 정원, 강의시간 중복 등 제약사항으로 <span class="text-danger">입력이 불가능한 학생인 경우 무시됩니다.</span></li>
+        </ul>
+      </div>
+
+      <div id="inputResultModal" class="modal-backdrop-dbs">
+        <div class="modal-box-dbs">
+          <div class="modal-header-dbs">
+            <span><i class="fa-solid fa-upload"></i> 일괄입력 처리 결과</span>
+            <span style="cursor:pointer;font-size:18px;" onclick="closeInputModal()">&times;</span>
+          </div>
+          <div class="modal-body-dbs">
+            <p id="inputLoadingMsg" style="text-align:center;padding:12px;color:#666;">잠시만 기다려주세요 ...</p>
+            <iframe id="input_iframe" name="input_iframe" style="width:100%;height:220px;border:1px solid #ddd;border-radius:3px;display:none;"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div id="footer">
+        Copyright &copy; <a href="http://www.xmecca.com" target="_blank"><strong>x</strong>mecca.com</a> All Rights Reserved.<br>
+        <i class="fa-solid fa-envelope"></i> dbdbschool@naver.com
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function toggleDd(e){e.stopPropagation();var d=document.getElementById('afDd');d.style.display=d.style.display==='none'?'block':'none';}
+    document.addEventListener('click',function(){var d=document.getElementById('afDd');if(d)d.style.display='none';});
+
+    function search_lec_list(obj){
+      document.getElementById('s_lec_div') && (document.getElementById('s_lec_div').value=obj.value);
+    }
+
+    function chk_excel_gubun(){
+      var g1=document.getElementById('excel_gubun_1').checked;
+      var trPay=document.getElementById('tr_pay_gubun');
+      var hs1=document.getElementById('help_sample1');
+      var hs2=document.getElementById('help_sample2');
+      var fs1=document.getElementById('file_sample1');
+      var fs2=document.getElementById('file_sample2');
+      if(g1){
+        trPay.style.display='none';
+        hs1.style.display='';hs2.style.display='none';
+        fs1.style.display='';fs2.style.display='none';
+        chk_pay_gubun();
+      }else{
+        trPay.style.display='';
+        hs1.style.display='none';hs2.style.display='';
+        fs1.style.display='none';fs2.style.display='';
+        chk_pay_gubun();
+      }
+    }
+
+    function chk_pay_gubun(){
+      var g2=document.getElementById('excel_gubun_2').checked;
+      var p1=document.getElementById('pay_gubun_1');
+      var c=document.getElementById('input_type_clear');
+      var a=document.getElementById('input_type_add');
+      if(g2){if(p1.checked){c.disabled=false;}else{c.disabled=true;a.checked=true;}}
+      else{c.disabled=false;}
+    }
+
+    function fm_edit_check(fm){
+      if(!fm.lec_num.value){alert('강좌 : 필수항목입니다.');fm.lec_num.focus();return false;}
+      var eg=document.querySelector('input[name=excel_gubun]:checked');
+      if(!eg){alert('데이터 형식 : 선택하세요.');return false;}
+      if(eg.value==='2'){var pg=document.querySelector('input[name=pay_gubun]:checked');if(!pg){alert('대상금액 구분 : 선택하세요.');return false;}}
+      if(!fm.userfile.value){alert('엑셀 데이터 파일 : 필수항목입니다.');fm.userfile.focus();return false;}
+      if(fm.userfile.files&&fm.userfile.files[0]&&fm.userfile.files[0].size>1048576){alert('엑셀 데이터 파일 : 용량이 너무 큰 엑셀 데이터는 입력할 수 없습니다(1M 이하만 가능)');return false;}
+      var it=document.querySelector('input[name=input_type]:checked');
+      var msg=it&&it.value==='clear'?'기존 데이터를 삭제 후 일괄입력 하시겠습니까?':'기존 데이터에 추가로 일괄입력 하시겠습니까?';
+      if(!confirm(msg))return false;
+      openInputModal();
+      var ifr=document.getElementById('input_iframe');
+      ifr.onload=function(){document.getElementById('inputLoadingMsg').style.display='none';ifr.style.display='block';};
+      return true;
+    }
+
+    function openInputModal(){
+      var m=document.getElementById('inputResultModal');
+      m.style.display='flex';
+      document.getElementById('inputLoadingMsg').style.display='block';
+      document.getElementById('input_iframe').style.display='none';
+    }
+    function closeInputModal(){document.getElementById('inputResultModal').style.display='none';}
+
+    document.addEventListener('DOMContentLoaded',function(){
+      chk_excel_gubun();
+      var el=document.getElementById('sub_ad_app_lists');
+      if(el)el.classList.add('active');
+    });
+  </script>
+</body>
+</html>
