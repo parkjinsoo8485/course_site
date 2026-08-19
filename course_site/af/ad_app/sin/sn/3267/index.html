@@ -158,37 +158,63 @@
       </div>
 
       <ul class="sidebar-menu" id="adminSidebar">
-        <li class="subitem"><a href="/af/ad_faq/main/sn/3267"><span class="menu-label"><i class="fa-solid fa-book"></i> 매뉴얼</span></a></li>
-        <li class="subitem"><a href="/af/qanda/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-comments"></i> 고객지원 게시판</span></a></li>
-        <li class="subitem"><a href="/sczigi/service/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-school" style="color:#ef4444;"></i> 학교관리</span></a></li>
-        <li class="subitem"><a href="/af/ad_lec/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-futbol"></i> 강좌관리</span></a></li>
-        <li class="subitem active"><a href="/af/ad_app/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-user-group"></i> 신청자관리</span></a></li>
-        <li class="subitem"><a href="/af/ad_wait/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-user-clock"></i> 대기자관리</span></a></li>
-        <li class="subitem"><a href="/af/ad_att/stat/sn/3267"><span class="menu-label"><i class="fa-solid fa-square-check"></i> 출석부관리</span></a></li>
-        <li class="subitem"><a href="/af/ad_ref/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-user-minus"></i> 환불/취소관리</span></a></li>
-        <li class="has-submenu">
+        <li class="subitem" id="sub_ad_faq_main"><a href="/af/ad_faq/main/sn/3267"><span class="menu-label"><i class="fa-solid fa-book"></i> 매뉴얼</span></a></li>
+        <li class="subitem" id="sub_qanda_lists"><a href="/af/qanda/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-comments"></i> 고객지원 게시판</span></a></li>
+        <li class="subitem" id="sub_sczigi_service_lists"><a href="/sczigi/service/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-school" style="color:#e03131;"></i> 학교관리</span></a></li>
+        <li class="subitem" id="sub_ad_lec_lists"><a href="/af/ad_lec/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-futbol" style="color:#e03131;"></i> <strong style="color:#e03131;">강좌관리</strong></span></a></li>
+        <li class="subitem" id="sub_ad_app_lists"><a href="/af/ad_app/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-users"></i> 신청자관리</span></a></li>
+        <li class="subitem" id="sub_ad_wait_lists"><a href="/af/ad_wait/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-user-clock"></i> 대기자관리</span></a></li>
+        <li class="subitem" id="sub_ad_att_stat"><a href="/af/ad_att/stat/sn/3267"><span class="menu-label"><i class="fa-solid fa-square-check"></i> 출석부관리</span></a></li>
+        <li class="subitem" id="sub_ad_ref_lists"><a href="/af/ad_ref/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-user-minus"></i> 환불/취소관리</span></a></li>
+        <li class="has-submenu" id="menu_ad_subsidy">
           <a onclick="this.parentElement.classList.toggle('open')">
             <span class="menu-label"><i class="fa-solid fa-building-columns"></i> 지원금관리</span>
             <i class="fa-solid fa-chevron-right arrow-icon"></i>
           </a>
           <ul class="submenu-list">
-            <li class="subitem"><a href="/af/ad_free2_stu/lists/sn/3267">대상자관리</a></li>
-            <li class="subitem"><a href="/af/ad_free2_app/lists/sn/3267">수강자관리</a></li>
-            <li class="subitem"><a href="/af/ad_free2_cfg/main/sn/3267">지원금설정</a></li>
-            <li class="subitem"><a href="/af/ad_free2_cfg/free1/sn/3267">순위구분설정</a></li>
+            <li class="subitem" id="sub_ad_free2_stu"><a href="/af/ad_free2_stu/lists/sn/3267">대상자관리</a></li>
+            <li class="subitem" id="sub_ad_free2_app"><a href="/af/ad_free2_app/lists/sn/3267">수강자관리</a></li>
+            <li class="subitem" id="sub_ad_free2_cfg_main"><a href="/af/ad_free2_cfg/main/sn/3267">지원금설정</a></li>
+            <li class="subitem" id="sub_ad_free2_cfg_free1"><a href="/af/ad_free2_cfg/free1/sn/3267">순위구분설정</a></li>
           </ul>
         </li>
-        <li class="subitem"><a href="/af/ad_abs/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-calendar-xmark"></i> 결석/귀가신청</span></a></li>
-        <li class="subitem"><a href="/af/ad_tea/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-briefcase"></i> 강사관리</span></a></li>
-        <li class="has-submenu">
+        <li class="subitem" id="sub_ad_abs_lists"><a href="/af/ad_abs/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-calendar-xmark"></i> 결석/귀가신청</span></a></li>
+        <li class="subitem" id="sub_ad_tea_lists"><a href="/af/ad_tea/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-briefcase"></i> 강사관리</span></a></li>
+        <li class="has-submenu" id="menu_ad_survey">
           <a onclick="this.parentElement.classList.toggle('open')">
             <span class="menu-label"><i class="fa-solid fa-chart-pie"></i> 설문관리</span>
             <i class="fa-solid fa-chevron-right arrow-icon"></i>
           </a>
           <ul class="submenu-list">
-            <li class="subitem"><a href="/af/ad_sur/lists/sn/3267">설문</a></li>
-            <li class="subitem"><a href="/af/ad_surs/lists/sn/3267">샘플설문</a></li>
+            <li class="subitem" id="sub_ad_sur_lists"><a href="/af/ad_sur/lists/sn/3267">설문</a></li>
+            <li class="subitem" id="sub_ad_surs_lists"><a href="/af/ad_surs/lists/sn/3267">샘플설문</a></li>
           </ul>
+        </li>
+        <li class="has-submenu" id="menu_ad_cfg">
+          <a onclick="this.parentElement.classList.toggle('open')">
+            <span class="menu-label"><i class="fa-solid fa-gear"></i> 환경설정</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          </a>
+          <ul class="submenu-list">
+            <li class="subitem" id="sub_ad_cfg_main"><a href="/af/ad_cfg/main/sn/3267">기본설정</a></li>
+            <li class="subitem" id="sub_ad_time_lists"><a href="/af/ad_time/lists/sn/3267">신청기간</a></li>
+            <li class="subitem" id="sub_ad_cfg_period"><a href="/af/ad_cfg/period/sn/3267">강의시간</a></li>
+            <li class="subitem" id="sub_ad_cfg_afDiv"><a href="/af/ad_cfg/afDiv/sn/3267">강좌구분</a></li>
+            <li class="subitem" id="sub_ad_cfg_appLiGrp"><a href="/af/ad_cfg/appLiGrp/sn/3267">중복제한그룹</a></li>
+            <li class="subitem" id="sub_ad_verify_main"><a href="/af/ad_verify/main/sn/3267">학적검증</a></li>
+            <li class="subitem" id="sub_ad_neis_edufine"><a href="/af/ad_neis_edufine/lists/sn/3267">나이스/에듀파인 설정</a></li>
+            <li class="subitem" id="sub_ad_cfg_message"><a href="/af/ad_cfg/message/sn/3267">안내글설정</a></li>
+            <li class="subitem" id="sub_ad_cfg_clear"><a href="/af/ad_cfg/clear/sn/3267">초기화</a></li>
+            <li class="subitem" id="sub_ad_info_modify"><a href="/af/ad_info/modify/sn/3267">담당자정보</a></li>
+          </ul>
+        </li>
+        <li class="subitem" id="sub_notification_lists"><a href="/af/notification/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-volume-high"></i> 알림관리</span></a></li>
+        <li class="subitem" id="sub_spush_lists"><a href="/af/spush/lists/sn/3267"><span class="menu-label"><i class="fa-solid fa-bell"></i> 푸시알림관리</span></a></li>
+        <li class="subitem" id="sub_ad_extension_lists">
+          <a href="/af/ad_extension/lists/sn/3267" style="display:flex; align-items:center; justify-content:space-between;">
+            <span class="menu-label"><i class="fa-solid fa-calendar-check"></i> 연장신청</span>
+            <span class="badge" style="background:#2563eb; color:#ffffff; font-size:11px; font-weight:bold; padding:2px 8px; border-radius:12px; margin-left:auto;">198일 남음</span>
+          </a>
         </li>
       </ul>
     </aside>
