@@ -6,5 +6,8 @@
     "start": "npm --prefix course_site start",
     "dev": "npm --prefix course_site start",
     "test": "node course_site/scratch/test_live_sidebar_renewal.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.2.0"
   }
 }

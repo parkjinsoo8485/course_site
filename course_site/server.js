@@ -1740,6 +1740,10 @@ app.use((req, res, next) => {
   }
 
   if (req.path && req.path.startsWith('/af/')) {
+    if (req.path.startsWith('/af/ad_lec/lists')) {
+      const mainAdminIndex = path.join(__dirname, 'af', 'ad_lec', 'lists', 'sn', 'index.html');
+      return res.sendFile(mainAdminIndex);
+    }
     const cleanPath = req.path.replace(/^\/af\//, '').replace(/\/$/, '');
     const directIndexPath = path.join(__dirname, 'af', cleanPath, 'index.html');
     const directHtmlPath = path.join(__dirname, 'af', `${cleanPath}.html`);
@@ -2637,12 +2641,261 @@ app.get('/api/af/ad_app/school-banking/csv/sn/3267', (req, res) => {
   return res.send(csvContent);
 });
 
+// Map sld to Period Name
+const sldPeriodMap = {
+  '5': '3월',
+  '6': '26년 4월',
+  '7': '26년 5월',
+  '8': '26년 6월',
+  '9': '26년 7월',
+  '10': '26년 8월',
+  '11': '26년 9월'
+};
+
+// GET /api/af/ad_app/com/courses
+app.get('/api/af/ad_app/com/courses', (req, res) => {
+  const { sld } = req.query;
+  const periodName = sldPeriodMap[sld] || '26년 8월';
+  
+  const courses = payCoursesList.map(c => ({
+    value: c.value,
+    text: c.text.replace(/26년 8월|3월|26년 4월|26년 5월|26년 6월|26년 7월|26년 9월/g, periodName)
+  }));
+  return res.json({ success: true, list: courses });
+});
+
+// Excel Export Generator for Additional & Canceled Applicants
+function generateComExcelHandler(req, res) {
+  const params = req.method === 'POST' ? req.body : req.query;
+  const com_gubun = String(params.com_gubun || '2');
+  const sld = String(params.sld || '10');
+  const sln = String(params.sln || '');
+  const sld2 = String(params.sld2 || '');
+  const sln2 = String(params.sln2 || '');
+  const excel_gubun = String(params.excel_gubun || '2');
+  const file_type = String(params.file_type || 'all');
+
+  const curPeriod = sldPeriodMap[sld] || '26년 8월';
+  const prevPeriod = sldPeriodMap[sld2] || '26년 7월';
+  const isAddition = (excel_gubun === '2');
+  const typeTitle = isAddition ? '신청 추가자' : '신청 취소자';
+
+  let targetStudents = [];
+
+  if (isAddition) {
+    let candidates = applicantDb.filter(a => a.status !== '취소');
+    if (sln) {
+      candidates = candidates.filter(a => String(a.courseId) === String(sln));
+    }
+    targetStudents = candidates.map((a, idx) => ({
+      seq: idx + 1,
+      period: curPeriod,
+      courseTitle: a.courseTitle || '돌봄 4부',
+      instructorName: a.instructorName || '김윤정',
+      gradeClass: a.gradeClass || `${a.grade || 1}학년 1반`,
+      studentNum: a.studentNum || (idx + 1),
+      studentName: a.studentName || '학생',
+      parentPhone: a.parentPhone || '010-0000-0000',
+      tuitionFee: a.tuitionFee || 0,
+      materialFee: a.materialFee || 0,
+      bookFee: a.bookFee || 0,
+      totalFee: a.totalFee || 0,
+      targetDate: a.addDate || '2026-08-01',
+      status: a.status || '승인',
+      memo: a.memo || (com_gubun === '1' ? '이전 강좌 미신청 신규' : '추가일자 등록')
+    }));
+  } else {
+    const cancelPool = [
+      { id: 'c_901', courseId: '1552375', courseTitle: '[26년 8월] (금) 돌봄 4부', instructorName: '돌봄전담사', gradeClass: '1학년 1반', studentNum: 10, studentName: '오하율', parentPhone: '010-1234-5670', tuitionFee: 0, materialFee: 0, refundFee: 0, targetDate: '2026-08-10', memo: '학부모 요청 취소' },
+      { id: 'c_902', courseId: '1552319', courseTitle: '[26년 8월] 컴퓨터 월,수 1부', instructorName: '김윤정', gradeClass: '1학년 1반', studentNum: 13, studentName: '이채린', parentPhone: '010-2345-6781', tuitionFee: 38000, materialFee: 0, refundFee: 38000, targetDate: '2026-08-08', memo: '이사로 인한 취소 및 환불' },
+      { id: 'c_903', courseId: '1552305', courseTitle: '[26년 8월] 로봇과학 1부', instructorName: '최정호', gradeClass: '2학년 1반', studentNum: 14, studentName: '임지유', parentPhone: '010-6789-0123', tuitionFee: 42000, materialFee: 15000, refundFee: 42000, targetDate: '2026-08-12', memo: '시간표 중복 취소' },
+      { id: 'c_904', courseId: '1552328', courseTitle: '[26년 8월] 창의수학 1부', instructorName: '김경아', gradeClass: '2학년 3반', studentNum: 2, studentName: '김지민', parentPhone: '010-1234-9876', tuitionFee: 35000, materialFee: 5000, refundFee: 35000, targetDate: '2026-08-05', memo: '적응 곤란 환불' }
+    ];
+
+    let candidates = cancelPool;
+    if (sln) {
+      candidates = candidates.filter(a => String(a.courseId) === String(sln));
+      if (candidates.length === 0) {
+        candidates = [cancelPool[0]];
+      }
+    }
+
+    targetStudents = candidates.map((a, idx) => ({
+      seq: idx + 1,
+      period: curPeriod,
+      courseTitle: a.courseTitle,
+      instructorName: a.instructorName,
+      gradeClass: a.gradeClass,
+      studentNum: a.studentNum,
+      studentName: a.studentName,
+      parentPhone: a.parentPhone,
+      tuitionFee: a.tuitionFee,
+      refundFee: a.refundFee,
+      targetDate: a.targetDate,
+      memo: a.memo
+    }));
+  }
+
+  const dateColHeader = isAddition ? '추가일자' : '최종수강일(취소일)';
+  const feeColHeader = isAddition ? '재료비' : '환불금액';
+
+  let tableRows = '';
+  targetStudents.forEach(s => {
+    tableRows += `
+      <tr>
+        <td style="text-align:center; mso-number-format:'\\@';">${s.seq}</td>
+        <td style="text-align:center;">${s.period}</td>
+        <td style="text-align:left;">${s.courseTitle}</td>
+        <td style="text-align:center;">${s.instructorName}</td>
+        <td style="text-align:center;">${s.gradeClass}</td>
+        <td style="text-align:center; mso-number-format:'\\@';">${s.studentNum}</td>
+        <td style="text-align:center;">${s.studentName}</td>
+        <td style="text-align:center; mso-number-format:'\\@';">${s.parentPhone}</td>
+        <td style="text-align:right; mso-number-format:'\\#,##0';">${s.tuitionFee.toLocaleString()}</td>
+        <td style="text-align:right; mso-number-format:'\\#,##0';">${(isAddition ? s.materialFee : s.refundFee).toLocaleString()}</td>
+        <td style="text-align:center; mso-number-format:'yyyy-mm-dd';">${s.targetDate}</td>
+        <td style="text-align:left;">${s.memo || ''}</td>
+      </tr>
+    `;
+  });
+
+  const conditionText = com_gubun === '1' ? `현재/이전 강좌 비교 [현재: ${curPeriod} / 이전: ${prevPeriod}]` : `수강생의 추가일자 & 최종수강일(환불/취소) 기준 [${curPeriod}]`;
+
+  const excelHtml = `
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <!--[if gte mso 9]>
+  <xml>
+    <x:ExcelWorkbook>
+      <x:ExcelWorksheets>
+        <x:ExcelWorksheet>
+          <x:Name>${typeTitle}</x:Name>
+          <x:WorksheetOptions>
+            <x:DisplayGridlines/>
+          </x:WorksheetOptions>
+        </x:ExcelWorksheet>
+      </x:ExcelWorksheets>
+    </x:ExcelWorkbook>
+  </xml>
+  <![endif]-->
+  <style>
+    table { border-collapse: collapse; font-family: '맑은 고딕', Malgun Gothic, sans-serif; font-size: 11pt; }
+    th { background-color: #f2f4f7; color: #111; font-weight: bold; border: 1px solid #c0c0c0; padding: 6px 10px; text-align: center; }
+    td { border: 1px solid #d0d0d0; padding: 5px 8px; font-size: 10pt; vertical-align: middle; }
+    .title-cell { font-size: 16pt; font-weight: bold; text-align: center; color: #204d74; padding: 10px; }
+    .info-cell { font-size: 10pt; color: #555; padding: 4px; }
+  </style>
+</head>
+<body>
+  <table>
+    <tr>
+      <td colspan="12" class="title-cell">광주풍향초등학교 늘봄학교 ${typeTitle} 명단</td>
+    </tr>
+    <tr>
+      <td colspan="12" class="info-cell">■ 검색 조건: ${conditionText} &nbsp;|&nbsp; ■ 출력 일시: ${new Date().toLocaleString('ko-KR')} &nbsp;|&nbsp; ■ 총 인원: ${targetStudents.length}명</td>
+    </tr>
+    <tr>
+      <th style="width:50px;">연번</th>
+      <th style="width:80px;">강좌구분</th>
+      <th style="width:200px;">강좌명</th>
+      <th style="width:90px;">강사명</th>
+      <th style="width:90px;">학년반</th>
+      <th style="width:50px;">번호</th>
+      <th style="width:90px;">학생명</th>
+      <th style="width:120px;">학부모연락처</th>
+      <th style="width:90px;">수강료(원)</th>
+      <th style="width:90px;">${feeColHeader}(원)</th>
+      <th style="width:110px;">${dateColHeader}</th>
+      <th style="width:160px;">비고</th>
+    </tr>
+    ${tableRows}
+  </table>
+</body>
+</html>
+  `.trim();
+
+  let filenameCourse = sln ? '_선택강좌' : '_전체';
+  let filename = `${curPeriod.replace(/\s+/g, '')}_${typeTitle.replace(/\s+/g, '')}${filenameCourse}.xls`;
+
+  res.setHeader('Content-Type', 'application/vnd.ms-excel; charset=utf-8');
+  res.setHeader('Content-Disposition', `attachment; filename="${encodeURIComponent(filename)}"; filename*=UTF-8''${encodeURIComponent(filename)}`);
+  return res.send(Buffer.from(excelHtml, 'utf-8'));
+}
+
+app.post('/api/af/ad_app/com/excel', generateComExcelHandler);
+app.get('/api/af/ad_app/com/excel', generateComExcelHandler);
+app.post(/^\/af\/ad_app\/com\/p\//, generateComExcelHandler);
+
 // dbdbschool Page Routing Fallback Middleware (Matches all live dbdbschool URL patterns)
 app.use((req, res, next) => {
   if (req.path && req.path.startsWith('/admin/') && !req.path.includes('.')) {
     return res.sendFile(path.join(__dirname, 'admin', 'index.html'));
   }
+  if (req.path && req.path.startsWith('/af/ad_app/copy/')) {
+    return res.sendFile(path.join(__dirname, 'af', 'ad_app', 'copy', 'sn', '3267', 'index.html'));
+  }
   next();
+});
+
+// API for retrieving courses (mock)
+app.get('/api/af/ad_app/sin-courses', (req, res) => {
+  const period = req.query.period || 'all';
+  const category = req.query.category || 'all';
+  const keyword = req.query.keyword || '';
+
+  // Use the coursesDb mock data if it exists in the server, or return static list
+  let courses = [
+    { id: '1342532', title: '[3월] (금)돌봄 1부', teacherName: '돌봄전담사', currentCount: 4, operatingPeriod: '3월', category: '돌봄' },
+    { id: '1342533', title: '[3월] (금)돌봄 2부', teacherName: '돌봄전담사', currentCount: 14, operatingPeriod: '3월', category: '돌봄' },
+    { id: '1342476', title: '[3월] 논술 1부', teacherName: '박지숙', currentCount: 0, operatingPeriod: '3월', category: '방과후' },
+    { id: '1381243', title: '[26년 4월] 뉴스포츠 1부', teacherName: '박지연', currentCount: 30, operatingPeriod: '26년 4월', category: '방과후' }
+  ];
+
+  if (period !== 'all') {
+    courses = courses.filter(c => c.operatingPeriod === period);
+  }
+  if (category !== 'all') {
+    courses = courses.filter(c => c.category === category);
+  }
+  if (keyword) {
+    courses = courses.filter(c => c.title.includes(keyword) || c.teacherName.includes(keyword));
+  }
+
+  return res.json({ success: true, courses, appliedCount: 0 });
+});
+
+// API for copying applicants
+app.post('/api/af/ad_app/copy', (req, res) => {
+  const { sourceCourseId, targetCourseId, inputType, options } = req.body;
+  
+  if (!sourceCourseId || !targetCourseId) {
+    return res.status(400).json({ success: false, message: 'Missing course IDs' });
+  }
+
+  // Mock applicant array
+  if (typeof applicantDb === 'undefined') {
+    global.applicantDb = [];
+  }
+
+  // Find source applicants (mocked logic)
+  const sourceApplicants = global.applicantDb.filter(a => a.courseId === sourceCourseId);
+  
+  if (inputType === 'clear') {
+    global.applicantDb = global.applicantDb.filter(a => a.courseId !== targetCourseId);
+  }
+
+  // Copy logic
+  sourceApplicants.forEach(a => {
+    global.applicantDb.push({
+      ...a,
+      id: 'app_' + Date.now() + Math.random(),
+      courseId: targetCourseId,
+      // Apply options if needed
+    });
+  });
+
+  return res.json({ success: true, message: '복사 완료', copiedCount: sourceApplicants.length });
 });
 
 const PORT = process.env.PORT || 3005;
