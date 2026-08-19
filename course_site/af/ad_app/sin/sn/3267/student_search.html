@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>학생 검색하기</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans KR', sans-serif; font-size: 12px; background: #fff; padding: 12px; color: #333; }
+    .header { font-size: 14px; font-weight: bold; color: #337ab7; margin-bottom: 10px; border-bottom: 2px solid #337ab7; padding-bottom: 6px; }
+    .filter-box { background: #f8fafc; border: 1px solid #e2e8f0; padding: 8px; border-radius: 4px; margin-bottom: 10px; display: flex; gap: 6px; align-items: center; }
+    .form-control { border: 1px solid #ccc; border-radius: 3px; padding: 4px 8px; font-size: 12px; height: 28px; outline: none; }
+    .btn { background: #337ab7; color: #fff; border: 1px solid #2e6da4; padding: 4px 10px; border-radius: 3px; cursor: pointer; font-size: 12px; font-weight: bold; }
+    .btn-sm { padding: 2px 6px; font-size: 11px; }
+    table { width: 100%; border-collapse: collapse; text-align: center; font-size: 12px; margin-top: 6px; }
+    th { background: #f4f6f9; border: 1px solid #ddd; padding: 6px 4px; font-weight: bold; }
+    td { border: 1px solid #eee; padding: 6px 4px; }
+    tr:hover td { background-color: #f0f7ff; }
+  </style>
+</head>
+<body>
+  <div class="header"><i class="fa-solid fa-binoculars"></i> 학생 검색하기</div>
+  <div class="filter-box">
+    <select id="selGrade" class="form-control" onchange="search()">
+      <option value="all">전체학년</option>
+      <option value="1" selected>1학년</option>
+      <option value="2">2학년</option>
+      <option value="3">3학년</option>
+    </select>
+    <select id="selClass" class="form-control" onchange="search()">
+      <option value="all" selected>전체반</option>
+      <option value="1">1반</option>
+      <option value="2">2반</option>
+    </select>
+    <input type="text" id="kw" class="form-control" style="flex:1;" placeholder="학생명 / 전화번호" onkeyup="if(event.key==='Enter') search()">
+    <button type="button" class="btn" onclick="search()"><i class="fa-solid fa-magnifying-glass"></i> 검색</button>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>학년</th>
+        <th>반</th>
+        <th>번호</th>
+        <th>학생명</th>
+        <th>연락처</th>
+        <th>선택</th>
+      </tr>
+    </thead>
+    <tbody id="stuBody">
+      <tr><td colspan="6" style="padding:15px; color:#888;">검색 중...</td></tr>
+    </tbody>
+  </table>
+
+  <script>
+    async function search() {
+      const grade = document.getElementById('selGrade').value;
+      const classNum = document.getElementById('selClass').value;
+      const keyword = document.getElementById('kw').value.trim();
+      const tbody = document.getElementById('stuBody');
+
+      tbody.innerHTML = `<tr><td colspan="6" style="padding:12px; color:#666;">검색 중...</td></tr>`;
+      try {
+        const query = new URLSearchParams({ grade, classNum, keyword });
+        const res = await fetch(`/api/student/search?${query.toString()}`);
+        const data = await res.json();
+        if (!data.success || !data.students.length) {
+          tbody.innerHTML = `<tr><td colspan="6" style="padding:12px; color:#888;">일치하는 학생이 없습니다.</td></tr>`;
+          return;
+        }
+        let html = '';
+        data.students.forEach(s => {
+          const info = `${s.grade}학년 ${s.classNum}반 ${s.studentNum}번 ${s.studentName} (${s.parentPhone || ''})`;
+          html += `
+            <tr>
+              <td>${s.grade}</td>
+              <td>${s.classNum}</td>
+              <td>${s.studentNum}</td>
+              <td><strong>${s.studentName}</strong></td>
+              <td>${s.parentPhone || '-'}</td>
+              <td><button class="btn btn-sm" onclick="selectStu('${s.studentId}', '${s.studentName}', '${s.grade}학년 ${s.classNum}반', '${s.studentNum}', '${s.parentPhone || ''}')">선택</button></td>
+            </tr>
+          `;
+        });
+        tbody.innerHTML = html;
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="6" style="padding:12px; color:#d9534f;">오류 발생</td></tr>`;
+      }
+    }
+
+    function selectStu(id, name, gc, num, phone) {
+      if (window.opener && !window.opener.closed) {
+        try {
+          if (typeof window.opener.selectStudentModalItem === 'function') {
+            window.opener.selectStudentModalItem(JSON.stringify({
+              studentId: id, studentName: name, gradeClass: gc, studentNum: num, parentPhone: phone
+            }));
+          }
+        } catch (e) {
+          console.error(e);
+        }
+        window.close();
+      } else {
+        alert(`${name} 학생이 선택되었습니다.`);
+      }
+    }
+
+    window.onload = search;
+  </script>
+</body>
+</html>

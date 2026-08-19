@@ -6,45 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>신청자관리 - 늘봄·방과후학교 - 디비디비스쿨</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/af/ad_lec/lists/sn/admin_lec.css">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Malgun Gothic', '맑은 고딕', 'Noto Sans KR', sans-serif; background-color: #ecf0f5; color: #333; font-size: 12px; min-height: 100vh; display: flex; flex-direction: column; }
+    body { font-family: 'Noto Sans KR', '맑은 고딕', 'Malgun Gothic', sans-serif; background-color: #f8fafc; color: #333; font-size: 12px; min-height: 100vh; display: flex; flex-direction: column; }
     a { color: inherit; text-decoration: none; }
     
-    /* Top Bar */
-    #header { height: 46px; background-color: #337ab7; color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
-    #logo { font-size: 15px; font-weight: bold; }
-    .header-service-btn { background: #286090; border: 1px solid #1f4e79; color: #fff; font-size: 12.5px; font-weight: bold; padding: 4px 10px; border-radius: 3px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; margin-left: 12px; }
-    .header-service-btn:hover { background: #1f4e79; }
-    .header-user { font-size: 12px; display: flex; align-items: center; gap: 8px; color: #fff; }
-    .header-user a { text-decoration: none; color: #e2e8f0; cursor: pointer; }
-    .header-user a:hover { text-decoration: underline; color: #fff; }
-    
-    .dropdown-menu { display: none; position: absolute; top: 40px; left: 150px; background: #fff; border: 1px solid #ccc; border-radius: 3px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1100; min-width: 160px; padding: 4px 0; }
-    .dropdown-menu a { display: block; padding: 8px 12px; font-size: 12px; color: #333; }
-    .dropdown-menu a:hover { background: #f0f7fd; color: #337ab7; font-weight: bold; }
-    
     /* Main Layout */
-    #container { display: flex; flex: 1; min-height: calc(100vh - 46px); }
-    
-    /* Left Sidebar */
-    #left_menu { width: 200px; background-color: #f8fafc; border-right: 1px solid #dcdcdc; color: #333; flex-shrink: 0; }
-    .user_box { padding: 12px; background-color: #fff; border-bottom: 1px solid #e2e8f0; }
-    .user_name { font-size: 13px; font-weight: bold; color: #222; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
-    .badge-bell { background: #d9534f; color: #fff; font-size: 10px; border-radius: 10px; padding: 1px 6px; font-weight: bold; }
-    .user_links { font-size: 11px; color: #666; margin-bottom: 10px; }
-    .user_links a { color: #555; text-decoration: none; }
-    .user_links a:hover { text-decoration: underline; color: #2563eb; }
-    
-    .sidebar-btn-group { display: flex; gap: 6px; margin-top: 6px; }
-    .sidebar-btn-home { flex: 1; background: #5cb85c; color: #fff; text-align: center; padding: 6px 0; font-weight: bold; font-size: 12px; border-radius: 2px; border: none; cursor: pointer; }
-    .sidebar-btn-home:hover { background: #4cae4c; }
-    .sidebar-btn-reg { flex: 1; background: #d9534f; color: #fff; text-align: center; padding: 6px 0; font-weight: bold; font-size: 12px; border-radius: 2px; border: none; cursor: pointer; }
-    .sidebar-btn-reg:hover { background: #c9302c; }
-
-    ul.menu-list { list-style: none; padding: 6px 0; }
-    ul.menu-list > li > a { display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; color: #444; font-size: 12.5px; border-left: 3px solid transparent; font-weight: normal; }
-    ul.menu-list > li > a:hover, ul.menu-list > li > a.on { background-color: #e8f0fe; color: #1a73e8; font-weight: bold; border-left-color: #1a73e8; }
+    .admin-layout { display: flex; flex: 1; min-height: calc(100vh - 52px); }
     
     /* Main Contents */
     #contents_box { flex: 1; padding: 16px 20px; max-width: 1600px; background: #fff; }
@@ -113,190 +82,248 @@
 </head>
 <body>
   
-  <!-- Top Header -->
-  <div id="header">
-    <div style="display:flex; align-items:center;">
-      <span id="logo">광주풍향초등학교</span>
-      <div style="position:relative;">
-        <button class="header-service-btn" onclick="toggleServiceDropdown()">늘봄학교 <i class="fa fa-caret-down"></i></button>
-        <div class="dropdown-menu" id="serviceDropdown">
-          <div style="padding: 6px 12px; font-size:11px; font-weight:bold; color:#777; border-bottom:1px solid #eee;">서비스 전환</div>
-          <a href="/af/ad_app/lists/sn/3267" style="font-weight:bold; color:#337ab7; background:#f0f7fd;"><i class="fa fa-chart-line" style="margin-right:6px;"></i> 늘봄학교 (현재)</a>
-          <a href="/sczigi/service/lists/sn/3267"><i class="fa fa-school" style="margin-right:6px;"></i> 학교관리</a>
-        </div>
+  <!-- 1. TOP GLOBAL BLUE NAVBAR -->
+  <header class="top-navbar">
+    <div class="school-title" id="topSchoolTitle" style="cursor:pointer;" onclick="window.location.href='/sczigi/service/lists/sn/3267'" title="학교관리 페이지로 이동">광주풍향초등학교</div>
+    <div class="center-selector" style="position:relative;">
+      <button id="afServiceBtn" onclick="toggleAfServiceDropdown(event)" style="background:rgba(255,255,255,0.15); border:none; color:white; font-size:0.88rem; font-weight:bold; padding:4px 10px; border-radius:3px; cursor:pointer; display:flex; align-items:center; gap:6px;">
+        <span>늘봄학교</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem;"></i>
+      </button>
+      <div id="afServiceDropdown" style="display:none; position:absolute; top:36px; left:0; background:#fff; color:#333; border:1px solid #ddd; border-radius:4px; box-shadow:0 4px 12px rgba(0,0,0,0.15); min-width:170px; z-index:1100; padding:4px 0; text-align:left;">
+        <div style="padding:6px 12px; font-size:11px; font-weight:bold; color:#777; border-bottom:1px solid #eee;">서비스 전환</div>
+        <a href="/af/ad_lec/lists/sn/3267" style="display:block; padding:8px 12px; font-size:12px; font-weight:bold; color:#3c8dbc; background:#f0f7fd;"><i class="fa-solid fa-chart-line" style="margin-right:6px;"></i> 늘봄학교 (현재)</a>
+        <a href="/sczigi/service/lists/sn/3267" style="display:block; padding:8px 12px; font-size:12px; color:#333; font-weight:bold;"><i class="fa-solid fa-school" style="color:#3c8dbc; margin-right:6px;"></i> 학교관리 돌아가기</a>
       </div>
     </div>
-    <div class="header-user">
-      <i class="fa fa-user-circle"></i>
-      <span>관리자(김혜련)님 <span class="badge-bell">0</span></span>
-      <span style="margin: 0 2px; opacity:0.6;">|</span>
-      <a href="/member/logout">[로그아웃]</a>
-      <a href="/member/profile">[정보수정]</a>
+    <div class="right-controls">
+      <select id="roleSwitcher" style="background:#1d4ed8; color:white; border:1px solid #60a5fa; border-radius:3px; padding:3px 8px; font-size:0.8rem;" onchange="location.href='/af/ad_lec/lists/sn/3267'">
+        <option value="school_admin" selected>학교 관리자 (Admin)</option>
+        <option value="teacher">강사 (Instructor)</option>
+        <option value="parent">학생/학부모 (Parent)</option>
+      </select>
+      <span style="cursor:pointer;" onclick="location.href='/login'"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</span>
     </div>
-  </div>
+  </header>
 
-  <div id="container">
-    <!-- Left Navigation Bar -->
-    <div id="left_menu">
-      <div class="user_box">
-        <div class="user_name">
-          관리자(김혜련)님 <span class="badge-bell">0</span>
+  <div class="admin-layout">
+    <!-- 2. SIDEBAR NAVIGATION (Main Page Sidebar UI) -->
+    <aside class="sidebar">
+      <div class="user-profile-card">
+        <div class="user-profile-header">
+          <div class="user-avatar-circle"><i class="fa-solid fa-user"></i></div>
+          <div class="user-name-text">관리자(박진수)님 <span class="badge-bell"><i class="fa-solid fa-bell"></i> 0</span></div>
         </div>
-        <div class="user_links">
-          <a href="/member/logout">[로그아웃]</a> <a href="/member/profile">[정보수정]</a>
+        <div class="user-links">
+          <a href="/login">[로그아웃]</a>
+          <a href="/member/profile">[정보수정]</a>
         </div>
-        <div class="sidebar-btn-group">
-          <button class="sidebar-btn-home" onclick="location.href='/af/ad_faq/main/sn/3267'">홈으로</button>
-          <button class="sidebar-btn-reg" onclick="location.href='/af/ad_lec/lists/sn/3267'">강좌등록</button>
+        <div class="user-action-buttons">
+          <button class="btn-home" onclick="location.href='/sczigi/service/lists/sn/3267'" style="background:#3c8dbc; color:#fff; font-weight:bold;"><i class="fa-solid fa-school"></i> 학교관리</button>
+          <button class="btn-course-reg" onclick="location.href='/af/ad_lec/lists/sn/3267'"><i class="fa-solid fa-plus"></i> 강좌등록</button>
         </div>
       </div>
-      
-      <ul class="menu-list">
-        <li><a href="/af/ad_faq/main/sn/3267">매뉴얼</a></li>
-        <li><a href="/af/qanda/lists/sn/3267">고객지원 게시판</a></li>
-        <li><a href="/sczigi/service/lists/sn/3267">학교관리</a></li>
-        <li><a href="/af/ad_lec/lists/sn/3267">강좌관리</a></li>
-        <li><a href="/af/ad_app/lists/sn/3267" class="on">신청자관리</a></li>
-        <li><a href="/af/ad_wait/lists/sn/3267">대기자관리</a></li>
-        <li><a href="/af/ad_att/stat/sn/3267">출석부관리</a></li>
-        <li><a href="/af/ad_ref/lists/sn/3267">환불/취소관리</a></li>
-        <li><a href="/af/ad_free2_stu/lists/sn/3267">지원금관리 <i class="fa fa-caret-down"></i></a></li>
-        <li><a href="/af/ad_free2_app/lists/sn/3267">대상자관리</a></li>
-        <li><a href="/af/ad_free2_stu/lists/sn/3267">수강자관리</a></li>
-        <li><a href="/af/ad_free2_cfg/main/sn/3267">지원금설정</a></li>
-        <li><a href="/af/ad_free2_cfg/free1/sn/3267">순위구분설정</a></li>
-        <li><a href="/af/ad_abs/lists/sn/3267">결석/귀가신청</a></li>
-        <li><a href="/af/ad_tea/lists/sn/3267">강사관리</a></li>
-        <li><a href="/af/ad_sur/lists/sn/3267">설문관리 <i class="fa fa-caret-down"></i></a></li>
-        <li><a href="/af/ad_surs/lists/sn/3267">설문</a></li>
+
+      <ul class="sidebar-menu" id="adminSidebar">
+        <li class="subitem" id="sub_ad_faq_main">
+          <a href="/af/ad_faq/main/sn/3267">
+            <span class="menu-label"><i class="fa-solid fa-book"></i> 매뉴얼</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_qanda_lists">
+          <a href="/af/qanda/lists/sn/3267">
+            <span class="menu-label"><i class="fa-solid fa-comments"></i> 고객지원 게시판</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_sczigi_service_lists">
+          <a href="/sczigi/service/lists/sn/3267">
+            <span class="menu-label"><i class="fa-solid fa-school" style="color:#ef4444;"></i> 학교관리</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_ad_lec_lists">
+          <a href="/af/ad_lec/lists/sn">
+            <span class="menu-label"><i class="fa-solid fa-futbol"></i> 강좌관리</span>
+          </a>
+        </li>
+        <li class="subitem active" id="sub_ad_app_lists">
+          <a href="/af/ad_app/lists/sn/3267">
+            <span class="menu-label"><i class="fa-solid fa-user-group"></i> 신청자관리</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_ad_wait_lists">
+          <a href="/af/ad_wait/lists/sn/3267">
+            <span class="menu-label"><i class="fa-solid fa-user-clock"></i> 대기자관리</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_ad_att_stat">
+          <a href="/af/ad_att/stat/sn/3267">
+            <span class="menu-label"><i class="fa-solid fa-square-check"></i> 출석부관리</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_ad_ref_lists">
+          <a href="/af/ad_ref/lists/sn/3267">
+            <span class="menu-label"><i class="fa-solid fa-user-minus"></i> 환불/취소관리</span>
+          </a>
+        </li>
+
+        <li class="has-submenu" id="menu_ad_subsidy">
+          <a onclick="this.parentElement.classList.toggle('open')">
+            <span class="menu-label"><i class="fa-solid fa-building-columns"></i> 지원금관리</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          </a>
+          <ul class="submenu-list">
+            <li class="subitem" id="sub_ad_free2_stu"><a href="/af/ad_free2_stu/lists/sn/3267">대상자관리</a></li>
+            <li class="subitem" id="sub_ad_free2_app"><a href="/af/ad_free2_app/lists/sn/3267">수강자관리</a></li>
+            <li class="subitem" id="sub_ad_free2_cfg_main"><a href="/af/ad_free2_cfg/main/sn/3267">지원금설정</a></li>
+            <li class="subitem" id="sub_ad_free2_cfg_free1"><a href="/af/ad_free2_cfg/free1/sn/3267">순위구분설정</a></li>
+          </ul>
+        </li>
+
+        <li class="subitem" id="sub_ad_abs_lists">
+          <a href="/af/ad_abs/lists/sn/3267">
+            <span class="menu-label"><i class="fa-solid fa-calendar-xmark"></i> 결석/귀가신청</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_ad_tea_lists">
+          <a href="/af/ad_tea/lists/sn/3267">
+            <span class="menu-label"><i class="fa-solid fa-briefcase"></i> 강사관리</span>
+          </a>
+        </li>
+
+        <li class="has-submenu" id="menu_ad_survey">
+          <a onclick="this.parentElement.classList.toggle('open')">
+            <span class="menu-label"><i class="fa-solid fa-chart-pie"></i> 설문관리</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          </a>
+          <ul class="submenu-list">
+            <li class="subitem" id="sub_ad_sur_lists"><a href="/af/ad_sur/lists/sn/3267">설문</a></li>
+            <li class="subitem" id="sub_ad_surs_lists"><a href="/af/ad_surs/lists/sn/3267">샘플설문</a></li>
+          </ul>
+        </li>
       </ul>
-    </div>
+    </aside>
 
-    <!-- Main Contents Area -->
-    <div id="contents_box">
-      <!-- Title Header Bar -->
-      <div id="contents_title">
-        <i class="fa fa-file-lines" style="color:#337ab7;"></i> 신청자관리
+    <!-- 3. MAIN CONTENT AREA (Course Management UI Style) -->
+    <main class="main-content">
+      <!-- Top Page Title Area -->
+      <div class="page-title-box">
+        <h1 id="viewMainTitle"><i class="fa-solid fa-user-group"></i> 신청자관리</h1>
+        <div class="subtitle">광주풍향초등학교 늘봄학교</div>
       </div>
-      <div style="font-size:11.5px; color:#666; margin-bottom:10px; margin-top:-8px;">광주풍향초등학교 늘봄학교</div>
 
-      <!-- Header Card Title & Top Action Buttons Bar -->
-      <div class="top-action-bar">
-        <div class="left-title">
-          <span>신청목록</span>
+      <!-- Main Section White Card (Course Management Style) -->
+      <div class="content-card">
+        <div class="card-top-bar">
+          <div class="section-title">신청목록</div>
+          <div class="helper-badges">
+            <a href="/af/ad_faq/main/sn/3267" class="helper-btn" onclick="openManualModal()"><i class="fa-solid fa-file-lines"></i> 매뉴얼</a>
+            <button class="helper-btn" onclick="openTestSimulationModal()"><i class="fa-solid fa-play"></i> 수강신청 테스트</button>
+            <button class="helper-btn" onclick="openIneligibleCheckModal()"><i class="fa-solid fa-chart-bar"></i> 신청결과 조회</button>
+            <button class="helper-btn" style="color:#ef4444;" onclick="downloadSchoolBankingCSV()"><i class="fa-solid fa-file-csv"></i> 스쿨뱅킹 파일 다운로드</button>
+          </div>
         </div>
-        <div class="right-btns">
-          <button class="btn btn-default" onclick="openManualModal()"><i class="fa fa-file-text" style="color:#666;"></i> 메뉴얼</button>
-          <button class="btn btn-default" onclick="openCreateModal()"><i class="fa fa-user-plus" style="color:#337ab7;"></i> 신청자 등록</button>
-          <button class="btn btn-default" onclick="openTestSimulationModal()"><i class="fa fa-play" style="color:#d9534f;"></i> 수강신청 테스트</button>
-          <button class="btn btn-default" onclick="openIneligibleCheckModal()"><i class="fa fa-user-xmark" style="color:#337ab7;"></i> 신청불가 조회</button>
-          <button class="btn btn-outline-danger" onclick="downloadSchoolBankingCSV()"><i class="fa fa-file-excel"></i> 스프레드시트 파일 다운로드</button>
+
+        <div class="alert-box">
+          <i class="fa-solid fa-circle-info"></i>
+          <div>
+            <strong>신청자 관리 페이지입니다. 수강생 현황 및 결제/환불 상태를 한눈에 관리하고 각종 서식을 출력하세요.</strong><br>
+            자주 하는 질문이 "매뉴얼"에 정리되어 있으니 이곳을 참고하시고 기타 문의사항은 "<a href="/af/qanda/lists/sn/3267" style="color:#2563eb; text-decoration:underline;">고객지원 게시판</a>"에 접수 바랍니다.
+          </div>
         </div>
-      </div>
 
-      <!-- Search Filters Row -->
-      <div class="filter-panel">
-        <select id="filterPeriod" class="form-control" style="width:95px;" onchange="loadApplicants()">
-          <option value="26년 8월">26년 8월</option>
-          <option value="26년 9월">26년 9월</option>
-          <option value="26년 10월">26년 10월</option>
-        </select>
-
-        <select id="filterCategory" class="form-control" style="width:105px;" onchange="loadApplicants()">
-          <option value="">=늘봄과정=</option>
-          <option value="방과후">방과후</option>
-          <option value="맞춤형">맞춤형</option>
-          <option value="돌봄">돌봄</option>
-        </select>
-
-        <select id="filterCourse" class="form-control" style="width:160px;" onchange="loadApplicants()">
-          <option value="">=강좌전체=</option>
-        </select>
-
-        <select class="form-control" style="width:65px;">
-          <option value="">전체</option>
-        </select>
-
-        <select id="filterGrade" class="form-control" style="width:75px;" onchange="loadApplicants()">
-          <option value="">=학년=</option>
-          <option value="1">1학년</option>
-          <option value="2">2학년</option>
-          <option value="3">3학년</option>
-          <option value="4">4학년</option>
-          <option value="5">5학년</option>
-          <option value="6">6학년</option>
-        </select>
-
-        <select id="filterClass" class="form-control" style="width:65px;" onchange="loadApplicants()">
-          <option value="">=반=</option>
-          <option value="1">1반</option>
-          <option value="2">2반</option>
-          <option value="3">3반</option>
-          <option value="4">4반</option>
-        </select>
-
-        <select id="filterSearchType" class="form-control" style="width:65px;">
-          <option value="name">이름</option>
-          <option value="phone">연락처</option>
-        </select>
-
-        <input type="text" id="searchKeyword" class="form-control" style="width:140px;" placeholder="검색어" onkeypress="if(event.key==='Enter') loadApplicants()">
-        
-        <button class="btn btn-default" onclick="loadApplicants()">검색</button>
-        <button class="btn btn-default" onclick="resetFilters()">전체</button>
-        <button class="btn btn-dark-green" onclick="downloadSchoolBankingCSV()">검색결과출력</button>
-      </div>
-
-      <!-- Middle Action Control Bar -->
-      <div class="control-panel">
-        <div>
-          <button class="btn btn-default" onclick="location.href='/af/ad_wait/lists/sn/3267'">대기자목록</button>
+        <!-- Filter Container (Course Management Style) -->
+        <div class="filter-container">
+          <select id="filterPeriod" onchange="loadApplicants()">
+            <option value="26년 8월" selected>26년 8월</option>
+            <option value="26년 9월">26년 9월</option>
+            <option value="26년 10월">26년 10월</option>
+            <option value="전체">전체 분기</option>
+          </select>
+          <select id="filterCategory" onchange="loadApplicants()">
+            <option value="">-늘봄과정-</option>
+            <option value="방과후">방과후</option>
+            <option value="맞춤형">맞춤형</option>
+            <option value="돌봄">돌봄</option>
+          </select>
+          <select id="filterCourse" onchange="loadApplicants()">
+            <option value="">-강좌전체-</option>
+          </select>
+          <select id="filterGrade" onchange="loadApplicants()">
+            <option value="">-학년-</option>
+            <option value="1">1학년</option>
+            <option value="2">2학년</option>
+            <option value="3">3학년</option>
+            <option value="4">4학년</option>
+            <option value="5">5학년</option>
+            <option value="6">6학년</option>
+          </select>
+          <select id="filterClass" onchange="loadApplicants()">
+            <option value="">-반-</option>
+            <option value="1">1반</option>
+            <option value="2">2반</option>
+            <option value="3">3반</option>
+            <option value="4">4반</option>
+          </select>
+          <select id="filterSearchType">
+            <option value="name">이름</option>
+            <option value="phone">연락처</option>
+          </select>
+          <input type="text" id="searchKeyword" placeholder="검색어" onkeyup="if(event.key==='Enter') loadApplicants()">
+          <button class="btn-db btn-db-gray" onclick="loadApplicants()">검색</button>
+          <button class="btn-db btn-db-gray" onclick="resetFilters()">전체</button>
+          <button class="btn-db btn-db-green" onclick="downloadSchoolBankingCSV()"><i class="fa-solid fa-file-excel"></i> 검색결과출력</button>
         </div>
-        <div class="right-btns">
-          <button class="btn btn-primary" onclick="openEligibleRegisterModal()">신청가능등록</button>
-          <button class="btn btn-warning" onclick="openIneligibleBatchModal()">신청불가일괄등록</button>
-          <button class="btn btn-warning" onclick="openBatchFeeModal()">수강료일괄</button>
-          <button class="btn btn-info" onclick="openPrintModal('방과후/늘봄 수강신청서')">신청서출력</button>
-          <button class="btn btn-default" onclick="openAddCancelLogsModal()">추가/취소조회</button>
-          <button class="btn btn-default" onclick="openUnappliedModal()">미신청자목록</button>
-          <button class="btn btn-success" onclick="downloadSchoolBankingCSV()">신청결과엑셀출력</button>
-          <button class="btn btn-dark-green" onclick="downloadSchoolBankingCSV()">수강신청서엑셀</button>
-          <button class="btn btn-success" onclick="openPrintModal('수강료 고지서')">고시서출력</button>
-          <button class="btn btn-dark-green" onclick="openPrintModal('시간표')">시간표출력</button>
-        </div>
-      </div>
 
-      <!-- Main Data Table -->
-      <div class="table-container">
-        <table class="db-table" id="applicantTable">
-          <thead>
-            <tr>
-              <th width="30"><input type="checkbox" id="checkAll" onchange="toggleSelectAll(this)"></th>
-              <th width="45">연번</th>
-              <th width="110">구분 (늘봄과정)</th>
-              <th width="160">강좌명</th>
-              <th width="40">학년</th>
-              <th width="40">반</th>
-              <th width="45">번호↑</th>
-              <th width="85">이름</th>
-              <th width="120">연락처</th>
-              <th width="65">수강료</th>
-              <th width="65">수용비</th>
-              <th width="65">강사료</th>
-              <th width="65">교재비</th>
-              <th width="65">재료비</th>
-              <th width="65">합계</th>
-              <th width="135">등록일자</th>
-              <th width="45">삭제</th>
-            </tr>
-          </thead>
-          <tbody id="applicantTableBody">
-            <!-- Rendered dynamically -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+        <!-- Action Buttons Bar (Course Management Style) -->
+        <div class="btn-action-group">
+          <div>
+            <button class="btn-db btn-db-gray" onclick="location.href='/af/ad_wait/lists/sn/3267'"><i class="fa-solid fa-user-clock"></i> 대기자등록</button>
+          </div>
+          <div style="display:flex; gap:5px; flex-wrap:wrap;">
+            <button class="btn-db btn-db-blue" onclick="location.href='/af/ad_app/sin/sn/3267'"><i class="fa-solid fa-user-plus"></i> 신청자등록</button>
+            <button class="btn-db btn-db-orange" onclick="openIneligibleBatchModal()"><i class="fa-solid fa-ban"></i> 신청불가일괄등록</button>
+            <button class="btn-db btn-db-cyan" onclick="openBatchFeeModal()"><i class="fa-solid fa-won-sign"></i> 수강료일괄</button>
+            <button class="btn-db btn-db-cyan" onclick="openPrintModal('방과후/늘봄 수강신청서')"><i class="fa-solid fa-print"></i> 신청서출력</button>
+            <button class="btn-db btn-db-coral" onclick="openAddCancelLogsModal()"><i class="fa-solid fa-user-xmark"></i> 포기/취소자조회</button>
+            <button class="btn-db btn-db-gray" onclick="openUnappliedModal()"><i class="fa-solid fa-users-slash"></i> 미신청자목록</button>
+            <button class="btn-db btn-db-green" onclick="downloadSchoolBankingCSV()"><i class="fa-solid fa-file-excel"></i> 신청결과엑셀출력</button>
+            <button class="btn-db btn-db-green" onclick="downloadSchoolBankingCSV()"><i class="fa-solid fa-file-invoice"></i> 수강신청서출력</button>
+            <button class="btn-db btn-db-green" onclick="openPrintModal('수강료 고지서')"><i class="fa-solid fa-receipt"></i> 고지서출력</button>
+            <button class="btn-db btn-db-green" onclick="openPrintModal('시간표')"><i class="fa-solid fa-calendar-week"></i> 시간표출력</button>
+          </div>
+        </div>
+
+        <!-- Main Data Table (Course Management Style) -->
+        <div class="table-responsive">
+          <table class="db-table" id="applicantTable">
+            <thead>
+              <tr>
+                <th style="width:30px;"><input type="checkbox" id="checkAll" onchange="toggleSelectAll(this)"></th>
+                <th>연번</th>
+                <th>구분 (늘봄과정)</th>
+                <th>강좌명</th>
+                <th>학년</th>
+                <th>반</th>
+                <th>번호↑</th>
+                <th>이름</th>
+                <th>연락처</th>
+                <th>수강료</th>
+                <th>수용비</th>
+                <th>강사료</th>
+                <th>교재비</th>
+                <th>재료비</th>
+                <th>합계</th>
+                <th>등록일자</th>
+                <th>삭제</th>
+              </tr>
+            </thead>
+            <tbody id="applicantTableBody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div> <!-- /.content-card -->
+    </main>
+  </div> <!-- /.admin-layout -->
 
   <!-- Modal 1: 신청자 등록 (개별) -->
   <div class="modal-backdrop" id="modalCreate">
@@ -755,9 +782,15 @@
       { id: 'app_705', seq: 705, period: '26년 8월 [돌봄]', courseTitle: '(금) 돌봄 4부', grade: 1, classNum: 2, studentNum: 2, studentName: '김은성', parentPhone: '010-9073-5302', tuitionFee: 0, accommodationFee: 0, teacherFee: 0, bookFee: 0, materialFee: 0, totalFee: 0, appliedAt: '2026-07-10 15:28:24' }
     ];
 
+    function toggleAfServiceDropdown(e) {
+      if (e) e.stopPropagation();
+      const el = document.getElementById('afServiceDropdown');
+      if (el) el.style.display = el.style.display === 'block' ? 'none' : 'block';
+    }
+
     function toggleServiceDropdown() {
       const el = document.getElementById('serviceDropdown');
-      el.style.display = el.style.display === 'block' ? 'none' : 'block';
+      if (el) el.style.display = el.style.display === 'block' ? 'none' : 'block';
     }
 
     function openModal(id) {
@@ -844,28 +877,31 @@
         <tr id="row_${a.id}">
           <td><input type="checkbox" class="rowCheck" value="${a.id}"></td>
           <td>${a.seq}</td>
-          <td><span style="color:#2563eb;">${a.period || '26년 8월 [돌봄]'}</span></td>
-          <td style="text-align:left; font-weight:normal;">${a.courseTitle}</td>
+          <td>
+            <div style="font-size:11px; color:#555;">26년 8월</div>
+            <span style="display:inline-block; background:#2563eb; color:#fff; font-size:10px; font-weight:bold; padding:0 4px; border-radius:2px; margin-top:2px;">늘봄</span>
+          </td>
+          <td style="text-align:left; font-weight:normal; color:#475569;">${a.courseTitle}</td>
           <td>${a.grade || 1}</td>
           <td>${a.classNum || 1}</td>
           <td>${a.studentNum || 1}</td>
           <td>
-            <b>${a.studentName}</b>
-            <i class="fa fa-pen-to-square icon-btn" title="학생명/인적사항 수정" onclick="openEditModal('${a.id}')"></i>
+            <span style="font-weight:600; color:#1e293b;">${a.studentName}</span>
+            <i class="fa-regular fa-pen-to-square icon-btn" title="수정" onclick="openEditModal('${a.id}')" style="margin-left:4px; color:#64748b; font-size:11px;"></i>
           </td>
           <td>
-            ${a.parentPhone ? a.parentPhone : '<i class="fa fa-phone" style="color:#888;"></i>'}
-            <i class="fa fa-pen-to-square icon-btn" title="연락처 수정" onclick="openEditModal('${a.id}')"></i>
+            <span style="color:#334155;">${a.parentPhone || ''}</span>
+            <i class="fa-regular fa-pen-to-square icon-btn" title="연락처 수정" onclick="openEditModal('${a.id}')" style="margin-left:4px; color:#64748b; font-size:11px;"></i>
           </td>
-          <td>${(a.tuitionFee || 0)}</td>
-          <td>${(a.accommodationFee || 0)}</td>
-          <td>${(a.teacherFee || 0)}</td>
-          <td>${(a.bookFee || 0)}</td>
-          <td>${(a.materialFee || 0)}</td>
-          <td>${(a.totalFee || 0)}</td>
-          <td style="font-size:11px; color:#555;">${a.appliedAt || '-'}</td>
+          <td style="color:#64748b;">${(a.tuitionFee || 0)}</td>
+          <td style="color:#64748b;">${(a.accommodationFee || 0)}</td>
+          <td style="color:#64748b;">${(a.teacherFee || 0)}</td>
+          <td style="color:#64748b;">${(a.bookFee || 0)}</td>
+          <td style="color:#64748b;">${(a.materialFee || 0)}</td>
+          <td style="color:#64748b; font-weight:bold;">${(a.totalFee || 0)}</td>
+          <td style="font-size:11px; color:#64748b;">${a.appliedAt || '2026-07-10 15:28:38'}</td>
           <td>
-            <i class="fa fa-trash-can icon-btn" style="color:#d9534f; font-size:13px;" title="삭제" onclick="deleteApplicantRow('${a.id}')"></i>
+            <i class="fa-regular fa-trash-can icon-btn" style="color:#64748b; font-size:13px; cursor:pointer;" title="삭제" onclick="deleteApplicantRow('${a.id}')"></i>
           </td>
         </tr>
       `).join('');

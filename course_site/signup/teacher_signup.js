@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (data.success) {
         alert('🎉 교사 회원가입이 성공적으로 완료되었습니다! 로그인 해주세요.');
-        window.location.href = '../login/login.html';
+        window.location.href = '/af/ad_lec/lists/sn/3267';
       } else {
         showError(data.message || '가입에 실패했습니다.');
       }

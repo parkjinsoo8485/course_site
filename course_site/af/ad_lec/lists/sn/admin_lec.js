@@ -84,6 +84,16 @@ document.addEventListener('DOMContentLoaded', () => {
 function switchSubmodelView(event, key, url, pushState = true) {
   if (event) event.preventDefault();
 
+  if (key === 'ad_app_lists') {
+    window.location.href = '/af/ad_app/lists/sn/3267';
+    return;
+  }
+
+  if (key === 'ad_lec_lists' && !window.location.pathname.endsWith('/af/ad_lec/lists/sn') && !window.location.pathname.endsWith('/af/ad_lec/lists/sn/')) {
+    window.location.href = '/af/ad_lec/lists/sn';
+    return;
+  }
+
   currentSubmodelKey = key;
 
   if (pushState && url) {
@@ -1383,11 +1393,11 @@ window.submitAddCourse = submitAddCourse;
 window.submitBatchCopy = submitBatchCopy;
 function switchRole(role) {
   if (role === 'teacher') {
-    window.location.href = '/teacher/dashboard';
+    window.location.href = '/dashboard/teacher_dashboard.html';
   } else if (role === 'parent') {
-    window.location.href = '/courses';
+    window.location.href = '/parent/index.html';
   } else {
-    window.location.href = '/af/ad_lec/lists/sn/3267';
+    window.location.href = '/af/ad_lec/lists/sn';
   }
 }
 

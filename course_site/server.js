@@ -46,8 +46,8 @@ const authenticateToken = (req, res, next) => {
 };
 
 
-app.get(['/login', '/login/'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'login', 'login.html'));
+app.get(['/login', '/login/', '/af/login/login/sn/3267', '/af/login/login/sn/3267/'], (req, res) => {
+  res.sendFile(path.join(__dirname, 'af', 'ad_lec', 'lists', 'sn', '3267', 'index.html'));
 });
 
 // ==================== SUPER ADMIN (MASTER) ROUTES ====================
@@ -1672,7 +1672,11 @@ app.use((req, res, next) => {
     if (fs.existsSync(directIndexPath)) return res.sendFile(directIndexPath);
     if (fs.existsSync(directHtmlPath)) return res.sendFile(directHtmlPath);
     if (fs.existsSync(fallbackSnPath)) return res.sendFile(fallbackSnPath);
+    const mainAdminIndex = path.join(__dirname, 'af', 'ad_lec', 'lists', 'sn', 'index.html');
+    if (fs.existsSync(mainAdminIndex)) return res.sendFile(mainAdminIndex);
   }
+  next();
+});
 
 // ==================== APPLICANT MANAGEMENT (ad_app) API & ROUTES ====================
 let applicantDb = [
@@ -1688,7 +1692,7 @@ let applicantDb = [
     studentNum: 10,
     gradeClass: '1학년 1반',
     studentName: '오하율',
-    parentPhone: '010-3718-3500',
+    parentPhone: '',
     tuitionFee: 0,
     accommodationFee: 0,
     teacherFee: 0,
@@ -1743,8 +1747,8 @@ let applicantDb = [
     classNum: 1,
     studentNum: 13,
     gradeClass: '1학년 1반',
-    studentName: '이치린',
-    parentPhone: '010-9876-5432',
+    studentName: '이채린',
+    parentPhone: '',
     tuitionFee: 0,
     accommodationFee: 0,
     teacherFee: 0,
@@ -1771,7 +1775,7 @@ let applicantDb = [
     classNum: 1,
     studentNum: 14,
     gradeClass: '1학년 1반',
-    studentName: '장희조',
+    studentName: '장희준',
     parentPhone: '010-5334-7217',
     tuitionFee: 0,
     accommodationFee: 0,
@@ -1827,14 +1831,14 @@ let applicantDb = [
     classNum: 1,
     studentNum: 18,
     gradeClass: '1학년 1반',
-    studentName: '최연우',
-    parentPhone: '010-1122-3344',
-    tuitionFee: 35000,
+    studentName: '최인우',
+    parentPhone: '',
+    tuitionFee: 0,
     accommodationFee: 0,
     teacherFee: 0,
     bookFee: 0,
     materialFee: 0,
-    totalFee: 35000,
+    totalFee: 0,
     subsidyType: '일반 자부담',
     paymentStatus: '결제완료',
     status: '승인',
@@ -1857,12 +1861,12 @@ let applicantDb = [
     gradeClass: '1학년 1반',
     studentName: '최유나',
     parentPhone: '010-3373-3683',
-    tuitionFee: 35000,
+    tuitionFee: 0,
     accommodationFee: 0,
     teacherFee: 0,
     bookFee: 0,
     materialFee: 0,
-    totalFee: 35000,
+    totalFee: 0,
     subsidyType: '일반 자부담',
     paymentStatus: '결제대기',
     status: '신청대기',
@@ -1883,7 +1887,7 @@ let applicantDb = [
     classNum: 2,
     studentNum: 2,
     gradeClass: '1학년 2반',
-    studentName: '김혼성',
+    studentName: '김윤성',
     parentPhone: '010-9073-5302',
     tuitionFee: 0,
     accommodationFee: 0,
@@ -1931,14 +1935,27 @@ let applicantDb = [
 ];
 
 let availableCoursesList = [
-  { id: 'c_1', title: '(금) 돌봄 4부', teacherName: '김민지', fee: 0, category: '돌봄' },
-  { id: 'c_2', title: '(월) 맞춤형 AI코딩교실', teacherName: '박코딩', fee: 35000, category: '맞춤형' },
-  { id: 'c_3', title: '(화/목) 창의로봇교실', teacherName: '이로봇', fee: 40000, category: '방과후' },
-  { id: 'c_4', title: '(수) K-POP 방송댄스', teacherName: '정댄스', fee: 30000, category: '방과후' }
+  { id: 'c_1', title: '(금) 돌봄 4부', teacherId: 'kim_minji', teacherName: '김민지', fee: 0, materialFee: 0, category: '돌봄', period: '26년 8월', operatingPeriod: '2026.08.01 ~ 2026.08.31', schedule: '금 16:00~16:50', capacity: 20, waitingCapacity: 5, targetGrade: [1, 2] },
+  { id: 'c_2', title: '(월) 맞춤형 AI코딩교실', teacherId: 'park_coding', teacherName: '박코딩', fee: 35000, materialFee: 10000, category: '맞춤형', period: '26년 8월', operatingPeriod: '2026.08.01 ~ 2026.08.31', schedule: '월 14:00~14:50', capacity: 15, waitingCapacity: 5, targetGrade: [1, 2, 3] },
+  { id: 'c_3', title: '(화/목) 창의로봇교실', teacherId: 'lee_robot', teacherName: '이로봇', fee: 40000, materialFee: 15000, category: '방과후', period: '26년 8월', operatingPeriod: '2026.08.01 ~ 2026.08.31', schedule: '화, 목 15:00~15:50', capacity: 16, waitingCapacity: 5, targetGrade: [1, 2, 3, 4, 5, 6] },
+  { id: 'c_4', title: '(수) K-POP 방송댄스', teacherId: 'jung_dance', teacherName: '정댄스', fee: 30000, materialFee: 0, category: '방과후', period: '26년 8월', operatingPeriod: '2026.08.01 ~ 2026.08.31', schedule: '수 14:00~14:50', capacity: 20, waitingCapacity: 5, targetGrade: [1, 2, 3, 4, 5, 6] },
+  { id: 'c_5', title: '(월/수) 주산암산교실', teacherId: 'kang_math', teacherName: '강수학', fee: 35000, materialFee: 5000, category: '방과후', period: '26년 8월', operatingPeriod: '2026.08.01 ~ 2026.08.31', schedule: '월, 수 14:00~14:50', capacity: 15, waitingCapacity: 5, targetGrade: [1, 2, 3] },
+  { id: 'c_6', title: '(화/목) 생명과학실험', teacherId: 'song_sci', teacherName: '송과학', fee: 42000, materialFee: 18000, category: '맞춤형', period: '26년 8월', operatingPeriod: '2026.08.01 ~ 2026.08.31', schedule: '화, 목 14:00~14:50', capacity: 15, waitingCapacity: 5, targetGrade: [1, 2, 3, 4] },
+  { id: 'c_7', title: '(금) 늘봄 미술교실', teacherId: 'han_art', teacherName: '한미술', fee: 0, materialFee: 8000, category: '돌봄', period: '26년 8월', operatingPeriod: '2026.08.01 ~ 2026.08.31', schedule: '금 15:00~15:50', capacity: 20, waitingCapacity: 5, targetGrade: [1, 2] }
 ];
 
 app.get(['/af/ad_app/lists/sn/3267', '/af/ad_app/lists/sn/3267/'], (req, res) => {
   return res.sendFile(path.join(__dirname, 'af', 'ad_app', 'lists', 'sn', '3267', 'index.html'));
+});
+
+// Applicant Registration Page (/af/ad_app/sin/...)
+app.get(/^\/af\/ad_app\/sin/, (req, res) => {
+  return res.sendFile(path.join(__dirname, 'af', 'ad_app', 'sin', 'sn', '3267', 'index.html'));
+});
+
+// Standalone Student Search Modal / Popup Route
+app.get(/^\/student\/search/, (req, res) => {
+  return res.sendFile(path.join(__dirname, 'af', 'ad_app', 'sin', 'sn', '3267', 'student_search.html'));
 });
 
 app.get('/api/courses/sn/3267', (req, res) => {
@@ -1948,21 +1965,189 @@ app.get('/api/courses/sn/3267', (req, res) => {
 app.get('/api/student/search', (req, res) => {
   const { grade, classNum, keyword } = req.query;
   const sampleStudents = [
-    { studentName: '김도하', grade: 1, classNum: 1, studentNum: 1, parentPhone: '010-1234-5678' },
-    { studentName: '김민준', grade: 1, classNum: 1, studentNum: 2, parentPhone: '010-2345-6789' },
-    { studentName: '박서아', grade: 1, classNum: 2, studentNum: 5, parentPhone: '010-3456-7890' },
-    { studentName: '이준우', grade: 2, classNum: 1, studentNum: 12, parentPhone: '010-4567-8901' },
-    { studentName: '정지우', grade: 2, classNum: 2, studentNum: 8, parentPhone: '010-5678-9012' }
+    { studentId: 'stu_1', studentName: '김도하', grade: 1, classNum: 1, studentNum: 1, parentPhone: '010-1234-5678' },
+    { studentId: 'stu_2', studentName: '김민준', grade: 1, classNum: 1, studentNum: 2, parentPhone: '010-2345-6789' },
+    { studentId: 'stu_3', studentName: '박서아', grade: 1, classNum: 2, studentNum: 5, parentPhone: '010-3456-7890' },
+    { studentId: 'stu_4', studentName: '노수지', grade: 1, classNum: 2, studentNum: 3, parentPhone: '010-5445-0930' },
+    { studentId: 'stu_5', studentName: '최다연', grade: 1, classNum: 1, studentNum: 17, parentPhone: '010-5219-2196' },
+    { studentId: 'stu_6', studentName: '최유나', grade: 1, classNum: 1, studentNum: 19, parentPhone: '010-3373-3683' },
+    { studentId: 'stu_7', studentName: '이준우', grade: 2, classNum: 1, studentNum: 12, parentPhone: '010-4567-8901' },
+    { studentId: 'stu_8', studentName: '정지우', grade: 2, classNum: 2, studentNum: 8, parentPhone: '010-5678-9012' }
   ];
 
   let filtered = sampleStudents;
-  if (grade) filtered = filtered.filter(s => String(s.grade) === String(grade));
-  if (classNum) filtered = filtered.filter(s => String(s.classNum) === String(classNum));
+  if (grade && grade !== 'all') filtered = filtered.filter(s => String(s.grade) === String(grade));
+  if (classNum && classNum !== 'all') filtered = filtered.filter(s => String(s.classNum) === String(classNum));
   if (keyword) {
-    const kw = keyword.toLowerCase();
+    const kw = keyword.toLowerCase().trim();
     filtered = filtered.filter(s => s.studentName.toLowerCase().includes(kw) || s.parentPhone.includes(kw));
   }
   return res.json({ success: true, students: filtered });
+});
+
+// GET /api/af/ad_app/sin-courses : Evaluates courses and student registration status
+app.get('/api/af/ad_app/sin-courses', (req, res) => {
+  const { studentName, gradeClass, period, category, keyword } = req.query;
+
+  // Find enrolled courses for this student
+  let enrolled = [];
+  if (studentName && gradeClass) {
+    enrolled = applicantDb.filter(a => a.studentName === studentName && a.gradeClass === gradeClass);
+  }
+
+  let studentGrade = 1;
+  if (gradeClass) {
+    const match = gradeClass.match(/(\d+)학년/);
+    if (match) studentGrade = parseInt(match[1]);
+  }
+
+  let filtered = [...availableCoursesList];
+
+  // Month filter (sld1)
+  if (period && period !== 'all' && period !== '구분전체') {
+    filtered = filtered.filter(c => !c.period || c.period.includes(period));
+  }
+
+  // Category filter (slp1)
+  if (category && category !== 'all' && category !== '늘봄과정전체') {
+    filtered = filtered.filter(c => c.category === category);
+  }
+
+  // Keyword filter
+  if (keyword) {
+    const kw = keyword.toLowerCase().trim();
+    filtered = filtered.filter(c => c.title.toLowerCase().includes(kw) || c.teacherName.toLowerCase().includes(kw));
+  }
+
+  // Evaluate course status for student
+  const coursesWithStatus = filtered.map((c, idx) => {
+    const currentEnrolledCount = applicantDb.filter(a => a.courseId === c.id).length;
+    const isApplied = enrolled.some(a => a.courseId === c.id);
+
+    let status = 'available';
+    let statusText = '신청';
+
+    if (isApplied) {
+      status = 'applied';
+      statusText = '신청완료';
+    } else {
+      // Check capacity
+      if (currentEnrolledCount >= c.capacity) {
+        status = 'closed';
+        statusText = '마감';
+      } else if (enrolled.length > 0) {
+        // Check time conflict
+        const isTimeConflict = enrolled.some(ea => {
+          const enrolledCourse = availableCoursesList.find(ac => ac.id === ea.courseId);
+          if (!enrolledCourse) return false;
+          // Simple schedule conflict check
+          return enrolledCourse.schedule && c.schedule && enrolledCourse.schedule.split(' ')[0] === c.schedule.split(' ')[0];
+        });
+
+        if (isTimeConflict) {
+          status = 'time_conflict';
+          statusText = '시간중복';
+        } else {
+          // Check teacher conflict
+          const isTeacherConflict = enrolled.some(ea => ea.instructorName === c.teacherName);
+          if (isTeacherConflict) {
+            status = 'teacher_conflict';
+            statusText = '강사중복';
+          }
+        }
+      }
+    }
+
+    return {
+      seq: idx + 1,
+      ...c,
+      currentCount: currentEnrolledCount,
+      waitingCount: 0,
+      status,
+      statusText
+    };
+  });
+
+  return res.json({
+    success: true,
+    appliedCount: enrolled.length,
+    courses: coursesWithStatus
+  });
+});
+
+// POST /api/af/ad_app/direct-apply
+app.post('/api/af/ad_app/direct-apply', (req, res) => {
+  const { studentName, gradeClass, studentNum, parentPhone, courseId } = req.body;
+  if (!studentName || !gradeClass || !courseId) {
+    return res.status(400).json({ success: false, message: '학생 정보와 강좌를 모두 선택해주세요.' });
+  }
+
+  const course = availableCoursesList.find(c => c.id === courseId);
+  if (!course) {
+    return res.status(404).json({ success: false, message: '강좌를 찾을 수 없습니다.' });
+  }
+
+  // Check duplicate
+  const already = applicantDb.find(a => a.studentName === studentName && a.gradeClass === gradeClass && a.courseId === courseId);
+  if (already) {
+    return res.status(400).json({ success: false, message: '이미 신청된 강좌입니다.' });
+  }
+
+  const nextSeq = applicantDb.length > 0 ? Math.max(...applicantDb.map(a => a.seq || 0)) + 1 : 700;
+  const now = new Date();
+  const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+
+  const newItem = {
+    id: `app_${nextSeq}`,
+    seq: nextSeq,
+    period: course.period || '26년 8월 늘봄',
+    courseId: course.id,
+    courseTitle: course.title,
+    instructorName: course.teacherName,
+    grade: parseInt(gradeClass) || 1,
+    classNum: 1,
+    studentNum: parseInt(studentNum) || 1,
+    gradeClass: gradeClass,
+    studentName: studentName,
+    parentPhone: parentPhone || '010-0000-0000',
+    tuitionFee: course.fee || 0,
+    accommodationFee: 0,
+    teacherFee: 0,
+    bookFee: 0,
+    materialFee: course.materialFee || 0,
+    totalFee: (course.fee || 0) + (course.materialFee || 0),
+    subsidyType: course.fee === 0 ? '늘봄 무상지원' : '일반 자부담',
+    paymentStatus: course.fee === 0 ? '무상' : '결제대기',
+    status: '승인',
+    appliedAt: dateStr,
+    bankName: '',
+    schoolBankingAccount: '',
+    depositorName: '',
+    memo: '관리자 직접 수강신청'
+  };
+
+  applicantDb.unshift(newItem);
+
+  const appliedCount = applicantDb.filter(a => a.studentName === studentName && a.gradeClass === gradeClass).length;
+  return res.json({ success: true, message: '수강신청이 완료되었습니다.', appliedCount, item: newItem });
+});
+
+// POST /api/af/ad_app/direct-cancel
+app.post('/api/af/ad_app/direct-cancel', (req, res) => {
+  const { studentName, gradeClass, courseId } = req.body;
+  if (!studentName || !gradeClass || !courseId) {
+    return res.status(400).json({ success: false, message: '학생 정보와 강좌를 모두 전달해주세요.' });
+  }
+
+  const prevLen = applicantDb.length;
+  applicantDb = applicantDb.filter(a => !(a.studentName === studentName && a.gradeClass === gradeClass && a.courseId === courseId));
+
+  if (applicantDb.length === prevLen) {
+    return res.status(404).json({ success: false, message: '취소할 수강 내역을 찾을 수 없습니다.' });
+  }
+
+  const appliedCount = applicantDb.filter(a => a.studentName === studentName && a.gradeClass === gradeClass).length;
+  return res.json({ success: true, message: '수강신청이 성공적으로 취소되었습니다.', appliedCount });
 });
 
 app.get('/api/af/ad_app/lists/sn/3267', (req, res) => {
@@ -2200,6 +2385,7 @@ app.get('/api/af/ad_app/school-banking/csv/sn/3267', (req, res) => {
 });
 
 // dbdbschool Page Routing Fallback Middleware (Matches all live dbdbschool URL patterns)
+app.use((req, res, next) => {
   if (req.path && req.path.startsWith('/admin/') && !req.path.includes('.')) {
     return res.sendFile(path.join(__dirname, 'admin', 'index.html'));
   }
