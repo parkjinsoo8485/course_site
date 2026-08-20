@@ -229,53 +229,46 @@ function renderLectureTable(lectures) {
   const tbody = document.getElementById('lectureTbody');
   if (!tbody) return;
   if (!lectures || lectures.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="13" style="text-align: center; padding: 40px; color: var(--text-secondary);">조회된 강좌가 없습니다.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="18" style="text-align: center; padding: 40px; color: var(--text-secondary);">조회된 강좌가 없습니다.</td></tr>`;
     return;
   }
 
   tbody.innerHTML = lectures.map((lec, idx) => {
     const costInstructor = lec.costInstructor !== undefined ? lec.costInstructor : Math.round(lec.tuitionFee * 0.8);
     const costFacility = lec.costFacility !== undefined ? lec.costFacility : Math.round(lec.tuitionFee * 0.2);
+    const periodDisplay = (lec.period || '2026-08-01~2026-08-31').replace(/2026-/g, '26.');
 
     return `
     <tr>
       <td style="text-align: center;"><input type="checkbox" class="lec-checkbox" value="${lec.id}"></td>
-      <td>${idx + 1}</td>
-      <td><span style="font-weight:600; color:#475569;">${lec.category}</span></td>
+      <td style="text-align: center;">${idx + 1}</td>
+      <td style="text-align: center;">
+        <button class="btn btn-default" style="padding: 2px 6px; font-size:11px; height:22px; line-height:1;" onclick="openEditModal('${lec.id}')">수정</button>
+      </td>
+      <td style="text-align: center;">
+        <span style="font-weight:600; color:#334155;">${lec.category}</span>
+        ${lec.neulbomType ? `<br><span style="font-size:11px; color:#0284c7;">(${lec.neulbomType})</span>` : ''}
+      </td>
       <td>
         <strong>${lec.title}</strong>
         ${lec.allowTimeConflict ? '<span style="font-size:0.75rem; color:#8b5cf6; display:block;">[중복허용]</span>' : ''}
       </td>
-      <td>${lec.instructor} <span style="font-size:0.78rem; color:#64748b;">(${lec.teacherId || 'inst'})</span></td>
-      <td>${lec.targetGrade}</td>
-      <td><strong>${lec.enrolledCount}</strong>/${lec.capacity} <span style="font-size:0.8rem; color:#64748b;">(대기: ${lec.waitingCount}/${lec.waitingCapacity})</span></td>
-      <td>
-        <strong>${lec.tuitionFee.toLocaleString()}원</strong>
-        <div style="font-size:0.78rem; color:#64748b;">
-          강사: <span style="color:#16a34a;">${costInstructor.toLocaleString()}원</span> / 
-          수용: <span style="color:#2563eb;">${costFacility.toLocaleString()}원</span>
-        </div>
-      </td>
-      <td>
-        <span style="font-size:0.85rem;">재료: ${lec.materialFee.toLocaleString()}원</span>
-        ${lec.textbookFee ? `<br><span style="font-size:0.78rem; color:#64748b;">교재: ${lec.textbookFee.toLocaleString()}원</span>` : ''}
-      </td>
-      <td>
-        ${lec.dayOfWeek} ${lec.scheduleTime}
-        <div style="font-size:0.78rem; color:#64748b;">(총 ${lec.totalHours || 12}시수 / ${lec.location})</div>
-      </td>
-      <td style="text-align: center;">
-        <label class="switch">
-          <input type="checkbox" ${lec.instructorClosed ? 'checked' : ''} onchange="toggleInstructorClose('${lec.id}')">
-          <span class="slider"></span>
-        </label>
-      </td>
+      <td style="text-align: center;">${lec.instructor}<br><span style="font-size:11px; color:#64748b;">(${lec.teacherId || 'inst'})</span></td>
+      <td style="text-align: center;"><strong>${lec.enrolledCount}</strong>/${lec.capacity}</td>
+      <td style="text-align: center;">${lec.waitingCount}/${lec.waitingCapacity}</td>
+      <td style="text-align: center;">${lec.targetGrade}</td>
+      <td style="text-align: center; font-size:11px;">${periodDisplay}</td>
+      <td style="text-align: center; font-size:11px;">${lec.dayOfWeek} ${lec.scheduleTime}</td>
+      <td style="text-align: right; padding-right:8px;"><strong>${lec.tuitionFee.toLocaleString()}원</strong></td>
+      <td style="text-align: center;"><span class="badge ${lec.feeReceipt === 'Y' ? 'badge-OUTPUT' : 'badge-CLOSED'}">${lec.feeReceipt === 'Y' ? '출력' : '미출력'}</span></td>
+      <td style="text-align: center;"><span class="badge ${lec.teacherClosed === 'Y' || lec.instructorClosed ? 'badge-CLOSED' : 'badge-OUTPUT'}">${lec.teacherClosed === 'Y' || lec.instructorClosed ? '마감' : '진행'}</span></td>
+      <td style="text-align: center;">${lec.teacherEditable === 'Y' ? '<span style="color:#16a34a; font-weight:600;">가능</span>' : '<span style="color:#64748b;">불가</span>'}</td>
+      <td style="text-align: center;"><span class="badge ${lec.refundClosed ? 'badge-CLOSED' : 'badge-OUTPUT'}">${lec.refundClosed ? '마감' : '가능'}</span></td>
       <td style="text-align: center;">
         <span class="badge badge-${lec.status}">${lec.status === 'OUTPUT' ? '출력' : (lec.status === 'CLOSED' ? '종료' : '대기')}</span>
       </td>
-      <td style="text-align: center; white-space: nowrap;">
-        <button class="btn btn-outline" style="padding: 4px 6px; font-size:0.78rem;" onclick="openCourseCopyModal('${lec.id}', '${lec.title}')" title="강좌 복사"><i class="fa-solid fa-clone"></i> 복사</button>
-        <button class="btn btn-outline" style="padding: 4px 6px; font-size:0.78rem;" onclick="runLottery('${lec.id}')" title="추첨 실행"><i class="fa-solid fa-dice"></i> 추첨</button>
+      <td style="text-align: center;">
+        <button class="btn btn-outline" style="padding: 2px 6px; font-size:11px; color:#ef4444; border-color:#fca5a5; height:22px; line-height:1;" onclick="deleteCourse('${lec.id}', '${lec.title}')">삭제</button>
       </td>
     </tr>
   `;
@@ -2025,10 +2018,44 @@ function handleAfUserLogout(e) {
   }
 }
 
+function openEditModal(courseId) {
+  openAddModal();
+  // Fetch course info if needed and populate
+  const cat = document.getElementById('categoryFilter') ? document.getElementById('categoryFilter').value : '26년 8월';
+  fetch(`/api/af/ad_lec/lists/sn/${SCHOOL_SN}?category=${encodeURIComponent(cat)}`)
+    .then(r => r.json())
+    .then(data => {
+      if (data.lectures) {
+        const found = data.lectures.find(l => l.id === courseId || String(l.code) === String(courseId));
+        if (found) {
+          if (document.getElementById('addTitle')) document.getElementById('addTitle').value = found.title;
+          if (document.getElementById('addInstructor')) document.getElementById('addInstructor').value = found.instructor;
+          if (document.getElementById('addCategory')) document.getElementById('addCategory').value = found.category;
+          if (document.getElementById('addTuitionFee')) document.getElementById('addTuitionFee').value = found.tuitionFee;
+          if (document.getElementById('addCapacity')) document.getElementById('addCapacity').value = found.capacity;
+        }
+      }
+    });
+}
+
+function deleteCourse(courseId, title) {
+  if (confirm(`'${title || '선택한 강좌'}'를 정말 삭제하시겠습니까?`)) {
+    fetch('/api/af/ad_lec/status', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ schoolId: SCHOOL_SN, courseId, status: 'CLOSED' })
+    })
+      .then(r => r.json())
+      .then(data => {
+        alert(data.message || '강좌가 삭제되었습니다.');
+        loadLectures();
+      });
+  }
+}
+
 window.openAfAdminInfoModal = openAfAdminInfoModal;
 window.closeAfAdminInfoModal = closeAfAdminInfoModal;
 window.handleAfAdminInfoSave = handleAfAdminInfoSave;
 window.handleAfUserLogout = handleAfUserLogout;
-
-
-
+window.openEditModal = openEditModal;
+window.deleteCourse = deleteCourse;
