@@ -9,6 +9,8 @@ const submodelTitles = {
   qanda_lists: '<i class="fa-solid fa-comments"></i> 고객지원 게시판',
   sczigi_service_lists: '<i class="fa-solid fa-school"></i> 학교관리',
   ad_lec_lists: '<i class="fa-solid fa-book-open"></i> 강좌관리',
+  ad_lec_write: '<i class="fa-solid fa-file-circle-plus"></i> 등록 - 강좌관리',
+  ad_lec_input: '<i class="fa-solid fa-file-import"></i> 일괄입력 - 강좌관리',
   ad_app_lists: '<i class="fa-solid fa-users"></i> 신청자관리',
   ad_wait_lists: '<i class="fa-solid fa-clock-rotate-left"></i> 대기자관리',
   ad_att_stat: '<i class="fa-solid fa-signature"></i> 출석부관리',
@@ -47,7 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let initialKey = 'ad_lec_lists';
 
   // Match live URL routes
-  if (path.includes('/af/ad_faq/main')) initialKey = 'ad_faq_main';
+  if (path.includes('/af/ad_lec/write')) initialKey = 'ad_lec_write';
+  else if (path.includes('/af/ad_lec/input')) initialKey = 'ad_lec_input';
+  else if (path.includes('/af/ad_faq/main')) initialKey = 'ad_faq_main';
   else if (path.includes('/af/qanda/lists')) initialKey = 'qanda_lists';
   else if (path.includes('/sczigi/service/lists')) initialKey = 'sczigi_service_lists';
   else if (path.includes('/af/ad_lec/lists')) initialKey = 'ad_lec_lists';
@@ -86,11 +90,6 @@ function switchSubmodelView(event, key, url, pushState = true) {
 
   if (key === 'ad_app_lists') {
     window.location.href = '/af/ad_app/lists/sn/3267';
-    return;
-  }
-
-  if (key === 'ad_lec_lists' && !window.location.pathname.endsWith('/af/ad_lec/lists/sn') && !window.location.pathname.endsWith('/af/ad_lec/lists/sn/')) {
-    window.location.href = '/af/ad_lec/lists/sn';
     return;
   }
 
@@ -209,18 +208,102 @@ function loadSubmodelData(key) {
 
 // ==================== 1. 강좌관리 (/af/ad_lec/lists) ====================
 
+let cachedLectures = [];
+let lectureSortDirection = 'asc';
+
+function toggleDetailSearch() {
+  const searchBox = document.getElementById('main_control_box_search');
+  const toggleText = document.getElementById('searchToggleText');
+  const toggleIcon = document.getElementById('searchToggleIcon');
+  if (!searchBox) return;
+
+  if (searchBox.style.display === 'none') {
+    searchBox.style.display = 'inline-flex';
+    if (toggleText) toggleText.innerText = '닫기';
+    if (toggleIcon) { toggleIcon.className = 'fa fa-angle-up'; }
+  } else {
+    searchBox.style.display = 'none';
+    if (toggleText) toggleText.innerText = '열기';
+    if (toggleIcon) { toggleIcon.className = 'fa fa-angle-down'; }
+  }
+}
+
+function toggleExtraDropdown() {
+  const drop = document.getElementById('main_control_box_drop');
+  const icon = document.getElementById('extraToggleIcon');
+  if (!drop) return;
+
+  if (drop.style.display === 'none' || drop.style.display === '') {
+    drop.style.display = 'flex';
+    if (icon) icon.className = 'fa fa-angle-up';
+  } else {
+    drop.style.display = 'none';
+    if (icon) icon.className = 'fa fa-angle-down';
+  }
+}
+
+// Close extra dropdown on click outside
+document.addEventListener('click', (e) => {
+  const btn = document.getElementById('main_control_box_btn02');
+  const drop = document.getElementById('main_control_box_drop');
+  if (drop && btn && !btn.contains(e.target) && !drop.contains(e.target)) {
+    drop.style.display = 'none';
+    const icon = document.getElementById('extraToggleIcon');
+    if (icon) icon.className = 'fa fa-angle-down';
+  }
+});
+
+function resetLectureSearch() {
+  if (document.getElementById('categoryFilter')) document.getElementById('categoryFilter').value = 'all';
+  if (document.getElementById('neulbomFilter')) document.getElementById('neulbomFilter').value = 'all';
+  if (document.getElementById('statusFilter')) document.getElementById('statusFilter').value = 'all';
+  if (document.getElementById('gradeFilter')) document.getElementById('gradeFilter').value = '';
+  if (document.getElementById('searchKeyword')) document.getElementById('searchKeyword').value = '';
+  loadLectures();
+}
+
+function sortLectureTable(field) {
+  lectureSortDirection = lectureSortDirection === 'asc' ? 'desc' : 'asc';
+  if (!cachedLectures || cachedLectures.length === 0) return;
+  cachedLectures.sort((a, b) => {
+    const valA = (a.title || '').toLowerCase();
+    const valB = (b.title || '').toLowerCase();
+    if (lectureSortDirection === 'asc') return valA.localeCompare(valB, 'ko');
+    return valB.localeCompare(valA, 'ko');
+  });
+  renderLectureTable(cachedLectures);
+}
+
 async function loadLectures() {
-  const category = document.getElementById('categoryFilter') ? document.getElementById('categoryFilter').value : '전체';
-  const status = document.getElementById('statusFilter') ? document.getElementById('statusFilter').value : '전체';
-  const keyword = document.getElementById('searchKeyword') ? document.getElementById('searchKeyword').value.trim() : '';
+  const categoryEl = document.getElementById('categoryFilter');
+  const neulbomEl = document.getElementById('neulbomFilter');
+  const statusEl = document.getElementById('statusFilter');
+  const gradeEl = document.getElementById('gradeFilter');
+  const keywordEl = document.getElementById('searchKeyword');
+
+  const category = (categoryEl && categoryEl.value !== 'all') ? categoryEl.value : '';
+  const status = (statusEl && statusEl.value !== 'all') ? statusEl.value : '';
+  const keyword = keywordEl ? keywordEl.value.trim() : '';
 
   try {
     const res = await fetch(`/api/af/ad_lec/lists/sn/${SCHOOL_SN}?category=${encodeURIComponent(category)}&status=${encodeURIComponent(status)}&keyword=${encodeURIComponent(keyword)}`);
     const data = await res.json();
     if (data.success) {
+      let list = data.lectures || [];
+
+      // Client-side neulbom & grade secondary filtering
+      if (neulbomEl && neulbomEl.value !== 'all') {
+        list = list.filter(l => (l.neulbomType && l.neulbomType.includes(neulbomEl.value)) || (l.title && l.title.includes(neulbomEl.value)));
+      }
+      if (gradeEl && gradeEl.value) {
+        list = list.filter(l => (l.targetGrade || '').includes(gradeEl.value));
+      }
+
+      cachedLectures = list;
       const span = document.getElementById('totalCountSpan');
-      if (span) span.innerText = data.totalCount;
-      renderLectureTable(data.lectures);
+      if (span) span.innerText = list.length;
+      renderLectureTable(list);
+      updateSelectedCourseCount();
     }
   } catch (e) { console.error('loadLectures Error:', e); }
 }
@@ -229,50 +312,263 @@ function renderLectureTable(lectures) {
   const tbody = document.getElementById('lectureTbody');
   if (!tbody) return;
   if (!lectures || lectures.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="18" style="text-align: center; padding: 40px; color: var(--text-secondary);">조회된 강좌가 없습니다.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="18" style="text-align: center; padding: 40px; color: #777;">검색된 데이터가 없습니다.</td></tr>`;
     return;
   }
 
+  const totalCount = lectures.length;
+
   tbody.innerHTML = lectures.map((lec, idx) => {
-    const costInstructor = lec.costInstructor !== undefined ? lec.costInstructor : Math.round(lec.tuitionFee * 0.8);
-    const costFacility = lec.costFacility !== undefined ? lec.costFacility : Math.round(lec.tuitionFee * 0.2);
-    const periodDisplay = (lec.period || '2026-08-01~2026-08-31').replace(/2026-/g, '26.');
+    const seq = totalCount - idx;
+    const periodDisplay = (lec.period || '2026-09-01~2026-09-30').replace('~', '~<br>');
+    
+    // Exact badge design matching screenshot
+    let neulbomBadge = '';
+    if (lec.neulbomType === '돌봄' || (lec.category && lec.category.includes('돌봄')) || (lec.title && lec.title.includes('돌봄'))) {
+      neulbomBadge = '<span style="display:inline-block; font-size:11px; padding:0 4px; border:1px solid #bce8f1; color:#31708f; background-color:#d9edf7; border-radius:3px;">돌봄</span>';
+    } else if (lec.neulbomType === '맞춤형' || (lec.title && (lec.title.includes('놀이체육') || lec.title.includes('독후') || lec.title.includes('창의보드')))) {
+      neulbomBadge = '<span style="display:inline-block; font-size:11px; padding:0 4px; border:1px solid #ebccd1; color:#a94442; background-color:#f2dede; border-radius:3px;">맞춤형</span>';
+    } else {
+      neulbomBadge = '<span style="display:inline-block; font-size:11px; padding:0 4px; border:1px solid #ccc; color:#555; background-color:#f5f5f5; border-radius:3px;">방과후</span>';
+    }
+
+    const scheduleHtml = (lec.schedule || `${lec.dayOfWeek || ''}:${lec.scheduleTime || ''}`).replace(/ \/ /g, '<br>');
+
+    // Status button
+    let statusBtn = '';
+    if (lec.status === 'CLOSED') {
+      statusBtn = `<button type="button" class="btn btn-default btn-xs" style="background:#777; border-color:#666; color:#fff; font-size:11px; padding:1px 6px; border-radius:3px;" onclick="toggleCourseAttribute('${lec.id}', 'status')">종료 <i class="fa-solid fa-caret-down" style="font-size:9px;"></i></button>`;
+    } else if (lec.status === 'WAITING') {
+      statusBtn = `<button type="button" class="btn btn-warning btn-xs" style="background:#f0ad4e; border-color:#eea236; color:#fff; font-size:11px; padding:1px 6px; border-radius:3px;" onclick="toggleCourseAttribute('${lec.id}', 'status')">대기 <i class="fa-solid fa-caret-down" style="font-size:9px;"></i></button>`;
+    } else {
+      statusBtn = `<button type="button" class="btn btn-danger btn-xs" style="background:#d9534f; border-color:#d43f3a; color:#fff; font-size:11px; padding:1px 6px; border-radius:3px;" onclick="toggleCourseAttribute('${lec.id}', 'status')">출력 <i class="fa-solid fa-caret-down" style="font-size:9px;"></i></button>`;
+    }
 
     return `
-    <tr>
-      <td style="text-align: center;"><input type="checkbox" class="lec-checkbox" value="${lec.id}"></td>
-      <td style="text-align: center;">${idx + 1}</td>
-      <td style="text-align: center;">
-        <button class="btn btn-default" style="padding: 2px 6px; font-size:11px; height:22px; line-height:1;" onclick="openEditModal('${lec.id}')">수정</button>
+    <tr style="height:36px; text-align:center; vertical-align:middle; border-bottom:1px solid #eee;">
+      <td><input type="checkbox" class="lec-checkbox" value="${lec.id}" onchange="updateSelectedCourseCount()"></td>
+      <td style="color:#555;">${seq}</td>
+      <td>
+        <a href="javascript:void(0)" onclick="openEditModal('${lec.id}')" title="수정" style="color:#777; text-decoration:none; font-size:13px;"><i class="fa-solid fa-gear"></i></a>
       </td>
-      <td style="text-align: center;">
-        <span style="font-weight:600; color:#334155;">${lec.category}</span>
-        ${lec.neulbomType ? `<br><span style="font-size:11px; color:#0284c7;">(${lec.neulbomType})</span>` : ''}
+      <td style="line-height:1.3; font-size:11px;">
+        <div style="color:#333;">${lec.category || '26년 9월'}</div>
+        ${neulbomBadge}
+      </td>
+      <td style="text-align:left; padding-left:8px;">
+        <strong style="color:#333; font-size:12px;">${lec.title}</strong>
+        ${lec.allowTimeConflict ? '<span style="font-size:10px; color:#8b5cf6; margin-left:4px;">[중복허용]</span>' : ''}
+      </td>
+      <td style="font-size:11px; color:#333;">${lec.instructor || '돌봄전담사'}</td>
+      <td>
+        <a href="/af/ad_app/lists/sn/${SCHOOL_SN}" onclick="switchSubmodelView(event, 'ad_app_lists', '/af/ad_app/lists/sn/${SCHOOL_SN}')" style="color:#337ab7; text-decoration:underline; font-weight:normal;">${lec.enrolledCount || 0} / ${lec.capacity || 20}</a>
       </td>
       <td>
-        <strong>${lec.title}</strong>
-        ${lec.allowTimeConflict ? '<span style="font-size:0.75rem; color:#8b5cf6; display:block;">[중복허용]</span>' : ''}
+        <a href="/af/ad_wait/lists/sn/${SCHOOL_SN}" onclick="switchSubmodelView(event, 'ad_wait_lists', '/af/ad_wait/lists/sn/${SCHOOL_SN}')" style="color:#555; text-decoration:underline; text-decoration-style:dotted;">${lec.waitingCount || 0}/${lec.waitingCapacity || 3}</a>
       </td>
-      <td style="text-align: center;">${lec.instructor}<br><span style="font-size:11px; color:#64748b;">(${lec.teacherId || 'inst'})</span></td>
-      <td style="text-align: center;"><strong>${lec.enrolledCount}</strong>/${lec.capacity}</td>
-      <td style="text-align: center;">${lec.waitingCount}/${lec.waitingCapacity}</td>
-      <td style="text-align: center;">${lec.targetGrade}</td>
-      <td style="text-align: center; font-size:11px;">${periodDisplay}</td>
-      <td style="text-align: center; font-size:11px;">${lec.dayOfWeek} ${lec.scheduleTime}</td>
-      <td style="text-align: right; padding-right:8px;"><strong>${lec.tuitionFee.toLocaleString()}원</strong></td>
-      <td style="text-align: center;"><span class="badge ${lec.feeReceipt === 'Y' ? 'badge-OUTPUT' : 'badge-CLOSED'}">${lec.feeReceipt === 'Y' ? '출력' : '미출력'}</span></td>
-      <td style="text-align: center;"><span class="badge ${lec.teacherClosed === 'Y' || lec.instructorClosed ? 'badge-CLOSED' : 'badge-OUTPUT'}">${lec.teacherClosed === 'Y' || lec.instructorClosed ? '마감' : '진행'}</span></td>
-      <td style="text-align: center;">${lec.teacherEditable === 'Y' ? '<span style="color:#16a34a; font-weight:600;">가능</span>' : '<span style="color:#64748b;">불가</span>'}</td>
-      <td style="text-align: center;"><span class="badge ${lec.refundClosed ? 'badge-CLOSED' : 'badge-OUTPUT'}">${lec.refundClosed ? '마감' : '가능'}</span></td>
-      <td style="text-align: center;">
-        <span class="badge badge-${lec.status}">${lec.status === 'OUTPUT' ? '출력' : (lec.status === 'CLOSED' ? '종료' : '대기')}</span>
+      <td style="font-size:11px;">${lec.targetGrade || '1,2,3'}</td>
+      <td style="font-size:11px; color:#555; line-height:1.2;">${periodDisplay}</td>
+      <td style="font-size:11px; color:#555; line-height:1.2;">${scheduleHtml}</td>
+      <td style="text-align:right; padding-right:8px; font-weight:normal; color:#333;">${(lec.tuitionFee || 0).toLocaleString()}</td>
+      <td style="cursor:pointer;" onclick="toggleCourseAttribute('${lec.id}', 'feeReceipt')">
+        ${lec.feeReceipt === 'Y' ? '<span style="color:#5cb85c; font-weight:bold;">출력</span>' : '<span style="color:#999;">-</span>'}
       </td>
-      <td style="text-align: center;">
-        <button class="btn btn-outline" style="padding: 2px 6px; font-size:11px; color:#ef4444; border-color:#fca5a5; height:22px; line-height:1;" onclick="deleteCourse('${lec.id}', '${lec.title}')">삭제</button>
+      <td style="cursor:pointer;" onclick="toggleCourseAttribute('${lec.id}', 'teacherClosed')">
+        ${lec.teacherClosed === 'Y' || lec.instructorClosed ? '<span style="color:#d9534f; font-weight:bold;">마감</span>' : '<span style="color:#999;">-</span>'}
+      </td>
+      <td style="cursor:pointer;" onclick="toggleCourseAttribute('${lec.id}', 'teacherEditable')">
+        ${lec.teacherEditable === 'Y' ? '<span style="color:#5cb85c; font-weight:bold;">가능</span>' : '<span style="color:#999;">-</span>'}
+      </td>
+      <td style="cursor:pointer;" onclick="toggleCourseAttribute('${lec.id}', 'refundClosed')">
+        ${lec.refundClosed ? '<span style="color:#d9534f; font-weight:bold;">마감</span>' : '<span style="color:#999;">-</span>'}
+      </td>
+      <td>
+        ${statusBtn}
+      </td>
+      <td>
+        <a href="javascript:void(0)" onclick="deleteCourse('${lec.id}', '${lec.title}')" title="삭제" style="color:#777; text-decoration:none; font-size:14px;"><i class="fa-regular fa-trash-can"></i></a>
       </td>
     </tr>
   `;
   }).join('');
+}
+
+function updateSelectedCourseCount() {
+  const checkedBoxes = document.querySelectorAll('.lec-checkbox:checked');
+  const countEl = document.getElementById('selectedCoursesCount');
+  if (countEl) countEl.innerText = checkedBoxes.length;
+}
+
+function toggleSelectAll(masterBox) {
+  const boxes = document.querySelectorAll('.lec-checkbox');
+  boxes.forEach(b => b.checked = masterBox.checked);
+  updateSelectedCourseCount();
+}
+
+async function applyBatchAction() {
+  const action = document.getElementById('bottom_batch_action').value;
+  if (!action) {
+    alert('일괄적용할 항목을 먼저 선택하세요.');
+    return;
+  }
+  const checkedBoxes = Array.from(document.querySelectorAll('.lec-checkbox:checked')).map(b => b.value);
+  if (checkedBoxes.length === 0) {
+    alert('적용할 강좌를 1개 이상 선택해 주세요.');
+    return;
+  }
+
+  if (action === 'batch_delete') {
+    if (!confirm(`선택한 ${checkedBoxes.length}개 강좌를 정말 삭제하시겠습니까?`)) return;
+    try {
+      for (const id of checkedBoxes) {
+        await fetch(`/api/af/ad_lec/delete/${id}`, { method: 'DELETE' });
+      }
+      alert('선택한 강좌가 일괄 삭제되었습니다.');
+      loadLectures();
+    } catch (e) {
+      alert('일괄 삭제 중 오류가 발생했습니다.');
+    }
+    return;
+  }
+
+  // Handle status / toggle batch updates
+  try {
+    for (const id of checkedBoxes) {
+      const course = cachedLectures.find(c => c.id === id);
+      if (!course) continue;
+      const payload = { ...course };
+      if (action === 'status_1') payload.status = 'OUTPUT';
+      else if (action === 'status_0') payload.status = 'WAITING';
+      else if (action === 'status_2') payload.status = 'CLOSED';
+      else if (action === 'tuition_output_yes') payload.feeReceipt = 'Y';
+      else if (action === 'tuition_output_no') payload.feeReceipt = 'N';
+      else if (action === 'teacher_close_yes') payload.teacherClosed = 'Y';
+      else if (action === 'teacher_close_no') payload.teacherClosed = 'N';
+      else if (action === 'teacher_edit_yes') payload.teacherEditable = 'Y';
+      else if (action === 'teacher_edit_no') payload.teacherEditable = 'N';
+      else if (action === 'refund_close_yes') payload.refundClosed = true;
+      else if (action === 'refund_close_no') payload.refundClosed = false;
+
+      await fetch(`/api/af/ad_lec/update/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    }
+    alert(`선택한 ${checkedBoxes.length}개 강좌에 일괄 적용이 완료되었습니다.`);
+    loadLectures();
+  } catch (err) {
+    console.error('Batch update error:', err);
+    alert('일괄 적용 처리 중 오류가 발생했습니다.');
+  }
+}
+
+// ==================== 강좌관리 인라인 및 액션 헬퍼 ====================
+
+// 1. 인라인 정원 실시간 수정 (show_max_sin)
+async function show_max_sin(courseId, currentCapacity = 20) {
+  const newCap = prompt('변경할 강좌의 정원을 입력하세요:', currentCapacity);
+  if (newCap === null || newCap.trim() === '') return;
+  const capNum = parseInt(newCap, 10);
+  if (isNaN(capNum) || capNum < 0) {
+    alert('올바른 숫자를 입력하세요.');
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/af/ad_lec/capacity', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: courseId, capacity: capNum })
+    });
+    const data = await res.json();
+    if (data.success) {
+      loadLectures();
+    } else {
+      alert(data.message || '정원 수정 실패');
+    }
+  } catch (err) {
+    console.error('Capacity update error:', err);
+    alert('정원 수정 중 통신 오류가 발생했습니다.');
+  }
+}
+
+// 2. 강좌 상태 드롭다운 실시간 변경 (chk_lec_status)
+async function chk_lec_status(courseId, statusCode) {
+  let statusStr = 'OUTPUT';
+  if (statusCode === 0 || statusCode === '0') statusStr = 'WAITING';
+  else if (statusCode === 2 || statusCode === '2') statusStr = 'CLOSED';
+
+  try {
+    const res = await fetch('/api/af/ad_lec/status', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ courseIds: [courseId], status: statusStr })
+    });
+    const data = await res.json();
+    if (data.success) {
+      loadLectures();
+    } else {
+      alert(data.message || '상태 변경 실패');
+    }
+  } catch (err) {
+    console.error('Status update error:', err);
+  }
+}
+
+// 3. 강좌 일괄복사 사전 검증 (chk_copy)
+function chk_copy() {
+  const sel = document.getElementById('categoryFilter');
+  if (!sel || sel.value === 'all') {
+    alert('강좌구분을 먼저 선택하세요.');
+    return false;
+  }
+  openBatchCopyModal();
+  return true;
+}
+
+// 4. 검색결과 엑셀 출력 (exportToExcel)
+function exportToExcel() {
+  window.location.href = '/af/ad_lec/listse/p/1/sn/3267/sld/11/sof/ln/sot/asc';
+}
+
+// 5. 출석부 출력 (printAttendanceSheet)
+function printAttendanceSheet() {
+  window.open('/af/ad_att/excel/p/1/sn/3267/sld/11/sof/ln/sot/asc', '_blank');
+}
+
+// 6. 강좌 통계 모달 열기
+async function openLectureStatsModal() {
+  try {
+    const res = await fetch('/api/af/ad_lec/stats');
+    const data = await res.json();
+    if (data.success && data.stats) {
+      let msg = '📊 [강좌 통계 현황]\n\n';
+      data.stats.forEach(st => {
+        msg += `■ 구분: ${st.category}\n - 총 강좌수: ${st.total}개 (출력: ${st.outputCount}, 대기: ${st.waitingCount}, 종료: ${st.closedCount})\n - 총 정원: ${st.totalCapacity}명 / 총 신청자: ${st.totalApplied}명\n\n`;
+      });
+      alert(msg);
+    }
+  } catch (e) {
+    alert('통계 데이터를 불러오는 중 오류가 발생했습니다.');
+  }
+}
+
+// 7. 검색 조건 리셋 (전체 버튼)
+function resetLectureSearch() {
+  const cat = document.getElementById('categoryFilter');
+  const nlb = document.getElementById('neulbomFilter');
+  const sts = document.getElementById('statusFilter');
+  const grd = document.getElementById('gradeFilter');
+  const kw = document.getElementById('searchKeyword');
+
+  if (cat) cat.value = 'all';
+  if (nlb) nlb.value = 'all';
+  if (sts) sts.value = 'all';
+  if (grd) grd.value = '';
+  if (kw) kw.value = '';
+
+  loadLectures();
 }
 
 // ==================== 2. 신청자관리 (/af/ad_app/lists) ====================
@@ -1151,15 +1447,34 @@ async function runLottery(courseId) {
   loadLectures();
 }
 
-function openAddModal() { document.getElementById('addModal').classList.add('show'); }
-function closeAddModal() { document.getElementById('addModal').classList.remove('show'); }
-function openBatchCopyModal() { document.getElementById('batchCopyModal').classList.add('show'); }
-function closeBatchCopyModal() { document.getElementById('batchCopyModal').classList.remove('show'); }
+// ==================== 6대 강좌관리 모달 완전 연동 로직 (01~09) ====================
+
+// 1. 강좌 등록 (01_강좌등록)
+function openAddModal() {
+  window.location.href = '/af/ad_lec/write/sn/' + SCHOOL_SN;
+}
+function closeAddModal() {
+  const modal = document.getElementById('addModal');
+  if (modal) modal.style.display = 'none';
+}
+
+function toggleAllGradeCheck(type, master) {
+  const chks = document.querySelectorAll(`.grade-chk-${type}`);
+  chks.forEach(c => c.checked = master.checked);
+  updateGradeHidden(type);
+}
+
+function updateGradeHidden(type) {
+  const chks = Array.from(document.querySelectorAll(`.grade-chk-${type}:checked`)).map(c => c.value);
+  const target = document.getElementById(type === 'add' ? 'addTargetGrade' : 'editTargetGrade');
+  if (target) target.value = chks.join(',');
+}
 
 async function submitAddCourse(e) {
   e.preventDefault();
+  updateGradeHidden('add');
   const fee = parseInt(document.getElementById('addTuitionFee').value) || 0;
-  const costFacility = parseInt(document.getElementById('addCostFacility').value) || Math.round(fee * 0.2);
+  const costFacility = parseInt(document.getElementById('addCostFacility').value) || 0;
 
   const payload = {
     schoolId: SCHOOL_SN,
@@ -1167,68 +1482,465 @@ async function submitAddCourse(e) {
     neulbomType: document.getElementById('addNeulbomType').value,
     title: document.getElementById('addTitle').value.trim(),
     instructor: document.getElementById('addInstructor').value.trim(),
-    targetGrade: document.getElementById('addTargetGrade').value.trim(),
-    capacity: document.getElementById('addCapacity').value,
-    waitingCapacity: document.getElementById('addWaitingCapacity').value,
-    totalHours: document.getElementById('addTotalHours').value,
+    targetGrade: document.getElementById('addTargetGrade').value || '1,2,3',
+    capacity: parseInt(document.getElementById('addCapacity').value) || 20,
+    waitingCapacity: parseInt(document.getElementById('addWaitingCapacity').value) || 3,
+    totalHours: parseInt(document.getElementById('addTotalHours').value) || 12,
+    period: `${document.getElementById('addSdate').value}~${document.getElementById('addEdate').value}`,
     tuitionFee: fee,
     fee: fee,
     costFacility: costFacility,
     costInstructor: fee - costFacility,
-    textbookFee: document.getElementById('addTextbookFee').value || 0,
-    materialFee: document.getElementById('addMaterialFee').value || 0,
+    textbookFee: parseInt(document.getElementById('addTextbookFee').value) || 0,
+    materialFee: parseInt(document.getElementById('addMaterialFee').value) || 0,
     classroom: document.getElementById('addClassroom').value.trim(),
     dayOfWeek: document.getElementById('addDayOfWeek').value.trim(),
     scheduleTime: document.getElementById('addScheduleTime').value.trim(),
     allowTimeConflict: document.getElementById('addAllowConflict').checked,
-    noSameTeacher: document.getElementById('addNoSameTeacher').checked
+    status: 'OUTPUT',
+    feeReceipt: 'Y',
+    teacherClosed: 'N',
+    teacherEditable: 'Y'
   };
 
-  const res = await fetch('/api/af/ad_lec/create', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  });
-  const data = await res.json();
-  alert(data.message);
-  closeAddModal();
+  try {
+    const res = await fetch('/api/af/ad_lec/create', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    alert(data.message || '강좌가 성공적으로 등록되었습니다.');
+    closeAddModal();
+    loadLectures();
+  } catch (err) {
+    alert('강좌 등록 중 오류가 발생했습니다.');
+  }
+}
+
+// 2. 강좌 일괄입력 모달 (02_강좌_일괄입력)
+function openBatchUploadModal() {
+  const modal = document.getElementById('batchUploadModal');
+  if (modal) {
+    modal.style.display = 'flex';
+    initBatchUploadRows();
+  }
+}
+function closeBatchUploadModal() {
+  const modal = document.getElementById('batchUploadModal');
+  if (modal) modal.style.display = 'none';
+}
+
+function initBatchUploadRows() {
+  const tbody = document.getElementById('batchUploadTbody');
+  if (!tbody) return;
+  tbody.innerHTML = `
+    <tr>
+      <td>1</td>
+      <td><select class="bu-neulbom" style="font-size:11px;"><option value="방과후">방과후</option><option value="맞춤형">맞춤형</option><option value="돌봄">돌봄</option></select></td>
+      <td><input type="text" class="bu-title" placeholder="강좌명 (예: 바둑 1부)" style="width:100%; padding:2px 4px; font-size:11px;"></td>
+      <td><input type="text" class="bu-inst" placeholder="강사명" style="width:100%; padding:2px 4px; font-size:11px;"></td>
+      <td><input type="text" class="bu-grade" value="1,2,3" style="width:100%; padding:2px 4px; font-size:11px; text-align:center;"></td>
+      <td><input type="text" class="bu-day" value="월,수" style="width:100%; padding:2px 4px; font-size:11px; text-align:center;"></td>
+      <td><input type="text" class="bu-time" value="14:00~14:50" style="width:100%; padding:2px 4px; font-size:11px; text-align:center;"></td>
+      <td><input type="number" class="bu-cap" value="20" style="width:100%; padding:2px 4px; font-size:11px; text-align:center;"></td>
+      <td><input type="number" class="bu-fee" value="35000" style="width:100%; padding:2px 4px; font-size:11px; text-align:right;"></td>
+      <td><a href="javascript:void(0)" onclick="this.closest('tr').remove()" style="color:#d9534f;"><i class="fa-regular fa-trash-can"></i></a></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><select class="bu-neulbom" style="font-size:11px;"><option value="맞춤형">맞춤형</option><option value="방과후">방과후</option><option value="돌봄">돌봄</option></select></td>
+      <td><input type="text" class="bu-title" placeholder="강좌명 (예: 놀이체육)" style="width:100%; padding:2px 4px; font-size:11px;"></td>
+      <td><input type="text" class="bu-inst" placeholder="강사명" style="width:100%; padding:2px 4px; font-size:11px;"></td>
+      <td><input type="text" class="bu-grade" value="1,2" style="width:100%; padding:2px 4px; font-size:11px; text-align:center;"></td>
+      <td><input type="text" class="bu-day" value="화,목" style="width:100%; padding:2px 4px; font-size:11px; text-align:center;"></td>
+      <td><input type="text" class="bu-time" value="13:20~14:10" style="width:100%; padding:2px 4px; font-size:11px; text-align:center;"></td>
+      <td><input type="number" class="bu-cap" value="20" style="width:100%; padding:2px 4px; font-size:11px; text-align:center;"></td>
+      <td><input type="number" class="bu-fee" value="0" style="width:100%; padding:2px 4px; font-size:11px; text-align:right;"></td>
+      <td><a href="javascript:void(0)" onclick="this.closest('tr').remove()" style="color:#d9534f;"><i class="fa-regular fa-trash-can"></i></a></td>
+    </tr>
+  `;
+}
+
+function addBatchUploadRow() {
+  const tbody = document.getElementById('batchUploadTbody');
+  if (!tbody) return;
+  const count = tbody.querySelectorAll('tr').length + 1;
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td>${count}</td>
+    <td><select class="bu-neulbom" style="font-size:11px;"><option value="방과후">방과후</option><option value="맞춤형">맞춤형</option><option value="돌봄">돌봄</option></select></td>
+    <td><input type="text" class="bu-title" placeholder="강좌명" style="width:100%; padding:2px 4px; font-size:11px;"></td>
+    <td><input type="text" class="bu-inst" placeholder="강사명" style="width:100%; padding:2px 4px; font-size:11px;"></td>
+    <td><input type="text" class="bu-grade" value="1,2,3" style="width:100%; padding:2px 4px; font-size:11px; text-align:center;"></td>
+    <td><input type="text" class="bu-day" value="월" style="width:100%; padding:2px 4px; font-size:11px; text-align:center;"></td>
+    <td><input type="text" class="bu-time" value="14:00~14:50" style="width:100%; padding:2px 4px; font-size:11px; text-align:center;"></td>
+    <td><input type="number" class="bu-cap" value="20" style="width:100%; padding:2px 4px; font-size:11px; text-align:center;"></td>
+    <td><input type="number" class="bu-fee" value="35000" style="width:100%; padding:2px 4px; font-size:11px; text-align:right;"></td>
+    <td><a href="javascript:void(0)" onclick="this.closest('tr').remove()" style="color:#d9534f;"><i class="fa-regular fa-trash-can"></i></a></td>
+  `;
+  tbody.appendChild(tr);
+}
+
+function downloadLectureTemplate() {
+  const csvContent = 'data:text/csv;charset=utf-8,\uFEFF' + 
+    '강좌구분,늘봄과정,강좌명,강사명,대상학년,요일,시간,정원,수강료\n' +
+    '26년 9월,방과후,창의로봇 1부,최정호,"1,2,3","월,수",15:00~15:50,20,40000\n' +
+    '26년 9월,맞춤형,놀이체육,김강사,"1,2","화,목",13:20~14:10,20,0\n' +
+    '26년 9월,돌봄,(월)돌봄 1부,돌봄전담사,"1,2,3",월,14:00~14:50,20,0\n';
+  const encodedUri = encodeURI(csvContent);
+  const link = document.createElement('a');
+  link.setAttribute('href', encodedUri);
+  link.setAttribute('download', '강좌_일괄입력_표준서식.csv');
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+async function executeBatchUpload() {
+  const category = document.getElementById('batchUploadCategory').value;
+  const rows = document.querySelectorAll('#batchUploadTbody tr');
+  let addedCount = 0;
+
+  for (const r of rows) {
+    const title = r.querySelector('.bu-title') ? r.querySelector('.bu-title').value.trim() : '';
+    if (!title) continue;
+    const neulbomType = r.querySelector('.bu-neulbom') ? r.querySelector('.bu-neulbom').value : '방과후';
+    const instructor = r.querySelector('.bu-inst') ? r.querySelector('.bu-inst').value.trim() : '강사';
+    const grade = r.querySelector('.bu-grade') ? r.querySelector('.bu-grade').value.trim() : '1,2,3';
+    const day = r.querySelector('.bu-day') ? r.querySelector('.bu-day').value.trim() : '월';
+    const time = r.querySelector('.bu-time') ? r.querySelector('.bu-time').value.trim() : '14:00~14:50';
+    const cap = parseInt(r.querySelector('.bu-cap').value) || 20;
+    const fee = parseInt(r.querySelector('.bu-fee').value) || 0;
+
+    const payload = {
+      schoolId: SCHOOL_SN,
+      category: category,
+      neulbomType: neulbomType,
+      title: title,
+      instructor: instructor,
+      targetGrade: grade,
+      capacity: cap,
+      waitingCapacity: 3,
+      dayOfWeek: day,
+      scheduleTime: time,
+      tuitionFee: fee,
+      fee: fee,
+      status: 'OUTPUT',
+      feeReceipt: 'Y',
+      period: '2026-09-01~2026-09-30'
+    };
+
+    await fetch('/api/af/ad_lec/create', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    addedCount++;
+  }
+
+  alert(`총 ${addedCount}개 강좌가 성공적으로 일괄 등록되었습니다.`);
+  closeBatchUploadModal();
   loadLectures();
 }
 
-async function submitBatchCopy(e) {
-  e.preventDefault();
-  const payload = {
-    schoolId: SCHOOL_SN,
-    sourceCategory: document.getElementById('copySourceCategory').value,
-    targetCategory: document.getElementById('copyTargetCategory').value.trim(),
-    copyFees: document.getElementById('copyFeesCheck').checked
-  };
-  const res = await fetch('/api/af/ad_lec/batch-copy', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  });
-  const data = await res.json();
-  alert(data.message);
+// 3. 강좌 일괄수정 모달 (03_강좌_일괄수정)
+function openBatchEditModal() {
+  const modal = document.getElementById('batchEditModal');
+  if (!modal) return;
+  modal.style.display = 'flex';
+  
+  const tbody = document.getElementById('bulkEditTbody');
+  if (tbody) {
+    const list = cachedLectures || [];
+    tbody.innerHTML = list.map((lec, idx) => `
+      <tr>
+        <td><input type="checkbox" class="bulk-edit-chk" value="${lec.id}" onchange="updateBulkEditCount()"></td>
+        <td>${list.length - idx}</td>
+        <td>${lec.category || ''}</td>
+        <td style="text-align:left; padding-left:8px;"><strong>${lec.title}</strong></td>
+        <td>${lec.instructor || '돌봄전담사'}</td>
+        <td>${lec.capacity || 20}</td>
+        <td>${(lec.tuitionFee || 0).toLocaleString()}원</td>
+        <td><span class="badge badge-success" style="background:#d9534f; color:#fff; font-size:10px; padding:1px 4px; border-radius:2px;">${lec.status === 'CLOSED' ? '종료' : '출력'}</span></td>
+      </tr>
+    `).join('');
+    updateBulkEditCount();
+  }
+}
+function closeBatchEditModal() {
+  const modal = document.getElementById('batchEditModal');
+  if (modal) modal.style.display = 'none';
+}
+
+function toggleBulkEditSelectAll(master) {
+  const chks = document.querySelectorAll('.bulk-edit-chk');
+  chks.forEach(c => c.checked = master.checked);
+  updateBulkEditCount();
+}
+
+function updateBulkEditCount() {
+  const count = document.querySelectorAll('.bulk-edit-chk:checked').length;
+  const countEl = document.getElementById('bulkEditSelectedCount');
+  if (countEl) countEl.innerText = count;
+}
+
+async function executeBatchEdit() {
+  const checkedBoxes = Array.from(document.querySelectorAll('.bulk-edit-chk:checked')).map(c => c.value);
+  if (checkedBoxes.length === 0) {
+    alert('일괄 수정할 대상 강좌를 1개 이상 선택해 주세요.');
+    return;
+  }
+
+  const updates = {};
+  if (document.getElementById('chkEditCategory').checked) {
+    updates.category = document.getElementById('bulkEditCategoryVal').value;
+  }
+  if (document.getElementById('chkEditDate').checked) {
+    updates.period = `${document.getElementById('bulkEditSdate').value}~${document.getElementById('bulkEditEdate').value}`;
+  }
+  if (document.getElementById('chkEditInstructor').checked) {
+    updates.instructor = document.getElementById('bulkEditInstructorVal').value.trim();
+    updates.teacherName = updates.instructor;
+  }
+  if (document.getElementById('chkEditCapacity').checked) {
+    updates.capacity = parseInt(document.getElementById('bulkEditCapacityVal').value) || 20;
+    updates.waitingCapacity = parseInt(document.getElementById('bulkEditWaitVal').value) || 3;
+  }
+  if (document.getElementById('chkEditTuition').checked) {
+    const fee = parseInt(document.getElementById('bulkEditTuitionVal').value) || 0;
+    updates.tuitionFee = fee;
+    updates.fee = fee;
+  }
+  if (document.getElementById('chkEditStatus').checked) {
+    updates.status = document.getElementById('bulkEditStatusVal').value;
+  }
+
+  if (Object.keys(updates).length === 0) {
+    alert('수정할 항목의 체크박스를 1개 이상 켜고 값을 입력해 주세요.');
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/af/ad_lec/bulk-update', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ courseIds: checkedBoxes, updates })
+    });
+    const data = await res.json();
+    alert(data.message || `${checkedBoxes.length}개 강좌가 일괄 수정되었습니다.`);
+    closeBatchEditModal();
+    loadLectures();
+  } catch (err) {
+    alert('일괄 수정 처리 중 오류가 발생했습니다.');
+  }
+}
+
+// 4. 강좌 일괄복사 모달 (04_강좌_일괄복사)
+function openBatchCopyModal() {
+  const modal = document.getElementById('batchCopyModal');
+  if (!modal) return;
+  modal.style.display = 'flex';
+  
+  const tbody = document.getElementById('batchCopyTbody');
+  if (tbody) {
+    const list = cachedLectures || [];
+    tbody.innerHTML = list.map((lec, idx) => `
+      <tr>
+        <td><input type="checkbox" class="batch-copy-chk" value="${lec.id}" checked></td>
+        <td>${list.length - idx}</td>
+        <td>${lec.category || ''}</td>
+        <td style="text-align:left; padding-left:8px;"><strong>${lec.title}</strong></td>
+        <td>${lec.instructor || '돌봄전담사'}</td>
+        <td>${lec.capacity || 20}</td>
+        <td>${(lec.tuitionFee || 0).toLocaleString()}원</td>
+      </tr>
+    `).join('');
+  }
+}
+function closeBatchCopyModal() {
+  const modal = document.getElementById('batchCopyModal');
+  if (modal) modal.style.display = 'none';
+}
+
+function toggleBatchCopySelectAll(master) {
+  const chks = document.querySelectorAll('.batch-copy-chk');
+  chks.forEach(c => c.checked = master.checked);
+}
+
+async function executeBatchCopySubmit() {
+  const targetCategory = document.getElementById('copyTargetCategory').value;
+  const checkedBoxes = Array.from(document.querySelectorAll('.batch-copy-chk:checked')).map(c => c.value);
+  if (checkedBoxes.length === 0) {
+    alert('복사할 강좌를 1개 이상 선택해 주세요.');
+    return;
+  }
+
+  let copiedCount = 0;
+  for (const id of checkedBoxes) {
+    const orig = cachedLectures.find(c => c.id === id);
+    if (!orig) continue;
+    const newCourse = {
+      ...orig,
+      id: 'lec_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+      code: String(Date.now()).slice(-7),
+      category: targetCategory,
+      applied: 0,
+      enrolledCount: 0,
+      waiting: 0,
+      waitingCount: 0
+    };
+    await fetch('/api/af/ad_lec/create', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newCourse)
+    });
+    copiedCount++;
+  }
+
+  alert(`총 ${copiedCount}개 강좌가 [${targetCategory}]으로 일괄 복사되었습니다.`);
   closeBatchCopyModal();
   loadLectures();
 }
 
-async function openRefundCalculator() {
-  const fee = prompt('수강료 (원)을 입력하세요:', '60000');
-  const totalDays = prompt('전체 수업 일수 (총시수 기준):', '12');
-  const attendedDays = prompt('수강한 일수:', '3');
-  if (fee && totalDays && attendedDays) {
-    const res = await fetch('/api/refunds/calculate', {
-      method: 'POST',
+// 5. 강좌 통계 모달 (05_강좌_통계)
+async function openLectureStatsModal() {
+  const modal = document.getElementById('lecStatsModal');
+  if (!modal) return;
+  modal.style.display = 'flex';
+
+  try {
+    const res = await fetch('/api/af/ad_lec/stats');
+    const data = await res.json();
+    const tbody = document.getElementById('lecStatsTbody');
+    if (tbody && data.stats) {
+      tbody.innerHTML = data.stats.map(st => `
+        <tr style="height:32px; border-bottom:1px solid #eee;">
+          <td style="font-weight:bold; background:#f8fafc;">${st.category}</td>
+          <td>${st.outputCount}</td>
+          <td>${st.waitingCount}</td>
+          <td>${st.closedCount}</td>
+          <td style="font-weight:bold; color:#1e40af;">${st.total}</td>
+          <td>${st.totalCapacity}명</td>
+          <td style="color:#059669; font-weight:bold;">${st.totalApplied}명</td>
+          <td>0명</td>
+          <td>${st.totalCapacity > 0 ? Math.round((st.totalApplied / st.totalCapacity) * 100) : 0}%</td>
+          <td><span style="color:#16a34a; font-weight:bold;">출력 (${st.total})</span></td>
+          <td><span style="color:#d9534f;">-</span></td>
+        </tr>
+      `).join('');
+    }
+  } catch (e) {
+    console.error('Stats load error:', e);
+  }
+}
+function closeLecStatsModal() {
+  const modal = document.getElementById('lecStatsModal');
+  if (modal) modal.style.display = 'none';
+}
+
+// 6. 강좌 단건 상세 수정 모달 (09_강좌_상세수정화면)
+function openEditModal(courseId) {
+  const course = cachedLectures.find(c => c.id === courseId || c.code === courseId);
+  if (!course) return;
+
+  const modal = document.getElementById('editCourseModal');
+  if (!modal) return;
+
+  document.getElementById('editCourseId').value = course.id;
+  document.getElementById('editCategory').value = course.category || '26년 9월';
+  document.getElementById('editNeulbomType').value = course.neulbomType || '방과후';
+  document.getElementById('editTitle').value = course.title || '';
+  document.getElementById('editInstructor').value = course.instructor || course.teacherName || '';
+  document.getElementById('editClassroom').value = course.classroom || course.location || '';
+  document.getElementById('editDayOfWeek').value = course.dayOfWeek || '금';
+  document.getElementById('editScheduleTime').value = course.scheduleTime || '14:00~14:50';
+  document.getElementById('editTotalHours').value = course.totalHours || 12;
+  document.getElementById('editCapacity').value = course.capacity || 20;
+  document.getElementById('editWaitingCapacity').value = course.waitingCapacity || 3;
+  
+  const periodParts = (course.period || '2026-09-01~2026-09-30').split('~');
+  document.getElementById('editSdate').value = periodParts[0] || '2026-09-01';
+  document.getElementById('editEdate').value = periodParts[1] || '2026-09-30';
+
+  document.getElementById('editTuitionFee').value = course.tuitionFee || 0;
+  document.getElementById('editStatus').value = course.status || 'OUTPUT';
+  document.getElementById('editTextbookFee').value = course.textbookFee || 0;
+  document.getElementById('editMaterialFee').value = course.materialFee || 0;
+  document.getElementById('editAllowConflict').checked = !!course.allowTimeConflict;
+
+  // Grade Checkboxes
+  const grades = (course.targetGrade || '1,2,3').split(',');
+  document.querySelectorAll('.grade-chk-edit').forEach(chk => {
+    chk.checked = grades.includes(chk.value);
+  });
+  updateGradeHidden('edit');
+
+  modal.style.display = 'flex';
+}
+function closeEditCourseModal() {
+  const modal = document.getElementById('editCourseModal');
+  if (modal) modal.style.display = 'none';
+}
+
+async function submitEditCourse(e) {
+  e.preventDefault();
+  updateGradeHidden('edit');
+  const courseId = document.getElementById('editCourseId').value;
+  const fee = parseInt(document.getElementById('editTuitionFee').value) || 0;
+
+  const payload = {
+    category: document.getElementById('editCategory').value,
+    neulbomType: document.getElementById('editNeulbomType').value,
+    title: document.getElementById('editTitle').value.trim(),
+    instructor: document.getElementById('editInstructor').value.trim(),
+    teacherName: document.getElementById('editInstructor').value.trim(),
+    targetGrade: document.getElementById('editTargetGrade').value || '1,2,3',
+    capacity: parseInt(document.getElementById('editCapacity').value) || 20,
+    waitingCapacity: parseInt(document.getElementById('editWaitingCapacity').value) || 3,
+    totalHours: parseInt(document.getElementById('editTotalHours').value) || 12,
+    period: `${document.getElementById('editSdate').value}~${document.getElementById('editEdate').value}`,
+    tuitionFee: fee,
+    fee: fee,
+    textbookFee: parseInt(document.getElementById('editTextbookFee').value) || 0,
+    materialFee: parseInt(document.getElementById('editMaterialFee').value) || 0,
+    classroom: document.getElementById('editClassroom').value.trim(),
+    dayOfWeek: document.getElementById('editDayOfWeek').value.trim(),
+    scheduleTime: document.getElementById('editScheduleTime').value.trim(),
+    allowTimeConflict: document.getElementById('editAllowConflict').checked,
+    status: document.getElementById('editStatus').value
+  };
+
+  try {
+    const res = await fetch(`/api/af/ad_lec/update/${courseId}`, {
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tuitionFee: fee, totalDays, attendedDays })
+      body: JSON.stringify(payload)
     });
     const data = await res.json();
-    alert(data.message);
+    alert(data.message || '강좌 정보가 성공적으로 수정되었습니다.');
+    closeEditCourseModal();
+    loadLectures();
+  } catch (err) {
+    alert('강좌 수정 중 오류가 발생했습니다.');
   }
 }
 
+async function deleteCurrentEditCourse() {
+  const courseId = document.getElementById('editCourseId').value;
+  const courseTitle = document.getElementById('editTitle').value;
+  if (!confirm(`[${courseTitle}] 강좌를 정말 삭제하시겠습니까?`)) return;
+
+  try {
+    const res = await fetch(`/api/af/ad_lec/delete/${courseId}`, { method: 'DELETE' });
+    const data = await res.json();
+    alert(data.message || '강좌가 삭제되었습니다.');
+    closeEditCourseModal();
+    loadLectures();
+  } catch (err) {
+    alert('삭제 처리 중 오류가 발생했습니다.');
+  }
+}
 
 async function loadFaqList() {
   try {
@@ -2059,3 +2771,208 @@ window.handleAfAdminInfoSave = handleAfAdminInfoSave;
 window.handleAfUserLogout = handleAfUserLogout;
 window.openEditModal = openEditModal;
 window.deleteCourse = deleteCourse;
+
+// ==================== 강좌등록 패널 인터랙션 ====================
+function toggleAllPanelGrade(master) {
+  const isChecked = master.checked;
+  document.querySelectorAll('.p-grade-chk').forEach(chk => chk.checked = isChecked);
+}
+
+function chkPanelLecPay(obj) {
+  const filterNum = (str) => (!str ? '0' : ('' + str).replace(/[^0-9]/g, '') || '0');
+  const commaSplit = (num) => (parseInt(num, 10) || 0).toLocaleString();
+
+  const payVal = parseInt(filterNum($('#p_lec_pay').val()), 10) || 0;
+  const useVal = parseInt(filterNum($('#p_lec_use_cost').val()), 10) || 0;
+
+  $('#p_lec_pay').val(commaSplit(payVal));
+  $('#p_lec_use_cost').val(commaSplit(useVal));
+
+  if (useVal > payVal) {
+    $('#p_lec_use_cost').val('0');
+    alert('수용비 : 수강료보다 클 수 없습니다.');
+    $('#p_lec_tea_fee').val(commaSplit(payVal));
+    return;
+  }
+  $('#p_lec_tea_fee').val(commaSplit(payVal - useVal));
+}
+
+function addPanelFile() {
+  const $box = $('#p_file_box');
+  const $row = $(
+    '<div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">' +
+      '<input type="file" style="font-size:12px;">' +
+      '<button type="button" class="btn btn-default btn-xs" onclick="$(this).parent().remove()" style="color:#d9534f;">[삭제]</button>' +
+    '</div>'
+  );
+  $box.append($row);
+}
+
+function openPanelLecTimeModal() {
+  if (typeof openLecTimeWin === 'function') {
+    openLecTimeWin();
+  } else {
+    const time = prompt('강의시간을 입력하세요 (예: 월,수 13:00~13:40):', '월 1부 (13:00~13:40)');
+    if (time) {
+      $('#p_lec_time_').val(time);
+    }
+  }
+}
+
+async function handlePanelCourseSubmit(e) {
+  if (e) e.preventDefault();
+  const filterNum = (str) => (!str ? 0 : parseInt(('' + str).replace(/[^0-9]/g, ''), 10) || 0);
+
+  const title = $('#p_lec_name').val().trim();
+  const category = $('#p_lec_div').val();
+  const neulbomType = $('#p_lec_pro_type').val();
+  const instructor = $('#p_tea_id').val().trim();
+  const assistantInstructor = $('#p_tea_id1').val().trim();
+
+  const selectedGrades = [];
+  $('.p-grade-chk:checked').each(function() {
+    selectedGrades.push($(this).val());
+  });
+
+  const scheduleTime = $('#p_lec_time_').val().trim();
+  const capacity = filterNum($('#p_lec_max_sin').val());
+  const waitingCapacity = filterNum($('#p_lec_max_wait').val());
+  const sdate = $('#p_lec_sdate').val().trim();
+  const edate = $('#p_lec_edate').val().trim();
+  const totalHours = filterNum($('#p_lec_tot_sisu').val());
+  const classroom = $('#p_lec_room').val().trim() || $('#p_lec_room_sel').val() || '후관1층 늘봄프로그램실';
+
+  const fee = filterNum($('#p_lec_pay').val());
+  const costFacility = filterNum($('#p_lec_use_cost').val());
+  const textbookFee = filterNum($('#p_lec_pay_book').val());
+  const materialFee = filterNum($('#p_lec_pay_item').val());
+  const content = $('#p_lec_content').val();
+
+  if (!title) { alert('강좌명을 입력하세요.'); return false; }
+  if (!category) { alert('강좌구분을 선택하세요.'); return false; }
+  if (!neulbomType) { alert('늘봄과정을 선택하세요.'); return false; }
+  if (!instructor) { alert('강사ID를 입력하세요.'); return false; }
+  if (selectedGrades.length === 0) { alert('대상학년을 최소 1개 이상 선택하세요.'); return false; }
+  if (!scheduleTime) { alert('강의시간을 입력하세요.'); return false; }
+  if (capacity <= 0) { alert('정원을 1명 이상 입력하세요.'); return false; }
+  if (!sdate || !edate) { alert('운영기간 시작일과 종료일을 입력하세요.'); return false; }
+
+  const payload = {
+    schoolId: SCHOOL_SN || '3267',
+    category,
+    neulbomType,
+    title,
+    instructor,
+    assistantInstructor,
+    targetGrade: selectedGrades.join(','),
+    scheduleTime,
+    capacity,
+    waitingCapacity,
+    period: sdate + ' ~ ' + edate,
+    totalHours,
+    classroom,
+    tuitionFee: fee,
+    fee,
+    costFacility,
+    costInstructor: fee - costFacility,
+    textbookFee,
+    materialFee,
+    content,
+    feeReceipt: $('#p_lec_pay_view').is(':checked') ? 'Y' : 'N',
+    teacherClosed: $('#p_lec_tea_finish').is(':checked') ? 'Y' : 'N',
+    teacherEditable: $('#p_lec_tea_edit').is(':checked') ? 'Y' : 'N',
+    refundClosed: $('#p_refund_status').is(':checked') ? 'Y' : 'N',
+    status: $('input[name="p_lec_status"]:checked').val() === '1' ? 'OUTPUT' : ($('input[name="p_lec_status"]:checked').val() === '0' ? 'WAITING' : 'CLOSED')
+  };
+
+  try {
+    const res = await fetch('/api/af/ad_lec/create', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (res.ok && data.success) {
+      alert(data.message || '강좌가 성공적으로 등록되었습니다.');
+      switchSubmodelView(null, 'ad_lec_lists', '/af/ad_lec/lists/sn/' + SCHOOL_SN);
+      loadLectures();
+    } else {
+      alert(data.message || data.error || '등록 실패');
+    }
+  } catch(err) {
+    alert('서버 통신 오류');
+  }
+  return false;
+}
+
+window.toggleAllPanelGrade = toggleAllPanelGrade;
+window.chkPanelLecPay = chkPanelLecPay;
+window.addPanelFile = addPanelFile;
+window.openPanelLecTimeModal = openPanelLecTimeModal;
+window.handlePanelCourseSubmit = handlePanelCourseSubmit;
+
+// ==================== 강좌 일괄입력 패널 인터랙션 ====================
+async function handlePanelBatchInputSubmit(e) {
+  if (e) e.preventDefault();
+  const divVal = document.getElementById('p_input_lec_div').value;
+  const fileInput = document.getElementById('p_input_userfile');
+
+  if (!divVal) {
+    alert('강좌구분 : 필수항목입니다.');
+    document.getElementById('p_input_lec_div').focus();
+    return false;
+  }
+
+  if (!fileInput.files || fileInput.files.length === 0) {
+    alert('엑셀 데이터 파일 : 필수항목입니다.');
+    fileInput.focus();
+    return false;
+  }
+
+  const file = fileInput.files[0];
+  if (file.size > 1024 * 1024) {
+    alert('엑셀 데이터 파일 : 용량이 너무 큰 엑셀 데이터는 입력할 수 없습니다(1M 이하만 가능)');
+    return false;
+  }
+
+  if (!confirm('기존 데이터에 추가로 일괄입력 하시겠습니까?')) {
+    return false;
+  }
+
+  // 텍스트(CSV)인 경우 클라이언트에서 파싱하여 전달하거나 FormData로 전송
+  const reader = new FileReader();
+  reader.onload = async function(evt) {
+    const csvContent = evt.target.result;
+    try {
+      const res = await fetch('/api/af/ad_lec/batch-upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          schoolId: SCHOOL_SN || '3267',
+          lec_div: divVal,
+          csvText: csvContent
+        })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        alert(data.message || '강좌가 성공적으로 일괄 등록되었습니다.');
+        switchSubmodelView(null, 'ad_lec_lists', '/af/ad_lec/lists/sn/' + SCHOOL_SN);
+        loadLectures();
+      } else {
+        alert(data.message || data.error || '일괄입력 처리 중 오류가 발생했습니다.');
+      }
+    } catch(err) {
+      alert('서버 통신 중 오류가 발생했습니다.');
+    }
+  };
+  reader.onerror = function() {
+    alert('파일을 읽는 중 오류가 발생했습니다.');
+  };
+  reader.readAsText(file, 'utf-8');
+
+  return false;
+}
+
+window.handlePanelBatchInputSubmit = handlePanelBatchInputSubmit;
+
+

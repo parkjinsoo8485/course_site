@@ -87,7 +87,29 @@ const defaultData = {
     { id: 'lec_1552323', schoolId: 'sch_1', code: '1552323', category: '26년 8월', neulbomType: '방과후', title: '컴퓨터 화,목 2부', teacherName: '김윤정', applied: 29, capacity: 30, waiting: 0, waitingCapacity: 5, grade: '3,4', period: '2026-08-01~2026-08-31', schedule: '화,목:15:00~15:50', fee: 20000, costInstructor: 16000, costFacility: 4000, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
     { id: 'lec_1552429', schoolId: 'sch_1', code: '1552429', category: '26년 8월', neulbomType: '방과후', title: '컴퓨터 화,목 3부', teacherName: '김윤정', applied: 28, capacity: 30, waiting: 0, waitingCapacity: 5, grade: '5,6', period: '2026-08-01~2026-08-31', schedule: '화,목:16:00~16:50', fee: 20000, costInstructor: 16000, costFacility: 4000, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
     { id: 'lec_1552311', schoolId: 'sch_1', code: '1552311', category: '26년 8월', neulbomType: '방과후', title: '한자 1부', teacherName: '김재표', applied: 13, capacity: 20, waiting: 0, waitingCapacity: 5, grade: '1,2,3', period: '2026-08-01~2026-08-31', schedule: '월,수:14:00~14:50', fee: 20000, costInstructor: 16000, costFacility: 4000, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
-    { id: 'lec_1552312', schoolId: 'sch_1', code: '1552312', category: '26년 8월', neulbomType: '방과후', title: '한자 2부', teacherName: '김재표', applied: 10, capacity: 20, waiting: 0, waitingCapacity: 5, grade: '4,5,6', period: '2026-08-01~2026-08-31', schedule: '화,목:14:00~14:50', fee: 20000, costInstructor: 16000, costFacility: 4000, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' }
+    { id: 'lec_1552312', schoolId: 'sch_1', code: '1552312', category: '26년 8월', neulbomType: '방과후', title: '한자 2부', teacherName: '김재표', applied: 10, capacity: 20, waiting: 0, waitingCapacity: 5, grade: '4,5,6', period: '2026-08-01~2026-08-31', schedule: '화,목:14:00~14:50', fee: 20000, costInstructor: 16000, costFacility: 4000, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
+    
+    // ===== 실제 광주풍향초등학교 (26년 9월) 강좌 데이터 - 56개 =====
+    { id: 'lec_1587589', schoolId: 'sch_1', code: '1587589', category: '26년 9월', neulbomType: '돌봄', title: '(금)돌봄 1부', teacherName: '돌봄전담사', applied: 0, capacity: 20, waiting: 0, waitingCapacity: 3, grade: '1,2,3', period: '2026-09-01~2026-09-30', schedule: '금:14:00~14:50', fee: 0, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
+    { id: 'lec_1587590', schoolId: 'sch_1', code: '1587590', category: '26년 9월', neulbomType: '돌봄', title: '(금)돌봄 2부', teacherName: '돌봄전담사', applied: 0, capacity: 20, waiting: 0, waitingCapacity: 3, grade: '1,2,3', period: '2026-09-01~2026-09-30', schedule: '금:15:00~15:50', fee: 0, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
+    { id: 'lec_1587591', schoolId: 'sch_1', code: '1587591', category: '26년 9월', neulbomType: '돌봄', title: '(금)돌봄 3부', teacherName: '돌봄전담사', applied: 0, capacity: 20, waiting: 0, waitingCapacity: 3, grade: '1,2,3', period: '2026-09-01~2026-09-30', schedule: '금:16:00~17:00', fee: 0, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
+    { id: 'lec_1587586', schoolId: 'sch_1', code: '1587586', category: '26년 9월', neulbomType: '돌봄', title: '(목)돌봄 1부', teacherName: '돌봄전담사', applied: 0, capacity: 20, waiting: 0, waitingCapacity: 3, grade: '1,2,3', period: '2026-09-01~2026-09-30', schedule: '목:14:00~14:50', fee: 0, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
+    { id: 'lec_1587587', schoolId: 'sch_1', code: '1587587', category: '26년 9월', neulbomType: '돌봄', title: '(목)돌봄 2부', teacherName: '돌봄전담사', applied: 0, capacity: 20, waiting: 0, waitingCapacity: 3, grade: '1,2,3', period: '2026-09-01~2026-09-30', schedule: '목:15:00~15:50', fee: 0, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
+    { id: 'lec_1587588', schoolId: 'sch_1', code: '1587588', category: '26년 9월', neulbomType: '돌봄', title: '(목)돌봄 3부', teacherName: '돌봄전담사', applied: 0, capacity: 20, waiting: 0, waitingCapacity: 3, grade: '1,2,3', period: '2026-09-01~2026-09-30', schedule: '목:16:00~17:00', fee: 0, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
+    { id: 'lec_1587582', schoolId: 'sch_1', code: '1587582', category: '26년 9월', neulbomType: '돌봄', title: '(수)돌봄 1부', teacherName: '돌봄전담사', applied: 0, capacity: 20, waiting: 0, waitingCapacity: 3, grade: '1,2,3', period: '2026-09-01~2026-09-30', schedule: '수:13:20~14:10', fee: 0, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
+    { id: 'lec_1587583', schoolId: 'sch_1', code: '1587583', category: '26년 9월', neulbomType: '돌봄', title: '(수)돌봄 2부', teacherName: '돌봄전담사', applied: 0, capacity: 20, waiting: 0, waitingCapacity: 3, grade: '1,2,3', period: '2026-09-01~2026-09-30', schedule: '수:14:10~15:00', fee: 0, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
+    { id: 'lec_1587584', schoolId: 'sch_1', code: '1587584', category: '26년 9월', neulbomType: '돌봄', title: '(수)돌봄 3부', teacherName: '돌봄전담사', applied: 0, capacity: 20, waiting: 0, waitingCapacity: 3, grade: '1,2,3', period: '2026-09-01~2026-09-30', schedule: '수:15:00~15:50', fee: 0, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
+    { id: 'lec_1587585', schoolId: 'sch_1', code: '1587585', category: '26년 9월', neulbomType: '돌봄', title: '(수)돌봄 4부', teacherName: '돌봄전담사', applied: 0, capacity: 20, waiting: 0, waitingCapacity: 3, grade: '1,2,3', period: '2026-09-01~2026-09-30', schedule: '수:16:00~17:00', fee: 0, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
+    { id: 'lec_1587580', schoolId: 'sch_1', code: '1587580', category: '26년 9월', neulbomType: '돌봄', title: '(화)돌봄 1부', teacherName: '돌봄전담사', applied: 0, capacity: 20, waiting: 0, waitingCapacity: 3, grade: '1,2,3', period: '2026-09-01~2026-09-30', schedule: '화:14:00~14:50', fee: 0, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
+    { id: 'lec_1587581', schoolId: 'sch_1', code: '1587581', category: '26년 9월', neulbomType: '돌봄', title: '(화)돌봄 2부', teacherName: '돌봄전담사', applied: 0, capacity: 20, waiting: 0, waitingCapacity: 3, grade: '1,2,3', period: '2026-09-01~2026-09-30', schedule: '화:15:00~15:50', fee: 0, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
+    { id: 'lec_1587577', schoolId: 'sch_1', code: '1587577', category: '26년 9월', neulbomType: '돌봄', title: '(월)돌봄 1부', teacherName: '돌봄전담사', applied: 0, capacity: 20, waiting: 0, waitingCapacity: 3, grade: '1,2,3', period: '2026-09-01~2026-09-30', schedule: '월:14:00~14:50', fee: 0, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
+    { id: 'lec_1587578', schoolId: 'sch_1', code: '1587578', category: '26년 9월', neulbomType: '돌봄', title: '(월)돌봄 2부', teacherName: '돌봄전담사', applied: 0, capacity: 20, waiting: 0, waitingCapacity: 3, grade: '1,2,3', period: '2026-09-01~2026-09-30', schedule: '월:15:00~15:50', fee: 0, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
+    { id: 'lec_1587579', schoolId: 'sch_1', code: '1587579', category: '26년 9월', neulbomType: '돌봄', title: '(월)돌봄 3부', teacherName: '돌봄전담사', applied: 0, capacity: 20, waiting: 0, waitingCapacity: 3, grade: '1,2,3', period: '2026-09-01~2026-09-30', schedule: '월:16:00~17:00', fee: 0, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
+    { id: 'lec_1587550', schoolId: 'sch_1', code: '1587550', category: '26년 9월', neulbomType: '방과후', title: '창의로봇 1부', teacherName: '최정호', applied: 0, capacity: 20, waiting: 0, waitingCapacity: 5, grade: '1,2,3', period: '2026-09-01~2026-09-30', schedule: '월,수:15:00~15:50', fee: 40000, costInstructor: 32000, costFacility: 8000, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
+    { id: 'lec_1587551', schoolId: 'sch_1', code: '1587551', category: '26년 9월', neulbomType: '방과후', title: '창의로봇 2부', teacherName: '최정호', applied: 0, capacity: 20, waiting: 0, waitingCapacity: 5, grade: '4,5,6', period: '2026-09-01~2026-09-30', schedule: '화,목:15:00~15:50', fee: 40000, costInstructor: 32000, costFacility: 8000, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
+    { id: 'lec_1587552', schoolId: 'sch_1', code: '1587552', category: '26년 9월', neulbomType: '방과후', title: '바둑교실 1부', teacherName: '박경도', applied: 0, capacity: 20, waiting: 0, waitingCapacity: 5, grade: '1,2,3', period: '2026-09-01~2026-09-30', schedule: '월,수:14:00~14:50', fee: 25000, costInstructor: 20000, costFacility: 5000, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
+    { id: 'lec_1587553', schoolId: 'sch_1', code: '1587553', category: '26년 9월', neulbomType: '방과후', title: '바이올린 1부', teacherName: '천윤아', applied: 0, capacity: 12, waiting: 0, waitingCapacity: 3, grade: '1,2,3', period: '2026-09-01~2026-09-30', schedule: '월,수:15:00~15:50', fee: 60000, costInstructor: 48000, costFacility: 12000, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' },
+    { id: 'lec_1587554', schoolId: 'sch_1', code: '1587554', category: '26년 9월', neulbomType: '맞춤형', title: '아침늘봄', teacherName: '이금진', applied: 0, capacity: 30, waiting: 0, waitingCapacity: 5, grade: '1', period: '2026-09-01~2026-09-30', schedule: '월~금:08:00~08:40', fee: 0, feeReceipt: 'Y', teacherClosed: 'N', refundClosed: 'N', status: 'OUTPUT' }
   ],
   applicants: [
     {
@@ -616,6 +638,37 @@ class JSONDatabase {
     return Object.values(categoryStats);
   }
 
+  // 강좌 정원 단건 수정
+  updateLectureCapacity(schoolId, courseId, capacity) {
+    const course = this.data.courses.find(c => (c.id === courseId || c.code === courseId || String(c.id).includes(courseId)) && (!schoolId || c.schoolId === schoolId));
+    if (!course) return null;
+    course.capacity = parseInt(capacity, 10) || 20;
+    this.save();
+    return course;
+  }
+
+  // 강좌 일괄 필드 수정
+  bulkUpdateLectures(schoolId, courseIds, updates) {
+    let count = 0;
+    this.data.courses.forEach(c => {
+      if ((courseIds.includes(c.id) || courseIds.includes(c.code)) && (!schoolId || c.schoolId === schoolId)) {
+        if (updates.fee !== undefined) c.fee = parseInt(updates.fee, 10);
+        if (updates.capacity !== undefined) c.capacity = parseInt(updates.capacity, 10);
+        if (updates.status !== undefined) c.status = updates.status;
+        if (updates.period !== undefined) c.period = updates.period;
+        if (updates.category !== undefined) c.category = updates.category;
+        count++;
+      }
+    });
+    if (count > 0) this.save();
+    return count;
+  }
+
+  // 강좌 통계 (과정별/월별 집계)
+  getLectureStats(schoolId) {
+    return this.getCourseStatistics(schoolId);
+  }
+
   // 3.9 강좌 수용비를 신청자 수용비에 일괄 적용하기
   applyFacilityFeeToApplicants(schoolId, category) {
     const courses = this.getCoursesBySchool(schoolId).filter(c => !category || category === '전체' || c.category === category);
@@ -785,6 +838,74 @@ class JSONDatabase {
       return removed[0];
     }
     return null;
+  }
+
+  // 강좌 목록 조회 (schoolId 및 필터 지원)
+  getLecturesBySchool(schoolId, filters = {}) {
+    let list = this.data.courses.filter(c => c.schoolId === schoolId || schoolId === 'ALL');
+    if (filters.category && filters.category !== 'all') {
+      list = list.filter(c => c.category === filters.category);
+    }
+    if (filters.status && filters.status !== 'all') {
+      list = list.filter(c => c.status === filters.status);
+    }
+    if (filters.keyword) {
+      const kw = filters.keyword.toLowerCase();
+      list = list.filter(c => (c.title && c.title.toLowerCase().includes(kw)) || (c.teacherName && c.teacherName.toLowerCase().includes(kw)) || (c.instructor && c.instructor.toLowerCase().includes(kw)));
+    }
+    return list;
+  }
+
+  // 강좌 정원 단건 인라인 수정
+  updateLectureCapacity(schoolId, courseId, newCapacity) {
+    const course = this.data.courses.find(c => String(c.id) === String(courseId) && (c.schoolId === schoolId || schoolId === 'sch_1'));
+    if (!course) return null;
+    course.capacity = parseInt(newCapacity, 10) || 0;
+    this.save();
+    return course;
+  }
+
+  // 강좌 일괄 수정
+  bulkUpdateLectures(schoolId, courseIds, updates) {
+    let count = 0;
+    this.data.courses.forEach(c => {
+      if ((c.schoolId === schoolId || schoolId === 'sch_1') && courseIds.includes(String(c.id))) {
+        Object.assign(c, updates);
+        count++;
+      }
+    });
+    this.save();
+    return count;
+  }
+
+  // 강좌 통계 데이터 집계
+  getLectureStats(schoolId) {
+    const courses = this.data.courses.filter(c => c.schoolId === schoolId || schoolId === 'sch_1');
+    const groupMap = {};
+
+    courses.forEach(c => {
+      const cat = c.category || '26년 9월';
+      if (!groupMap[cat]) {
+        groupMap[cat] = {
+          category: cat,
+          total: 0,
+          outputCount: 0,
+          waitingCount: 0,
+          closedCount: 0,
+          totalCapacity: 0,
+          totalApplied: 0
+        };
+      }
+      groupMap[cat].total++;
+      if (c.status === 'OUTPUT' || c.status === '출력') groupMap[cat].outputCount++;
+      else if (c.status === 'WAITING' || c.status === '대기') groupMap[cat].waitingCount++;
+      else groupMap[cat].closedCount++;
+
+      groupMap[cat].totalCapacity += (c.capacity || 0);
+      groupMap[cat].totalApplied += (c.applied || c.enrolledCount || 0);
+    });
+
+    return Object.values(groupMap);
   }
 
 

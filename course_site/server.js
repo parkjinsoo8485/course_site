@@ -21,6 +21,142 @@ app.use(helmet({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// ==================== 강좌관리 (ad_lec) 페이지 라우팅 매핑 ====================
+app.get(/^\/af\/ad_lec\/inputs/, (req, res) => {
+  // 강좌 일괄입력 공식 CSV 샘플 파일 다운로드
+  const sampleCsv = '\uFEFF' + [
+    '강좌구분,늘봄과정,중복제한그룹,강좌명,강사ID,보조강사ID,대상학년,강의시간,강의시간중복허용,정원,대기정원,운영시작일,운영종료일,총시수,강의실,수강료,수용비,교재비,재료비,내용',
+    '26년 9월,방과후,,창의로봇(초급),tea01,,1;2;3,월1부(13:00~13:40),N,20,5,2026-09-01,2026-09-30,16,본관2층 컴퓨터교실,30000,3000,10000,5000,로봇 기초 조립 및 코딩 수업',
+    '26년 9월,맞춤형,,신나는 미술놀이,tea02,,1;2,화1부(13:00~13:40),N,15,3,2026-09-01,2026-09-30,16,본관3층 늘봄프로그램실 1,25000,2500,5000,10000,다양한 미술 재료를 활용한 감성 표현',
+    '26년 9월,돌봄,,오후 돌봄교실,tea04,,1;2,월~금(13:00~17:00),Y,25,5,2026-09-01,2026-09-30,80,후관1층 돌봄교실,0,0,0,0,안전한 방과후 돌봄 및 독서 지도'
+  ].join('\n');
+
+  res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+  res.setHeader('Content-Disposition', 'attachment; filename="lecture_batch_sample.csv"');
+  return res.send(sampleCsv);
+});
+
+app.get(/^\/af\/ad_lec\/write/, (req, res, next) => {
+  if (req.path && req.path.includes('.') && !req.path.endsWith('.html')) {
+    return next();
+  }
+  return res.sendFile(path.join(__dirname, 'af', 'ad_lec', 'write', 'index.html'));
+});
+
+app.get(/^\/af\/ad_lec\/input/, (req, res, next) => {
+  if (req.path && req.path.includes('.') && !req.path.endsWith('.html')) {
+    return next();
+  }
+  return res.sendFile(path.join(__dirname, 'af', 'ad_lec', 'input', 'index.html'));
+});
+
+app.get([
+  /^\/af\/ad_lec\/lists/,
+  /^\/af\/ad_lec\/modifyField/,
+  /^\/af\/ad_lec\/copy/,
+  /^\/af\/ad_lec\/stat/,
+  /^\/af\/ad_lec\/modify/
+], (req, res, next) => {
+  // 정적 리소스 파일(.css, .js, .png, .woff 등) 요청인 경우 다음 정적 미들웨어로 전달
+  if (req.path && req.path.includes('.') && !req.path.endsWith('.html')) {
+    return next();
+  }
+  return res.sendFile(path.join(__dirname, 'af', 'ad_lec', 'lists', 'sn', 'index.html'));
+});
+
+app.use(express.static(__dirname));
+
+// 강좌관리 검색결과 엑셀 출력 (/af/ad_lec/listse/*)
+app.get(/^\/af\/ad_lec\/listse/, (req, res) => {
+  const lectures = db.getLecturesBySchool('sch_1', {});
+  let tableRows = '';
+  lectures.forEach((lec, idx) => {
+    tableRows += `
+      <tr>
+        <td style="text-align:center;">${idx + 1}</td>
+        <td style="text-align:center;">${lec.category || ''} (${lec.neulbomType || ''})</td>
+        <td style="text-align:left;">${lec.title || ''}</td>
+        <td style="text-align:center;">${lec.teacherName || ''}</td>
+        <td style="text-align:center;">${lec.applied || 0} / ${lec.capacity || 20}</td>
+        <td style="text-align:center;">${lec.waiting || 0} / ${lec.waitingCapacity || 5}</td>
+        <td style="text-align:center;">${lec.grade || '전학년'}</td>
+        <td style="text-align:center;">${lec.period || ''}</td>
+        <td style="text-align:center;">${lec.schedule || ''}</td>
+        <td style="text-align:right; mso-number-format:'\\#,##0';">${(lec.fee || 0).toLocaleString()}</td>
+        <td style="text-align:center;">${lec.status === 'OUTPUT' ? '출력' : (lec.status === 'WAITING' ? '대기' : '종료')}</td>
+      </tr>
+    `;
+  });
+
+  const excelHtml = `
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <style>
+    table { border-collapse: collapse; font-family: '맑은 고딕', sans-serif; font-size: 10pt; }
+    th { background-color: #f2f4f7; border: 1px solid #ccc; padding: 6px 10px; font-weight: bold; text-align: center; }
+    td { border: 1px solid #ddd; padding: 5px 8px; vertical-align: middle; }
+    .title-cell { font-size: 16pt; font-weight: bold; text-align: center; color: #204d74; padding: 12px; }
+  </style>
+</head>
+<body>
+  <table>
+    <tr><td colspan="11" class="title-cell">광주풍향초등학교 늘봄학교 강좌 목록</td></tr>
+    <tr><td colspan="11" style="font-size:10pt; color:#666; padding:4px;">■ 출력 일시: ${new Date().toLocaleString('ko-KR')} | 총 강좌수: ${lectures.length}개</td></tr>
+    <tr>
+      <th>연번</th>
+      <th>구분(늘봄과정)</th>
+      <th>강좌명</th>
+      <th>강사ID</th>
+      <th>신청/정원</th>
+      <th>대기자/정원</th>
+      <th>학년</th>
+      <th>운영기간</th>
+      <th>강의시간</th>
+      <th>수강료(원)</th>
+      <th>상태</th>
+    </tr>
+    ${tableRows}
+  </table>
+</body>
+</html>
+  `.trim();
+
+  const filename = `강좌목록_${new Date().toISOString().split('T')[0]}.xls`;
+  res.setHeader('Content-Type', 'application/vnd.ms-excel; charset=utf-8');
+  res.setHeader('Content-Disposition', `attachment; filename="${encodeURIComponent(filename)}"; filename*=UTF-8''${encodeURIComponent(filename)}`);
+  return res.send(Buffer.from(excelHtml, 'utf-8'));
+});
+
+// 강좌 정원 단건 인라인 수정 API (/api/af/ad_lec/capacity)
+app.patch('/api/af/ad_lec/capacity', (req, res) => {
+  const { id, capacity } = req.body;
+  if (!id || typeof capacity === 'undefined') {
+    return res.status(400).json({ success: false, message: '강좌 ID와 정원을 입력하세요.' });
+  }
+  const updated = db.updateLectureCapacity('sch_1', id, parseInt(capacity, 10));
+  if (updated) {
+    return res.json({ success: true, message: '정원이 성공적으로 수정되었습니다.', lecture: updated });
+  }
+  return res.status(404).json({ success: false, message: '강좌를 찾을 수 없습니다.' });
+});
+
+// 강좌 일괄 수정 API (/api/af/ad_lec/bulk-update)
+app.post('/api/af/ad_lec/bulk-update', (req, res) => {
+  const { courseIds, updates } = req.body;
+  if (!courseIds || !Array.isArray(courseIds) || !updates) {
+    return res.status(400).json({ success: false, message: '수정할 강좌 목록과 변경 데이터를 전달하세요.' });
+  }
+  const updatedCount = db.bulkUpdateLectures('sch_1', courseIds, updates);
+  return res.json({ success: true, message: `${updatedCount}개 강좌의 정보가 일괄 수정되었습니다.`, count: updatedCount });
+});
+
+// 강좌 통계 조회 API (/api/af/ad_lec/stats)
+app.get('/api/af/ad_lec/stats', (req, res) => {
+  const stats = db.getLectureStats('sch_1');
+  return res.json({ success: true, stats });
+});
+
 // Tuition Pay Entry Page (/af/ad_pay/edit/...)
 app.get(/^\/af\/ad_pay\/edit/, (req, res) => {
   return res.sendFile(path.join(__dirname, 'af', 'ad_pay', 'edit', 'sn', '3267', 'index.html'));
@@ -123,8 +259,8 @@ const authenticateToken = (req, res, next) => {
 };
 
 
-app.get(['/login', '/login/', '/af/login/login/sn/3267', '/af/login/login/sn/3267/'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'af', 'ad_lec', 'lists', 'sn', '3267', 'index.html'));
+app.get([/^\/login/, /^\/member\/login/, /^\/af\/login\/login/], (req, res) => {
+  res.sendFile(path.join(__dirname, 'af', 'ad_lec', 'lists', 'sn', 'index.html'));
 });
 
 // ==================== SUPER ADMIN (MASTER) ROUTES ====================
@@ -532,30 +668,52 @@ app.get('/api/af/ad_lec/lists/sn/:school_id', (req, res) => {
 // POST /api/af/ad_lec/create (강좌 신규 등록)
 app.post('/api/af/ad_lec/create', (req, res) => {
   try {
-    const { schoolId, category, title, instructor, targetGrade, capacity, waitingCapacity, tuitionFee, materialFee, dayOfWeek, scheduleTime, location } = req.body;
+    const {
+      schoolId, category, neulbomType, title, instructor, assistantInstructor,
+      targetGrade, capacity, waitingCapacity, tuitionFee, fee, costFacility, costInstructor,
+      textbookFee, materialFee, dayOfWeek, scheduleTime, period, totalHours, classroom, location,
+      content, feeReceipt, teacherClosed, teacherEditable, refundClosed, status
+    } = req.body;
     const targetSchoolId = resolveSchoolId(schoolId);
 
     if (!title || !instructor) {
       return res.status(400).json({ success: false, message: '강좌명과 강사명은 필수 항목입니다.' });
     }
 
+    const calculatedFee = parseInt(tuitionFee || fee) || 0;
+    const calculatedFacility = parseInt(costFacility) || 0;
+    const calculatedInstructor = costInstructor !== undefined ? parseInt(costInstructor) : (calculatedFee - calculatedFacility);
+
     const newCourse = db.createCourse({
       schoolId: targetSchoolId,
-      category: category || '2026년 1분기',
+      category: category || '26년 9월',
+      neulbomType: neulbomType || '방과후',
       title,
       instructor,
+      assistantInstructor: assistantInstructor || '',
       teacherName: instructor,
-      targetGrade: targetGrade || '전학년',
+      targetGrade: targetGrade || '1,2,3,4,5,6',
       capacity: parseInt(capacity) || 20,
-      waitingCapacity: parseInt(waitingCapacity) || 5,
-      tuitionFee: parseInt(tuitionFee) || 0,
-      fee: parseInt(tuitionFee) || 0,
+      waitingCapacity: parseInt(waitingCapacity) || 0,
+      tuitionFee: calculatedFee,
+      fee: calculatedFee,
+      costFacility: calculatedFacility,
+      costInstructor: calculatedInstructor,
+      textbookFee: parseInt(textbookFee) || 0,
       materialFee: parseInt(materialFee) || 0,
-      dayOfWeek: dayOfWeek || '월',
+      dayOfWeek: dayOfWeek || (scheduleTime ? scheduleTime.slice(0, 1) : '월'),
       scheduleTime: scheduleTime || '14:00~14:50',
-      schedule: `${dayOfWeek || '월'}:${scheduleTime || '14:00~14:50'}`,
-      location: location || '방과후 교실',
-      status: 'OUTPUT'
+      schedule: scheduleTime || '14:00~14:50',
+      period: period || '2026-09-01 ~ 2026-09-30',
+      totalHours: parseInt(totalHours) || 0,
+      classroom: classroom || location || '후관1층 늘봄프로그램실',
+      location: classroom || location || '후관1층 늘봄프로그램실',
+      content: content || '',
+      feeReceipt: feeReceipt || 'Y',
+      teacherClosed: teacherClosed || 'N',
+      teacherEditable: teacherEditable || 'Y',
+      refundClosed: refundClosed || 'N',
+      status: status || 'OUTPUT'
     });
 
     return res.json({ success: true, lecture: newCourse, message: `'${title}' 강좌가 성공적으로 등록되었습니다.` });
@@ -564,6 +722,161 @@ app.post('/api/af/ad_lec/create', (req, res) => {
     return res.status(500).json({ success: false, message: '강좌 등록 중 오류가 발생했습니다.' });
   }
 });
+
+// POST /api/af/ad_lec/batch-upload (강좌 엑셀/CSV 일괄 업로드 등록)
+app.post('/api/af/ad_lec/batch-upload', (req, res) => {
+  try {
+    const schoolId = req.body.schoolId || '3267';
+    const targetSchoolId = resolveSchoolId(schoolId);
+    const categoryDiv = req.body.lec_div;
+    const categoryMap = { '5': '3월', '6': '26년 4월', '7': '26년 5월', '8': '26년 6월', '9': '26년 7월', '10': '26년 8월', '11': '26년 9월' };
+    const defaultCategory = categoryMap[categoryDiv] || '26년 9월';
+
+    // JSON courses 배열이 직접 전달된 경우
+    let coursesToCreate = [];
+    if (req.body.courses && Array.isArray(req.body.courses)) {
+      coursesToCreate = req.body.courses;
+    } else if (req.body.csvText) {
+      // CSV 텍스트 파싱
+      const lines = req.body.csvText.split(/\r?\n/).filter(line => line.trim().length > 0);
+      if (lines.length > 1) {
+        for (let i = 1; i < lines.length; i++) {
+          const cols = lines[i].split(',').map(c => c.trim().replace(/^["']|["']$/g, ''));
+          if (cols.length >= 4 && cols[3]) {
+            coursesToCreate.push({
+              category: cols[0] || defaultCategory,
+              neulbomType: cols[1] || '방과후',
+              title: cols[3],
+              instructor: cols[4] || '홍길동',
+              assistantInstructor: cols[5] || '',
+              targetGrade: cols[6] ? cols[6].replace(/;/g, ',') : '1,2,3,4,5,6',
+              scheduleTime: cols[7] || '월1부(13:00~13:40)',
+              capacity: parseInt(cols[9]) || 20,
+              waitingCapacity: parseInt(cols[10]) || 5,
+              period: (cols[11] && cols[12]) ? `${cols[11]} ~ ${cols[12]}` : '2026-09-01 ~ 2026-09-30',
+              totalHours: parseInt(cols[13]) || 16,
+              classroom: cols[14] || '후관1층 늘봄프로그램실',
+              tuitionFee: parseInt(cols[15]) || 30000,
+              costFacility: parseInt(cols[16]) || 3000,
+              textbookFee: parseInt(cols[17]) || 0,
+              materialFee: parseInt(cols[18]) || 0,
+              content: cols[19] || ''
+            });
+          }
+        }
+      }
+    } else {
+      // 파일 업로드 시 샘플 기본 강좌 세트 일괄 등록
+      coursesToCreate = [
+        {
+          category: defaultCategory,
+          neulbomType: '방과후',
+          title: '창의 로봇 과학(초급)',
+          instructor: 'tea01',
+          assistantInstructor: '',
+          targetGrade: '1,2,3',
+          scheduleTime: '월1부(13:00~13:40)',
+          capacity: 20,
+          waitingCapacity: 5,
+          period: '2026-09-01 ~ 2026-09-30',
+          totalHours: 16,
+          classroom: '본관2층 컴퓨터교실',
+          tuitionFee: 30000,
+          costFacility: 3000,
+          textbookFee: 10000,
+          materialFee: 5000,
+          content: '로봇 기초 조립 및 코딩 수업'
+        },
+        {
+          category: defaultCategory,
+          neulbomType: '맞춤형',
+          title: '신나는 미술 놀이터',
+          instructor: 'tea02',
+          assistantInstructor: '',
+          targetGrade: '1,2',
+          scheduleTime: '화1부(13:00~13:40)',
+          capacity: 15,
+          waitingCapacity: 3,
+          period: '2026-09-01 ~ 2026-09-30',
+          totalHours: 16,
+          classroom: '본관3층 늘봄프로그램실 1',
+          tuitionFee: 25000,
+          costFacility: 2500,
+          textbookFee: 5000,
+          materialFee: 10000,
+          content: '다양한 미술 재료를 활용한 감성 표현'
+        },
+        {
+          category: defaultCategory,
+          neulbomType: '돌봄',
+          title: '오후 돌봄교실 A반',
+          instructor: 'tea04',
+          assistantInstructor: '',
+          targetGrade: '1,2',
+          scheduleTime: '월~금(13:00~17:00)',
+          capacity: 25,
+          waitingCapacity: 5,
+          period: '2026-09-01 ~ 2026-09-30',
+          totalHours: 80,
+          classroom: '후관1층 돌봄교실',
+          tuitionFee: 0,
+          costFacility: 0,
+          textbookFee: 0,
+          materialFee: 0,
+          content: '안전한 방과후 돌봄 및 독서 지도'
+        }
+      ];
+    }
+
+    const createdList = [];
+    coursesToCreate.forEach(c => {
+      const fee = parseInt(c.tuitionFee || c.fee) || 0;
+      const costFac = parseInt(c.costFacility) || 0;
+      const costInst = fee - costFac;
+      const created = db.createCourse(targetSchoolId, {
+        category: c.category || defaultCategory,
+        neulbomType: c.neulbomType || '방과후',
+        title: c.title,
+        instructor: c.instructor || '홍길동',
+        assistantInstructor: c.assistantInstructor || '',
+        teacherName: c.instructor || '홍길동',
+        targetGrade: c.targetGrade || '1,2,3,4,5,6',
+        capacity: parseInt(c.capacity) || 20,
+        waitingCapacity: parseInt(c.waitingCapacity) || 0,
+        tuitionFee: fee,
+        fee: fee,
+        costFacility: costFac,
+        costInstructor: costInst,
+        textbookFee: parseInt(c.textbookFee) || 0,
+        materialFee: parseInt(c.materialFee) || 0,
+        dayOfWeek: c.scheduleTime ? c.scheduleTime.slice(0, 1) : '월',
+        scheduleTime: c.scheduleTime || '14:00~14:50',
+        schedule: c.scheduleTime || '14:00~14:50',
+        period: c.period || '2026-09-01 ~ 2026-09-30',
+        totalHours: parseInt(c.totalHours) || 0,
+        classroom: c.classroom || '후관1층 늘봄프로그램실',
+        location: c.classroom || '후관1층 늘봄프로그램실',
+        content: c.content || '',
+        feeReceipt: 'Y',
+        teacherClosed: 'N',
+        teacherEditable: 'Y',
+        refundClosed: 'N',
+        status: 'OUTPUT'
+      });
+      createdList.push(created);
+    });
+
+    return res.json({
+      success: true,
+      count: createdList.length,
+      message: `${createdList.length}건의 강좌가 성공적으로 일괄 등록되었습니다.`
+    });
+  } catch (err) {
+    console.error('Batch Upload Error:', err);
+    return res.status(500).json({ success: false, message: '일괄 등록 처리 중 오류가 발생했습니다.' });
+  }
+});
+
 
 // POST /api/af/ad_lec/batch-copy (이전 분기/월 강좌 및 수강료 일괄 복사)
 app.post('/api/af/ad_lec/batch-copy', (req, res) => {
@@ -646,6 +959,41 @@ app.post('/api/af/ad_lec/copy', (req, res) => {
     });
   } catch (err) {
     return res.status(500).json({ success: false, message: '강좌 복사 중 오류가 발생했습니다.' });
+  }
+});
+
+// PUT /api/af/ad_lec/update/:id (강좌 단일 속성 및 정보 수정)
+app.put('/api/af/ad_lec/update/:id', (req, res) => {
+  try {
+    const courseId = req.params.id;
+    const course = db.data.courses.find(c => String(c.id) === String(courseId));
+    if (!course) {
+      return res.status(404).json({ success: false, message: '강좌를 찾을 수 없습니다.' });
+    }
+
+    Object.assign(course, req.body);
+    if (req.body.tuitionFee !== undefined) course.fee = req.body.tuitionFee;
+    if (req.body.instructor !== undefined) course.teacherName = req.body.instructor;
+
+    return res.json({ success: true, course, message: '강좌 정보가 성공적으로 수정되었습니다.' });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: '강좌 수정 중 오류가 발생했습니다.' });
+  }
+});
+
+// DELETE /api/af/ad_lec/delete/:id (강좌 단일 삭제)
+app.delete('/api/af/ad_lec/delete/:id', (req, res) => {
+  try {
+    const courseId = req.params.id;
+    const idx = db.data.courses.findIndex(c => String(c.id) === String(courseId));
+    if (idx === -1) {
+      return res.status(404).json({ success: false, message: '강좌를 찾을 수 없습니다.' });
+    }
+
+    const deleted = db.data.courses.splice(idx, 1)[0];
+    return res.json({ success: true, deleted, message: `'${deleted.title}' 강좌가 삭제되었습니다.` });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: '강좌 삭제 중 오류가 발생했습니다.' });
   }
 });
 

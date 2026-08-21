@@ -1,0 +1,110 @@
+[
+  {
+    "url": "https://www.dbdbschool.kr/af/ad_lec/stat/sn/3267",
+    "status": 200,
+    "type": "document",
+    "method": "GET"
+  },
+  {
+    "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/bootstrap.css?23111301",
+    "status": 200,
+    "type": "stylesheet",
+    "method": "GET"
+  },
+  {
+    "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/bootstrap-theme.css",
+    "status": 200,
+    "type": "stylesheet",
+    "method": "GET"
+  },
+  {
+    "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/ui/jquery-ui.css",
+    "status": 200,
+    "type": "stylesheet",
+    "method": "GET"
+  },
+  {
+    "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/default.css?26061201",
+    "status": 200,
+    "type": "stylesheet",
+    "method": "GET"
+  },
+  {
+    "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/af/content.css?26033101",
+    "status": 200,
+    "type": "stylesheet",
+    "method": "GET"
+  },
+  {
+    "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/icon/css/font-awesome.css",
+    "status": 200,
+    "type": "stylesheet",
+    "method": "GET"
+  },
+  {
+    "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/scroll/jquery.mCustomScrollbar.css",
+    "status": 200,
+    "type": "stylesheet",
+    "method": "GET"
+  },
+  {
+    "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/jquery.js",
+    "status": 200,
+    "type": "script",
+    "method": "GET"
+  },
+  {
+    "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/ui/jquery-ui.js",
+    "status": 200,
+    "type": "script",
+    "method": "GET"
+  },
+  {
+    "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/bootstrap.js",
+    "status": 200,
+    "type": "script",
+    "method": "GET"
+  },
+  {
+    "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/common.js?23021501",
+    "status": 200,
+    "type": "script",
+    "method": "GET"
+  },
+  {
+    "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/scroll/jquery.mCustomScrollbar.js",
+    "status": 200,
+    "type": "script",
+    "method": "GET"
+  },
+  {
+    "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/table_sticky.js?26042101",
+    "status": 200,
+    "type": "script",
+    "method": "GET"
+  },
+  {
+    "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/icon/fonts/fontawesome-webfont.woff?v=4.2.0",
+    "status": 200,
+    "type": "font",
+    "method": "GET"
+  },
+  {
+    "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/images/af/user_face01.png",
+    "status": 200,
+    "type": "image",
+    "method": "GET"
+  },
+  {
+    "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/images/help_dot.gif",
+    "status": 200,
+    "type": "image",
+    "method": "GET"
+  },
+  {
+    "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/scroll/jquery.mousewheel.min.js?_=1787209501443",
+    "status": 200,
+    "type": "script",
+    "method": "GET"
+  }
+]

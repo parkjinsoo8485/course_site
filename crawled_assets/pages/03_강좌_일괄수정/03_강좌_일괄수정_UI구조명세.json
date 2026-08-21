@@ -1,0 +1,368 @@
+{
+  "title": "일괄수정 - 강좌관리 - 늘봄학교",
+  "url": "https://www.dbdbschool.kr/af/ad_lec/modifyField/p/1/sn/3267/sld/11/sof/ln/sot/asc",
+  "buttons": [
+    {
+      "text": "취소",
+      "onclick": "location.href='https://www.dbdbschool.kr/af/ad_lec/lists/p/1/sn/3267/sld/11/sof/ln/sot/asc';",
+      "href": ""
+    },
+    {
+      "text": "수정",
+      "onclick": "",
+      "href": ""
+    }
+  ],
+  "inputs": [
+    {
+      "type": "radio",
+      "id": "lec_status1_1",
+      "name": "lec_status1",
+      "placeholder": "",
+      "value": "1"
+    },
+    {
+      "type": "radio",
+      "id": "lec_status1_0",
+      "name": "lec_status1",
+      "placeholder": "",
+      "value": "0"
+    },
+    {
+      "type": "radio",
+      "id": "lec_status1_2",
+      "name": "lec_status1",
+      "placeholder": "",
+      "value": "2"
+    },
+    {
+      "type": "radio",
+      "id": "lec_status1_all",
+      "name": "lec_status1",
+      "placeholder": "",
+      "value": "all"
+    },
+    {
+      "type": "checkbox",
+      "id": "chk_lec_div",
+      "name": "chk_lec_div",
+      "placeholder": "",
+      "value": "1"
+    },
+    {
+      "type": "checkbox",
+      "id": "chk_lec_date",
+      "name": "chk_lec_date",
+      "placeholder": "",
+      "value": "1"
+    },
+    {
+      "type": "text",
+      "id": "lec_sdate",
+      "name": "lec_sdate",
+      "placeholder": "",
+      "value": ""
+    },
+    {
+      "type": "text",
+      "id": "lec_edate",
+      "name": "lec_edate",
+      "placeholder": "",
+      "value": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "chk_tea_id",
+      "name": "chk_tea_id",
+      "placeholder": "",
+      "value": "1"
+    },
+    {
+      "type": "radio",
+      "id": "tea_id_chk_Y",
+      "name": "tea_id_chk",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "radio",
+      "id": "tea_id_chk_N",
+      "name": "tea_id_chk",
+      "placeholder": "",
+      "value": "N"
+    },
+    {
+      "type": "checkbox",
+      "id": "chk_lec_time",
+      "name": "chk_lec_time",
+      "placeholder": "",
+      "value": "1"
+    },
+    {
+      "type": "radio",
+      "id": "lec_time_not_chk_Y",
+      "name": "lec_time_not_chk",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "radio",
+      "id": "lec_time_not_chk_N",
+      "name": "lec_time_not_chk",
+      "placeholder": "",
+      "value": "N"
+    },
+    {
+      "type": "checkbox",
+      "id": "chk_pay_view",
+      "name": "chk_pay_view",
+      "placeholder": "",
+      "value": "1"
+    },
+    {
+      "type": "radio",
+      "id": "lec_pay_view_Y",
+      "name": "lec_pay_view",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "radio",
+      "id": "lec_pay_view_N",
+      "name": "lec_pay_view",
+      "placeholder": "",
+      "value": "N"
+    },
+    {
+      "type": "checkbox",
+      "id": "chk_tea_finish",
+      "name": "chk_tea_finish",
+      "placeholder": "",
+      "value": "1"
+    },
+    {
+      "type": "radio",
+      "id": "lec_tea_finish_Y",
+      "name": "lec_tea_finish",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "radio",
+      "id": "lec_tea_finish_N",
+      "name": "lec_tea_finish",
+      "placeholder": "",
+      "value": "N"
+    },
+    {
+      "type": "checkbox",
+      "id": "chk_tea_edit",
+      "name": "chk_tea_edit",
+      "placeholder": "",
+      "value": "1"
+    },
+    {
+      "type": "radio",
+      "id": "lec_tea_edit_Y",
+      "name": "lec_tea_edit",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "radio",
+      "id": "lec_tea_edit_N",
+      "name": "lec_tea_edit",
+      "placeholder": "",
+      "value": "N"
+    },
+    {
+      "type": "checkbox",
+      "id": "chk_refund_status",
+      "name": "chk_refund_status",
+      "placeholder": "",
+      "value": "1"
+    },
+    {
+      "type": "radio",
+      "id": "refund_status_Y",
+      "name": "refund_status",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "radio",
+      "id": "refund_status_N",
+      "name": "refund_status",
+      "placeholder": "",
+      "value": "N"
+    },
+    {
+      "type": "checkbox",
+      "id": "chk_lec_status",
+      "name": "chk_lec_status",
+      "placeholder": "",
+      "value": "1"
+    },
+    {
+      "type": "radio",
+      "id": "lec_status2_1",
+      "name": "lec_status2",
+      "placeholder": "",
+      "value": "1"
+    },
+    {
+      "type": "radio",
+      "id": "lec_status2_0",
+      "name": "lec_status2",
+      "placeholder": "",
+      "value": "0"
+    },
+    {
+      "type": "radio",
+      "id": "lec_status2_2",
+      "name": "lec_status2",
+      "placeholder": "",
+      "value": "2"
+    },
+    {
+      "type": "button",
+      "id": "",
+      "name": "",
+      "placeholder": "",
+      "value": "취소"
+    },
+    {
+      "type": "submit",
+      "id": "sm_sm_sm_sm",
+      "name": "",
+      "placeholder": "",
+      "value": "수정"
+    }
+  ],
+  "selects": [
+    {
+      "id": "lec_div1",
+      "name": "lec_div1",
+      "options": [
+        {
+          "text": "= 선택하세요 =",
+          "value": "",
+          "selected": false
+        },
+        {
+          "text": "구분없음",
+          "value": "0",
+          "selected": false
+        },
+        {
+          "text": "3월",
+          "value": "5",
+          "selected": false
+        },
+        {
+          "text": "26년 4월",
+          "value": "6",
+          "selected": false
+        },
+        {
+          "text": "26년 5월",
+          "value": "7",
+          "selected": false
+        },
+        {
+          "text": "26년 6월",
+          "value": "8",
+          "selected": false
+        },
+        {
+          "text": "26년 7월",
+          "value": "9",
+          "selected": false
+        },
+        {
+          "text": "26년 8월",
+          "value": "10",
+          "selected": false
+        },
+        {
+          "text": "26년 9월",
+          "value": "11",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "id": "lec_div2",
+      "name": "lec_div2",
+      "options": [
+        {
+          "text": "= 선택하세요 =",
+          "value": "",
+          "selected": true
+        },
+        {
+          "text": "3월",
+          "value": "5",
+          "selected": false
+        },
+        {
+          "text": "26년 4월",
+          "value": "6",
+          "selected": false
+        },
+        {
+          "text": "26년 5월",
+          "value": "7",
+          "selected": false
+        },
+        {
+          "text": "26년 6월",
+          "value": "8",
+          "selected": false
+        },
+        {
+          "text": "26년 7월",
+          "value": "9",
+          "selected": false
+        },
+        {
+          "text": "26년 8월",
+          "value": "10",
+          "selected": false
+        },
+        {
+          "text": "26년 9월",
+          "value": "11",
+          "selected": false
+        }
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "idx": 0,
+      "headers": [
+        "검색\n조건",
+        "강좌구분",
+        "상태"
+      ],
+      "rowCount": 2
+    },
+    {
+      "idx": 1,
+      "headers": [
+        "수정\n필드",
+        "강좌구분",
+        "운영기간",
+        "강사ID 중복\n신청 불가",
+        "시간 중복 허용",
+        "수강료 출력",
+        "강사마감",
+        "강사 강좌 편집",
+        "환불마감",
+        "상태"
+      ],
+      "rowCount": 9
+    }
+  ]
+}
