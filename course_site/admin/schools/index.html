@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>학교 목록 관리 | 본사 최고관리자 | 늘봄학교 SaaS</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "맑은 고딕", "Malgun Gothic", "Noto Sans KR", sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: 220px; min-height: 100vh;
+      background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+      border-right: 1px solid rgba(255,255,255,0.07);
+      display: flex; flex-direction: column;
+      position: fixed; top: 0; left: 0; bottom: 0; z-index: 100;
+    }
+    .sidebar-logo { padding: 24px 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .sidebar-logo .logo-badge {
+      font-size: 0.72rem; font-weight: 700;
+      background: linear-gradient(135deg, #6366f1, #38bdf8);
+      color: white; padding: 3px 10px; border-radius: 9999px;
+      display: inline-block; margin-bottom: 8px;
+    }
+    .sidebar-logo h2 {
+      font-size: 1.05rem; font-weight: 800;
+      background: linear-gradient(135deg, #818cf8, #38bdf8);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .sidebar-logo .role-label { font-size: 0.75rem; color: #64748b; margin-top: 4px; }
+    .sidebar-nav { flex: 1; padding: 16px 0; }
+    .nav-section-label {
+      font-size: 0.68rem; font-weight: 700; color: #475569;
+      padding: 8px 20px 4px; text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 20px; color: #94a3b8; text-decoration: none;
+      font-size: 0.88rem; font-weight: 500; border-left: 3px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .nav-item:hover { background: rgba(99,102,241,0.08); color: #c7d2fe; }
+    .nav-item.active { background: rgba(99,102,241,0.15); color: #818cf8; border-left-color: #6366f1; font-weight: 700; }
+    .nav-item .icon { font-size: 1rem; width: 18px; text-align: center; }
+    .sidebar-footer { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.07); }
+    .sidebar-footer a { color: #475569; font-size: 0.8rem; text-decoration: none; }
+    .sidebar-footer a:hover { color: #94a3b8; }
+
+    /* ── Main ── */
+    .main { margin-left: 220px; flex: 1; display: flex; flex-direction: column; }
+    .topbar {
+      background: rgba(30,41,59,0.8); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 16px 32px; display: flex; align-items: center;
+      justify-content: space-between; position: sticky; top: 0; z-index: 50;
+    }
+    .topbar-title { font-size: 1.05rem; font-weight: 700; color: #f1f5f9; }
+    .topbar-meta { font-size: 0.8rem; color: #64748b; }
+    .topbar-right { display: flex; align-items: center; gap: 12px; }
+    .admin-avatar {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, #6366f1, #38bdf8);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.85rem; color: white;
+    }
+
+    .content { padding: 32px; }
+
+    /* ── Stats ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .stat-mini {
+      background: rgba(30,41,59,0.7);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .stat-mini .icon { font-size: 1.5rem; }
+    .stat-mini .val { font-size: 1.5rem; font-weight: 800; }
+    .stat-mini .lbl { font-size: 0.78rem; color: #64748b; }
+
+    /* ── Filter ── */
+    .filter-bar {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+      background: rgba(30,41,59,0.5);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 8px; padding: 12px 16px; margin-bottom: 20px;
+    }
+    .filter-bar select, .filter-bar input {
+      height: 34px; padding: 0 10px; font-size: 0.84rem;
+      background: rgba(15,23,42,0.8);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px; color: #e2e8f0; outline: none;
+    }
+    .filter-bar input::placeholder { color: #475569; }
+    .filter-bar select option { background: #1e293b; }
+    .filter-bar button {
+      height: 34px; padding: 0 16px; border-radius: 6px; border: none;
+      font-size: 0.84rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-search { background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; }
+    .btn-reset { background: rgba(255,255,255,0.07); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1) !important; }
+
+    /* ── Table ── */
+    .table-wrap {
+      background: rgba(30,41,59,0.6);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px; overflow: hidden;
+    }
+    .table-header-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(15,23,42,0.5);
+    }
+    .table-count { font-size: 0.83rem; color: #64748b; }
+    .table-count strong { color: #818cf8; font-weight: 700; }
+    .main-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+    .main-table th {
+      padding: 12px 16px; text-align: left;
+      font-size: 0.75rem; font-weight: 700; color: #475569;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      background: rgba(15,23,42,0.4);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .main-table th.center { text-align: center; }
+    .main-table td {
+      padding: 14px 16px; color: #cbd5e1;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .main-table tbody tr:hover { background: rgba(99,102,241,0.05); }
+    .main-table tbody tr:last-child td { border-bottom: none; }
+    .main-table td.center { text-align: center; }
+
+    .school-name { font-weight: 700; color: #e2e8f0; }
+    .school-id { font-size: 0.75rem; color: #475569; margin-top: 2px; }
+
+    .plan-badge {
+      display: inline-block; padding: 3px 10px;
+      border-radius: 5px; font-size: 0.76rem; font-weight: 700;
+    }
+    .plan-basic { background: rgba(100,116,139,0.2); color: #94a3b8; border: 1px solid rgba(100,116,139,0.3); }
+    .plan-standard { background: rgba(99,102,241,0.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.3); }
+    .plan-premium { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+
+    .st-badge {
+      display: inline-block; padding: 3px 10px;
+      border-radius: 9999px; font-size: 0.76rem; font-weight: 700;
+    }
+    .st-active { background: rgba(16,185,129,0.12); color: #34d399; border: 1px solid rgba(16,185,129,0.25); }
+    .st-trial { background: rgba(245,158,11,0.12); color: #fbbf24; border: 1px solid rgba(245,158,11,0.25); }
+    .st-paused { background: rgba(239,68,68,0.12); color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
+
+    .btn-row { display: flex; gap: 6px; justify-content: center; }
+    .btn-sm {
+      padding: 4px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: 600;
+      cursor: pointer; text-decoration: none; border: none; transition: all 0.2s;
+    }
+    .btn-go { background: rgba(99,102,241,0.2); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.3) !important; }
+    .btn-go:hover { background: rgba(99,102,241,0.35); color: #c7d2fe; }
+    .btn-approve { background: rgba(16,185,129,0.2); color: #34d399; border: 1px solid rgba(16,185,129,0.3) !important; }
+    .btn-approve:hover { background: rgba(16,185,129,0.35); }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════ SIDEBAR ═══════════ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-badge">SUPER ADMIN</div>
+      <h2>🏫 늘봄학교 SaaS</h2>
+      <div class="role-label">본사 최고 관리자 시스템</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">마스터 관리</div>
+      <a href="/admin" class="nav-item">
+        <span class="icon">📊</span> 전체 현황 대시보드
+      </a>
+      <a href="/admin/qanda" class="nav-item">
+        <span class="icon">💬</span> 통합 Q&amp;A 관리
+      </a>
+      <a href="/admin/schools" class="nav-item active">
+        <span class="icon">🏫</span> 학교 목록 관리
+      </a>
+      <div class="nav-section-label" style="margin-top:12px;">공통 콘텐츠</div>
+      <a href="/af/ad_faq/main/sn/3267" class="nav-item">
+        <span class="icon">📖</span> FAQ/매뉴얼 관리
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="/">← 학교 관리자로 이동</a>
+    </div>
+  </aside>
+
+  <!-- ═══════════ MAIN ═══════════ -->
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <div class="topbar-title">학교 목록 관리</div>
+        <div class="topbar-meta">서비스 이용 중인 전체 학교 현황을 관리합니다</div>
+      </div>
+      <div class="topbar-right">
+        <div class="admin-avatar">최</div>
+        <span style="font-size:0.85rem; color:#94a3b8;">본사 관리자</span>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- ── 통계 ── -->
+      <div class="stats-row">
+        <div class="stat-mini">
+          <div class="icon">🏫</div>
+          <div>
+            <div class="val" id="cnt-total">0</div>
+            <div class="lbl">전체 학교</div>
+          </div>
+        </div>
+        <div class="stat-mini">
+          <div class="icon">✅</div>
+          <div>
+            <div class="val" id="cnt-active" style="color:#34d399;">0</div>
+            <div class="lbl">운영 중</div>
+          </div>
+        </div>
+        <div class="stat-mini">
+          <div class="icon">🔶</div>
+          <div>
+            <div class="val" id="cnt-trial" style="color:#fbbf24;">0</div>
+            <div class="lbl">체험판</div>
+          </div>
+        </div>
+        <div class="stat-mini">
+          <div class="icon">⭐</div>
+          <div>
+            <div class="val" id="cnt-premium" style="color:#a5b4fc;">0</div>
+            <div class="lbl">Premium</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 필터 ── -->
+      <div class="filter-bar">
+        <select id="filter-plan">
+          <option value="all">전체 플랜</option>
+          <option value="Basic">Basic</option>
+          <option value="Standard">Standard</option>
+          <option value="Premium">Premium</option>
+        </select>
+        <select id="filter-status">
+          <option value="all">전체 상태</option>
+          <option value="active">운영 중</option>
+          <option value="trial">체험판</option>
+          <option value="paused">일시정지</option>
+        </select>
+        <input type="text" id="filter-keyword" placeholder="학교명 / 담당자 검색..." style="min-width:180px;">
+        <button class="btn-search" onclick="applyFilter()">🔍 검색</button>
+        <button class="btn-reset" onclick="resetFilter()">전체</button>
+      </div>
+
+      <!-- ── 테이블 ── -->
+      <div class="table-wrap">
+        <div class="table-header-row">
+          <div class="table-count">총 <strong id="display-count">0</strong>개 학교</div>
+        </div>
+        <table class="main-table">
+          <thead>
+            <tr>
+              <th>학교명 / School ID</th>
+              <th class="center" style="width:100px;">구독 플랜</th>
+              <th class="center" style="width:90px;">상태</th>
+              <th>담당자</th>
+              <th>연락처</th>
+              <th class="center" style="width:110px;">가입일</th>
+              <th class="center" style="width:120px;">바로가기</th>
+            </tr>
+          </thead>
+          <tbody id="schools-tbody"></tbody>
+        </table>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    const SCHOOLS = [
+      { id: '3267', name: '광주풍향초등학교', plan: 'Standard', status: 'active', contact: '김혜련', phone: '062-609-1182', since: '2025-03-01' },
+      { id: '1001', name: '서울한강초등학교', plan: 'Basic', status: 'active', contact: '박민수', phone: '02-312-4451', since: '2025-09-01' },
+      { id: '2002', name: '부산해운대초등학교', plan: 'Premium', status: 'active', contact: '이지영', phone: '051-741-2233', since: '2024-12-01' },
+      { id: '4004', name: '대전중앙초등학교', plan: 'Basic', status: 'trial', contact: '최성호', phone: '042-551-8877', since: '2026-08-01' },
+      { id: '5005', name: '인천송도초등학교', plan: 'Standard', status: 'active', contact: '정하나', phone: '032-851-6677', since: '2025-06-15' },
+      { id: '6006', name: '대구수성초등학교', plan: 'Premium', status: 'active', contact: '강지훈', phone: '053-765-3344', since: '2025-01-10' },
+    ];
+
+    let filterPlan = 'all';
+    let filterStatus = 'all';
+    let filterKeyword = '';
+
+    function getPlanBadge(plan) {
+      const cls = plan === 'Premium' ? 'plan-premium' : plan === 'Standard' ? 'plan-standard' : 'plan-basic';
+      return `<span class="plan-badge ${cls}">${plan}</span>`;
+    }
+    function getStatusBadge(status) {
+      if (status === 'active') return '<span class="st-badge st-active">🟢 운영 중</span>';
+      if (status === 'trial') return '<span class="st-badge st-trial">🔶 체험판</span>';
+      return '<span class="st-badge st-paused">🔴 일시정지</span>';
+    }
+
+    function renderStats(items) {
+      document.getElementById('cnt-total').textContent = SCHOOLS.length;
+      document.getElementById('cnt-active').textContent = SCHOOLS.filter(s => s.status === 'active').length;
+      document.getElementById('cnt-trial').textContent = SCHOOLS.filter(s => s.status === 'trial').length;
+      document.getElementById('cnt-premium').textContent = SCHOOLS.filter(s => s.plan === 'Premium').length;
+    }
+
+    function renderTable() {
+      let items = [...SCHOOLS];
+      if (filterPlan !== 'all') items = items.filter(s => s.plan === filterPlan);
+      if (filterStatus !== 'all') items = items.filter(s => s.status === filterStatus);
+      if (filterKeyword.trim()) {
+        const kw = filterKeyword.trim().toLowerCase();
+        items = items.filter(s => s.name.toLowerCase().includes(kw) || s.contact.toLowerCase().includes(kw));
+      }
+
+      renderStats();
+      document.getElementById('display-count').textContent = items.length;
+
+      const tbody = document.getElementById('schools-tbody');
+      if (items.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:50px;color:#475569;">조회된 학교가 없습니다.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = items.map(s => `
+        <tr>
+          <td>
+            <div class="school-name">${s.name}</div>
+            <div class="school-id">School ID: ${s.id}</div>
+          </td>
+          <td class="center">${getPlanBadge(s.plan)}</td>
+          <td class="center">${getStatusBadge(s.status)}</td>
+          <td>${s.contact}</td>
+          <td style="color:#64748b;">${s.phone}</td>
+          <td class="center" style="color:#64748b;">${s.since}</td>
+          <td class="center">
+            <div class="btn-row">
+              <a href="/af/ad_lec/lists/sn/${s.id}" class="btn-sm btn-go">강좌관리</a>
+              ${s.status === 'trial' ? `<button class="btn-sm btn-approve" onclick="approveSchool('${s.id}')">승인</button>` : ''}
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function applyFilter() {
+      filterPlan = document.getElementById('filter-plan').value;
+      filterStatus = document.getElementById('filter-status').value;
+      filterKeyword = document.getElementById('filter-keyword').value;
+      renderTable();
+    }
+
+    function resetFilter() {
+      filterPlan = 'all'; filterStatus = 'all'; filterKeyword = '';
+      document.getElementById('filter-plan').value = 'all';
+      document.getElementById('filter-status').value = 'all';
+      document.getElementById('filter-keyword').value = '';
+      renderTable();
+    }
+
+    function approveSchool(id) {
+      const school = SCHOOLS.find(s => s.id === id);
+      if (!school) return;
+      if (confirm(`[${school.name}] 학교를 정식 운영 승인하시겠습니까?`)) {
+        school.status = 'active';
+        renderTable();
+      }
+    }
+
+    document.getElementById('filter-keyword').addEventListener('keydown', e => {
+      if (e.key === 'Enter') applyFilter();
+    });
+
+    renderTable();
+  </script>
+</body>
+</html>

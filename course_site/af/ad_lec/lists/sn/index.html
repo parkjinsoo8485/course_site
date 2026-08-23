@@ -294,10 +294,11 @@
           <div class="card-top-bar">
             <div class="section-title">신청목록</div>
             <div class="helper-badges">
-              <a href="/af/ad_faq/main/sn/3267" class="helper-btn" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')"><i class="fa-solid fa-file-lines"></i> 매뉴얼</a>
-              <button class="helper-btn" onclick="openAppCreateModal()"><i class="fa-solid fa-user-plus"></i> 신청자 등록</button>
-              <button class="helper-btn" onclick="openAppTestMode()"><i class="fa-solid fa-play"></i> 수강신청 테스트</button>
-              <button class="helper-btn" onclick="downloadSchoolBankingCsv()"><i class="fa-solid fa-file-csv"></i> 스쿨뱅킹 파일 다운로드</button>
+              <a href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/%EC%8B%A0%EC%B2%AD%EC%9E%90%20%EA%B4%80%EB%A6%AC_02_%EC%8B%A0%EC%B2%AD%EC%9E%90%20%EB%93%B1%EB%A1%9D.hwp" target="_blank" class="helper-btn" style="background:#2563eb; color:#fff;"><i class="fa-solid fa-download"></i> 신청자 등록 (HWP)</a>
+              <a href="https://www.dbdbschool.kr/help/go_data/num/76/data/link1" target="_blank" class="helper-btn" style="background:#dc2626; color:#fff;"><i class="fa-brands fa-youtube"></i> 수강신청 테스트</a>
+              <a href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/%EC%9A%B4%EC%98%81%EC%A0%88%EC%B0%A8_12_%EC%8B%A0%EC%B2%AD%EA%B2%B0%EA%B3%BC%20%EC%A1%B0%ED%9A%8C.hwp" target="_blank" class="helper-btn" style="background:#2563eb; color:#fff;"><i class="fa-solid fa-download"></i> 신청결과 조회 (HWP)</a>
+              <a href="https://www.dbdbschool.kr/help/go_data/num/84/data/link1" target="_blank" class="helper-btn" style="background:#dc2626; color:#fff;"><i class="fa-brands fa-youtube"></i> 스쿨뱅킹 파일 다운로드</a>
+              <button class="helper-btn" onclick="downloadSchoolBankingCsv()" style="background:#16a34a; color:#fff;"><i class="fa-solid fa-file-csv"></i> 스쿨뱅킹 CSV 즉시 다운로드</button>
             </div>
           </div>
 
@@ -3043,6 +3044,81 @@
         <div style="display:flex; justify-content:flex-end; gap:6px; margin-top:16px;">
           <button type="button" class="btn-db btn-db-gray" onclick="closeAppModal('modalAppTestMode')">닫기</button>
           <button type="button" class="btn-db btn-db-blue" onclick="executeTestApply()"><i class="fa-solid fa-paper-plane"></i> 가상 수강신청 접수하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. Modal: Q&A 문의글 작성 -->
+  <div class="modal-backdrop" id="modalQaWrite" style="display:none;">
+    <div class="modal-box" style="max-width: 780px;">
+      <div class="modal-header" style="background:#337ab7; color:#fff;">
+        <h3><i class="fa-solid fa-pen-to-square"></i> 고객지원 문의 등록</h3>
+        <button class="close-btn" onclick="closeQaModal('modalQaWrite')">&times;</button>
+      </div>
+      <div class="modal-body" style="padding:16px 20px;">
+        <form id="fm_qa_write" onsubmit="handleQaWriteSubmit(event)">
+          <table class="db-table" style="width:100%; font-size:12.5px;">
+            <tbody>
+              <tr>
+                <td style="width:130px; font-weight:bold; background:#f8fafc;">작성자</td>
+                <td><input type="text" id="qa_author_name" value="김혜련" required style="width:180px; height:28px; border:1px solid #ccc; padding:2px 6px;"></td>
+              </tr>
+              <tr>
+                <td style="font-weight:bold; background:#f8fafc;">휴대폰</td>
+                <td>
+                  <div style="display:flex; align-items:center; gap:4px;">
+                    <select id="qa_hp1" style="height:28px; border:1px solid #ccc;"><option value="010">010</option><option value="011">011</option></select>
+                    - <input type="text" id="qa_hp2" value="2494" maxlength="4" style="width:50px; height:28px; border:1px solid #ccc; text-align:center;">
+                    - <input type="text" id="qa_hp3" value="1479" maxlength="4" style="width:50px; height:28px; border:1px solid #ccc; text-align:center;">
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:bold; background:#f8fafc;">일반전화</td>
+                <td><input type="text" id="qa_phone" value="062-609-1182" style="width:180px; height:28px; border:1px solid #ccc; padding:2px 6px;"></td>
+              </tr>
+              <tr>
+                <td style="font-weight:bold; background:#f8fafc;">이메일</td>
+                <td><input type="email" id="qa_email" value="khh147979@naver.com" style="width:260px; height:28px; border:1px solid #ccc; padding:2px 6px;"></td>
+              </tr>
+              <tr>
+                <td style="font-weight:bold; background:#f8fafc;">제목</td>
+                <td><input type="text" id="qa_subject" placeholder="문의 제목을 입력하세요." required style="width:100%; height:30px; border:1px solid #ccc; padding:2px 8px; font-weight:bold;"></td>
+              </tr>
+              <tr>
+                <td style="font-weight:bold; background:#f8fafc; vertical-align:top; padding-top:8px;">내용</td>
+                <td><textarea id="qa_contents" rows="6" placeholder="문의하실 내용을 상세히 적어주세요." required style="width:100%; border:1px solid #ccc; padding:8px; line-height:1.5; resize:vertical;"></textarea></td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="display:flex; justify-content:flex-end; gap:6px; margin-top:16px;">
+            <button type="button" class="btn-db btn-db-gray" onclick="closeQaModal('modalQaWrite')">취소</button>
+            <button type="submit" class="btn-db btn-db-blue" style="font-weight:bold;"><i class="fa-solid fa-check"></i> 문의 등록하기</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. Modal: Q&A 문의글 상세 및 답변 조회 -->
+  <div class="modal-backdrop" id="modalQaView" style="display:none;">
+    <div class="modal-box" style="max-width: 800px;">
+      <div class="modal-header" style="background:#2b669a; color:#fff;">
+        <h3 id="qaViewTitle"><i class="fa-solid fa-file-lines"></i> 고객지원 문의 상세</h3>
+        <button class="close-btn" onclick="closeQaModal('modalQaView')">&times;</button>
+      </div>
+      <div class="modal-body" style="padding:16px 20px;">
+        <div id="qaViewBody">
+          <!-- Dynamically populated -->
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top:16px; border-top:1px solid #eee; padding-top:12px;">
+          <div>
+            <button type="button" class="btn-db btn-db-coral" id="btnQaDelete" onclick="deleteCurrentQaItem()"><i class="fa-solid fa-trash"></i> 삭제</button>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button type="button" class="btn-db btn-db-gray" onclick="closeQaModal('modalQaView')">목록으로</button>
+          </div>
         </div>
       </div>
     </div>

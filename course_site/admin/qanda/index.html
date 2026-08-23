@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>통합 Q&A 관리 | 본사 최고관리자 | 늘봄학교 SaaS</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "맑은 고딕", "Malgun Gothic", "Noto Sans KR", sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* ── Sidebar (공통) ── */
+    .sidebar {
+      width: 220px;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+      border-right: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      z-index: 100;
+    }
+    .sidebar-logo { padding: 24px 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .sidebar-logo .logo-badge {
+      font-size: 0.72rem; font-weight: 700;
+      background: linear-gradient(135deg, #6366f1, #38bdf8);
+      color: white; padding: 3px 10px; border-radius: 9999px;
+      display: inline-block; margin-bottom: 8px;
+    }
+    .sidebar-logo h2 {
+      font-size: 1.05rem; font-weight: 800;
+      background: linear-gradient(135deg, #818cf8, #38bdf8);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .sidebar-logo .role-label { font-size: 0.75rem; color: #64748b; margin-top: 4px; }
+    .sidebar-nav { flex: 1; padding: 16px 0; }
+    .nav-section-label {
+      font-size: 0.68rem; font-weight: 700; color: #475569;
+      padding: 8px 20px 4px; text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 20px; color: #94a3b8; text-decoration: none;
+      font-size: 0.88rem; font-weight: 500; border-left: 3px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .nav-item:hover { background: rgba(99,102,241,0.08); color: #c7d2fe; }
+    .nav-item.active { background: rgba(99,102,241,0.15); color: #818cf8; border-left-color: #6366f1; font-weight: 700; }
+    .nav-item .icon { font-size: 1rem; width: 18px; text-align: center; }
+    .sidebar-footer { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.07); }
+    .sidebar-footer a { color: #475569; font-size: 0.8rem; text-decoration: none; }
+    .sidebar-footer a:hover { color: #94a3b8; }
+
+    /* ── Main ── */
+    .main { margin-left: 220px; flex: 1; display: flex; flex-direction: column; }
+    .topbar {
+      background: rgba(30,41,59,0.8); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 16px 32px; display: flex; align-items: center;
+      justify-content: space-between; position: sticky; top: 0; z-index: 50;
+    }
+    .topbar-title { font-size: 1.05rem; font-weight: 700; color: #f1f5f9; }
+    .topbar-meta { font-size: 0.8rem; color: #64748b; }
+    .topbar-right { display: flex; align-items: center; gap: 12px; }
+    .admin-avatar {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, #6366f1, #38bdf8);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.85rem; color: white;
+    }
+
+    .content { padding: 28px 32px; }
+
+    /* ── 요약 카드 ── */
+    .summary-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .sum-card {
+      background: rgba(30,41,59,0.7);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .sum-card:hover { border-color: rgba(99,102,241,0.3); background: rgba(99,102,241,0.08); }
+    .sum-card.active-filter { border-color: #6366f1; background: rgba(99,102,241,0.15); }
+    .sum-icon { font-size: 1.6rem; }
+    .sum-val { font-size: 1.7rem; font-weight: 800; }
+    .sum-label { font-size: 0.8rem; color: #64748b; }
+
+    /* ── Filter Bar ── */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      background: rgba(30,41,59,0.5);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+    }
+    .filter-bar select, .filter-bar input {
+      height: 34px;
+      padding: 0 10px;
+      font-size: 0.84rem;
+      background: rgba(15,23,42,0.8);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px;
+      color: #e2e8f0;
+      outline: none;
+    }
+    .filter-bar select option { background: #1e293b; }
+    .filter-bar input::placeholder { color: #475569; }
+    .filter-bar input:focus { border-color: #6366f1; }
+    .filter-bar button {
+      height: 34px; padding: 0 16px; border-radius: 6px; border: none;
+      font-size: 0.84rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-search { background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; }
+    .btn-search:hover { opacity: 0.88; }
+    .btn-reset { background: rgba(255,255,255,0.07); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1) !important; }
+    .btn-reset:hover { background: rgba(255,255,255,0.12); color: #e2e8f0; }
+
+    /* ── Status Tab Bar ── */
+    .tab-bar {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 16px;
+      background: rgba(15,23,42,0.4);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 4px;
+    }
+    .tab-btn {
+      flex: 1; padding: 8px 12px; border: none; border-radius: 6px;
+      font-size: 0.83rem; font-weight: 600; cursor: pointer;
+      background: transparent; color: #64748b; transition: all 0.2s;
+    }
+    .tab-btn:hover { background: rgba(99,102,241,0.1); color: #a5b4fc; }
+    .tab-btn.active { background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; }
+    .tab-count {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border-radius: 9999px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 1px 7px;
+      margin-left: 4px;
+    }
+    .tab-btn.active .tab-count { background: rgba(255,255,255,0.3); }
+
+    /* ── Table ── */
+    .table-wrap {
+      background: rgba(30,41,59,0.6);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .table-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(15,23,42,0.5);
+    }
+    .table-count-label { font-size: 0.83rem; color: #64748b; }
+    .table-count-label strong { color: #818cf8; font-weight: 700; }
+    .main-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .main-table th {
+      padding: 12px 16px; text-align: left;
+      font-size: 0.75rem; font-weight: 700; color: #475569;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      background: rgba(15,23,42,0.4);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .main-table th.center { text-align: center; }
+    .main-table td {
+      padding: 13px 16px;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+    .main-table tbody tr { transition: background 0.15s; }
+    .main-table tbody tr:hover { background: rgba(99,102,241,0.06); }
+    .main-table tbody tr:last-child td { border-bottom: none; }
+    .main-table td.center { text-align: center; }
+
+    .school-tag {
+      display: inline-block; padding: 2px 9px;
+      background: rgba(99,102,241,0.12); color: #a5b4fc;
+      border-radius: 4px; font-size: 0.75rem; font-weight: 600;
+    }
+    .status-badge {
+      display: inline-block; padding: 3px 10px;
+      border-radius: 9999px; font-size: 0.75rem; font-weight: 700;
+    }
+    .s-pending { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
+    .s-process { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.25); }
+    .s-done { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.25); }
+
+    .btn-answer {
+      display: inline-block; padding: 5px 12px;
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white; border-radius: 6px; font-size: 0.78rem;
+      font-weight: 700; text-decoration: none; transition: all 0.2s;
+    }
+    .btn-answer:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn-view {
+      display: inline-block; padding: 5px 12px;
+      background: rgba(255,255,255,0.07); color: #94a3b8;
+      border-radius: 6px; font-size: 0.78rem; font-weight: 600;
+      text-decoration: none; border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.2s;
+    }
+    .btn-view:hover { background: rgba(255,255,255,0.12); color: #e2e8f0; }
+
+    .empty-row td {
+      padding: 60px 16px !important;
+      text-align: center !important;
+      color: #475569 !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════ SIDEBAR ═══════════ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-badge">SUPER ADMIN</div>
+      <h2>🏫 늘봄학교 SaaS</h2>
+      <div class="role-label">본사 최고 관리자 시스템</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">마스터 관리</div>
+      <a href="/admin" class="nav-item">
+        <span class="icon">📊</span> 전체 현황 대시보드
+      </a>
+      <a href="/admin/qanda" class="nav-item active">
+        <span class="icon">💬</span> 통합 Q&amp;A 관리
+      </a>
+      <a href="/admin/schools" class="nav-item">
+        <span class="icon">🏫</span> 학교 목록 관리
+      </a>
+      <div class="nav-section-label" style="margin-top:12px;">공통 콘텐츠</div>
+      <a href="/af/ad_faq/main/sn/3267" class="nav-item">
+        <span class="icon">📖</span> FAQ/매뉴얼 관리
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="/">← 학교 관리자로 이동</a>
+    </div>
+  </aside>
+
+  <!-- ═══════════ MAIN ═══════════ -->
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <div class="topbar-title">통합 Q&amp;A 관리</div>
+        <div class="topbar-meta">전국 모든 학교에서 접수된 문의를 한곳에서 처리합니다</div>
+      </div>
+      <div class="topbar-right">
+        <div class="admin-avatar">최</div>
+        <span style="font-size:0.85rem; color:#94a3b8;">본사 관리자</span>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- ── 요약 카드 ── -->
+      <div class="summary-cards">
+        <div class="sum-card" id="card-all" onclick="setTab('all')">
+          <div class="sum-icon">📋</div>
+          <div>
+            <div class="sum-val" id="cnt-all">0</div>
+            <div class="sum-label">전체 문의</div>
+          </div>
+        </div>
+        <div class="sum-card" id="card-pending" onclick="setTab('pending')">
+          <div class="sum-icon">⚠️</div>
+          <div>
+            <div class="sum-val" style="color:#f87171;" id="cnt-pending">0</div>
+            <div class="sum-label">답변 대기</div>
+          </div>
+        </div>
+        <div class="sum-card" id="card-done" onclick="setTab('done')">
+          <div class="sum-icon">✅</div>
+          <div>
+            <div class="sum-val" style="color:#34d399;" id="cnt-done">0</div>
+            <div class="sum-label">답변 완료</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 필터 바 ── -->
+      <div class="filter-bar">
+        <select id="filter-school">
+          <option value="all">전체 학교</option>
+          <option value="3267">광주풍향초등학교</option>
+          <option value="1001">서울한강초등학교</option>
+          <option value="2002">부산해운대초등학교</option>
+          <option value="4004">대전중앙초등학교</option>
+        </select>
+        <select id="filter-type">
+          <option value="sub_con">제목 + 내용</option>
+          <option value="subject">제목</option>
+          <option value="contents">내용</option>
+        </select>
+        <input type="text" id="filter-keyword" placeholder="검색어 입력..." style="min-width:180px;">
+        <button class="btn-search" onclick="applyFilter()">🔍 검색</button>
+        <button class="btn-reset" onclick="resetFilter()">전체</button>
+      </div>
+
+      <!-- ── 상태 탭 ── -->
+      <div class="tab-bar">
+        <button class="tab-btn active" id="tab-all" onclick="setTab('all')">
+          전체 <span class="tab-count" id="tab-cnt-all">0</span>
+        </button>
+        <button class="tab-btn" id="tab-pending" onclick="setTab('pending')">
+          ⚠️ 답변 대기 <span class="tab-count" id="tab-cnt-pending">0</span>
+        </button>
+        <button class="tab-btn" id="tab-processing" onclick="setTab('processing')">
+          🔄 처리 중 <span class="tab-count" id="tab-cnt-processing">0</span>
+        </button>
+        <button class="tab-btn" id="tab-done" onclick="setTab('done')">
+          ✅ 답변 완료 <span class="tab-count" id="tab-cnt-done">0</span>
+        </button>
+      </div>
+
+      <!-- ── 테이블 ── -->
+      <div class="table-wrap">
+        <div class="table-header-row">
+          <div class="table-count-label">총 <strong id="display-count">0</strong>건의 문의</div>
+        </div>
+        <table class="main-table">
+          <thead>
+            <tr>
+              <th style="width:140px;">학교명</th>
+              <th>문의 제목</th>
+              <th style="width:90px;">작성자</th>
+              <th style="width:110px;" class="center">작성일</th>
+              <th style="width:120px;" class="center">처리 상태</th>
+              <th style="width:100px;" class="center">처리</th>
+            </tr>
+          </thead>
+          <tbody id="qna-tbody"></tbody>
+        </table>
+      </div>
+
+    </div><!-- /content -->
+  </main>
+
+  <script>
+    // ─── 데이터 로드 (localStorage 공유) ───
+    function getQnaItems() {
+      const stored = localStorage.getItem('admin_qna_items');
+      if (stored) return JSON.parse(stored);
+      const defaults = [
+        { id: 'q001', schoolId: '1001', schoolName: '서울한강초등학교', subject: '수강신청 기간 변경 요청', authorName: '박민수', contents: '다음 학기 수강신청 기간을 1주일 연장할 수 있을까요?', createdAt: '2026-08-16', status: '0', statusText: '답변대기', answerContent: '' },
+        { id: 'q002', schoolId: '2002', schoolName: '부산해운대초등학교', subject: '강좌 복사 기능이 작동하지 않습니다', authorName: '이지영', contents: '강좌 복사 버튼을 클릭하면 오류가 발생합니다. 확인 부탁드립니다.', createdAt: '2026-08-15', status: '0', statusText: '답변대기', answerContent: '' },
+        { id: 'q003', schoolId: '4004', schoolName: '대전중앙초등학교', subject: '에듀파인 연동 문의', authorName: '최성호', contents: '에듀파인 코드 자동 연동 기능 사용 방법을 알려주세요.', createdAt: '2026-08-14', status: '1', statusText: '처리중', answerContent: '' },
+        { id: 'q004', schoolId: '3267', schoolName: '광주풍향초등학교', subject: '2026학년도 1학기 늘봄학교 만족도 조사 설문지', authorName: '김혜련', contents: '2026학년도 바뀐 설문지 보내드립니다. 감사합니다.', createdAt: '2026-06-01', status: '3', statusText: '답변완료', answerContent: '자료 올려 주셔서 감사합니다. 4가지 샘플 설문에 등록해드렸습니다. 확인 바랍니다.' },
+        { id: 'q005', schoolId: '3267', schoolName: '광주풍향초등학교', subject: '지원금 스쿨뱅킹 현황', authorName: '김혜련', contents: '1학기 지원금 스쿨뱅킹 수납 현황 파일 확인 부탁드립니다.', createdAt: '2025-06-13', status: '3', statusText: '답변완료', answerContent: '스쿨뱅킹 집계 데이터 정상 반영 완료되었습니다.' },
+      ];
+      localStorage.setItem('admin_qna_items', JSON.stringify(defaults));
+      return defaults;
+    }
+
+    let allItems = getQnaItems();
+    let currentTab = 'all';
+    let filterSchool = 'all';
+    let filterKeyword = '';
+    let filterType = 'sub_con';
+
+    function updateCounts(items) {
+      const all = items.length;
+      const pending = items.filter(i => i.status === '0').length;
+      const processing = items.filter(i => i.status === '1').length;
+      const done = items.filter(i => i.status === '2' || i.status === '3').length;
+
+      document.getElementById('cnt-all').textContent = all;
+      document.getElementById('cnt-pending').textContent = pending;
+      document.getElementById('cnt-done').textContent = done;
+      document.getElementById('tab-cnt-all').textContent = all;
+      document.getElementById('tab-cnt-pending').textContent = pending;
+      document.getElementById('tab-cnt-processing').textContent = processing;
+      document.getElementById('tab-cnt-done').textContent = done;
+    }
+
+    function getStatusBadge(item) {
+      if (item.status === '0') return '<span class="status-badge s-pending">⚠️ 답변대기</span>';
+      if (item.status === '1') return '<span class="status-badge s-process">🔄 처리중</span>';
+      return '<span class="status-badge s-done">✅ 답변완료</span>';
+    }
+
+    function getActionBtn(item) {
+      if (item.status === '0' || item.status === '1') {
+        return `<a href="/admin/qanda/view?id=${item.id}" class="btn-answer">답변하기</a>`;
+      }
+      return `<a href="/admin/qanda/view?id=${item.id}" class="btn-view">내용 보기</a>`;
+    }
+
+    function renderTable() {
+      let items = [...allItems];
+
+      // 학교 필터
+      if (filterSchool !== 'all') {
+        items = items.filter(i => i.schoolId === filterSchool);
+      }
+
+      // 키워드 필터
+      if (filterKeyword.trim()) {
+        const kw = filterKeyword.trim().toLowerCase();
+        items = items.filter(i => {
+          if (filterType === 'subject') return i.subject.toLowerCase().includes(kw);
+          if (filterType === 'contents') return (i.contents || '').toLowerCase().includes(kw);
+          return i.subject.toLowerCase().includes(kw) || (i.contents || '').toLowerCase().includes(kw);
+        });
+      }
+
+      // 탭 필터
+      if (currentTab === 'pending') items = items.filter(i => i.status === '0');
+      else if (currentTab === 'processing') items = items.filter(i => i.status === '1');
+      else if (currentTab === 'done') items = items.filter(i => i.status === '2' || i.status === '3');
+
+      // 정렬: 답변대기 최우선 → 처리중 → 완료, 같으면 날짜 내림차순
+      const sortOrder = { '0': 0, '1': 1, '2': 2, '3': 3 };
+      items.sort((a, b) => {
+        const diff = sortOrder[a.status] - sortOrder[b.status];
+        if (diff !== 0) return diff;
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      });
+
+      updateCounts(allItems);
+      document.getElementById('display-count').textContent = items.length;
+
+      const tbody = document.getElementById('qna-tbody');
+      if (items.length === 0) {
+        tbody.innerHTML = `<tr class="empty-row"><td colspan="6">📭 조회된 문의가 없습니다.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = items.map(item => `
+        <tr>
+          <td><span class="school-tag">${item.schoolName}</span></td>
+          <td style="font-weight:600; color:#e2e8f0; max-width:260px;">
+            <a href="/admin/qanda/view?id=${item.id}" style="color:#e2e8f0; text-decoration:none;" onmouseover="this.style.color='#818cf8'" onmouseout="this.style.color='#e2e8f0'">
+              ${item.subject}
+            </a>
+          </td>
+          <td>${item.authorName}</td>
+          <td class="center" style="color:#64748b;">${item.createdAt}</td>
+          <td class="center">${getStatusBadge(item)}</td>
+          <td class="center">${getActionBtn(item)}</td>
+        </tr>
+      `).join('');
+    }
+
+    function setTab(tab) {
+      currentTab = tab;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      const tabMap = { all: 'tab-all', pending: 'tab-pending', processing: 'tab-processing', done: 'tab-done' };
+      const el = document.getElementById(tabMap[tab]);
+      if (el) el.classList.add('active');
+      renderTable();
+    }
+
+    function applyFilter() {
+      filterSchool = document.getElementById('filter-school').value;
+      filterKeyword = document.getElementById('filter-keyword').value;
+      filterType = document.getElementById('filter-type').value;
+      renderTable();
+    }
+
+    function resetFilter() {
+      filterSchool = 'all';
+      filterKeyword = '';
+      filterType = 'sub_con';
+      currentTab = 'all';
+      document.getElementById('filter-school').value = 'all';
+      document.getElementById('filter-keyword').value = '';
+      document.getElementById('filter-type').value = 'sub_con';
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-all').classList.add('active');
+      renderTable();
+    }
+
+    document.getElementById('filter-keyword').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') applyFilter();
+    });
+
+    // 초기 렌더
+    renderTable();
+  </script>
+</body>
+</html>

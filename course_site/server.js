@@ -42,6 +42,11 @@ app.get('/help/go_data/num/:num/data/:type', (req, res) => {
   return res.redirect(`/api/manual/doc/${num}`);
 });
 
+// 메인 페이지
+app.get(['/', '/main', '/index.html'], (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 // ==================== SUPER ADMIN (MASTER) ROUTES ====================
 // 대시보드
 app.get(['/admin', '/admin/'], (req, res) => {
@@ -63,11 +68,23 @@ app.get(['/admin/schools', '/admin/schools/'], (req, res) => {
   res.sendFile(path.join(__dirname, 'admin', 'schools', 'index.html'));
 });
 
-// Serve static files
+// Serve static files BEFORE HTML route patterns (prevents CSS/JS from being intercepted by :school_id param routes)
 app.use(express.static(path.join(__dirname)));
 
 // ==================== DBDBSCHOOL CLONE ROUTES ====================
-app.get(['/af/ad_lec/lists/sn/3267', '/af/ad_lec/lists/sn/3267/'], (req, res) => {
+app.get(['/af/ad_lec/lists/sn/:school_id', '/af/ad_lec/lists/sn/:school_id/'], (req, res) => {
+  res.sendFile(path.join(__dirname, 'af/ad_lec/lists/sn/index.html'));
+});
+
+app.get(['/af/ad_app/lists/sn/:school_id', '/af/ad_app/lists/sn/:school_id/'], (req, res) => {
+  res.sendFile(path.join(__dirname, 'af/ad_lec/lists/sn/index.html'));
+});
+
+app.get(['/af/ad_faq/main/sn/:school_id', '/af/ad_faq/main/sn/:school_id/'], (req, res) => {
+  res.sendFile(path.join(__dirname, 'af/ad_lec/lists/sn/index.html'));
+});
+
+app.get(['/af/qanda/lists/sn/:school_id', '/af/qanda/lists/sn/:school_id/'], (req, res) => {
   res.sendFile(path.join(__dirname, 'af/ad_lec/lists/sn/index.html'));
 });
 
@@ -83,9 +100,7 @@ app.get(['/member/faq/sn/3267', '/member/faq/sn/3267/'], (req, res) => {
   res.sendFile(path.join(__dirname, 'member/faq/sn/3267/index.html'));
 });
 
-app.get(['/af/ad_app/lists/sn/:school_id', '/af/ad_app/lists/sn/:school_id/'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'af/ad_lec/lists/sn/index.html'));
-});
+// (express.static has been moved above to before DBDBSCHOOL CLONE ROUTES)
 
 // Dynamic store for school 3267 courses
 let dbdbschool3267Courses = [

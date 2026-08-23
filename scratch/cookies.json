@@ -1,0 +1,92 @@
+[
+  {
+    "name": "aws-waf-token",
+    "value": "46eb60c9-40f8-4b94-a95b-0eb716dd28e2:AgoAtw8M3+QaAAAA:yrEMM7HSf97UCqic1v8QEUYs/X/5xyzGHriw1bRVQBU9u3g1XayhNRkxHbUu7rY6t+KtPJ0+XPQ0uUMQwQ3m4pU6vvzRt5DjESgoimfZK629tZFynpFV39hS6MOEhakP/nPE+5MEueL/kZOeAFgas9nPbHanUMvAxp9CeyBYTTRABukHV88x4YNg1YCIjDE0BBAqUb20HqJuZdbrMIaOEuIaBIG58u5vdx4+D1Rfk4sD0Lq2TdgCc5f5xsvOq8qGOGgShb0nyYQHdUo=",
+    "domain": ".www.dbdbschool.kr",
+    "path": "/",
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "csrf_cookie_name",
+    "value": "4c3ea9ccf4b9fc499840e99f31040ef1",
+    "domain": ".www.dbdbschool.kr",
+    "path": "/",
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Strict"
+  },
+  {
+    "name": "csrf_cookie_name_uptime",
+    "value": "20260817122903",
+    "domain": ".www.dbdbschool.kr",
+    "path": "/",
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Strict"
+  },
+  {
+    "name": "xm_cus_ugnum",
+    "value": "36a9948dd92926816d9a0b61f02831f58ab9ed4aafb8ee6bdd970d5b632f79f850753b269eb0edeb3ed2f21cf773cd5c60313a80812e1213414b59bd13933504QqBiSyIekk3BAwA6mMSqRyUc2c8VtblXOQyXZ5bju0yHWtTFmb2wuPlD1iuX9mhdXy117pgL2sY%2BRc5dLbEWzCCx8j5g7hQgpYs6PQ65vVo%3D",
+    "domain": ".www.dbdbschool.kr",
+    "path": "/",
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "xm_session",
+    "value": "4316ddc66b1d1106058e2b6cbefdc6c3",
+    "domain": ".www.dbdbschool.kr",
+    "path": "/",
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "aws-waf-token",
+    "value": "46eb60c9-40f8-4b94-a95b-0eb716dd28e2:AgoAtw8M3+QaAAAA:yrEMM7HSf97UCqic1v8QEUYs/X/5xyzGHriw1bRVQBU9u3g1XayhNRkxHbUu7rY6t+KtPJ0+XPQ0uUMQwQ3m4pU6vvzRt5DjESgoimfZK629tZFynpFV39hS6MOEhakP/nPE+5MEueL/kZOeAFgas9nPbHanUMvAxp9CeyBYTTRABukHV88x4YNg1YCIjDE0BBAqUb20HqJuZdbrMIaOEuIaBIG58u5vdx4+D1Rfk4sD0Lq2TdgCc5f5xsvOq8qGOGgShb0nyYQHdUo=",
+    "domain": "www.dbdbschool.kr",
+    "path": "/",
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "csrf_cookie_name",
+    "value": "4c3ea9ccf4b9fc499840e99f31040ef1",
+    "domain": "www.dbdbschool.kr",
+    "path": "/",
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Strict"
+  },
+  {
+    "name": "csrf_cookie_name_uptime",
+    "value": "20260817122903",
+    "domain": "www.dbdbschool.kr",
+    "path": "/",
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Strict"
+  },
+  {
+    "name": "xm_cus_ugnum",
+    "value": "36a9948dd92926816d9a0b61f02831f58ab9ed4aafb8ee6bdd970d5b632f79f850753b269eb0edeb3ed2f21cf773cd5c60313a80812e1213414b59bd13933504QqBiSyIekk3BAwA6mMSqRyUc2c8VtblXOQyXZ5bju0yHWtTFmb2wuPlD1iuX9mhdXy117pgL2sY%2BRc5dLbEWzCCx8j5g7hQgpYs6PQ65vVo%3D",
+    "domain": "www.dbdbschool.kr",
+    "path": "/",
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "xm_session",
+    "value": "4316ddc66b1d1106058e2b6cbefdc6c3",
+    "domain": "www.dbdbschool.kr",
+    "path": "/",
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  }
+]

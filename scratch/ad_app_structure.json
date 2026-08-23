@@ -1,0 +1,3238 @@
+{
+  "title": "신청목록 - 신청자관리 - 늘봄학교",
+  "pageHeader": "늘봄학교",
+  "lnb": [],
+  "tabs": [],
+  "buttons": [
+    {
+      "text": "상세검색 열기",
+      "id": "main_control_box_btn01",
+      "className": "main_control_box_btn btn btn-default btn-sm",
+      "onclick": null,
+      "href": "#none;",
+      "tag": "A"
+    },
+    {
+      "text": "검색",
+      "id": "",
+      "className": "btn btn-default  btn-sm",
+      "onclick": null,
+      "href": null,
+      "tag": "INPUT"
+    },
+    {
+      "text": "전체",
+      "id": "",
+      "className": "btn btn-default  btn-sm",
+      "onclick": "location.href='https://www.dbdbschool.kr/af/ad_app/lists/sn/3267/sld/all/slp/all';",
+      "href": null,
+      "tag": "INPUT"
+    },
+    {
+      "text": "검색결과출력",
+      "id": "",
+      "className": "btn btn-success btn-sm",
+      "onclick": "return chk_excel();",
+      "href": "https://www.dbdbschool.kr/af/ad_app/listse/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+      "tag": "A"
+    },
+    {
+      "text": "대기자목록",
+      "id": "",
+      "className": "btn btn-default btn-sm ",
+      "onclick": null,
+      "href": "https://www.dbdbschool.kr/af/ad_wait/lists/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+      "tag": "A"
+    },
+    {
+      "text": "신청자등록",
+      "id": "",
+      "className": "btn btn-primary btn-sm",
+      "onclick": "location.href='https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc'",
+      "href": null,
+      "tag": "INPUT"
+    },
+    {
+      "text": "추가기능..",
+      "id": "main_control_box_btn02",
+      "className": "main_control_box_btn btn btn-default btn-sm",
+      "onclick": null,
+      "href": "#none;",
+      "tag": "A"
+    },
+    {
+      "text": "신청자일괄입력",
+      "id": "",
+      "className": "btn btn-warning btn-sm ",
+      "onclick": null,
+      "href": "https://www.dbdbschool.kr/af/ad_app/input/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+      "tag": "A"
+    },
+    {
+      "text": "수강료입력",
+      "id": "",
+      "className": "btn btn-warning btn-sm ",
+      "onclick": null,
+      "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+      "tag": "A"
+    },
+    {
+      "text": "신청자복사",
+      "id": "",
+      "className": "btn btn-info btn-sm ",
+      "onclick": null,
+      "href": "https://www.dbdbschool.kr/af/ad_app/copy/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+      "tag": "A"
+    },
+    {
+      "text": "추가/취소자조회",
+      "id": "",
+      "className": "btn btn-default btn-sm ",
+      "onclick": null,
+      "href": "https://www.dbdbschool.kr/af/ad_app/com/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+      "tag": "A"
+    },
+    {
+      "text": "미신청자목록",
+      "id": "",
+      "className": "btn btn-default btn-sm ",
+      "onclick": null,
+      "href": "https://www.dbdbschool.kr/af/ad_app/list1/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+      "tag": "A"
+    },
+    {
+      "text": "신청결과엑셀출력",
+      "id": "",
+      "className": "btn btn-success btn-sm ",
+      "onclick": null,
+      "href": "https://www.dbdbschool.kr/af/ad_app/excel/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+      "tag": "A"
+    },
+    {
+      "text": "수강신청서출력",
+      "id": "",
+      "className": "btn btn-success btn-sm ",
+      "onclick": null,
+      "href": "https://www.dbdbschool.kr/af/ad_app/pdf/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+      "tag": "A"
+    },
+    {
+      "text": "고지서출력",
+      "id": "",
+      "className": "btn btn-success btn-sm ",
+      "onclick": null,
+      "href": "https://www.dbdbschool.kr/af/ad_app/pdf1/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+      "tag": "A"
+    },
+    {
+      "text": "시간표출력",
+      "id": "",
+      "className": "btn btn-success btn-sm ",
+      "onclick": null,
+      "href": "https://www.dbdbschool.kr/af/ad_app/pdf2/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+      "tag": "A"
+    },
+    {
+      "text": "적용하기",
+      "id": "",
+      "className": "btn btn-default",
+      "onclick": null,
+      "href": null,
+      "tag": "INPUT"
+    },
+    {
+      "text": "로그인",
+      "id": "",
+      "className": "go_btn",
+      "onclick": null,
+      "href": null,
+      "tag": "INPUT"
+    },
+    {
+      "text": "×",
+      "id": "",
+      "className": "close",
+      "onclick": null,
+      "href": null,
+      "tag": "BUTTON"
+    },
+    {
+      "text": "2단계 인증",
+      "id": "",
+      "className": "btn btn-primary",
+      "onclick": null,
+      "href": null,
+      "tag": "INPUT"
+    },
+    {
+      "text": "×",
+      "id": "",
+      "className": "close",
+      "onclick": null,
+      "href": null,
+      "tag": "BUTTON"
+    },
+    {
+      "text": "확인",
+      "id": "",
+      "className": "btn btn-primary",
+      "onclick": null,
+      "href": "#none;",
+      "tag": "A"
+    }
+  ],
+  "searchForm": [
+    {
+      "action": "https://www.dbdbschool.kr/af/ad_app/lists/sn/3267",
+      "method": "get",
+      "id": "fm_list_search1",
+      "className": "",
+      "inputs": [
+        {
+          "tagName": "SELECT",
+          "type": "select-one",
+          "name": "sld",
+          "id": "",
+          "value": "10",
+          "options": [
+            {
+              "text": "=강좌구분=",
+              "value": "all",
+              "selected": false
+            },
+            {
+              "text": "3월",
+              "value": "5",
+              "selected": false
+            },
+            {
+              "text": "26년 4월",
+              "value": "6",
+              "selected": false
+            },
+            {
+              "text": "26년 5월",
+              "value": "7",
+              "selected": false
+            },
+            {
+              "text": "26년 6월",
+              "value": "8",
+              "selected": false
+            },
+            {
+              "text": "26년 7월",
+              "value": "9",
+              "selected": false
+            },
+            {
+              "text": "26년 8월",
+              "value": "10",
+              "selected": true
+            },
+            {
+              "text": "26년 9월",
+              "value": "11",
+              "selected": false
+            }
+          ]
+        },
+        {
+          "tagName": "SELECT",
+          "type": "select-one",
+          "name": "slp",
+          "id": "",
+          "value": "all",
+          "options": [
+            {
+              "text": "=늘봄과정=",
+              "value": "all",
+              "selected": true
+            },
+            {
+              "text": "방과후",
+              "value": "1",
+              "selected": false
+            },
+            {
+              "text": "맞춤형",
+              "value": "2",
+              "selected": false
+            },
+            {
+              "text": "돌봄",
+              "value": "3",
+              "selected": false
+            }
+          ]
+        },
+        {
+          "tagName": "SELECT",
+          "type": "select-one",
+          "name": "sln",
+          "id": "sel_lec_num",
+          "value": "",
+          "options": [
+            {
+              "text": "=강좌전체=",
+              "value": "",
+              "selected": true
+            },
+            {
+              "text": "[26년 8월] (금) 돌봄 4부(돌봄전담사,19명)",
+              "value": "1552375",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] (금)돌봄 1부(돌봄전담사,5명)",
+              "value": "1552291",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] (금)돌봄 2부(돌봄전담사,12명)",
+              "value": "1552292",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] (금)돌봄 3부(돌봄전담사,20명)",
+              "value": "1552293",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] (목) 돌봄 4부(돌봄전담사,20명)",
+              "value": "1552374",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] (목)돌봄 1부(돌봄전담사,2명)",
+              "value": "1552288",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] (목)돌봄 2부(돌봄전담사,4명)",
+              "value": "1552289",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] (목)돌봄 3부(돌봄전담사,10명)",
+              "value": "1552290",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] (수)돌봄 1부(돌봄전담사,1명)",
+              "value": "1552284",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] (수)돌봄 2부(돌봄전담사,4명)",
+              "value": "1552285",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] (수)돌봄 3부(돌봄전담사,10명)",
+              "value": "1552286",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] (수)돌봄 4부(돌봄전담사,20명)",
+              "value": "1552287",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] (월)돌봄 1부(돌봄전담사,1명)",
+              "value": "1552277",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] (월)돌봄 2부(돌봄전담사,4명)",
+              "value": "1552278",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] (월)돌봄 3부(돌봄전담사,10명)",
+              "value": "1552279",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] (월)돌봄 4부(돌봄전담사,20명)",
+              "value": "1552280",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] (화) 돌봄 4부(돌봄전담사,20명)",
+              "value": "1552373",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] (화)돌봄 1부(돌봄전담사,2명)",
+              "value": "1552281",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] (화)돌봄 2부(돌봄전담사,4명)",
+              "value": "1552282",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] (화)돌봄 3부(돌봄전담사,10명)",
+              "value": "1552283",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 논술 1부(박지숙,17명)",
+              "value": "1552299",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 논술 2부(박지숙,11명)",
+              "value": "1552300",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 논술 3부(박지숙,0명)",
+              "value": "1552301",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 놀이체육 1부(강태연,11명)",
+              "value": "1552297",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 놀이체육 2부(강태연,15명)",
+              "value": "1552296",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 뉴스포츠 1부(박지연,30명)",
+              "value": "1552324",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 뉴스포츠 2부(박지연,20명)",
+              "value": "1552325",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 댄스 1부(김지향,0명)",
+              "value": "1552302",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 댄스 2부(김지향,16명)",
+              "value": "1552303",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 댄스 3부(김지향,6명)",
+              "value": "1552304",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 독후활동미술놀이 1부(임은희,9명)",
+              "value": "1552295",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 독후활동미술놀이 2부(임은희,20명)",
+              "value": "1552294",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 로봇과학 1부(최정호,14명)",
+              "value": "1552305",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 로봇과학 2부(최정호,22명)",
+              "value": "1552306",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 로봇과학 3부(최정호,6명)",
+              "value": "1552307",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 바둑 1부(박경도,8명)",
+              "value": "1552313",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 바둑 2부(박경도,4명)",
+              "value": "1552314",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 바이올린 1부(천윤아,8명)",
+              "value": "1552315",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 바이올린 2부(천윤아,11명)",
+              "value": "1552316",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 생활영어 1부(서인경,9명)",
+              "value": "1552326",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 생활영어 2부(서인경,4명)",
+              "value": "1552327",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 아침늘봄 (월~금 08:00~08:40)(이금진,5명)",
+              "value": "1552298",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 주산 1부(박은화,8명)",
+              "value": "1552308",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 주산 2부(박은화,2명)",
+              "value": "1552309",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 주산 3부(박은화,3명)",
+              "value": "1552310",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 창의미술 1부(김언주,20명)",
+              "value": "1552317",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 창의미술 2부(김언주,10명)",
+              "value": "1552318",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 창의보드 1부(정진화,10명)",
+              "value": "1552275",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 창의보드 2부(정진화,18명)",
+              "value": "1552276",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 창의수학 1부(김경아,17명)",
+              "value": "1552328",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 창의수학 2부(김경아,12명)",
+              "value": "1552329",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 컴퓨터 월,수 1부(김윤정,15명)",
+              "value": "1552319",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 컴퓨터 월,수 2부(김윤정,29명)",
+              "value": "1552320",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 컴퓨터 월,수 3부(김윤정,22명)",
+              "value": "1552321",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 컴퓨터 화,목 1부(김윤정,22명)",
+              "value": "1552322",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 컴퓨터 화,목 2부(김윤정,29명)",
+              "value": "1552323",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 컴퓨터 화,목 3부(김윤정,28명)",
+              "value": "1552429",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 한자 1부(김재표,13명)",
+              "value": "1552311",
+              "selected": false
+            },
+            {
+              "text": "[26년 8월] 한자 2부(김재표,10명)",
+              "value": "1552312",
+              "selected": false
+            }
+          ]
+        },
+        {
+          "tagName": "SELECT",
+          "type": "select-one",
+          "name": "sgr",
+          "id": "sgr",
+          "value": "",
+          "options": [
+            {
+              "text": "=학년=",
+              "value": "",
+              "selected": true
+            },
+            {
+              "text": "1",
+              "value": "1",
+              "selected": false
+            },
+            {
+              "text": "2",
+              "value": "2",
+              "selected": false
+            },
+            {
+              "text": "3",
+              "value": "3",
+              "selected": false
+            },
+            {
+              "text": "4",
+              "value": "4",
+              "selected": false
+            },
+            {
+              "text": "5",
+              "value": "5",
+              "selected": false
+            },
+            {
+              "text": "6",
+              "value": "6",
+              "selected": false
+            }
+          ]
+        },
+        {
+          "tagName": "SELECT",
+          "type": "select-one",
+          "name": "scl",
+          "id": "scl",
+          "value": "",
+          "options": [
+            {
+              "text": "=반=",
+              "value": "",
+              "selected": true
+            },
+            {
+              "text": "1",
+              "value": "1",
+              "selected": false
+            },
+            {
+              "text": "2",
+              "value": "2",
+              "selected": false
+            },
+            {
+              "text": "3",
+              "value": "3",
+              "selected": false
+            },
+            {
+              "text": "4",
+              "value": "4",
+              "selected": false
+            },
+            {
+              "text": "5",
+              "value": "5",
+              "selected": false
+            },
+            {
+              "text": "6",
+              "value": "6",
+              "selected": false
+            },
+            {
+              "text": "7",
+              "value": "7",
+              "selected": false
+            },
+            {
+              "text": "8",
+              "value": "8",
+              "selected": false
+            },
+            {
+              "text": "9",
+              "value": "9",
+              "selected": false
+            },
+            {
+              "text": "10",
+              "value": "10",
+              "selected": false
+            },
+            {
+              "text": "11",
+              "value": "11",
+              "selected": false
+            },
+            {
+              "text": "12",
+              "value": "12",
+              "selected": false
+            }
+          ]
+        },
+        {
+          "tagName": "SELECT",
+          "type": "select-one",
+          "name": "st",
+          "id": "st",
+          "value": "app_mem_name",
+          "options": [
+            {
+              "text": "이름",
+              "value": "app_mem_name",
+              "selected": true
+            },
+            {
+              "text": "연락처",
+              "value": "tel",
+              "selected": false
+            }
+          ]
+        },
+        {
+          "tagName": "INPUT",
+          "type": "text",
+          "name": "sw",
+          "id": "s_word",
+          "value": "",
+          "placeholder": "검색어"
+        },
+        {
+          "tagName": "INPUT",
+          "type": "submit",
+          "name": "",
+          "id": "",
+          "value": "검색",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "button",
+          "name": "",
+          "id": "",
+          "value": "전체",
+          "placeholder": ""
+        }
+      ]
+    },
+    {
+      "action": "https://www.dbdbschool.kr/af/ad_app/lists/sn/3267",
+      "method": "post",
+      "id": "fm_list",
+      "className": "",
+      "inputs": [
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "value": "2026-08-17 15:01:45",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "lec_num",
+          "id": "",
+          "value": "",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "check_all",
+          "id": "check_all",
+          "value": "",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21016254",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21016254",
+          "id": "stu_hp_info_21016254",
+          "value": "^최인화^010-3331-1011",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21016237",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21016237",
+          "id": "stu_hp_info_21016237",
+          "value": "010-3718-3500^최경신^010-8108-3500",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21016247",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21016247",
+          "id": "stu_hp_info_21016247",
+          "value": "^정태정^010-2377-2400",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21016260",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21016260",
+          "id": "stu_hp_info_21016260",
+          "value": "010-5334-7217^임현주^010-5334-7217",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21016240",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21016240",
+          "id": "stu_hp_info_21016240",
+          "value": "010-5219-2196^김연지^010-5219-2196",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21016242",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21016242",
+          "id": "stu_hp_info_21016242",
+          "value": "^김연지^010-5219-2196",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21016276",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21016276",
+          "id": "stu_hp_info_21016276",
+          "value": "010-3373-3683^배신애^010-3373-3683",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21016252",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21016252",
+          "id": "stu_hp_info_21016252",
+          "value": "010-9073-5302^김자람^010-9073-5302",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21016250",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21016250",
+          "id": "stu_hp_info_21016250",
+          "value": "010-5445-0830^선민희^010-6276-4555",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21016257",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21016257",
+          "id": "stu_hp_info_21016257",
+          "value": "010-9633-1848^이환나^010-9633-1848",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21016266",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21016266",
+          "id": "stu_hp_info_21016266",
+          "value": "010-9165-9331^김선화^010-2913-9331",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21016262",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21016262",
+          "id": "stu_hp_info_21016262",
+          "value": "010-8589-0432^김새야^010-7491-2340",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21016290",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21016290",
+          "id": "stu_hp_info_21016290",
+          "value": "010-4063-0090^변희숙^010-4063-0090",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21016282",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21016282",
+          "id": "stu_hp_info_21016282",
+          "value": "^김시온^010-6624-0627",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21016288",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21016288",
+          "id": "stu_hp_info_21016288",
+          "value": "010-8204-1807^김상희^010-2734-8010",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21016279",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21016279",
+          "id": "stu_hp_info_21016279",
+          "value": "010-3123-5981^정지현^010-9126-3697",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21016318",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21016318",
+          "id": "stu_hp_info_21016318",
+          "value": "010-4562-2495^최미경^010-4562-2495",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21016286",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21016286",
+          "id": "stu_hp_info_21016286",
+          "value": "^정태정^010-2377-2400",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21016297",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21016297",
+          "id": "stu_hp_info_21016297",
+          "value": "^김명혜^010-6682-3848",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21197006",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21197006",
+          "id": "stu_hp_info_21197006",
+          "value": "010-4611-7747^공현미^010-4611-7747",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21001508",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21001508",
+          "id": "stu_hp_info_21001508",
+          "value": "010-3709-4181^최유현^010-3929-4181",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21196053",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21196053",
+          "id": "stu_hp_info_21196053",
+          "value": "010-9165-9331^김선화^010-2913-9331",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21191604",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21191604",
+          "id": "stu_hp_info_21191604",
+          "value": "010-3746-1741^장정화^010-3009-1741",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21001511",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21001511",
+          "id": "stu_hp_info_21001511",
+          "value": "010-9613-3683^최지우^010-8535-5090",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21191512",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21191512",
+          "id": "stu_hp_info_21191512",
+          "value": "010-6525-7350^윤희정^010-7667-7350",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21001513",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21001513",
+          "id": "stu_hp_info_21001513",
+          "value": "^손혜진^010-5036-9943",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21001514",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21001514",
+          "id": "stu_hp_info_21001514",
+          "value": "010-5334-7217^임현주^010-5334-7217",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21001515",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21001515",
+          "id": "stu_hp_info_21001515",
+          "value": "010-6632-6786^김해린^010-6632-6786",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21001516",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21001516",
+          "id": "stu_hp_info_21001516",
+          "value": "010-3709-4181^최유현^010-3929-4181",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21191549",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21191549",
+          "id": "stu_hp_info_21191549",
+          "value": "010-5508-9969^조세희^010-5508-9969",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21001520",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21001520",
+          "id": "stu_hp_info_21001520",
+          "value": "010-9682-3120^백샛별^010-6684-3120",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21001521",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21001521",
+          "id": "stu_hp_info_21001521",
+          "value": "010-4063-0090^변희숙^010-4063-0090",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21191502",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21191502",
+          "id": "stu_hp_info_21191502",
+          "value": "^김시온^010-6624-0627",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21195827",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21195827",
+          "id": "stu_hp_info_21195827",
+          "value": "010-3123-5981^정지현^010-9126-3697",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21191591",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21191591",
+          "id": "stu_hp_info_21191591",
+          "value": "010-3746-1741^장정화^010-3009-1741",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21001525",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21001525",
+          "id": "stu_hp_info_21001525",
+          "value": "010-9613-3683^최지우^010-8535-5090",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21195347",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21195347",
+          "id": "stu_hp_info_21195347",
+          "value": "010-5550-3763^강가람^010-5550-3763",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21001526",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21001526",
+          "id": "stu_hp_info_21001526",
+          "value": "^손혜진^010-5036-9943",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21001527",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21001527",
+          "id": "stu_hp_info_21001527",
+          "value": "010-3718-3500^최경신^010-8108-3500",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21191659",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21191659",
+          "id": "stu_hp_info_21191659",
+          "value": "^정태정^010-2377-2400",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21001529",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21001529",
+          "id": "stu_hp_info_21001529",
+          "value": "010-5334-7217^임현주^010-5334-7217",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21191501",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21191501",
+          "id": "stu_hp_info_21191501",
+          "value": "010-6632-6786^김해린^010-6632-6786",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21191681",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21191681",
+          "id": "stu_hp_info_21191681",
+          "value": "010-3373-3683^배신애^010-3373-3683",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21193620",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21193620",
+          "id": "stu_hp_info_21193620",
+          "value": "010-9073-5302^김자람^010-9073-5302",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21193405",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21193405",
+          "id": "stu_hp_info_21193405",
+          "value": "010-3709-4181^최유현^010-3929-4181",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21193782",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21193782",
+          "id": "stu_hp_info_21193782",
+          "value": "010-9633-1848^이환나^010-9633-1848",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21193567",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21193567",
+          "id": "stu_hp_info_21193567",
+          "value": "010-8589-0432^김새야^010-7491-2340",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21191515",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21191515",
+          "id": "stu_hp_info_21191515",
+          "value": "010-4063-0090^변희숙^010-4063-0090",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21191506",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21191506",
+          "id": "stu_hp_info_21191506",
+          "value": "^김시온^010-6624-0627",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "checkbox",
+          "name": "data_checked[]",
+          "id": "",
+          "value": "21191813",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "stu_hp_info_21191813",
+          "id": "stu_hp_info_21191813",
+          "value": "010-8204-1807^김상희^010-2734-8010",
+          "placeholder": ""
+        },
+        {
+          "tagName": "SELECT",
+          "type": "select-one",
+          "name": "update_type",
+          "id": "",
+          "value": "",
+          "options": [
+            {
+              "text": "==== 일괄적용 ====",
+              "value": "",
+              "selected": true
+            },
+            {
+              "text": "신청자 이동",
+              "value": "move",
+              "selected": false
+            },
+            {
+              "text": "-------------------------",
+              "value": "",
+              "selected": false
+            },
+            {
+              "text": "신청자 삭제",
+              "value": "del",
+              "selected": false
+            }
+          ]
+        },
+        {
+          "tagName": "INPUT",
+          "type": "submit",
+          "name": "",
+          "id": "",
+          "value": "적용하기",
+          "placeholder": ""
+        }
+      ]
+    },
+    {
+      "action": "https://www.dbdbschool.kr/af/ad_app/cancel/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+      "method": "post",
+      "id": "fm_lec_cancel",
+      "className": "",
+      "inputs": [
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "value": "2026-08-17 15:01:45",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "num",
+          "id": "cancel_num",
+          "value": "",
+          "placeholder": ""
+        }
+      ]
+    },
+    {
+      "action": "https://www.dbdbschool.kr/af/ad_app/stu_hp/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+      "method": "post",
+      "id": "fm_stu_hp",
+      "className": "",
+      "inputs": [
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "value": "2026-08-17 15:01:45",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "num",
+          "id": "stu_hp_num",
+          "value": "",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "mem_hp",
+          "id": "update_stu_hp",
+          "value": "",
+          "placeholder": ""
+        }
+      ]
+    },
+    {
+      "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+      "method": "post",
+      "id": "fm_comm_login",
+      "className": "",
+      "inputs": [
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "value": "2026-08-17 15:01:45",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "text",
+          "name": "login_id",
+          "id": "login_id",
+          "value": "",
+          "placeholder": "아이디"
+        },
+        {
+          "tagName": "INPUT",
+          "type": "password",
+          "name": "login_passwd",
+          "id": "login_passwd",
+          "value": "",
+          "placeholder": "비밀번호"
+        },
+        {
+          "tagName": "INPUT",
+          "type": "submit",
+          "name": "submit",
+          "id": "",
+          "value": "로그인",
+          "placeholder": ""
+        }
+      ]
+    },
+    {
+      "action": "https://www.dbdbschool.kr/member/auth2/modal/Y/sn/3267",
+      "method": "post",
+      "id": "fm_comm_auth2",
+      "className": "",
+      "inputs": [
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "value": "2026-08-17 15:01:45",
+          "placeholder": ""
+        },
+        {
+          "tagName": "INPUT",
+          "type": "text",
+          "name": "otp_num",
+          "id": "",
+          "value": "",
+          "placeholder": "OTP 인증번호를 입력하세요."
+        },
+        {
+          "tagName": "INPUT",
+          "type": "submit",
+          "name": "submit",
+          "id": "",
+          "value": "2단계 인증",
+          "placeholder": ""
+        }
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "tableIndex": 0,
+      "className": "table AlignCenter table-hover_sm list MAT0",
+      "id": "",
+      "headers": [
+        {
+          "text": "",
+          "colspan": 1,
+          "rowspan": 1
+        },
+        {
+          "text": "연번",
+          "colspan": 1,
+          "rowspan": 1
+        },
+        {
+          "text": "구분\n(늘봄과정)",
+          "colspan": 1,
+          "rowspan": 1
+        },
+        {
+          "text": "강좌명",
+          "colspan": 1,
+          "rowspan": 1
+        },
+        {
+          "text": "학년",
+          "colspan": 1,
+          "rowspan": 1
+        },
+        {
+          "text": "반",
+          "colspan": 1,
+          "rowspan": 1
+        },
+        {
+          "text": "번호",
+          "colspan": 1,
+          "rowspan": 1
+        },
+        {
+          "text": "이름",
+          "colspan": 1,
+          "rowspan": 1
+        },
+        {
+          "text": "연락처",
+          "colspan": 1,
+          "rowspan": 1
+        },
+        {
+          "text": "수강료",
+          "colspan": 1,
+          "rowspan": 1
+        },
+        {
+          "text": "수용비",
+          "colspan": 1,
+          "rowspan": 1
+        },
+        {
+          "text": "강사료",
+          "colspan": 1,
+          "rowspan": 1
+        },
+        {
+          "text": "교재비",
+          "colspan": 1,
+          "rowspan": 1
+        },
+        {
+          "text": "재료비",
+          "colspan": 1,
+          "rowspan": 1
+        },
+        {
+          "text": "합계",
+          "colspan": 1,
+          "rowspan": 1
+        },
+        {
+          "text": "등록일자",
+          "colspan": 1,
+          "rowspan": 1
+        },
+        {
+          "text": "삭제",
+          "colspan": 1,
+          "rowspan": 1
+        }
+      ],
+      "rowCount": 50,
+      "sampleRows": [
+        [
+          {
+            "text": "",
+            "html": "<input type=\"checkbox\" name=\"data_checked[]\" value=\"21016254\">",
+            "links": []
+          },
+          {
+            "text": "712",
+            "html": "712",
+            "links": []
+          },
+          {
+            "text": "26년 8월\n돌봄",
+            "html": "26년 8월\t\t\t\t\t<br><span class=\"lec_pro_type3\">돌봄</span>",
+            "links": []
+          },
+          {
+            "text": "(금) 돌봄 4부",
+            "html": "(금) 돌봄 4부",
+            "links": []
+          },
+          {
+            "text": "1",
+            "html": "1",
+            "links": []
+          },
+          {
+            "text": "1",
+            "html": "1",
+            "links": []
+          },
+          {
+            "text": "10",
+            "html": "10",
+            "links": []
+          },
+          {
+            "text": "오하율",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841988\" class=\"link_type\">오하율</a>\n\t\t\t\t\t<a href=\"#none;\" id=\"stu_hp_21016254\" style=\"position:absolute; right:4px; top:0px;\" onclick=\"open_stu_schedule(4841988, 1552375);\"><i class=\"fa fa-list-alt\" ti",
+            "links": [
+              {
+                "text": "오하율",
+                "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841988",
+                "onclick": null
+              },
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "open_stu_schedule(4841988, 1552375);"
+              }
+            ]
+          },
+          {
+            "text": "",
+            "html": "<span class=\"stu_hp_4841988\"></span>&nbsp;<a href=\"#none;\" id=\"stu_hp_21016254\" style=\"position:absolute; right:4px; top:0px;\" onclick=\"show_stu_hp(21016254, 4841988 ); return false;\"><i class=\"fa fa-pencil-square \" title=\"연락처 수정\"></i></a>\n\t\t\t\t\t<input type=\"hidden\" name=\"stu_hp_info_21016254\" id=\"st",
+            "links": [
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "show_stu_hp(21016254, 4841988 ); return false;"
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016254\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016254",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016254\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016254",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "0",
+            "links": []
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016254\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016254",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016254\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016254",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "0",
+            "links": []
+          },
+          {
+            "text": "2026-07-10\n15:28:38",
+            "html": "2026-07-10<br>15:28:38",
+            "links": []
+          },
+          {
+            "text": "",
+            "html": "<a href=\"#none;\" onclick=\"chk_cancel(21016254); return false;\"><i class=\"fa fa-trash-o icon_btn\" title=\"삭제\"></i></a>",
+            "links": [
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "chk_cancel(21016254); return false;"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "text": "",
+            "html": "<input type=\"checkbox\" name=\"data_checked[]\" value=\"21016237\">",
+            "links": []
+          },
+          {
+            "text": "711",
+            "html": "711",
+            "links": []
+          },
+          {
+            "text": "26년 8월\n돌봄",
+            "html": "26년 8월\t\t\t\t\t<br><span class=\"lec_pro_type3\">돌봄</span>",
+            "links": []
+          },
+          {
+            "text": "(금) 돌봄 4부",
+            "html": "(금) 돌봄 4부",
+            "links": []
+          },
+          {
+            "text": "1",
+            "html": "1",
+            "links": []
+          },
+          {
+            "text": "1",
+            "html": "1",
+            "links": []
+          },
+          {
+            "text": "11",
+            "html": "11",
+            "links": []
+          },
+          {
+            "text": "이소윤",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841990\" class=\"link_type\">이소윤</a>\n\t\t\t\t\t<a href=\"#none;\" id=\"stu_hp_21016237\" style=\"position:absolute; right:4px; top:0px;\" onclick=\"open_stu_schedule(4841990, 1552375);\"><i class=\"fa fa-list-alt\" ti",
+            "links": [
+              {
+                "text": "이소윤",
+                "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841990",
+                "onclick": null
+              },
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "open_stu_schedule(4841990, 1552375);"
+              }
+            ]
+          },
+          {
+            "text": "010-3718-3500",
+            "html": "<span class=\"stu_hp_4841990\">010-3718-3500</span>&nbsp;<a href=\"#none;\" id=\"stu_hp_21016237\" style=\"position:absolute; right:4px; top:0px;\" onclick=\"show_stu_hp(21016237, 4841990 ); return false;\"><i class=\"fa fa-pencil-square \" title=\"연락처 수정\"></i></a>\n\t\t\t\t\t<input type=\"hidden\" name=\"stu_hp_info_210",
+            "links": [
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "show_stu_hp(21016237, 4841990 ); return false;"
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016237\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016237",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016237\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016237",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "0",
+            "links": []
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016237\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016237",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016237\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016237",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "0",
+            "links": []
+          },
+          {
+            "text": "2026-07-10\n15:26:54",
+            "html": "2026-07-10<br>15:26:54",
+            "links": []
+          },
+          {
+            "text": "",
+            "html": "<a href=\"#none;\" onclick=\"chk_cancel(21016237); return false;\"><i class=\"fa fa-trash-o icon_btn\" title=\"삭제\"></i></a>",
+            "links": [
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "chk_cancel(21016237); return false;"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "text": "",
+            "html": "<input type=\"checkbox\" name=\"data_checked[]\" value=\"21016247\">",
+            "links": []
+          },
+          {
+            "text": "710",
+            "html": "710",
+            "links": []
+          },
+          {
+            "text": "26년 8월\n돌봄",
+            "html": "26년 8월\t\t\t\t\t<br><span class=\"lec_pro_type3\">돌봄</span>",
+            "links": []
+          },
+          {
+            "text": "(금) 돌봄 4부",
+            "html": "(금) 돌봄 4부",
+            "links": []
+          },
+          {
+            "text": "1",
+            "html": "1",
+            "links": []
+          },
+          {
+            "text": "1",
+            "html": "1",
+            "links": []
+          },
+          {
+            "text": "13",
+            "html": "13",
+            "links": []
+          },
+          {
+            "text": "이채린",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841994\" class=\"link_type\">이채린</a>\n\t\t\t\t\t<a href=\"#none;\" id=\"stu_hp_21016247\" style=\"position:absolute; right:4px; top:0px;\" onclick=\"open_stu_schedule(4841994, 1552375);\"><i class=\"fa fa-list-alt\" ti",
+            "links": [
+              {
+                "text": "이채린",
+                "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841994",
+                "onclick": null
+              },
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "open_stu_schedule(4841994, 1552375);"
+              }
+            ]
+          },
+          {
+            "text": "",
+            "html": "<span class=\"stu_hp_4841994\"></span>&nbsp;<a href=\"#none;\" id=\"stu_hp_21016247\" style=\"position:absolute; right:4px; top:0px;\" onclick=\"show_stu_hp(21016247, 4841994 ); return false;\"><i class=\"fa fa-pencil-square \" title=\"연락처 수정\"></i></a>\n\t\t\t\t\t<input type=\"hidden\" name=\"stu_hp_info_21016247\" id=\"st",
+            "links": [
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "show_stu_hp(21016247, 4841994 ); return false;"
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016247\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016247",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016247\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016247",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "0",
+            "links": []
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016247\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016247",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016247\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016247",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "0",
+            "links": []
+          },
+          {
+            "text": "2026-07-10\n15:27:53",
+            "html": "2026-07-10<br>15:27:53",
+            "links": []
+          },
+          {
+            "text": "",
+            "html": "<a href=\"#none;\" onclick=\"chk_cancel(21016247); return false;\"><i class=\"fa fa-trash-o icon_btn\" title=\"삭제\"></i></a>",
+            "links": [
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "chk_cancel(21016247); return false;"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "text": "",
+            "html": "<input type=\"checkbox\" name=\"data_checked[]\" value=\"21016260\">",
+            "links": []
+          },
+          {
+            "text": "709",
+            "html": "709",
+            "links": []
+          },
+          {
+            "text": "26년 8월\n돌봄",
+            "html": "26년 8월\t\t\t\t\t<br><span class=\"lec_pro_type3\">돌봄</span>",
+            "links": []
+          },
+          {
+            "text": "(금) 돌봄 4부",
+            "html": "(금) 돌봄 4부",
+            "links": []
+          },
+          {
+            "text": "1",
+            "html": "1",
+            "links": []
+          },
+          {
+            "text": "1",
+            "html": "1",
+            "links": []
+          },
+          {
+            "text": "14",
+            "html": "14",
+            "links": []
+          },
+          {
+            "text": "장희준",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841996\" class=\"link_type\">장희준</a>\n\t\t\t\t\t<a href=\"#none;\" id=\"stu_hp_21016260\" style=\"position:absolute; right:4px; top:0px;\" onclick=\"open_stu_schedule(4841996, 1552375);\"><i class=\"fa fa-list-alt\" ti",
+            "links": [
+              {
+                "text": "장희준",
+                "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841996",
+                "onclick": null
+              },
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "open_stu_schedule(4841996, 1552375);"
+              }
+            ]
+          },
+          {
+            "text": "010-5334-7217",
+            "html": "<span class=\"stu_hp_4841996\">010-5334-7217</span>&nbsp;<a href=\"#none;\" id=\"stu_hp_21016260\" style=\"position:absolute; right:4px; top:0px;\" onclick=\"show_stu_hp(21016260, 4841996 ); return false;\"><i class=\"fa fa-pencil-square \" title=\"연락처 수정\"></i></a>\n\t\t\t\t\t<input type=\"hidden\" name=\"stu_hp_info_210",
+            "links": [
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "show_stu_hp(21016260, 4841996 ); return false;"
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016260\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016260",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016260\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016260",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "0",
+            "links": []
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016260\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016260",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016260\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016260",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "0",
+            "links": []
+          },
+          {
+            "text": "2026-07-10\n15:29:29",
+            "html": "2026-07-10<br>15:29:29",
+            "links": []
+          },
+          {
+            "text": "",
+            "html": "<a href=\"#none;\" onclick=\"chk_cancel(21016260); return false;\"><i class=\"fa fa-trash-o icon_btn\" title=\"삭제\"></i></a>",
+            "links": [
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "chk_cancel(21016260); return false;"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "text": "",
+            "html": "<input type=\"checkbox\" name=\"data_checked[]\" value=\"21016240\">",
+            "links": []
+          },
+          {
+            "text": "708",
+            "html": "708",
+            "links": []
+          },
+          {
+            "text": "26년 8월\n돌봄",
+            "html": "26년 8월\t\t\t\t\t<br><span class=\"lec_pro_type3\">돌봄</span>",
+            "links": []
+          },
+          {
+            "text": "(금) 돌봄 4부",
+            "html": "(금) 돌봄 4부",
+            "links": []
+          },
+          {
+            "text": "1",
+            "html": "1",
+            "links": []
+          },
+          {
+            "text": "1",
+            "html": "1",
+            "links": []
+          },
+          {
+            "text": "17",
+            "html": "17",
+            "links": []
+          },
+          {
+            "text": "최다연",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842002\" class=\"link_type\">최다연</a>\n\t\t\t\t\t<a href=\"#none;\" id=\"stu_hp_21016240\" style=\"position:absolute; right:4px; top:0px;\" onclick=\"open_stu_schedule(4842002, 1552375);\"><i class=\"fa fa-list-alt\" ti",
+            "links": [
+              {
+                "text": "최다연",
+                "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842002",
+                "onclick": null
+              },
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "open_stu_schedule(4842002, 1552375);"
+              }
+            ]
+          },
+          {
+            "text": "010-5219-2196",
+            "html": "<span class=\"stu_hp_4842002\">010-5219-2196</span>&nbsp;<a href=\"#none;\" id=\"stu_hp_21016240\" style=\"position:absolute; right:4px; top:0px;\" onclick=\"show_stu_hp(21016240, 4842002 ); return false;\"><i class=\"fa fa-pencil-square \" title=\"연락처 수정\"></i></a>\n\t\t\t\t\t<input type=\"hidden\" name=\"stu_hp_info_210",
+            "links": [
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "show_stu_hp(21016240, 4842002 ); return false;"
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016240\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016240",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016240\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016240",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "0",
+            "links": []
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016240\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016240",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016240\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016240",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "0",
+            "links": []
+          },
+          {
+            "text": "2026-07-10\n15:27:16",
+            "html": "2026-07-10<br>15:27:16",
+            "links": []
+          },
+          {
+            "text": "",
+            "html": "<a href=\"#none;\" onclick=\"chk_cancel(21016240); return false;\"><i class=\"fa fa-trash-o icon_btn\" title=\"삭제\"></i></a>",
+            "links": [
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "chk_cancel(21016240); return false;"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "text": "",
+            "html": "<input type=\"checkbox\" name=\"data_checked[]\" value=\"21016242\">",
+            "links": []
+          },
+          {
+            "text": "707",
+            "html": "707",
+            "links": []
+          },
+          {
+            "text": "26년 8월\n돌봄",
+            "html": "26년 8월\t\t\t\t\t<br><span class=\"lec_pro_type3\">돌봄</span>",
+            "links": []
+          },
+          {
+            "text": "(금) 돌봄 4부",
+            "html": "(금) 돌봄 4부",
+            "links": []
+          },
+          {
+            "text": "1",
+            "html": "1",
+            "links": []
+          },
+          {
+            "text": "1",
+            "html": "1",
+            "links": []
+          },
+          {
+            "text": "18",
+            "html": "18",
+            "links": []
+          },
+          {
+            "text": "최연우",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842004\" class=\"link_type\">최연우</a>\n\t\t\t\t\t<a href=\"#none;\" id=\"stu_hp_21016242\" style=\"position:absolute; right:4px; top:0px;\" onclick=\"open_stu_schedule(4842004, 1552375);\"><i class=\"fa fa-list-alt\" ti",
+            "links": [
+              {
+                "text": "최연우",
+                "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842004",
+                "onclick": null
+              },
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "open_stu_schedule(4842004, 1552375);"
+              }
+            ]
+          },
+          {
+            "text": "",
+            "html": "<span class=\"stu_hp_4842004\"></span>&nbsp;<a href=\"#none;\" id=\"stu_hp_21016242\" style=\"position:absolute; right:4px; top:0px;\" onclick=\"show_stu_hp(21016242, 4842004 ); return false;\"><i class=\"fa fa-pencil-square \" title=\"연락처 수정\"></i></a>\n\t\t\t\t\t<input type=\"hidden\" name=\"stu_hp_info_21016242\" id=\"st",
+            "links": [
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "show_stu_hp(21016242, 4842004 ); return false;"
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016242\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016242",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016242\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016242",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "0",
+            "links": []
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016242\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016242",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016242\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016242",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "0",
+            "links": []
+          },
+          {
+            "text": "2026-07-10\n15:27:36",
+            "html": "2026-07-10<br>15:27:36",
+            "links": []
+          },
+          {
+            "text": "",
+            "html": "<a href=\"#none;\" onclick=\"chk_cancel(21016242); return false;\"><i class=\"fa fa-trash-o icon_btn\" title=\"삭제\"></i></a>",
+            "links": [
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "chk_cancel(21016242); return false;"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "text": "",
+            "html": "<input type=\"checkbox\" name=\"data_checked[]\" value=\"21016276\">",
+            "links": []
+          },
+          {
+            "text": "706",
+            "html": "706",
+            "links": []
+          },
+          {
+            "text": "26년 8월\n돌봄",
+            "html": "26년 8월\t\t\t\t\t<br><span class=\"lec_pro_type3\">돌봄</span>",
+            "links": []
+          },
+          {
+            "text": "(금) 돌봄 4부",
+            "html": "(금) 돌봄 4부",
+            "links": []
+          },
+          {
+            "text": "1",
+            "html": "1",
+            "links": []
+          },
+          {
+            "text": "1",
+            "html": "1",
+            "links": []
+          },
+          {
+            "text": "19",
+            "html": "19",
+            "links": []
+          },
+          {
+            "text": "최유나",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842006\" class=\"link_type\">최유나</a>\n\t\t\t\t\t<a href=\"#none;\" id=\"stu_hp_21016276\" style=\"position:absolute; right:4px; top:0px;\" onclick=\"open_stu_schedule(4842006, 1552375);\"><i class=\"fa fa-list-alt\" ti",
+            "links": [
+              {
+                "text": "최유나",
+                "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842006",
+                "onclick": null
+              },
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "open_stu_schedule(4842006, 1552375);"
+              }
+            ]
+          },
+          {
+            "text": "010-3373-3683",
+            "html": "<span class=\"stu_hp_4842006\">010-3373-3683</span>&nbsp;<a href=\"#none;\" id=\"stu_hp_21016276\" style=\"position:absolute; right:4px; top:0px;\" onclick=\"show_stu_hp(21016276, 4842006 ); return false;\"><i class=\"fa fa-pencil-square \" title=\"연락처 수정\"></i></a>\n\t\t\t\t\t<input type=\"hidden\" name=\"stu_hp_info_210",
+            "links": [
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "show_stu_hp(21016276, 4842006 ); return false;"
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016276\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016276",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016276\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016276",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "0",
+            "links": []
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016276\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016276",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016276\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016276",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "0",
+            "links": []
+          },
+          {
+            "text": "2026-07-10\n15:31:04",
+            "html": "2026-07-10<br>15:31:04",
+            "links": []
+          },
+          {
+            "text": "",
+            "html": "<a href=\"#none;\" onclick=\"chk_cancel(21016276); return false;\"><i class=\"fa fa-trash-o icon_btn\" title=\"삭제\"></i></a>",
+            "links": [
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "chk_cancel(21016276); return false;"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "text": "",
+            "html": "<input type=\"checkbox\" name=\"data_checked[]\" value=\"21016252\">",
+            "links": []
+          },
+          {
+            "text": "705",
+            "html": "705",
+            "links": []
+          },
+          {
+            "text": "26년 8월\n돌봄",
+            "html": "26년 8월\t\t\t\t\t<br><span class=\"lec_pro_type3\">돌봄</span>",
+            "links": []
+          },
+          {
+            "text": "(금) 돌봄 4부",
+            "html": "(금) 돌봄 4부",
+            "links": []
+          },
+          {
+            "text": "1",
+            "html": "1",
+            "links": []
+          },
+          {
+            "text": "2",
+            "html": "2",
+            "links": []
+          },
+          {
+            "text": "2",
+            "html": "2",
+            "links": []
+          },
+          {
+            "text": "김은성",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842010\" class=\"link_type\">김은성</a>\n\t\t\t\t\t<a href=\"#none;\" id=\"stu_hp_21016252\" style=\"position:absolute; right:4px; top:0px;\" onclick=\"open_stu_schedule(4842010, 1552375);\"><i class=\"fa fa-list-alt\" ti",
+            "links": [
+              {
+                "text": "김은성",
+                "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842010",
+                "onclick": null
+              },
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "open_stu_schedule(4842010, 1552375);"
+              }
+            ]
+          },
+          {
+            "text": "010-9073-5302",
+            "html": "<span class=\"stu_hp_4842010\">010-9073-5302</span>&nbsp;<a href=\"#none;\" id=\"stu_hp_21016252\" style=\"position:absolute; right:4px; top:0px;\" onclick=\"show_stu_hp(21016252, 4842010 ); return false;\"><i class=\"fa fa-pencil-square \" title=\"연락처 수정\"></i></a>\n\t\t\t\t\t<input type=\"hidden\" name=\"stu_hp_info_210",
+            "links": [
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "show_stu_hp(21016252, 4842010 ); return false;"
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016252\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016252",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016252\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016252",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "0",
+            "links": []
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016252\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016252",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016252\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016252",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "0",
+            "links": []
+          },
+          {
+            "text": "2026-07-10\n15:28:24",
+            "html": "2026-07-10<br>15:28:24",
+            "links": []
+          },
+          {
+            "text": "",
+            "html": "<a href=\"#none;\" onclick=\"chk_cancel(21016252); return false;\"><i class=\"fa fa-trash-o icon_btn\" title=\"삭제\"></i></a>",
+            "links": [
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "chk_cancel(21016252); return false;"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "text": "",
+            "html": "<input type=\"checkbox\" name=\"data_checked[]\" value=\"21016250\">",
+            "links": []
+          },
+          {
+            "text": "704",
+            "html": "704",
+            "links": []
+          },
+          {
+            "text": "26년 8월\n돌봄",
+            "html": "26년 8월\t\t\t\t\t<br><span class=\"lec_pro_type3\">돌봄</span>",
+            "links": []
+          },
+          {
+            "text": "(금) 돌봄 4부",
+            "html": "(금) 돌봄 4부",
+            "links": []
+          },
+          {
+            "text": "1",
+            "html": "1",
+            "links": []
+          },
+          {
+            "text": "2",
+            "html": "2",
+            "links": []
+          },
+          {
+            "text": "5",
+            "html": "5",
+            "links": []
+          },
+          {
+            "text": "노슬찬",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842016\" class=\"link_type\">노슬찬</a>\n\t\t\t\t\t<a href=\"#none;\" id=\"stu_hp_21016250\" style=\"position:absolute; right:4px; top:0px;\" onclick=\"open_stu_schedule(4842016, 1552375);\"><i class=\"fa fa-list-alt\" ti",
+            "links": [
+              {
+                "text": "노슬찬",
+                "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842016",
+                "onclick": null
+              },
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "open_stu_schedule(4842016, 1552375);"
+              }
+            ]
+          },
+          {
+            "text": "010-5445-0830",
+            "html": "<span class=\"stu_hp_4842016\">010-5445-0830</span>&nbsp;<a href=\"#none;\" id=\"stu_hp_21016250\" style=\"position:absolute; right:4px; top:0px;\" onclick=\"show_stu_hp(21016250, 4842016 ); return false;\"><i class=\"fa fa-pencil-square \" title=\"연락처 수정\"></i></a>\n\t\t\t\t\t<input type=\"hidden\" name=\"stu_hp_info_210",
+            "links": [
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "show_stu_hp(21016250, 4842016 ); return false;"
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016250\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016250",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016250\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016250",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "0",
+            "links": []
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016250\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016250",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016250\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016250",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "0",
+            "links": []
+          },
+          {
+            "text": "2026-07-10\n15:28:08",
+            "html": "2026-07-10<br>15:28:08",
+            "links": []
+          },
+          {
+            "text": "",
+            "html": "<a href=\"#none;\" onclick=\"chk_cancel(21016250); return false;\"><i class=\"fa fa-trash-o icon_btn\" title=\"삭제\"></i></a>",
+            "links": [
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "chk_cancel(21016250); return false;"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "text": "",
+            "html": "<input type=\"checkbox\" name=\"data_checked[]\" value=\"21016257\">",
+            "links": []
+          },
+          {
+            "text": "703",
+            "html": "703",
+            "links": []
+          },
+          {
+            "text": "26년 8월\n돌봄",
+            "html": "26년 8월\t\t\t\t\t<br><span class=\"lec_pro_type3\">돌봄</span>",
+            "links": []
+          },
+          {
+            "text": "(금) 돌봄 4부",
+            "html": "(금) 돌봄 4부",
+            "links": []
+          },
+          {
+            "text": "1",
+            "html": "1",
+            "links": []
+          },
+          {
+            "text": "2",
+            "html": "2",
+            "links": []
+          },
+          {
+            "text": "7",
+            "html": "7",
+            "links": []
+          },
+          {
+            "text": "배지안",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842020\" class=\"link_type\">배지안</a>\n\t\t\t\t\t<a href=\"#none;\" id=\"stu_hp_21016257\" style=\"position:absolute; right:4px; top:0px;\" onclick=\"open_stu_schedule(4842020, 1552375);\"><i class=\"fa fa-list-alt\" ti",
+            "links": [
+              {
+                "text": "배지안",
+                "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842020",
+                "onclick": null
+              },
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "open_stu_schedule(4842020, 1552375);"
+              }
+            ]
+          },
+          {
+            "text": "010-9633-1848",
+            "html": "<span class=\"stu_hp_4842020\">010-9633-1848</span>&nbsp;<a href=\"#none;\" id=\"stu_hp_21016257\" style=\"position:absolute; right:4px; top:0px;\" onclick=\"show_stu_hp(21016257, 4842020 ); return false;\"><i class=\"fa fa-pencil-square \" title=\"연락처 수정\"></i></a>\n\t\t\t\t\t<input type=\"hidden\" name=\"stu_hp_info_210",
+            "links": [
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "show_stu_hp(21016257, 4842020 ); return false;"
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016257\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016257",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016257\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016257",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "0",
+            "links": []
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016257\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016257",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "<a href=\"https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016257\" class=\"link_type\">0</a>",
+            "links": [
+              {
+                "text": "0",
+                "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016257",
+                "onclick": null
+              }
+            ]
+          },
+          {
+            "text": "0",
+            "html": "0",
+            "links": []
+          },
+          {
+            "text": "2026-07-10\n15:28:54",
+            "html": "2026-07-10<br>15:28:54",
+            "links": []
+          },
+          {
+            "text": "",
+            "html": "<a href=\"#none;\" onclick=\"chk_cancel(21016257); return false;\"><i class=\"fa fa-trash-o icon_btn\" title=\"삭제\"></i></a>",
+            "links": [
+              {
+                "text": "",
+                "href": "#none;",
+                "onclick": "chk_cancel(21016257); return false;"
+              }
+            ]
+          }
+        ]
+      ]
+    }
+  ],
+  "pagination": [
+    {
+      "text": "1",
+      "href": "https://www.dbdbschool.kr/af/ad_app/lists/sn/3267#none;",
+      "onclick": null
+    },
+    {
+      "text": "2",
+      "href": "https://www.dbdbschool.kr/af/ad_app/lists/sn/3267/sld/10/sof/sbh/sot/asc/p/2",
+      "onclick": null
+    },
+    {
+      "text": "다음",
+      "href": "https://www.dbdbschool.kr/af/ad_app/lists/sn/3267/sld/10/sof/sbh/sot/asc/p/2",
+      "onclick": null
+    },
+    {
+      "text": "마지막",
+      "href": "https://www.dbdbschool.kr/af/ad_app/lists/sn/3267/sld/10/sof/sbh/sot/asc/p/15",
+      "onclick": null
+    }
+  ]
+}

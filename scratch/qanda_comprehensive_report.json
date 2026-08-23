@@ -1,0 +1,1204 @@
+{
+  "timestamp": "2026-08-17T03:32:32.594Z",
+  "listUrl": "https://www.dbdbschool.kr/af/qanda/lists/sn/3267",
+  "listAnalysis": {
+    "pageTitle": "목록 - 고객지원 게시판 - 늘봄학교",
+    "mainHeader": "늘봄학교 ",
+    "tables": [
+      {
+        "headers": [
+          {
+            "text": "연번",
+            "classes": "mobile_none",
+            "style": "",
+            "width": "60"
+          },
+          {
+            "text": "제목",
+            "classes": "",
+            "style": "",
+            "width": ""
+          },
+          {
+            "text": "등록일자",
+            "classes": "",
+            "style": "",
+            "width": "100"
+          },
+          {
+            "text": "진행",
+            "classes": "",
+            "style": "",
+            "width": "80"
+          },
+          {
+            "text": "답변",
+            "classes": "",
+            "style": "",
+            "width": "60"
+          }
+        ],
+        "rowCount": 2,
+        "rows": [
+          [
+            {
+              "text": "2",
+              "html": "2",
+              "classes": "mobile_none",
+              "style": ""
+            },
+            {
+              "text": "2026학년도 1학기 늘봄학교 만족도 조사 설문지",
+              "html": "<a href=\"https://www.dbdbschool.kr/af/qanda/view/num/8806/p/1/sn/3267\" class=\"link_type\">2026학년도 1학기 늘봄학교 만족도 조사 설문지</a>",
+              "classes": "noti_title text-left",
+              "style": ""
+            },
+            {
+              "text": "2026-06-01",
+              "html": "2026-06-01",
+              "classes": "",
+              "style": ""
+            },
+            {
+              "text": "완료",
+              "html": "<span style=\"color:#EB9316;\">완료</span>",
+              "classes": "",
+              "style": ""
+            },
+            {
+              "text": "06/01",
+              "html": "06/01",
+              "classes": "",
+              "style": ""
+            }
+          ],
+          [
+            {
+              "text": "1",
+              "html": "1",
+              "classes": "mobile_none",
+              "style": ""
+            },
+            {
+              "text": "지원금 스쿨뱅킹 현황",
+              "html": "<a href=\"https://www.dbdbschool.kr/af/qanda/view/num/3356/p/1/sn/3267\" class=\"link_type\">지원금 스쿨뱅킹 현황</a>",
+              "classes": "noti_title text-left",
+              "style": ""
+            },
+            {
+              "text": "2025-06-13",
+              "html": "2025-06-13",
+              "classes": "",
+              "style": ""
+            },
+            {
+              "text": "완료",
+              "html": "<span style=\"color:#EB9316;\">완료</span>",
+              "classes": "",
+              "style": ""
+            },
+            {
+              "text": "06/13",
+              "html": "06/13",
+              "classes": "",
+              "style": ""
+            }
+          ]
+        ]
+      }
+    ],
+    "actionButtons": [
+      {
+        "tag": "A",
+        "text": "광주풍향초등학교",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "늘봄학교",
+        "href": "https://www.dbdbschool.kr/af/qanda/lists/sn/3267#none;",
+        "classes": "btn_icon",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "늘봄학교",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "0",
+        "href": "https://www.dbdbschool.kr/af/notification/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "[로그아웃]",
+        "href": "https://www.dbdbschool.kr/member/logout/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "[정보수정]",
+        "href": "https://www.dbdbschool.kr/member/modify/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "홈으로",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "강좌등록",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/write/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "매뉴얼",
+        "href": "https://www.dbdbschool.kr/af/ad_faq/main/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "고객지원 게시판",
+        "href": "https://www.dbdbschool.kr/af/qanda/lists/sn/3267",
+        "classes": "on",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "학교관리",
+        "href": "https://www.dbdbschool.kr/sczigi/service/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "강좌관리",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "신청자관리",
+        "href": "https://www.dbdbschool.kr/af/ad_app/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "대기자관리",
+        "href": "https://www.dbdbschool.kr/af/ad_wait/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "출석부관리",
+        "href": "https://www.dbdbschool.kr/af/ad_att/stat/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "환불/취소관리",
+        "href": "https://www.dbdbschool.kr/af/ad_ref/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "지원금관리",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_stu/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "대상자관리",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_stu/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "수강자관리",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_app/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "지원금설정",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_cfg/main/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "순위구분설정",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_cfg/free1/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "결석/귀가신청",
+        "href": "https://www.dbdbschool.kr/af/ad_abs/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "강사관리",
+        "href": "https://www.dbdbschool.kr/af/ad_tea/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "설문관리",
+        "href": "https://www.dbdbschool.kr/af/ad_sur/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "설문",
+        "href": "https://www.dbdbschool.kr/af/ad_sur/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "샘플설문",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "환경설정",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/main/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "기본설정",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/main/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "신청기간",
+        "href": "https://www.dbdbschool.kr/af/ad_time/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "강의시간",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/period/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "강좌구분",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/afDiv/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "중복제한그룹",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/appLiGrp/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "학적검증",
+        "href": "https://www.dbdbschool.kr/af/ad_verify/main/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "나이스/에듀파인 설정",
+        "href": "https://www.dbdbschool.kr/af/ad_neis_edufine/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "안내글설정",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/message/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "초기화",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/clear/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "담당자정보",
+        "href": "https://www.dbdbschool.kr/af/ad_info/modify/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "알림관리",
+        "href": "https://www.dbdbschool.kr/af/notification/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "푸시알림관리",
+        "href": "https://www.dbdbschool.kr/af/spush/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "연장신청195일 남음",
+        "href": "https://www.dbdbschool.kr/af/ad_extension/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "강좌관리",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "INPUT",
+        "text": "검색",
+        "href": "",
+        "classes": "btn btn-default btn-sm",
+        "style": ""
+      },
+      {
+        "tag": "INPUT",
+        "text": "전체",
+        "href": "",
+        "classes": "btn btn-default btn-sm",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "매뉴얼",
+        "href": "https://www.dbdbschool.kr/af/ad_faq/lists/sn/3267",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "INPUT",
+        "text": "등록",
+        "href": "",
+        "classes": "btn btn-primary btn-sm",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "2026학년도 1학기 늘봄학교 만족도 조사 설문지",
+        "href": "https://www.dbdbschool.kr/af/qanda/view/num/8806/p/1/sn/3267",
+        "classes": "link_type",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "지원금 스쿨뱅킹 현황",
+        "href": "https://www.dbdbschool.kr/af/qanda/view/num/3356/p/1/sn/3267",
+        "classes": "link_type",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "xmecca.com",
+        "href": "http://www.xmecca.com/",
+        "classes": "",
+        "style": ""
+      },
+      {
+        "tag": "INPUT",
+        "text": "로그인",
+        "href": "",
+        "classes": "go_btn",
+        "style": ""
+      },
+      {
+        "tag": "BUTTON",
+        "text": "×",
+        "href": "",
+        "classes": "close",
+        "style": ""
+      },
+      {
+        "tag": "INPUT",
+        "text": "2단계 인증",
+        "href": "",
+        "classes": "btn btn-primary",
+        "style": ""
+      },
+      {
+        "tag": "BUTTON",
+        "text": "×",
+        "href": "",
+        "classes": "close",
+        "style": ""
+      },
+      {
+        "tag": "A",
+        "text": "확인",
+        "href": "https://www.dbdbschool.kr/af/qanda/lists/sn/3267#none;",
+        "classes": "btn btn-primary",
+        "style": ""
+      }
+    ],
+    "filters": [
+      {
+        "tag": "SELECT",
+        "id": "",
+        "name": "as",
+        "placeholder": "",
+        "options": [
+          {
+            "value": "all",
+            "text": "=진행상태="
+          },
+          {
+            "value": "0",
+            "text": "접수"
+          },
+          {
+            "value": "1",
+            "text": "처리중"
+          },
+          {
+            "value": "2",
+            "text": "완료"
+          },
+          {
+            "value": "3",
+            "text": "답변완료"
+          }
+        ]
+      },
+      {
+        "tag": "SELECT",
+        "id": "",
+        "name": "st",
+        "placeholder": "",
+        "options": [
+          {
+            "value": "sub_con",
+            "text": "제목 + 내용"
+          },
+          {
+            "value": "subject",
+            "text": "제목"
+          },
+          {
+            "value": "contents",
+            "text": "내용"
+          }
+        ]
+      },
+      {
+        "tag": "INPUT",
+        "id": "s_word",
+        "name": "sw",
+        "placeholder": ""
+      },
+      {
+        "tag": "INPUT",
+        "id": "login_id",
+        "name": "login_id",
+        "placeholder": "아이디"
+      },
+      {
+        "tag": "INPUT",
+        "id": "",
+        "name": "otp_num",
+        "placeholder": "OTP 인증번호를 입력하세요."
+      }
+    ]
+  },
+  "writeAnalysis": {
+    "formAction": "https://www.dbdbschool.kr/af/qanda/write/sn/3267",
+    "formMethod": "post",
+    "inputs": [
+      {
+        "tag": "INPUT",
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "placeholder": "",
+        "required": false
+      },
+      {
+        "tag": "INPUT",
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "placeholder": "",
+        "required": false
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "name": "w_name",
+        "id": "w_name",
+        "placeholder": "",
+        "required": false
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "name": "w_hp_1",
+        "id": "w_hp_1",
+        "placeholder": "",
+        "required": false
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "name": "w_hp_2",
+        "id": "w_hp_2",
+        "placeholder": "",
+        "required": false
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "name": "w_hp_3",
+        "id": "w_hp_3",
+        "placeholder": "",
+        "required": false
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "name": "w_tel",
+        "id": "w_tel",
+        "placeholder": "",
+        "required": false
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "name": "w_email",
+        "id": "",
+        "placeholder": "",
+        "required": false
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "name": "subject",
+        "id": "subject",
+        "placeholder": "",
+        "required": false
+      },
+      {
+        "tag": "TEXTAREA",
+        "type": "textarea",
+        "name": "w_contents",
+        "id": "w_contents",
+        "placeholder": "",
+        "required": false
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "name": "chk_update",
+        "id": "chk_update",
+        "placeholder": "",
+        "required": false
+      },
+      {
+        "tag": "INPUT",
+        "type": "button",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "required": false
+      },
+      {
+        "tag": "INPUT",
+        "type": "submit",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "required": false
+      },
+      {
+        "tag": "INPUT",
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "placeholder": "",
+        "required": false
+      },
+      {
+        "tag": "INPUT",
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "placeholder": "",
+        "required": false
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "name": "login_id",
+        "id": "login_id",
+        "placeholder": "아이디",
+        "required": false
+      },
+      {
+        "tag": "INPUT",
+        "type": "password",
+        "name": "login_passwd",
+        "id": "login_passwd",
+        "placeholder": "비밀번호",
+        "required": false
+      },
+      {
+        "tag": "INPUT",
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "placeholder": "",
+        "required": false
+      },
+      {
+        "tag": "INPUT",
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "placeholder": "",
+        "required": false
+      },
+      {
+        "tag": "INPUT",
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "placeholder": "",
+        "required": false
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "name": "otp_num",
+        "id": "",
+        "placeholder": "OTP 인증번호를 입력하세요.",
+        "required": false
+      },
+      {
+        "tag": "INPUT",
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "placeholder": "",
+        "required": false
+      }
+    ],
+    "tableStructure": [
+      {
+        "label": "성명",
+        "contentHtml": "<input name=\"w_name\" id=\"w_name\" value=\"김혜련\" type=\"text\" class=\"form-control input-sm size100\" size=\"20\" maxlength=\"15\" style=\"width: 30%;\">\n\t\t\t\t<div class=\"error_msg error_w_name\"></div>"
+      },
+      {
+        "label": "휴대폰",
+        "contentHtml": "<select name=\"w_hp_1\" id=\"w_hp_1\" class=\"form-control input-sm size60\">\n\t\t\t\t\t<option value=\"\">번호선택</option>\n\t\t\t\t\t<option value=\"010\" selected=\"selected\">010</option>\n<option value=\"011\">011</option>\n<option value=\"016\">016</option>\n<option value=\"017\">017</option>\n<option value=\"018\">018</option>\n<option value=\"019\">019</option>\n\t\t\t\t</select> -\n\t\t\t\t<input name=\"w_hp_2\" type=\"text\" id=\"w_hp_2\" value=\"2494\" size=\"4\" maxlength=\"4\" title=\"휴대폰 둘째 자리\" class=\"form-control input-sm size45\" style=\"width: 100px;\"> -\n\t\t\t\t<input name=\"w_hp_3\" type=\"text\" id=\"w_hp_3\" value=\"1479\" size=\"4\" maxlength=\"4\" title=\"휴대폰 셋째 자리\" class=\"form-control input-sm size45\" style=\"width: 100px;\">\n\t\t\t\t<div class=\"error_msg error_w_hp_1\"></div>\n\t\t\t\t<div class=\"error_msg error_w_hp_2\"></div>\n\t\t\t\t<div class=\"error_msg error_w_hp_3\"></div>\n\t\t\t\t<div>※ 상담 전화 및 처리 결과를 문자로 발송해 드립니다.</div>"
+      },
+      {
+        "label": "전화",
+        "contentHtml": "<input name=\"w_tel\" id=\"w_tel\" value=\"062-609-1182\" type=\"text\" class=\"form-control input-sm size100\" size=\"20\" maxlength=\"30\" style=\"width: 30%;\">\n\t\t\t\t<div class=\"error_msg error_w_tel\"></div>"
+      },
+      {
+        "label": "이메일",
+        "contentHtml": "<input name=\"w_email\" value=\"khh147979@naver.com\" type=\"text\" class=\"form-control input-sm size100\" size=\"25\" maxlength=\"128\" style=\"width: 50%;\">\t\t\t\n\t\t\t\t<div class=\"error_msg error_w_email\"></div>\n\t\t\t\t<div>※ 필요한 자료를 메일로 받기 원하시는 경우 입력하세요.</div>"
+      },
+      {
+        "label": "제목",
+        "contentHtml": "<input id=\"subject\" name=\"subject\" type=\"text\" title=\"제목\" value=\"\" class=\"form-control size100\" style=\"width: 60%;\" maxlength=\"100\">\n\t\t\t\t\t<div class=\"error_msg error_subject\"></div>"
+      },
+      {
+        "label": "내용",
+        "contentHtml": "<textarea id=\"w_contents\" name=\"w_contents\" class=\"form-control size100\" rows=\"20\" style=\"width: 92%;\"></textarea>\n\t\t\t\t\t<div class=\"error_msg error_w_contents\"></div>"
+      },
+      {
+        "label": "첨부파일",
+        "contentHtml": "<div id=\"file_box\" class=\"ui-sortable\">\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div><a href=\"#none;\" onclick=\"add_file(); return false;\" class=\"btn btn-default btn-xs font-12 MAT10\" role=\"button\">파일추가</a></div>\n\t\t\t\t\t\t<div>(※ 한 번에 최대 3M 이하만 올릴 수 있습니다.)</div>"
+      },
+      {
+        "label": "서비스 담당자\n정보 수정",
+        "contentHtml": "<input type=\"checkbox\" name=\"chk_update\" id=\"chk_update\" value=\"Y\" style=\"\"> <label for=\"chk_update\"> 위에 입력된 작성자 정보를 '<span class=\"text-danger\">환경설정 &gt; 담당자정보</span>'에 업데이트합니다.</label>\n\t\t\t\t\t<div class=\"error_msg error_chk_update\"></div>"
+      }
+    ]
+  },
+  "viewAnalysis": {
+    "title": "보기 - 고객지원 게시판 - 늘봄학교",
+    "details": [
+      {
+        "label": "성명",
+        "value": "김혜련"
+      },
+      {
+        "label": "휴대폰",
+        "value": "010-2494-1479"
+      },
+      {
+        "label": "전화",
+        "value": "062-609-1182"
+      },
+      {
+        "label": "이메일",
+        "value": "khh147979@naver.com"
+      },
+      {
+        "label": "제목",
+        "value": "2026학년도 1학기 늘봄학교 만족도 조사 설문지"
+      },
+      {
+        "label": "첨부파일",
+        "value": "2026학년도1학기늘봄학교만족도조사설문지.hwp"
+      },
+      {
+        "label": "2026학년도 바뀐 설문지 보내드립니다. \n감사합니다.",
+        "value": "2026학년도 바뀐 설문지 보내드립니다. \n감사합니다."
+      },
+      {
+        "label": "진행상태",
+        "value": "완료"
+      },
+      {
+        "label": "자료 올려 주셔서 감사합니다.\n4가지 샘플 설문에 등록해드렸습니다. \n확인 바랍니다.",
+        "value": "자료 올려 주셔서 감사합니다.\n4가지 샘플 설문에 등록해드렸습니다. \n확인 바랍니다."
+      }
+    ],
+    "hasReplyArea": false
+  },
+  "networkRequests": [
+    {
+      "url": "https://www.dbdbschool.kr/af/qanda/lists/sn/3267",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bodyLength": 26826,
+      "sample": "<!DOCTYPE html>\r\n<html lang=\"ko\">\r\n  <head>\r\n\t<meta charset=\"utf-8\">\r\n\t<meta name=\"description\" content=\"방과후학교 수강신청, 늘봄학교 수강신청, 자유학기제 수강신청, 우유신청, 온라인 연수지명부 작성 등 학교 교직원 업무 경감을 위한 온라인 서비스를 제공합니다.\" />\r\n\t<meta name=\"keywords\" content=\"방과후학교,늘봄학교,우유신청,연수지명부,수강신청,늘봄학교 수강신청,자유학기제 수강신청,방과후 신청,방과후 수강신청,방과후학교"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/bootstrap-theme.css",
+      "status": 200,
+      "contentType": "text/css",
+      "bodyLength": 16819,
+      "sample": ".btn-default,\n.btn-primary,\n.btn-success,\n.btn-info,\n.btn-warning,\n.btn-danger {\n  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);\n          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0,"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/ui/jquery-ui.css",
+      "status": 200,
+      "contentType": "text/css",
+      "bodyLength": 23379,
+      "sample": "/*! jQuery UI - v1.11.2 - 2014-10-21\n* http://jqueryui.com\n* Includes: core.css, draggable.css, resizable.css, selectable.css, sortable.css, datepicker.css, theme.css\n* To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Trebuchet%20MS%2CTahoma%2CVerdana%2CArial%2Csans-se"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/af/content.css?26033101",
+      "status": 200,
+      "contentType": "text/css",
+      "bodyLength": 13916,
+      "sample": "@charset \"utf-8\";\r\n\r\n\r\n/*드래그*/\r\n::selection {background:#8fbce3;}\r\n::-moz-selection {background:#8fbce3;}\r\n::-webkit-selection {background:#8fbce3;}\r\n\r\n\r\n\r\n/*상단*/\r\n#header {background:#4791d2;   }\r\n#header p#logo{color:#e7f6f2;  background:#366d9d;}\r\n#header p#logo strong{ color:#77aac1; }\r\n\r\n/*#hea"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/default.css?26061201",
+      "status": 200,
+      "contentType": "text/css",
+      "bodyLength": 53642,
+      "sample": "@charset \"utf-8\";\r\n\r\nbody {font-family:\"맑은 고딕\",Malgun Gothic, Nanum Gothic,\"나눔 고딕\",\"돋움\", Dotum, \"굴림\",  Gulim, sans-serif;}\r\nh1, h2, h3, h4, h5, h6, form, input, ul, li, dl, dt, dd, p {margin:0; padding:0;}\r\n\r\na {text-decoration:none;}\r\na:hover {text-decoration:none;}\r\na:active {text-decoration:none;"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/scroll/jquery.mCustomScrollbar.css",
+      "status": 200,
+      "contentType": "text/css",
+      "bodyLength": 53630,
+      "sample": "/*\n== malihu jquery custom scrollbar plugin ==\nPlugin URI: http://manos.malihu.gr/jquery-custom-content-scroller\n*/\n\n\n\n/*\nCONTENTS: \n\t1. BASIC STYLE - Plugin's basic/essential CSS properties (normally, should not be edited). \n\t2. VERTICAL SCROLLBAR - Positioning and dimensions of vertical scrollbar."
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/bootstrap.css?23111301",
+      "status": 200,
+      "contentType": "text/css",
+      "bodyLength": 120264,
+      "sample": "/*!\n * Bootstrap v3.0.0\n *\n * Copyright 2013 Twitter, Inc\n * Licensed under the Apache License v2.0\n * http://www.apache.org/licenses/LICENSE-2.0\n *\n * Designed and built with all the love in the world by @mdo and @fat.\n */\n\n/*! normalize.css v2.1.0 | MIT License | git.io/normalize */\n\narticle,\nasid"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/icon/css/font-awesome.css",
+      "status": 200,
+      "contentType": "text/css",
+      "bodyLength": 26651,
+      "sample": "/*!\n *  Font Awesome 4.2.0 by @davegandy - http://fontawesome.io - @fontawesome\n *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)\n */\n/* FONT PATH\n * -------------------------- */\n@font-face {\n  font-family: 'FontAwesome';\n  src: url('../fonts/fontawesome-webfont.eot?"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/table_sticky.js?26042101",
+      "status": 200,
+      "contentType": "application/x-javascript",
+      "bodyLength": 1786,
+      "sample": "// { 메인 테이블 th 고정 --------------\nlet responsiveContainer = null; \n\n// 상단 타이틀 고정값\nlet rcTitleBox = null; \nlet rcTopOffset = null; \n\n// th가 2개 이상인 경우 고려\nlet rcHeaderRows = null; \n\n//let stickyCnt = 0;\nfunction adjustTableSticky() {\n\t//stickyCnt++;\n\t\n\t// 위치 계산\n\tconst rect = responsiveContainer.getBound"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/common.js?23021501",
+      "status": 200,
+      "contentType": "application/x-javascript",
+      "bodyLength": 4014,
+      "sample": "/*\r\n\thttp://www.abeautifulsite.net/detecting-mobile-devices-with-javascript/\r\n\tif( isMobile.any() ) alert('Mobile');\r\n\tif( isMobile.iOS() ) alert('iOS');\r\n*/\r\nvar isMobile = {\r\n    Android: function() {\r\n        return navigator.userAgent.match(/Android/i);\r\n    },\r\n    BlackBerry: function() {\r\n   "
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/bootstrap.js",
+      "status": 200,
+      "contentType": "text/javascript",
+      "bodyLength": 58457,
+      "sample": "/**\n* bootstrap.js v3.0.0 by @fat and @mdo\n* Copyright 2013 Twitter Inc.\n* http://www.apache.org/licenses/LICENSE-2.0\n*/\nif (!jQuery) { throw new Error(\"Bootstrap requires jQuery\") }\n\n/* ========================================================================\n * Bootstrap: transition.js v3.0.0\n * ht"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/jquery.js",
+      "status": 200,
+      "contentType": "text/javascript",
+      "bodyLength": 282769,
+      "sample": "/*!\n * jQuery JavaScript Library v1.11.1\n * http://jquery.com/\n *\n * Includes Sizzle.js\n * http://sizzlejs.com/\n *\n * Copyright 2005, 2014 jQuery Foundation, Inc. and other contributors\n * Released under the MIT license\n * http://jquery.org/license\n *\n * Date: 2014-05-01T17:42Z\n */\n\n\n\n\n(function( gl"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/ui/jquery-ui.js",
+      "status": 200,
+      "contentType": "text/javascript",
+      "bodyLength": 306216,
+      "sample": "/*! jQuery UI - v1.11.2 - 2014-10-21\n* http://jqueryui.com\n* Includes: core.js, widget.js, mouse.js, position.js, draggable.js, droppable.js, resizable.js, selectable.js, sortable.js, datepicker.js, effect.js, effect-blind.js, effect-bounce.js, effect-clip.js, effect-drop.js, effect-explode.js, effe"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/scroll/jquery.mCustomScrollbar.js",
+      "status": 200,
+      "contentType": "application/x-javascript",
+      "bodyLength": 93022,
+      "sample": "/*\n== malihu jquery custom scrollbar plugin == \nVersion: 3.1.5 \nPlugin URI: http://manos.malihu.gr/jquery-custom-content-scroller \nAuthor: malihu\nAuthor URI: http://manos.malihu.gr\nLicense: MIT License (MIT)\n*/\n\n/*\nCopyright Manos Malihutsakis (email: manos@malihu.gr)\n\nPermission is hereby granted, "
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/images/af/user_face01.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bodyLength": 2845,
+      "sample": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u00000\u0000\u0000\u00001\b\u0006\u0000\u0000\u0000�^*\"\u0000\u0000\u0000\u0019tEXtSoftware\u0000Adobe ImageReadyq�e<\u0000\u0000\u0003\"iTXtXML:com.adobe.xmp\u0000\u0000\u0000\u0000\u0000<?xpacket begin=\"﻿\" id=\"W5M0MpCehiHzreSzNTczkc9d\"?> <x:xmpmeta xmlns:x=\"adobe:ns:meta/\" x:xmptk=\"Adobe XMP Core 5.3-c011 66.145661, 2012/02/06-14:56:27        \"> <rdf:RDF xmlns:rdf=\"http://www.w3.org/"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/scroll/jquery.mousewheel.min.js?_=1786937550086",
+      "status": 200,
+      "contentType": "application/x-javascript",
+      "bodyLength": 2771,
+      "sample": "/*!\n * jQuery Mousewheel 3.1.13\n *\n * Copyright 2015 jQuery Foundation and other contributors\n * Released under the MIT license.\n * http://jquery.org/license\n */\n!function(a){\"function\"==typeof define&&define.amd?define([\"jquery\"],a):\"object\"==typeof exports?module.exports=a:a(jQuery)}(function(a){f"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/icon/fonts/fontawesome-webfont.woff?v=4.2.0",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "bodyLength": 61914,
+      "sample": "wOFF\u0000\u0001\u0000\u0000\u0000\u0000��\u0000\u000e\u0000\u0000\u0000\u0001� \u0000\u0001\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000FFTM\u0000\u0000\u0001D\u0000\u0000\u0000\u001c\u0000\u0000\u0000\u001cg�)�GDEF\u0000\u0000\u0001`\u0000\u0000\u0000\u001f\u0000\u0000\u0000 \u0002-\u0000\u0004OS/2\u0000\u0000\u0001�\u0000\u0000\u0000>\u0000\u0000\u0000`�\u0002zLcmap\u0000\u0000\u0001�\u0000\u0000\u0001G\u0000\u0000\u0002�ԓ�\\gasp\u0000\u0000\u0003\b\u0000\u0000\u0000\b\u0000\u0000\u0000\b��\u0000\u0003glyf\u0000\u0000\u0003\u0010\u0000\u0000�6\u0000\u0001��MR �head\u0000\u0000�H\u0000\u0000\u00001\u0000\u0000\u00006\bf\u0011�hhea\u0000\u0000�|\u0000\u0000\u0000\u001f\u0000\u0000\u0000$\u000f\u0002\t�hmtx\u0000\u0000�\u0000\u0000\u0002G\u0000\u0000\u0007�\u001c$\u0014zloca\u0000\u0000��\u0000\u0000\u0003�\u0000\u0000\u0004\u0002\u0001��maxp\u0000\u0000��\u0000\u0000\u0000\u001f\u0000\u0000\u0000 \u0002V\u0002\u001cname\u0000\u0000��\u0000\u0000\u0001u\u0000\u0000\u00038L\"u@post\u0000\u0000�p\u0000\u0000\f2\u0000\u0000\u0014bq\r"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/bootstrap.css?23111301",
+      "status": 200,
+      "contentType": "text/css",
+      "bodyLength": 120264,
+      "sample": "/*!\n * Bootstrap v3.0.0\n *\n * Copyright 2013 Twitter, Inc\n * Licensed under the Apache License v2.0\n * http://www.apache.org/licenses/LICENSE-2.0\n *\n * Designed and built with all the love in the world by @mdo and @fat.\n */\n\n/*! normalize.css v2.1.0 | MIT License | git.io/normalize */\n\narticle,\nasid"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/bootstrap-theme.css",
+      "status": 200,
+      "contentType": "text/css",
+      "bodyLength": 16819,
+      "sample": ".btn-default,\n.btn-primary,\n.btn-success,\n.btn-info,\n.btn-warning,\n.btn-danger {\n  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);\n          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0,"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/ui/jquery-ui.css",
+      "status": 200,
+      "contentType": "text/css",
+      "bodyLength": 23379,
+      "sample": "/*! jQuery UI - v1.11.2 - 2014-10-21\n* http://jqueryui.com\n* Includes: core.css, draggable.css, resizable.css, selectable.css, sortable.css, datepicker.css, theme.css\n* To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Trebuchet%20MS%2CTahoma%2CVerdana%2CArial%2Csans-se"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/default.css?26061201",
+      "status": 200,
+      "contentType": "text/css",
+      "bodyLength": 53642,
+      "sample": "@charset \"utf-8\";\r\n\r\nbody {font-family:\"맑은 고딕\",Malgun Gothic, Nanum Gothic,\"나눔 고딕\",\"돋움\", Dotum, \"굴림\",  Gulim, sans-serif;}\r\nh1, h2, h3, h4, h5, h6, form, input, ul, li, dl, dt, dd, p {margin:0; padding:0;}\r\n\r\na {text-decoration:none;}\r\na:hover {text-decoration:none;}\r\na:active {text-decoration:none;"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/af/content.css?26033101",
+      "status": 200,
+      "contentType": "text/css",
+      "bodyLength": 13916,
+      "sample": "@charset \"utf-8\";\r\n\r\n\r\n/*드래그*/\r\n::selection {background:#8fbce3;}\r\n::-moz-selection {background:#8fbce3;}\r\n::-webkit-selection {background:#8fbce3;}\r\n\r\n\r\n\r\n/*상단*/\r\n#header {background:#4791d2;   }\r\n#header p#logo{color:#e7f6f2;  background:#366d9d;}\r\n#header p#logo strong{ color:#77aac1; }\r\n\r\n/*#hea"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/icon/css/font-awesome.css",
+      "status": 200,
+      "contentType": "text/css",
+      "bodyLength": 26651,
+      "sample": "/*!\n *  Font Awesome 4.2.0 by @davegandy - http://fontawesome.io - @fontawesome\n *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)\n */\n/* FONT PATH\n * -------------------------- */\n@font-face {\n  font-family: 'FontAwesome';\n  src: url('../fonts/fontawesome-webfont.eot?"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/scroll/jquery.mCustomScrollbar.css",
+      "status": 200,
+      "contentType": "text/css",
+      "bodyLength": 53630,
+      "sample": "/*\n== malihu jquery custom scrollbar plugin ==\nPlugin URI: http://manos.malihu.gr/jquery-custom-content-scroller\n*/\n\n\n\n/*\nCONTENTS: \n\t1. BASIC STYLE - Plugin's basic/essential CSS properties (normally, should not be edited). \n\t2. VERTICAL SCROLLBAR - Positioning and dimensions of vertical scrollbar."
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/jquery.js",
+      "status": 200,
+      "contentType": "text/javascript",
+      "bodyLength": 282769,
+      "sample": "/*!\n * jQuery JavaScript Library v1.11.1\n * http://jquery.com/\n *\n * Includes Sizzle.js\n * http://sizzlejs.com/\n *\n * Copyright 2005, 2014 jQuery Foundation, Inc. and other contributors\n * Released under the MIT license\n * http://jquery.org/license\n *\n * Date: 2014-05-01T17:42Z\n */\n\n\n\n\n(function( gl"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/ui/jquery-ui.js",
+      "status": 200,
+      "contentType": "text/javascript",
+      "bodyLength": 306216,
+      "sample": "/*! jQuery UI - v1.11.2 - 2014-10-21\n* http://jqueryui.com\n* Includes: core.js, widget.js, mouse.js, position.js, draggable.js, droppable.js, resizable.js, selectable.js, sortable.js, datepicker.js, effect.js, effect-blind.js, effect-bounce.js, effect-clip.js, effect-drop.js, effect-explode.js, effe"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/bootstrap.js",
+      "status": 200,
+      "contentType": "text/javascript",
+      "bodyLength": 58457,
+      "sample": "/**\n* bootstrap.js v3.0.0 by @fat and @mdo\n* Copyright 2013 Twitter Inc.\n* http://www.apache.org/licenses/LICENSE-2.0\n*/\nif (!jQuery) { throw new Error(\"Bootstrap requires jQuery\") }\n\n/* ========================================================================\n * Bootstrap: transition.js v3.0.0\n * ht"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/common.js?23021501",
+      "status": 200,
+      "contentType": "application/x-javascript",
+      "bodyLength": 4014,
+      "sample": "/*\r\n\thttp://www.abeautifulsite.net/detecting-mobile-devices-with-javascript/\r\n\tif( isMobile.any() ) alert('Mobile');\r\n\tif( isMobile.iOS() ) alert('iOS');\r\n*/\r\nvar isMobile = {\r\n    Android: function() {\r\n        return navigator.userAgent.match(/Android/i);\r\n    },\r\n    BlackBerry: function() {\r\n   "
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/scroll/jquery.mCustomScrollbar.js",
+      "status": 200,
+      "contentType": "application/x-javascript",
+      "bodyLength": 93022,
+      "sample": "/*\n== malihu jquery custom scrollbar plugin == \nVersion: 3.1.5 \nPlugin URI: http://manos.malihu.gr/jquery-custom-content-scroller \nAuthor: malihu\nAuthor URI: http://manos.malihu.gr\nLicense: MIT License (MIT)\n*/\n\n/*\nCopyright Manos Malihutsakis (email: manos@malihu.gr)\n\nPermission is hereby granted, "
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/table_sticky.js?26042101",
+      "status": 200,
+      "contentType": "application/x-javascript",
+      "bodyLength": 1786,
+      "sample": "// { 메인 테이블 th 고정 --------------\nlet responsiveContainer = null; \n\n// 상단 타이틀 고정값\nlet rcTitleBox = null; \nlet rcTopOffset = null; \n\n// th가 2개 이상인 경우 고려\nlet rcHeaderRows = null; \n\n//let stickyCnt = 0;\nfunction adjustTableSticky() {\n\t//stickyCnt++;\n\t\n\t// 위치 계산\n\tconst rect = responsiveContainer.getBound"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/icon/fonts/fontawesome-webfont.woff?v=4.2.0",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "bodyLength": 0,
+      "sample": ""
+    },
+    {
+      "url": "https://www.dbdbschool.kr/af/qanda/write/sn/3267",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bodyLength": 30714,
+      "sample": "<!DOCTYPE html>\r\n<html lang=\"ko\">\r\n  <head>\r\n\t<meta charset=\"utf-8\">\r\n\t<meta name=\"description\" content=\"방과후학교 수강신청, 늘봄학교 수강신청, 자유학기제 수강신청, 우유신청, 온라인 연수지명부 작성 등 학교 교직원 업무 경감을 위한 온라인 서비스를 제공합니다.\" />\r\n\t<meta name=\"keywords\" content=\"방과후학교,늘봄학교,우유신청,연수지명부,수강신청,늘봄학교 수강신청,자유학기제 수강신청,방과후 신청,방과후 수강신청,방과후학교"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/images/af/user_face01.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bodyLength": 2845,
+      "sample": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u00000\u0000\u0000\u00001\b\u0006\u0000\u0000\u0000�^*\"\u0000\u0000\u0000\u0019tEXtSoftware\u0000Adobe ImageReadyq�e<\u0000\u0000\u0003\"iTXtXML:com.adobe.xmp\u0000\u0000\u0000\u0000\u0000<?xpacket begin=\"﻿\" id=\"W5M0MpCehiHzreSzNTczkc9d\"?> <x:xmpmeta xmlns:x=\"adobe:ns:meta/\" x:xmptk=\"Adobe XMP Core 5.3-c011 66.145661, 2012/02/06-14:56:27        \"> <rdf:RDF xmlns:rdf=\"http://www.w3.org/"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/form_common.js?190226",
+      "status": 200,
+      "contentType": "application/x-javascript",
+      "bodyLength": 3887,
+      "sample": "function validate_required(obj, type) {\n\tif(typeof obj == 'object') {\n\t\tvar obj_type = $(obj).attr('type');\n\n\t\tif(obj_type == 'checkbox' || obj_type == 'radio') {\n\t\t\tvar obj_name = $(obj).attr('name');\n\t\t\tif($(\"input[name='\" + obj_name + \"']:checked\").length < 1) {\n\t\t\t\treturn false\n\t\t\t}\n\t\t} else {\n\t"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/ui/jquery.ui.touch-punch.js",
+      "status": 200,
+      "contentType": "text/javascript",
+      "bodyLength": 5073,
+      "sample": "/*!\n * jQuery UI Touch Punch 0.2.3\n *\n * Copyright 2011–2014, Dave Furfero\n * Dual licensed under the MIT or GPL Version 2 licenses.\n *\n * Depends:\n *  jquery.ui.widget.js\n *  jquery.ui.mouse.js\n */\n(function ($) {\n\n  // Detect touch support\n  $.support.touch = 'ontouchend' in document;\n\n  // Ignore"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/form_ajax.js",
+      "status": 200,
+      "contentType": "application/x-javascript",
+      "bodyLength": 7779,
+      "sample": "// { ajax form\n// 줄바꿈 : \\r\\n\nfunction fm_ajax(fm, cfg){\n\tif(typeof cfg != 'object') { cfg = {}; }\n\n\tif(typeof cfg['async'] == 'boolean') { cfg_async = cfg['async']; }\n\telse { cfg_async = true; }\n\n\tif(typeof cfg['ajax_type'] == 'string' && cfg['ajax_type'] == 'GET') { cfg_ajax_type = cfg['ajax_type']"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/jquery.form.min.js",
+      "status": 200,
+      "contentType": "text/javascript",
+      "bodyLength": 15248,
+      "sample": "/*!\n * jQuery Form Plugin\n * version: 3.51.0-2014.06.20\n * Requires jQuery v1.5 or later\n * Copyright (c) 2014 M. Alsup\n * Examples and documentation at: http://malsup.com/jquery/form/\n * Project repository: https://github.com/malsup/form\n * Dual licensed under the MIT and GPL licenses.\n * https://g"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/scroll/jquery.mousewheel.min.js?_=1786937551066",
+      "status": 200,
+      "contentType": "application/x-javascript",
+      "bodyLength": 2771,
+      "sample": "/*!\n * jQuery Mousewheel 3.1.13\n *\n * Copyright 2015 jQuery Foundation and other contributors\n * Released under the MIT license.\n * http://jquery.org/license\n */\n!function(a){\"function\"==typeof define&&define.amd?define([\"jquery\"],a):\"object\"==typeof exports?module.exports=a:a(jQuery)}(function(a){f"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/bootstrap.css?23111301",
+      "status": 200,
+      "contentType": "text/css",
+      "bodyLength": 120264,
+      "sample": "/*!\n * Bootstrap v3.0.0\n *\n * Copyright 2013 Twitter, Inc\n * Licensed under the Apache License v2.0\n * http://www.apache.org/licenses/LICENSE-2.0\n *\n * Designed and built with all the love in the world by @mdo and @fat.\n */\n\n/*! normalize.css v2.1.0 | MIT License | git.io/normalize */\n\narticle,\nasid"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/bootstrap-theme.css",
+      "status": 200,
+      "contentType": "text/css",
+      "bodyLength": 16819,
+      "sample": ".btn-default,\n.btn-primary,\n.btn-success,\n.btn-info,\n.btn-warning,\n.btn-danger {\n  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);\n          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0,"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/ui/jquery-ui.css",
+      "status": 200,
+      "contentType": "text/css",
+      "bodyLength": 23379,
+      "sample": "/*! jQuery UI - v1.11.2 - 2014-10-21\n* http://jqueryui.com\n* Includes: core.css, draggable.css, resizable.css, selectable.css, sortable.css, datepicker.css, theme.css\n* To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Trebuchet%20MS%2CTahoma%2CVerdana%2CArial%2Csans-se"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/default.css?26061201",
+      "status": 200,
+      "contentType": "text/css",
+      "bodyLength": 53642,
+      "sample": "@charset \"utf-8\";\r\n\r\nbody {font-family:\"맑은 고딕\",Malgun Gothic, Nanum Gothic,\"나눔 고딕\",\"돋움\", Dotum, \"굴림\",  Gulim, sans-serif;}\r\nh1, h2, h3, h4, h5, h6, form, input, ul, li, dl, dt, dd, p {margin:0; padding:0;}\r\n\r\na {text-decoration:none;}\r\na:hover {text-decoration:none;}\r\na:active {text-decoration:none;"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/af/content.css?26033101",
+      "status": 200,
+      "contentType": "text/css",
+      "bodyLength": 13916,
+      "sample": "@charset \"utf-8\";\r\n\r\n\r\n/*드래그*/\r\n::selection {background:#8fbce3;}\r\n::-moz-selection {background:#8fbce3;}\r\n::-webkit-selection {background:#8fbce3;}\r\n\r\n\r\n\r\n/*상단*/\r\n#header {background:#4791d2;   }\r\n#header p#logo{color:#e7f6f2;  background:#366d9d;}\r\n#header p#logo strong{ color:#77aac1; }\r\n\r\n/*#hea"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/icon/css/font-awesome.css",
+      "status": 200,
+      "contentType": "text/css",
+      "bodyLength": 26651,
+      "sample": "/*!\n *  Font Awesome 4.2.0 by @davegandy - http://fontawesome.io - @fontawesome\n *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)\n */\n/* FONT PATH\n * -------------------------- */\n@font-face {\n  font-family: 'FontAwesome';\n  src: url('../fonts/fontawesome-webfont.eot?"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/scroll/jquery.mCustomScrollbar.css",
+      "status": 200,
+      "contentType": "text/css",
+      "bodyLength": 53630,
+      "sample": "/*\n== malihu jquery custom scrollbar plugin ==\nPlugin URI: http://manos.malihu.gr/jquery-custom-content-scroller\n*/\n\n\n\n/*\nCONTENTS: \n\t1. BASIC STYLE - Plugin's basic/essential CSS properties (normally, should not be edited). \n\t2. VERTICAL SCROLLBAR - Positioning and dimensions of vertical scrollbar."
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/jquery.js",
+      "status": 200,
+      "contentType": "text/javascript",
+      "bodyLength": 282769,
+      "sample": "/*!\n * jQuery JavaScript Library v1.11.1\n * http://jquery.com/\n *\n * Includes Sizzle.js\n * http://sizzlejs.com/\n *\n * Copyright 2005, 2014 jQuery Foundation, Inc. and other contributors\n * Released under the MIT license\n * http://jquery.org/license\n *\n * Date: 2014-05-01T17:42Z\n */\n\n\n\n\n(function( gl"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/ui/jquery-ui.js",
+      "status": 200,
+      "contentType": "text/javascript",
+      "bodyLength": 306216,
+      "sample": "/*! jQuery UI - v1.11.2 - 2014-10-21\n* http://jqueryui.com\n* Includes: core.js, widget.js, mouse.js, position.js, draggable.js, droppable.js, resizable.js, selectable.js, sortable.js, datepicker.js, effect.js, effect-blind.js, effect-bounce.js, effect-clip.js, effect-drop.js, effect-explode.js, effe"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/bootstrap.js",
+      "status": 200,
+      "contentType": "text/javascript",
+      "bodyLength": 58457,
+      "sample": "/**\n* bootstrap.js v3.0.0 by @fat and @mdo\n* Copyright 2013 Twitter Inc.\n* http://www.apache.org/licenses/LICENSE-2.0\n*/\nif (!jQuery) { throw new Error(\"Bootstrap requires jQuery\") }\n\n/* ========================================================================\n * Bootstrap: transition.js v3.0.0\n * ht"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/common.js?23021501",
+      "status": 200,
+      "contentType": "application/x-javascript",
+      "bodyLength": 4014,
+      "sample": "/*\r\n\thttp://www.abeautifulsite.net/detecting-mobile-devices-with-javascript/\r\n\tif( isMobile.any() ) alert('Mobile');\r\n\tif( isMobile.iOS() ) alert('iOS');\r\n*/\r\nvar isMobile = {\r\n    Android: function() {\r\n        return navigator.userAgent.match(/Android/i);\r\n    },\r\n    BlackBerry: function() {\r\n   "
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/scroll/jquery.mCustomScrollbar.js",
+      "status": 200,
+      "contentType": "application/x-javascript",
+      "bodyLength": 93022,
+      "sample": "/*\n== malihu jquery custom scrollbar plugin == \nVersion: 3.1.5 \nPlugin URI: http://manos.malihu.gr/jquery-custom-content-scroller \nAuthor: malihu\nAuthor URI: http://manos.malihu.gr\nLicense: MIT License (MIT)\n*/\n\n/*\nCopyright Manos Malihutsakis (email: manos@malihu.gr)\n\nPermission is hereby granted, "
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/table_sticky.js?26042101",
+      "status": 200,
+      "contentType": "application/x-javascript",
+      "bodyLength": 1786,
+      "sample": "// { 메인 테이블 th 고정 --------------\nlet responsiveContainer = null; \n\n// 상단 타이틀 고정값\nlet rcTitleBox = null; \nlet rcTopOffset = null; \n\n// th가 2개 이상인 경우 고려\nlet rcHeaderRows = null; \n\n//let stickyCnt = 0;\nfunction adjustTableSticky() {\n\t//stickyCnt++;\n\t\n\t// 위치 계산\n\tconst rect = responsiveContainer.getBound"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/icon/fonts/fontawesome-webfont.woff?v=4.2.0",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "bodyLength": 0,
+      "sample": ""
+    },
+    {
+      "url": "https://www.dbdbschool.kr/af/qanda/view/num/8806/p/1/sn/3267",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bodyLength": 26672,
+      "sample": "<!DOCTYPE html>\r\n<html lang=\"ko\">\r\n  <head>\r\n\t<meta charset=\"utf-8\">\r\n\t<meta name=\"description\" content=\"방과후학교 수강신청, 늘봄학교 수강신청, 자유학기제 수강신청, 우유신청, 온라인 연수지명부 작성 등 학교 교직원 업무 경감을 위한 온라인 서비스를 제공합니다.\" />\r\n\t<meta name=\"keywords\" content=\"방과후학교,늘봄학교,우유신청,연수지명부,수강신청,늘봄학교 수강신청,자유학기제 수강신청,방과후 신청,방과후 수강신청,방과후학교"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/images/af/user_face01.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bodyLength": 2845,
+      "sample": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u00000\u0000\u0000\u00001\b\u0006\u0000\u0000\u0000�^*\"\u0000\u0000\u0000\u0019tEXtSoftware\u0000Adobe ImageReadyq�e<\u0000\u0000\u0003\"iTXtXML:com.adobe.xmp\u0000\u0000\u0000\u0000\u0000<?xpacket begin=\"﻿\" id=\"W5M0MpCehiHzreSzNTczkc9d\"?> <x:xmpmeta xmlns:x=\"adobe:ns:meta/\" x:xmptk=\"Adobe XMP Core 5.3-c011 66.145661, 2012/02/06-14:56:27        \"> <rdf:RDF xmlns:rdf=\"http://www.w3.org/"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/images/ext_icons/hwp.gif",
+      "status": 200,
+      "contentType": "image/gif",
+      "bodyLength": 229,
+      "sample": "GIF89a\u0010\u0000\u0010\u0000��\u0000\u0000\u0000\u0000\u0000\u0000c\u0000�c\u0000\u0000�\u0000�cc��c�����ΜΜ���Μ��Μ���������\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000!�\u0004\u0001\u0000\u0000\u0010\u0000,\u0000\u0000\u0000\u0000\u0010\u0000\u0010\u0000@\u0005g $�d)\u0006CP\u001cE�8I�\u0014d@<B��<P�\u001d�UK�L&���p<d\u000f�/H��\u0000\u0005D�`����R��\u0002��_�`P\u0018,_��ldv\u0004�\f�k.\u0002��\b\u000b\f.;\u0007%\bTAV#�T\r+it,�\u0005�!\u0000;"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/scroll/jquery.mousewheel.min.js?_=1786937551888",
+      "status": 200,
+      "contentType": "application/x-javascript",
+      "bodyLength": 2771,
+      "sample": "/*!\n * jQuery Mousewheel 3.1.13\n *\n * Copyright 2015 jQuery Foundation and other contributors\n * Released under the MIT license.\n * http://jquery.org/license\n */\n!function(a){\"function\"==typeof define&&define.amd?define([\"jquery\"],a):\"object\"==typeof exports?module.exports=a:a(jQuery)}(function(a){f"
+    }
+  ]
+}

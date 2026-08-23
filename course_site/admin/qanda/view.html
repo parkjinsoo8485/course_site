@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q&A 답변 작성 | 본사 최고관리자 | 늘봄학교 SaaS</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "맑은 고딕", "Malgun Gothic", "Noto Sans KR", sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: 220px; min-height: 100vh;
+      background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+      border-right: 1px solid rgba(255,255,255,0.07);
+      display: flex; flex-direction: column;
+      position: fixed; top: 0; left: 0; bottom: 0; z-index: 100;
+    }
+    .sidebar-logo { padding: 24px 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .sidebar-logo .logo-badge {
+      font-size: 0.72rem; font-weight: 700;
+      background: linear-gradient(135deg, #6366f1, #38bdf8);
+      color: white; padding: 3px 10px; border-radius: 9999px;
+      display: inline-block; margin-bottom: 8px;
+    }
+    .sidebar-logo h2 {
+      font-size: 1.05rem; font-weight: 800;
+      background: linear-gradient(135deg, #818cf8, #38bdf8);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .sidebar-logo .role-label { font-size: 0.75rem; color: #64748b; margin-top: 4px; }
+    .sidebar-nav { flex: 1; padding: 16px 0; }
+    .nav-section-label {
+      font-size: 0.68rem; font-weight: 700; color: #475569;
+      padding: 8px 20px 4px; text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 20px; color: #94a3b8; text-decoration: none;
+      font-size: 0.88rem; font-weight: 500; border-left: 3px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .nav-item:hover { background: rgba(99,102,241,0.08); color: #c7d2fe; }
+    .nav-item.active { background: rgba(99,102,241,0.15); color: #818cf8; border-left-color: #6366f1; font-weight: 700; }
+    .nav-item .icon { font-size: 1rem; width: 18px; text-align: center; }
+    .sidebar-footer { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.07); }
+    .sidebar-footer a { color: #475569; font-size: 0.8rem; text-decoration: none; }
+    .sidebar-footer a:hover { color: #94a3b8; }
+
+    /* ── Main ── */
+    .main { margin-left: 220px; flex: 1; display: flex; flex-direction: column; }
+    .topbar {
+      background: rgba(30,41,59,0.8); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 16px 32px; display: flex; align-items: center;
+      justify-content: space-between; position: sticky; top: 0; z-index: 50;
+    }
+    .topbar-title { font-size: 1.05rem; font-weight: 700; color: #f1f5f9; }
+    .topbar-meta { font-size: 0.8rem; color: #64748b; }
+    .topbar-right { display: flex; align-items: center; gap: 12px; }
+    .admin-avatar {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, #6366f1, #38bdf8);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.85rem; color: white;
+    }
+
+    .content { padding: 32px; max-width: 900px; }
+
+    /* ── Breadcrumb ── */
+    .breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.8rem; color: #475569; margin-bottom: 24px;
+    }
+    .breadcrumb a { color: #6366f1; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { color: #64748b; }
+
+    /* ── Q&A Info Card ── */
+    .qna-card {
+      background: rgba(30,41,59,0.7);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .qna-card-header {
+      padding: 16px 24px;
+      background: rgba(15,23,42,0.5);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .qna-card-title {
+      font-size: 0.85rem; font-weight: 700; color: #64748b;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .qna-card-body { padding: 24px; }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .info-row { display: flex; flex-direction: column; gap: 4px; }
+    .info-label { font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+    .info-value { font-size: 0.9rem; color: #e2e8f0; font-weight: 500; }
+    .school-tag {
+      display: inline-block; padding: 3px 10px;
+      background: rgba(99,102,241,0.15); color: #a5b4fc;
+      border-radius: 5px; font-size: 0.82rem; font-weight: 700;
+    }
+    .status-badge {
+      display: inline-block; padding: 3px 10px;
+      border-radius: 9999px; font-size: 0.78rem; font-weight: 700;
+    }
+    .s-pending { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
+    .s-process { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.25); }
+    .s-done { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.25); }
+
+    .question-subject {
+      font-size: 1.05rem; font-weight: 700; color: #f1f5f9;
+      margin-bottom: 12px; padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .question-body {
+      font-size: 0.88rem; color: #cbd5e1; line-height: 1.75;
+      white-space: pre-wrap;
+      background: rgba(15,23,42,0.4);
+      border-radius: 8px; padding: 16px;
+    }
+
+    /* ── Answer Card ── */
+    .answer-card {
+      background: rgba(30,41,59,0.7);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .answer-card-header {
+      padding: 16px 24px;
+      background: rgba(99,102,241,0.1);
+      border-bottom: 1px solid rgba(99,102,241,0.2);
+    }
+    .answer-card-title {
+      font-size: 0.92rem; font-weight: 700; color: #a5b4fc;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .answer-card-body { padding: 24px; }
+
+    /* ── Template Select ── */
+    .template-row {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+    }
+    .template-label { font-size: 0.82rem; font-weight: 600; color: #94a3b8; white-space: nowrap; }
+    .template-select {
+      flex: 1; height: 36px; padding: 0 12px;
+      background: rgba(15,23,42,0.8);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px; color: #e2e8f0; font-size: 0.84rem; outline: none;
+      cursor: pointer;
+    }
+    .template-select:focus { border-color: #6366f1; }
+    .template-select option { background: #1e293b; }
+    .btn-apply {
+      padding: 0 16px; height: 36px;
+      background: rgba(99,102,241,0.2);
+      border: 1px solid rgba(99,102,241,0.4);
+      color: #a5b4fc; border-radius: 6px; font-size: 0.82rem; font-weight: 700;
+      cursor: pointer; white-space: nowrap; transition: all 0.2s;
+    }
+    .btn-apply:hover { background: rgba(99,102,241,0.3); color: #c7d2fe; }
+
+    /* ── Textarea ── */
+    .answer-textarea {
+      width: 100%; min-height: 180px; padding: 14px 16px;
+      background: rgba(15,23,42,0.7);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; color: #e2e8f0; font-size: 0.88rem;
+      font-family: "맑은 고딕", "Malgun Gothic", sans-serif;
+      line-height: 1.7; resize: vertical; outline: none;
+      transition: border-color 0.2s;
+    }
+    .answer-textarea:focus { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,0.1); }
+    .answer-textarea::placeholder { color: #475569; }
+    .char-count { font-size: 0.75rem; color: #475569; text-align: right; margin-top: 6px; }
+
+    /* ── Readonly Answer ── */
+    .answer-readonly {
+      padding: 16px;
+      background: rgba(16,185,129,0.06);
+      border: 1px solid rgba(16,185,129,0.2);
+      border-radius: 8px;
+      font-size: 0.88rem;
+      color: #a7f3d0;
+      line-height: 1.75;
+      white-space: pre-wrap;
+    }
+
+    /* ── Action Buttons ── */
+    .action-row {
+      display: flex; gap: 12px; justify-content: flex-end;
+      padding-top: 4px;
+    }
+    .btn-submit {
+      padding: 10px 28px;
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white; border: none; border-radius: 8px;
+      font-size: 0.9rem; font-weight: 700; cursor: pointer;
+      transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+    }
+    .btn-submit:hover { opacity: 0.88; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(99,102,241,0.4); }
+    .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+    .btn-back {
+      padding: 10px 20px;
+      background: rgba(255,255,255,0.06);
+      color: #94a3b8; border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; font-size: 0.88rem; font-weight: 600;
+      cursor: pointer; text-decoration: none; display: inline-flex; align-items: center;
+      transition: all 0.2s;
+    }
+    .btn-back:hover { background: rgba(255,255,255,0.1); color: #e2e8f0; }
+
+    /* ── Success Toast ── */
+    .toast {
+      position: fixed; top: 24px; right: 24px;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white; padding: 14px 22px; border-radius: 10px;
+      font-size: 0.88rem; font-weight: 700;
+      box-shadow: 0 8px 24px rgba(16,185,129,0.4);
+      transform: translateY(-80px); opacity: 0;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 9999;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ── Not found ── */
+    .not-found {
+      text-align: center; padding: 80px 40px;
+      color: #475569;
+    }
+    .not-found h2 { font-size: 1.4rem; margin-bottom: 12px; color: #64748b; }
+  </style>
+</head>
+<body>
+
+  <div class="toast" id="toast">✅ 답변이 등록되었습니다!</div>
+
+  <!-- ═══════════ SIDEBAR ═══════════ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-badge">SUPER ADMIN</div>
+      <h2>🏫 늘봄학교 SaaS</h2>
+      <div class="role-label">본사 최고 관리자 시스템</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">마스터 관리</div>
+      <a href="/admin" class="nav-item">
+        <span class="icon">📊</span> 전체 현황 대시보드
+      </a>
+      <a href="/admin/qanda" class="nav-item active">
+        <span class="icon">💬</span> 통합 Q&amp;A 관리
+      </a>
+      <a href="/admin/schools" class="nav-item">
+        <span class="icon">🏫</span> 학교 목록 관리
+      </a>
+      <div class="nav-section-label" style="margin-top:12px;">공통 콘텐츠</div>
+      <a href="/af/ad_faq/main/sn/3267" class="nav-item">
+        <span class="icon">📖</span> FAQ/매뉴얼 관리
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="/">← 학교 관리자로 이동</a>
+    </div>
+  </aside>
+
+  <!-- ═══════════ MAIN ═══════════ -->
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <div class="topbar-title">Q&amp;A 답변 작성</div>
+        <div class="topbar-meta" id="topbar-school-name">학교 문의 상세 조회</div>
+      </div>
+      <div class="topbar-right">
+        <div class="admin-avatar">최</div>
+        <span style="font-size:0.85rem; color:#94a3b8;">본사 관리자</span>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        <a href="/admin">대시보드</a>
+        <span>›</span>
+        <a href="/admin/qanda">통합 Q&amp;A 관리</a>
+        <span>›</span>
+        <span style="color:#e2e8f0;" id="breadcrumb-subject">문의 상세</span>
+      </div>
+
+      <div id="main-content"></div>
+    </div>
+  </main>
+
+  <script>
+    // ─── URL 파라미터에서 id 추출 ───
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetId = urlParams.get('id');
+
+    // ─── localStorage 스토어 ───
+    function getQnaItems() {
+      const stored = localStorage.getItem('admin_qna_items');
+      if (stored) return JSON.parse(stored);
+      return [];
+    }
+    function saveQnaItems(items) {
+      localStorage.setItem('admin_qna_items', JSON.stringify(items));
+    }
+
+    // ─── 템플릿 목록 ───
+    const TEMPLATES = [
+      { value: '', label: '── 자주 쓰는 답변 템플릿 선택 ──' },
+      { value: 'login_error', label: '로그인 오류 안내', text: '안녕하세요, 늘봄학교 SaaS 고객지원팀입니다.\n\n로그인 오류가 발생하셨군요. 아래 절차를 따라 진행해 보시기 바랍니다.\n\n1. 브라우저 캐시 삭제 후 재시도\n2. 비밀번호 분실 시 [비밀번호 찾기] 메뉴 이용\n3. 위 방법으로 해결되지 않으면 담당자에게 직접 연락 부탁드립니다.\n\n더 궁금하신 점이 있으시면 언제든지 문의해 주세요. 감사합니다.' },
+      { value: 'course_copy', label: '강좌 복사 매뉴얼 안내', text: '안녕하세요, 늘봄학교 SaaS 고객지원팀입니다.\n\n강좌 복사 기능 사용 방법을 안내해 드립니다.\n\n[강좌 복사 방법]\n1. 강좌관리 → 강좌 목록 이동\n2. 복사할 강좌 체크박스 선택\n3. 상단 [일괄복사] 버튼 클릭\n4. 복사할 학기/연도 설정 후 확인\n\n자세한 내용은 FAQ 매뉴얼 → 강좌관리 카테고리를 참고해 주세요.\n\n감사합니다.' },
+      { value: 'enrollment_period', label: '수강신청 기간 안내', text: '안녕하세요, 늘봄학교 SaaS 고객지원팀입니다.\n\n수강신청 기간 변경은 아래 경로에서 직접 설정 가능합니다.\n\n[설정 경로]\n강좌관리 → 강좌 설정 → 수강신청 기간 설정\n\n기간 변경 후 학부모/학생에게 안내 문자 발송을 권장드립니다.\n추가 문의사항이 있으시면 언제든 연락 주세요. 감사합니다.' },
+      { value: 'edufine', label: '에듀파인 연동 안내', text: '안녕하세요, 늘봄학교 SaaS 고객지원팀입니다.\n\n에듀파인 연동 방법을 안내해 드립니다.\n\n[에듀파인 코드 연동 순서]\n1. 강좌관리 → 강좌 상세 → 에듀파인 코드 입력란\n2. 교육청에서 발급받은 에듀파인 코드 입력\n3. [저장] 클릭 후 에듀파인 시스템에서 확인\n\n코드 발급은 소속 교육지원청 담당자에게 문의하시기 바랍니다.\n감사합니다.' },
+      { value: 'refund', label: '환불 처리 안내', text: '안녕하세요, 늘봄학교 SaaS 고객지원팀입니다.\n\n환불 처리 관련 안내를 드립니다.\n\n[환불 절차]\n1. 학생관리 → 수강 취소 처리\n2. 환불관리 → 환불 신청 승인\n3. 지원금 환불의 경우 비율 환산 자동 계산됨\n\n정확한 환불 금액은 수강 일수에 따라 자동 산정되며, FAQ 매뉴얼의 환불 규정을 참고해 주세요.\n감사합니다.' },
+    ];
+
+    // ─── 상태 배지 ───
+    function getStatusBadge(status) {
+      if (status === '0') return '<span class="status-badge s-pending">⚠️ 답변대기</span>';
+      if (status === '1') return '<span class="status-badge s-process">🔄 처리중</span>';
+      return '<span class="status-badge s-done">✅ 답변완료</span>';
+    }
+
+    // ─── 메인 렌더 ───
+    function render() {
+      const items = getQnaItems();
+      const item = items.find(i => i.id === targetId);
+      const container = document.getElementById('main-content');
+
+      if (!item) {
+        container.innerHTML = `
+          <div class="not-found">
+            <h2>📭 문의를 찾을 수 없습니다</h2>
+            <p>해당 Q&amp;A 항목이 존재하지 않습니다.</p>
+            <a href="/admin/qanda" style="color:#6366f1; text-decoration:none; margin-top:16px; display:inline-block;">← 목록으로 돌아가기</a>
+          </div>
+        `;
+        return;
+      }
+
+      document.getElementById('topbar-school-name').textContent = item.schoolName + ' 문의';
+      document.getElementById('breadcrumb-subject').textContent = item.subject.length > 20 ? item.subject.slice(0, 20) + '...' : item.subject;
+
+      const isAnswered = item.status === '2' || item.status === '3';
+
+      // 템플릿 옵션 생성
+      const templateOptions = TEMPLATES.map(t => `<option value="${t.value}">${t.label}</option>`).join('');
+
+      container.innerHTML = `
+        <!-- ── 질문 카드 ── -->
+        <div class="qna-card">
+          <div class="qna-card-header">
+            <div class="qna-card-title">📋 문의 내용</div>
+            ${getStatusBadge(item.status)}
+          </div>
+          <div class="qna-card-body">
+            <div class="info-grid">
+              <div class="info-row">
+                <span class="info-label">학교명</span>
+                <span class="info-value"><span class="school-tag">${item.schoolName}</span></span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">작성자</span>
+                <span class="info-value">${item.authorName}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">작성일</span>
+                <span class="info-value" style="color:#64748b;">${item.createdAt}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">처리 상태</span>
+                <span class="info-value">${getStatusBadge(item.status)}</span>
+              </div>
+            </div>
+            <div class="question-subject">${item.subject}</div>
+            <div class="question-body">${item.contents || '(내용 없음)'}</div>
+          </div>
+        </div>
+
+        <!-- ── 답변 카드 ── -->
+        <div class="answer-card">
+          <div class="answer-card-header">
+            <div class="answer-card-title">
+              ✏️ ${isAnswered ? '등록된 답변' : '답변 작성'}
+            </div>
+          </div>
+          <div class="answer-card-body">
+            ${isAnswered ? `
+              <div style="font-size:0.8rem; color:#10b981; font-weight:600; margin-bottom:12px;">
+                ✅ 답변이 등록되어 있습니다.
+              </div>
+              <div class="answer-readonly">${item.answerContent}</div>
+              <div class="action-row" style="margin-top:20px;">
+                <a href="/admin/qanda" class="btn-back">← 목록으로 돌아가기</a>
+              </div>
+            ` : `
+              <div class="template-row">
+                <span class="template-label">📂 템플릿 선택:</span>
+                <select class="template-select" id="template-select">
+                  ${templateOptions}
+                </select>
+                <button class="btn-apply" onclick="applyTemplate()">적용</button>
+              </div>
+              <textarea
+                class="answer-textarea"
+                id="answer-textarea"
+                placeholder="학교 관리자의 문의에 대한 답변을 입력하세요..."
+                oninput="updateCharCount()"
+              ></textarea>
+              <div class="char-count" id="char-count">0자</div>
+              <div class="action-row" style="margin-top:16px;">
+                <a href="/admin/qanda" class="btn-back">← 목록으로</a>
+                <button class="btn-submit" id="submit-btn" onclick="submitAnswer('${item.id}')">
+                  📨 답변 등록
+                </button>
+              </div>
+            `}
+          </div>
+        </div>
+      `;
+    }
+
+    function applyTemplate() {
+      const sel = document.getElementById('template-select');
+      const selectedVal = sel.value;
+      if (!selectedVal) return;
+      const tpl = TEMPLATES.find(t => t.value === selectedVal);
+      if (tpl && tpl.text) {
+        document.getElementById('answer-textarea').value = tpl.text;
+        updateCharCount();
+      }
+    }
+
+    function updateCharCount() {
+      const ta = document.getElementById('answer-textarea');
+      if (ta) {
+        document.getElementById('char-count').textContent = ta.value.length + '자';
+      }
+    }
+
+    function submitAnswer(id) {
+      const ta = document.getElementById('answer-textarea');
+      const content = ta ? ta.value.trim() : '';
+      if (!content) {
+        ta.style.borderColor = '#ef4444';
+        ta.placeholder = '⚠️ 답변 내용을 입력해 주세요.';
+        ta.focus();
+        return;
+      }
+
+      const submitBtn = document.getElementById('submit-btn');
+      submitBtn.disabled = true;
+      submitBtn.textContent = '등록 중...';
+
+      // localStorage 업데이트
+      const items = getQnaItems();
+      const today = new Date().toISOString().split('T')[0];
+      const updated = items.map(item => {
+        if (item.id === id) {
+          return {
+            ...item,
+            status: '3',
+            statusText: '답변완료',
+            answerContent: content,
+            answerDate: today,
+          };
+        }
+        return item;
+      });
+      saveQnaItems(updated);
+
+      // 토스트 → 목록으로 이동
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => {
+        window.location.href = '/admin/qanda';
+      }, 1800);
+    }
+
+    // 초기 렌더
+    render();
+  </script>
+</body>
+</html>

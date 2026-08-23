@@ -1915,7 +1915,411 @@ class JSONDatabase {
     }
     return this.data.applyPeriods;
   }
+
+  // 13. Q&A 고객지원 게시판 (/af/qanda/*)
+  getQnaList(schoolId) {
+    if (!this.data.qnaList) {
+      this.data.qnaList = [
+        {
+          id: 'qna_8806',
+          num: 2,
+          schoolId: schoolId || '3267',
+          authorName: '김혜련',
+          hp1: '010',
+          hp2: '2494',
+          hp3: '1479',
+          phone: '062-609-1182',
+          email: 'khh147979@naver.com',
+          subject: '2026학년도 1학기 늘봄학교 만족도 조사 설문지',
+          contents: '2026학년도 바뀐 설문지 보내드립니다.\n감사합니다.',
+          files: [{ id: 'f_1', name: '2026학년도1학기늘봄학교만족도조사설문지.hwp' }],
+          status: '2',
+          statusText: '완료',
+          createdAt: '2026-06-01',
+          answerDate: '06/01',
+          answerContent: '자료 올려 주셔서 감사합니다.\n4가지 샘플 설문에 등록해드렸습니다.\n확인 바랍니다.'
+        },
+        {
+          id: 'qna_3356',
+          num: 1,
+          schoolId: schoolId || '3267',
+          authorName: '김혜련',
+          hp1: '010',
+          hp2: '2494',
+          hp3: '1479',
+          phone: '062-609-1182',
+          email: 'khh147979@naver.com',
+          subject: '지원금 스쿨뱅킹 현황',
+          contents: '1학기 지원금 스쿨뱅킹 수납 현황 파일 확인 부탁드립니다.',
+          files: [],
+          status: '2',
+          statusText: '완료',
+          createdAt: '2026-05-15',
+          answerDate: '05/16',
+          answerContent: '요청하신 지원금 스쿨뱅킹 수납 현황을 에듀파인 연계 규격에 맞게 생성하여 등록 처리하였습니다.'
+        }
+      ];
+      this.save();
+    }
+    return this.data.qnaList;
+  }
+
+  getQnaById(id) {
+    const list = this.getQnaList();
+    return list.find(i => String(i.id) === String(id)) || null;
+  }
+
+  createQna(data) {
+    const list = this.getQnaList();
+    const newItem = {
+      id: `qna_${Date.now()}`,
+      num: list.length + 1,
+      createdAt: new Date().toISOString().split('T')[0],
+      status: '0',
+      statusText: '접수',
+      answerDate: '',
+      answerContent: '',
+      ...data
+    };
+    list.unshift(newItem);
+    this.save();
+    return newItem;
+  }
+
+  updateQnaReply(id, data) {
+    const list = this.getQnaList();
+    const target = list.find(i => String(i.id) === String(id));
+    if (!target) return null;
+
+    target.answerContent = data.replyContent || target.answerContent;
+    target.status = data.status || '2';
+    target.statusText = target.status === '3' ? '답변완료' : (target.status === '2' ? '완료' : '처리중');
+    target.answerDate = new Date().toISOString().split('T')[0].substring(5);
+    this.save();
+    return target;
+  }
+
+  deleteQna(id) {
+    const list = this.getQnaList();
+    const initLen = list.length;
+    this.data.qnaList = list.filter(i => String(i.id) !== String(id));
+    this.save();
+    return this.data.qnaList.length < initLen;
+  }
+
+  // 14. Applicants Management (/af/ad_app/*)
+  getApplicantsBySchool(schoolId, filters = {}) {
+    if (!this.data.applicants) {
+      this.data.applicants = [
+        {
+          id: 'app_1',
+          schoolId: '3267',
+          courseId: 'c_3267_1',
+          courseTitle: '[늘봄] AI 로봇 코딩 교실',
+          category: '늘봄',
+          neulbomType: '초등1~2학년 늘봄',
+          studentId: 'stu_1',
+          studentName: '김민준',
+          grade: '1',
+          classNum: '2',
+          studentNumber: '08',
+          guardianName: '김상우',
+          guardianPhone: '010-3344-5566',
+          tuitionFee: 30000,
+          materialFee: 15000,
+          totalFee: 45000,
+          paymentStatus: '납부완료',
+          status: '정상',
+          isPriority: true,
+          appliedAt: '2026-03-02 09:15:20'
+        },
+        {
+          id: 'app_2',
+          schoolId: '3267',
+          courseId: 'c_3267_1',
+          courseTitle: '[늘봄] AI 로봇 코딩 교실',
+          category: '늘봄',
+          neulbomType: '초등1~2학년 늘봄',
+          studentId: 'stu_2',
+          studentName: '이서연',
+          grade: '1',
+          classNum: '1',
+          studentNumber: '14',
+          guardianName: '이지훈',
+          guardianPhone: '010-7788-9900',
+          tuitionFee: 30000,
+          materialFee: 15000,
+          totalFee: 45000,
+          paymentStatus: '납부완료',
+          status: '정상',
+          isPriority: false,
+          appliedAt: '2026-03-02 09:20:11'
+        },
+        {
+          id: 'app_3',
+          schoolId: '3267',
+          courseId: 'c_3267_2',
+          courseTitle: '창의 융합 생명과학 실험',
+          category: '방과후',
+          neulbomType: '',
+          studentId: 'stu_3',
+          studentName: '박도윤',
+          grade: '2',
+          classNum: '3',
+          studentNumber: '03',
+          guardianName: '박성민',
+          guardianPhone: '010-1234-5678',
+          tuitionFee: 35000,
+          materialFee: 20000,
+          totalFee: 55000,
+          paymentStatus: '미납',
+          status: '정상',
+          isPriority: false,
+          appliedAt: '2026-03-02 09:35:44'
+        },
+        {
+          id: 'app_4',
+          schoolId: '3267',
+          courseId: 'c_3267_3',
+          courseTitle: '신나는 음악 줄넘기',
+          category: '방과후',
+          neulbomType: '',
+          studentId: 'stu_4',
+          studentName: '최예은',
+          grade: '3',
+          classNum: '1',
+          studentNumber: '21',
+          guardianName: '최원석',
+          guardianPhone: '010-9988-7766',
+          tuitionFee: 25000,
+          materialFee: 5000,
+          totalFee: 30000,
+          paymentStatus: '납부완료',
+          status: '정상',
+          isPriority: true,
+          appliedAt: '2026-03-02 09:40:02'
+        }
+      ];
+      this.save();
+    }
+
+    let items = this.data.applicants.filter(a => String(a.schoolId) === String(schoolId || '3267'));
+
+    if (filters.category && filters.category !== 'all' && filters.category !== '전체') {
+      items = items.filter(a => a.category === filters.category);
+    }
+    if (filters.neulbomType && filters.neulbomType !== 'all') {
+      items = items.filter(a => a.neulbomType === filters.neulbomType);
+    }
+    if (filters.courseId && filters.courseId !== 'all') {
+      items = items.filter(a => a.courseId === filters.courseId);
+    }
+    if (filters.grade && filters.grade !== 'all') {
+      items = items.filter(a => String(a.grade) === String(filters.grade));
+    }
+    if (filters.classNum && filters.classNum !== 'all') {
+      items = items.filter(a => String(a.classNum) === String(filters.classNum));
+    }
+    if (filters.paymentStatus && filters.paymentStatus !== 'all') {
+      items = items.filter(a => a.paymentStatus === filters.paymentStatus);
+    }
+    if (filters.status && filters.status !== 'all') {
+      items = items.filter(a => a.status === filters.status);
+    }
+    if (filters.keyword && filters.keyword.trim()) {
+      const kw = filters.keyword.trim().toLowerCase();
+      items = items.filter(a => 
+        (a.studentName && a.studentName.toLowerCase().includes(kw)) ||
+        (a.guardianName && a.guardianName.toLowerCase().includes(kw)) ||
+        (a.guardianPhone && a.guardianPhone.includes(kw)) ||
+        (a.courseTitle && a.courseTitle.toLowerCase().includes(kw))
+      );
+    }
+
+    return items;
+  }
+
+  getApplicantStats(schoolId) {
+    const items = this.getApplicantsBySchool(schoolId);
+    return {
+      totalCount: items.length,
+      paidCount: items.filter(i => i.paymentStatus === '납부완료').length,
+      unpaidCount: items.filter(i => i.paymentStatus === '미납').length,
+      priorityCount: items.filter(i => i.isPriority).length,
+      totalTuitionFee: items.reduce((sum, i) => sum + (Number(i.tuitionFee) || 0), 0),
+      totalMaterialFee: items.reduce((sum, i) => sum + (Number(i.materialFee) || 0), 0),
+      totalFeeSum: items.reduce((sum, i) => sum + (Number(i.totalFee) || 0), 0)
+    };
+  }
+
+  getApplicantById(id) {
+    if (!this.data.applicants) this.getApplicantsBySchool();
+    return this.data.applicants.find(a => String(a.id) === String(id)) || null;
+  }
+
+  createApplicant(data) {
+    if (!this.data.applicants) this.getApplicantsBySchool();
+    const tuition = Number(data.tuitionFee) || 0;
+    const material = Number(data.materialFee) || 0;
+    const book = Number(data.bookFee) || 0;
+    const instructorFee = data.instructorFee !== undefined ? Number(data.instructorFee) : Math.round(tuition * 0.8);
+    const facilityFee = data.facilityFee !== undefined ? Number(data.facilityFee) : (tuition - instructorFee);
+    const totalFee = tuition + material + book;
+
+    const newApp = {
+      id: data.id || `app_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
+      schoolId: data.schoolId || '3267',
+      courseId: data.courseId || 'c_3267_1',
+      courseTitle: data.courseTitle || '신규 강좌',
+      category: data.category || '26년 8월',
+      neulbomType: data.neulbomType || '방과후',
+      studentId: data.studentId || `stu_${Date.now()}`,
+      studentName: data.studentName || '홍길동',
+      gradeClass: data.gradeClass || `${data.grade || 1}학년 ${data.classNum || 1}반`,
+      grade: String(data.grade || (data.gradeClass ? data.gradeClass.substring(0, 1) : '1')),
+      classNum: String(data.classNum || (data.gradeClass && data.gradeClass.includes('반') ? data.gradeClass.split('반')[0].slice(-1) : '1')),
+      studentNum: String(data.studentNum || data.studentNumber || '01'),
+      studentNumber: String(data.studentNum || data.studentNumber || '01'),
+      guardianName: data.guardianName || data.depositorName || '보호자',
+      guardianPhone: data.guardianPhone || data.parentPhone || '010-0000-0000',
+      parentPhone: data.guardianPhone || data.parentPhone || '010-0000-0000',
+      tuitionFee: tuition,
+      bookFee: book,
+      materialFee: material,
+      instructorFee,
+      facilityFee,
+      totalFee,
+      paymentStatus: data.paymentStatus || '미납',
+      status: data.status || '정상',
+      isPriority: !!data.isPriority,
+      appliedAt: new Date().toISOString().replace('T', ' ').substring(0, 19),
+      ...data
+    };
+    newApp.totalFee = totalFee; // Ensure correct total fee
+    this.data.applicants.unshift(newApp);
+    this.save();
+    return newApp;
+  }
+
+  copyApplicants({ schoolId, fromCategory, toCategory } = {}) {
+    if (!this.data.applicants) this.getApplicantsBySchool();
+    const sourceList = this.data.applicants.filter(a => {
+      const matchSchool = !schoolId || String(a.schoolId) === String(schoolId);
+      const matchCategory = !fromCategory || a.category === fromCategory;
+      return matchSchool && matchCategory;
+    });
+
+    const targetCategory = toCategory || '26년 9월';
+    const copied = [];
+    sourceList.forEach(app => {
+      const cloned = {
+        ...app,
+        id: `app_${Date.now()}_${Math.floor(Math.random() * 10000)}`,
+        category: targetCategory,
+        appliedAt: new Date().toISOString().replace('T', ' ').substring(0, 19)
+      };
+      this.data.applicants.unshift(cloned);
+      copied.push(cloned);
+    });
+
+    this.save();
+    return { copiedCount: copied.length, count: copied.length, items: copied };
+  }
+
+  createApplicantsBatch(schoolId, items = []) {
+    if (!this.data.applicants) this.getApplicantsBySchool();
+    const created = [];
+    items.forEach(item => {
+      const app = this.createApplicant({ schoolId, ...item });
+      created.push(app);
+    });
+    return created;
+  }
+
+  batchCreateApplicants(schoolId, items = []) {
+    return this.createApplicantsBatch(schoolId, items);
+  }
+
+  batchUpdateFee(courseId, { tuitionFee, materialFee, applyToAll } = {}) {
+    if (!this.data.applicants) this.getApplicantsBySchool();
+    let count = 0;
+    this.data.applicants.forEach(app => {
+      if (applyToAll || app.courseId === courseId) {
+        if (tuitionFee !== undefined) app.tuitionFee = Number(tuitionFee);
+        if (materialFee !== undefined) app.materialFee = Number(materialFee);
+        app.totalFee = (Number(app.tuitionFee) || 0) + (Number(app.materialFee) || 0) + (Number(app.bookFee) || 0);
+        count++;
+      }
+    });
+    this.save();
+    return { updatedCount: count, count };
+  }
+
+  batchUpdateApplicantFees(courseIdOrSchoolId, options = {}) {
+    const courseId = typeof courseIdOrSchoolId === 'object' ? courseIdOrSchoolId.courseId : (options.courseId || courseIdOrSchoolId);
+    return this.batchUpdateFee(courseId, options);
+  }
+
+  updateApplicant(id, data) {
+    const list = this.data.applicants || [];
+    const target = list.find(a => String(a.id) === String(id));
+    if (!target) return null;
+
+    Object.assign(target, data);
+    if (data.tuitionFee !== undefined || data.materialFee !== undefined) {
+      target.totalFee = (Number(target.tuitionFee) || 0) + (Number(target.materialFee) || 0);
+    }
+    this.save();
+    return target;
+  }
+
+  deleteApplicant(id) {
+    if (!this.data.applicants) return false;
+    const initLen = this.data.applicants.length;
+    this.data.applicants = this.data.applicants.filter(a => String(a.id) !== String(id));
+    this.save();
+    return this.data.applicants.length < initLen;
+  }
+
+  batchDeleteApplicants(ids = []) {
+    if (!this.data.applicants) return 0;
+    const idSet = new Set(ids.map(String));
+    const initLen = this.data.applicants.length;
+    this.data.applicants = this.data.applicants.filter(a => !idSet.has(String(a.id)));
+    this.save();
+    return initLen - this.data.applicants.length;
+  }
+
+  batchTransferApplicants(ids = [], targetCourseId, targetCourseTitle) {
+    if (!this.data.applicants) return 0;
+    let count = 0;
+    const idSet = new Set(ids.map(String));
+    this.data.applicants.forEach(a => {
+      if (idSet.has(String(a.id))) {
+        a.courseId = targetCourseId;
+        if (targetCourseTitle) a.courseTitle = targetCourseTitle;
+        count++;
+      }
+    });
+    this.save();
+    return count;
+  }
+
+  batchUpdateDrawPriority(ids = [], isPriority = true) {
+    if (!this.data.applicants) return 0;
+    let count = 0;
+    const idSet = new Set(ids.map(String));
+    this.data.applicants.forEach(a => {
+      if (idSet.has(String(a.id))) {
+        a.isPriority = isPriority;
+        count++;
+      }
+    });
+    this.save();
+    return count;
+  }
 }
 
 module.exports = new JSONDatabase();
+
 

@@ -1,0 +1,175 @@
+{
+  "title": "목록 - 서비스목록 - 학교관리",
+  "headerText": "학교관리",
+  "links": [
+    {
+      "text": "학교관리",
+      "href": "https://www.dbdbschool.kr/sczigi/service/lists/sn/3267#none;",
+      "pathname": "/sczigi/service/lists/sn/3267",
+      "className": "btn_icon",
+      "parentTag": "H1",
+      "parentClass": ""
+    },
+    {
+      "text": "서비스목록",
+      "href": "https://www.dbdbschool.kr/sczigi/service/lists/sn/3267",
+      "pathname": "/sczigi/service/lists/sn/3267",
+      "className": "on",
+      "parentTag": "LI",
+      "parentClass": ""
+    },
+    {
+      "text": "교직원관리",
+      "href": "https://www.dbdbschool.kr/sczigi/teacher/lists/sn/3267",
+      "pathname": "/sczigi/teacher/lists/sn/3267",
+      "className": "",
+      "parentTag": "LI",
+      "parentClass": ""
+    },
+    {
+      "text": "교직원관리",
+      "href": "https://www.dbdbschool.kr/sczigi/teacher/lists/sn/3267",
+      "pathname": "/sczigi/teacher/lists/sn/3267",
+      "className": "",
+      "parentTag": "LI",
+      "parentClass": ""
+    },
+    {
+      "text": "회원필드설정",
+      "href": "https://www.dbdbschool.kr/sczigi/teacher/field/sn/3267",
+      "pathname": "/sczigi/teacher/field/sn/3267",
+      "className": "",
+      "parentTag": "LI",
+      "parentClass": ""
+    },
+    {
+      "text": "직위명설정",
+      "href": "https://www.dbdbschool.kr/sczigi/teacher/level/sn/3267",
+      "pathname": "/sczigi/teacher/level/sn/3267",
+      "className": "",
+      "parentTag": "LI",
+      "parentClass": ""
+    },
+    {
+      "text": "초기화",
+      "href": "https://www.dbdbschool.kr/sczigi/teacher/clear/sn/3267",
+      "pathname": "/sczigi/teacher/clear/sn/3267",
+      "className": "",
+      "parentTag": "LI",
+      "parentClass": ""
+    },
+    {
+      "text": "학생관리",
+      "href": "https://www.dbdbschool.kr/sczigi/student/lists/sn/3267",
+      "pathname": "/sczigi/student/lists/sn/3267",
+      "className": "",
+      "parentTag": "LI",
+      "parentClass": ""
+    },
+    {
+      "text": "학생관리",
+      "href": "https://www.dbdbschool.kr/sczigi/student/lists/sn/3267",
+      "pathname": "/sczigi/student/lists/sn/3267",
+      "className": "",
+      "parentTag": "LI",
+      "parentClass": ""
+    },
+    {
+      "text": "기본설정",
+      "href": "https://www.dbdbschool.kr/sczigi/student/main/sn/3267",
+      "pathname": "/sczigi/student/main/sn/3267",
+      "className": "",
+      "parentTag": "LI",
+      "parentClass": ""
+    },
+    {
+      "text": "회원필드설정",
+      "href": "https://www.dbdbschool.kr/sczigi/student/field/sn/3267",
+      "pathname": "/sczigi/student/field/sn/3267",
+      "className": "",
+      "parentTag": "LI",
+      "parentClass": ""
+    },
+    {
+      "text": "학과설정",
+      "href": "https://www.dbdbschool.kr/sczigi/student/course/sn/3267",
+      "pathname": "/sczigi/student/course/sn/3267",
+      "className": "",
+      "parentTag": "LI",
+      "parentClass": ""
+    },
+    {
+      "text": "초기화",
+      "href": "https://www.dbdbschool.kr/sczigi/student/clear/sn/3267",
+      "pathname": "/sczigi/student/clear/sn/3267",
+      "className": "",
+      "parentTag": "LI",
+      "parentClass": ""
+    },
+    {
+      "text": "문자관리",
+      "href": "https://www.dbdbschool.kr/sczigi/sms_tel/lists/sn/3267",
+      "pathname": "/sczigi/sms_tel/lists/sn/3267",
+      "className": "",
+      "parentTag": "LI",
+      "parentClass": ""
+    },
+    {
+      "text": "발신번호관리",
+      "href": "https://www.dbdbschool.kr/sczigi/sms_tel/lists/sn/3267",
+      "pathname": "/sczigi/sms_tel/lists/sn/3267",
+      "className": "",
+      "parentTag": "LI",
+      "parentClass": ""
+    },
+    {
+      "text": "충전신청",
+      "href": "https://www.dbdbschool.kr/sczigi/sms_sin/lists/sn/3267",
+      "pathname": "/sczigi/sms_sin/lists/sn/3267",
+      "className": "",
+      "parentTag": "LI",
+      "parentClass": ""
+    },
+    {
+      "text": "충전내역",
+      "href": "https://www.dbdbschool.kr/sczigi/sms_charge/lists/sn/3267",
+      "pathname": "/sczigi/sms_charge/lists/sn/3267",
+      "className": "",
+      "parentTag": "LI",
+      "parentClass": ""
+    },
+    {
+      "text": "발송통계",
+      "href": "https://www.dbdbschool.kr/sczigi/sms_report/lists/sn/3267",
+      "pathname": "/sczigi/sms_report/lists/sn/3267",
+      "className": "",
+      "parentTag": "LI",
+      "parentClass": ""
+    },
+    {
+      "text": "권한설정",
+      "href": "https://www.dbdbschool.kr/sczigi/auth/main/sn/3267",
+      "pathname": "/sczigi/auth/main/sn/3267",
+      "className": "",
+      "parentTag": "LI",
+      "parentClass": ""
+    },
+    {
+      "text": "서비스접근로그",
+      "href": "https://www.dbdbschool.kr/sczigi/privacy_log/main/sn/3267",
+      "pathname": "/sczigi/privacy_log/main/sn/3267",
+      "className": "",
+      "parentTag": "LI",
+      "parentClass": ""
+    },
+    {
+      "text": "확인",
+      "href": "https://www.dbdbschool.kr/sczigi/service/lists/sn/3267#none;",
+      "pathname": "/sczigi/service/lists/sn/3267",
+      "className": "btn btn-primary",
+      "parentTag": "P",
+      "parentClass": "close"
+    }
+  ],
+  "allNavLinks": []
+}

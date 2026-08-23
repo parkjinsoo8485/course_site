@@ -1,0 +1,2750 @@
+[
+  {
+    "text": "광주풍향초등학교",
+    "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "늘봄학교",
+    "href": "#none;",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "늘봄학교",
+    "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/notification/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "홈으로",
+    "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "강좌등록",
+    "href": "https://www.dbdbschool.kr/af/ad_lec/write/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "매뉴얼",
+    "href": "https://www.dbdbschool.kr/af/ad_faq/main/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "고객지원 게시판",
+    "href": "https://www.dbdbschool.kr/af/qanda/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "강좌관리",
+    "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "신청자관리",
+    "href": "https://www.dbdbschool.kr/af/ad_app/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "대기자관리",
+    "href": "https://www.dbdbschool.kr/af/ad_wait/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "출석부관리",
+    "href": "https://www.dbdbschool.kr/af/ad_att/stat/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "환불/취소관리",
+    "href": "https://www.dbdbschool.kr/af/ad_ref/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "지원금관리",
+    "href": "https://www.dbdbschool.kr/af/ad_free2_stu/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "대상자관리",
+    "href": "https://www.dbdbschool.kr/af/ad_free2_stu/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "수강자관리",
+    "href": "https://www.dbdbschool.kr/af/ad_free2_app/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "지원금설정",
+    "href": "https://www.dbdbschool.kr/af/ad_free2_cfg/main/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "순위구분설정",
+    "href": "https://www.dbdbschool.kr/af/ad_free2_cfg/free1/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "결석/귀가신청",
+    "href": "https://www.dbdbschool.kr/af/ad_abs/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "강사관리",
+    "href": "https://www.dbdbschool.kr/af/ad_tea/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "설문관리",
+    "href": "https://www.dbdbschool.kr/af/ad_sur/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "설문",
+    "href": "https://www.dbdbschool.kr/af/ad_sur/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "샘플설문",
+    "href": "https://www.dbdbschool.kr/af/ad_surs/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "환경설정",
+    "href": "https://www.dbdbschool.kr/af/ad_cfg/main/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "기본설정",
+    "href": "https://www.dbdbschool.kr/af/ad_cfg/main/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "신청기간",
+    "href": "https://www.dbdbschool.kr/af/ad_time/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "강의시간",
+    "href": "https://www.dbdbschool.kr/af/ad_cfg/period/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "강좌구분",
+    "href": "https://www.dbdbschool.kr/af/ad_cfg/afDiv/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "중복제한그룹",
+    "href": "https://www.dbdbschool.kr/af/ad_cfg/appLiGrp/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "학적검증",
+    "href": "https://www.dbdbschool.kr/af/ad_verify/main/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "나이스/에듀파인 설정",
+    "href": "https://www.dbdbschool.kr/af/ad_neis_edufine/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "안내글설정",
+    "href": "https://www.dbdbschool.kr/af/ad_cfg/message/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "초기화",
+    "href": "https://www.dbdbschool.kr/af/ad_cfg/clear/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "담당자정보",
+    "href": "https://www.dbdbschool.kr/af/ad_info/modify/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "알림관리",
+    "href": "https://www.dbdbschool.kr/af/notification/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "푸시알림관리",
+    "href": "https://www.dbdbschool.kr/af/spush/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "연장신청195일 남음",
+    "href": "https://www.dbdbschool.kr/af/ad_extension/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "강좌관리",
+    "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "상세검색 열기",
+    "href": "#none;",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "검색결과출력",
+    "href": "https://www.dbdbschool.kr/af/ad_app/listse/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+    "onclick": "return chk_excel();",
+    "tag": "A"
+  },
+  {
+    "text": "대기자목록",
+    "href": "https://www.dbdbschool.kr/af/ad_wait/lists/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "추가기능..",
+    "href": "#none;",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "신청자일괄입력",
+    "href": "https://www.dbdbschool.kr/af/ad_app/input/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "수강료입력",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "신청자복사",
+    "href": "https://www.dbdbschool.kr/af/ad_app/copy/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "추가/취소자조회",
+    "href": "https://www.dbdbschool.kr/af/ad_app/com/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "미신청자목록",
+    "href": "https://www.dbdbschool.kr/af/ad_app/list1/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "신청결과엑셀출력",
+    "href": "https://www.dbdbschool.kr/af/ad_app/excel/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "수강신청서출력",
+    "href": "https://www.dbdbschool.kr/af/ad_app/pdf/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "고지서출력",
+    "href": "https://www.dbdbschool.kr/af/ad_app/pdf1/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "시간표출력",
+    "href": "https://www.dbdbschool.kr/af/ad_app/pdf2/p/1/sn/3267/sld/10/sof/sbh/sot/asc",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "번호",
+    "href": "https://www.dbdbschool.kr/af/ad_app/lists/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sot/desc/sof/sbh",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "등록일자",
+    "href": "https://www.dbdbschool.kr/af/ad_app/lists/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sot/desc/sof/num",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "오하율",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841988",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4841988, 1552375);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21016254, 4841988 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016254",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016254",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016254",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016254",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21016254); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "이소윤",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841990",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4841990, 1552375);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21016237, 4841990 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016237",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016237",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016237",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016237",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21016237); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "이채린",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841994",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4841994, 1552375);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21016247, 4841994 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016247",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016247",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016247",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016247",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21016247); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "장희준",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841996",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4841996, 1552375);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21016260, 4841996 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016260",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016260",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016260",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016260",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21016260); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "최다연",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842002",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842002, 1552375);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21016240, 4842002 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016240",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016240",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016240",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016240",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21016240); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "최연우",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842004",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842004, 1552375);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21016242, 4842004 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016242",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016242",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016242",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016242",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21016242); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "최유나",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842006",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842006, 1552375);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21016276, 4842006 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016276",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016276",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016276",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016276",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21016276); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "김은성",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842010",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842010, 1552375);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21016252, 4842010 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016252",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016252",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016252",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016252",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21016252); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "노슬찬",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842016",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842016, 1552375);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21016250, 4842016 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016250",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016250",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016250",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016250",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21016250); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "배지안",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842020",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842020, 1552375);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21016257, 4842020 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016257",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016257",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016257",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016257",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21016257); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "소하윤",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842022",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842022, 1552375);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21016266, 4842022 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016266",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016266",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016266",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016266",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21016266); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "임지유",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842034",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842034, 1552375);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21016262, 4842034 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016262",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016262",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016262",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016262",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21016262); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "장무재",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842068",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842068, 1552375);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21016290, 4842068 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016290",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016290",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016290",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016290",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21016290); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "국민준",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842076",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842076, 1552375);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21016282, 4842076 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016282",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016282",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016282",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016282",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21016282); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "김도아",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842080",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842080, 1552375);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21016288, 4842080 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016288",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016288",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016288",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016288",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21016288); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "홍은재",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842096",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842096, 1552375);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21016279, 4842096 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016279",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016279",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016279",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016279",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21016279); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "김지민",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842102",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842102, 1552375);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21016318, 4842102 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016318",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016318",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016318",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016318",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21016318); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "이서린",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842110",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842110, 1552375);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21016286, 4842110 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016286",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016286",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016286",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016286",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21016286); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "이용준",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842116",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842116, 1552375);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21016297, 4842116 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_21016297",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_use_cost_21016297",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_book_21016297",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552375#lec_pay_item_21016297",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21016297); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "이지윤",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841992",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4841992, 1552291);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21197006, 4841992 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552291#lec_pay_21197006",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552291#lec_use_cost_21197006",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552291#lec_pay_book_21197006",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552291#lec_pay_item_21197006",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21197006); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "김지율",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842012",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842012, 1552291);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21001508, 4842012 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552291#lec_pay_21001508",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552291#lec_use_cost_21001508",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552291#lec_pay_book_21001508",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552291#lec_pay_item_21001508",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21001508); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "소하윤",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842022",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842022, 1552291);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21196053, 4842022 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552291#lec_pay_21196053",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552291#lec_use_cost_21196053",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552291#lec_pay_book_21196053",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552291#lec_pay_item_21196053",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21196053); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "조제우",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842120",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842120, 1552291);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21191604, 4842120 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552291#lec_pay_21191604",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552291#lec_use_cost_21191604",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552291#lec_pay_book_21191604",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552291#lec_pay_item_21191604",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21191604); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "최유혁",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842196",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842196, 1552291);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21001511, 4842196 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552291#lec_pay_21001511",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552291#lec_use_cost_21001511",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552291#lec_pay_book_21001511",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552291#lec_pay_item_21001511",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21001511); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "박지오",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841982",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4841982, 1552292);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21191512, 4841982 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_21191512",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_use_cost_21191512",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_book_21191512",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_item_21191512",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21191512); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "양지후",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841986",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4841986, 1552292);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21001513, 4841986 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_21001513",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_use_cost_21001513",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_book_21001513",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_item_21001513",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21001513); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "장희준",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841996",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4841996, 1552292);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21001514, 4841996 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_21001514",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_use_cost_21001514",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_book_21001514",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_item_21001514",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21001514); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "정유준",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841998",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4841998, 1552292);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21001515, 4841998 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_21001515",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_use_cost_21001515",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_book_21001515",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_item_21001515",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21001515); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "김지율",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842012",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842012, 1552292);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21001516, 4842012 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_21001516",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_use_cost_21001516",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_book_21001516",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_item_21001516",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21001516); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "정서린",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842040",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842040, 1552292);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21191549, 4842040 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_21191549",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_use_cost_21191549",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_book_21191549",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_item_21191549",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21191549); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "박정민",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842060",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842060, 1552292);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21001520, 4842060 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_21001520",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_use_cost_21001520",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_book_21001520",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_item_21001520",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21001520); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "장무재",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842068",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842068, 1552292);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21001521, 4842068 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_21001521",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_use_cost_21001521",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_book_21001521",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_item_21001521",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21001521); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "국민준",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842076",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842076, 1552292);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21191502, 4842076 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_21191502",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_use_cost_21191502",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_book_21191502",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_item_21191502",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21191502); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "홍은재",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842096",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842096, 1552292);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21195827, 4842096 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_21195827",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_use_cost_21195827",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_book_21195827",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_item_21195827",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21195827); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "조제우",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842120",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842120, 1552292);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21191591, 4842120 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_21191591",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_use_cost_21191591",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_book_21191591",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_item_21191591",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21191591); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "최유혁",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842196",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842196, 1552292);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21001525, 4842196 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_21001525",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_use_cost_21001525",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_book_21001525",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552292#lec_pay_item_21001525",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21001525); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "김이레",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841976",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4841976, 1552293);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21195347, 4841976 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_21195347",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_use_cost_21195347",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_book_21195347",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_item_21195347",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21195347); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "양지후",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841986",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4841986, 1552293);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21001526, 4841986 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_21001526",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_use_cost_21001526",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_book_21001526",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_item_21001526",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21001526); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "이소윤",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841990",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4841990, 1552293);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21001527, 4841990 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_21001527",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_use_cost_21001527",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_book_21001527",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_item_21001527",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21001527); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "이채린",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841994",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4841994, 1552293);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21191659, 4841994 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_21191659",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_use_cost_21191659",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_book_21191659",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_item_21191659",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21191659); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "장희준",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841996",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4841996, 1552293);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21001529, 4841996 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_21001529",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_use_cost_21001529",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_book_21001529",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_item_21001529",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21001529); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "정유준",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4841998",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4841998, 1552293);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21191501, 4841998 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_21191501",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_use_cost_21191501",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_book_21191501",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_item_21191501",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21191501); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "최유나",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842006",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842006, 1552293);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21191681, 4842006 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_21191681",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_use_cost_21191681",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_book_21191681",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_item_21191681",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21191681); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "김은성",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842010",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842010, 1552293);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21193620, 4842010 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_21193620",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_use_cost_21193620",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_book_21193620",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_item_21193620",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21193620); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "김지율",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842012",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842012, 1552293);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21193405, 4842012 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_21193405",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_use_cost_21193405",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_book_21193405",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_item_21193405",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21193405); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "배지안",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842020",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842020, 1552293);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21193782, 4842020 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_21193782",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_use_cost_21193782",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_book_21193782",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_item_21193782",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21193782); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "임지유",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842034",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842034, 1552293);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21193567, 4842034 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_21193567",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_use_cost_21193567",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_book_21193567",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_item_21193567",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21193567); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "장무재",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842068",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842068, 1552293);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21191515, 4842068 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_21191515",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_use_cost_21191515",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_book_21191515",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_item_21191515",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21191515); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "국민준",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842076",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842076, 1552293);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21191506, 4842076 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_21191506",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_use_cost_21191506",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_book_21191506",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_item_21191506",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21191506); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "김도아",
+    "href": "https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld1/10/mem_num/4842080",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "open_stu_schedule(4842080, 1552293);",
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "show_stu_hp(21191813, 4842080 ); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_21191813",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_use_cost_21191813",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_book_21191813",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "0",
+    "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/10/sof/sbh/sot/asc/sld/10/sln/1552293#lec_pay_item_21191813",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "",
+    "href": "#none;",
+    "onclick": "chk_cancel(21191813); return false;",
+    "tag": "A"
+  },
+  {
+    "text": "1",
+    "href": "#none;",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "2",
+    "href": "https://www.dbdbschool.kr/af/ad_app/lists/sn/3267/sld/10/sof/sbh/sot/asc/p/2",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "다음",
+    "href": "https://www.dbdbschool.kr/af/ad_app/lists/sn/3267/sld/10/sof/sbh/sot/asc/p/2",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "마지막",
+    "href": "https://www.dbdbschool.kr/af/ad_app/lists/sn/3267/sld/10/sof/sbh/sot/asc/p/15",
+    "onclick": null,
+    "tag": "A"
+  },
+  {
+    "text": "확인",
+    "href": "#none;",
+    "onclick": null,
+    "tag": "A"
+  }
+]

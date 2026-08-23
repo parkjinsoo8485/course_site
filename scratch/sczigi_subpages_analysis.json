@@ -1,0 +1,3368 @@
+[
+  {
+    "url": "https://www.dbdbschool.kr/sczigi/service/lists/sn/3267#none;",
+    "landedUrl": "https://www.dbdbschool.kr/sczigi/service/lists/sn/3267#none;",
+    "safeName": "sczigi_service_lists_sn_3267_none_",
+    "subDom": {
+      "title": "목록 - 서비스목록 - 학교관리",
+      "h1": "학교관리",
+      "contentTitle": "",
+      "tables": [
+        {
+          "index": 0,
+          "headers": [
+            "서비스명",
+            "서비스 URL",
+            "이용기간"
+          ],
+          "rowCount": 1,
+          "sampleRows": [
+            [
+              "늘봄학교",
+              "https://www.dbdbschool.kr/go/ai/0hc5dFL",
+              "2025-05-09 ~ 2027-02-28"
+            ]
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "login_id",
+              "placeholder": "아이디"
+            },
+            {
+              "tag": "INPUT",
+              "type": "password",
+              "name": "login_passwd",
+              "placeholder": "비밀번호"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "submit",
+              "placeholder": ""
+            }
+          ]
+        }
+      ],
+      "buttons": [
+        {
+          "text": "로그인",
+          "href": ""
+        },
+        {
+          "text": "×",
+          "href": ""
+        },
+        {
+          "text": "확인",
+          "href": "https://www.dbdbschool.kr/sczigi/service/lists/sn/3267#none;"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://www.dbdbschool.kr/sczigi/service/lists/sn/3267",
+    "landedUrl": "https://www.dbdbschool.kr/sczigi/service/lists/sn/3267",
+    "safeName": "sczigi_service_lists_sn_3267",
+    "subDom": {
+      "title": "목록 - 서비스목록 - 학교관리",
+      "h1": "학교관리",
+      "contentTitle": "",
+      "tables": [
+        {
+          "index": 0,
+          "headers": [
+            "서비스명",
+            "서비스 URL",
+            "이용기간"
+          ],
+          "rowCount": 1,
+          "sampleRows": [
+            [
+              "늘봄학교",
+              "https://www.dbdbschool.kr/go/ai/0hc5dFL",
+              "2025-05-09 ~ 2027-02-28"
+            ]
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "login_id",
+              "placeholder": "아이디"
+            },
+            {
+              "tag": "INPUT",
+              "type": "password",
+              "name": "login_passwd",
+              "placeholder": "비밀번호"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "submit",
+              "placeholder": ""
+            }
+          ]
+        }
+      ],
+      "buttons": [
+        {
+          "text": "로그인",
+          "href": ""
+        },
+        {
+          "text": "×",
+          "href": ""
+        },
+        {
+          "text": "확인",
+          "href": "https://www.dbdbschool.kr/sczigi/service/lists/sn/3267#none;"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://www.dbdbschool.kr/sczigi/teacher/lists/sn/3267",
+    "landedUrl": "https://www.dbdbschool.kr/sczigi/teacher/lists/sn/3267",
+    "safeName": "sczigi_teacher_lists_sn_3267",
+    "subDom": {
+      "title": "목록 - 교직원관리 - 학교관리",
+      "h1": "학교관리",
+      "contentTitle": "",
+      "tables": [
+        {
+          "index": 0,
+          "headers": [
+            "",
+            "연번",
+            "수정",
+            "아이디",
+            "이름",
+            "휴대폰\n(비고)",
+            "담임",
+            "직명",
+            "마지막\n로그인",
+            "임시\n비번",
+            "본인\n인증",
+            "2단계\n인증",
+            "약관동의",
+            "상태",
+            "삭제"
+          ],
+          "rowCount": 3,
+          "sampleRows": [
+            [
+              "",
+              "3",
+              "",
+              "김혜련",
+              "김혜련",
+              "",
+              "",
+              "늘봄실무사",
+              "",
+              "Y",
+              "",
+              "",
+              "-",
+              "사용",
+              ""
+            ],
+            [
+              "",
+              "2",
+              "",
+              "박진수",
+              "박진수",
+              "",
+              "",
+              "늘봄지원실장",
+              "2025-09-11 14:29:19",
+              "",
+              "",
+              "",
+              "2025-09-11",
+              "사용",
+              ""
+            ],
+            [
+              "",
+              "1",
+              "",
+              "풍향초",
+              "풍향초",
+              "",
+              "1학년\n1반",
+              "교직원",
+              "2026-04-24 11:40:16",
+              "",
+              "",
+              "",
+              "2026-04-24",
+              "사용",
+              ""
+            ]
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/teacher/lists/sn/3267",
+          "method": "get",
+          "inputs": [
+            {
+              "tag": "SELECT",
+              "type": "select-one",
+              "name": "sct",
+              "options": [
+                {
+                  "value": "",
+                  "text": "=전체="
+                },
+                {
+                  "value": "1",
+                  "text": "담임"
+                }
+              ]
+            },
+            {
+              "tag": "SELECT",
+              "type": "select-one",
+              "name": "st",
+              "options": [
+                {
+                  "value": "mem_id",
+                  "text": "아이디"
+                },
+                {
+                  "value": "mem_name",
+                  "text": "이름"
+                },
+                {
+                  "value": "nice_bunho",
+                  "text": "나이스번호"
+                },
+                {
+                  "value": "mem_birthday",
+                  "text": "생년월일"
+                }
+              ]
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "sw",
+              "placeholder": "검색어 입력"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "button",
+              "name": "",
+              "placeholder": ""
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/teacher/lists/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "check_all",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/teacher/status/p/1/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "num",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "mem_status",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "mem_obj_id",
+              "placeholder": ""
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/teacher/del/p/1/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "num",
+              "placeholder": ""
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "login_id",
+              "placeholder": "아이디"
+            },
+            {
+              "tag": "INPUT",
+              "type": "password",
+              "name": "login_passwd",
+              "placeholder": "비밀번호"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "submit",
+              "placeholder": ""
+            }
+          ]
+        }
+      ],
+      "buttons": [
+        {
+          "text": "검색",
+          "href": ""
+        },
+        {
+          "text": "전체",
+          "href": ""
+        },
+        {
+          "text": "교직원 등록",
+          "href": ""
+        },
+        {
+          "text": "추가기능..",
+          "href": "https://www.dbdbschool.kr/sczigi/teacher/lists/sn/3267#none;"
+        },
+        {
+          "text": "교직원 일괄입력",
+          "href": "https://www.dbdbschool.kr/sczigi/teacher/input/p/1/sn/3267"
+        },
+        {
+          "text": "검색결과엑셀출력",
+          "href": "https://www.dbdbschool.kr/sczigi/teacher/listse/p/1/sn/3267"
+        },
+        {
+          "text": "적용하기",
+          "href": ""
+        },
+        {
+          "text": "로그인",
+          "href": ""
+        },
+        {
+          "text": "×",
+          "href": ""
+        },
+        {
+          "text": "확인",
+          "href": "https://www.dbdbschool.kr/sczigi/teacher/lists/sn/3267#none;"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://www.dbdbschool.kr/sczigi/teacher/field/sn/3267",
+    "landedUrl": "https://www.dbdbschool.kr/sczigi/teacher/field/sn/3267",
+    "safeName": "sczigi_teacher_field_sn_3267",
+    "subDom": {
+      "title": "회원필드설정 - 교직원관리 - 학교관리",
+      "h1": "학교관리",
+      "contentTitle": "",
+      "tables": [
+        {
+          "index": 0,
+          "headers": [
+            "필드명",
+            "출력상태",
+            "휴대폰",
+            "직위",
+            "생년월일",
+            "나이스 개인번호"
+          ],
+          "rowCount": 5,
+          "sampleRows": [
+            [],
+            [
+              "필수(휴대폰 본인인증)"
+            ],
+            [
+              "Yes  No"
+            ],
+            [
+              "Yes  No"
+            ],
+            [
+              "Yes  No"
+            ]
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/teacher/field/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "radio",
+              "name": "mem_level",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "radio",
+              "name": "mem_level",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "radio",
+              "name": "mem_birthday",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "radio",
+              "name": "mem_birthday",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "radio",
+              "name": "nice_bunho",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "radio",
+              "name": "nice_bunho",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "button",
+              "name": "",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "",
+              "placeholder": ""
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "login_id",
+              "placeholder": "아이디"
+            },
+            {
+              "tag": "INPUT",
+              "type": "password",
+              "name": "login_passwd",
+              "placeholder": "비밀번호"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "submit",
+              "placeholder": ""
+            }
+          ]
+        }
+      ],
+      "buttons": [
+        {
+          "text": "취소",
+          "href": ""
+        },
+        {
+          "text": "수정",
+          "href": ""
+        },
+        {
+          "text": "로그인",
+          "href": ""
+        },
+        {
+          "text": "×",
+          "href": ""
+        },
+        {
+          "text": "확인",
+          "href": "https://www.dbdbschool.kr/sczigi/teacher/field/sn/3267#none;"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://www.dbdbschool.kr/sczigi/teacher/level/sn/3267",
+    "landedUrl": "https://www.dbdbschool.kr/sczigi/teacher/level/sn/3267",
+    "safeName": "sczigi_teacher_level_sn_3267",
+    "subDom": {
+      "title": "직위명 설정 - 교직원관리 - 학교관리",
+      "h1": "학교관리",
+      "contentTitle": "",
+      "tables": [
+        {
+          "index": 0,
+          "headers": [
+            "연번",
+            "사용",
+            "코드명",
+            "적용",
+            "출력순서",
+            "삭제"
+          ],
+          "rowCount": 8,
+          "sampleRows": [
+            [
+              "7",
+              "",
+              "",
+              "",
+              "▲",
+              "▽",
+              ""
+            ],
+            [
+              "6",
+              "",
+              "",
+              "",
+              "▲",
+              "▽",
+              ""
+            ],
+            [
+              "5",
+              "",
+              "",
+              "",
+              "▲",
+              "▽",
+              ""
+            ],
+            [
+              "4",
+              "",
+              "",
+              "",
+              "▲",
+              "▽",
+              ""
+            ],
+            [
+              "3",
+              "",
+              "",
+              "",
+              "▲",
+              "▽",
+              ""
+            ]
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/teacher/level/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "number",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "mode1",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "use_status_23086",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "div_name_23086",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "sort_num_list[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "code_num_list[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "use_status_23087",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "div_name_23087",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "sort_num_list[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "code_num_list[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "use_status_23088",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "div_name_23088",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "sort_num_list[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "code_num_list[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "use_status_23089",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "div_name_23089",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "sort_num_list[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "code_num_list[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "use_status_23090",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "div_name_23090",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "sort_num_list[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "code_num_list[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "use_status_23091",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "div_name_23091",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "sort_num_list[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "code_num_list[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "use_status_23092",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "div_name_23092",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "sort_num_list[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "code_num_list[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "use_status_add1",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "div_name_add1",
+              "placeholder": ""
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "login_id",
+              "placeholder": "아이디"
+            },
+            {
+              "tag": "INPUT",
+              "type": "password",
+              "name": "login_passwd",
+              "placeholder": "비밀번호"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "submit",
+              "placeholder": ""
+            }
+          ]
+        }
+      ],
+      "buttons": [
+        {
+          "text": "로그인",
+          "href": ""
+        },
+        {
+          "text": "×",
+          "href": ""
+        },
+        {
+          "text": "확인",
+          "href": "https://www.dbdbschool.kr/sczigi/teacher/level/sn/3267#none;"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://www.dbdbschool.kr/sczigi/teacher/clear/sn/3267",
+    "landedUrl": "https://www.dbdbschool.kr/sczigi/teacher/clear/sn/3267",
+    "safeName": "sczigi_teacher_clear_sn_3267",
+    "subDom": {
+      "title": "초기화 - 교직원관리 - 학교관리",
+      "h1": "학교관리",
+      "contentTitle": "",
+      "tables": [
+        {
+          "index": 0,
+          "headers": [
+            "직위\n생년월일\n나이스 개인번호",
+            "회원 데이터",
+            "담임 학과 데이터"
+          ],
+          "rowCount": 3,
+          "sampleRows": [
+            [
+              "초기화\n\n- 선택된 필드에 등록된 기존 데이터를 초기화합니다."
+            ],
+            [
+              "삭제하기\n\n- 전체 교직원 데이터를 삭제합니다."
+            ],
+            [
+              "초기화\n\n- 전체 교직원의 학과 데이터를 초기화합니다.\n\n- 학과를 사용하고 싶지 않을 때 기존에 등록된 교직원의 학과 데이터를 초기화합니다."
+            ]
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/teacher/clear/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "clear_gubun",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "mem_level",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "tea_birthday",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "nice_bunho",
+              "placeholder": ""
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "login_id",
+              "placeholder": "아이디"
+            },
+            {
+              "tag": "INPUT",
+              "type": "password",
+              "name": "login_passwd",
+              "placeholder": "비밀번호"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "submit",
+              "placeholder": ""
+            }
+          ]
+        }
+      ],
+      "buttons": [
+        {
+          "text": "로그인",
+          "href": ""
+        },
+        {
+          "text": "×",
+          "href": ""
+        },
+        {
+          "text": "확인",
+          "href": "https://www.dbdbschool.kr/sczigi/teacher/clear/sn/3267#none;"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://www.dbdbschool.kr/sczigi/student/lists/sn/3267",
+    "landedUrl": "https://www.dbdbschool.kr/sczigi/student/lists/sn/3267",
+    "safeName": "sczigi_student_lists_sn_3267",
+    "subDom": {
+      "title": "목록 - 학생관리 - 학교관리",
+      "h1": "학교관리",
+      "contentTitle": "",
+      "tables": [
+        {
+          "index": 0,
+          "headers": [
+            "",
+            "연번",
+            "수정",
+            "학년",
+            "반",
+            "번호",
+            "이름",
+            "성별",
+            "연락처\n(비고)",
+            "이전 학적",
+            "마지막\n수정",
+            "마지막\n로그인",
+            "임시\n비번",
+            "약관동의",
+            "상태",
+            "삭제"
+          ],
+          "rowCount": 30,
+          "sampleRows": [
+            [
+              "",
+              "317",
+              "",
+              "1",
+              "1",
+              "1",
+              "김도하",
+              "",
+              "010-2218-7705\n010-2218-7705(윤보미)",
+              "",
+              "2026-05-28\n15:04:57",
+              "2026-07-27\n07:17:25",
+              "",
+              "2026-02-24",
+              "사용",
+              ""
+            ],
+            [
+              "",
+              "316",
+              "",
+              "1",
+              "1",
+              "2",
+              "김민호",
+              "",
+              "010-6695-5578(보호자)",
+              "",
+              "2026-03-31\n13:13:25",
+              "",
+              "Y",
+              "-",
+              "사용",
+              ""
+            ],
+            [
+              "",
+              "315",
+              "",
+              "1",
+              "1",
+              "3",
+              "김은수",
+              "",
+              "010-4629-0929(김정은)",
+              "",
+              "2026-02-23\n18:32:41",
+              "2026-08-11\n13:56:18",
+              "",
+              "2026-02-23",
+              "사용",
+              ""
+            ],
+            [
+              "",
+              "314",
+              "",
+              "1",
+              "1",
+              "4",
+              "김이레",
+              "",
+              "010-5550-3763\n010-5550-3763(강가람)",
+              "",
+              "2026-08-05\n21:43:47",
+              "2026-08-05\n21:43:11",
+              "",
+              "2026-02-24",
+              "사용",
+              ""
+            ],
+            [
+              "",
+              "313",
+              "",
+              "1",
+              "1",
+              "5",
+              "문지유",
+              "",
+              "010-4031-3971(조현주)",
+              "",
+              "2026-02-24\n08:09:57",
+              "2026-07-23\n10:11:46",
+              "",
+              "2026-02-24",
+              "사용",
+              ""
+            ]
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/student/lists/sn/3267",
+          "method": "get",
+          "inputs": [
+            {
+              "tag": "SELECT",
+              "type": "select-one",
+              "name": "sgr",
+              "options": [
+                {
+                  "value": "",
+                  "text": "=학년="
+                },
+                {
+                  "value": "1",
+                  "text": "1"
+                },
+                {
+                  "value": "2",
+                  "text": "2"
+                },
+                {
+                  "value": "3",
+                  "text": "3"
+                },
+                {
+                  "value": "4",
+                  "text": "4"
+                },
+                {
+                  "value": "5",
+                  "text": "5"
+                },
+                {
+                  "value": "6",
+                  "text": "6"
+                }
+              ]
+            },
+            {
+              "tag": "SELECT",
+              "type": "select-one",
+              "name": "scl",
+              "options": [
+                {
+                  "value": "",
+                  "text": "=반="
+                },
+                {
+                  "value": "1",
+                  "text": "1"
+                },
+                {
+                  "value": "2",
+                  "text": "2"
+                },
+                {
+                  "value": "3",
+                  "text": "3"
+                },
+                {
+                  "value": "4",
+                  "text": "4"
+                },
+                {
+                  "value": "5",
+                  "text": "5"
+                },
+                {
+                  "value": "6",
+                  "text": "6"
+                },
+                {
+                  "value": "7",
+                  "text": "7"
+                },
+                {
+                  "value": "8",
+                  "text": "8"
+                },
+                {
+                  "value": "9",
+                  "text": "9"
+                },
+                {
+                  "value": "10",
+                  "text": "10"
+                },
+                {
+                  "value": "11",
+                  "text": "11"
+                },
+                {
+                  "value": "12",
+                  "text": "12"
+                }
+              ]
+            },
+            {
+              "tag": "SELECT",
+              "type": "select-one",
+              "name": "st",
+              "options": [
+                {
+                  "value": "mem_name",
+                  "text": "이름"
+                },
+                {
+                  "value": "tel",
+                  "text": "연락처"
+                }
+              ]
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "sw",
+              "placeholder": "검색어"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "button",
+              "name": "",
+              "placeholder": ""
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/student/lists/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "check_all",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "data_checked[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "SELECT",
+              "type": "select-one",
+              "name": "update_type",
+              "options": [
+                {
+                  "value": "",
+                  "text": "=== 일괄적용 ==="
+                },
+                {
+                  "value": "status_1",
+                  "text": "[상태변경] 사용"
+                },
+                {
+                  "value": "status_0",
+                  "text": "[상태변경] 대기"
+                },
+                {
+                  "value": "",
+                  "text": "---------------"
+                },
+                {
+                  "value": "del",
+                  "text": "삭제"
+                }
+              ]
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "",
+              "placeholder": ""
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/student/status/p/1/sn/3267/sof/grade/sot/asc",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "num",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "mem_status",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "mem_obj_id",
+              "placeholder": ""
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/student/del/p/1/sn/3267/sof/grade/sot/asc",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "num",
+              "placeholder": ""
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "login_id",
+              "placeholder": "아이디"
+            },
+            {
+              "tag": "INPUT",
+              "type": "password",
+              "name": "login_passwd",
+              "placeholder": "비밀번호"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "submit",
+              "placeholder": ""
+            }
+          ]
+        }
+      ],
+      "buttons": [
+        {
+          "text": "검색",
+          "href": ""
+        },
+        {
+          "text": "전체",
+          "href": ""
+        },
+        {
+          "text": "학생등록",
+          "href": ""
+        },
+        {
+          "text": "추가기능..",
+          "href": "https://www.dbdbschool.kr/sczigi/student/lists/sn/3267#none;"
+        },
+        {
+          "text": "학생 일괄입력",
+          "href": "https://www.dbdbschool.kr/sczigi/student/input/p/1/sn/3267/sof/grade/sot/asc"
+        },
+        {
+          "text": "진급처리(학적변경)",
+          "href": "https://www.dbdbschool.kr/sczigi/student/up/p/1/sn/3267/sof/grade/sot/asc"
+        },
+        {
+          "text": "검색결과엑셀출력",
+          "href": "https://www.dbdbschool.kr/sczigi/student/listse/p/1/sn/3267/sof/grade/sot/asc"
+        },
+        {
+          "text": "적용하기",
+          "href": ""
+        },
+        {
+          "text": "로그인",
+          "href": ""
+        },
+        {
+          "text": "×",
+          "href": ""
+        },
+        {
+          "text": "확인",
+          "href": "https://www.dbdbschool.kr/sczigi/student/lists/sn/3267#none;"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://www.dbdbschool.kr/sczigi/student/main/sn/3267",
+    "landedUrl": "https://www.dbdbschool.kr/sczigi/student/main/sn/3267",
+    "safeName": "sczigi_student_main_sn_3267",
+    "subDom": {
+      "title": "기본설정 - 학생관리 - 학교관리",
+      "h1": "학교관리",
+      "contentTitle": "",
+      "tables": [
+        {
+          "index": 0,
+          "headers": [
+            "다자녀 로그인 공유",
+            "최댓값\n지정",
+            "학년",
+            "학급",
+            "번호"
+          ],
+          "rowCount": 5,
+          "sampleRows": [
+            [],
+            [
+              "학생 회원 간 로그인을 공유할 수 있도록 허용"
+            ],
+            [
+              "학년"
+            ],
+            [
+              "반\n학급명 사용"
+            ],
+            [
+              "번"
+            ]
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/student/main/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "allowLinkLogin",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "maxGrade",
+              "placeholder": "학년"
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "maxClass",
+              "placeholder": "반"
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "useClassName",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "maxBunho",
+              "placeholder": "번"
+            },
+            {
+              "tag": "INPUT",
+              "type": "button",
+              "name": "",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "",
+              "placeholder": ""
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "login_id",
+              "placeholder": "아이디"
+            },
+            {
+              "tag": "INPUT",
+              "type": "password",
+              "name": "login_passwd",
+              "placeholder": "비밀번호"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "submit",
+              "placeholder": ""
+            }
+          ]
+        }
+      ],
+      "buttons": [
+        {
+          "text": "취소",
+          "href": ""
+        },
+        {
+          "text": "수정",
+          "href": ""
+        },
+        {
+          "text": "로그인",
+          "href": ""
+        },
+        {
+          "text": "×",
+          "href": ""
+        },
+        {
+          "text": "확인",
+          "href": "https://www.dbdbschool.kr/sczigi/student/main/sn/3267#none;"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://www.dbdbschool.kr/sczigi/student/field/sn/3267",
+    "landedUrl": "https://www.dbdbschool.kr/sczigi/student/field/sn/3267",
+    "safeName": "sczigi_student_field_sn_3267",
+    "subDom": {
+      "title": "회원필드설정 - 학생관리 - 학교관리",
+      "h1": "학교관리",
+      "contentTitle": "",
+      "tables": [
+        {
+          "index": 0,
+          "headers": [
+            "필드명",
+            "출력상태",
+            "필수입력",
+            "학생 휴대폰",
+            "보호자 성명",
+            "보호자 연락처",
+            "성별"
+          ],
+          "rowCount": 5,
+          "sampleRows": [
+            [],
+            [
+              "Yes  No",
+              "Yes  No"
+            ],
+            [
+              "Yes  No",
+              "Yes  No"
+            ],
+            [
+              "Yes  No",
+              "Yes  No"
+            ],
+            [
+              "Yes  No\n(학생에게는 보이지 않고, 관리 용도로만 사용됩니다.)",
+              "-"
+            ]
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/student/field/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "radio",
+              "name": "mem_hp",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "radio",
+              "name": "mem_hp",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "radio",
+              "name": "mem_hp_req",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "radio",
+              "name": "mem_hp_req",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "radio",
+              "name": "mem_pa_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "radio",
+              "name": "mem_pa_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "radio",
+              "name": "mem_pa_name_req",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "radio",
+              "name": "mem_pa_name_req",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "radio",
+              "name": "mem_pa_tel",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "radio",
+              "name": "mem_pa_tel",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "radio",
+              "name": "mem_pa_tel_req",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "radio",
+              "name": "mem_pa_tel_req",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "radio",
+              "name": "mem_sex",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "radio",
+              "name": "mem_sex",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "button",
+              "name": "",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "",
+              "placeholder": ""
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "login_id",
+              "placeholder": "아이디"
+            },
+            {
+              "tag": "INPUT",
+              "type": "password",
+              "name": "login_passwd",
+              "placeholder": "비밀번호"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "submit",
+              "placeholder": ""
+            }
+          ]
+        }
+      ],
+      "buttons": [
+        {
+          "text": "취소",
+          "href": ""
+        },
+        {
+          "text": "수정",
+          "href": ""
+        },
+        {
+          "text": "로그인",
+          "href": ""
+        },
+        {
+          "text": "×",
+          "href": ""
+        },
+        {
+          "text": "확인",
+          "href": "https://www.dbdbschool.kr/sczigi/student/field/sn/3267#none;"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://www.dbdbschool.kr/sczigi/student/course/sn/3267",
+    "landedUrl": "https://www.dbdbschool.kr/sczigi/student/course/sn/3267",
+    "safeName": "sczigi_student_course_sn_3267",
+    "subDom": {
+      "title": "학과 설정 - 학생관리 - 학교관리",
+      "h1": "학교관리",
+      "contentTitle": "",
+      "tables": [
+        {
+          "index": 0,
+          "headers": [
+            "연번",
+            "사용",
+            "코드명",
+            "적용",
+            "출력순서",
+            "삭제"
+          ],
+          "rowCount": 1,
+          "sampleRows": [
+            [
+              "",
+              "",
+              "",
+              "추가",
+              "일괄 변경",
+              ""
+            ]
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/student/course/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "number",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "mode1",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "use_status_add1",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "div_name_add1",
+              "placeholder": ""
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "login_id",
+              "placeholder": "아이디"
+            },
+            {
+              "tag": "INPUT",
+              "type": "password",
+              "name": "login_passwd",
+              "placeholder": "비밀번호"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "submit",
+              "placeholder": ""
+            }
+          ]
+        }
+      ],
+      "buttons": [
+        {
+          "text": "로그인",
+          "href": ""
+        },
+        {
+          "text": "×",
+          "href": ""
+        },
+        {
+          "text": "확인",
+          "href": "https://www.dbdbschool.kr/sczigi/student/course/sn/3267#none;"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://www.dbdbschool.kr/sczigi/student/clear/sn/3267",
+    "landedUrl": "https://www.dbdbschool.kr/sczigi/student/clear/sn/3267",
+    "safeName": "sczigi_student_clear_sn_3267",
+    "subDom": {
+      "title": "초기화 - 학생관리 - 학교관리",
+      "h1": "학교관리",
+      "contentTitle": "",
+      "tables": [
+        {
+          "index": 0,
+          "headers": [
+            "휴대폰\n보호자 성명\n보호자 연락처\n성별",
+            "비밀번호",
+            "학생 데이터",
+            "학생 학과 데이터"
+          ],
+          "rowCount": 4,
+          "sampleRows": [
+            [
+              "초기화\n\n- 선택된 필드에 등록된 기존 데이터를 초기화합니다."
+            ],
+            [
+              "=학년전체=\n1학년\n2학년\n3학년\n4학년\n5학년\n6학년\n   초기화\n(4~15자 이내의 영문 또는 숫자)\n\n- 임시 비밀번호로 초기화합니다."
+            ],
+            [
+              "=학년전체=\n1학년\n2학년\n3학년\n4학년\n5학년\n6학년\n 삭제하기\n\n- 선택된 학년의 학생 데이터를 삭제합니다."
+            ],
+            [
+              "초기화\n\n- 전체 학생의 학과 데이터를 초기화합니다.\n\n- 학과를 사용하고 싶지 않을 때 기존에 등록된 학생의 학과 데이터를 초기화합니다."
+            ]
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/student/clear/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "clear_gubun",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "stu_hp",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "mem_pa_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "mem_pa_tel",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "mem_sex",
+              "placeholder": ""
+            },
+            {
+              "tag": "SELECT",
+              "type": "select-one",
+              "name": "clear_grade",
+              "options": [
+                {
+                  "value": "",
+                  "text": "=학년전체="
+                },
+                {
+                  "value": "1",
+                  "text": "1학년"
+                },
+                {
+                  "value": "2",
+                  "text": "2학년"
+                },
+                {
+                  "value": "3",
+                  "text": "3학년"
+                },
+                {
+                  "value": "4",
+                  "text": "4학년"
+                },
+                {
+                  "value": "5",
+                  "text": "5학년"
+                },
+                {
+                  "value": "6",
+                  "text": "6학년"
+                }
+              ]
+            },
+            {
+              "tag": "INPUT",
+              "type": "password",
+              "name": "def_passwd",
+              "placeholder": ""
+            },
+            {
+              "tag": "SELECT",
+              "type": "select-one",
+              "name": "del_grade",
+              "options": [
+                {
+                  "value": "",
+                  "text": "=학년전체="
+                },
+                {
+                  "value": "1",
+                  "text": "1학년"
+                },
+                {
+                  "value": "2",
+                  "text": "2학년"
+                },
+                {
+                  "value": "3",
+                  "text": "3학년"
+                },
+                {
+                  "value": "4",
+                  "text": "4학년"
+                },
+                {
+                  "value": "5",
+                  "text": "5학년"
+                },
+                {
+                  "value": "6",
+                  "text": "6학년"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "login_id",
+              "placeholder": "아이디"
+            },
+            {
+              "tag": "INPUT",
+              "type": "password",
+              "name": "login_passwd",
+              "placeholder": "비밀번호"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "submit",
+              "placeholder": ""
+            }
+          ]
+        }
+      ],
+      "buttons": [
+        {
+          "text": "로그인",
+          "href": ""
+        },
+        {
+          "text": "×",
+          "href": ""
+        },
+        {
+          "text": "확인",
+          "href": "https://www.dbdbschool.kr/sczigi/student/clear/sn/3267#none;"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://www.dbdbschool.kr/sczigi/sms_tel/lists/sn/3267",
+    "landedUrl": "https://www.dbdbschool.kr/sczigi/sms_tel/lists/sn/3267",
+    "safeName": "sczigi_sms_tel_lists_sn_3267",
+    "subDom": {
+      "title": "목록 - 문자관리 > 발신번호관리 - 학교관리",
+      "h1": "학교관리",
+      "contentTitle": "",
+      "tables": [
+        {
+          "index": 0,
+          "headers": [
+            "연번",
+            "수정",
+            "발신번호",
+            "발신번호명의",
+            "인증방식",
+            "발신번호 구분\n(비고)",
+            "처리상태",
+            "승인일자",
+            "취소"
+          ],
+          "rowCount": 1,
+          "sampleRows": [
+            [
+              "검색된 발신번호가 없습니다."
+            ]
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/sms_tel/lists//sn/3267",
+          "method": "get",
+          "inputs": [
+            {
+              "tag": "SELECT",
+              "type": "select-one",
+              "name": "ast",
+              "options": [
+                {
+                  "value": "all",
+                  "text": "=처리상태="
+                },
+                {
+                  "value": "1",
+                  "text": "접수"
+                },
+                {
+                  "value": "2",
+                  "text": "심사중"
+                },
+                {
+                  "value": "3",
+                  "text": "승인완료"
+                }
+              ]
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "st",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "sw",
+              "placeholder": "발신번호"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "button",
+              "name": "",
+              "placeholder": ""
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/sms_tel/cancel/p/1/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "num",
+              "placeholder": ""
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "login_id",
+              "placeholder": "아이디"
+            },
+            {
+              "tag": "INPUT",
+              "type": "password",
+              "name": "login_passwd",
+              "placeholder": "비밀번호"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "submit",
+              "placeholder": ""
+            }
+          ]
+        }
+      ],
+      "buttons": [
+        {
+          "text": "발신번호등록",
+          "href": ""
+        },
+        {
+          "text": "검색",
+          "href": ""
+        },
+        {
+          "text": "전체",
+          "href": ""
+        },
+        {
+          "text": "로그인",
+          "href": ""
+        },
+        {
+          "text": "×",
+          "href": ""
+        },
+        {
+          "text": "확인",
+          "href": "https://www.dbdbschool.kr/sczigi/sms_tel/lists/sn/3267#none;"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://www.dbdbschool.kr/sczigi/sms_sin/lists/sn/3267",
+    "landedUrl": "https://www.dbdbschool.kr/sczigi/sms_sin/lists/sn/3267",
+    "safeName": "sczigi_sms_sin_lists_sn_3267",
+    "subDom": {
+      "title": "목록 - 문자관리 > 충전신청 - 학교관리",
+      "h1": "학교관리",
+      "contentTitle": "",
+      "tables": [
+        {
+          "index": 0,
+          "headers": [
+            "연번",
+            "충전금액(원)",
+            "충전건수(건)",
+            "견적서",
+            "품의여부",
+            "상태",
+            "신청일자"
+          ],
+          "rowCount": 1,
+          "sampleRows": [
+            [
+              "등록된 데이터가 없습니다."
+            ]
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/sms_sin/consult/p/1/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "num",
+              "placeholder": ""
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/sms_sin/del/p/1/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "num",
+              "placeholder": ""
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "login_id",
+              "placeholder": "아이디"
+            },
+            {
+              "tag": "INPUT",
+              "type": "password",
+              "name": "login_passwd",
+              "placeholder": "비밀번호"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "submit",
+              "placeholder": ""
+            }
+          ]
+        }
+      ],
+      "buttons": [
+        {
+          "text": "충전신청",
+          "href": ""
+        },
+        {
+          "text": "로그인",
+          "href": ""
+        },
+        {
+          "text": "×",
+          "href": ""
+        },
+        {
+          "text": "확인",
+          "href": "https://www.dbdbschool.kr/sczigi/sms_sin/lists/sn/3267#none;"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://www.dbdbschool.kr/sczigi/sms_charge/lists/sn/3267",
+    "landedUrl": "https://www.dbdbschool.kr/sczigi/sms_charge/lists/sn/3267",
+    "safeName": "sczigi_sms_charge_lists_sn_3267",
+    "subDom": {
+      "title": "목록 - 문자관리 > 충전내역 - 학교관리",
+      "h1": "학교관리",
+      "contentTitle": "",
+      "tables": [
+        {
+          "index": 0,
+          "headers": [
+            "연번",
+            "충전건수(건)",
+            "충전구분",
+            "비고",
+            "처리구분",
+            "처리일자"
+          ],
+          "rowCount": 1,
+          "sampleRows": [
+            [
+              "등록된 데이터가 없습니다."
+            ]
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "login_id",
+              "placeholder": "아이디"
+            },
+            {
+              "tag": "INPUT",
+              "type": "password",
+              "name": "login_passwd",
+              "placeholder": "비밀번호"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "submit",
+              "placeholder": ""
+            }
+          ]
+        }
+      ],
+      "buttons": [
+        {
+          "text": "로그인",
+          "href": ""
+        },
+        {
+          "text": "×",
+          "href": ""
+        },
+        {
+          "text": "확인",
+          "href": "https://www.dbdbschool.kr/sczigi/sms_charge/lists/sn/3267#none;"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://www.dbdbschool.kr/sczigi/sms_report/lists/sn/3267",
+    "landedUrl": "https://www.dbdbschool.kr/sczigi/sms_report/lists/sn/3267",
+    "safeName": "sczigi_sms_report_lists_sn_3267",
+    "subDom": {
+      "title": "목록 - 문자관리 > 발송통계 - 학교관리",
+      "h1": "학교관리",
+      "contentTitle": "",
+      "tables": [
+        {
+          "index": 0,
+          "headers": [
+            "연번",
+            "발송일자",
+            "SMS",
+            "LMS",
+            "차감(성공) / 재충전(실패)",
+            "성공",
+            "실패",
+            "합계",
+            "성공",
+            "실패",
+            "합계",
+            "차감",
+            "재충전",
+            "합계"
+          ],
+          "rowCount": 2,
+          "sampleRows": [
+            [],
+            [
+              "검색된 데이터가 없습니다."
+            ]
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/sms_report/lists/sn/3267",
+          "method": "get",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "button",
+              "name": "",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "button",
+              "name": "",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "button",
+              "name": "",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "sdate",
+              "placeholder": "시작일자"
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "edate",
+              "placeholder": "종료일자"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "button",
+              "name": "",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "button",
+              "name": "",
+              "placeholder": ""
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "login_id",
+              "placeholder": "아이디"
+            },
+            {
+              "tag": "INPUT",
+              "type": "password",
+              "name": "login_passwd",
+              "placeholder": "비밀번호"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "submit",
+              "placeholder": ""
+            }
+          ]
+        }
+      ],
+      "buttons": [
+        {
+          "text": "지난달",
+          "href": ""
+        },
+        {
+          "text": "이번달",
+          "href": ""
+        },
+        {
+          "text": "최근1달",
+          "href": ""
+        },
+        {
+          "text": "검색",
+          "href": ""
+        },
+        {
+          "text": "검색결과엑셀출력",
+          "href": ""
+        },
+        {
+          "text": "실패목록출력(8월)",
+          "href": ""
+        },
+        {
+          "text": "로그인",
+          "href": ""
+        },
+        {
+          "text": "×",
+          "href": ""
+        },
+        {
+          "text": "확인",
+          "href": "https://www.dbdbschool.kr/sczigi/sms_report/lists/sn/3267#none;"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://www.dbdbschool.kr/sczigi/auth/main/sn/3267",
+    "landedUrl": "https://www.dbdbschool.kr/sczigi/auth/main/sn/3267",
+    "safeName": "sczigi_auth_main_sn_3267",
+    "subDom": {
+      "title": "서비스 관리자 권한 설정 - 권한설정 - 학교관리",
+      "h1": "학교관리",
+      "contentTitle": "",
+      "tables": [
+        {
+          "index": 0,
+          "headers": [
+            "서비스명",
+            "학교관리 메뉴 이용 권한",
+            "관리자ID",
+            "교직원관리",
+            "학생관리"
+          ],
+          "rowCount": 3,
+          "sampleRows": [
+            [],
+            [],
+            [
+              "늘봄학교",
+              "",
+              "",
+              "박진수"
+            ]
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/auth/main/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "data_null",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "check_all_tea",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "check_all_stu",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "auth_menu_tea[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "checkbox",
+              "name": "auth_menu_stu[]",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "button",
+              "name": "",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "",
+              "placeholder": ""
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "login_id",
+              "placeholder": "아이디"
+            },
+            {
+              "tag": "INPUT",
+              "type": "password",
+              "name": "login_passwd",
+              "placeholder": "비밀번호"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "submit",
+              "placeholder": ""
+            }
+          ]
+        }
+      ],
+      "buttons": [
+        {
+          "text": "취소",
+          "href": ""
+        },
+        {
+          "text": "수정",
+          "href": ""
+        },
+        {
+          "text": "로그인",
+          "href": ""
+        },
+        {
+          "text": "×",
+          "href": ""
+        },
+        {
+          "text": "확인",
+          "href": "https://www.dbdbschool.kr/sczigi/auth/main/sn/3267#none;"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://www.dbdbschool.kr/sczigi/privacy_log/main/sn/3267",
+    "landedUrl": "https://www.dbdbschool.kr/sczigi/privacy_log/main/sn/3267",
+    "safeName": "sczigi_privacy_log_main_sn_3267",
+    "subDom": {
+      "title": "목록 - 서비스 접근 로그 - 학교관리",
+      "h1": "학교관리",
+      "contentTitle": "",
+      "tables": [
+        {
+          "index": 0,
+          "headers": [
+            "연번",
+            "서비스",
+            "아이디",
+            "회원그룹",
+            "접속IP",
+            "접속시간",
+            "수행업무"
+          ],
+          "rowCount": 10,
+          "sampleRows": [
+            [
+              "2655",
+              "방과후학교",
+              "관리자",
+              "학교관리자",
+              "175.121.221.72",
+              "2026-08-17 13:30:08",
+              "학생 목록 열람"
+            ],
+            [
+              "2654",
+              "방과후학교",
+              "관리자",
+              "학교관리자",
+              "175.121.221.72",
+              "2026-08-17 13:30:05",
+              "교직원 목록 열람"
+            ],
+            [
+              "2653",
+              "방과후학교",
+              "관리자",
+              "학교관리자",
+              "175.121.221.72",
+              "2026-08-17 13:22:27",
+              "학생 목록 열람"
+            ],
+            [
+              "2652",
+              "방과후학교",
+              "관리자",
+              "학교관리자",
+              "175.121.221.72",
+              "2026-08-17 13:22:26",
+              "학생 목록 열람"
+            ],
+            [
+              "2651",
+              "방과후학교",
+              "관리자",
+              "학교관리자",
+              "175.121.221.72",
+              "2026-08-17 13:22:23",
+              "교직원 목록 열람"
+            ]
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "action": "https://www.dbdbschool.kr/sczigi/privacy_log/lists/sn/3267",
+          "method": "get",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "ssd",
+              "placeholder": "시작일자"
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "sed",
+              "placeholder": "종료일자"
+            },
+            {
+              "tag": "SELECT",
+              "type": "select-one",
+              "name": "st",
+              "options": [
+                {
+                  "value": "mem_id",
+                  "text": "아이디"
+                },
+                {
+                  "value": "job",
+                  "text": "수행업무"
+                }
+              ]
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "sw",
+              "placeholder": "검색어 입력"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "button",
+              "name": "",
+              "placeholder": ""
+            }
+          ]
+        },
+        {
+          "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+          "method": "post",
+          "inputs": [
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "csrf_test_name",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "hidden",
+              "name": "form_open_date_use_chk_csrf",
+              "placeholder": ""
+            },
+            {
+              "tag": "INPUT",
+              "type": "text",
+              "name": "login_id",
+              "placeholder": "아이디"
+            },
+            {
+              "tag": "INPUT",
+              "type": "password",
+              "name": "login_passwd",
+              "placeholder": "비밀번호"
+            },
+            {
+              "tag": "INPUT",
+              "type": "submit",
+              "name": "submit",
+              "placeholder": ""
+            }
+          ]
+        }
+      ],
+      "buttons": [
+        {
+          "text": "검색",
+          "href": ""
+        },
+        {
+          "text": "전체",
+          "href": ""
+        },
+        {
+          "text": "검색결과출력",
+          "href": "https://www.dbdbschool.kr/sczigi/privacy_log/listse/p/1/sn/3267"
+        },
+        {
+          "text": "로그인",
+          "href": ""
+        },
+        {
+          "text": "×",
+          "href": ""
+        },
+        {
+          "text": "확인",
+          "href": "https://www.dbdbschool.kr/sczigi/privacy_log/main/sn/3267#none;"
+        }
+      ]
+    }
+  }
+]

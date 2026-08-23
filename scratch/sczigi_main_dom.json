@@ -1,0 +1,130 @@
+{
+  "title": "목록 - 서비스목록 - 학교관리",
+  "h1": "학교관리",
+  "tables": [
+    {
+      "index": 0,
+      "className": "table AlignCenter table-hover_sm list MAT0",
+      "headers": [
+        {
+          "text": "서비스명",
+          "colspan": 1,
+          "rowspan": 1,
+          "width": "",
+          "style": ""
+        },
+        {
+          "text": "서비스 URL",
+          "colspan": 1,
+          "rowspan": 1,
+          "width": "",
+          "style": ""
+        },
+        {
+          "text": "이용기간",
+          "colspan": 1,
+          "rowspan": 1,
+          "width": "",
+          "style": ""
+        }
+      ],
+      "rows": [
+        [
+          {
+            "text": "늘봄학교",
+            "html": "늘봄학교",
+            "colspan": 1,
+            "rowspan": 1,
+            "className": ""
+          },
+          {
+            "text": "https://www.dbdbschool.kr/go/ai/0hc5dFL",
+            "html": "<div id=\"qr_container_3267\" title=\"https://www.dbdbschool.kr/go/ai/0hc5dFL\"><canvas width=\"170\" height=\"170\" style=\"display: none;\"></canvas><img src=\"data:image/png;base64,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\" style=\"display: block;\"></div>\n\t\t\t\t<div><a href=\"https://www.dbdbschool.kr/go/ai/0hc5dFL\" class=\"underline\" target=\"_blank\">https://www.dbdbschool.kr/go/ai/0hc5dFL</a></div>",
+            "colspan": 1,
+            "rowspan": 1,
+            "className": "text-left"
+          },
+          {
+            "text": "2025-05-09 ~ 2027-02-28",
+            "html": "2025-05-09 ~ 2027-02-28",
+            "colspan": 1,
+            "rowspan": 1,
+            "className": ""
+          }
+        ]
+      ]
+    }
+  ],
+  "buttons": [
+    {
+      "tag": "INPUT",
+      "text": "로그인",
+      "href": "",
+      "className": "go_btn",
+      "style": ""
+    },
+    {
+      "tag": "BUTTON",
+      "text": "×",
+      "href": "",
+      "className": "close",
+      "style": ""
+    },
+    {
+      "tag": "A",
+      "text": "확인",
+      "href": "https://www.dbdbschool.kr/sczigi/service/lists/sn/3267#none;",
+      "className": "btn btn-primary",
+      "style": ""
+    }
+  ],
+  "forms": [
+    {
+      "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+      "method": "post",
+      "inputs": [
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1",
+          "placeholder": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "value": "2026-08-17 13:30:03",
+          "placeholder": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "login_id",
+          "id": "login_id",
+          "value": "",
+          "placeholder": "아이디"
+        },
+        {
+          "tag": "INPUT",
+          "type": "password",
+          "name": "login_passwd",
+          "id": "login_passwd",
+          "value": "",
+          "placeholder": "비밀번호"
+        },
+        {
+          "tag": "INPUT",
+          "type": "submit",
+          "name": "submit",
+          "id": "",
+          "value": "로그인",
+          "placeholder": ""
+        }
+      ]
+    }
+  ],
+  "tabs": []
+}

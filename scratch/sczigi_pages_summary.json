@@ -1,0 +1,432 @@
+[
+  {
+    "index": 1,
+    "url": "https://www.dbdbschool.kr/sczigi/service/lists/sn/3267#none;",
+    "title": "목록 - 서비스목록 - 학교관리",
+    "h1": "학교관리",
+    "contentTitle": "",
+    "tableHeaders": [
+      [
+        "서비스명",
+        "서비스 URL",
+        "이용기간"
+      ]
+    ],
+    "buttons": [
+      "로그인",
+      "확인"
+    ],
+    "formsCount": 1
+  },
+  {
+    "index": 2,
+    "url": "https://www.dbdbschool.kr/sczigi/service/lists/sn/3267",
+    "title": "목록 - 서비스목록 - 학교관리",
+    "h1": "학교관리",
+    "contentTitle": "",
+    "tableHeaders": [
+      [
+        "서비스명",
+        "서비스 URL",
+        "이용기간"
+      ]
+    ],
+    "buttons": [
+      "로그인",
+      "확인"
+    ],
+    "formsCount": 1
+  },
+  {
+    "index": 3,
+    "url": "https://www.dbdbschool.kr/sczigi/teacher/lists/sn/3267",
+    "title": "목록 - 교직원관리 - 학교관리",
+    "h1": "학교관리",
+    "contentTitle": "",
+    "tableHeaders": [
+      [
+        "",
+        "연번",
+        "수정",
+        "아이디",
+        "이름",
+        "휴대폰\n(비고)",
+        "담임",
+        "직명",
+        "마지막\n로그인",
+        "임시\n비번",
+        "본인\n인증",
+        "2단계\n인증",
+        "약관동의",
+        "상태",
+        "삭제"
+      ]
+    ],
+    "buttons": [
+      "검색",
+      "전체",
+      "교직원 등록",
+      "추가기능..",
+      "교직원 일괄입력",
+      "검색결과엑셀출력",
+      "적용하기",
+      "로그인",
+      "확인"
+    ],
+    "formsCount": 5
+  },
+  {
+    "index": 4,
+    "url": "https://www.dbdbschool.kr/sczigi/teacher/field/sn/3267",
+    "title": "회원필드설정 - 교직원관리 - 학교관리",
+    "h1": "학교관리",
+    "contentTitle": "",
+    "tableHeaders": [
+      [
+        "필드명",
+        "출력상태",
+        "휴대폰",
+        "직위",
+        "생년월일",
+        "나이스 개인번호"
+      ]
+    ],
+    "buttons": [
+      "취소",
+      "수정",
+      "로그인",
+      "확인"
+    ],
+    "formsCount": 2
+  },
+  {
+    "index": 5,
+    "url": "https://www.dbdbschool.kr/sczigi/teacher/level/sn/3267",
+    "title": "직위명 설정 - 교직원관리 - 학교관리",
+    "h1": "학교관리",
+    "contentTitle": "",
+    "tableHeaders": [
+      [
+        "연번",
+        "사용",
+        "코드명",
+        "적용",
+        "출력순서",
+        "삭제"
+      ]
+    ],
+    "buttons": [
+      "로그인",
+      "확인"
+    ],
+    "formsCount": 2
+  },
+  {
+    "index": 6,
+    "url": "https://www.dbdbschool.kr/sczigi/teacher/clear/sn/3267",
+    "title": "초기화 - 교직원관리 - 학교관리",
+    "h1": "학교관리",
+    "contentTitle": "",
+    "tableHeaders": [
+      [
+        "직위\n생년월일\n나이스 개인번호",
+        "회원 데이터",
+        "담임 학과 데이터"
+      ]
+    ],
+    "buttons": [
+      "로그인",
+      "확인"
+    ],
+    "formsCount": 2
+  },
+  {
+    "index": 7,
+    "url": "https://www.dbdbschool.kr/sczigi/student/lists/sn/3267",
+    "title": "목록 - 학생관리 - 학교관리",
+    "h1": "학교관리",
+    "contentTitle": "",
+    "tableHeaders": [
+      [
+        "",
+        "연번",
+        "수정",
+        "학년",
+        "반",
+        "번호",
+        "이름",
+        "성별",
+        "연락처\n(비고)",
+        "이전 학적",
+        "마지막\n수정",
+        "마지막\n로그인",
+        "임시\n비번",
+        "약관동의",
+        "상태",
+        "삭제"
+      ]
+    ],
+    "buttons": [
+      "검색",
+      "전체",
+      "학생등록",
+      "추가기능..",
+      "학생 일괄입력",
+      "진급처리(학적변경)",
+      "검색결과엑셀출력",
+      "적용하기",
+      "로그인",
+      "확인"
+    ],
+    "formsCount": 5
+  },
+  {
+    "index": 8,
+    "url": "https://www.dbdbschool.kr/sczigi/student/main/sn/3267",
+    "title": "기본설정 - 학생관리 - 학교관리",
+    "h1": "학교관리",
+    "contentTitle": "",
+    "tableHeaders": [
+      [
+        "다자녀 로그인 공유",
+        "최댓값\n지정",
+        "학년",
+        "학급",
+        "번호"
+      ]
+    ],
+    "buttons": [
+      "취소",
+      "수정",
+      "로그인",
+      "확인"
+    ],
+    "formsCount": 2
+  },
+  {
+    "index": 9,
+    "url": "https://www.dbdbschool.kr/sczigi/student/field/sn/3267",
+    "title": "회원필드설정 - 학생관리 - 학교관리",
+    "h1": "학교관리",
+    "contentTitle": "",
+    "tableHeaders": [
+      [
+        "필드명",
+        "출력상태",
+        "필수입력",
+        "학생 휴대폰",
+        "보호자 성명",
+        "보호자 연락처",
+        "성별"
+      ]
+    ],
+    "buttons": [
+      "취소",
+      "수정",
+      "로그인",
+      "확인"
+    ],
+    "formsCount": 2
+  },
+  {
+    "index": 10,
+    "url": "https://www.dbdbschool.kr/sczigi/student/course/sn/3267",
+    "title": "학과 설정 - 학생관리 - 학교관리",
+    "h1": "학교관리",
+    "contentTitle": "",
+    "tableHeaders": [
+      [
+        "연번",
+        "사용",
+        "코드명",
+        "적용",
+        "출력순서",
+        "삭제"
+      ]
+    ],
+    "buttons": [
+      "로그인",
+      "확인"
+    ],
+    "formsCount": 2
+  },
+  {
+    "index": 11,
+    "url": "https://www.dbdbschool.kr/sczigi/student/clear/sn/3267",
+    "title": "초기화 - 학생관리 - 학교관리",
+    "h1": "학교관리",
+    "contentTitle": "",
+    "tableHeaders": [
+      [
+        "휴대폰\n보호자 성명\n보호자 연락처\n성별",
+        "비밀번호",
+        "학생 데이터",
+        "학생 학과 데이터"
+      ]
+    ],
+    "buttons": [
+      "로그인",
+      "확인"
+    ],
+    "formsCount": 2
+  },
+  {
+    "index": 12,
+    "url": "https://www.dbdbschool.kr/sczigi/sms_tel/lists/sn/3267",
+    "title": "목록 - 문자관리 > 발신번호관리 - 학교관리",
+    "h1": "학교관리",
+    "contentTitle": "",
+    "tableHeaders": [
+      [
+        "연번",
+        "수정",
+        "발신번호",
+        "발신번호명의",
+        "인증방식",
+        "발신번호 구분\n(비고)",
+        "처리상태",
+        "승인일자",
+        "취소"
+      ]
+    ],
+    "buttons": [
+      "발신번호등록",
+      "검색",
+      "전체",
+      "로그인",
+      "확인"
+    ],
+    "formsCount": 3
+  },
+  {
+    "index": 13,
+    "url": "https://www.dbdbschool.kr/sczigi/sms_sin/lists/sn/3267",
+    "title": "목록 - 문자관리 > 충전신청 - 학교관리",
+    "h1": "학교관리",
+    "contentTitle": "",
+    "tableHeaders": [
+      [
+        "연번",
+        "충전금액(원)",
+        "충전건수(건)",
+        "견적서",
+        "품의여부",
+        "상태",
+        "신청일자"
+      ]
+    ],
+    "buttons": [
+      "충전신청",
+      "로그인",
+      "확인"
+    ],
+    "formsCount": 3
+  },
+  {
+    "index": 14,
+    "url": "https://www.dbdbschool.kr/sczigi/sms_charge/lists/sn/3267",
+    "title": "목록 - 문자관리 > 충전내역 - 학교관리",
+    "h1": "학교관리",
+    "contentTitle": "",
+    "tableHeaders": [
+      [
+        "연번",
+        "충전건수(건)",
+        "충전구분",
+        "비고",
+        "처리구분",
+        "처리일자"
+      ]
+    ],
+    "buttons": [
+      "로그인",
+      "확인"
+    ],
+    "formsCount": 1
+  },
+  {
+    "index": 15,
+    "url": "https://www.dbdbschool.kr/sczigi/sms_report/lists/sn/3267",
+    "title": "목록 - 문자관리 > 발송통계 - 학교관리",
+    "h1": "학교관리",
+    "contentTitle": "",
+    "tableHeaders": [
+      [
+        "연번",
+        "발송일자",
+        "SMS",
+        "LMS",
+        "차감(성공) / 재충전(실패)",
+        "성공",
+        "실패",
+        "합계",
+        "성공",
+        "실패",
+        "합계",
+        "차감",
+        "재충전",
+        "합계"
+      ]
+    ],
+    "buttons": [
+      "지난달",
+      "이번달",
+      "최근1달",
+      "검색",
+      "검색결과엑셀출력",
+      "실패목록출력(8월)",
+      "로그인",
+      "확인"
+    ],
+    "formsCount": 2
+  },
+  {
+    "index": 16,
+    "url": "https://www.dbdbschool.kr/sczigi/auth/main/sn/3267",
+    "title": "서비스 관리자 권한 설정 - 권한설정 - 학교관리",
+    "h1": "학교관리",
+    "contentTitle": "",
+    "tableHeaders": [
+      [
+        "서비스명",
+        "학교관리 메뉴 이용 권한",
+        "관리자ID",
+        "교직원관리",
+        "학생관리"
+      ]
+    ],
+    "buttons": [
+      "취소",
+      "수정",
+      "로그인",
+      "확인"
+    ],
+    "formsCount": 2
+  },
+  {
+    "index": 17,
+    "url": "https://www.dbdbschool.kr/sczigi/privacy_log/main/sn/3267",
+    "title": "목록 - 서비스 접근 로그 - 학교관리",
+    "h1": "학교관리",
+    "contentTitle": "",
+    "tableHeaders": [
+      [
+        "연번",
+        "서비스",
+        "아이디",
+        "회원그룹",
+        "접속IP",
+        "접속시간",
+        "수행업무"
+      ]
+    ],
+    "buttons": [
+      "검색",
+      "전체",
+      "검색결과출력",
+      "로그인",
+      "확인"
+    ],
+    "formsCount": 2
+  }
+]

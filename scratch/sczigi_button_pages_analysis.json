@@ -1,0 +1,2786 @@
+[
+  {
+    "name": "teacher_write",
+    "url": "https://www.dbdbschool.kr/sczigi/teacher/write/p/1/sn/3267",
+    "title": "교직원 등록 폼",
+    "currentUrl": "https://www.dbdbschool.kr/sczigi/teacher/write/p/1/sn/3267",
+    "screenshotPath": "scratch/btn_page_teacher_write.png",
+    "domSummary": {
+      "title": "교직원등록 - 교직원관리 - 학교관리",
+      "h1": "학교관리",
+      "heading": "교직원관리",
+      "formInputs": [
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "placeholder": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "placeholder": "",
+          "value": "2026-08-17 14:03:00"
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "mem_id",
+          "id": "mem_id",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "mem_name",
+          "id": "mem_name",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "password",
+          "name": "mem_passwd",
+          "id": "mem_passwd",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "name": "mem_level",
+          "id": "mem_level",
+          "value": "",
+          "options": [
+            {
+              "value": "",
+              "text": "=선택="
+            },
+            {
+              "value": "1",
+              "text": "교장"
+            },
+            {
+              "value": "2",
+              "text": "교감"
+            },
+            {
+              "value": "4",
+              "text": "수석교사"
+            },
+            {
+              "value": "3",
+              "text": "교사"
+            },
+            {
+              "value": "5",
+              "text": "교직원"
+            },
+            {
+              "value": "6",
+              "text": "늘봄지원실장"
+            },
+            {
+              "value": "7",
+              "text": "늘봄실무사"
+            }
+          ]
+        },
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "name": "mem_grade",
+          "id": "mem_grade",
+          "value": "",
+          "options": [
+            {
+              "value": "",
+              "text": "=학년="
+            },
+            {
+              "value": "1",
+              "text": "1"
+            },
+            {
+              "value": "2",
+              "text": "2"
+            },
+            {
+              "value": "3",
+              "text": "3"
+            },
+            {
+              "value": "4",
+              "text": "4"
+            },
+            {
+              "value": "5",
+              "text": "5"
+            },
+            {
+              "value": "6",
+              "text": "6"
+            }
+          ]
+        },
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "name": "mem_class",
+          "id": "mem_class",
+          "value": "",
+          "options": [
+            {
+              "value": "",
+              "text": "=학급="
+            },
+            {
+              "value": "1",
+              "text": "1"
+            },
+            {
+              "value": "2",
+              "text": "2"
+            },
+            {
+              "value": "3",
+              "text": "3"
+            },
+            {
+              "value": "4",
+              "text": "4"
+            },
+            {
+              "value": "5",
+              "text": "5"
+            },
+            {
+              "value": "6",
+              "text": "6"
+            },
+            {
+              "value": "7",
+              "text": "7"
+            },
+            {
+              "value": "8",
+              "text": "8"
+            },
+            {
+              "value": "9",
+              "text": "9"
+            },
+            {
+              "value": "10",
+              "text": "10"
+            },
+            {
+              "value": "11",
+              "text": "11"
+            },
+            {
+              "value": "12",
+              "text": "12"
+            }
+          ]
+        },
+        {
+          "tag": "TEXTAREA",
+          "type": "textarea",
+          "name": "mem_allow_ip",
+          "id": "mem_allow_ip",
+          "placeholder": "로그인허용IP",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "mem_bigo",
+          "id": "mem_bigo",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "radio",
+          "name": "mem_status",
+          "id": "mem_status_1",
+          "placeholder": "",
+          "value": "1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "radio",
+          "name": "mem_status",
+          "id": "mem_status_0",
+          "placeholder": "",
+          "value": "0"
+        },
+        {
+          "tag": "INPUT",
+          "type": "button",
+          "name": "",
+          "id": "",
+          "placeholder": "",
+          "value": "목록보기"
+        },
+        {
+          "tag": "INPUT",
+          "type": "submit",
+          "name": "",
+          "id": "",
+          "placeholder": "",
+          "value": "등록"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "placeholder": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "placeholder": "",
+          "value": "2026-08-17 14:03:00"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "chk_mem_id",
+          "id": "chk_mem_id",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "chk_mem_num",
+          "id": "chk_mem_num",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "placeholder": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "placeholder": "",
+          "value": "2026-08-17 14:03:00"
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "login_id",
+          "id": "login_id",
+          "placeholder": "아이디",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "password",
+          "name": "login_passwd",
+          "id": "login_passwd",
+          "placeholder": "비밀번호",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "submit",
+          "name": "submit",
+          "id": "",
+          "placeholder": "",
+          "value": "로그인"
+        }
+      ],
+      "buttons": [
+        {
+          "text": "목록보기",
+          "className": "btn btn-default"
+        },
+        {
+          "text": "등록",
+          "className": "btn btn-danger"
+        },
+        {
+          "text": "로그인",
+          "className": "go_btn"
+        },
+        {
+          "text": "×",
+          "className": "close"
+        },
+        {
+          "text": "확인",
+          "className": "btn btn-primary"
+        }
+      ]
+    }
+  },
+  {
+    "name": "teacher_input",
+    "url": "https://www.dbdbschool.kr/sczigi/teacher/input/p/1/sn/3267",
+    "title": "교직원 일괄입력 엑셀업로드",
+    "currentUrl": "https://www.dbdbschool.kr/sczigi/teacher/input/p/1/sn/3267",
+    "screenshotPath": "scratch/btn_page_teacher_input.png",
+    "domSummary": {
+      "title": "일괄입력 - 교직원관리 - 학교관리",
+      "h1": "학교관리",
+      "heading": "교직원관리",
+      "formInputs": [
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "placeholder": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "placeholder": "",
+          "value": "2026-08-17 14:03:01"
+        },
+        {
+          "tag": "INPUT",
+          "type": "file",
+          "name": "userfile",
+          "id": "userfile",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "button",
+          "name": "",
+          "id": "",
+          "placeholder": "",
+          "value": "취소"
+        },
+        {
+          "tag": "INPUT",
+          "type": "submit",
+          "name": "",
+          "id": "",
+          "placeholder": "",
+          "value": "등록"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "placeholder": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "placeholder": "",
+          "value": "2026-08-17 14:03:01"
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "login_id",
+          "id": "login_id",
+          "placeholder": "아이디",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "password",
+          "name": "login_passwd",
+          "id": "login_passwd",
+          "placeholder": "비밀번호",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "submit",
+          "name": "submit",
+          "id": "",
+          "placeholder": "",
+          "value": "로그인"
+        }
+      ],
+      "buttons": [
+        {
+          "text": "취소",
+          "className": "btn btn-default"
+        },
+        {
+          "text": "등록",
+          "className": "btn btn-primary"
+        },
+        {
+          "text": "로그인",
+          "className": "go_btn"
+        },
+        {
+          "text": "×",
+          "className": "close"
+        },
+        {
+          "text": "확인",
+          "className": "btn btn-primary"
+        }
+      ]
+    }
+  },
+  {
+    "name": "teacher_modify",
+    "url": "https://www.dbdbschool.kr/sczigi/teacher/modify/num/134763/p/1/sn/3267",
+    "title": "교직원 정보 수정",
+    "currentUrl": "https://www.dbdbschool.kr/sczigi/teacher/modify/num/134763/p/1/sn/3267",
+    "screenshotPath": "scratch/btn_page_teacher_modify.png",
+    "domSummary": {
+      "title": "교직원수정 - 교직원관리 - 학교관리",
+      "h1": "학교관리",
+      "heading": "교직원관리",
+      "formInputs": [
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "placeholder": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "placeholder": "",
+          "value": "2026-08-17 14:03:02"
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "mem_id",
+          "id": "mem_id",
+          "placeholder": "",
+          "value": "김혜련"
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "mem_name",
+          "id": "mem_name",
+          "placeholder": "",
+          "value": "김혜련"
+        },
+        {
+          "tag": "INPUT",
+          "type": "checkbox",
+          "name": "change_mem_name",
+          "id": "change_mem_name",
+          "placeholder": "",
+          "value": "1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "password",
+          "name": "mem_passwd",
+          "id": "mem_passwd",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "name": "mem_level",
+          "id": "mem_level",
+          "value": "7",
+          "options": [
+            {
+              "value": "",
+              "text": "=선택="
+            },
+            {
+              "value": "1",
+              "text": "교장"
+            },
+            {
+              "value": "2",
+              "text": "교감"
+            },
+            {
+              "value": "4",
+              "text": "수석교사"
+            },
+            {
+              "value": "3",
+              "text": "교사"
+            },
+            {
+              "value": "5",
+              "text": "교직원"
+            },
+            {
+              "value": "6",
+              "text": "늘봄지원실장"
+            },
+            {
+              "value": "7",
+              "text": "늘봄실무사"
+            }
+          ]
+        },
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "name": "mem_grade",
+          "id": "mem_grade",
+          "value": "",
+          "options": [
+            {
+              "value": "",
+              "text": "=학년="
+            },
+            {
+              "value": "1",
+              "text": "1"
+            },
+            {
+              "value": "2",
+              "text": "2"
+            },
+            {
+              "value": "3",
+              "text": "3"
+            },
+            {
+              "value": "4",
+              "text": "4"
+            },
+            {
+              "value": "5",
+              "text": "5"
+            },
+            {
+              "value": "6",
+              "text": "6"
+            }
+          ]
+        },
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "name": "mem_class",
+          "id": "mem_class",
+          "value": "",
+          "options": [
+            {
+              "value": "",
+              "text": "=학급="
+            },
+            {
+              "value": "1",
+              "text": "1"
+            },
+            {
+              "value": "2",
+              "text": "2"
+            },
+            {
+              "value": "3",
+              "text": "3"
+            },
+            {
+              "value": "4",
+              "text": "4"
+            },
+            {
+              "value": "5",
+              "text": "5"
+            },
+            {
+              "value": "6",
+              "text": "6"
+            },
+            {
+              "value": "7",
+              "text": "7"
+            },
+            {
+              "value": "8",
+              "text": "8"
+            },
+            {
+              "value": "9",
+              "text": "9"
+            },
+            {
+              "value": "10",
+              "text": "10"
+            },
+            {
+              "value": "11",
+              "text": "11"
+            },
+            {
+              "value": "12",
+              "text": "12"
+            }
+          ]
+        },
+        {
+          "tag": "INPUT",
+          "type": "checkbox",
+          "name": "del_mem_hp",
+          "id": "del_mem_hp",
+          "placeholder": "",
+          "value": "1"
+        },
+        {
+          "tag": "TEXTAREA",
+          "type": "textarea",
+          "name": "mem_allow_ip",
+          "id": "mem_allow_ip",
+          "placeholder": "로그인허용IP",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "mem_bigo",
+          "id": "mem_bigo",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "radio",
+          "name": "mem_status",
+          "id": "mem_status_1",
+          "placeholder": "",
+          "value": "1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "radio",
+          "name": "mem_status",
+          "id": "mem_status_0",
+          "placeholder": "",
+          "value": "0"
+        },
+        {
+          "tag": "INPUT",
+          "type": "button",
+          "name": "",
+          "id": "",
+          "placeholder": "",
+          "value": "목록보기"
+        },
+        {
+          "tag": "INPUT",
+          "type": "submit",
+          "name": "",
+          "id": "",
+          "placeholder": "",
+          "value": "수정"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "placeholder": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "placeholder": "",
+          "value": "2026-08-17 14:03:02"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "chk_mem_id",
+          "id": "chk_mem_id",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "chk_mem_num",
+          "id": "chk_mem_num",
+          "placeholder": "",
+          "value": "134763"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "placeholder": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "placeholder": "",
+          "value": "2026-08-17 14:03:02"
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "login_id",
+          "id": "login_id",
+          "placeholder": "아이디",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "password",
+          "name": "login_passwd",
+          "id": "login_passwd",
+          "placeholder": "비밀번호",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "submit",
+          "name": "submit",
+          "id": "",
+          "placeholder": "",
+          "value": "로그인"
+        }
+      ],
+      "buttons": [
+        {
+          "text": "목록보기",
+          "className": "btn btn-default"
+        },
+        {
+          "text": "수정",
+          "className": "btn btn-primary"
+        },
+        {
+          "text": "로그인",
+          "className": "go_btn"
+        },
+        {
+          "text": "×",
+          "className": "close"
+        },
+        {
+          "text": "확인",
+          "className": "btn btn-primary"
+        }
+      ]
+    }
+  },
+  {
+    "name": "student_write",
+    "url": "https://www.dbdbschool.kr/sczigi/student/write/p/1/sn/3267/sof/grade/sot/asc",
+    "title": "학생 등록 폼",
+    "currentUrl": "https://www.dbdbschool.kr/sczigi/student/write/p/1/sn/3267/sof/grade/sot/asc",
+    "screenshotPath": "scratch/btn_page_student_write.png",
+    "domSummary": {
+      "title": "학생등록 - 학생관리 - 학교관리",
+      "h1": "학교관리",
+      "heading": "학생관리",
+      "formInputs": [
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "placeholder": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "placeholder": "",
+          "value": "2026-08-17 14:03:03"
+        },
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "name": "mem_grade",
+          "id": "mem_grade",
+          "value": "",
+          "options": [
+            {
+              "value": "",
+              "text": "=선택="
+            },
+            {
+              "value": "1",
+              "text": "1"
+            },
+            {
+              "value": "2",
+              "text": "2"
+            },
+            {
+              "value": "3",
+              "text": "3"
+            },
+            {
+              "value": "4",
+              "text": "4"
+            },
+            {
+              "value": "5",
+              "text": "5"
+            },
+            {
+              "value": "6",
+              "text": "6"
+            }
+          ]
+        },
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "name": "mem_class",
+          "id": "mem_class",
+          "value": "",
+          "options": [
+            {
+              "value": "",
+              "text": "=선택="
+            },
+            {
+              "value": "1",
+              "text": "1"
+            },
+            {
+              "value": "2",
+              "text": "2"
+            },
+            {
+              "value": "3",
+              "text": "3"
+            },
+            {
+              "value": "4",
+              "text": "4"
+            },
+            {
+              "value": "5",
+              "text": "5"
+            },
+            {
+              "value": "6",
+              "text": "6"
+            },
+            {
+              "value": "7",
+              "text": "7"
+            },
+            {
+              "value": "8",
+              "text": "8"
+            },
+            {
+              "value": "9",
+              "text": "9"
+            },
+            {
+              "value": "10",
+              "text": "10"
+            },
+            {
+              "value": "11",
+              "text": "11"
+            },
+            {
+              "value": "12",
+              "text": "12"
+            }
+          ]
+        },
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "name": "mem_bunho",
+          "id": "mem_bunho",
+          "value": "",
+          "options": [
+            {
+              "value": "",
+              "text": "=선택="
+            },
+            {
+              "value": "1",
+              "text": "1"
+            },
+            {
+              "value": "2",
+              "text": "2"
+            },
+            {
+              "value": "3",
+              "text": "3"
+            },
+            {
+              "value": "4",
+              "text": "4"
+            },
+            {
+              "value": "5",
+              "text": "5"
+            },
+            {
+              "value": "6",
+              "text": "6"
+            },
+            {
+              "value": "7",
+              "text": "7"
+            },
+            {
+              "value": "8",
+              "text": "8"
+            },
+            {
+              "value": "9",
+              "text": "9"
+            },
+            {
+              "value": "10",
+              "text": "10"
+            },
+            {
+              "value": "11",
+              "text": "11"
+            },
+            {
+              "value": "12",
+              "text": "12"
+            },
+            {
+              "value": "13",
+              "text": "13"
+            },
+            {
+              "value": "14",
+              "text": "14"
+            },
+            {
+              "value": "15",
+              "text": "15"
+            },
+            {
+              "value": "16",
+              "text": "16"
+            },
+            {
+              "value": "17",
+              "text": "17"
+            },
+            {
+              "value": "18",
+              "text": "18"
+            },
+            {
+              "value": "19",
+              "text": "19"
+            },
+            {
+              "value": "20",
+              "text": "20"
+            },
+            {
+              "value": "21",
+              "text": "21"
+            },
+            {
+              "value": "22",
+              "text": "22"
+            },
+            {
+              "value": "23",
+              "text": "23"
+            },
+            {
+              "value": "24",
+              "text": "24"
+            },
+            {
+              "value": "25",
+              "text": "25"
+            },
+            {
+              "value": "26",
+              "text": "26"
+            },
+            {
+              "value": "27",
+              "text": "27"
+            },
+            {
+              "value": "28",
+              "text": "28"
+            },
+            {
+              "value": "29",
+              "text": "29"
+            },
+            {
+              "value": "30",
+              "text": "30"
+            },
+            {
+              "value": "31",
+              "text": "31"
+            },
+            {
+              "value": "32",
+              "text": "32"
+            },
+            {
+              "value": "33",
+              "text": "33"
+            },
+            {
+              "value": "34",
+              "text": "34"
+            },
+            {
+              "value": "35",
+              "text": "35"
+            },
+            {
+              "value": "36",
+              "text": "36"
+            },
+            {
+              "value": "37",
+              "text": "37"
+            },
+            {
+              "value": "38",
+              "text": "38"
+            },
+            {
+              "value": "39",
+              "text": "39"
+            },
+            {
+              "value": "40",
+              "text": "40"
+            },
+            {
+              "value": "41",
+              "text": "41"
+            },
+            {
+              "value": "42",
+              "text": "42"
+            },
+            {
+              "value": "43",
+              "text": "43"
+            },
+            {
+              "value": "44",
+              "text": "44"
+            },
+            {
+              "value": "45",
+              "text": "45"
+            },
+            {
+              "value": "46",
+              "text": "46"
+            },
+            {
+              "value": "47",
+              "text": "47"
+            },
+            {
+              "value": "48",
+              "text": "48"
+            },
+            {
+              "value": "49",
+              "text": "49"
+            },
+            {
+              "value": "50",
+              "text": "50"
+            },
+            {
+              "value": "51",
+              "text": "51"
+            },
+            {
+              "value": "52",
+              "text": "52"
+            },
+            {
+              "value": "53",
+              "text": "53"
+            },
+            {
+              "value": "54",
+              "text": "54"
+            },
+            {
+              "value": "55",
+              "text": "55"
+            },
+            {
+              "value": "56",
+              "text": "56"
+            },
+            {
+              "value": "57",
+              "text": "57"
+            },
+            {
+              "value": "58",
+              "text": "58"
+            },
+            {
+              "value": "59",
+              "text": "59"
+            },
+            {
+              "value": "60",
+              "text": "60"
+            },
+            {
+              "value": "61",
+              "text": "61"
+            },
+            {
+              "value": "62",
+              "text": "62"
+            },
+            {
+              "value": "63",
+              "text": "63"
+            },
+            {
+              "value": "64",
+              "text": "64"
+            },
+            {
+              "value": "65",
+              "text": "65"
+            },
+            {
+              "value": "66",
+              "text": "66"
+            },
+            {
+              "value": "67",
+              "text": "67"
+            },
+            {
+              "value": "68",
+              "text": "68"
+            },
+            {
+              "value": "69",
+              "text": "69"
+            },
+            {
+              "value": "70",
+              "text": "70"
+            },
+            {
+              "value": "71",
+              "text": "71"
+            },
+            {
+              "value": "72",
+              "text": "72"
+            },
+            {
+              "value": "73",
+              "text": "73"
+            },
+            {
+              "value": "74",
+              "text": "74"
+            },
+            {
+              "value": "75",
+              "text": "75"
+            },
+            {
+              "value": "76",
+              "text": "76"
+            },
+            {
+              "value": "77",
+              "text": "77"
+            },
+            {
+              "value": "78",
+              "text": "78"
+            },
+            {
+              "value": "79",
+              "text": "79"
+            },
+            {
+              "value": "80",
+              "text": "80"
+            },
+            {
+              "value": "81",
+              "text": "81"
+            },
+            {
+              "value": "82",
+              "text": "82"
+            },
+            {
+              "value": "83",
+              "text": "83"
+            },
+            {
+              "value": "84",
+              "text": "84"
+            },
+            {
+              "value": "85",
+              "text": "85"
+            },
+            {
+              "value": "86",
+              "text": "86"
+            },
+            {
+              "value": "87",
+              "text": "87"
+            },
+            {
+              "value": "88",
+              "text": "88"
+            },
+            {
+              "value": "89",
+              "text": "89"
+            },
+            {
+              "value": "90",
+              "text": "90"
+            },
+            {
+              "value": "91",
+              "text": "91"
+            },
+            {
+              "value": "92",
+              "text": "92"
+            },
+            {
+              "value": "93",
+              "text": "93"
+            },
+            {
+              "value": "94",
+              "text": "94"
+            },
+            {
+              "value": "95",
+              "text": "95"
+            },
+            {
+              "value": "96",
+              "text": "96"
+            },
+            {
+              "value": "97",
+              "text": "97"
+            },
+            {
+              "value": "98",
+              "text": "98"
+            },
+            {
+              "value": "99",
+              "text": "99"
+            }
+          ]
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "mem_name",
+          "id": "mem_name",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "password",
+          "name": "mem_passwd",
+          "id": "mem_passwd",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "name": "mem_hp_1",
+          "id": "mem_hp_1",
+          "value": "",
+          "options": [
+            {
+              "value": "",
+              "text": "선택"
+            },
+            {
+              "value": "010",
+              "text": "010"
+            },
+            {
+              "value": "011",
+              "text": "011"
+            },
+            {
+              "value": "012",
+              "text": "012"
+            },
+            {
+              "value": "016",
+              "text": "016"
+            },
+            {
+              "value": "017",
+              "text": "017"
+            },
+            {
+              "value": "018",
+              "text": "018"
+            },
+            {
+              "value": "019",
+              "text": "019"
+            },
+            {
+              "value": "090",
+              "text": "090"
+            },
+            {
+              "value": "091",
+              "text": "091"
+            },
+            {
+              "value": "092",
+              "text": "092"
+            },
+            {
+              "value": "093",
+              "text": "093"
+            },
+            {
+              "value": "094",
+              "text": "094"
+            },
+            {
+              "value": "096",
+              "text": "096"
+            },
+            {
+              "value": "098",
+              "text": "098"
+            },
+            {
+              "value": "etc",
+              "text": "직접입력"
+            }
+          ]
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "mem_hp_1_etc",
+          "id": "mem_hp_1_etc",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "mem_hp_2",
+          "id": "mem_hp_2",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "mem_hp_3",
+          "id": "mem_hp_3",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "mem_pa_name",
+          "id": "mem_pa_name",
+          "placeholder": "보호자 성명",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "bigo",
+          "id": "bigo",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "radio",
+          "name": "mem_status",
+          "id": "mem_status_1",
+          "placeholder": "",
+          "value": "1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "radio",
+          "name": "mem_status",
+          "id": "mem_status_0",
+          "placeholder": "",
+          "value": "0"
+        },
+        {
+          "tag": "INPUT",
+          "type": "button",
+          "name": "",
+          "id": "",
+          "placeholder": "",
+          "value": "목록보기"
+        },
+        {
+          "tag": "INPUT",
+          "type": "submit",
+          "name": "",
+          "id": "",
+          "placeholder": "",
+          "value": "등록"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "placeholder": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "placeholder": "",
+          "value": "2026-08-17 14:03:03"
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "login_id",
+          "id": "login_id",
+          "placeholder": "아이디",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "password",
+          "name": "login_passwd",
+          "id": "login_passwd",
+          "placeholder": "비밀번호",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "submit",
+          "name": "submit",
+          "id": "",
+          "placeholder": "",
+          "value": "로그인"
+        }
+      ],
+      "buttons": [
+        {
+          "text": "목록보기",
+          "className": "btn btn-default"
+        },
+        {
+          "text": "등록",
+          "className": "btn btn-danger"
+        },
+        {
+          "text": "로그인",
+          "className": "go_btn"
+        },
+        {
+          "text": "×",
+          "className": "close"
+        },
+        {
+          "text": "확인",
+          "className": "btn btn-primary"
+        }
+      ]
+    }
+  },
+  {
+    "name": "student_input",
+    "url": "https://www.dbdbschool.kr/sczigi/student/input/p/1/sn/3267/sof/grade/sot/asc",
+    "title": "학생 일괄입력 엑셀업로드",
+    "currentUrl": "https://www.dbdbschool.kr/sczigi/student/input/p/1/sn/3267/sof/grade/sot/asc",
+    "screenshotPath": "scratch/btn_page_student_input.png",
+    "domSummary": {
+      "title": "일괄입력 - 학생관리 - 학교관리",
+      "h1": "학교관리",
+      "heading": "학생관리",
+      "formInputs": [
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "placeholder": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "placeholder": "",
+          "value": "2026-08-17 14:03:04"
+        },
+        {
+          "tag": "INPUT",
+          "type": "radio",
+          "name": "excel_gubun",
+          "id": "excel_gubun_1",
+          "placeholder": "",
+          "value": "1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "radio",
+          "name": "excel_gubun",
+          "id": "excel_gubun_2",
+          "placeholder": "",
+          "value": "2"
+        },
+        {
+          "tag": "INPUT",
+          "type": "file",
+          "name": "userfile",
+          "id": "userfile",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "radio",
+          "name": "input_type",
+          "id": "input_type_add",
+          "placeholder": "",
+          "value": "add"
+        },
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "name": "grade",
+          "id": "grade",
+          "value": "",
+          "options": [
+            {
+              "value": "",
+              "text": "=선택="
+            },
+            {
+              "value": "1",
+              "text": "1학년"
+            },
+            {
+              "value": "2",
+              "text": "2학년"
+            },
+            {
+              "value": "3",
+              "text": "3학년"
+            },
+            {
+              "value": "4",
+              "text": "4학년"
+            },
+            {
+              "value": "5",
+              "text": "5학년"
+            },
+            {
+              "value": "6",
+              "text": "6학년"
+            }
+          ]
+        },
+        {
+          "tag": "INPUT",
+          "type": "password",
+          "name": "def_passwd",
+          "id": "def_passwd",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "button",
+          "name": "",
+          "id": "",
+          "placeholder": "",
+          "value": "목록보기"
+        },
+        {
+          "tag": "INPUT",
+          "type": "submit",
+          "name": "",
+          "id": "",
+          "placeholder": "",
+          "value": "등록"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "placeholder": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "placeholder": "",
+          "value": "2026-08-17 14:03:04"
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "login_id",
+          "id": "login_id",
+          "placeholder": "아이디",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "password",
+          "name": "login_passwd",
+          "id": "login_passwd",
+          "placeholder": "비밀번호",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "submit",
+          "name": "submit",
+          "id": "",
+          "placeholder": "",
+          "value": "로그인"
+        }
+      ],
+      "buttons": [
+        {
+          "text": "목록보기",
+          "className": "btn btn-default"
+        },
+        {
+          "text": "등록",
+          "className": "btn btn-danger"
+        },
+        {
+          "text": "로그인",
+          "className": "go_btn"
+        },
+        {
+          "text": "×",
+          "className": "close"
+        },
+        {
+          "text": "확인",
+          "className": "btn btn-primary"
+        }
+      ]
+    }
+  },
+  {
+    "name": "student_up",
+    "url": "https://www.dbdbschool.kr/sczigi/student/up/p/1/sn/3267/sof/grade/sot/asc",
+    "title": "학생 진급처리(학적변경)",
+    "currentUrl": "https://www.dbdbschool.kr/sczigi/student/up/p/1/sn/3267/sof/grade/sot/asc",
+    "screenshotPath": "scratch/btn_page_student_up.png",
+    "domSummary": {
+      "title": "진급처리(학적변경) - 학생관리 - 학교관리",
+      "h1": "학교관리",
+      "heading": "학생관리",
+      "formInputs": [
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "placeholder": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "placeholder": "",
+          "value": "2026-08-17 14:03:04"
+        },
+        {
+          "tag": "INPUT",
+          "type": "radio",
+          "name": "excel_gubun",
+          "id": "excel_gubun_1",
+          "placeholder": "",
+          "value": "1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "radio",
+          "name": "excel_gubun",
+          "id": "excel_gubun_2",
+          "placeholder": "",
+          "value": "2"
+        },
+        {
+          "tag": "INPUT",
+          "type": "radio",
+          "name": "excel_gubun",
+          "id": "excel_gubun_3",
+          "placeholder": "",
+          "value": "3"
+        },
+        {
+          "tag": "INPUT",
+          "type": "file",
+          "name": "userfile",
+          "id": "userfile",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "name": "old_grade",
+          "id": "old_grade",
+          "value": "",
+          "options": [
+            {
+              "value": "",
+              "text": "=선택="
+            },
+            {
+              "value": "1",
+              "text": "1학년"
+            },
+            {
+              "value": "2",
+              "text": "2학년"
+            },
+            {
+              "value": "3",
+              "text": "3학년"
+            },
+            {
+              "value": "4",
+              "text": "4학년"
+            },
+            {
+              "value": "5",
+              "text": "5학년"
+            },
+            {
+              "value": "6",
+              "text": "6학년"
+            }
+          ]
+        },
+        {
+          "tag": "INPUT",
+          "type": "button",
+          "name": "",
+          "id": "",
+          "placeholder": "",
+          "value": "취소"
+        },
+        {
+          "tag": "INPUT",
+          "type": "submit",
+          "name": "",
+          "id": "",
+          "placeholder": "",
+          "value": "진급처리(학적변경)"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "placeholder": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "placeholder": "",
+          "value": "2026-08-17 14:03:04"
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "login_id",
+          "id": "login_id",
+          "placeholder": "아이디",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "password",
+          "name": "login_passwd",
+          "id": "login_passwd",
+          "placeholder": "비밀번호",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "submit",
+          "name": "submit",
+          "id": "",
+          "placeholder": "",
+          "value": "로그인"
+        }
+      ],
+      "buttons": [
+        {
+          "text": "취소",
+          "className": "btn btn-default"
+        },
+        {
+          "text": "진급처리(학적변경)",
+          "className": "btn btn-danger"
+        },
+        {
+          "text": "로그인",
+          "className": "go_btn"
+        },
+        {
+          "text": "×",
+          "className": "close"
+        },
+        {
+          "text": "확인",
+          "className": "btn btn-primary"
+        }
+      ]
+    }
+  },
+  {
+    "name": "student_modify",
+    "url": "https://www.dbdbschool.kr/sczigi/student/modify/num/4841970/p/1/sn/3267/sof/grade/sot/asc",
+    "title": "학생 정보 수정",
+    "currentUrl": "https://www.dbdbschool.kr/sczigi/student/modify/num/4841970/p/1/sn/3267/sof/grade/sot/asc",
+    "screenshotPath": "scratch/btn_page_student_modify.png",
+    "domSummary": {
+      "title": "학생수정 - 학생관리 - 학교관리",
+      "h1": "학교관리",
+      "heading": "학생관리",
+      "formInputs": [
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "placeholder": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "placeholder": "",
+          "value": "2026-08-17 14:03:05"
+        },
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "name": "mem_grade",
+          "id": "mem_grade",
+          "value": "1",
+          "options": [
+            {
+              "value": "",
+              "text": "=선택="
+            },
+            {
+              "value": "1",
+              "text": "1"
+            },
+            {
+              "value": "2",
+              "text": "2"
+            },
+            {
+              "value": "3",
+              "text": "3"
+            },
+            {
+              "value": "4",
+              "text": "4"
+            },
+            {
+              "value": "5",
+              "text": "5"
+            },
+            {
+              "value": "6",
+              "text": "6"
+            }
+          ]
+        },
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "name": "mem_class",
+          "id": "mem_class",
+          "value": "1",
+          "options": [
+            {
+              "value": "",
+              "text": "=선택="
+            },
+            {
+              "value": "1",
+              "text": "1"
+            },
+            {
+              "value": "2",
+              "text": "2"
+            },
+            {
+              "value": "3",
+              "text": "3"
+            },
+            {
+              "value": "4",
+              "text": "4"
+            },
+            {
+              "value": "5",
+              "text": "5"
+            },
+            {
+              "value": "6",
+              "text": "6"
+            },
+            {
+              "value": "7",
+              "text": "7"
+            },
+            {
+              "value": "8",
+              "text": "8"
+            },
+            {
+              "value": "9",
+              "text": "9"
+            },
+            {
+              "value": "10",
+              "text": "10"
+            },
+            {
+              "value": "11",
+              "text": "11"
+            },
+            {
+              "value": "12",
+              "text": "12"
+            }
+          ]
+        },
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "name": "mem_bunho",
+          "id": "mem_bunho",
+          "value": "1",
+          "options": [
+            {
+              "value": "",
+              "text": "=선택="
+            },
+            {
+              "value": "1",
+              "text": "1"
+            },
+            {
+              "value": "2",
+              "text": "2"
+            },
+            {
+              "value": "3",
+              "text": "3"
+            },
+            {
+              "value": "4",
+              "text": "4"
+            },
+            {
+              "value": "5",
+              "text": "5"
+            },
+            {
+              "value": "6",
+              "text": "6"
+            },
+            {
+              "value": "7",
+              "text": "7"
+            },
+            {
+              "value": "8",
+              "text": "8"
+            },
+            {
+              "value": "9",
+              "text": "9"
+            },
+            {
+              "value": "10",
+              "text": "10"
+            },
+            {
+              "value": "11",
+              "text": "11"
+            },
+            {
+              "value": "12",
+              "text": "12"
+            },
+            {
+              "value": "13",
+              "text": "13"
+            },
+            {
+              "value": "14",
+              "text": "14"
+            },
+            {
+              "value": "15",
+              "text": "15"
+            },
+            {
+              "value": "16",
+              "text": "16"
+            },
+            {
+              "value": "17",
+              "text": "17"
+            },
+            {
+              "value": "18",
+              "text": "18"
+            },
+            {
+              "value": "19",
+              "text": "19"
+            },
+            {
+              "value": "20",
+              "text": "20"
+            },
+            {
+              "value": "21",
+              "text": "21"
+            },
+            {
+              "value": "22",
+              "text": "22"
+            },
+            {
+              "value": "23",
+              "text": "23"
+            },
+            {
+              "value": "24",
+              "text": "24"
+            },
+            {
+              "value": "25",
+              "text": "25"
+            },
+            {
+              "value": "26",
+              "text": "26"
+            },
+            {
+              "value": "27",
+              "text": "27"
+            },
+            {
+              "value": "28",
+              "text": "28"
+            },
+            {
+              "value": "29",
+              "text": "29"
+            },
+            {
+              "value": "30",
+              "text": "30"
+            },
+            {
+              "value": "31",
+              "text": "31"
+            },
+            {
+              "value": "32",
+              "text": "32"
+            },
+            {
+              "value": "33",
+              "text": "33"
+            },
+            {
+              "value": "34",
+              "text": "34"
+            },
+            {
+              "value": "35",
+              "text": "35"
+            },
+            {
+              "value": "36",
+              "text": "36"
+            },
+            {
+              "value": "37",
+              "text": "37"
+            },
+            {
+              "value": "38",
+              "text": "38"
+            },
+            {
+              "value": "39",
+              "text": "39"
+            },
+            {
+              "value": "40",
+              "text": "40"
+            },
+            {
+              "value": "41",
+              "text": "41"
+            },
+            {
+              "value": "42",
+              "text": "42"
+            },
+            {
+              "value": "43",
+              "text": "43"
+            },
+            {
+              "value": "44",
+              "text": "44"
+            },
+            {
+              "value": "45",
+              "text": "45"
+            },
+            {
+              "value": "46",
+              "text": "46"
+            },
+            {
+              "value": "47",
+              "text": "47"
+            },
+            {
+              "value": "48",
+              "text": "48"
+            },
+            {
+              "value": "49",
+              "text": "49"
+            },
+            {
+              "value": "50",
+              "text": "50"
+            },
+            {
+              "value": "51",
+              "text": "51"
+            },
+            {
+              "value": "52",
+              "text": "52"
+            },
+            {
+              "value": "53",
+              "text": "53"
+            },
+            {
+              "value": "54",
+              "text": "54"
+            },
+            {
+              "value": "55",
+              "text": "55"
+            },
+            {
+              "value": "56",
+              "text": "56"
+            },
+            {
+              "value": "57",
+              "text": "57"
+            },
+            {
+              "value": "58",
+              "text": "58"
+            },
+            {
+              "value": "59",
+              "text": "59"
+            },
+            {
+              "value": "60",
+              "text": "60"
+            },
+            {
+              "value": "61",
+              "text": "61"
+            },
+            {
+              "value": "62",
+              "text": "62"
+            },
+            {
+              "value": "63",
+              "text": "63"
+            },
+            {
+              "value": "64",
+              "text": "64"
+            },
+            {
+              "value": "65",
+              "text": "65"
+            },
+            {
+              "value": "66",
+              "text": "66"
+            },
+            {
+              "value": "67",
+              "text": "67"
+            },
+            {
+              "value": "68",
+              "text": "68"
+            },
+            {
+              "value": "69",
+              "text": "69"
+            },
+            {
+              "value": "70",
+              "text": "70"
+            },
+            {
+              "value": "71",
+              "text": "71"
+            },
+            {
+              "value": "72",
+              "text": "72"
+            },
+            {
+              "value": "73",
+              "text": "73"
+            },
+            {
+              "value": "74",
+              "text": "74"
+            },
+            {
+              "value": "75",
+              "text": "75"
+            },
+            {
+              "value": "76",
+              "text": "76"
+            },
+            {
+              "value": "77",
+              "text": "77"
+            },
+            {
+              "value": "78",
+              "text": "78"
+            },
+            {
+              "value": "79",
+              "text": "79"
+            },
+            {
+              "value": "80",
+              "text": "80"
+            },
+            {
+              "value": "81",
+              "text": "81"
+            },
+            {
+              "value": "82",
+              "text": "82"
+            },
+            {
+              "value": "83",
+              "text": "83"
+            },
+            {
+              "value": "84",
+              "text": "84"
+            },
+            {
+              "value": "85",
+              "text": "85"
+            },
+            {
+              "value": "86",
+              "text": "86"
+            },
+            {
+              "value": "87",
+              "text": "87"
+            },
+            {
+              "value": "88",
+              "text": "88"
+            },
+            {
+              "value": "89",
+              "text": "89"
+            },
+            {
+              "value": "90",
+              "text": "90"
+            },
+            {
+              "value": "91",
+              "text": "91"
+            },
+            {
+              "value": "92",
+              "text": "92"
+            },
+            {
+              "value": "93",
+              "text": "93"
+            },
+            {
+              "value": "94",
+              "text": "94"
+            },
+            {
+              "value": "95",
+              "text": "95"
+            },
+            {
+              "value": "96",
+              "text": "96"
+            },
+            {
+              "value": "97",
+              "text": "97"
+            },
+            {
+              "value": "98",
+              "text": "98"
+            },
+            {
+              "value": "99",
+              "text": "99"
+            }
+          ]
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "mem_name",
+          "id": "mem_name",
+          "placeholder": "",
+          "value": "김도하"
+        },
+        {
+          "tag": "INPUT",
+          "type": "password",
+          "name": "mem_passwd",
+          "id": "mem_passwd",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "name": "mem_hp_1",
+          "id": "mem_hp_1",
+          "value": "010",
+          "options": [
+            {
+              "value": "",
+              "text": "선택"
+            },
+            {
+              "value": "010",
+              "text": "010"
+            },
+            {
+              "value": "011",
+              "text": "011"
+            },
+            {
+              "value": "012",
+              "text": "012"
+            },
+            {
+              "value": "016",
+              "text": "016"
+            },
+            {
+              "value": "017",
+              "text": "017"
+            },
+            {
+              "value": "018",
+              "text": "018"
+            },
+            {
+              "value": "019",
+              "text": "019"
+            },
+            {
+              "value": "090",
+              "text": "090"
+            },
+            {
+              "value": "091",
+              "text": "091"
+            },
+            {
+              "value": "092",
+              "text": "092"
+            },
+            {
+              "value": "093",
+              "text": "093"
+            },
+            {
+              "value": "094",
+              "text": "094"
+            },
+            {
+              "value": "096",
+              "text": "096"
+            },
+            {
+              "value": "098",
+              "text": "098"
+            },
+            {
+              "value": "etc",
+              "text": "직접입력"
+            }
+          ]
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "mem_hp_1_etc",
+          "id": "mem_hp_1_etc",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "mem_hp_2",
+          "id": "mem_hp_2",
+          "placeholder": "",
+          "value": "2218"
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "mem_hp_3",
+          "id": "mem_hp_3",
+          "placeholder": "",
+          "value": "7705"
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "mem_pa_name",
+          "id": "mem_pa_name",
+          "placeholder": "보호자 성명",
+          "value": "윤보미"
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "bigo",
+          "id": "bigo",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "radio",
+          "name": "mem_status",
+          "id": "mem_status_1",
+          "placeholder": "",
+          "value": "1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "radio",
+          "name": "mem_status",
+          "id": "mem_status_0",
+          "placeholder": "",
+          "value": "0"
+        },
+        {
+          "tag": "INPUT",
+          "type": "button",
+          "name": "",
+          "id": "",
+          "placeholder": "",
+          "value": "목록보기"
+        },
+        {
+          "tag": "INPUT",
+          "type": "submit",
+          "name": "",
+          "id": "",
+          "placeholder": "",
+          "value": "수정"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "placeholder": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "placeholder": "",
+          "value": "2026-08-17 14:03:05"
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "login_id",
+          "id": "login_id",
+          "placeholder": "아이디",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "password",
+          "name": "login_passwd",
+          "id": "login_passwd",
+          "placeholder": "비밀번호",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "submit",
+          "name": "submit",
+          "id": "",
+          "placeholder": "",
+          "value": "로그인"
+        }
+      ],
+      "buttons": [
+        {
+          "text": "목록보기",
+          "className": "btn btn-default"
+        },
+        {
+          "text": "수정",
+          "className": "btn btn-danger"
+        },
+        {
+          "text": "로그인",
+          "className": "go_btn"
+        },
+        {
+          "text": "×",
+          "className": "close"
+        },
+        {
+          "text": "확인",
+          "className": "btn btn-primary"
+        }
+      ]
+    }
+  },
+  {
+    "name": "sms_tel_help",
+    "url": "https://www.dbdbschool.kr/sczigi/sms_tel/help/p/1/sn/3267",
+    "title": "발신번호 등록 안내 및 서식",
+    "currentUrl": "https://www.dbdbschool.kr/sczigi/sms_tel/help/p/1/sn/3267",
+    "screenshotPath": "scratch/btn_page_sms_tel_help.png",
+    "domSummary": {
+      "title": "발신번호등록 안내 - 문자관리 > 발신번호관리 - 학교관리",
+      "h1": "학교관리",
+      "heading": "문자관리 > 발신번호관리",
+      "formInputs": [
+        {
+          "tag": "INPUT",
+          "type": "checkbox",
+          "name": "agree",
+          "id": "agree",
+          "placeholder": "",
+          "value": "1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "button",
+          "name": "",
+          "id": "",
+          "placeholder": "",
+          "value": "목록"
+        },
+        {
+          "tag": "INPUT",
+          "type": "submit",
+          "name": "",
+          "id": "",
+          "placeholder": "",
+          "value": "발신번호등록"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "csrf_test_name",
+          "id": "",
+          "placeholder": "",
+          "value": "4c3ea9ccf4b9fc499840e99f31040ef1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "form_open_date_use_chk_csrf",
+          "id": "",
+          "placeholder": "",
+          "value": "2026-08-17 14:03:06"
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "name": "login_id",
+          "id": "login_id",
+          "placeholder": "아이디",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "password",
+          "name": "login_passwd",
+          "id": "login_passwd",
+          "placeholder": "비밀번호",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "submit",
+          "name": "submit",
+          "id": "",
+          "placeholder": "",
+          "value": "로그인"
+        }
+      ],
+      "buttons": [
+        {
+          "text": "목록",
+          "className": "btn btn-default"
+        },
+        {
+          "text": "발신번호등록",
+          "className": "btn btn-primary"
+        },
+        {
+          "text": "로그인",
+          "className": "go_btn"
+        },
+        {
+          "text": "×",
+          "className": "close"
+        },
+        {
+          "text": "확인",
+          "className": "btn btn-primary"
+        }
+      ]
+    }
+  }
+]

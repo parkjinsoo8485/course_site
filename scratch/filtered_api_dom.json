@@ -1,0 +1,1026 @@
+{
+  "generatedAt": "2026-08-17T12:33:51.931Z",
+  "targetUrl": "https://www.dbdbschool.kr/af/ad_app/lists/sn/3267",
+  "totalEntries": 16,
+  "filteredCount": 5,
+  "entries": [
+    {
+      "url": "https://www.dbdbschool.kr/af/ad_app/lists/sn/3267",
+      "method": "GET",
+      "status": 307,
+      "resourceType": "document",
+      "mimeType": "text/html; charset=utf-8",
+      "request": {
+        "queryString": [],
+        "headers": [
+          {
+            "name": ":authority",
+            "value": "www.dbdbschool.kr"
+          },
+          {
+            "name": ":method",
+            "value": "GET"
+          },
+          {
+            "name": ":path",
+            "value": "/af/ad_app/lists/sn/3267"
+          },
+          {
+            "name": ":scheme",
+            "value": "https"
+          },
+          {
+            "name": "accept",
+            "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+          },
+          {
+            "name": "accept-encoding",
+            "value": "gzip, deflate, br, zstd"
+          },
+          {
+            "name": "accept-language",
+            "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+          },
+          {
+            "name": "cookie",
+            "value": "aws-waf-token=46eb60c9-40f8-4b94-a95b-0eb716dd28e2:AgoAtw8M3+QaAAAA:yrEMM7HSf97UCqic1v8QEUYs/X/5xyzGHriw1bRVQBU9u3g1XayhNRkxHbUu7rY6t+KtPJ0+XPQ0uUMQwQ3m4pU6vvzRt5DjESgoimfZK629tZFynpFV39hS6MOEhakP/nPE+5MEueL/kZOeAFgas9nPbHanUMvAxp9CeyBYTTRABukHV88x4YNg1YCIjDE0BBAqUb20HqJuZdbrMIaOEuIaBIG58u5vdx4+D1Rfk4sD0Lq2TdgCc5f5xsvOq8qGOGgShb0nyYQHdUo=; csrf_cookie_name=4c3ea9ccf4b9fc499840e99f31040ef1; csrf_cookie_name_uptime=20260817122903; xm_cus_ugnum=36a9948dd92926816d9a0b61f02831f58ab9ed4aafb8ee6bdd970d5b632f79f850753b269eb0edeb3ed2f21cf773cd5c60313a80812e1213414b59bd13933504QqBiSyIekk3BAwA6mMSqRyUc2c8VtblXOQyXZ5bju0yHWtTFmb2wuPlD1iuX9mhdXy117pgL2sY%2BRc5dLbEWzCCx8j5g7hQgpYs6PQ65vVo%3D; xm_session=4316ddc66b1d1106058e2b6cbefdc6c3; aws-waf-token=46eb60c9-40f8-4b94-a95b-0eb716dd28e2:AgoAtw8M3+QaAAAA:yrEMM7HSf97UCqic1v8QEUYs/X/5xyzGHriw1bRVQBU9u3g1XayhNRkxHbUu7rY6t+KtPJ0+XPQ0uUMQwQ3m4pU6vvzRt5DjESgoimfZK629tZFynpFV39hS6MOEhakP/nPE+5MEueL/kZOeAFgas9nPbHanUMvAxp9CeyBYTTRABukHV88x4YNg1YCIjDE0BBAqUb20HqJuZdbrMIaOEuIaBIG58u5vdx4+D1Rfk4sD0Lq2TdgCc5f5xsvOq8qGOGgShb0nyYQHdUo=; csrf_cookie_name=4c3ea9ccf4b9fc499840e99f31040ef1; csrf_cookie_name_uptime=20260817122903; xm_cus_ugnum=36a9948dd92926816d9a0b61f02831f58ab9ed4aafb8ee6bdd970d5b632f79f850753b269eb0edeb3ed2f21cf773cd5c60313a80812e1213414b59bd13933504QqBiSyIekk3BAwA6mMSqRyUc2c8VtblXOQyXZ5bju0yHWtTFmb2wuPlD1iuX9mhdXy117pgL2sY%2BRc5dLbEWzCCx8j5g7hQgpYs6PQ65vVo%3D; xm_session=4316ddc66b1d1106058e2b6cbefdc6c3"
+          },
+          {
+            "name": "priority",
+            "value": "u=0, i"
+          },
+          {
+            "name": "sec-ch-ua",
+            "value": "\"Chromium\";v=\"151\", \"Not=A?Brand\";v=\"99\""
+          },
+          {
+            "name": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "name": "sec-ch-ua-platform",
+            "value": "\"Windows\""
+          },
+          {
+            "name": "sec-fetch-dest",
+            "value": "document"
+          },
+          {
+            "name": "sec-fetch-mode",
+            "value": "navigate"
+          },
+          {
+            "name": "sec-fetch-site",
+            "value": "none"
+          },
+          {
+            "name": "sec-fetch-user",
+            "value": "?1"
+          },
+          {
+            "name": "upgrade-insecure-requests",
+            "value": "1"
+          },
+          {
+            "name": "user-agent",
+            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+          }
+        ],
+        "postData": null
+      },
+      "response": {
+        "status": 307,
+        "statusText": "",
+        "headers": [
+          {
+            "name": "cache-control",
+            "value": "no-store, no-cache, must-revalidate"
+          },
+          {
+            "name": "content-length",
+            "value": "0"
+          },
+          {
+            "name": "content-type",
+            "value": "text/html; charset=utf-8"
+          },
+          {
+            "name": "date",
+            "value": "Mon, 17 Aug 2026 12:32:43 GMT"
+          },
+          {
+            "name": "expires",
+            "value": "Thu, 19 Nov 1981 08:52:00 GMT"
+          },
+          {
+            "name": "location",
+            "value": "https://www.dbdbschool.kr/member/login/sn/3267"
+          },
+          {
+            "name": "pragma",
+            "value": "no-cache"
+          },
+          {
+            "name": "server",
+            "value": "Apache"
+          },
+          {
+            "name": "set-cookie",
+            "value": "csrf_cookie_name=4c3ea9ccf4b9fc499840e99f31040ef1; expires=Mon, 17 Aug 2026 15:32:43 GMT; Max-Age=10800; path=/; domain=www.dbdbschool.kr; SameSite=Strict"
+          },
+          {
+            "name": "set-cookie",
+            "value": "csrf_cookie_name_uptime=20260817213243; expires=Mon, 17 Aug 2026 15:32:43 GMT; Max-Age=10800; path=/; domain=www.dbdbschool.kr; SameSite=Strict"
+          },
+          {
+            "name": "set-cookie",
+            "value": "xm_session=9940cec4b392fa2360fe6d539f0021f6; path=/; domain=www.dbdbschool.kr; HttpOnly; SameSite=Lax"
+          }
+        ],
+        "body": ""
+      },
+      "time": 81.839,
+      "startedDateTime": "2026-08-17T12:32:42.282Z"
+    },
+    {
+      "url": "https://www.dbdbschool.kr/member/login/sn/3267",
+      "method": "GET",
+      "status": 200,
+      "resourceType": "document",
+      "mimeType": "text/html; charset=utf-8",
+      "request": {
+        "queryString": [],
+        "headers": [
+          {
+            "name": ":authority",
+            "value": "www.dbdbschool.kr"
+          },
+          {
+            "name": ":method",
+            "value": "GET"
+          },
+          {
+            "name": ":path",
+            "value": "/member/login/sn/3267"
+          },
+          {
+            "name": ":scheme",
+            "value": "https"
+          },
+          {
+            "name": "accept",
+            "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+          },
+          {
+            "name": "accept-encoding",
+            "value": "gzip, deflate, br, zstd"
+          },
+          {
+            "name": "accept-language",
+            "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+          },
+          {
+            "name": "cookie",
+            "value": "aws-waf-token=46eb60c9-40f8-4b94-a95b-0eb716dd28e2:AgoAtw8M3+QaAAAA:yrEMM7HSf97UCqic1v8QEUYs/X/5xyzGHriw1bRVQBU9u3g1XayhNRkxHbUu7rY6t+KtPJ0+XPQ0uUMQwQ3m4pU6vvzRt5DjESgoimfZK629tZFynpFV39hS6MOEhakP/nPE+5MEueL/kZOeAFgas9nPbHanUMvAxp9CeyBYTTRABukHV88x4YNg1YCIjDE0BBAqUb20HqJuZdbrMIaOEuIaBIG58u5vdx4+D1Rfk4sD0Lq2TdgCc5f5xsvOq8qGOGgShb0nyYQHdUo=; csrf_cookie_name=4c3ea9ccf4b9fc499840e99f31040ef1; xm_cus_ugnum=36a9948dd92926816d9a0b61f02831f58ab9ed4aafb8ee6bdd970d5b632f79f850753b269eb0edeb3ed2f21cf773cd5c60313a80812e1213414b59bd13933504QqBiSyIekk3BAwA6mMSqRyUc2c8VtblXOQyXZ5bju0yHWtTFmb2wuPlD1iuX9mhdXy117pgL2sY%2BRc5dLbEWzCCx8j5g7hQgpYs6PQ65vVo%3D; aws-waf-token=46eb60c9-40f8-4b94-a95b-0eb716dd28e2:AgoAtw8M3+QaAAAA:yrEMM7HSf97UCqic1v8QEUYs/X/5xyzGHriw1bRVQBU9u3g1XayhNRkxHbUu7rY6t+KtPJ0+XPQ0uUMQwQ3m4pU6vvzRt5DjESgoimfZK629tZFynpFV39hS6MOEhakP/nPE+5MEueL/kZOeAFgas9nPbHanUMvAxp9CeyBYTTRABukHV88x4YNg1YCIjDE0BBAqUb20HqJuZdbrMIaOEuIaBIG58u5vdx4+D1Rfk4sD0Lq2TdgCc5f5xsvOq8qGOGgShb0nyYQHdUo=; csrf_cookie_name=4c3ea9ccf4b9fc499840e99f31040ef1; csrf_cookie_name_uptime=20260817122903; xm_cus_ugnum=36a9948dd92926816d9a0b61f02831f58ab9ed4aafb8ee6bdd970d5b632f79f850753b269eb0edeb3ed2f21cf773cd5c60313a80812e1213414b59bd13933504QqBiSyIekk3BAwA6mMSqRyUc2c8VtblXOQyXZ5bju0yHWtTFmb2wuPlD1iuX9mhdXy117pgL2sY%2BRc5dLbEWzCCx8j5g7hQgpYs6PQ65vVo%3D; xm_session=4316ddc66b1d1106058e2b6cbefdc6c3; csrf_cookie_name_uptime=20260817213243; xm_session=9940cec4b392fa2360fe6d539f0021f6"
+          },
+          {
+            "name": "priority",
+            "value": "u=0, i"
+          },
+          {
+            "name": "sec-ch-ua",
+            "value": "\"Chromium\";v=\"151\", \"Not=A?Brand\";v=\"99\""
+          },
+          {
+            "name": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "name": "sec-ch-ua-platform",
+            "value": "\"Windows\""
+          },
+          {
+            "name": "sec-fetch-dest",
+            "value": "document"
+          },
+          {
+            "name": "sec-fetch-mode",
+            "value": "navigate"
+          },
+          {
+            "name": "sec-fetch-site",
+            "value": "none"
+          },
+          {
+            "name": "sec-fetch-user",
+            "value": "?1"
+          },
+          {
+            "name": "upgrade-insecure-requests",
+            "value": "1"
+          },
+          {
+            "name": "user-agent",
+            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+          }
+        ],
+        "postData": null
+      },
+      "response": {
+        "status": 200,
+        "statusText": "",
+        "headers": [
+          {
+            "name": "cache-control",
+            "value": "no-store, no-cache, must-revalidate"
+          },
+          {
+            "name": "content-type",
+            "value": "text/html; charset=utf-8"
+          },
+          {
+            "name": "date",
+            "value": "Mon, 17 Aug 2026 12:32:43 GMT"
+          },
+          {
+            "name": "expires",
+            "value": "Thu, 19 Nov 1981 08:52:00 GMT"
+          },
+          {
+            "name": "pragma",
+            "value": "no-cache"
+          },
+          {
+            "name": "server",
+            "value": "Apache"
+          },
+          {
+            "name": "set-cookie",
+            "value": "csrf_cookie_name=4c3ea9ccf4b9fc499840e99f31040ef1; expires=Mon, 17 Aug 2026 15:32:43 GMT; Max-Age=10800; path=/; domain=www.dbdbschool.kr; SameSite=Strict"
+          },
+          {
+            "name": "set-cookie",
+            "value": "csrf_cookie_name_uptime=20260817213243; expires=Mon, 17 Aug 2026 15:32:43 GMT; Max-Age=10800; path=/; domain=www.dbdbschool.kr; SameSite=Strict"
+          },
+          {
+            "name": "set-cookie",
+            "value": "xm_session=4d60c31532f746eeef4a2fa487236aee; path=/; domain=www.dbdbschool.kr; HttpOnly; SameSite=Lax"
+          }
+        ],
+        "body": "<!DOCTYPE html>\r\n<html lang=\"ko\">\r\n  <head>\r\n\t<meta charset=\"utf-8\">\r\n\t<meta name=\"description\" content=\"늘봄학교,방과후학교,자유학기제,우유신청 등 수강신청 및 학교 업무 경감 프로그램\" />\r\n\t<meta name=\"keywords\" content=\"방과후, 늘봄, 늘봄학교, 방과후학교, 자유학기제, 자유학년제, 방과후학교 신청, 방과후학교 수강신청, 방과후 신청, 방과후 수강신청, 늘봄 신청, 늘봄 수강신청, 늘봄학교 신청, 늘봄학교 수강신청, 자유학기제 신청, 자유학기제 수강신청, 자유학년제 신청, 자유학년제 수강신청, 우유신청\" />\r\n\t<meta name=\"author\" content=\"엑스메카\" />\t\t\r\n\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\" />\r\n\t<meta name=\"viewport\" content=\"user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width\" />\r\n\t<link rel=\"apple-touch-icon-precomposed\"  href=\"https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/images/mobile_ico_2.png\" />\r\n\t<link rel=\"apple-touch-icon-precomposed\" sizes=\"114x114\" href=\"https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/images/mobile_ico_2.png\" />\r\n\t<link rel=\"shortcut icon\" type=\"image/x-icon\" href=\"https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/images/mobile_ico_2.png\">\r\n\t<title>늘봄학교 - 로그인</title>\r\n\t<link href=\"https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/bootstrap.css?23111301\" rel=\"stylesheet\" type=\"text/css\" />\r\n\t<link href=\"https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/bootstrap-theme.css\" rel=\"stylesheet\" type=\"text/css\" />\r\n\t<link href=\"https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/ui/jquery-ui.css\" rel=\"stylesheet\" type=\"text/css\" />\r\n\t<link href=\"https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/default.css?20260612\" rel=\"stylesheet\" type=\"text/css\" />\r\n\t<link href=\"https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/user/default.css?26063001\" rel=\"stylesheet\">\r\n\t<link href=\"https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/icon/css/font-awesome.css\" rel=\"stylesheet\" type=\"text/css\" />\r\n\t<script type=\"text/javascript\" src=\"https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/jquery.js\"></script>\r\n\t<script type=\"text/javascript\" src=\"https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/ui/jquery-ui.js\"></script>\r\n\t<script type=\"text/javascript\" src=\"https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/bootstrap.js\"></script>\r\n\t<script type=\"text/javascript\" src=\"https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/common.js?211207\"></script>\r\n\t\t\t<!--[if lt IE 9]>\r\n\t\t\t<link href=\"https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/ie9.css\" rel=\"stylesheet\">\r\n\t\t<![endif]-->\r\n\r\n\t</head>\r\n\t<body><form action=\"https://www.dbdbschool.kr/member/login/sn/3267\" method=\"post\" accept-charset=\"utf-8\" name=\"fm_edit\" id=\"fm_edit\" onsubmit=\"return fm_edit_check(this, event);\" autocomplete=\"off\" ><div style=\"display:none\">\n\t<input type=\"hidden\" id=\"csrf_test_name\" name=\"csrf_test_name\" value=\"4c3ea9ccf4b9fc499840e99f31040ef1\" />\n\t<input type=\"hidden\" name=\"form_open_date_use_chk_csrf\" value=\"2026-08-17 21:32:43\" />\n\t<input type=\"hidden\" id=\"login_user_grp\" name=\"login_user_grp\" value=\"2\" />\n\t<input type=\"hidden\" id=\"res_ser_date\" name=\"res_ser_date\" value=\"2026-08-17 21:32:43\" />\n\t<input type=\"hidden\" id=\"ready_cli_date\" name=\"ready_cli_date\" value=\"\" />\n\t<input type=\"hidden\" id=\"ready_cli_gmt\" name=\"ready_cli_gmt\" value=\"\" />\n</div>\n<div class=\"login\">\n\t<h1>\n\t<span class=\"s_name\">광주풍향초등학교</span><br />늘봄학교\t<span class=\"s_servie_box\"><a href=\"#none;\" class=\"off btn_icon\"></a>\n\t\t<div class=\"m_box\">\n\t\t\t<span class=\"arrow\"></span>\n\t\t\t<ul>\n\t\t\n\t\t\t\t<li class=\"service2\"><a href=\"https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267\">늘봄학교</a></li>\n\t\t\t</ul>\n\t\t\t<!-- p class=\"more\"><a href=\"https://www.dbdbschool.kr/\">다른 서비스 둘러보기 <i class=\"fa fa-share\"></i></a></p -->\n\t\t</div>\n\t</span>\n\t</h1>\n\t<div class=\"login_box\">\n\t\t<ul class=\"choice_user\">\n\t\t\t<li class=\"login_user_grp1\" style=\"\"><a href=\"#none\" class=\"\" value=\"1\">교직원</a></li>\n\t\t\t<li class=\"login_user_grp2\" style=\"\"><a href=\"#none\" class=\"\" value=\"2\">학생</a></li>\n\t\t\t<li class=\"login_user_grp4\" style=\"\"><a href=\"#none\" class=\"\" value=\"4\">강사</a></li>\n\t\t</ul>\n\t\t<div class=\"login_user_grp1 user_off\"> \n\t\t\t<ul class=\"in_box\" style=\"border-top:1px #cccccc solid;\">\n\t\t\t\t<li>\n\t\t\t\t\t<i class=\"fa fa-user\"><span>아이디</span></i><input type=\"text\" name=\"login_id\" id=\"login_id\" value=\"\" maxlength=\"15\" size=\"15\" title=\"아이디\" placeholder=\"아이디를 입력하세요.\" class=\"form-control\" style=\"ime-mode:active;\" autocomplete=\"off\" />\n\t\t\t\t\t<div class=\"error_msg\"></div>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<i class=\"fa fa-key\"><span>비밀번호</span></i><input type=\"password\" name=\"login_passwd\" value=\"\" id=\"login_passwd\" maxlength=\"16\" size=\"16\" title=\"비밀번호\"  placeholder=\"비밀번호를 입력하세요.\" class=\"form-control\" autocomplete=\"off\"  />\n\t\t\t\t\t<div class=\"error_msg\"></div>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\t\t<div class=\"login_user_grp2 user_off\"> \n\t\t\t<ul class=\"in_box\" style=\"border-top:1px #cccccc solid;\">\n\t\t\t\t<li>\n\t\n\t\t\t\t\t<div id=\"stu_log_top_txt\">\n\t\t\t\t\t\t* 학년, 반, 번호, 이름 입력 후 초기비밀번호 1234, 변경했을 경우 변경된 비밀번호 입력 로그인<br />\r\n* 반드시 강사와 소통 가능한 연락처 입력, 공개해 주시기 바랍니다.<br />\r\n* 2학기 신청 기간:{8.21.(금), 09:00~23.(일), 23:59까지}내에... [TRUNCATED_FOR_LIGHTWEIGHT]"
+      },
+      "time": 33.804,
+      "startedDateTime": "2026-08-17T12:32:42.350Z"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/jquery.js",
+      "method": "GET",
+      "status": 200,
+      "resourceType": "script",
+      "mimeType": "text/javascript",
+      "request": {
+        "queryString": [],
+        "headers": [
+          {
+            "name": "Accept",
+            "value": "*/*"
+          },
+          {
+            "name": "Accept-Encoding",
+            "value": "gzip, deflate, br, zstd"
+          },
+          {
+            "name": "Accept-Language",
+            "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+          },
+          {
+            "name": "Connection",
+            "value": "keep-alive"
+          },
+          {
+            "name": "Host",
+            "value": "s3-ap-northeast-2.amazonaws.com"
+          },
+          {
+            "name": "Referer",
+            "value": "https://www.dbdbschool.kr/"
+          },
+          {
+            "name": "Sec-Fetch-Dest",
+            "value": "script"
+          },
+          {
+            "name": "Sec-Fetch-Mode",
+            "value": "no-cors"
+          },
+          {
+            "name": "Sec-Fetch-Site",
+            "value": "cross-site"
+          },
+          {
+            "name": "Sec-Fetch-Storage-Access",
+            "value": "active"
+          },
+          {
+            "name": "User-Agent",
+            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+          },
+          {
+            "name": "sec-ch-ua",
+            "value": "\"Chromium\";v=\"151\", \"Not=A?Brand\";v=\"99\""
+          },
+          {
+            "name": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "name": "sec-ch-ua-platform",
+            "value": "\"Windows\""
+          }
+        ],
+        "postData": null
+      },
+      "response": {
+        "status": 200,
+        "statusText": "OK",
+        "headers": [
+          {
+            "name": "Accept-Ranges",
+            "value": "bytes"
+          },
+          {
+            "name": "Content-Length",
+            "value": "282769"
+          },
+          {
+            "name": "Content-Type",
+            "value": "text/javascript"
+          },
+          {
+            "name": "Date",
+            "value": "Mon, 17 Aug 2026 12:32:44 GMT"
+          },
+          {
+            "name": "ETag",
+            "value": "\"bc0c1e51be47861204756ec679a51c14\""
+          },
+          {
+            "name": "Last-Modified",
+            "value": "Fri, 12 Jan 2018 06:26:36 GMT"
+          },
+          {
+            "name": "Server",
+            "value": "AmazonS3"
+          },
+          {
+            "name": "x-amz-id-2",
+            "value": "kzrtp/khLIVRyZYtJ8A+9jdMUcjDKbvgQ1IAmkb4keRKfNGqTsaxUbmiE51l2Qkjxe/7xsBkJMM="
+          },
+          {
+            "name": "x-amz-meta-gid",
+            "value": "502"
+          },
+          {
+            "name": "x-amz-meta-mode",
+            "value": "33252"
+          },
+          {
+            "name": "x-amz-meta-mtime",
+            "value": "1416883095"
+          },
+          {
+            "name": "x-amz-meta-uid",
+            "value": "501"
+          },
+          {
+            "name": "x-amz-request-id",
+            "value": "EJKD4A9D3C8Q2SC5"
+          }
+        ],
+        "body": "/*!\n * jQuery JavaScript Library v1.11.1\n * http://jquery.com/\n *\n * Includes Sizzle.js\n * http://sizzlejs.com/\n *\n * Copyright 2005, 2014 jQuery Foundation, Inc. and other contributors\n * Released under the MIT license\n * http://jquery.org/license\n *\n * Date: 2014-05-01T17:42Z\n */\n\n\n\n\n(function( global, factory ) {\n\n\tif ( typeof module === \"object\" && typeof module.exports === \"object\" ) {\n\t\t// For CommonJS and CommonJS-like environments where a proper window is present,\n\t\t// execute the factory and get jQuery\n\t\t// For environments that do not inherently posses a window with a document\n\t\t// (such as Node.js), expose a jQuery-making factory as module.exports\n\t\t// This accentuates the need for the creation of a real window\n\t\t// e.g. var jQuery = require(\"jquery\")(window);\n\t\t// See ticket #14549 for more info\n\t\tmodule.exports = global.document ?\n\t\t\tfactory( global, true ) :\n\t\t\tfunction( w ) {\n\t\t\t\tif ( !w.document ) {\n\t\t\t\t\tthrow new Error( \"jQuery requires a window with a document\" );\n\t\t\t\t}\n\t\t\t\treturn factory( w );\n\t\t\t};\n\t} else {\n\t\tfactory( global );\n\t}\n\n// Pass this if window is not defined yet\n}(typeof window !== \"undefined\" ? window : this, function( window, noGlobal ) {\n\n// Can't do this because several apps including ASP.NET trace\n// the stack via arguments.caller.callee and Firefox dies if\n// you try to trace through \"use strict\" call chains. (#13335)\n// Support: Firefox 18+\n//\n\nvar deletedIds = [];\n\nvar slice = deletedIds.slice;\n\nvar concat = deletedIds.concat;\n\nvar push = deletedIds.push;\n\nvar indexOf = deletedIds.indexOf;\n\nvar class2type = {};\n\nvar toString = class2type.toString;\n\nvar hasOwn = class2type.hasOwnProperty;\n\nvar support = {};\n\n\n\nvar\n\tversion = \"1.11.1\",\n\n\t// Define a local copy of jQuery\n\tjQuery = function( selector, context ) {\n\t\t// The jQuery object is actually just the init constructor 'enhanced'\n\t\t// Need init if jQuery is called (just allow error to be thrown if not included)\n\t\treturn new jQuery.fn.init( selector, context );\n\t},\n\n\t// Support: Android<4.1, IE<9\n\t// Make sure we trim BOM and NBSP\n\trtrim = /^[\\s\\uFEFF\\xA0]+|[\\s\\uFEFF\\xA0]+$/g,\n\n\t// Matches dashed string for camelizing\n\trmsPrefix = /^-ms-/,\n\trdashAlpha = /-([\\da-z])/gi,\n\n\t// Used by jQuery.camelCase as callback to replace()\n\tfcamelCase = function( all, letter ) {\n\t\treturn letter.toUpperCase();\n\t};\n\njQuery.fn = jQuery.prototype = {\n\t// The current version of jQuery being used\n\tjquery: version,\n\n\tconstructor: jQuery,\n\n\t// Start with an empty selector\n\tselector: \"\",\n\n\t// The default length of a jQuery object is 0\n\tlength: 0,\n\n\ttoArray: function() {\n\t\treturn slice.call( this );\n\t},\n\n\t// Get the Nth element in the matched element set OR\n\t// Get the whole matched element set as a clean array\n\tget: function( num ) {\n\t\treturn num != null ?\n\n\t\t\t// Return just the one element from the set\n\t\t\t( num < 0 ? this[ num + this.length ] : this[ num ] ) :\n\n\t\t\t// Return all the elements in a clean array\n\t\t\tslice.call( this );\n\t},\n\n\t// Take an array of elements and push it onto the stack\n\t// (returning the new matched element set)\n\tpushStack: function( elems ) {\n\n\t\t// Build a new jQuery matched element set\n\t\tvar ret = jQuery.merge( this.constructor(), elems );\n\n\t\t// Add the old object onto the stack (as a reference)\n\t\tret.prevObject = this;\n\t\tret.context = this.context;\n\n\t\t// Return the newly-formed element set\n\t\treturn ret;\n\t},\n\n\t// Execute a callback for every element in the matched set.\n\t// (You can seed the arguments with an array of args, but this is\n\t// only used internally.)\n\teach: function( callback, args ) {\n\t\treturn jQuery.each( this, callback, args );\n\t},\n\n\tmap: function( callback ) {\n\t\treturn this.pushStack( jQuery.map(this, function( elem, i ) {\n\t\t\treturn callback.call( elem, i, elem );\n\t\t}));\n\t},\n\n\tslice: function() {\n\t\treturn this.pushStack( slice.apply( this, arguments ) );\n\t},\n\n\tfirst: function() {\n\t\treturn this.eq( 0 );\n\t},\n\n\tlast: function() {\n\t\treturn this.eq( -1 );\n\t},\n\n\teq: function( i ) {\n\t\tvar len = this.length,\n\t\t\tj = +i + ( i < 0 ? len : 0 );\n\t\treturn this.pushStack( j >= 0 && j < len ? [ this[j] ] : [] );\n\t},\n\n\tend: function() {\n\t\treturn this.prevObject || this.constructor(null);\n\t},\n\n\t// For internal use only.\n\t// Behaves like an Array's method, not like a jQuery method.\n\tpush: push,\n\tsort: deletedIds.sort,\n\tsplice: deletedIds.splice\n};\n\njQuery.extend = jQuery.fn.extend = function() {\n\tvar src, copyIsArray, copy, name, options, clone,\n\t\ttarget = arguments[0] || {},\n\t\ti = 1,\n\t\tlength = arguments.length,\n\t\tdeep = false;\n\n\t// Handle a deep copy situation\n\tif ( typeof target === \"boolean\" ) {\n\t\tdeep = target;\n\n\t\t// skip the boolean and the target\n\t\ttarget = arguments[ i ] || {};\n\t\ti++;\n\t}\n\n\t// Handle case when target is a string or something (possible in deep copy)\n\tif ( typeof target !== \"object\" && !jQuery.isFunction(target) ) {\n\t\ttarget = {};\n\t}\n\n\t// extend jQuery itself if only one argument is passed\n\tif ( i === length ) {\n\t\ttarget = this;\n\t\ti--;\n\t}\n\n\tfor ( ; i < length; i++ ) {\n\t\t// Only deal with non-null/undef... [TRUNCATED_FOR_LIGHTWEIGHT]"
+      },
+      "time": 94.009,
+      "startedDateTime": "2026-08-17T12:32:42.400Z"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/ui/jquery-ui.js",
+      "method": "GET",
+      "status": 200,
+      "resourceType": "script",
+      "mimeType": "text/javascript",
+      "request": {
+        "queryString": [],
+        "headers": [
+          {
+            "name": "Accept",
+            "value": "*/*"
+          },
+          {
+            "name": "Accept-Encoding",
+            "value": "gzip, deflate, br, zstd"
+          },
+          {
+            "name": "Accept-Language",
+            "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+          },
+          {
+            "name": "Connection",
+            "value": "keep-alive"
+          },
+          {
+            "name": "Host",
+            "value": "s3-ap-northeast-2.amazonaws.com"
+          },
+          {
+            "name": "Referer",
+            "value": "https://www.dbdbschool.kr/"
+          },
+          {
+            "name": "Sec-Fetch-Dest",
+            "value": "script"
+          },
+          {
+            "name": "Sec-Fetch-Mode",
+            "value": "no-cors"
+          },
+          {
+            "name": "Sec-Fetch-Site",
+            "value": "cross-site"
+          },
+          {
+            "name": "Sec-Fetch-Storage-Access",
+            "value": "active"
+          },
+          {
+            "name": "User-Agent",
+            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+          },
+          {
+            "name": "sec-ch-ua",
+            "value": "\"Chromium\";v=\"151\", \"Not=A?Brand\";v=\"99\""
+          },
+          {
+            "name": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "name": "sec-ch-ua-platform",
+            "value": "\"Windows\""
+          }
+        ],
+        "postData": null
+      },
+      "response": {
+        "status": 200,
+        "statusText": "OK",
+        "headers": [
+          {
+            "name": "Accept-Ranges",
+            "value": "bytes"
+          },
+          {
+            "name": "Content-Length",
+            "value": "306216"
+          },
+          {
+            "name": "Content-Type",
+            "value": "text/javascript"
+          },
+          {
+            "name": "Date",
+            "value": "Mon, 17 Aug 2026 12:32:44 GMT"
+          },
+          {
+            "name": "ETag",
+            "value": "\"90e6932ead7d8c58a865e5a31f402628\""
+          },
+          {
+            "name": "Last-Modified",
+            "value": "Fri, 12 Jan 2018 06:26:39 GMT"
+          },
+          {
+            "name": "Server",
+            "value": "AmazonS3"
+          },
+          {
+            "name": "x-amz-id-2",
+            "value": "N4nJw3ghzDE5fZwAefzrrJ4fz16R5TZjlmHRsIsWOtCv+V+lWp9pBrZl1P0ZSpTQ/8yuBIM/JP4="
+          },
+          {
+            "name": "x-amz-meta-gid",
+            "value": "502"
+          },
+          {
+            "name": "x-amz-meta-mode",
+            "value": "33252"
+          },
+          {
+            "name": "x-amz-meta-mtime",
+            "value": "1413954726"
+          },
+          {
+            "name": "x-amz-meta-uid",
+            "value": "501"
+          },
+          {
+            "name": "x-amz-request-id",
+            "value": "EJK9R1BHBBC3AWVF"
+          }
+        ],
+        "body": "/*! jQuery UI - v1.11.2 - 2014-10-21\n* http://jqueryui.com\n* Includes: core.js, widget.js, mouse.js, position.js, draggable.js, droppable.js, resizable.js, selectable.js, sortable.js, datepicker.js, effect.js, effect-blind.js, effect-bounce.js, effect-clip.js, effect-drop.js, effect-explode.js, effect-fade.js, effect-fold.js, effect-highlight.js, effect-puff.js, effect-pulsate.js, effect-scale.js, effect-shake.js, effect-size.js, effect-slide.js, effect-transfer.js\n* Copyright 2014 jQuery Foundation and other contributors; Licensed MIT */\n\n(function( factory ) {\n\tif ( typeof define === \"function\" && define.amd ) {\n\n\t\t// AMD. Register as an anonymous module.\n\t\tdefine([ \"jquery\" ], factory );\n\t} else {\n\n\t\t// Browser globals\n\t\tfactory( jQuery );\n\t}\n}(function( $ ) {\n/*!\n * jQuery UI Core 1.11.2\n * http://jqueryui.com\n *\n * Copyright 2014 jQuery Foundation and other contributors\n * Released under the MIT license.\n * http://jquery.org/license\n *\n * http://api.jqueryui.com/category/ui-core/\n */\n\n\n// $.ui might exist from components with no dependencies, e.g., $.ui.position\n$.ui = $.ui || {};\n\n$.extend( $.ui, {\n\tversion: \"1.11.2\",\n\n\tkeyCode: {\n\t\tBACKSPACE: 8,\n\t\tCOMMA: 188,\n\t\tDELETE: 46,\n\t\tDOWN: 40,\n\t\tEND: 35,\n\t\tENTER: 13,\n\t\tESCAPE: 27,\n\t\tHOME: 36,\n\t\tLEFT: 37,\n\t\tPAGE_DOWN: 34,\n\t\tPAGE_UP: 33,\n\t\tPERIOD: 190,\n\t\tRIGHT: 39,\n\t\tSPACE: 32,\n\t\tTAB: 9,\n\t\tUP: 38\n\t}\n});\n\n// plugins\n$.fn.extend({\n\tscrollParent: function( includeHidden ) {\n\t\tvar position = this.css( \"position\" ),\n\t\t\texcludeStaticParent = position === \"absolute\",\n\t\t\toverflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/,\n\t\t\tscrollParent = this.parents().filter( function() {\n\t\t\t\tvar parent = $( this );\n\t\t\t\tif ( excludeStaticParent && parent.css( \"position\" ) === \"static\" ) {\n\t\t\t\t\treturn false;\n\t\t\t\t}\n\t\t\t\treturn overflowRegex.test( parent.css( \"overflow\" ) + parent.css( \"overflow-y\" ) + parent.css( \"overflow-x\" ) );\n\t\t\t}).eq( 0 );\n\n\t\treturn position === \"fixed\" || !scrollParent.length ? $( this[ 0 ].ownerDocument || document ) : scrollParent;\n\t},\n\n\tuniqueId: (function() {\n\t\tvar uuid = 0;\n\n\t\treturn function() {\n\t\t\treturn this.each(function() {\n\t\t\t\tif ( !this.id ) {\n\t\t\t\t\tthis.id = \"ui-id-\" + ( ++uuid );\n\t\t\t\t}\n\t\t\t});\n\t\t};\n\t})(),\n\n\tremoveUniqueId: function() {\n\t\treturn this.each(function() {\n\t\t\tif ( /^ui-id-\\d+$/.test( this.id ) ) {\n\t\t\t\t$( this ).removeAttr( \"id\" );\n\t\t\t}\n\t\t});\n\t}\n});\n\n// selectors\nfunction focusable( element, isTabIndexNotNaN ) {\n\tvar map, mapName, img,\n\t\tnodeName = element.nodeName.toLowerCase();\n\tif ( \"area\" === nodeName ) {\n\t\tmap = element.parentNode;\n\t\tmapName = map.name;\n\t\tif ( !element.href || !mapName || map.nodeName.toLowerCase() !== \"map\" ) {\n\t\t\treturn false;\n\t\t}\n\t\timg = $( \"img[usemap='#\" + mapName + \"']\" )[ 0 ];\n\t\treturn !!img && visible( img );\n\t}\n\treturn ( /input|select|textarea|button|object/.test( nodeName ) ?\n\t\t!element.disabled :\n\t\t\"a\" === nodeName ?\n\t\t\telement.href || isTabIndexNotNaN :\n\t\t\tisTabIndexNotNaN) &&\n\t\t// the element and all of its ancestors must be visible\n\t\tvisible( element );\n}\n\nfunction visible( element ) {\n\treturn $.expr.filters.visible( element ) &&\n\t\t!$( element ).parents().addBack().filter(function() {\n\t\t\treturn $.css( this, \"visibility\" ) === \"hidden\";\n\t\t}).length;\n}\n\n$.extend( $.expr[ \":\" ], {\n\tdata: $.expr.createPseudo ?\n\t\t$.expr.createPseudo(function( dataName ) {\n\t\t\treturn function( elem ) {\n\t\t\t\treturn !!$.data( elem, dataName );\n\t\t\t};\n\t\t}) :\n\t\t// support: jQuery <1.8\n\t\tfunction( elem, i, match ) {\n\t\t\treturn !!$.data( elem, match[ 3 ] );\n\t\t},\n\n\tfocusable: function( element ) {\n\t\treturn focusable( element, !isNaN( $.attr( element, \"tabindex\" ) ) );\n\t},\n\n\ttabbable: function( element ) {\n\t\tvar tabIndex = $.attr( element, \"tabindex\" ),\n\t\t\tisTabIndexNaN = isNaN( tabIndex );\n\t\treturn ( isTabIndexNaN || tabIndex >= 0 ) && focusable( element, !isTabIndexNaN );\n\t}\n});\n\n// support: jQuery <1.8\nif ( !$( \"<a>\" ).outerWidth( 1 ).jquery ) {\n\t$.each( [ \"Width\", \"Height\" ], function( i, name ) {\n\t\tvar side = name === \"Width\" ? [ \"Left\", \"Right\" ] : [ \"Top\", \"Bottom\" ],\n\t\t\ttype = name.toLowerCase(),\n\t\t\torig = {\n\t\t\t\tinnerWidth: $.fn.innerWidth,\n\t\t\t\tinnerHeight: $.fn.innerHeight,\n\t\t\t\touterWidth: $.fn.outerWidth,\n\t\t\t\touterHeight: $.fn.outerHeight\n\t\t\t};\n\n\t\tfunction reduce( elem, size, border, margin ) {\n\t\t\t$.each( side, function() {\n\t\t\t\tsize -= parseFloat( $.css( elem, \"padding\" + this ) ) || 0;\n\t\t\t\tif ( border ) {\n\t\t\t\t\tsize -= parseFloat( $.css( elem, \"border\" + this + \"Width\" ) ) || 0;\n\t\t\t\t}\n\t\t\t\tif ( margin ) {\n\t\t\t\t\tsize -= parseFloat( $.css( elem, \"margin\" + this ) ) || 0;\n\t\t\t\t}\n\t\t\t});\n\t\t\treturn size;\n\t\t}\n\n\t\t$.fn[ \"inner\" + name ] = function( size ) {\n\t\t\tif ( size === undefined ) {\n\t\t\t\treturn orig[ \"inner\" + name ].call( this );\n\t\t\t}\n\n\t\t\treturn this.each(function() {\n\t\t\t\t$( this ).css( type, reduce( this, size ) + \"px\" );\n\t\t\t});\n\t\t};\n\n\t\t$.fn[ \"outer\" + name] = function( size, margin ) {\n\t\t\tif ( typeof size !== \"number\" ) {\n\t\t\t\treturn orig[ \"outer\" + name ].call( this, size );\n\t\t\t}\n\n\t\t\treturn this.each(function() {... [TRUNCATED_FOR_LIGHTWEIGHT]"
+      },
+      "time": 121.387,
+      "startedDateTime": "2026-08-17T12:32:42.400Z"
+    },
+    {
+      "url": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/bootstrap.js",
+      "method": "GET",
+      "status": 200,
+      "resourceType": "script",
+      "mimeType": "text/javascript",
+      "request": {
+        "queryString": [],
+        "headers": [
+          {
+            "name": "Accept",
+            "value": "*/*"
+          },
+          {
+            "name": "Accept-Encoding",
+            "value": "gzip, deflate, br, zstd"
+          },
+          {
+            "name": "Accept-Language",
+            "value": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
+          },
+          {
+            "name": "Connection",
+            "value": "keep-alive"
+          },
+          {
+            "name": "Host",
+            "value": "s3-ap-northeast-2.amazonaws.com"
+          },
+          {
+            "name": "Referer",
+            "value": "https://www.dbdbschool.kr/"
+          },
+          {
+            "name": "Sec-Fetch-Dest",
+            "value": "script"
+          },
+          {
+            "name": "Sec-Fetch-Mode",
+            "value": "no-cors"
+          },
+          {
+            "name": "Sec-Fetch-Site",
+            "value": "cross-site"
+          },
+          {
+            "name": "Sec-Fetch-Storage-Access",
+            "value": "active"
+          },
+          {
+            "name": "User-Agent",
+            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+          },
+          {
+            "name": "sec-ch-ua",
+            "value": "\"Chromium\";v=\"151\", \"Not=A?Brand\";v=\"99\""
+          },
+          {
+            "name": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "name": "sec-ch-ua-platform",
+            "value": "\"Windows\""
+          }
+        ],
+        "postData": null
+      },
+      "response": {
+        "status": 200,
+        "statusText": "OK",
+        "headers": [
+          {
+            "name": "Accept-Ranges",
+            "value": "bytes"
+          },
+          {
+            "name": "Content-Length",
+            "value": "58457"
+          },
+          {
+            "name": "Content-Type",
+            "value": "text/javascript"
+          },
+          {
+            "name": "Date",
+            "value": "Mon, 17 Aug 2026 12:32:44 GMT"
+          },
+          {
+            "name": "ETag",
+            "value": "\"93026945185532d3d6a1206a287decf6\""
+          },
+          {
+            "name": "Last-Modified",
+            "value": "Fri, 12 Jan 2018 06:26:22 GMT"
+          },
+          {
+            "name": "Server",
+            "value": "AmazonS3"
+          },
+          {
+            "name": "x-amz-id-2",
+            "value": "wzuxGG0eetN9o135f9z0/noc9G9hOUi0qCUbhFFjGS+uMWQNrCuCp2hCGwmb9gHHfpF6clUAezo="
+          },
+          {
+            "name": "x-amz-meta-gid",
+            "value": "502"
+          },
+          {
+            "name": "x-amz-meta-mode",
+            "value": "33252"
+          },
+          {
+            "name": "x-amz-meta-mtime",
+            "value": "1416887965"
+          },
+          {
+            "name": "x-amz-meta-uid",
+            "value": "501"
+          },
+          {
+            "name": "x-amz-request-id",
+            "value": "EJK9M666HPFA60EY"
+          }
+        ],
+        "body": "/**\n* bootstrap.js v3.0.0 by @fat and @mdo\n* Copyright 2013 Twitter Inc.\n* http://www.apache.org/licenses/LICENSE-2.0\n*/\nif (!jQuery) { throw new Error(\"Bootstrap requires jQuery\") }\n\n/* ========================================================================\n * Bootstrap: transition.js v3.0.0\n * http://twbs.github.com/bootstrap/javascript.html#transitions\n * ========================================================================\n * Copyright 2013 Twitter, Inc.\n *\n * Licensed under the Apache License, Version 2.0 (the \"License\");\n * you may not use this file except in compliance with the License.\n * You may obtain a copy of the License at\n *\n * http://www.apache.org/licenses/LICENSE-2.0\n *\n * Unless required by applicable law or agreed to in writing, software\n * distributed under the License is distributed on an \"AS IS\" BASIS,\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n * See the License for the specific language governing permissions and\n * limitations under the License.\n * ======================================================================== */\n\n\n+function ($) { \"use strict\";\n\n  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)\n  // ============================================================\n\n  function transitionEnd() {\n    var el = document.createElement('bootstrap')\n\n    var transEndEventNames = {\n      'WebkitTransition' : 'webkitTransitionEnd'\n    , 'MozTransition'    : 'transitionend'\n    , 'OTransition'      : 'oTransitionEnd otransitionend'\n    , 'transition'       : 'transitionend'\n    }\n\n    for (var name in transEndEventNames) {\n      if (el.style[name] !== undefined) {\n        return { end: transEndEventNames[name] }\n      }\n    }\n  }\n\n  // http://blog.alexmaccaw.com/css-transitions\n  $.fn.emulateTransitionEnd = function (duration) {\n    var called = false, $el = this\n    $(this).one($.support.transition.end, function () { called = true })\n    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }\n    setTimeout(callback, duration)\n    return this\n  }\n\n  $(function () {\n    $.support.transition = transitionEnd()\n  })\n\n}(window.jQuery);\n\n/* ========================================================================\n * Bootstrap: alert.js v3.0.0\n * http://twbs.github.com/bootstrap/javascript.html#alerts\n * ========================================================================\n * Copyright 2013 Twitter, Inc.\n *\n * Licensed under the Apache License, Version 2.0 (the \"License\");\n * you may not use this file except in compliance with the License.\n * You may obtain a copy of the License at\n *\n * http://www.apache.org/licenses/LICENSE-2.0\n *\n * Unless required by applicable law or agreed to in writing, software\n * distributed under the License is distributed on an \"AS IS\" BASIS,\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n * See the License for the specific language governing permissions and\n * limitations under the License.\n * ======================================================================== */\n\n\n+function ($) { \"use strict\";\n\n  // ALERT CLASS DEFINITION\n  // ======================\n\n  var dismiss = '[data-dismiss=\"alert\"]'\n  var Alert   = function (el) {\n    $(el).on('click', dismiss, this.close)\n  }\n\n  Alert.prototype.close = function (e) {\n    var $this    = $(this)\n    var selector = $this.attr('data-target')\n\n    if (!selector) {\n      selector = $this.attr('href')\n      selector = selector && selector.replace(/.*(?=#[^\\s]*$)/, '') // strip for ie7\n    }\n\n    var $parent = $(selector)\n\n    if (e) e.preventDefault()\n\n    if (!$parent.length) {\n      $parent = $this.hasClass('alert') ? $this : $this.parent()\n    }\n\n    $parent.trigger(e = $.Event('close.bs.alert'))\n\n    if (e.isDefaultPrevented()) return\n\n    $parent.removeClass('in')\n\n    function removeElement() {\n      $parent.trigger('closed.bs.alert').remove()\n    }\n\n    $.support.transition && $parent.hasClass('fade') ?\n      $parent\n        .one($.support.transition.end, removeElement)\n        .emulateTransitionEnd(150) :\n      removeElement()\n  }\n\n\n  // ALERT PLUGIN DEFINITION\n  // =======================\n\n  var old = $.fn.alert\n\n  $.fn.alert = function (option) {\n    return this.each(function () {\n      var $this = $(this)\n      var data  = $this.data('bs.alert')\n\n      if (!data) $this.data('bs.alert', (data = new Alert(this)))\n      if (typeof option == 'string') data[option].call($this)\n    })\n  }\n\n  $.fn.alert.Constructor = Alert\n\n\n  // ALERT NO CONFLICT\n  // =================\n\n  $.fn.alert.noConflict = function () {\n    $.fn.alert = old\n    return this\n  }\n\n\n  // ALERT DATA-API\n  // ==============\n\n  $(document).on('click.bs.alert.data-api', dismiss, Alert.prototype.close)\n\n}(window.jQuery);\n\n/* ========================================================================\n * Bootstrap: button.js v3.0.0\n * http://twbs.github.com/bootstrap/javascript.html#buttons\n * ==========================================================... [TRUNCATED_FOR_LIGHTWEIGHT]"
+      },
+      "time": 80.758,
+      "startedDateTime": "2026-08-17T12:32:42.401Z"
+    }
+  ],
+  "domSchema": {
+    "targetPage": "https://www.dbdbschool.kr/af/ad_app/lists/sn/3267",
+    "pageTitle": "신청목록 - 신청자관리 - 늘봄학교",
+    "schoolName": "광주풍향초등학교",
+    "serviceName": "늘봄학교",
+    "role": "school_admin",
+    "currentAdmin": "관리자(김혜련)님",
+    "filters": {
+      "divisions": [
+        {
+          "value": "all",
+          "label": "=강좌구분="
+        },
+        {
+          "value": "5",
+          "label": "3월"
+        },
+        {
+          "value": "6",
+          "label": "26년 4월"
+        },
+        {
+          "value": "7",
+          "label": "26년 5월"
+        },
+        {
+          "value": "8",
+          "label": "26년 6월"
+        },
+        {
+          "value": "9",
+          "label": "26년 7월"
+        },
+        {
+          "value": "10",
+          "label": "26년 8월",
+          "default": true
+        },
+        {
+          "value": "11",
+          "label": "26년 9월"
+        }
+      ],
+      "programs": [
+        {
+          "value": "all",
+          "label": "=늘봄과정="
+        },
+        {
+          "value": "1",
+          "label": "방과후"
+        },
+        {
+          "value": "2",
+          "label": "맞춤형"
+        },
+        {
+          "value": "3",
+          "label": "돌봄"
+        }
+      ],
+      "grades": [
+        {
+          "value": "",
+          "label": "=학년="
+        },
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        }
+      ],
+      "classes": [
+        {
+          "value": "",
+          "label": "=반="
+        },
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        },
+        {
+          "value": "7",
+          "label": "7"
+        },
+        {
+          "value": "8",
+          "label": "8"
+        },
+        {
+          "value": "9",
+          "label": "9"
+        },
+        {
+          "value": "10",
+          "label": "10"
+        },
+        {
+          "value": "11",
+          "label": "11"
+        },
+        {
+          "value": "12",
+          "label": "12"
+        }
+      ],
+      "searchTypes": [
+        {
+          "value": "app_mem_name",
+          "label": "이름"
+        },
+        {
+          "value": "tel",
+          "label": "연락처"
+        }
+      ]
+    },
+    "topActions": [
+      {
+        "text": "상세검색 열기/닫기",
+        "id": "main_control_box_btn01",
+        "type": "toggle"
+      },
+      {
+        "text": "대기자목록",
+        "href": "/af/ad_wait/lists/sn/3267",
+        "variant": "default"
+      },
+      {
+        "text": "신청자등록",
+        "href": "/af/ad_app/sin/sn/3267",
+        "variant": "primary"
+      },
+      {
+        "text": "추가기능..",
+        "id": "main_control_box_btn02",
+        "type": "dropdown",
+        "subItems": [
+          {
+            "text": "신청자일괄입력",
+            "href": "/af/ad_app/input/sn/3267",
+            "variant": "warning"
+          },
+          {
+            "text": "수강료입력",
+            "href": "/af/ad_pay/edit/sn/3267",
+            "variant": "warning"
+          },
+          {
+            "text": "신청자복사",
+            "href": "/af/ad_app/copy/sn/3267",
+            "variant": "info"
+          },
+          {
+            "text": "추가/취소자조회",
+            "href": "/af/ad_app/com/sn/3267",
+            "variant": "default"
+          },
+          {
+            "text": "미신청자목록",
+            "href": "/af/ad_app/list1/sn/3267",
+            "variant": "default"
+          },
+          {
+            "text": "신청결과엑셀출력",
+            "href": "/af/ad_app/excel/sn/3267",
+            "variant": "success"
+          },
+          {
+            "text": "수강신청서출력",
+            "href": "/af/ad_app/pdf/sn/3267",
+            "variant": "success"
+          },
+          {
+            "text": "고지서출력",
+            "href": "/af/ad_app/pdf1/sn/3267",
+            "variant": "success"
+          },
+          {
+            "text": "시간표출력",
+            "href": "/af/ad_app/pdf2/sn/3267",
+            "variant": "success"
+          }
+        ]
+      }
+    ],
+    "tableColumns": [
+      {
+        "key": "checkbox",
+        "label": "선택",
+        "width": 40
+      },
+      {
+        "key": "seq",
+        "label": "연번",
+        "width": 60
+      },
+      {
+        "key": "division",
+        "label": "구분\n(늘봄과정)",
+        "width": 90
+      },
+      {
+        "key": "lec_name",
+        "label": "강좌명",
+        "width": null
+      },
+      {
+        "key": "grade",
+        "label": "학년",
+        "width": 50
+      },
+      {
+        "key": "class_num",
+        "label": "반",
+        "width": 50
+      },
+      {
+        "key": "bunho",
+        "label": "번호",
+        "width": 60,
+        "sortable": true
+      },
+      {
+        "key": "student_name",
+        "label": "이름",
+        "width": 80
+      },
+      {
+        "key": "contact",
+        "label": "연락처",
+        "width": 170
+      },
+      {
+        "key": "tuition_fee",
+        "label": "수강료",
+        "width": 70
+      },
+      {
+        "key": "material_fee",
+        "label": "수용비",
+        "width": 70
+      },
+      {
+        "key": "instructor_fee",
+        "label": "강사료",
+        "width": 70
+      },
+      {
+        "key": "book_fee",
+        "label": "교재비",
+        "width": 70
+      },
+      {
+        "key": "item_fee",
+        "label": "재료비",
+        "width": 70
+      },
+      {
+        "key": "total_fee",
+        "label": "합계",
+        "width": 70
+      },
+      {
+        "key": "reg_date",
+        "label": "등록일자",
+        "width": 100,
+        "sortable": true
+      },
+      {
+        "key": "delete_action",
+        "label": "삭제",
+        "width": 50
+      }
+    ],
+    "batchActions": [
+      {
+        "value": "del",
+        "label": "선택삭제"
+      },
+      {
+        "value": "move",
+        "label": "신청자이동"
+      },
+      {
+        "value": "draw_first_Y",
+        "label": "우선추첨대상자지정"
+      },
+      {
+        "value": "draw_first_N",
+        "label": "우선추첨대상자제외"
+      }
+    ],
+    "apiEndpoints": [
+      {
+        "path": "/api/af/ad_app/lists/sn/:school_id",
+        "method": "GET",
+        "desc": "신청자 목록 및 필터 검색"
+      },
+      {
+        "path": "/api/af/ad_app/stu_hp/sn/:school_id",
+        "method": "POST",
+        "desc": "학생/학부모 연락처 인라인 수정"
+      },
+      {
+        "path": "/api/af/ad_app/cancel/sn/:school_id",
+        "method": "POST",
+        "desc": "단일/선택 신청자 삭제 및 취소 처리"
+      },
+      {
+        "path": "/api/af/ad_app/draw_first/sn/:school_id",
+        "method": "POST",
+        "desc": "우선추첨 대상자 일괄 지정/제외"
+      },
+      {
+        "path": "/api/af/ad_app/schedule/sn/:school_id",
+        "method": "GET",
+        "desc": "학생 수강 시간표 모달 데이터 조회"
+      }
+    ]
+  }
+}

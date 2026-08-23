@@ -274,54 +274,662 @@ function renderLectureTable(lectures) {
 
 // ==================== 2. 신청자관리 (/af/ad_app/lists) ====================
 
+let applicantListCache = [];
+let applicantCoursesCache = [];
+let appSortAsc = { studentNum: true, appliedAt: false };
+
 async function loadApplicants() {
+  const categoryEl = document.getElementById('appCategoryFilter');
+  const neulbomEl = document.getElementById('appNeulbomFilter');
+  const courseEl = document.getElementById('appCourseFilter');
+  const gradeEl = document.getElementById('appGradeFilter');
+  const classEl = document.getElementById('appClassFilter');
+  const searchTypeEl = document.getElementById('appSearchTypeFilter');
+  const keywordEl = document.getElementById('appSearchKeyword');
+
+  const category = categoryEl ? categoryEl.value : '26년 8월';
+  const neulbomType = neulbomEl ? neulbomEl.value : '=늘봄과정=';
+  const courseId = courseEl ? courseEl.value : '=강좌전체=';
+  const grade = gradeEl ? gradeEl.value : '=학년=';
+  const classNum = classEl ? classEl.value : '=반=';
+  const searchType = searchTypeEl ? searchTypeEl.value : 'all';
+  const keyword = keywordEl ? keywordEl.value.trim() : '';
+
+  const params = new URLSearchParams();
+  if (category && category !== '전체') params.append('category', category);
+  if (neulbomType && neulbomType !== '=늘봄과정=') params.append('neulbomType', neulbomType);
+  if (courseId && courseId !== '=강좌전체=') params.append('courseId', courseId);
+  if (grade && grade !== '=학년=') params.append('grade', grade);
+  if (classNum && classNum !== '=반=') params.append('classNum', classNum);
+  if (searchType && searchType !== 'all') params.append('searchType', searchType);
+  if (keyword) params.append('keyword', keyword);
+
   try {
-    const res = await fetch(`/api/af/ad_stu/lists/sn/${SCHOOL_SN}`);
+    const res = await fetch(`/api/af/ad_app/lists/sn/${SCHOOL_SN}?${params.toString()}`);
     const data = await res.json();
     if (data.success) {
-      const span = document.getElementById('applicantCountSpan');
-      if (span) span.innerText = data.totalCount || data.applicants.length;
-
-      const tbody = document.getElementById('studentTbody');
-      if (!tbody) return;
-      tbody.innerHTML = data.applicants.map(app => `
-        <tr>
-          <td style="text-align: center;"><input type="checkbox" class="app-checkbox" value="${app.id}"></td>
-          <td><strong>${app.studentName}</strong></td>
-          <td>${app.gradeClass}</td>
-          <td>${app.parentPhone}</td>
-          <td>${app.courseTitle}</td>
-          <td><span class="badge badge-OUTPUT">${app.subsidyType}</span></td>
-          <td><strong>35,000원</strong></td>
-          <td><span class="badge badge-OUTPUT">${app.paymentStatus}</span></td>
-          <td><span class="badge ${app.status === '수강승인' ? 'badge-OUTPUT' : 'badge-CLOSED'}">${app.status}</span></td>
-          <td style="text-align: center;">
-            <button class="btn btn-outline" style="padding: 4px 8px; font-size: 0.8rem;" onclick="approveApplicant('${app.id}')">승인 변경</button>
-          </td>
-        </tr>
-      `).join('');
+      applicantListCache = data.items || [];
+      if (data.courses && Array.isArray(data.courses)) {
+        applicantCoursesCache = data.courses;
+        populateApplicantCourseFilters(data.courses);
+      }
+      renderApplicantKPIs(data.stats, applicantListCache);
+      renderApplicantsTable(applicantListCache);
     }
-  } catch (e) { console.error('loadApplicants Error:', e); }
+  } catch (e) {
+    console.error('loadApplicants Error:', e);
+  }
+}
+
+function populateApplicantCourseFilters(courses) {
+  const filterSelect = document.getElementById('appCourseFilter');
+  const newAppCourseSelect = document.getElementById('newAppCourseSelect');
+  const batchFeeCourseSelect = document.getElementById('batchFeeCourseSelect');
+  const testModeCourseSelect = document.getElementById('testModeCourseSelect');
+
+  const optionsHtml = courses.map(c => `<option value="${c.id || c.title}">[${c.category || '늘봄'}] ${c.title} (${c.instructor || c.teacherName || '강사'}, ${c.enrolledCount || c.applied || 0}명)</option>`).join('');
+
+  if (filterSelect && filterSelect.options.length <= 1) {
+    filterSelect.innerHTML = '<option value="=강좌전체=">=강좌전체=</option>' + optionsHtml;
+  }
+  if (newAppCourseSelect) {
+    newAppCourseSelect.innerHTML = '<option value="">강좌를 선택하세요</option>' + optionsHtml;
+  }
+  if (batchFeeCourseSelect) {
+    batchFeeCourseSelect.innerHTML = optionsHtml;
+  }
+  if (testModeCourseSelect) {
+    testModeCourseSelect.innerHTML = optionsHtml;
+  }
+}
+
+function renderApplicantKPIs(stats, items) {
+  const totalCount = stats ? stats.totalCount : items.length;
+  const approvedCount = stats ? stats.approvedCount : items.filter(i => i.status === '승인' || i.status === '정상' || i.status === '수강승인').length;
+  const waitingCount = stats ? stats.waitingCount : items.filter(i => i.status === '신청대기' || i.paymentStatus === '결제대기' || i.paymentStatus === '미납').length;
+  const totalFee = stats ? stats.totalTuitionFee : items.reduce((sum, i) => sum + (Number(i.totalFee) || (Number(i.tuitionFee) || 0) + (Number(i.materialFee) || 0)), 0);
+  const collectedFee = stats ? stats.totalCollectedFee : items.reduce((sum, i) => i.paymentStatus === '결제완료' || i.paymentStatus === '납부완료' ? sum + (Number(i.totalFee) || Number(i.tuitionFee) || 0) : sum, 0);
+
+  const totalEl = document.getElementById('appKpiTotal');
+  const approvedEl = document.getElementById('appKpiApproved');
+  const waitingEl = document.getElementById('appKpiWaiting');
+  const totalFeeEl = document.getElementById('appKpiTotalFee');
+  const collectedFeeEl = document.getElementById('appKpiCollectedFee');
+  const spanCount = document.getElementById('applicantCountSpan');
+
+  if (totalEl) totalEl.innerText = `${totalCount.toLocaleString()}명`;
+  if (approvedEl) approvedEl.innerText = `${approvedCount.toLocaleString()}명`;
+  if (waitingEl) waitingEl.innerText = `${waitingCount.toLocaleString()}명`;
+  if (totalFeeEl) totalFeeEl.innerText = `${totalFee.toLocaleString()}원`;
+  if (collectedFeeEl) collectedFeeEl.innerText = `${collectedFee.toLocaleString()}원`;
+  if (spanCount) spanCount.innerText = totalCount;
+}
+
+function renderApplicantsTable(items) {
+  const tbody = document.getElementById('studentTbody');
+  if (!tbody) return;
+
+  if (!items || items.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="17" style="text-align:center; padding:40px; color:#64748b;"><i class="fa-solid fa-folder-open" style="font-size:24px; margin-bottom:8px; display:block;"></i>조회된 수강 신청자가 없습니다.</td></tr>`;
+    return;
+  }
+
+  let totalTuition = 0;
+  let totalFacility = 0;
+  let totalInstructor = 0;
+  let totalBook = 0;
+  let totalMaterial = 0;
+  let grandTotal = 0;
+
+  const rows = items.map((app, idx) => {
+    const tuition = Number(app.tuitionFee) || 0;
+    const material = Number(app.materialFee) || 0;
+    const book = Number(app.bookFee) || 0;
+    const instructor = app.instructorFee !== undefined ? Number(app.instructorFee) : Math.round(tuition * 0.8);
+    const facility = app.facilityFee !== undefined ? Number(app.facilityFee) : Math.round(tuition * 0.2);
+    const total = Number(app.totalFee) || (tuition + material + book);
+
+    totalTuition += tuition;
+    totalFacility += facility;
+    totalInstructor += instructor;
+    totalBook += book;
+    totalMaterial += material;
+    grandTotal += total;
+
+    const grade = app.grade || (app.gradeClass ? app.gradeClass.charAt(0) : '1');
+    const classNum = app.classNum || (app.gradeClass && app.gradeClass.includes('반') ? app.gradeClass.split('반')[0].slice(-1) : '1');
+    const studentNum = app.studentNum || app.studentNumber || (idx + 1 < 10 ? `0${idx + 1}` : `${idx + 1}`);
+    const phone = app.parentPhone || app.guardianPhone || '-';
+
+    return `
+      <tr>
+        <td style="text-align:center;"><input type="checkbox" class="app-checkbox" value="${app.id}"></td>
+        <td style="text-align:center;">${idx + 1}</td>
+        <td style="text-align:center;"><span style="font-size:11.5px; color:#475569;">[${app.category || '26년 8월'}]</span><br><span style="font-weight:600; color:#2563eb;">${app.neulbomType || '방과후'}</span></td>
+        <td><strong>${escHtml(app.courseTitle)}</strong></td>
+        <td style="text-align:center;">${grade}</td>
+        <td style="text-align:center;">${classNum}</td>
+        <td style="text-align:center;"><strong>${studentNum}</strong></td>
+        <td style="text-align:center;">
+          <a href="javascript:void(0);" onclick="viewAppSchedule('${escHtml(app.studentName)}', '${escHtml(app.gradeClass || grade + '학년 ' + classNum + '반')}')" style="font-weight:bold; color:#1d4ed8; text-decoration:underline;">${escHtml(app.studentName)}</a>
+        </td>
+        <td style="text-align:center; font-size:12px;">
+          ${phone}
+          <button class="btn btn-outline" style="padding:1px 5px; font-size:10px; margin-left:2px;" onclick="editAppContact('${app.id}', '${escHtml(app.studentName)}', '${phone}')">수정</button>
+        </td>
+        <td style="text-align:right; font-weight:600;">${tuition.toLocaleString()}원</td>
+        <td style="text-align:right; color:#64748b;">${facility.toLocaleString()}원</td>
+        <td style="text-align:right; color:#64748b;">${instructor.toLocaleString()}원</td>
+        <td style="text-align:right; color:#64748b;">${book.toLocaleString()}원</td>
+        <td style="text-align:right; color:#64748b;">${material.toLocaleString()}원</td>
+        <td style="text-align:right; font-weight:bold; color:#059669;">${total.toLocaleString()}원</td>
+        <td style="text-align:center; font-size:11px; color:#64748b;">${(app.appliedAt || '2026-08-15').substring(0, 10)}</td>
+        <td style="text-align:center; white-space:nowrap;">
+          <button class="btn btn-outline" style="padding:3px 6px; font-size:11px;" onclick="openAppEditModal('${app.id}')" title="수정"><i class="fa-solid fa-pen"></i></button>
+          <button class="btn btn-outline" style="padding:3px 6px; font-size:11px; color:#dc2626;" onclick="deleteApp('${app.id}')" title="삭제"><i class="fa-solid fa-trash"></i></button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+
+  const summaryRow = `
+    <tr style="background:#f8fafc; font-weight:bold; border-top:2px solid #cbd5e1;">
+      <td colspan="9" style="text-align:center; padding:10px;">합계 (${items.length}명)</td>
+      <td style="text-align:right; color:#1e293b;">${totalTuition.toLocaleString()}원</td>
+      <td style="text-align:right; color:#64748b;">${totalFacility.toLocaleString()}원</td>
+      <td style="text-align:right; color:#64748b;">${totalInstructor.toLocaleString()}원</td>
+      <td style="text-align:right; color:#64748b;">${totalBook.toLocaleString()}원</td>
+      <td style="text-align:right; color:#64748b;">${totalMaterial.toLocaleString()}원</td>
+      <td style="text-align:right; color:#059669;">${grandTotal.toLocaleString()}원</td>
+      <td colspan="2"></td>
+    </tr>
+  `;
+
+  tbody.innerHTML = rows + summaryRow;
+}
+
+function resetAppFilters() {
+  const cat = document.getElementById('appCategoryFilter');
+  const nlb = document.getElementById('appNeulbomFilter');
+  const crs = document.getElementById('appCourseFilter');
+  const grd = document.getElementById('appGradeFilter');
+  const cls = document.getElementById('appClassFilter');
+  const st = document.getElementById('appSearchTypeFilter');
+  const kw = document.getElementById('appSearchKeyword');
+
+  if (cat) cat.value = '26년 8월';
+  if (nlb) nlb.value = '=늘봄과정=';
+  if (crs) crs.value = '=강좌전체=';
+  if (grd) grd.value = '=학년=';
+  if (cls) cls.value = '=반=';
+  if (st) st.value = 'all';
+  if (kw) kw.value = '';
+
+  loadApplicants();
 }
 
 function toggleSelectAllApps(master) {
   document.querySelectorAll('.app-checkbox').forEach(cb => cb.checked = master.checked);
 }
 
-function approveSelectedStudent() {
-  alert('선택하신 수강생의 승인 상태가 업데이트되었습니다.');
-  loadApplicants();
+function toggleAppSort(column) {
+  appSortAsc[column] = !appSortAsc[column];
+  applicantListCache.sort((a, b) => {
+    let valA = a[column] || '';
+    let valB = b[column] || '';
+    if (column === 'studentNum') {
+      valA = parseInt(valA) || 0;
+      valB = parseInt(valB) || 0;
+    }
+    return appSortAsc[column] ? (valA > valB ? 1 : -1) : (valA < valB ? 1 : -1);
+  });
+  renderApplicantsTable(applicantListCache);
 }
 
-function cancelSelectedStudent() {
-  if (confirm('선택 학생의 수강을 취소하고 대기자에게 결원 승격 알림을 전송하시겠습니까?')) {
-    alert('수강 취소 및 대기자 자동 승격이 완료되었습니다.');
-    loadApplicants();
+function openAppCreateModal() {
+  const modal = document.getElementById('modalAppCreate');
+  if (modal) modal.style.display = 'flex';
+}
+
+function closeAppModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) modal.style.display = 'none';
+}
+
+async function handleAppCreateSubmit(e) {
+  if (e) e.preventDefault();
+  const courseId = document.getElementById('newAppCourseSelect')?.value;
+  const studentName = document.getElementById('newAppStudentName')?.value;
+  const gradeClass = document.getElementById('newAppGradeClass')?.value;
+  const studentNum = document.getElementById('newAppStudentNum')?.value;
+  const parentPhone = document.getElementById('newAppParentPhone')?.value;
+  const subsidyType = document.getElementById('newAppSubsidyType')?.value || '일반 자부담';
+  const tuitionFee = parseInt(document.getElementById('newAppTuitionFee')?.value) || 0;
+  const bookFee = parseInt(document.getElementById('newAppBookFee')?.value) || 0;
+  const materialFee = parseInt(document.getElementById('newAppMaterialFee')?.value) || 0;
+  const bankName = document.getElementById('newAppBankName')?.value || '농협';
+  const account = document.getElementById('newAppAccount')?.value || '';
+  const depositor = document.getElementById('newAppDepositor')?.value || '';
+  const memo = document.getElementById('newAppMemo')?.value || '';
+
+  if (!courseId || !studentName) {
+    alert('강좌 및 학생명을 입력하세요.');
+    return;
+  }
+
+  const selectedCourse = applicantCoursesCache.find(c => c.id === courseId || c.title === courseId);
+
+  try {
+    const res = await fetch('/api/af/ad_app/create', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        schoolId: SCHOOL_SN,
+        category: '26년 8월',
+        neulbomType: '방과후',
+        courseId,
+        courseTitle: selectedCourse ? selectedCourse.title : courseId,
+        instructorName: selectedCourse ? (selectedCourse.instructor || selectedCourse.teacherName) : '강사',
+        studentName,
+        gradeClass: gradeClass || '1학년 1반',
+        studentNum: studentNum || '01',
+        parentPhone: parentPhone || '010-0000-0000',
+        subsidyType,
+        tuitionFee,
+        bookFee,
+        materialFee,
+        bankName,
+        schoolBankingAccount: account,
+        depositorName: depositor,
+        paymentStatus: tuitionFee === 0 ? '무상' : '결제대기',
+        status: '승인',
+        memo
+      })
+    });
+    const d = await res.json();
+    if (d.success) {
+      alert('신청자가 성공적으로 등록되었습니다.');
+      closeAppModal('modalAppCreate');
+      loadApplicants();
+    } else {
+      alert(d.message || '등록 중 오류가 발생했습니다.');
+    }
+  } catch (err) {
+    console.error('Create Applicant Error:', err);
   }
 }
 
-function approveApplicant(id) {
-  alert(`신청 ID: ${id}의 승인 상태가 변경되었습니다.`);
+async function openAppEditModal(id) {
+  try {
+    const res = await fetch(`/api/af/ad_app/view/${id}`);
+    const d = await res.json();
+    if (d.success && d.item) {
+      const item = d.item;
+      document.getElementById('editAppId').value = item.id;
+      document.getElementById('editAppCourseLabel').innerText = item.courseTitle || '-';
+      document.getElementById('editAppSubLabel').innerText = `ID: ${item.id} | ${item.appliedAt || ''}`;
+      document.getElementById('editAppStudentName').value = item.studentName || '';
+      document.getElementById('editAppGradeClass').value = item.gradeClass || '';
+      document.getElementById('editAppStudentNum').value = item.studentNum || '';
+      document.getElementById('editAppParentPhone').value = item.parentPhone || item.guardianPhone || '';
+      document.getElementById('editAppSubsidyType').value = item.subsidyType || '일반 자부담';
+      document.getElementById('editAppTuitionFee').value = item.tuitionFee || 0;
+      document.getElementById('editAppBookFee').value = item.bookFee || 0;
+      document.getElementById('editAppMaterialFee').value = item.materialFee || 0;
+      document.getElementById('editAppBankName').value = item.bankName || '';
+      document.getElementById('editAppAccount').value = item.schoolBankingAccount || '';
+      document.getElementById('editAppDepositor').value = item.depositorName || '';
+      document.getElementById('editAppPaymentStatus').value = item.paymentStatus || '결제대기';
+      document.getElementById('editAppStatus').value = item.status || '승인';
+      document.getElementById('editAppMemo').value = item.memo || '';
+
+      const modal = document.getElementById('modalAppEdit');
+      if (modal) modal.style.display = 'flex';
+    }
+  } catch (err) {
+    console.error('View Applicant Error:', err);
+  }
+}
+
+async function submitAppEdit(e) {
+  if (e) e.preventDefault();
+  const id = document.getElementById('editAppId')?.value;
+  const studentName = document.getElementById('editAppStudentName')?.value;
+  const gradeClass = document.getElementById('editAppGradeClass')?.value;
+  const studentNum = document.getElementById('editAppStudentNum')?.value;
+  const parentPhone = document.getElementById('editAppParentPhone')?.value;
+  const subsidyType = document.getElementById('editAppSubsidyType')?.value;
+  const tuitionFee = parseInt(document.getElementById('editAppTuitionFee')?.value) || 0;
+  const bookFee = parseInt(document.getElementById('editAppBookFee')?.value) || 0;
+  const materialFee = parseInt(document.getElementById('editAppMaterialFee')?.value) || 0;
+  const bankName = document.getElementById('editAppBankName')?.value;
+  const schoolBankingAccount = document.getElementById('editAppAccount')?.value;
+  const depositorName = document.getElementById('editAppDepositor')?.value;
+  const paymentStatus = document.getElementById('editAppPaymentStatus')?.value;
+  const status = document.getElementById('editAppStatus')?.value;
+  const memo = document.getElementById('editAppMemo')?.value;
+
+  try {
+    const res = await fetch('/api/af/ad_app/update', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id, studentName, gradeClass, studentNum, parentPhone, subsidyType,
+        tuitionFee, bookFee, materialFee, bankName, schoolBankingAccount,
+        depositorName, paymentStatus, status, memo
+      })
+    });
+    const d = await res.json();
+    if (d.success) {
+      alert('신청자 정보가 성공적으로 변경되었습니다.');
+      closeAppModal('modalAppEdit');
+      loadApplicants();
+    }
+  } catch (err) {
+    console.error('Update Applicant Error:', err);
+  }
+}
+
+async function deleteApp(id) {
+  if (!confirm('정말 해당 신청 내역을 삭제하시겠습니까?')) return;
+  try {
+    const res = await fetch('/api/af/ad_app/delete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id })
+    });
+    const d = await res.json();
+    if (d.success) {
+      alert('삭제되었습니다.');
+      closeAppModal('modalAppEdit');
+      loadApplicants();
+    }
+  } catch (err) {
+    console.error('Delete Applicant Error:', err);
+  }
+}
+
+async function handleBulkAppStatus(status) {
+  const selected = Array.from(document.querySelectorAll('.app-checkbox:checked')).map(cb => cb.value);
+  if (selected.length === 0) {
+    alert('선택된 학생이 없습니다.');
+    return;
+  }
+  if (!confirm(`선택한 ${selected.length}명의 상태를 "${status}"(으)로 일괄 변경하시겠습니까?`)) return;
+
+  for (const id of selected) {
+    await fetch('/api/af/ad_app/update', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, status })
+    });
+  }
+  alert('일괄 변경이 완료되었습니다.');
+  loadApplicants();
+}
+
+async function handleBulkAppDelete() {
+  const selected = Array.from(document.querySelectorAll('.app-checkbox:checked')).map(cb => cb.value);
+  if (selected.length === 0) {
+    alert('삭제할 학생을 선택하세요.');
+    return;
+  }
+  if (!confirm(`선택한 ${selected.length}명의 수강 신청을 일괄 삭제하시겠습니까?`)) return;
+
+  for (const id of selected) {
+    await fetch('/api/af/ad_app/delete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id })
+    });
+  }
+  alert('일괄 삭제가 완료되었습니다.');
+  loadApplicants();
+}
+
+function openAppBatchUploadModal() {
+  const modal = document.getElementById('modalAppBatchUpload');
+  if (modal) modal.style.display = 'flex';
+}
+
+function parseAppBatchSample() {
+  const sample = `김민준\t1학년 2반\t14\t010-2345-6789\t[특기적성] 창의 로봇교실 A반\t35000\t15000\n이서연\t2학년 1반\t07\t010-3456-7890\t[특기적성] 창의 로봇교실 A반\t35000\t15000`;
+  const textarea = document.getElementById('appBatchTextarea');
+  if (textarea) textarea.value = sample;
+}
+
+async function submitAppBatchUpload() {
+  const text = document.getElementById('appBatchTextarea')?.value.trim();
+  if (!text) {
+    alert('붙여넣을 명단 데이터를 입력하세요.');
+    return;
+  }
+
+  const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+  const items = lines.map(line => {
+    const parts = line.split(/[\t,]+/).map(p => p.trim());
+    return {
+      studentName: parts[0] || '학생',
+      gradeClass: parts[1] || '1학년 1반',
+      studentNum: parts[2] || '01',
+      parentPhone: parts[3] || '010-0000-0000',
+      courseTitle: parts[4] || '[늘봄] AI 로봇 코딩 교실',
+      courseId: 'c_3267_1',
+      tuitionFee: parseInt(parts[5]) || 35000,
+      materialFee: parseInt(parts[6]) || 15000,
+      paymentStatus: '결제대기',
+      status: '승인'
+    };
+  });
+
+  try {
+    const res = await fetch('/api/af/ad_app/batch-upload', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ schoolId: SCHOOL_SN, items })
+    });
+    const d = await res.json();
+    if (d.success) {
+      alert(`${d.count}명의 수강 신청이 일괄 등록되었습니다.`);
+      closeAppModal('modalAppBatchUpload');
+      loadApplicants();
+    }
+  } catch (err) {
+    console.error('Batch Upload Error:', err);
+  }
+}
+
+function openAppBatchFeeModal() {
+  const modal = document.getElementById('modalAppBatchFee');
+  if (modal) modal.style.display = 'flex';
+}
+
+async function submitAppBatchFee(e) {
+  if (e) e.preventDefault();
+  const courseId = document.getElementById('batchFeeCourseSelect')?.value;
+  const tuitionFee = parseInt(document.getElementById('batchFeeTuition')?.value) || 0;
+  const bookFee = parseInt(document.getElementById('batchFeeBook')?.value) || 0;
+  const materialFee = parseInt(document.getElementById('batchFeeMaterial')?.value) || 0;
+
+  try {
+    const res = await fetch('/api/af/ad_app/batch-fee', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ schoolId: SCHOOL_SN, courseId, tuitionFee, bookFee, materialFee })
+    });
+    const d = await res.json();
+    if (d.success) {
+      alert(`${d.updatedCount}건의 수강료가 일괄 적용되었습니다.`);
+      closeAppModal('modalAppBatchFee');
+      loadApplicants();
+    }
+  } catch (err) {
+    console.error('Batch Fee Error:', err);
+  }
+}
+
+function openAppBatchCopyModal() {
+  const modal = document.getElementById('modalAppBatchCopy');
+  if (modal) modal.style.display = 'flex';
+}
+
+async function submitAppBatchCopy(e) {
+  if (e) e.preventDefault();
+  const fromCategory = document.getElementById('copyAppFromCategory')?.value;
+  const toCategory = document.getElementById('copyAppToCategory')?.value;
+
+  try {
+    const res = await fetch('/api/af/ad_app/copy', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ schoolId: SCHOOL_SN, fromCategory, toCategory })
+    });
+    const d = await res.json();
+    if (d.success) {
+      alert(`${d.copiedCount}명의 신청자가 '${toCategory}'(으)로 일괄 복사되었습니다.`);
+      closeAppModal('modalAppBatchCopy');
+      loadApplicants();
+    }
+  } catch (err) {
+    console.error('Batch Copy Error:', err);
+  }
+}
+
+function exportAppExcel() {
+  window.location.href = `/api/af/ad_app/school-banking/csv/sn/${SCHOOL_SN}`;
+}
+
+function downloadSchoolBankingCsv() {
+  window.location.href = `/api/af/ad_app/school-banking/csv/sn/${SCHOOL_SN}`;
+}
+
+function openAppPrintModal(type) {
+  const modal = document.getElementById('modalAppPrint');
+  const titleEl = document.getElementById('appPrintModalTitle');
+  const contentEl = document.getElementById('appPrintContentArea');
+  if (!modal || !contentEl) return;
+
+  if (type === 'application') {
+    if (titleEl) titleEl.innerHTML = '<i class="fa-solid fa-file-invoice"></i> 방과후학교 / 늘봄 수강신청서 인쇄';
+    contentEl.innerHTML = `
+      <div style="background:#fff; padding:30px; border:1px solid #ddd; max-width:700px; margin:0 auto; font-family:'Malgun Gothic';">
+        <h2 style="text-align:center; margin-bottom:20px; font-size:20px; text-decoration:underline;">2026학년도 늘봄·방과후학교 수강신청 확인서</h2>
+        <table style="width:100%; border-collapse:collapse; margin-bottom:16px; font-size:13px;" border="1">
+          <tr><th style="padding:8px; background:#f5f5f5; width:120px;">학교명</th><td style="padding:8px;">광주풍향초등학교</td><th style="padding:8px; background:#f5f5f5; width:120px;">신청분기</th><td style="padding:8px;">26년 8월</td></tr>
+          <tr><th style="padding:8px; background:#f5f5f5;">학생성명</th><td style="padding:8px;">김민준 (1학년 2반 14번)</td><th style="padding:8px; background:#f5f5f5;">학부모연락처</th><td style="padding:8px;">010-2345-6789</td></tr>
+          <tr><th style="padding:8px; background:#f5f5f5;">신청강좌</th><td colspan="3" style="padding:8px; font-weight:bold;">[특기적성] 창의 로봇교실 A반</td></tr>
+          <tr><th style="padding:8px; background:#f5f5f5;">수강료내역</th><td colspan="3" style="padding:8px;">수강료: 35,000원 / 재료비: 15,000원 (합계: 50,000원)</td></tr>
+        </table>
+        <p style="text-align:center; margin-top:30px; line-height:1.8; font-size:13px;">
+          위와 같이 2026학년도 늘봄·방과후학교 수강을 신청하였음을 확인합니다.<br><br>
+          <strong>2026년 8월 18일</strong><br><br>
+          <strong>광주풍향초등학교장 귀하</strong>
+        </p>
+      </div>
+    `;
+  } else if (type === 'bill') {
+    if (titleEl) titleEl.innerHTML = '<i class="fa-solid fa-receipt"></i> 방과후학교 교육비 납입 고지서';
+    contentEl.innerHTML = `
+      <div style="background:#fff; padding:30px; border:1px solid #ddd; max-width:700px; margin:0 auto; font-family:'Malgun Gothic';">
+        <h2 style="text-align:center; margin-bottom:20px; font-size:20px; text-decoration:underline;">늘봄·방과후학교 수강료 및 교재재료비 납입고지서</h2>
+        <table style="width:100%; border-collapse:collapse; margin-bottom:16px; font-size:13px;" border="1">
+          <tr><th style="padding:8px; background:#f5f5f5; width:120px;">학생인적</th><td colspan="3" style="padding:8px;">광주풍향초등학교 1학년 2반 14번 김민준</td></tr>
+          <tr><th style="padding:8px; background:#f5f5f5;">납부계좌</th><td colspan="3" style="padding:8px;">농협 302-9999-8888-77 (스쿨뱅킹 자동출금)</td></tr>
+          <tr><th style="padding:8px; background:#f5f5f5;">납부기한</th><td colspan="3" style="padding:8px; color:#dc2626; font-weight:bold;">2026년 8월 25일까지</td></tr>
+          <tr><th style="padding:8px; background:#f5f5f5;">납입금액</th><td colspan="3" style="padding:8px; font-size:16px; font-weight:bold; color:#059669;">50,000원</td></tr>
+        </table>
+      </div>
+    `;
+  } else {
+    if (titleEl) titleEl.innerHTML = '<i class="fa-solid fa-calendar-days"></i> 학생 수강 시간표 인쇄';
+    contentEl.innerHTML = `
+      <div style="background:#fff; padding:30px; border:1px solid #ddd; max-width:700px; margin:0 auto; font-family:'Malgun Gothic';">
+        <h2 style="text-align:center; margin-bottom:20px; font-size:20px; text-decoration:underline;">학생 개인별 주간 수강시간표</h2>
+        <table style="width:100%; border-collapse:collapse; font-size:12px; text-align:center;" border="1">
+          <thead><tr style="background:#f5f5f5;"><th style="padding:8px;">교시 / 요일</th><th>월요일</th><th>화요일</th><th>수요일</th><th>목요일</th><th>금요일</th></tr></thead>
+          <tbody>
+            <tr><td style="padding:8px; font-weight:bold;">1부 (14:00~14:50)</td><td>-</td><td style="background:#e0f2fe; font-weight:bold;">창의로봇교실</td><td>-</td><td style="background:#e0f2fe; font-weight:bold;">창의로봇교실</td><td>-</td></tr>
+            <tr><td style="padding:8px; font-weight:bold;">2부 (15:00~15:50)</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+  }
+
+  modal.style.display = 'flex';
+}
+
+function triggerPrintArea() {
+  window.print();
+}
+
+function openAppChangeHistoryModal() {
+  const modal = document.getElementById('modalAppStatusView');
+  const titleEl = document.getElementById('appStatusModalTitle');
+  const bodyEl = document.getElementById('appStatusModalBody');
+  if (!modal || !bodyEl) return;
+
+  if (titleEl) titleEl.innerHTML = '<i class="fa-solid fa-clock-rotate-left"></i> 최근 수강 추가 및 취소 변동 이력';
+  bodyEl.innerHTML = `
+    <table class="db-table" style="width:100%; font-size:12px;">
+      <thead><tr><th>일시</th><th>구분</th><th>학생명</th><th>강좌명</th><th>변동사유</th><th>처리자</th></tr></thead>
+      <tbody>
+        <tr><td>2026-08-17 14:20</td><td><span class="badge" style="background:#16a34a; color:#fff;">추가등록</span></td><td>정다은</td><td>[늘봄] AI 로봇 코딩 교실</td><td>관리자 직접 등록</td><td>관리자(김혜련)</td></tr>
+        <tr><td>2026-08-16 11:05</td><td><span class="badge" style="background:#dc2626; color:#fff;">수강취소</span></td><td>김하은</td><td>[특기적성] 창의 미술교실</td><td>학부모 유선 취소 요청</td><td>관리자(김혜련)</td></tr>
+      </tbody>
+    </table>
+  `;
+  modal.style.display = 'flex';
+}
+
+function openAppUnregisteredModal() {
+  const modal = document.getElementById('modalAppStatusView');
+  const titleEl = document.getElementById('appStatusModalTitle');
+  const bodyEl = document.getElementById('appStatusModalBody');
+  if (!modal || !bodyEl) return;
+
+  if (titleEl) titleEl.innerHTML = '<i class="fa-solid fa-user-slash"></i> 방과후 미신청 학생 명단 (안내문 미제출)';
+  bodyEl.innerHTML = `
+    <table class="db-table" style="width:100%; font-size:12px;">
+      <thead><tr><th>연번</th><th>학년반</th><th>번호</th><th>학생명</th><th>보호자연락처</th><th>SMS 안내</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>1학년 1반</td><td>03</td><td>강태호</td><td>010-4444-5555</td><td><button class="btn btn-outline" style="padding:2px 6px; font-size:11px;" onclick="alert('신청 안내 SMS가 발송되었습니다.')">SMS 발송</button></td></tr>
+        <tr><td>2</td><td>1학년 2반</td><td>08</td><td>윤채원</td><td>010-6666-7777</td><td><button class="btn btn-outline" style="padding:2px 6px; font-size:11px;" onclick="alert('신청 안내 SMS가 발송되었습니다.')">SMS 발송</button></td></tr>
+      </tbody>
+    </table>
+  `;
+  modal.style.display = 'flex';
+}
+
+function editAppContact(id, studentName, currentPhone) {
+  const newPhone = prompt(`[${studentName}] 학생의 학부모 연락처를 수정하세요:`, currentPhone !== '-' ? currentPhone : '010-');
+  if (newPhone && newPhone.trim()) {
+    fetch('/api/af/ad_app/update', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, parentPhone: newPhone.trim(), guardianPhone: newPhone.trim() })
+    }).then(res => res.json()).then(d => {
+      if (d.success) {
+        alert('연락처가 변경되었습니다.');
+        loadApplicants();
+      }
+    });
+  }
+}
+
+function viewAppSchedule(studentName, gradeClass) {
+  alert(`[${studentName} (${gradeClass})] 학생 주간 수강시간표:\n\n- 화요일 14:00~14:50: [특기적성] 창의 로봇교실 A반\n- 목요일 14:00~14:50: [특기적성] 창의 로봇교실 A반`);
+}
+
+function openAppTestMode() {
+  const modal = document.getElementById('modalAppTestMode');
+  if (modal) modal.style.display = 'flex';
+}
+
+async function executeTestApply() {
+  const courseTitle = document.getElementById('testModeCourseSelect')?.value;
+  alert(`[정다은] 학생의 [${courseTitle || '신청 강좌'}] 가상 수강신청이 성공적으로 접수되었습니다.\n관리자 신청목록에 자동 반영됩니다.`);
+  closeAppModal('modalAppTestMode');
   loadApplicants();
 }
 
@@ -1226,41 +1834,6 @@ async function openRefundCalculator() {
   }
 }
 
-async function loadQaList() {
-  try {
-    const res = await fetch(`/api/qa?schoolCode=UNCHON2025`);
-    const data = await res.json();
-    const tbody = document.getElementById('qaTbody');
-    if (tbody && data.questions) {
-      tbody.innerHTML = data.questions.map(qa => `
-        <tr>
-          <td><strong>${qa.courseTitle}</strong></td>
-          <td>${qa.authorName} (${qa.authorRole})</td>
-          <td>${qa.title}</td>
-          <td><span class="badge ${qa.reply ? 'badge-OUTPUT' : 'badge-WAITING'}">${qa.reply ? '답변완료' : '미답변'}</span></td>
-          <td>${(qa.createdAt || '').slice(0, 10)}</td>
-          <td style="text-align: center;"><button class="btn btn-primary" style="padding:4px 8px; font-size:0.8rem;" onclick="alert('Q&A 답변 작성 창이 열립니다.')">답변</button></td>
-        </tr>
-      `).join('');
-    }
-  } catch (e) { console.error('loadQaList Error:', e); }
-}
-
-async function loadFaqList() {
-  try {
-    const res = await fetch(`/api/af/ad_faq/main`);
-    const data = await res.json();
-    const container = document.getElementById('faqAccordionContainer');
-    if (container && data.faqs) {
-      container.innerHTML = data.faqs.map(faq => `
-        <div style="background: white; border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 10px; padding: 14px;">
-          <h4 style="margin: 0 0 6px 0; color: var(--primary-color); cursor: pointer;"><i class="fa-solid fa-circle-question"></i> [${faq.category}] ${faq.question}</h4>
-          <p style="margin: 0; color: var(--text-secondary); font-size: 0.9rem;">${faq.answer}</p>
-        </div>
-      `).join('');
-    }
-  } catch (e) { console.error('loadFaqList Error:', e); }
-}
 
 function exportToExcel() {
   alert('📊 Excel (.xlsx) 보고서 파일이 다운로드되었습니다.');
@@ -1354,8 +1927,6 @@ window.saveManagerInfo = saveManagerInfo;
 window.loadRestrictionGroups = loadRestrictionGroups;
 window.loadNoticeSettings = loadNoticeSettings;
 window.saveNoticeSettings = saveNoticeSettings;
-window.loadQaList = loadQaList;
-window.loadFaqList = loadFaqList;
 window.loadInstructorBanking = loadInstructorBanking;
 window.saveBasicSettings = saveBasicSettings;
 window.toggleSelectAll = toggleSelectAll;
@@ -1690,4 +2261,289 @@ function escHtml(str) {
 }
 
 window.loadFaqList = loadFaqList;
+
+// ==================== 28. 고객지원 게시판 (/af/qanda/lists) ====================
+let qaItems = [
+  {
+    id: '8806',
+    num: 2,
+    authorName: '김혜련',
+    hp1: '010',
+    hp2: '2494',
+    hp3: '1479',
+    phone: '062-609-1182',
+    email: 'khh147979@naver.com',
+    subject: '2026학년도 1학기 늘봄학교 만족도 조사 설문지',
+    contents: '2026학년도 바뀐 설문지 보내드립니다.\n감사합니다.',
+    files: [{ id: 'f_1', name: '2026학년도1학기늘봄학교만족도조사설문지.hwp' }],
+    status: '2',
+    statusText: '완료',
+    createdAt: '2026-06-01',
+    answerDate: '06/01',
+    answerContent: '자료 올려 주셔서 감사합니다.\n4가지 샘플 설문에 등록해드렸습니다.\n확인 바랍니다.'
+  },
+  {
+    id: '3356',
+    num: 1,
+    authorName: '김혜련',
+    hp1: '010',
+    hp2: '2494',
+    hp3: '1479',
+    phone: '062-609-1182',
+    email: 'khh147979@naver.com',
+    subject: '지원금 스쿨뱅킹 현황',
+    contents: '1학기 지원금 스쿨뱅킹 수납 현황 파일 확인 부탁드립니다.',
+    files: [],
+    status: '2',
+    statusText: '완료',
+    createdAt: '2026-05-15',
+    answerDate: '05/16',
+    answerContent: '요청하신 지원금 스쿨뱅킹 수납 현황을 에듀파인 연계 규격에 맞게 생성하여 등록 처리하였습니다.'
+  }
+];
+
+let currentViewingQaId = null;
+
+async function loadQaList() {
+  const tbody = document.getElementById('qaTbody');
+  if (!tbody) return;
+
+  try {
+    const res = await fetch(`/api/af/qanda/lists/sn/${SCHOOL_SN}`);
+    if (res.ok) {
+      const data = await res.json();
+      if (data.items && Array.isArray(data.items)) {
+        qaItems = data.items;
+      }
+    }
+  } catch (_) {}
+
+  renderQaTable(qaItems);
+}
+
+function renderQaTable(items) {
+  const tbody = document.getElementById('qaTbody');
+  if (!tbody) return;
+
+  if (!items || items.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" class="center" style="padding:40px; color:#888;">등록된 질문이 없습니다.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = items.map(item => {
+    let statusBadge = '<span style="color:#666;">접수</span>';
+    let answerBadge = '<span style="color:#999;">미답변</span>';
+    if (item.status === '1') {
+      statusBadge = '<span style="color:#d9534f; font-weight:bold;">처리중</span>';
+    } else if (item.status === '2') {
+      statusBadge = '<span style="color:#337ab7; font-weight:bold;">완료</span>';
+      answerBadge = `<span style="color:#337ab7; font-weight:bold;"><i class="fa-solid fa-check"></i> ${escHtml(item.answerDate || '완료')}</span>`;
+    }
+
+    return `
+      <tr style="border-bottom:1px solid #eee; height:38px;">
+        <td style="border-right:1px solid #eee;">${item.num || item.id}</td>
+        <td style="text-align:left; padding-left:12px; border-right:1px solid #eee;">
+          <a href="javascript:void(0);" onclick="openQaViewModal('${item.id}')" style="color:#337ab7; font-weight:bold; text-decoration:none;">
+            ${escHtml(item.subject)}
+          </a>
+        </td>
+        <td style="border-right:1px solid #eee; font-size:11px; color:#666;">${item.createdAt || ''}</td>
+        <td style="border-right:1px solid #eee;">${statusBadge}</td>
+        <td>${answerBadge}</td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function filterQaList() {
+  const status = document.getElementById('qaStatusFilter')?.value || 'all';
+  const type = document.getElementById('qaSearchType')?.value || 'sub_con';
+  const kw = (document.getElementById('qaSearchKeyword')?.value || '').trim().toLowerCase();
+
+  let filtered = [...qaItems];
+  if (status !== 'all') {
+    filtered = filtered.filter(i => String(i.status) === String(status));
+  }
+  if (kw) {
+    if (type === 'subject') {
+      filtered = filtered.filter(i => i.subject.toLowerCase().includes(kw));
+    } else if (type === 'contents') {
+      filtered = filtered.filter(i => i.contents.toLowerCase().includes(kw));
+    } else {
+      filtered = filtered.filter(i => i.subject.toLowerCase().includes(kw) || (i.contents && i.contents.toLowerCase().includes(kw)));
+    }
+  }
+  renderQaTable(filtered);
+}
+
+function resetQaFilter() {
+  if (document.getElementById('qaStatusFilter')) document.getElementById('qaStatusFilter').value = 'all';
+  if (document.getElementById('qaSearchType')) document.getElementById('qaSearchType').value = 'sub_con';
+  if (document.getElementById('qaSearchKeyword')) document.getElementById('qaSearchKeyword').value = '';
+  renderQaTable(qaItems);
+}
+
+function openQaWriteModal() {
+  const modal = document.getElementById('modalQaWrite');
+  if (modal) modal.style.display = 'flex';
+}
+
+function openQaViewModal(id) {
+  const item = qaItems.find(i => String(i.id) === String(id));
+  if (!item) return;
+
+  currentViewingQaId = id;
+  const modal = document.getElementById('modalQaView');
+  const body = document.getElementById('qaViewBody');
+  if (!modal || !body) return;
+
+  let answerHtml = `
+    <div style="background:#f5f8fc; border:1px solid #d2e4f7; padding:12px 16px; border-radius:4px; margin-top:16px;">
+      <div style="font-weight:bold; color:#2b669a; margin-bottom:6px;"><i class="fa-solid fa-reply"></i> 디비디비스쿨 고객지원 담당자 답변</div>
+      <div style="color:#555; white-space:pre-line; line-height:1.6;">${escHtml(item.answerContent || '문의가 접수되었습니다. 신속히 확인 후 답변드리겠습니다.')}</div>
+    </div>
+  `;
+
+  body.innerHTML = `
+    <table class="db-table" style="width:100%; font-size:12.5px; margin-bottom:12px;">
+      <tbody>
+        <tr>
+          <td style="width:120px; font-weight:bold; background:#f8fafc;">제목</td>
+          <td style="font-weight:bold; font-size:14px; color:#1e293b;">${escHtml(item.subject)}</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; background:#f8fafc;">작성자</td>
+          <td>${escHtml(item.authorName)} (${item.hp1}-${item.hp2}-${item.hp3})</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; background:#f8fafc;">등록일시</td>
+          <td>${escHtml(item.createdAt)}</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; background:#f8fafc;">진행상태</td>
+          <td><span class="badge" style="background:#337ab7; color:#fff; padding:3px 8px; border-radius:3px;">${item.statusText || (item.status === '2' ? '완료' : '접수')}</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; background:#f8fafc; vertical-align:top; padding-top:10px;">문의내용</td>
+          <td style="white-space:pre-line; line-height:1.6; padding:10px 8px;">${escHtml(item.contents)}</td>
+        </tr>
+      </tbody>
+    </table>
+    ${answerHtml}
+  `;
+
+  modal.style.display = 'flex';
+}
+
+function closeQaModal(id) {
+  const modal = document.getElementById(id);
+  if (modal) modal.style.display = 'none';
+}
+
+async function handleQaWriteSubmit(e) {
+  e.preventDefault();
+  const subject = document.getElementById('qa_subject')?.value;
+  const contents = document.getElementById('qa_contents')?.value;
+  const authorName = document.getElementById('qa_author_name')?.value || '김혜련';
+  const hp1 = document.getElementById('qa_hp1')?.value || '010';
+  const hp2 = document.getElementById('qa_hp2')?.value || '2494';
+  const hp3 = document.getElementById('qa_hp3')?.value || '1479';
+  const phone = document.getElementById('qa_phone')?.value || '062-609-1182';
+  const email = document.getElementById('qa_email')?.value || 'khh147979@naver.com';
+
+  const newItem = {
+    id: String(Date.now()),
+    num: qaItems.length + 1,
+    authorName,
+    hp1,
+    hp2,
+    hp3,
+    phone,
+    email,
+    subject,
+    contents,
+    files: [],
+    status: '0',
+    statusText: '접수',
+    createdAt: new Date().toISOString().split('T')[0],
+    answerDate: '',
+    answerContent: ''
+  };
+
+  try {
+    await fetch('/api/af/qanda/create', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        school_id: SCHOOL_SN,
+        ...newItem
+      })
+    });
+  } catch (_) {}
+
+  qaItems.unshift(newItem);
+  renderQaTable(qaItems);
+  closeQaModal('modalQaWrite');
+  alert('고객지원 문의가 등록되었습니다.');
+}
+
+async function deleteCurrentQaItem() {
+  if (!currentViewingQaId) return;
+  if (!window.confirm('정말 삭제하시겠습니까?')) return;
+
+  try {
+    await fetch('/api/af/qanda/delete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: currentViewingQaId })
+    });
+  } catch (_) {}
+
+  qaItems = qaItems.filter(i => String(i.id) !== String(currentViewingQaId));
+  renderQaTable(qaItems);
+  closeQaModal('modalQaView');
+  alert('삭제되었습니다.');
+}
+
+window.loadQaList = loadQaList;
+window.filterQaList = filterQaList;
+window.resetQaFilter = resetQaFilter;
+window.openQaWriteModal = openQaWriteModal;
+window.openQaViewModal = openQaViewModal;
+window.closeQaModal = closeQaModal;
+window.handleQaWriteSubmit = handleQaWriteSubmit;
+window.deleteCurrentQaItem = deleteCurrentQaItem;
+
+// Export Applicant Functions
+window.loadApplicants = loadApplicants;
+window.resetAppFilters = resetAppFilters;
+window.toggleSelectAllApps = toggleSelectAllApps;
+window.toggleAppSort = toggleAppSort;
+window.openAppCreateModal = openAppCreateModal;
+window.closeAppModal = closeAppModal;
+window.handleAppCreateSubmit = handleAppCreateSubmit;
+window.openAppEditModal = openAppEditModal;
+window.submitAppEdit = submitAppEdit;
+window.deleteApp = deleteApp;
+window.handleBulkAppStatus = handleBulkAppStatus;
+window.handleBulkAppDelete = handleBulkAppDelete;
+window.openAppBatchUploadModal = openAppBatchUploadModal;
+window.parseAppBatchSample = parseAppBatchSample;
+window.submitAppBatchUpload = submitAppBatchUpload;
+window.openAppBatchFeeModal = openAppBatchFeeModal;
+window.submitAppBatchFee = submitAppBatchFee;
+window.openAppBatchCopyModal = openAppBatchCopyModal;
+window.submitAppBatchCopy = submitAppBatchCopy;
+window.exportAppExcel = exportAppExcel;
+window.downloadSchoolBankingCsv = downloadSchoolBankingCsv;
+window.openAppPrintModal = openAppPrintModal;
+window.triggerPrintArea = triggerPrintArea;
+window.openAppChangeHistoryModal = openAppChangeHistoryModal;
+window.openAppUnregisteredModal = openAppUnregisteredModal;
+window.editAppContact = editAppContact;
+window.viewAppSchedule = viewAppSchedule;
+window.openAppTestMode = openAppTestMode;
+window.executeTestApply = executeTestApply;
+
 
