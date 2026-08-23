@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>신청자관리 - 늘봄·방과후학교 - 디비디비스쿨</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/af/ad_lec/lists/sn/admin_lec.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans KR', '맑은 고딕', 'Malgun Gothic', sans-serif; background-color: #f8fafc; color: #333; font-size: 12px; min-height: 100vh; display: flex; flex-direction: column; }
+    a { color: inherit; text-decoration: none; }
+    
+    /* Main Layout */
+    .admin-layout { display: flex; flex: 1; min-height: calc(100vh - 52px); }
+    
+    /* Main Contents */
+    #contents_box { flex: 1; padding: 16px 20px; max-width: 1600px; background: #fff; }
+    #contents_title { font-size: 18px; font-weight: bold; color: #222; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; border-bottom: 2px solid #337ab7; padding-bottom: 8px; }
+    
+    /* Top Action Bar in Title Panel */
+    .top-action-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
+    .top-action-bar .left-title { font-size: 14px; font-weight: bold; color: #333; display: flex; align-items: center; gap: 6px; }
+    .top-action-bar .right-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+    
+    /* Buttons Styling */
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 5px 10px; font-size: 12px; font-weight: bold; border-radius: 3px; cursor: pointer; border: 1px solid #ccc; background: #fff; color: #333; gap: 4px; white-space: nowrap; }
+    .btn:hover { background: #f4f4f4; }
+    .btn-primary { background: #337ab7; color: #fff; border-color: #2e6da4; }
+    .btn-primary:hover { background: #286090; }
+    .btn-success { background: #5cb85c; color: #fff; border-color: #4cae4c; }
+    .btn-success:hover { background: #449d44; }
+    .btn-dark-green { background: #27ae60; color: #fff; border-color: #219150; }
+    .btn-dark-green:hover { background: #1e824c; }
+    .btn-warning { background: #f0ad4e; color: #fff; border-color: #eea236; }
+    .btn-warning:hover { background: #ec971f; }
+    .btn-info { background: #5bc0de; color: #fff; border-color: #46b8da; }
+    .btn-info:hover { background: #31b0d5; }
+    .btn-danger { background: #d9534f; color: #fff; border-color: #d43f3a; }
+    .btn-danger:hover { background: #c9302c; }
+    .btn-outline-danger { background: #fff; color: #d9534f; border-color: #d9534f; }
+    .btn-outline-danger:hover { background: #fdf2f2; }
+    .btn-default { background: #fff; color: #333; border-color: #ccc; }
+    
+    .btn-db-white {
+      background: linear-gradient(to bottom, #ffffff 0%, #f1f3f5 100%) !important;
+      border: 1px solid #ced4da !important;
+      color: #334155 !important;
+      font-weight: 500 !important;
+    }
+    .btn-db-white:hover {
+      background: #e9ecef !important;
+      border-color: #adb5bd !important;
+    }
+    
+    .form-control { border: 1px solid #ccc; border-radius: 2px; padding: 4px 8px; font-size: 12px; outline: none; background: #fff; height: 28px; }
+    
+    /* Search Filter Row */
+    .filter-panel { background: #f8fafc; border: 1px solid #dcdcdc; padding: 8px 12px; border-radius: 3px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    
+    /* Middle Control Bar */
+    .control-panel { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
+    .control-panel .right-btns { display: flex; gap: 4px; flex-wrap: wrap; }
+    
+    /* Table Styling */
+    .table-container { overflow-x: auto; border: 1px solid #dcdcdc; border-radius: 2px; }
+    table.db-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 12px; }
+    table.db-table th { background: #f4f6f9; padding: 8px 4px; border: 1px solid #dcdcdc; color: #333; font-weight: bold; white-space: nowrap; }
+    table.db-table td { padding: 7px 4px; border: 1px solid #e2e8f0; color: #333; vertical-align: middle; white-space: nowrap; }
+    table.db-table tr:nth-child(even) td { background-color: #fafafa; }
+    table.db-table tr:hover td { background-color: #f1f5f9; }
+    
+    .icon-btn { cursor: pointer; color: #666; font-size: 11px; margin-left: 3px; }
+    .icon-btn:hover { color: #337ab7; }
+
+    /* Modal Backdrop & Box */
+    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; padding: 16px; }
+    .modal-box { background: #fff; border-radius: 4px; width: 100%; max-width: 680px; box-shadow: 0 4px 20px rgba(0,0,0,0.25); overflow: hidden; animation: fadeIn 0.15s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+    .modal-header { background: #337ab7; color: #fff; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 13.5px; }
+    .modal-body { padding: 16px; max-height: 75vh; overflow-y: auto; font-size: 12px; }
+    .modal-footer { padding: 10px 16px; background: #f8fafc; border-top: 1px solid #eee; display: flex; justify-content: flex-end; gap: 6px; }
+    
+    .form-group { margin-bottom: 10px; }
+    .form-group label { display: block; font-weight: bold; margin-bottom: 4px; color: #333; font-size: 12px; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; }
+    
+    .help_box { background: #fcf8e3; border: 1px solid #faebcc; color: #8a6d3b; padding: 8px 12px; border-radius: 3px; font-size: 12px; line-height: 1.6; margin-bottom: 10px; }
+
+    #footer { background: #fff; border-top: 1px solid #d2d6de; padding: 10px; text-align: center; font-size: 11.5px; color: #666; margin-top: auto; }
+  </style>
+</head>
+<body>
+  
+  <!-- 1. TOP GLOBAL BLUE NAVBAR -->
+  <header class="top-navbar">
+    <div class="school-title" id="topSchoolTitle" style="cursor:pointer;" onclick="window.location.href='/sczigi/service/lists/sn/3267'" title="학교관리 페이지로 이동">광주풍향초등학교</div>
+    <div class="center-selector" style="position:relative;">
+      <button id="afServiceBtn" onclick="toggleAfServiceDropdown(event)" style="background:rgba(255,255,255,0.15); border:none; color:white; font-size:0.88rem; font-weight:bold; padding:4px 10px; border-radius:3px; cursor:pointer; display:flex; align-items:center; gap:6px;">
+        <span>늘봄학교</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem;"></i>
+      </button>
+      <div id="afServiceDropdown" style="display:none; position:absolute; top:36px; left:0; background:#fff; color:#333; border:1px solid #ddd; border-radius:4px; box-shadow:0 4px 12px rgba(0,0,0,0.15); min-width:170px; z-index:1100; padding:4px 0; text-align:left;">
+        <div style="padding:6px 12px; font-size:11px; font-weight:bold; color:#777; border-bottom:1px solid #eee;">서비스 전환</div>
+        <a href="/af/ad_lec/lists/sn/3267" style="display:block; padding:8px 12px; font-size:12px; font-weight:bold; color:#3c8dbc; background:#f0f7fd;"><i class="fa-solid fa-chart-line" style="margin-right:6px;"></i> 늘봄학교 (현재)</a>
+        <a href="/sczigi/service/lists/sn/3267" style="display:block; padding:8px 12px; font-size:12px; color:#333; font-weight:bold;"><i class="fa-solid fa-school" style="color:#3c8dbc; margin-right:6px;"></i> 학교관리 돌아가기</a>
+      </div>
+    </div>
+    <div class="right-controls">
+      <select id="roleSwitcher" style="background:#1d4ed8; color:white; border:1px solid #60a5fa; border-radius:3px; padding:3px 8px; font-size:0.8rem;" onchange="location.href='/af/ad_lec/lists/sn/3267'">
+        <option value="school_admin" selected>학교 관리자 (Admin)</option>
+        <option value="teacher">강사 (Instructor)</option>
+        <option value="parent">학생/학부모 (Parent)</option>
+      </select>
+      <span style="cursor:pointer;" onclick="location.href='/login'"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</span>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+    <!-- 2. SIDEBAR NAVIGATION (Main Page Sidebar UI) -->
+    <aside class="sidebar">
+      <div class="user-profile-card">
+        <div class="user-profile-header">
+          <div class="user-avatar-circle"><i class="fa-solid fa-user"></i></div>
+          <div class="user-name-text">관리자(박진수)님 <span class="badge-bell"><i class="fa-solid fa-bell"></i> 0</span></div>
+        </div>
+        <div class="user-links">
+          <a href="/login">[로그아웃]</a>
+          <a href="/member/profile">[정보수정]</a>
+        </div>
+        <div class="user-action-buttons">
+          <button class="btn-home" onclick="location.href='/sczigi/service/lists/sn/3267'" style="background:#3c8dbc; color:#fff; font-weight:bold;"><i class="fa-solid fa-school"></i> 학교관리</button>
+          <button class="btn-course-reg" onclick="location.href='/af/ad_lec/lists/sn/3267'"><i class="fa-solid fa-plus"></i> 강좌등록</button>
+        </div>
+      </div>
+
+      <ul class="sidebar-menu" id="adminSidebar">
+        <li class="subitem" id="sub_ad_faq_main">
+          <a href="/af/ad_faq/main/sn/3267">
+            <span class="menu-label"><i class="fa-solid fa-book"></i> 매뉴얼</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_qanda_lists">
+          <a href="/af/qanda/lists/sn/3267">
+            <span class="menu-label"><i class="fa-solid fa-comments"></i> 고객지원 게시판</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_sczigi_service_lists">
+          <a href="/sczigi/service/lists/sn/3267">
+            <span class="menu-label"><i class="fa-solid fa-school"></i> 학교관리</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_ad_lec_lists">
+          <a href="/af/ad_lec/lists/sn/3267">
+            <span class="menu-label"><i class="fa-solid fa-futbol"></i> 강좌관리</span>
+          </a>
+        </li>
+        <li class="subitem active" id="sub_ad_app_lists">
+          <a href="/af/ad_app/lists/sn/3267">
+            <span class="menu-label"><i class="fa-solid fa-users"></i> 신청자관리</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_ad_wait_lists">
+          <a href="/af/ad_wait/lists/sn/3267">
+            <span class="menu-label"><i class="fa-solid fa-user-clock"></i> 대기자관리</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_ad_att_stat">
+          <a href="/af/ad_att/stat/sn/3267">
+            <span class="menu-label"><i class="fa-solid fa-square-check"></i> 출석부관리</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_ad_ref_lists">
+          <a href="/af/ad_ref/lists/sn/3267">
+            <span class="menu-label"><i class="fa-solid fa-user-minus"></i> 환불/취소관리</span>
+          </a>
+        </li>
+
+        <li class="has-submenu" id="menu_ad_subsidy">
+          <a onclick="this.parentElement.classList.toggle('open')">
+            <span class="menu-label"><i class="fa-solid fa-building-columns"></i> 지원금관리</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          </a>
+          <ul class="submenu-list">
+            <li class="subitem" id="sub_ad_free2_stu"><a href="/af/ad_free2_stu/lists/sn/3267">대상자관리</a></li>
+            <li class="subitem" id="sub_ad_free2_app"><a href="/af/ad_free2_app/lists/sn/3267">수강자관리</a></li>
+            <li class="subitem" id="sub_ad_free2_cfg_main"><a href="/af/ad_free2_cfg/main/sn/3267">지원금설정</a></li>
+            <li class="subitem" id="sub_ad_free2_cfg_free1"><a href="/af/ad_free2_cfg/free1/sn/3267">순위구분설정</a></li>
+          </ul>
+        </li>
+
+        <li class="subitem" id="sub_ad_abs_lists">
+          <a href="/af/ad_abs/lists/sn/3267">
+            <span class="menu-label"><i class="fa-solid fa-calendar-xmark"></i> 결석/귀가신청</span>
+          </a>
+        </li>
+        <li class="subitem" id="sub_ad_tea_lists">
+          <a href="/af/ad_tea/lists/sn/3267">
+            <span class="menu-label"><i class="fa-solid fa-briefcase"></i> 강사관리</span>
+          </a>
+        </li>
+
+        <li class="has-submenu" id="menu_ad_survey">
+          <a onclick="this.parentElement.classList.toggle('open')">
+            <span class="menu-label"><i class="fa-solid fa-chart-pie"></i> 설문관리</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          </a>
+          <ul class="submenu-list">
+            <li class="subitem" id="sub_ad_sur_lists"><a href="/af/ad_sur/lists/sn/3267">설문</a></li>
+            <li class="subitem" id="sub_ad_surs_lists"><a href="/af/ad_surs/lists/sn/3267">샘플설문</a></li>
+          </ul>
+        </li>
+
+        <li class="has-submenu" id="menu_ad_cfg">
+          <a onclick="this.parentElement.classList.toggle('open')">
+            <span class="menu-label"><i class="fa-solid fa-gear"></i> 환경설정</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          </a>
+          <ul class="submenu-list">
+            <li class="subitem" id="sub_ad_cfg_main"><a href="/af/ad_cfg/main/sn/3267">기본설정</a></li>
+            <li class="subitem" id="sub_ad_time_lists"><a href="/af/ad_time/lists/sn/3267">신청기간</a></li>
+            <li class="subitem" id="sub_ad_cfg_period"><a href="/af/ad_cfg/period/sn/3267">강의시간</a></li>
+            <li class="subitem" id="sub_ad_cfg_afDiv"><a href="/af/ad_cfg/afDiv/sn/3267">강좌구분</a></li>
+            <li class="subitem" id="sub_ad_cfg_appLiGrp"><a href="/af/ad_cfg/appLiGrp/sn/3267">중복제한그룹</a></li>
+            <li class="subitem" id="sub_ad_verify_main"><a href="/af/ad_verify/main/sn/3267">학적검증</a></li>
+            <li class="subitem" id="sub_ad_neis_edufine"><a href="/af/ad_neis_edufine/lists/sn/3267">나이스/에듀파인 설정</a></li>
+            <li class="subitem" id="sub_ad_cfg_message"><a href="/af/ad_cfg/message/sn/3267">안내글설정</a></li>
+            <li class="subitem" id="sub_ad_cfg_clear"><a href="/af/ad_cfg/clear/sn/3267">초기화</a></li>
+            <li class="subitem" id="sub_ad_info_modify"><a href="/af/ad_info/modify/sn/3267">담당자정보</a></li>
+          </ul>
+        </li>
+
+        <li class="subitem" id="sub_notification_lists">
+          <a href="/af/notification/lists/sn/3267">
+            <span class="menu-label"><i class="fa-solid fa-volume-high"></i> 알림관리</span>
+          </a>
+        </li>
+
+        <li class="subitem" id="sub_spush_lists">
+          <a href="/af/spush/lists/sn/3267">
+            <span class="menu-label"><i class="fa-solid fa-bell"></i> 푸시알림관리</span>
+          </a>
+        </li>
+
+        <li class="subitem" id="sub_ad_extension_lists">
+          <a href="/af/ad_extension/lists/sn/3267" style="display:flex; align-items:center; justify-content:space-between;">
+            <span class="menu-label"><i class="fa-solid fa-calendar-check"></i> 연장신청</span>
+            <span class="badge" style="background:#2563eb; color:#ffffff; font-size:11px; font-weight:bold; padding:2px 8px; border-radius:12px; margin-left:auto;">198일 남음</span>
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <main id='contents_box'>
+<!-- Title Area -->
+      <div id="contents_title">
+        <i class="fa fa-file-text-o"></i> 신청자관리 <br>
+        <span class="title">광주풍향초등학교 늘봄학교</span>
+      </div>
+
+			<div class="panel_main panel-default_main" style="border: 1px solid #dcdcdc; border-radius: 3px; margin-bottom: 15px; background: #fff;">
+	<div class="panel-heading" style="background: #fcfcfc; border-bottom: 1px solid #dcdcdc; padding: 10px 15px; font-size: 13.5px; font-weight: normal; color: #555;">추가/취소자조회</div>
+	<div class="panel-body" style="padding: 15px;">
+		<p style="margin-bottom:10px;"><i class="fa fa-check-square" style="color:#337ab7; font-size:13px;" title="필수항목"></i><span style="font-size:12px; margin-left:4px;">표시가 있는 항목은 반드시 입력해야 합니다.</span></p>	
+		<form action="/api/af/ad_app/com/excel" name="fm_excel" id="fm_excel" method="post" onsubmit="return fm_excel_check(this);" accept-charset="utf-8">
+		
+		<table class="table list table-form" style="margin:0px; width:100%; border-top:1px solid #dcdcdc; border-bottom:1px solid #dcdcdc;">
+		<tbody><tr style="border-bottom:1px solid #eee;">
+			<th style="width:140px; background-color:#f9f9f9; text-align:left; padding:10px 15px; font-weight:normal; color:#555;">검색 조건 <i class="fa fa-check-square" style="color:#337ab7; font-size:12px;"></i></th>		
+			<td style="text-align:left; padding:10px 15px; border-left:1px solid #eee;">
+				<span class="mobile_clear">			
+					<span style="line-height:1.6;">
+						<label style="cursor:pointer; font-weight:normal;"><input type="radio" name="com_gubun" id="com_gubun_2" value="2" checked="checked" onclick="chk_tr_sld2();"> 수강생의 추가일자 &amp; 최종수강일(환불/취소) 기준</label><br>
+						<label style="cursor:pointer; font-weight:normal;"><input type="radio" name="com_gubun" id="com_gubun_1" value="1" onclick="chk_tr_sld2();"> 현재/이전 강좌 비교</label>				
+					</span>			
+				</span>			
+			</td>
+		</tr>			
+		<tr style="border-bottom:1px solid #eee;">
+			<th style="background-color:#f9f9f9; text-align:left; padding:10px 15px; font-weight:normal; color:#555;">현재 강좌 <i class="fa fa-check-square" style="color:#337ab7; font-size:12px;"></i></th>
+			<td style="text-align:left; padding:10px 15px; border-left:1px solid #eee;">
+				<div style="display:flex; gap:5px;">
+					<select name="sld" id="sld" onchange="search_lec_list(this); return false;" class="form-control" style="width:120px; font-size:12px; height:28px;">
+						<option value="">=강좌구분=</option>
+						<option value="5">3월</option>
+						<option value="6">26년 4월</option>
+						<option value="7">26년 5월</option>
+						<option value="8">26년 6월</option>
+						<option value="9">26년 7월</option>
+						<option value="10" selected="selected">26년 8월</option>
+						<option value="11">26년 9월</option>
+					</select>	
+					<select id="sln" name="sln" class="form-control" style="width:300px; font-size:12px; height:28px;">
+						<option value="">-강좌전체-</option>
+					</select>
+				</div>
+			</td>
+		</tr>
+		<tr id="tr_sld2" style="display:none; border-bottom:1px solid #eee;">
+			<th style="background-color:#f9f9f9; text-align:left; padding:10px 15px; font-weight:normal; color:#555;">이전 강좌 <i class="fa fa-check-square" style="color:#337ab7; font-size:12px;"></i></th>
+			<td style="text-align:left; padding:10px 15px; border-left:1px solid #eee;">
+				<div style="display:flex; gap:5px;">
+					<select name="sld2" id="sld2" onchange="search_lec_list(this); return false;" class="form-control" style="width:120px; font-size:12px; height:28px;">
+						<option value="">=강좌구분=</option>
+						<option value="5">3월</option>
+						<option value="6">26년 4월</option>
+						<option value="7">26년 5월</option>
+						<option value="8">26년 6월</option>
+						<option value="9" selected="selected">26년 7월</option>
+						<option value="10">26년 8월</option>
+						<option value="11">26년 9월</option>
+					</select>							
+					<select id="sln2" name="sln2" class="form-control" style="width:300px; font-size:12px; height:28px;">
+						<option value="">-강좌전체-</option>
+					</select>				
+				</div>
+			</td>
+		</tr>		
+		<tr style="border-bottom:1px solid #eee;">
+			<th style="background-color:#f9f9f9; text-align:left; padding:10px 15px; font-weight:normal; color:#555;">출력 구분 <i class="fa fa-check-square" style="color:#337ab7; font-size:12px;"></i></th>		
+			<td style="text-align:left; padding:10px 15px; border-left:1px solid #eee;">
+				<span class="mobile_clear">			
+					<span style="line-height:1.6;">
+						<label style="cursor:pointer; font-weight:normal;"><input type="radio" name="excel_gubun" id="excel_gubun_1" value="1"> 신청 취소자</label><br>				
+						<label style="cursor:pointer; font-weight:normal;"><input type="radio" name="excel_gubun" id="excel_gubun_2" value="2" checked="checked"> 신청 추가자</label>
+					</span>			
+				</span>			
+			</td>
+		</tr>						
+		<tr>
+			<th style="background-color:#f9f9f9; text-align:left; padding:10px 15px; font-weight:normal; color:#555;">출력 파일 <i class="fa fa-check-square" style="color:#337ab7; font-size:12px;"></i></th>		
+			<td style="text-align:left; padding:10px 15px; border-left:1px solid #eee;">
+				<span class="mobile_clear">			
+					<span style="line-height:1.6;">
+						<label style="cursor:pointer; font-weight:normal;"><input type="radio" name="file_type" id="file_type_one" value="one" checked="checked"> 강좌별로 파일 출력</label><br>				
+						<label style="cursor:pointer; font-weight:normal;"><input type="radio" name="file_type" id="file_type_all" value="all"> 한 개의 파일에 모두 출력</label><br>
+						<label style="cursor:pointer; font-weight:normal;"><input type="radio" name="file_type" id="file_type_tea" value="tea"> 강사별로 파일 출력</label>
+					</span>			
+				</span>			
+			</td>
+		</tr>			
+		</tbody></table>
+		
+		<div style="text-align:center; margin-top:25px; display:flex; justify-content:center; align-items:center; gap:6px;">
+			<button type="button" onclick="location.href='/af/ad_app/lists/sn/3267'" style="height:30px; padding:0 14px; font-size:12px; font-weight:bold; color:#333; background:#fff; border:1px solid #ccc; border-radius:3px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; box-sizing:border-box; margin:0; line-height:1;">취소</button>		
+			<button type="submit" style="height:30px; padding:0 14px; font-size:12px; font-weight:bold; color:#fff; background:#5cb85c; border:1px solid #4cae4c; border-radius:3px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; box-sizing:border-box; margin:0; line-height:1;">엑셀 출력</button>
+		</div>		
+</form>			
+	</div>	
+</div>
+
+<div style="background:#fff; border:1px solid #eee; border-left:3px solid #d9534f; padding:15px; margin-top:15px; font-size:12px; color:#555; line-height:1.6;">
+	<div style="font-weight:bold; color:#d9534f; margin-bottom:5px;">&lt; 현재/이전 강좌 비교 &gt;</div>
+	<ul style="list-style:none; padding-left:15px; margin-bottom:15px;">
+		<li style="position:relative; margin-bottom:2px;"><span style="position:absolute; left:-10px; color:#d9534f; font-weight:bold;">•</span> 강좌를 '강좌전체'로 선택한 경우 강좌명이 같은 이전, 현재 강좌를 비교하여 취소자와 추가자를 출력합니다.</li>
+		<li style="position:relative; margin-bottom:2px;"><span style="position:absolute; left:-10px; color:#d9534f; font-weight:bold;">•</span> 신청 추가자 : 이전 강좌에는 신청하지 않고, 현재 강좌에는 신청한 학생입니다.</li>
+		<li style="position:relative; margin-bottom:2px;"><span style="position:absolute; left:-10px; color:#d9534f; font-weight:bold;">•</span> 신청 취소자 : 이전 강좌에는 신청되어 있고, 현재 강좌에는 신청하지 않은 학생입니다.</li>
+	</ul>
+
+	<div style="font-weight:bold; color:#d9534f; margin-bottom:5px;">&lt; 수강생의 추가일자 &amp; 최종수강일(환불/취소) 기준 &gt;</div>
+	<ul style="list-style:none; padding-left:15px; margin-bottom:0;">
+		<li style="position:relative; margin-bottom:2px;"><span style="position:absolute; left:-10px; color:#d9534f; font-weight:bold;">•</span> 신청 추가자 : 추가일자가 등록되어있는 학생입니다.</li>
+		<li style="position:relative; margin-bottom:2px;"><span style="position:absolute; left:-10px; color:#d9534f; font-weight:bold;">•</span> 신청 취소자 : 환불/취소 내역에 최종수강일이 등록되어있는 학생입니다.</li>
+	</ul>
+</div>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer id="footer">
+    Copyright ⓒ <span style="font-weight:bold; color:#337ab7;">xmecca.com</span> All Rights Reserved. &nbsp;|&nbsp; <i class="fa-solid fa-envelope"></i> dbdbschool@naver.com
+  </footer>
+
+  <script>
+    function toggleAfServiceDropdown(e) {
+      e.stopPropagation();
+      const dd = document.getElementById('afServiceDropdown');
+      if (dd) dd.style.display = dd.style.display === 'block' ? 'none' : 'block';
+    }
+
+    document.addEventListener('click', () => {
+      const dd = document.getElementById('afServiceDropdown');
+      if (dd) dd.style.display = 'none';
+    });
+
+    function chk_tr_sld2() {
+      const gubun1 = document.getElementById('com_gubun_1');
+      const tr = document.getElementById('tr_sld2');
+      if (tr && gubun1) {
+        tr.style.display = gubun1.checked ? 'table-row' : 'none';
+      }
+    }
+
+    async function search_lec_list(obj) {
+      const sldVal = obj.value;
+      const targetId = (obj.id === 'sld2') ? 'sln2' : 'sln';
+      const targetSelect = document.getElementById(targetId);
+      if (!targetSelect) return;
+
+      targetSelect.innerHTML = '<option value="">-강좌전체-</option>';
+
+      if (!sldVal) return;
+
+      try {
+        const res = await fetch(`/api/af/ad_app/com/courses?sld=${encodeURIComponent(sldVal)}`);
+        const data = await res.json();
+        if (data.success && Array.isArray(data.list)) {
+          data.list.forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = c.value;
+            opt.textContent = ` ${c.text}`;
+            targetSelect.appendChild(opt);
+          });
+        }
+      } catch (err) {
+        console.error('강좌 목록 로드 실패:', err);
+      }
+    }
+
+    function fm_excel_check(fm) {
+      const com_gubun_el = document.querySelector('input[name="com_gubun"]:checked');
+      if (!com_gubun_el) {
+        alert('검색 조건 : 선택하세요.');
+        return false;
+      }
+
+      const sld = document.getElementById('sld');
+      if (!sld || !sld.value) {
+        alert('현재 강좌(강좌구분) : 선택하세요.');
+        return false;
+      }
+
+      if (com_gubun_el.value === '1') {
+        const sld2 = document.getElementById('sld2');
+        if (!sld2 || !sld2.value) {
+          alert('이전 강좌(강좌구분) : 선택하세요.');
+          return false;
+        }
+      }
+
+      const excel_gubun_el = document.querySelector('input[name="excel_gubun"]:checked');
+      if (!excel_gubun_el) {
+        alert('출력 구분 : 선택하세요.');
+        return false;
+      }
+
+      const file_type_el = document.querySelector('input[name="file_type"]:checked');
+      if (!file_type_el) {
+        alert('출력 파일 : 선택하세요.');
+        return false;
+      }
+
+      if (confirm('출력하시겠습니까?\n\n(데이터가 많은 경우 처리되는 시간이 다소 지연될 수 있습니다.)')) {
+        return true;
+      }
+      return false;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      chk_tr_sld2();
+      const sld = document.getElementById('sld');
+      if (sld && sld.value) {
+        search_lec_list(sld);
+      }
+      const sld2 = document.getElementById('sld2');
+      if (sld2 && sld2.value) {
+        search_lec_list(sld2);
+      }
+    });
+  </script>
+</body>
+</html>

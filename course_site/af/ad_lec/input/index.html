@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="방과후학교 수강신청, 늘봄학교 수강신청, 자유학기제 수강신청, 우유신청, 온라인 연수지명부 작성 등 학교 교직원 업무 경감을 위한 온라인 서비스를 제공합니다.">
+	<meta name="keywords" content="방과후학교,늘봄학교,우유신청,연수지명부,수강신청,늘봄학교 수강신청,자유학기제 수강신청,방과후 신청,방과후 수강신청,방과후학교 신청,방과후학교 수강신청,방과후학교 프로그램,방과후학교 운영시스템,방과후학교 온라인시스템">
+	<meta name="author" content="엑스메카">	
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+	<link rel="apple-touch-icon-precomposed" href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/images/mobile_ico_2.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/images/mobile_ico_2.png">
+	<link rel="shortcut icon" type="image/x-icon" href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/images/mobile_ico_2.png">
+	
+	<title>일괄입력 - 강좌관리 - 늘봄학교</title>
+	<link href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/bootstrap.css?23111301" rel="stylesheet" type="text/css">
+	<link href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+	<link href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/ui/jquery-ui.css" rel="stylesheet" type="text/css">
+	<link href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/default.css?26061201" rel="stylesheet" type="text/css">
+	<link href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/af/content.css?26033101" rel="stylesheet" type="text/css">
+	<link href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/icon/css/font-awesome.css" rel="stylesheet" type="text/css">
+	<link href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/scroll/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<script>
+		var XM_SITE_URL = '/';
+		var XM_STATIC_URL = 'https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/';
+	</script>
+	<script type="text/javascript" src="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/jquery.js"></script>
+	<script type="text/javascript" src="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/ui/jquery-ui.js"></script>
+	<script type="text/javascript" src="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/bootstrap.js"></script>
+	<script type="text/javascript" src="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/common.js?23021501"></script>
+	<script type="text/javascript" src="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/scroll/jquery.mCustomScrollbar.js"></script>
+
+  <style>
+    /* ==================== dbdbschool 원본 100% 픽셀 일치 스타일 ==================== */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Malgun Gothic', '맑은 고딕', Dotum, '돋움', AppleGothic, sans-serif;
+      font-size: 12px;
+      color: #333333;
+      background-color: #f4f6f9;
+      line-height: 1.42857143;
+    }
+
+    #header {
+      height: 50px;
+      background: #3c8dbc;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 15px;
+      position: relative;
+      z-index: 1000;
+    }
+    #header #logo {
+      margin: 0;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    #header #logo a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+    #header h1 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: bold;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    #header h1 a.btn_icon {
+      color: #ffffff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    #header .menu_btn {
+      margin: 0;
+      font-size: 18px;
+      cursor: pointer;
+      color: #ffffff;
+    }
+    .my_service {
+      display: none;
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ffffff;
+      color: #333333;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      min-width: 140px;
+      z-index: 1100;
+      padding: 5px 0;
+      text-align: left;
+    }
+    .my_service ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .my_service ul li a {
+      display: block;
+      padding: 8px 15px;
+      color: #333333;
+      text-decoration: none;
+      font-size: 12px;
+    }
+    .my_service ul li a:hover {
+      background: #f5f5f5;
+    }
+
+    #container {
+      display: flex;
+      min-height: calc(100vh - 50px);
+    }
+
+    #left_menu {
+      width: 185px;
+      background: #f9f9f9;
+      border-right: 1px solid #e7e7e7;
+      flex-shrink: 0;
+    }
+    .user_box {
+      padding: 12px 10px;
+      border-bottom: 1px solid #e7e7e7;
+      background: #fff;
+      text-align: center;
+    }
+    .user_box dl.user {
+      margin: 0 0 10px 0;
+    }
+    .user_box dl.user dt {
+      font-size: 12px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .user_box dl.user dt .ball_num a {
+      color: #d9534f;
+      text-decoration: none;
+      font-size: 11px;
+    }
+    .user_box dl.user dd {
+      display: inline-block;
+      margin: 0 3px;
+      font-size: 11px;
+    }
+    .user_box dl.user dd a {
+      color: #777777;
+      text-decoration: none;
+    }
+    .user_box ul.main_btn {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+    }
+    .user_box ul.main_btn li {
+      flex: 1;
+    }
+    .user_box ul.main_btn li a {
+      display: block;
+      padding: 6px 0;
+      font-size: 12px;
+      font-weight: bold;
+      color: #ffffff;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 3px;
+    }
+    .user_box ul.main_btn li.btn01 a {
+      background: #00a65a;
+    }
+    .user_box ul.main_btn li.btn02 a {
+      background: #dd4b39;
+    }
+
+    ul.parent {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    ul.parent > li {
+      border-bottom: 1px solid #f0f0f0;
+    }
+    ul.parent > li > a {
+      display: flex;
+      align-items: center;
+      padding: 10px 14px;
+      color: #444444;
+      text-decoration: none;
+      font-size: 12px;
+      transition: background 0.15s;
+    }
+    ul.parent > li > a i.fa {
+      width: 20px;
+      font-size: 14px;
+      color: #666666;
+    }
+    ul.parent > li > a strong {
+      font-weight: normal;
+      flex: 1;
+    }
+    ul.parent > li > a:hover,
+    ul.parent > li > a.on {
+      background: #e4e7ea;
+      color: #dd4b39;
+      font-weight: bold;
+    }
+    ul.parent > li > a.on i.fa {
+      color: #dd4b39;
+    }
+    ul.depth {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      background: #f0f2f5;
+      display: none;
+    }
+    ul.depth li a {
+      display: block;
+      padding: 7px 14px 7px 34px;
+      color: #555555;
+      text-decoration: none;
+      font-size: 11px;
+    }
+    ul.depth li a:hover {
+      color: #dd4b39;
+      background: #e9ecef;
+    }
+    .badge-xm {
+      background: #f39c12;
+      color: #fff;
+      font-size: 10px;
+      padding: 2px 5px;
+      border-radius: 10px;
+      margin-left: 4px;
+    }
+
+    #contents_box {
+      flex: 1;
+      padding: 20px 24px;
+      background: #ffffff;
+      min-width: 0;
+    }
+    #contents_title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333333;
+      margin-bottom: 15px;
+      position: relative;
+      line-height: 1.3;
+    }
+    #contents_title i.fa {
+      color: #3c8dbc;
+      margin-right: 4px;
+    }
+    #contents_title span.title {
+      font-size: 12px;
+      font-weight: normal;
+      color: #777777;
+    }
+    #contents_title p.write_yun {
+      position: absolute;
+      right: 0;
+      top: 0;
+      margin: 0;
+      text-align: center;
+    }
+    #contents_title p.write_yun a {
+      display: inline-block;
+      padding: 4px 10px;
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      color: #555;
+      text-decoration: none;
+      font-size: 11px;
+    }
+
+    .panel_main {
+      border: 1px solid #e0e0e0;
+      border-radius: 3px;
+      background: #ffffff;
+      position: relative;
+    }
+    .new_help_manualbox {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      z-index: 10;
+    }
+    .new_help_manualbox p.hm_title {
+      display: none;
+    }
+    .new_help_manualbox ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .new_help_manualbox a.manual_btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      background: #f9f9f9;
+      border: 1px solid #cccccc;
+      border-radius: 3px;
+      color: #333333;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: bold;
+    }
+    .new_help_manualbox a.manual_btn i.fa {
+      color: #cc181e;
+      font-size: 14px;
+    }
+
+    .panel-heading {
+      padding: 12px 15px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #333333;
+      border-bottom: 1px solid #eeeeee;
+      background-color: #fafafa;
+    }
+    .panel-body {
+      padding: 10px 15px 5px 15px;
+    }
+    .MAT20 {
+      margin-top: 0px !important;
+      margin-bottom: 10px;
+      color: #666;
+    }
+    i.required {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background: #d9534f;
+      border-radius: 50%;
+      position: relative;
+      margin-right: 3px;
+      vertical-align: middle;
+    }
+    i.required::after {
+      content: "!";
+      color: #fff;
+      font-size: 9px;
+      font-weight: bold;
+      position: absolute;
+      left: 4px;
+      top: -1px;
+    }
+
+    table.table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 0px;
+      border-top: 1px solid #ddd;
+    }
+    table.table th {
+      background-color: #f7f9fa;
+      color: #333333;
+      font-weight: bold;
+      text-align: left;
+      padding: 8px 12px;
+      border: 1px solid #e7e7e7;
+      vertical-align: middle;
+      font-size: 12px;
+      width: 160px;
+    }
+    table.table td {
+      padding: 8px 12px;
+      border: 1px solid #e7e7e7;
+      vertical-align: middle;
+      font-size: 12px;
+      background-color: #ffffff;
+      line-height: 1.7;
+    }
+    .form-control {
+      height: 30px;
+      padding: 4px 8px;
+      font-size: 12px;
+      border: 1px solid #cccccc;
+      border-radius: 3px;
+      color: #555555;
+      background-color: #ffffff;
+      box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+      box-sizing: border-box;
+    }
+    .text-danger {
+      color: #d9534f;
+    }
+
+    .btn {
+      height: 30px;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3px;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      border: 1px solid transparent;
+      line-height: 1;
+      text-decoration: none;
+    }
+    .btn-default {
+      background-color: #ffffff;
+      border-color: #cccccc;
+      color: #333333;
+    }
+    .btn-default:hover {
+      background-color: #e6e6e6;
+    }
+    .btn-danger {
+      background-color: #d9534f;
+      border-color: #d43f3a;
+      color: #ffffff;
+    }
+    .btn-danger:hover {
+      background-color: #c9302c;
+    }
+
+    .help_box {
+      margin-top: 20px;
+      padding: 14px 18px;
+      background: #fafafa;
+      border-left: 3px solid #d9534f;
+      border-top: 1px solid #eeeeee;
+      border-right: 1px solid #eeeeee;
+      border-bottom: 1px solid #eeeeee;
+      font-size: 12px;
+      line-height: 1.8;
+      color: #555555;
+    }
+    .help_box ul {
+      margin: 0;
+      padding-left: 15px;
+    }
+
+    #footer {
+      margin-top: 35px;
+      padding: 20px 0;
+      text-align: center;
+      font-size: 11px;
+      color: #888888;
+      border-top: 1px solid #eeeeee;
+      line-height: 1.6;
+    }
+    #footer a {
+      color: #555555;
+      text-decoration: none;
+    }
+    a.link_type {
+      color: #337ab7;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<div id="le_on"></div>
+
+<!-- 1. TOP HEADER -->
+<div id="header">
+	<p id="logo"><a href="/af/ad_lec/lists/sn/3267">광주풍향초등학교</a></p>
+	<h1>
+    <a href="#none;" class="btn_icon">늘봄학교 <i class="fa title fa-angle-down"></i></a> 
+		<span class="box_position">
+			<div class="my_service">
+				<span class="arrow"><i class="fa fa-sort-asc"></i></span>
+				<ul>
+					<li><a href="/af/ad_lec/lists/sn/3267">늘봄학교</a></li>
+					<li><a href="/sczigi/service/lists/sn/3267">학교관리 돌아가기</a></li>
+				</ul>
+			</div>
+		</span>
+	</h1>
+	<p class="menu_btn"><i class="fa fa-bars"></i></p>
+</div>
+
+<!-- 2. MAIN CONTAINER -->
+<div id="container">
+	<!-- LEFT SIDEBAR -->
+	<div id="left_menu" class="content mCustomScrollbar light" data-mcs-theme="minimal-dark">
+		<div class="user_box">
+			<p class="user_t"></p>
+			<dl class="user">
+				<dt>관리자(김혜련)님 <span class="ball_num"><a href="/af/notification/lists/sn/3267"><i class="fa fa-bell"></i><i class="num">0</i></a></span></dt>
+				<dd><a href="/member/logout/sn/3267">[로그아웃]</a></dd>
+				<dd><a href="/member/modify/sn/3267">[정보수정]</a></dd>
+			</dl>
+							
+			<ul class="main_btn">
+				<li class="btn01"><a href="/af/ad_lec/lists/sn/3267">홈으로</a></li>				
+				<li class="btn02"><a href="/af/ad_lec/write/sn/3267">강좌등록</a></li>
+			</ul>	
+		</div>
+		<ul class="parent">
+			<li><a href="/af/ad_faq/main/sn/3267"><i class="fa fa-download"></i><strong>매뉴얼</strong></a></li>
+			<li><a href="/af/qanda/lists/sn/3267"><i class="fa fa-phone"></i><strong>고객지원 게시판</strong></a></li>
+			<li class="admin"><a href="/sczigi/service/lists/sn/3267"><i class="fa fa-cog"></i><strong>학교관리</strong></a></li>
+			<li><a href="/af/ad_lec/lists/sn/3267" class="on"><i class="fa fa-futbol-o"></i><strong>강좌관리</strong></a></li>
+			<li><a href="/af/ad_app/lists/sn/3267"><i class="fa fa-slideshare"></i><strong>신청자관리</strong></a></li>
+			<li><a href="/af/ad_wait/lists/sn/3267"><i class="fa fa-slideshare"></i><strong>대기자관리</strong></a></li>	
+			<li><a href="/af/ad_att/stat/sn/3267"><i class="fa fa-check-square-o"></i><strong>출석부관리</strong></a></li>	
+			<li><a href="/af/ad_ref/lists/sn/3267"><i class="fa fa-slideshare"></i><strong>환불/취소관리</strong></a></li>	
+			<li class="has-sub"><a href="#none;"><i class="fa fa-university"></i><strong>지원금관리</strong><span class="fa fa-chevron-down" style="float:right;"></span></a>
+				<ul class="depth">
+					<li><a href="/af/ad_free2_stu/lists/sn/3267"><i class="fa fa-volume-up"></i>대상자관리</a></li>
+					<li><a href="/af/ad_free2_app/lists/sn/3267"><i class="fa fa-volume-up"></i>수강자관리</a></li>
+					<li><a href="/af/ad_free2_cfg/main/sn/3267"><i class="fa fa-volume-up"></i>지원금설정</a></li>						
+					<li><a href="/af/ad_free2_cfg/free1/sn/3267"><i class="fa fa-volume-up"></i>순위구분설정</a></li>
+				</ul>
+			</li>	
+			<li><a href="/af/ad_rsch/lists/sn/3267"><i class="fa fa-calendar"></i><strong>귀가일정표</strong></a></li>	
+			<li><a href="/af/ad_abs/lists/sn/3267"><i class="fa fa-calendar-o"></i><strong>결석/귀가신청</strong></a></li>	
+			<li><a href="/af/ad_tea/lists/sn/3267"><i class="fa fa-briefcase"></i><strong>강사관리</strong><span class="fa badge-xm"></span></a></li>
+			<li class="has-sub"><a href="#none;"><i class="fa fa-pie-chart"></i><strong>설문관리</strong><span class="fa fa-chevron-down" style="float:right;"></span></a>
+				<ul class="depth">
+					<li><a href="/af/ad_sur/lists/sn/3267"><i class="fa fa-volume-up"></i>설문</a></li>
+					<li><a href="/af/ad_surs/lists/sn/3267"><i class="fa fa-volume-up"></i>샘플설문</a></li>					
+				</ul>
+			</li>				
+			<li class="has-sub"><a href="#none;"><i class="fa fa-cog"></i><strong>환경설정</strong><span class="fa fa-chevron-down" style="float:right;"></span></a>
+				<ul class="depth">
+					<li><a href="/af/ad_cfg/main/sn/3267"><i class="fa fa-volume-up"></i>기본설정</a></li>
+					<li><a href="/af/ad_time/lists/sn/3267"><i class="fa fa-volume-up"></i>신청기간</a></li>
+					<li><a href="/af/ad_cfg/period/sn/3267"><i class="fa fa-volume-up"></i>강의시간</a></li>
+					<li><a href="/af/ad_cfg/afDiv/sn/3267"><i class="fa fa-volume-up"></i>강좌구분</a></li>
+					<li><a href="/af/ad_cfg/appLiGrp/sn/3267"><i class="fa fa-volume-up"></i>중복제한그룹</a></li>						
+					<li><a href="/af/ad_verify/main/sn/3267"><i class="fa fa-volume-up"></i>학적검증</a></li>
+					<li><a href="/af/ad_neis_edufine/lists/sn/3267"><i class="fa fa-volume-up"></i>나이스/에듀파인 설정</a></li>						
+					<li><a href="/af/ad_cfg/message/sn/3267"><i class="fa fa-volume-up"></i>안내글설정</a></li>
+					<li><a href="/af/ad_cfg/clear/sn/3267"><i class="fa fa-volume-up"></i>초기화</a></li>
+					<li><a href="/af/ad_info/modify/sn/3267"><i class="fa fa-volume-up"></i>담당자정보</a></li>
+				</ul>
+			</li>									
+			<li><a href="/af/notification/lists/sn/3267"><i class="fa fa-volume-up"></i><strong>알림관리</strong></a></li>
+			<li><a href="/af/spush/lists/sn/3267"><i class="fa fa-bell" style="font-size:18px;"></i><strong>푸시알림관리</strong></a></li>
+			<li><a href="/af/ad_extension/lists/sn/3267"><i class="fa fa-calendar-o"></i><strong>연장신청<span class="badge badge-xm">192일 남음</span></strong></a></li>
+		</ul>
+	</div>
+
+	<!-- CONTENTS BOX -->
+	<div id="contents_box">
+		<div id="contents_title">
+			<i class="fa fa-file-text-o"></i> 강좌관리 <br><span class="title">광주풍향초등학교 늘봄학교</span>
+			<p class="write_yun"><a href="/af/ad_app/lists/sn/3267"><i class="fa fa-slideshare"></i><br><span class="write">신청자관리</span></a></p>				
+		</div>
+		<div id="contents">
+			<div class="panel_main panel-default_main">
+				<div class="new_help_manualbox hm_loca1">
+					<p class="hm_title"><i class="fa fa-file-text-o" aria-hidden="true"></i>매뉴얼</p>
+					<ul>
+						<li>
+							<a href="https://www.dbdbschool.kr/help/go_data/num/92/data/link1" target="_blank" class="manual_btn"><i class="fa fa-youtube-play"></i> 강좌 일괄입력</a>
+						</li>
+					</ul>
+				</div>
+				
+				<div class="panel-heading">일괄입력</div>
+				<div class="panel-body">
+					<p class="MAT20"><i class="fa required" title="필수항목"></i><span class="font-12"> 표시가 있는 항목은 반드시 입력해야 합니다.</span></p>
+				</div>
+
+				<form action="/af/ad_lec/input/sn/3267" name="fm_edit" id="fm_edit" onsubmit="return fm_edit_check(this);" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+				<input type="hidden" name="csrf_test_name" value="e43c6256fddf4af68d2ce6925f075607">
+				<input type="hidden" name="form_open_date_use_chk_csrf" value="2026-08-20 16:04:44">
+					<table class="table table-bordered table-hover">
+						<tbody>
+						<tr>
+							<th>강좌구분 <span><i class="fa required" title="필수항목"></i></span></th>
+							<td>
+								<select name="lec_div" id="lec_div" class="form-control" style="width:160px;">
+									<option value="">=선택=</option>
+									<option value="5">3월</option>
+									<option value="6">26년 4월</option>
+									<option value="7">26년 5월</option>
+									<option value="8">26년 6월</option>
+									<option value="9">26년 7월</option>
+									<option value="10">26년 8월</option>
+									<option value="11" selected="selected">26년 9월</option>
+								</select>
+							</td>	
+						</tr>
+						
+						<tr>
+							<th width="160" style="min-width:73px;">엑셀 데이터 파일 <span><i class="fa required" title="필수항목"></i></span></th>
+							<td>
+								<input id="userfile" name="userfile" type="file" title="데이터파일" value="" class="size90" style="display:inline-block;">&nbsp;
+								<span class="mobile_clear">(<a href="/af/ad_lec/inputs/sn/3267" download="강좌일괄입력_샘플양식.csv" class="link_type">일괄입력 샘플 다운로드</a>)</span>
+								<div style="margin-top:6px; color:#555;">
+									<i class="fa fa-question-circle"></i> <a href="https://www.dbdbschool.kr/help/view/num/261/p/1/pdc/faq/sn/3267" target="_blank" style="border-bottom:1px dashed; color:#555; text-decoration:none;">한셀로 만들어진 엑셀파일은 변환 후 사용할 수 있습니다.</a><br>
+								</div>				
+							</td>
+						</tr>
+						<tr>
+							<th>기존 데이터 <span><i class="fa required" title="필수항목"></i></span></th>
+							<td>
+								<span class="mobile_clear"><input type="radio" name="input_type" id="input_type_add" value="add" checked="checked"> <label for="input_type_add">추가 입력(수정)</label></span>
+							</td>
+						</tr>		
+						<tr>
+							<th>참고사항</th>
+							<td>
+								- 샘플파일  <span class="text-danger">첫 번째 줄의 내용은 변경할 수 없습니다.</span> <br>
+								- <span class="text-danger">늘봄과정 : 늘봄과정 구분을 사용하는 경우에만 필수</span> 항목입니다.<br>
+								- 중복제한그룹	: 선택 항목입니다.<br>
+								- <span class="text-danger">강좌명	: 필수</span> 항목입니다.<br>
+								- <span class="text-danger">강사ID : 필수</span> 항목입니다.<br>
+								- <span class="text-danger">대상학년 : 필수</span> 항목입니다.<br>
+								- <span class="text-danger">대상학과 : 학과 설정이 되어 있는 경우에만 필수</span> 항목입니다.<br>
+								- <span class="text-danger">강의시간 : 필수</span> 항목입니다.<br>
+								- 강의시간중복허용 : 선택 항목입니다.<br>
+								- <span class="text-danger">정원 : 필수</span> 항목입니다.<br>
+								- <span class="text-danger">대기정원 : 대기자 기능을 사용하는 경우에만 필수</span> 항목입니다.<br>				
+								- <span class="text-danger">운영기간(시작) : 필수</span> 항목입니다.<br>
+								- <span class="text-danger">운영기간(종료) : 필수</span> 항목입니다.<br>
+								- 총시수, 강의실, 수강료, 수용비, 교재비, 재료비, 지원금차감제외, 최대지원금액, 내용 : 선택 항목입니다.<br>
+							</td>
+						</tr>
+					</tbody></table>
+					<p class="text-center MAT30" style="margin-top:25px; margin-bottom:30px; text-align:center;">
+						<input type="button" value="취소" onclick="location.href='/af/ad_lec/lists/sn/3267';" class="btn btn-default" style="margin-right:6px; min-width:65px;">	
+						<input type="submit" value="등록" class="btn btn-danger" style="min-width:65px; background:#d9534f; border-color:#d43f3a; color:#ffffff;">
+					</p>
+				</form>
+			</div>
+
+			<div class="help_box">
+				<ul>
+					<li>중복제한그룹은 <span class="text-danger" style="font-weight:bold;">환경설정 &gt; 중복제한그룹 &gt; 코드명</span>과 일치하도록 입력해 주세요.</li>
+					<li>학과를 입력하는 경우 <span class="text-danger" style="font-weight:bold;">학교환경설정 &gt; 학과설정 &gt; 코드명</span>과 일치하도록 입력해 주세요.</li>
+					<li>강의시간은 <span class="text-danger" style="font-weight:bold;">환경설정 &gt; 수업교시 &gt; 코드명</span>과 일치하도록 입력해 주세요.</li>
+					<li>지원금명은 <span class="text-danger" style="font-weight:bold;">지원금관리 &gt; 지원금설정 &gt; 지원금명</span>과 일치하도록 입력해 주세요.</li>
+					<li><span class="text-danger" style="font-weight:bold;">강좌명이 같은 데이터는 수정</span>됩니다.</li>
+				</ul>
+			</div>	
+
+			<div id="footer">
+				Copyright ⓒ <span class="copyright_name"><a href="http://www.xmecca.com" target="_blank"><strong>x</strong>mecca.com</a></span> All Rights Reserved.
+				<br><i class="fa fa-envelope"></i> dbdbschool@naver.com
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	async function fm_edit_check(fm) {
+		if (!fm.lec_div.value) {
+			alert('강좌구분 : 필수항목입니다.');
+			fm.lec_div.focus();
+			return false;
+		}	
+		
+		if (!fm.userfile.files || fm.userfile.files.length === 0) {
+			alert('엑셀 데이터 파일 : 필수항목입니다.');
+			fm.userfile.focus();			
+			return false;
+		}
+
+		var file = fm.userfile.files[0];
+		if (file.size > 1024 * 1024) {
+			alert("엑셀 데이터 파일 : 용량이 너무 큰 엑셀 데이터는 입력할 수 없습니다(1M 이하만 가능)");
+			return false;
+		}		
+
+		if (!confirm("기존 데이터에 추가로 일괄입력 하시겠습니까?")) {
+			return false;
+		}
+
+		var formData = new FormData();
+		formData.append('userfile', file);
+		formData.append('lec_div', fm.lec_div.value);
+		formData.append('schoolId', '3267');
+
+		try {
+			var res = await fetch('/api/af/ad_lec/batch-upload', {
+				method: 'POST',
+				body: formData
+			});
+			var result = await res.json();
+			if (res.ok && result.success) {
+				alert(result.message || '강좌가 성공적으로 일괄 등록되었습니다.');
+				location.href = '/af/ad_lec/lists/sn/3267';
+			} else {
+				alert(result.message || result.error || '일괄입력 처리 중 오류가 발생했습니다.');
+			}
+		} catch (e) {
+			alert('서버 통신 중 오류가 발생했습니다.');
+		}
+		
+		return false;		
+	}	
+
+  $(function() {
+    // 서비스 드롭다운
+    $('#header h1 a.btn_icon').click(function(e) {
+      e.stopPropagation();
+      $(this).find('i.fa').toggleClass('fa-angle-down fa-angle-up');
+      $('.my_service').toggle();
+    });
+
+    $(document).click(function() {
+      $('.my_service').hide();
+      $('#header h1 a.btn_icon i.fa').removeClass('fa-angle-up').addClass('fa-angle-down');
+    });
+
+    // 사이드바 서브메뉴
+    $('ul.parent > li.has-sub > a').click(function(e) {
+      e.preventDefault();
+      $(this).next('ul.depth').slideToggle(200);
+      $(this).find('span.fa').toggleClass('fa-chevron-down fa-chevron-up');
+    });
+  });
+</script>
+</body>
+</html>

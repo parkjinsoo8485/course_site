@@ -1,0 +1,876 @@
+{
+  "title": "목록 - 강좌관리 - 늘봄학교",
+  "url": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+  "buttons": [
+    {
+      "text": "상세검색 열기",
+      "onclick": "",
+      "href": "#none;"
+    },
+    {
+      "text": "검색",
+      "onclick": "",
+      "href": ""
+    },
+    {
+      "text": "전체",
+      "onclick": "location.href='https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267/sld/all/slp/all';",
+      "href": ""
+    },
+    {
+      "text": "검색결과엑셀출력",
+      "onclick": "location.href='https://www.dbdbschool.kr/af/ad_lec/listse/p/1/sn/3267/sld/11/sof/ln/sot/asc';",
+      "href": ""
+    },
+    {
+      "text": "출석부 출력",
+      "onclick": "location.href='https://www.dbdbschool.kr/af/ad_att/excel/p/1/sn/3267/sld/11/sof/ln/sot/asc';",
+      "href": ""
+    },
+    {
+      "text": "강좌 등록",
+      "onclick": "location.href='https://www.dbdbschool.kr/af/ad_lec/write/p/1/sn/3267/sld/11/sof/ln/sot/asc'",
+      "href": ""
+    },
+    {
+      "text": "추가기능..",
+      "onclick": "",
+      "href": "#none;"
+    },
+    {
+      "text": "강좌 일괄입력",
+      "onclick": "",
+      "href": "https://www.dbdbschool.kr/af/ad_lec/input/p/1/sn/3267/sld/11/sof/ln/sot/asc"
+    },
+    {
+      "text": "강좌 일괄수정",
+      "onclick": "",
+      "href": "https://www.dbdbschool.kr/af/ad_lec/modifyField/p/1/sn/3267/sld/11/sof/ln/sot/asc"
+    },
+    {
+      "text": "강좌 일괄복사",
+      "onclick": "return chk_copy();",
+      "href": "https://www.dbdbschool.kr/af/ad_lec/copy/p/1/sn/3267/sld/11/sof/ln/sot/asc"
+    },
+    {
+      "text": "강좌 통계",
+      "onclick": "location.href='https://www.dbdbschool.kr/af/ad_lec/stat/sn/3267';",
+      "href": ""
+    },
+    {
+      "text": "적용하기",
+      "onclick": "",
+      "href": ""
+    }
+  ],
+  "inputs": [
+    {
+      "type": "text",
+      "id": "s_word",
+      "name": "sw",
+      "placeholder": "검색어",
+      "value": ""
+    },
+    {
+      "type": "submit",
+      "id": "",
+      "name": "",
+      "placeholder": "",
+      "value": "검색"
+    },
+    {
+      "type": "button",
+      "id": "",
+      "name": "",
+      "placeholder": "",
+      "value": "전체"
+    },
+    {
+      "type": "button",
+      "id": "",
+      "name": "",
+      "placeholder": "",
+      "value": "검색결과엑셀출력"
+    },
+    {
+      "type": "button",
+      "id": "",
+      "name": "",
+      "placeholder": "",
+      "value": "출석부 출력"
+    },
+    {
+      "type": "button",
+      "id": "",
+      "name": "",
+      "placeholder": "",
+      "value": "강좌 등록"
+    },
+    {
+      "type": "button",
+      "id": "",
+      "name": "",
+      "placeholder": "",
+      "value": "강좌 통계"
+    },
+    {
+      "type": "checkbox",
+      "id": "check_all",
+      "name": "check_all",
+      "placeholder": "",
+      "value": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587589",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587589"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587590",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587590"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587591",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587591"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587586",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587586"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587587",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587587"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587588",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587588"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587582",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587582"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587583",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587583"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587584",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587584"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587585",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587585"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587575",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587575"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587576",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587576"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587577",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587577"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587578",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587578"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587579",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587579"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587580",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587580"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587581",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587581"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587597",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587597"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587598",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587598"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587599",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587599"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587595",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587595"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587594",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587594"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587623",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587623"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587624",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587624"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587600",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587600"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587601",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587601"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587602",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587602"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587593",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587593"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587592",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587592"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587603",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587603"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587604",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587604"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587605",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587605"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587612",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587612"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587613",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587613"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587614",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587614"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587615",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587615"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587625",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587625"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587626",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587626"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587596",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587596"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587606",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587606"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587607",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587607"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587608",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587608"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587616",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587616"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587617",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587617"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587573",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587573"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587574",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587574"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587627",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587627"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587628",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587628"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587618",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587618"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587619",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587619"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587620",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587620"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587621",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587621"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587622",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587622"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587609",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587609"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587610",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587610"
+    },
+    {
+      "type": "checkbox",
+      "id": "data_checked_1587611",
+      "name": "data_checked[]",
+      "placeholder": "",
+      "value": "1587611"
+    },
+    {
+      "type": "submit",
+      "id": "",
+      "name": "",
+      "placeholder": "",
+      "value": "적용하기"
+    }
+  ],
+  "selects": [
+    {
+      "id": "sel_led_div",
+      "name": "sld",
+      "options": [
+        {
+          "text": "=구분전체=",
+          "value": "all",
+          "selected": false
+        },
+        {
+          "text": "3월",
+          "value": "5",
+          "selected": false
+        },
+        {
+          "text": "26년 4월",
+          "value": "6",
+          "selected": false
+        },
+        {
+          "text": "26년 5월",
+          "value": "7",
+          "selected": false
+        },
+        {
+          "text": "26년 6월",
+          "value": "8",
+          "selected": false
+        },
+        {
+          "text": "26년 7월",
+          "value": "9",
+          "selected": false
+        },
+        {
+          "text": "26년 8월",
+          "value": "10",
+          "selected": false
+        },
+        {
+          "text": "26년 9월",
+          "value": "11",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "id": "s_lec_pro_type",
+      "name": "slp",
+      "options": [
+        {
+          "text": "=늘봄과정=",
+          "value": "all",
+          "selected": true
+        },
+        {
+          "text": "방과후",
+          "value": "1",
+          "selected": false
+        },
+        {
+          "text": "맞춤형",
+          "value": "2",
+          "selected": false
+        },
+        {
+          "text": "돌봄",
+          "value": "3",
+          "selected": false
+        }
+      ]
+    },
+    {
+      "id": "",
+      "name": "sls",
+      "options": [
+        {
+          "text": "=상태전체=",
+          "value": "all",
+          "selected": true
+        },
+        {
+          "text": "출력",
+          "value": "1",
+          "selected": false
+        },
+        {
+          "text": "대기",
+          "value": "0",
+          "selected": false
+        },
+        {
+          "text": "종료",
+          "value": "2",
+          "selected": false
+        }
+      ]
+    },
+    {
+      "id": "s_grade",
+      "name": "s_grade",
+      "options": [
+        {
+          "text": "=학년=",
+          "value": "",
+          "selected": true
+        },
+        {
+          "text": "1",
+          "value": "1",
+          "selected": false
+        },
+        {
+          "text": "2",
+          "value": "2",
+          "selected": false
+        },
+        {
+          "text": "3",
+          "value": "3",
+          "selected": false
+        },
+        {
+          "text": "4",
+          "value": "4",
+          "selected": false
+        },
+        {
+          "text": "5",
+          "value": "5",
+          "selected": false
+        },
+        {
+          "text": "6",
+          "value": "6",
+          "selected": false
+        }
+      ]
+    },
+    {
+      "id": "st",
+      "name": "st",
+      "options": [
+        {
+          "text": "강좌명",
+          "value": "lec_name",
+          "selected": true
+        },
+        {
+          "text": "강사ID",
+          "value": "tea_id",
+          "selected": false
+        }
+      ]
+    },
+    {
+      "id": "update_type",
+      "name": "update_type",
+      "options": [
+        {
+          "text": "===== 일괄적용 ======",
+          "value": "",
+          "selected": true
+        },
+        {
+          "text": "[상태변경] 출력",
+          "value": "status_1",
+          "selected": false
+        },
+        {
+          "text": "[상태변경] 대기",
+          "value": "status_0",
+          "selected": false
+        },
+        {
+          "text": "[상태변경] 종료",
+          "value": "status_2",
+          "selected": false
+        },
+        {
+          "text": "-------------------------------",
+          "value": "",
+          "selected": false
+        },
+        {
+          "text": "[강사마감] Yes",
+          "value": "tea_finish_Y",
+          "selected": false
+        },
+        {
+          "text": "[강사마감] No",
+          "value": "tea_finish_N",
+          "selected": false
+        },
+        {
+          "text": "-------------------------------",
+          "value": "",
+          "selected": false
+        },
+        {
+          "text": "[강사편집] Yes",
+          "value": "tea_edit_Y",
+          "selected": false
+        },
+        {
+          "text": "[강사편집] No",
+          "value": "tea_edit_N",
+          "selected": false
+        },
+        {
+          "text": "-------------------------------",
+          "value": "",
+          "selected": false
+        },
+        {
+          "text": "[환불마감] Yes",
+          "value": "refund_status_Y",
+          "selected": false
+        },
+        {
+          "text": "[환불마감] No",
+          "value": "refund_status_N",
+          "selected": false
+        },
+        {
+          "text": "-------------------------------",
+          "value": "",
+          "selected": false
+        },
+        {
+          "text": "[강사ID 중복 신청 불가] Yes",
+          "value": "tea_id_chk_Y",
+          "selected": false
+        },
+        {
+          "text": "[강사ID 중복 신청 불가] No",
+          "value": "tea_id_chk_N",
+          "selected": false
+        },
+        {
+          "text": "-------------------------------",
+          "value": "",
+          "selected": false
+        },
+        {
+          "text": "[시간 중복 허용] Yes",
+          "value": "lec_time_not_chk_Y",
+          "selected": false
+        },
+        {
+          "text": "[시간 중복 허용] No",
+          "value": "lec_time_not_chk_N",
+          "selected": false
+        },
+        {
+          "text": "-------------------------------",
+          "value": "",
+          "selected": false
+        },
+        {
+          "text": "[수강료출력] Yes",
+          "value": "pay_view_Y",
+          "selected": false
+        },
+        {
+          "text": "[수강료출력] No",
+          "value": "pay_view_N",
+          "selected": false
+        },
+        {
+          "text": "-------------------------------",
+          "value": "",
+          "selected": false
+        },
+        {
+          "text": "[신청자 수강료] 전체 적용",
+          "value": "pay_update",
+          "selected": false
+        },
+        {
+          "text": "[신청자 수용비] 전체 적용",
+          "value": "pay_use_cost_update",
+          "selected": false
+        },
+        {
+          "text": "[신청자 교재비] 전체 적용",
+          "value": "pay_book_update",
+          "selected": false
+        },
+        {
+          "text": "[신청자 재료비] 전체 적용",
+          "value": "pay_item_update",
+          "selected": false
+        },
+        {
+          "text": "-------------------------------",
+          "value": "",
+          "selected": false
+        },
+        {
+          "text": "강좌 삭제",
+          "value": "del",
+          "selected": false
+        },
+        {
+          "text": "-------------------------------",
+          "value": "",
+          "selected": false
+        },
+        {
+          "text": "신청자 삭제",
+          "value": "sdel",
+          "selected": false
+        },
+        {
+          "text": "-------------------------------",
+          "value": "",
+          "selected": false
+        },
+        {
+          "text": "대기자 삭제",
+          "value": "wdel",
+          "selected": false
+        }
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "idx": 0,
+      "headers": [
+        "연번",
+        "수정",
+        "구분\n(늘봄과정)",
+        "강좌명",
+        "강사ID",
+        "신청\n/정원",
+        "대기자\n/정원",
+        "학년",
+        "운영기간",
+        "강의시간",
+        "수강료",
+        "수강료\n출력",
+        "강사\n마감",
+        "강사\n편집",
+        "환불\n마감",
+        "상태",
+        "삭제"
+      ],
+      "rowCount": 56
+    }
+  ]
+}

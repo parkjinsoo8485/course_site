@@ -1,0 +1,709 @@
+{
+  "title": "강좌 일괄복사 - 강좌관리 - 늘봄학교",
+  "url": "https://www.dbdbschool.kr/af/ad_lec/copy/p/1/sn/3267/sld/11/sof/ln/sot/asc",
+  "buttons": [
+    {
+      "text": "취소",
+      "onclick": "location.href='https://www.dbdbschool.kr/af/ad_lec/lists/p/1/sn/3267/sld/11/sof/ln/sot/asc';",
+      "href": ""
+    },
+    {
+      "text": "복사",
+      "onclick": "",
+      "href": ""
+    }
+  ],
+  "inputs": [
+    {
+      "type": "checkbox",
+      "id": "check_all",
+      "name": "check_all",
+      "placeholder": "",
+      "value": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587589",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587589"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587590",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587590"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587591",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587591"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587586",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587586"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587587",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587587"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587588",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587588"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587582",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587582"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587583",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587583"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587584",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587584"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587585",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587585"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587575",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587575"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587576",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587576"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587577",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587577"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587578",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587578"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587579",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587579"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587580",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587580"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587581",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587581"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587597",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587597"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587598",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587598"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587599",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587599"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587595",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587595"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587594",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587594"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587623",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587623"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587624",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587624"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587600",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587600"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587601",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587601"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587602",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587602"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587593",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587593"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587592",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587592"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587603",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587603"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587604",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587604"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587605",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587605"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587612",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587612"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587613",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587613"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587614",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587614"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587615",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587615"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587625",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587625"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587626",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587626"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587596",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587596"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587606",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587606"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587607",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587607"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587608",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587608"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587616",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587616"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587617",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587617"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587573",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587573"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587574",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587574"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587627",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587627"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587628",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587628"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587618",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587618"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587619",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587619"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587620",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587620"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587621",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587621"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587622",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587622"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587609",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587609"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587610",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587610"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_list_1587611",
+      "name": "lec_list[]",
+      "placeholder": "",
+      "value": "1587611"
+    },
+    {
+      "type": "radio",
+      "id": "copy_mem_Y",
+      "name": "copy_mem",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "radio",
+      "id": "copy_mem_N",
+      "name": "copy_mem",
+      "placeholder": "",
+      "value": "N"
+    },
+    {
+      "type": "checkbox",
+      "id": "copy_not_ref",
+      "name": "copy_not_ref",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "radio",
+      "id": "copy_wait_Y",
+      "name": "copy_wait",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "radio",
+      "id": "copy_wait_N",
+      "name": "copy_wait",
+      "placeholder": "",
+      "value": "N"
+    },
+    {
+      "type": "radio",
+      "id": "copy_lec_pay_Y",
+      "name": "copy_lec_pay",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "radio",
+      "id": "copy_lec_pay_L",
+      "name": "copy_lec_pay",
+      "placeholder": "",
+      "value": "L"
+    },
+    {
+      "type": "radio",
+      "id": "copy_lec_pay_Z",
+      "name": "copy_lec_pay",
+      "placeholder": "",
+      "value": "Z"
+    },
+    {
+      "type": "radio",
+      "id": "copy_lec_use_cost_Y",
+      "name": "copy_lec_use_cost",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "radio",
+      "id": "copy_lec_use_cost_L",
+      "name": "copy_lec_use_cost",
+      "placeholder": "",
+      "value": "L"
+    },
+    {
+      "type": "radio",
+      "id": "copy_lec_use_cost_Z",
+      "name": "copy_lec_use_cost",
+      "placeholder": "",
+      "value": "Z"
+    },
+    {
+      "type": "radio",
+      "id": "copy_lec_pay_book_Y",
+      "name": "copy_lec_pay_book",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "radio",
+      "id": "copy_lec_pay_book_L",
+      "name": "copy_lec_pay_book",
+      "placeholder": "",
+      "value": "L"
+    },
+    {
+      "type": "radio",
+      "id": "copy_lec_pay_book_Z",
+      "name": "copy_lec_pay_book",
+      "placeholder": "",
+      "value": "Z"
+    },
+    {
+      "type": "radio",
+      "id": "copy_lec_pay_item_Y",
+      "name": "copy_lec_pay_item",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "radio",
+      "id": "copy_lec_pay_item_L",
+      "name": "copy_lec_pay_item",
+      "placeholder": "",
+      "value": "L"
+    },
+    {
+      "type": "radio",
+      "id": "copy_lec_pay_item_Z",
+      "name": "copy_lec_pay_item",
+      "placeholder": "",
+      "value": "Z"
+    },
+    {
+      "type": "checkbox",
+      "id": "chk_lec_date",
+      "name": "chk_lec_date",
+      "placeholder": "",
+      "value": "1"
+    },
+    {
+      "type": "text",
+      "id": "lec_sdate",
+      "name": "lec_sdate",
+      "placeholder": "",
+      "value": ""
+    },
+    {
+      "type": "text",
+      "id": "lec_edate",
+      "name": "lec_edate",
+      "placeholder": "",
+      "value": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "chk_tea_finish",
+      "name": "chk_tea_finish",
+      "placeholder": "",
+      "value": "1"
+    },
+    {
+      "type": "radio",
+      "id": "lec_tea_finish_Y",
+      "name": "lec_tea_finish",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "radio",
+      "id": "lec_tea_finish_N",
+      "name": "lec_tea_finish",
+      "placeholder": "",
+      "value": "N"
+    },
+    {
+      "type": "checkbox",
+      "id": "chk_refund_status",
+      "name": "chk_refund_status",
+      "placeholder": "",
+      "value": "1"
+    },
+    {
+      "type": "radio",
+      "id": "refund_status_Y",
+      "name": "refund_status",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "radio",
+      "id": "refund_status_N",
+      "name": "refund_status",
+      "placeholder": "",
+      "value": "N"
+    },
+    {
+      "type": "checkbox",
+      "id": "chk_lec_status",
+      "name": "chk_lec_status",
+      "placeholder": "",
+      "value": "1"
+    },
+    {
+      "type": "radio",
+      "id": "lec_status_1",
+      "name": "lec_status",
+      "placeholder": "",
+      "value": "1"
+    },
+    {
+      "type": "radio",
+      "id": "lec_status_0",
+      "name": "lec_status",
+      "placeholder": "",
+      "value": "0"
+    },
+    {
+      "type": "radio",
+      "id": "lec_status_2",
+      "name": "lec_status",
+      "placeholder": "",
+      "value": "2"
+    },
+    {
+      "type": "button",
+      "id": "",
+      "name": "",
+      "placeholder": "",
+      "value": "취소"
+    },
+    {
+      "type": "submit",
+      "id": "sm_sm_sm_sm",
+      "name": "",
+      "placeholder": "",
+      "value": "복사"
+    }
+  ],
+  "selects": [
+    {
+      "id": "lec_div2",
+      "name": "lec_div2",
+      "options": [
+        {
+          "text": "=선택=",
+          "value": "",
+          "selected": true
+        },
+        {
+          "text": "3월",
+          "value": "5",
+          "selected": false
+        },
+        {
+          "text": "26년 4월",
+          "value": "6",
+          "selected": false
+        },
+        {
+          "text": "26년 5월",
+          "value": "7",
+          "selected": false
+        },
+        {
+          "text": "26년 6월",
+          "value": "8",
+          "selected": false
+        },
+        {
+          "text": "26년 7월",
+          "value": "9",
+          "selected": false
+        },
+        {
+          "text": "26년 8월",
+          "value": "10",
+          "selected": false
+        },
+        {
+          "text": "26년 9월",
+          "value": "11",
+          "selected": false
+        }
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "idx": 0,
+      "headers": [
+        "강좌\n선택",
+        "강좌구분",
+        "강좌",
+        "적용",
+        "강좌구분",
+        "신청자 복사",
+        "대기자 복사",
+        "신청자\n수강료 복사",
+        "운영기간",
+        "강사마감",
+        "환불마감",
+        "상태"
+      ],
+      "rowCount": 13
+    }
+  ]
+}

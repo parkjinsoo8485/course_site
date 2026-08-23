@@ -1,0 +1,678 @@
+{
+  "title": "신청목록 - 신청자관리 - 늘봄학교",
+  "url": "https://www.dbdbschool.kr/af/ad_app/lists/sln/1587589/sn/3267/sld/11/slp/all",
+  "buttons": [
+    {
+      "text": "상세검색 열기",
+      "onclick": "",
+      "href": "#none;"
+    },
+    {
+      "text": "검색",
+      "onclick": "",
+      "href": ""
+    },
+    {
+      "text": "전체",
+      "onclick": "location.href='https://www.dbdbschool.kr/af/ad_app/lists/sn/3267/sld/all/slp/all';",
+      "href": ""
+    },
+    {
+      "text": "검색결과출력",
+      "onclick": "return chk_excel();",
+      "href": "https://www.dbdbschool.kr/af/ad_app/listse/p/1/sn/3267/sld/11/slp/all/sln/1587589/sof/sbh/sot/asc"
+    },
+    {
+      "text": "대기자목록",
+      "onclick": "",
+      "href": "https://www.dbdbschool.kr/af/ad_wait/lists/p/1/sn/3267/sld/11/slp/all/sln/1587589/sof/sbh/sot/asc"
+    },
+    {
+      "text": "신청자등록",
+      "onclick": "location.href='https://www.dbdbschool.kr/af/ad_app/sin/p/1/sn/3267/sld/11/slp/all/sln/1587589/sof/sbh/sot/asc'",
+      "href": ""
+    },
+    {
+      "text": "추가기능..",
+      "onclick": "",
+      "href": "#none;"
+    },
+    {
+      "text": "신청자일괄입력",
+      "onclick": "",
+      "href": "https://www.dbdbschool.kr/af/ad_app/input/p/1/sn/3267/sld/11/slp/all/sln/1587589/sof/sbh/sot/asc"
+    },
+    {
+      "text": "수강료입력",
+      "onclick": "",
+      "href": "https://www.dbdbschool.kr/af/ad_pay/edit/p/1/sn/3267/sld/11/slp/all/sln/1587589/sof/sbh/sot/asc"
+    },
+    {
+      "text": "신청자복사",
+      "onclick": "",
+      "href": "https://www.dbdbschool.kr/af/ad_app/copy/p/1/sn/3267/sld/11/slp/all/sln/1587589/sof/sbh/sot/asc"
+    },
+    {
+      "text": "추가/취소자조회",
+      "onclick": "",
+      "href": "https://www.dbdbschool.kr/af/ad_app/com/p/1/sn/3267/sld/11/slp/all/sln/1587589/sof/sbh/sot/asc"
+    },
+    {
+      "text": "미신청자목록",
+      "onclick": "",
+      "href": "https://www.dbdbschool.kr/af/ad_app/list1/p/1/sn/3267/sld/11/slp/all/sln/1587589/sof/sbh/sot/asc"
+    },
+    {
+      "text": "신청결과엑셀출력",
+      "onclick": "",
+      "href": "https://www.dbdbschool.kr/af/ad_app/excel/p/1/sn/3267/sld/11/slp/all/sln/1587589/sof/sbh/sot/asc"
+    },
+    {
+      "text": "수강신청서출력",
+      "onclick": "",
+      "href": "https://www.dbdbschool.kr/af/ad_app/pdf/p/1/sn/3267/sld/11/slp/all/sln/1587589/sof/sbh/sot/asc"
+    },
+    {
+      "text": "고지서출력",
+      "onclick": "",
+      "href": "https://www.dbdbschool.kr/af/ad_app/pdf1/p/1/sn/3267/sld/11/slp/all/sln/1587589/sof/sbh/sot/asc"
+    },
+    {
+      "text": "시간표출력",
+      "onclick": "",
+      "href": "https://www.dbdbschool.kr/af/ad_app/pdf2/p/1/sn/3267/sld/11/slp/all/sln/1587589/sof/sbh/sot/asc"
+    },
+    {
+      "text": "적용하기",
+      "onclick": "",
+      "href": ""
+    }
+  ],
+  "inputs": [
+    {
+      "type": "text",
+      "id": "s_word",
+      "name": "sw",
+      "placeholder": "검색어",
+      "value": ""
+    },
+    {
+      "type": "submit",
+      "id": "",
+      "name": "",
+      "placeholder": "",
+      "value": "검색"
+    },
+    {
+      "type": "button",
+      "id": "",
+      "name": "",
+      "placeholder": "",
+      "value": "전체"
+    },
+    {
+      "type": "button",
+      "id": "",
+      "name": "",
+      "placeholder": "",
+      "value": "신청자등록"
+    },
+    {
+      "type": "checkbox",
+      "id": "check_all",
+      "name": "check_all",
+      "placeholder": "",
+      "value": ""
+    },
+    {
+      "type": "submit",
+      "id": "",
+      "name": "",
+      "placeholder": "",
+      "value": "적용하기"
+    }
+  ],
+  "selects": [
+    {
+      "id": "",
+      "name": "sld",
+      "options": [
+        {
+          "text": "=강좌구분=",
+          "value": "all",
+          "selected": false
+        },
+        {
+          "text": "3월",
+          "value": "5",
+          "selected": false
+        },
+        {
+          "text": "26년 4월",
+          "value": "6",
+          "selected": false
+        },
+        {
+          "text": "26년 5월",
+          "value": "7",
+          "selected": false
+        },
+        {
+          "text": "26년 6월",
+          "value": "8",
+          "selected": false
+        },
+        {
+          "text": "26년 7월",
+          "value": "9",
+          "selected": false
+        },
+        {
+          "text": "26년 8월",
+          "value": "10",
+          "selected": false
+        },
+        {
+          "text": "26년 9월",
+          "value": "11",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "id": "",
+      "name": "slp",
+      "options": [
+        {
+          "text": "=늘봄과정=",
+          "value": "all",
+          "selected": true
+        },
+        {
+          "text": "방과후",
+          "value": "1",
+          "selected": false
+        },
+        {
+          "text": "맞춤형",
+          "value": "2",
+          "selected": false
+        },
+        {
+          "text": "돌봄",
+          "value": "3",
+          "selected": false
+        }
+      ]
+    },
+    {
+      "id": "sel_lec_num",
+      "name": "sln",
+      "options": [
+        {
+          "text": "=강좌전체=",
+          "value": "",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] (금)돌봄 1부(돌봄전담사,0명)",
+          "value": "1587589",
+          "selected": true
+        },
+        {
+          "text": "[26년 9월] (금)돌봄 2부(돌봄전담사,0명)",
+          "value": "1587590",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] (금)돌봄 3부(돌봄전담사,0명)",
+          "value": "1587591",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] (목)돌봄 1부(돌봄전담사,0명)",
+          "value": "1587586",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] (목)돌봄 2부(돌봄전담사,0명)",
+          "value": "1587587",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] (목)돌봄 3부(돌봄전담사,0명)",
+          "value": "1587588",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] (수)돌봄 1부(돌봄전담사,0명)",
+          "value": "1587582",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] (수)돌봄 2부(돌봄전담사,0명)",
+          "value": "1587583",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] (수)돌봄 3부(돌봄전담사,0명)",
+          "value": "1587584",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] (수)돌봄 4부(돌봄전담사,0명)",
+          "value": "1587585",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] (월)돌봄 1부(돌봄전담사,0명)",
+          "value": "1587575",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] (월)돌봄 2부(돌봄전담사,0명)",
+          "value": "1587576",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] (월)돌봄 3부(돌봄전담사,0명)",
+          "value": "1587577",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] (월)돌봄 4부(돌봄전담사,0명)",
+          "value": "1587578",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] (화)돌봄 1부(돌봄전담사,0명)",
+          "value": "1587579",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] (화)돌봄 2부(돌봄전담사,0명)",
+          "value": "1587580",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] (화)돌봄 3부(돌봄전담사,0명)",
+          "value": "1587581",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 논술 1부(박지숙,0명)",
+          "value": "1587597",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 논술 2부(박지숙,0명)",
+          "value": "1587598",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 논술 3부(박지숙,0명)",
+          "value": "1587599",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 놀이체육 1부(강태연,0명)",
+          "value": "1587595",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 놀이체육 2부(강태연,0명)",
+          "value": "1587594",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 뉴스포츠 1부(박지연,0명)",
+          "value": "1587623",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 뉴스포츠 2부(박지연,0명)",
+          "value": "1587624",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 댄스 1부(김지향,0명)",
+          "value": "1587600",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 댄스 2부(김지향,0명)",
+          "value": "1587601",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 댄스 3부(김지향,0명)",
+          "value": "1587602",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 독후활동미술놀이 1부(임은희,0명)",
+          "value": "1587593",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 독후활동미술놀이 2부(임은희,0명)",
+          "value": "1587592",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 로봇과학 1부(최정호,0명)",
+          "value": "1587603",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 로봇과학 2부(최정호,0명)",
+          "value": "1587604",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 로봇과학 3부(최정호,0명)",
+          "value": "1587605",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 바둑 1부(박경도,0명)",
+          "value": "1587612",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 바둑 2부(박경도,0명)",
+          "value": "1587613",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 바이올린 1부(천윤아,0명)",
+          "value": "1587614",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 바이올린 2부(천윤아,0명)",
+          "value": "1587615",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 생활영어 1부(서인경,0명)",
+          "value": "1587625",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 생활영어 2부(서인경,2명)",
+          "value": "1587626",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 아침늘봄 (월~금 08:00~08:40)(이금진,0명)",
+          "value": "1587596",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 주산 1부(박은화,0명)",
+          "value": "1587606",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 주산 2부(박은화,0명)",
+          "value": "1587607",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 주산 3부(박은화,0명)",
+          "value": "1587608",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 창의미술 1부(김언주,1명)",
+          "value": "1587616",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 창의미술 2부(김언주,0명)",
+          "value": "1587617",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 창의보드 1부(정진화,0명)",
+          "value": "1587573",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 창의보드 2부(정진화,0명)",
+          "value": "1587574",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 창의수학 1부(김경아,0명)",
+          "value": "1587627",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 창의수학 2부(김경아,0명)",
+          "value": "1587628",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 컴퓨터 월,수 1부(김윤정,3명)",
+          "value": "1587618",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 컴퓨터 월,수 2부(김윤정,1명)",
+          "value": "1587619",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 컴퓨터 월,수 3부(김윤정,0명)",
+          "value": "1587620",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 컴퓨터 화,목 1부(김윤정,0명)",
+          "value": "1587621",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 컴퓨터 화,목 2부(김윤정,0명)",
+          "value": "1587622",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 한자 1부(김재표,0명)",
+          "value": "1587609",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 한자 2부(김재표,0명)",
+          "value": "1587610",
+          "selected": false
+        },
+        {
+          "text": "[26년 9월] 한자 3부(김재표,0명)",
+          "value": "1587611",
+          "selected": false
+        }
+      ]
+    },
+    {
+      "id": "sgr",
+      "name": "sgr",
+      "options": [
+        {
+          "text": "=학년=",
+          "value": "",
+          "selected": true
+        },
+        {
+          "text": "1",
+          "value": "1",
+          "selected": false
+        },
+        {
+          "text": "2",
+          "value": "2",
+          "selected": false
+        },
+        {
+          "text": "3",
+          "value": "3",
+          "selected": false
+        },
+        {
+          "text": "4",
+          "value": "4",
+          "selected": false
+        },
+        {
+          "text": "5",
+          "value": "5",
+          "selected": false
+        },
+        {
+          "text": "6",
+          "value": "6",
+          "selected": false
+        }
+      ]
+    },
+    {
+      "id": "scl",
+      "name": "scl",
+      "options": [
+        {
+          "text": "=반=",
+          "value": "",
+          "selected": true
+        },
+        {
+          "text": "1",
+          "value": "1",
+          "selected": false
+        },
+        {
+          "text": "2",
+          "value": "2",
+          "selected": false
+        },
+        {
+          "text": "3",
+          "value": "3",
+          "selected": false
+        },
+        {
+          "text": "4",
+          "value": "4",
+          "selected": false
+        },
+        {
+          "text": "5",
+          "value": "5",
+          "selected": false
+        },
+        {
+          "text": "6",
+          "value": "6",
+          "selected": false
+        },
+        {
+          "text": "7",
+          "value": "7",
+          "selected": false
+        },
+        {
+          "text": "8",
+          "value": "8",
+          "selected": false
+        },
+        {
+          "text": "9",
+          "value": "9",
+          "selected": false
+        },
+        {
+          "text": "10",
+          "value": "10",
+          "selected": false
+        },
+        {
+          "text": "11",
+          "value": "11",
+          "selected": false
+        },
+        {
+          "text": "12",
+          "value": "12",
+          "selected": false
+        }
+      ]
+    },
+    {
+      "id": "st",
+      "name": "st",
+      "options": [
+        {
+          "text": "이름",
+          "value": "app_mem_name",
+          "selected": true
+        },
+        {
+          "text": "연락처",
+          "value": "tel",
+          "selected": false
+        }
+      ]
+    },
+    {
+      "id": "",
+      "name": "update_type",
+      "options": [
+        {
+          "text": "==== 일괄적용 ====",
+          "value": "",
+          "selected": true
+        },
+        {
+          "text": "신청자 이동",
+          "value": "move",
+          "selected": false
+        },
+        {
+          "text": "-------------------------",
+          "value": "",
+          "selected": false
+        },
+        {
+          "text": "신청자 삭제",
+          "value": "del",
+          "selected": false
+        }
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "idx": 0,
+      "headers": [
+        "연번",
+        "구분\n(늘봄과정)",
+        "강좌명",
+        "학년",
+        "반",
+        "번호",
+        "이름",
+        "연락처",
+        "수강료",
+        "수용비",
+        "강사료",
+        "교재비",
+        "재료비",
+        "합계",
+        "등록일자",
+        "삭제"
+      ],
+      "rowCount": 1
+    }
+  ]
+}

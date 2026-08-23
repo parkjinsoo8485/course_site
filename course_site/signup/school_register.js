@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (data.success) {
         alert(`🎉 ${data.schoolName} 등록이 완료되었습니다!\n발급된 학교 코드: [ ${data.schoolCode} ]\n관리자 계정으로 로그인해주세요.`);
-        window.location.href = '../login/login.html';
+        window.location.href = '/af/ad_lec/lists/sn/3267';
       } else {
         showError(data.message || '학교 가입 실패');
       }

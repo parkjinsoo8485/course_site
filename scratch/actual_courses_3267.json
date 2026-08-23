@@ -1,0 +1,415 @@
+[
+  {
+    "id": 1552375,
+    "period": "26년 8월",
+    "name": "(금) 돌봄 4부",
+    "teacher": "돌봄전담사",
+    "studentCount": 19
+  },
+  {
+    "id": 1552291,
+    "period": "26년 8월",
+    "name": "(금)돌봄 1부",
+    "teacher": "돌봄전담사",
+    "studentCount": 5
+  },
+  {
+    "id": 1552292,
+    "period": "26년 8월",
+    "name": "(금)돌봄 2부",
+    "teacher": "돌봄전담사",
+    "studentCount": 12
+  },
+  {
+    "id": 1552293,
+    "period": "26년 8월",
+    "name": "(금)돌봄 3부",
+    "teacher": "돌봄전담사",
+    "studentCount": 20
+  },
+  {
+    "id": 1552374,
+    "period": "26년 8월",
+    "name": "(목) 돌봄 4부",
+    "teacher": "돌봄전담사",
+    "studentCount": 20
+  },
+  {
+    "id": 1552288,
+    "period": "26년 8월",
+    "name": "(목)돌봄 1부",
+    "teacher": "돌봄전담사",
+    "studentCount": 2
+  },
+  {
+    "id": 1552289,
+    "period": "26년 8월",
+    "name": "(목)돌봄 2부",
+    "teacher": "돌봄전담사",
+    "studentCount": 4
+  },
+  {
+    "id": 1552290,
+    "period": "26년 8월",
+    "name": "(목)돌봄 3부",
+    "teacher": "돌봄전담사",
+    "studentCount": 10
+  },
+  {
+    "id": 1552284,
+    "period": "26년 8월",
+    "name": "(수)돌봄 1부",
+    "teacher": "돌봄전담사",
+    "studentCount": 1
+  },
+  {
+    "id": 1552285,
+    "period": "26년 8월",
+    "name": "(수)돌봄 2부",
+    "teacher": "돌봄전담사",
+    "studentCount": 4
+  },
+  {
+    "id": 1552286,
+    "period": "26년 8월",
+    "name": "(수)돌봄 3부",
+    "teacher": "돌봄전담사",
+    "studentCount": 10
+  },
+  {
+    "id": 1552287,
+    "period": "26년 8월",
+    "name": "(수)돌봄 4부",
+    "teacher": "돌봄전담사",
+    "studentCount": 20
+  },
+  {
+    "id": 1552277,
+    "period": "26년 8월",
+    "name": "(월)돌봄 1부",
+    "teacher": "돌봄전담사",
+    "studentCount": 1
+  },
+  {
+    "id": 1552278,
+    "period": "26년 8월",
+    "name": "(월)돌봄 2부",
+    "teacher": "돌봄전담사",
+    "studentCount": 4
+  },
+  {
+    "id": 1552279,
+    "period": "26년 8월",
+    "name": "(월)돌봄 3부",
+    "teacher": "돌봄전담사",
+    "studentCount": 10
+  },
+  {
+    "id": 1552280,
+    "period": "26년 8월",
+    "name": "(월)돌봄 4부",
+    "teacher": "돌봄전담사",
+    "studentCount": 20
+  },
+  {
+    "id": 1552373,
+    "period": "26년 8월",
+    "name": "(화) 돌봄 4부",
+    "teacher": "돌봄전담사",
+    "studentCount": 20
+  },
+  {
+    "id": 1552281,
+    "period": "26년 8월",
+    "name": "(화)돌봄 1부",
+    "teacher": "돌봄전담사",
+    "studentCount": 2
+  },
+  {
+    "id": 1552282,
+    "period": "26년 8월",
+    "name": "(화)돌봄 2부",
+    "teacher": "돌봄전담사",
+    "studentCount": 4
+  },
+  {
+    "id": 1552283,
+    "period": "26년 8월",
+    "name": "(화)돌봄 3부",
+    "teacher": "돌봄전담사",
+    "studentCount": 10
+  },
+  {
+    "id": 1552299,
+    "period": "26년 8월",
+    "name": "논술 1부",
+    "teacher": "박지숙",
+    "studentCount": 17
+  },
+  {
+    "id": 1552300,
+    "period": "26년 8월",
+    "name": "논술 2부",
+    "teacher": "박지숙",
+    "studentCount": 11
+  },
+  {
+    "id": 1552301,
+    "period": "26년 8월",
+    "name": "논술 3부",
+    "teacher": "박지숙",
+    "studentCount": 0
+  },
+  {
+    "id": 1552297,
+    "period": "26년 8월",
+    "name": "놀이체육 1부",
+    "teacher": "강태연",
+    "studentCount": 11
+  },
+  {
+    "id": 1552296,
+    "period": "26년 8월",
+    "name": "놀이체육 2부",
+    "teacher": "강태연",
+    "studentCount": 15
+  },
+  {
+    "id": 1552324,
+    "period": "26년 8월",
+    "name": "뉴스포츠 1부",
+    "teacher": "박지연",
+    "studentCount": 30
+  },
+  {
+    "id": 1552325,
+    "period": "26년 8월",
+    "name": "뉴스포츠 2부",
+    "teacher": "박지연",
+    "studentCount": 20
+  },
+  {
+    "id": 1552302,
+    "period": "26년 8월",
+    "name": "댄스 1부",
+    "teacher": "김지향",
+    "studentCount": 0
+  },
+  {
+    "id": 1552303,
+    "period": "26년 8월",
+    "name": "댄스 2부",
+    "teacher": "김지향",
+    "studentCount": 16
+  },
+  {
+    "id": 1552304,
+    "period": "26년 8월",
+    "name": "댄스 3부",
+    "teacher": "김지향",
+    "studentCount": 6
+  },
+  {
+    "id": 1552295,
+    "period": "26년 8월",
+    "name": "독후활동미술놀이 1부",
+    "teacher": "임은희",
+    "studentCount": 9
+  },
+  {
+    "id": 1552294,
+    "period": "26년 8월",
+    "name": "독후활동미술놀이 2부",
+    "teacher": "임은희",
+    "studentCount": 20
+  },
+  {
+    "id": 1552305,
+    "period": "26년 8월",
+    "name": "로봇과학 1부",
+    "teacher": "최정호",
+    "studentCount": 14
+  },
+  {
+    "id": 1552306,
+    "period": "26년 8월",
+    "name": "로봇과학 2부",
+    "teacher": "최정호",
+    "studentCount": 22
+  },
+  {
+    "id": 1552307,
+    "period": "26년 8월",
+    "name": "로봇과학 3부",
+    "teacher": "최정호",
+    "studentCount": 6
+  },
+  {
+    "id": 1552313,
+    "period": "26년 8월",
+    "name": "바둑 1부",
+    "teacher": "박경도",
+    "studentCount": 8
+  },
+  {
+    "id": 1552314,
+    "period": "26년 8월",
+    "name": "바둑 2부",
+    "teacher": "박경도",
+    "studentCount": 4
+  },
+  {
+    "id": 1552315,
+    "period": "26년 8월",
+    "name": "바이올린 1부",
+    "teacher": "천윤아",
+    "studentCount": 8
+  },
+  {
+    "id": 1552316,
+    "period": "26년 8월",
+    "name": "바이올린 2부",
+    "teacher": "천윤아",
+    "studentCount": 11
+  },
+  {
+    "id": 1552326,
+    "period": "26년 8월",
+    "name": "생활영어 1부",
+    "teacher": "서인경",
+    "studentCount": 9
+  },
+  {
+    "id": 1552327,
+    "period": "26년 8월",
+    "name": "생활영어 2부",
+    "teacher": "서인경",
+    "studentCount": 4
+  },
+  {
+    "id": 1552298,
+    "period": "26년 8월",
+    "name": "아침늘봄",
+    "teacher": "월~금 08:00~08:40)(이금진",
+    "studentCount": 5
+  },
+  {
+    "id": 1552308,
+    "period": "26년 8월",
+    "name": "주산 1부",
+    "teacher": "박은화",
+    "studentCount": 8
+  },
+  {
+    "id": 1552309,
+    "period": "26년 8월",
+    "name": "주산 2부",
+    "teacher": "박은화",
+    "studentCount": 2
+  },
+  {
+    "id": 1552310,
+    "period": "26년 8월",
+    "name": "주산 3부",
+    "teacher": "박은화",
+    "studentCount": 3
+  },
+  {
+    "id": 1552317,
+    "period": "26년 8월",
+    "name": "창의미술 1부",
+    "teacher": "김언주",
+    "studentCount": 20
+  },
+  {
+    "id": 1552318,
+    "period": "26년 8월",
+    "name": "창의미술 2부",
+    "teacher": "김언주",
+    "studentCount": 10
+  },
+  {
+    "id": 1552275,
+    "period": "26년 8월",
+    "name": "창의보드 1부",
+    "teacher": "정진화",
+    "studentCount": 10
+  },
+  {
+    "id": 1552276,
+    "period": "26년 8월",
+    "name": "창의보드 2부",
+    "teacher": "정진화",
+    "studentCount": 18
+  },
+  {
+    "id": 1552328,
+    "period": "26년 8월",
+    "name": "창의수학 1부",
+    "teacher": "김경아",
+    "studentCount": 17
+  },
+  {
+    "id": 1552329,
+    "period": "26년 8월",
+    "name": "창의수학 2부",
+    "teacher": "김경아",
+    "studentCount": 12
+  },
+  {
+    "id": 1552319,
+    "period": "26년 8월",
+    "name": "컴퓨터 월,수 1부",
+    "teacher": "김윤정",
+    "studentCount": 15
+  },
+  {
+    "id": 1552320,
+    "period": "26년 8월",
+    "name": "컴퓨터 월,수 2부",
+    "teacher": "김윤정",
+    "studentCount": 29
+  },
+  {
+    "id": 1552321,
+    "period": "26년 8월",
+    "name": "컴퓨터 월,수 3부",
+    "teacher": "김윤정",
+    "studentCount": 22
+  },
+  {
+    "id": 1552322,
+    "period": "26년 8월",
+    "name": "컴퓨터 화,목 1부",
+    "teacher": "김윤정",
+    "studentCount": 22
+  },
+  {
+    "id": 1552323,
+    "period": "26년 8월",
+    "name": "컴퓨터 화,목 2부",
+    "teacher": "김윤정",
+    "studentCount": 29
+  },
+  {
+    "id": 1552429,
+    "period": "26년 8월",
+    "name": "컴퓨터 화,목 3부",
+    "teacher": "김윤정",
+    "studentCount": 28
+  },
+  {
+    "id": 1552311,
+    "period": "26년 8월",
+    "name": "한자 1부",
+    "teacher": "김재표",
+    "studentCount": 13
+  },
+  {
+    "id": 1552312,
+    "period": "26년 8월",
+    "name": "한자 2부",
+    "teacher": "김재표",
+    "studentCount": 10
+  }
+]

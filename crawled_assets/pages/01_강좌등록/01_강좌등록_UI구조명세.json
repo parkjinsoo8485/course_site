@@ -1,0 +1,496 @@
+{
+  "title": "등록 - 강좌관리 - 늘봄학교",
+  "url": "https://www.dbdbschool.kr/af/ad_lec/write/p/1/sn/3267/sld/11/sof/ln/sot/asc",
+  "buttons": [
+    {
+      "text": "파일추가",
+      "onclick": "add_file(); return false;",
+      "href": "#none;"
+    },
+    {
+      "text": "취소",
+      "onclick": "history.back(-1); return false;",
+      "href": ""
+    },
+    {
+      "text": "등록",
+      "onclick": "",
+      "href": ""
+    }
+  ],
+  "inputs": [
+    {
+      "type": "text",
+      "id": "lec_name",
+      "name": "lec_name",
+      "placeholder": "",
+      "value": ""
+    },
+    {
+      "type": "text",
+      "id": "tea_id",
+      "name": "tea_id",
+      "placeholder": "",
+      "value": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "tea_id_chk",
+      "name": "tea_id_chk",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "text",
+      "id": "tea_id1",
+      "name": "tea_id1",
+      "placeholder": "",
+      "value": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "check_all_grade",
+      "name": "check_all_grade",
+      "placeholder": "",
+      "value": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_grade_grade_1",
+      "name": "lec_grade[]",
+      "placeholder": "",
+      "value": "1"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_grade_grade_2",
+      "name": "lec_grade[]",
+      "placeholder": "",
+      "value": "2"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_grade_grade_3",
+      "name": "lec_grade[]",
+      "placeholder": "",
+      "value": "3"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_grade_grade_4",
+      "name": "lec_grade[]",
+      "placeholder": "",
+      "value": "4"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_grade_grade_5",
+      "name": "lec_grade[]",
+      "placeholder": "",
+      "value": "5"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_grade_grade_6",
+      "name": "lec_grade[]",
+      "placeholder": "",
+      "value": "6"
+    },
+    {
+      "type": "text",
+      "id": "lec_time_",
+      "name": "lec_time_",
+      "placeholder": "",
+      "value": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_time_not_chk",
+      "name": "lec_time_not_chk",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "text",
+      "id": "lec_max_sin",
+      "name": "lec_max_sin",
+      "placeholder": "",
+      "value": "0"
+    },
+    {
+      "type": "text",
+      "id": "lec_max_wait",
+      "name": "lec_max_wait",
+      "placeholder": "",
+      "value": "0"
+    },
+    {
+      "type": "text",
+      "id": "lec_sdate",
+      "name": "lec_sdate",
+      "placeholder": "",
+      "value": ""
+    },
+    {
+      "type": "text",
+      "id": "lec_edate",
+      "name": "lec_edate",
+      "placeholder": "",
+      "value": ""
+    },
+    {
+      "type": "text",
+      "id": "lec_tot_sisu",
+      "name": "lec_tot_sisu",
+      "placeholder": "",
+      "value": "0"
+    },
+    {
+      "type": "text",
+      "id": "lec_room",
+      "name": "lec_room",
+      "placeholder": "신규입력",
+      "value": ""
+    },
+    {
+      "type": "text",
+      "id": "lec_pay",
+      "name": "lec_pay",
+      "placeholder": "",
+      "value": "0"
+    },
+    {
+      "type": "checkbox",
+      "id": "not_free2_pay",
+      "name": "not_free2_pay",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "checkbox",
+      "id": "not_free3_pay",
+      "name": "not_free3_pay",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "checkbox",
+      "id": "not_free1_pay",
+      "name": "not_free1_pay",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "text",
+      "id": "lec_use_cost",
+      "name": "lec_use_cost",
+      "placeholder": "",
+      "value": "0"
+    },
+    {
+      "type": "text",
+      "id": "lec_tea_fee",
+      "name": "lec_tea_fee",
+      "placeholder": "",
+      "value": "0"
+    },
+    {
+      "type": "text",
+      "id": "lec_pay_book",
+      "name": "lec_pay_book",
+      "placeholder": "",
+      "value": "0"
+    },
+    {
+      "type": "checkbox",
+      "id": "not_free2_pay_book",
+      "name": "not_free2_pay_book",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "checkbox",
+      "id": "not_free3_pay_book",
+      "name": "not_free3_pay_book",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "checkbox",
+      "id": "not_free1_pay_book",
+      "name": "not_free1_pay_book",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "text",
+      "id": "lec_pay_item",
+      "name": "lec_pay_item",
+      "placeholder": "",
+      "value": "0"
+    },
+    {
+      "type": "checkbox",
+      "id": "not_free2_pay_item",
+      "name": "not_free2_pay_item",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "checkbox",
+      "id": "not_free3_pay_item",
+      "name": "not_free3_pay_item",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "checkbox",
+      "id": "not_free1_pay_item",
+      "name": "not_free1_pay_item",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "text",
+      "id": "lec_content",
+      "name": "lec_content",
+      "placeholder": "",
+      "value": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_pay_view",
+      "name": "lec_pay_view",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_tea_finish",
+      "name": "lec_tea_finish",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "checkbox",
+      "id": "lec_tea_edit",
+      "name": "lec_tea_edit",
+      "placeholder": "",
+      "value": "Y"
+    },
+    {
+      "type": "checkbox",
+      "id": "refund_status",
+      "name": "refund_status",
+      "placeholder": "",
+      "value": "1"
+    },
+    {
+      "type": "radio",
+      "id": "lec_status_1",
+      "name": "lec_status",
+      "placeholder": "",
+      "value": "1"
+    },
+    {
+      "type": "radio",
+      "id": "lec_status_0",
+      "name": "lec_status",
+      "placeholder": "",
+      "value": "0"
+    },
+    {
+      "type": "radio",
+      "id": "lec_status_2",
+      "name": "lec_status",
+      "placeholder": "",
+      "value": "2"
+    },
+    {
+      "type": "button",
+      "id": "",
+      "name": "",
+      "placeholder": "",
+      "value": "취소"
+    },
+    {
+      "type": "submit",
+      "id": "",
+      "name": "",
+      "placeholder": "",
+      "value": "등록"
+    }
+  ],
+  "selects": [
+    {
+      "id": "lec_div",
+      "name": "lec_div",
+      "options": [
+        {
+          "text": "=선택=",
+          "value": "",
+          "selected": false
+        },
+        {
+          "text": "3월",
+          "value": "5",
+          "selected": false
+        },
+        {
+          "text": "26년 4월",
+          "value": "6",
+          "selected": false
+        },
+        {
+          "text": "26년 5월",
+          "value": "7",
+          "selected": false
+        },
+        {
+          "text": "26년 6월",
+          "value": "8",
+          "selected": false
+        },
+        {
+          "text": "26년 7월",
+          "value": "9",
+          "selected": false
+        },
+        {
+          "text": "26년 8월",
+          "value": "10",
+          "selected": false
+        },
+        {
+          "text": "26년 9월",
+          "value": "11",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "id": "lec_pro_type",
+      "name": "lec_pro_type",
+      "options": [
+        {
+          "text": "=선택=",
+          "value": "",
+          "selected": true
+        },
+        {
+          "text": "방과후",
+          "value": "1",
+          "selected": false
+        },
+        {
+          "text": "맞춤형",
+          "value": "2",
+          "selected": false
+        },
+        {
+          "text": "돌봄",
+          "value": "3",
+          "selected": false
+        }
+      ]
+    },
+    {
+      "id": "lec_room_",
+      "name": "lec_room_",
+      "options": [
+        {
+          "text": "== 선택 ==",
+          "value": "",
+          "selected": true
+        },
+        {
+          "text": "강당",
+          "value": "강당",
+          "selected": false
+        },
+        {
+          "text": "본관2층 컴퓨터교실",
+          "value": "본관2층 컴퓨터교실",
+          "selected": false
+        },
+        {
+          "text": "본관3층 늘봄프로그램실 1",
+          "value": "본관3층 늘봄프로그램실 1",
+          "selected": false
+        },
+        {
+          "text": "본관3층 늘봄프로그램실 2",
+          "value": "본관3층 늘봄프로그램실 2",
+          "selected": false
+        },
+        {
+          "text": "본관3층 늘봄프로그램실 3",
+          "value": "본관3층 늘봄프로그램실 3",
+          "selected": false
+        },
+        {
+          "text": "본관3층 늘봄프로그램실 4",
+          "value": "본관3층 늘봄프로그램실 4",
+          "selected": false
+        },
+        {
+          "text": "후관1층 늘봄프로그램실",
+          "value": "후관1층 늘봄프로그램실",
+          "selected": false
+        },
+        {
+          "text": "후관1층 늘봄프로그램실/강당",
+          "value": "후관1층 늘봄프로그램실/강당",
+          "selected": false
+        },
+        {
+          "text": "후관1층 돌봄교실",
+          "value": "후관1층 돌봄교실",
+          "selected": false
+        },
+        {
+          "text": "후관2층 늘봄프로그램실 5",
+          "value": "후관2층 늘봄프로그램실 5",
+          "selected": false
+        },
+        {
+          "text": "후관2층 늘봄프로그램실 6",
+          "value": "후관2층 늘봄프로그램실 6",
+          "selected": false
+        }
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "idx": 0,
+      "headers": [
+        "강좌명",
+        "강좌구분",
+        "늘봄과정",
+        "강사ID",
+        "보조강사ID",
+        "대상학년",
+        "강의시간",
+        "정원",
+        "대기정원",
+        "운영기간",
+        "총시수",
+        "강의실",
+        "수강료",
+        "수용비",
+        "강사료",
+        "교재비",
+        "재료비",
+        "내용",
+        "첨부파일",
+        "수강료 출력",
+        "강사마감",
+        "강사 강좌 편집",
+        "환불마감",
+        "상태"
+      ],
+      "rowCount": 24
+    }
+  ]
+}

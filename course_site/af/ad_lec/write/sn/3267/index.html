@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="방과후학교 수강신청, 늘봄학교 수강신청, 자유학기제 수강신청, 우유신청, 온라인 연수지명부 작성 등 학교 교직원 업무 경감을 위한 온라인 서비스를 제공합니다.">
+	<meta name="keywords" content="방과후학교,늘봄학교,우유신청,연수지명부,수강신청,늘봄학교 수강신청,자유학기제 수강신청,방과후 신청,방과후 수강신청,방과후학교 신청,방과후학교 수강신청,방과후학교 프로그램,방과후학교 운영시스템,방과후학교 온라인시스템">
+	<meta name="author" content="엑스메카">	
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+	<link rel="apple-touch-icon-precomposed" href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/images/mobile_ico_2.png">
+	<link rel="shortcut icon" type="image/x-icon" href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/images/mobile_ico_2.png">
+	
+	<title>등록 - 강좌관리 - 늘봄학교</title>
+	<link href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/bootstrap.css?23111301" rel="stylesheet" type="text/css">
+	<link href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+	<link href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/ui/jquery-ui.css" rel="stylesheet" type="text/css">
+	<link href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/default.css?26061201" rel="stylesheet" type="text/css">
+	<link href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/af/content.css?26033101" rel="stylesheet" type="text/css">
+	<link href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/icon/css/font-awesome.css" rel="stylesheet" type="text/css">
+	<link href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/scroll/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<script>
+		var XM_SITE_URL = '/';
+		var XM_STATIC_URL = 'https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/';
+	</script>
+	<script type="text/javascript" src="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/jquery.js"></script>
+	<script type="text/javascript" src="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/ui/jquery-ui.js"></script>
+	<script type="text/javascript" src="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/bootstrap.js"></script>
+	<script type="text/javascript" src="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/common.js?23021501"></script>
+	<script type="text/javascript" src="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/scroll/jquery.mCustomScrollbar.js"></script>
+
+  <style>
+    /* ==================== dbdbschool 원본 100% 픽셀 일치 스타일 ==================== */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Malgun Gothic', '맑은 고딕', Dotum, '돋움', AppleGothic, sans-serif;
+      font-size: 12px;
+      color: #333333;
+      background-color: #f4f6f9;
+      line-height: 1.42857143;
+    }
+
+    #header {
+      height: 50px;
+      background: #3c8dbc;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 15px;
+      position: relative;
+      z-index: 1000;
+    }
+    #header #logo {
+      margin: 0;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    #header #logo a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+    #header h1 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: bold;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    #header h1 a.btn_icon {
+      color: #ffffff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    #header .menu_btn {
+      margin: 0;
+      font-size: 18px;
+      cursor: pointer;
+      color: #ffffff;
+    }
+    .my_service {
+      display: none;
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ffffff;
+      color: #333333;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      min-width: 140px;
+      z-index: 1100;
+      padding: 5px 0;
+      text-align: left;
+    }
+    .my_service ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .my_service ul li a {
+      display: block;
+      padding: 8px 15px;
+      color: #333333;
+      text-decoration: none;
+      font-size: 12px;
+    }
+    .my_service ul li a:hover {
+      background: #f5f5f5;
+    }
+
+    #container {
+      display: flex;
+      min-height: calc(100vh - 50px);
+    }
+
+    #left_menu {
+      width: 185px;
+      background: #f9f9f9;
+      border-right: 1px solid #e7e7e7;
+      flex-shrink: 0;
+    }
+    .user_box {
+      padding: 12px 10px;
+      border-bottom: 1px solid #e7e7e7;
+      background: #fff;
+      text-align: center;
+    }
+    .user_box dl.user {
+      margin: 0 0 10px 0;
+    }
+    .user_box dl.user dt {
+      font-size: 12px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .user_box dl.user dt .ball_num a {
+      color: #d9534f;
+      text-decoration: none;
+      font-size: 11px;
+    }
+    .user_box dl.user dd {
+      display: inline-block;
+      margin: 0 3px;
+      font-size: 11px;
+    }
+    .user_box dl.user dd a {
+      color: #777777;
+      text-decoration: none;
+    }
+    .user_box ul.main_btn {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+    }
+    .user_box ul.main_btn li {
+      flex: 1;
+    }
+    .user_box ul.main_btn li a {
+      display: block;
+      padding: 6px 0;
+      font-size: 12px;
+      font-weight: bold;
+      color: #ffffff;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 3px;
+    }
+    .user_box ul.main_btn li.btn01 a {
+      background: #00a65a;
+    }
+    .user_box ul.main_btn li.btn02 a {
+      background: #dd4b39;
+    }
+
+    ul.parent {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    ul.parent > li {
+      border-bottom: 1px solid #f0f0f0;
+    }
+    ul.parent > li > a {
+      display: flex;
+      align-items: center;
+      padding: 10px 14px;
+      color: #444444;
+      text-decoration: none;
+      font-size: 12px;
+      transition: background 0.15s;
+    }
+    ul.parent > li > a i.fa {
+      width: 20px;
+      font-size: 14px;
+      color: #666666;
+    }
+    ul.parent > li > a strong {
+      font-weight: normal;
+      flex: 1;
+    }
+    ul.parent > li > a:hover,
+    ul.parent > li > a.on {
+      background: #e4e7ea;
+      color: #dd4b39;
+      font-weight: bold;
+    }
+    ul.parent > li > a.on i.fa {
+      color: #dd4b39;
+    }
+    ul.depth {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      background: #f0f2f5;
+      display: none;
+    }
+    ul.depth li a {
+      display: block;
+      padding: 7px 14px 7px 34px;
+      color: #555555;
+      text-decoration: none;
+      font-size: 11px;
+    }
+    ul.depth li a:hover {
+      color: #dd4b39;
+      background: #e9ecef;
+    }
+    .badge-xm {
+      background: #f39c12;
+      color: #fff;
+      font-size: 10px;
+      padding: 2px 5px;
+      border-radius: 10px;
+      margin-left: 4px;
+    }
+
+    #contents_box {
+      flex: 1;
+      padding: 20px 24px;
+      background: #ffffff;
+      min-width: 0;
+    }
+    #contents_title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333333;
+      margin-bottom: 15px;
+      position: relative;
+      line-height: 1.3;
+    }
+    #contents_title i.fa {
+      color: #3c8dbc;
+      margin-right: 4px;
+    }
+    #contents_title span.title {
+      font-size: 12px;
+      font-weight: normal;
+      color: #777777;
+    }
+    #contents_title p.write_yun {
+      position: absolute;
+      right: 0;
+      top: 0;
+      margin: 0;
+      text-align: center;
+    }
+    #contents_title p.write_yun a {
+      display: inline-block;
+      padding: 4px 10px;
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      color: #555;
+      text-decoration: none;
+      font-size: 11px;
+    }
+
+    .panel_main {
+      border: 1px solid #e0e0e0;
+      border-radius: 3px;
+      background: #ffffff;
+      position: relative;
+    }
+    .new_help_manualbox {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      z-index: 10;
+    }
+    .new_help_manualbox p.hm_title {
+      display: none;
+    }
+    .new_help_manualbox ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .new_help_manualbox a.manual_btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      background: #f9f9f9;
+      border: 1px solid #cccccc;
+      border-radius: 3px;
+      color: #333333;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: bold;
+    }
+    .new_help_manualbox a.manual_btn i.fa {
+      color: #cc181e;
+      font-size: 14px;
+    }
+
+    .panel-heading {
+      padding: 12px 15px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #333333;
+      border-bottom: 1px solid #eeeeee;
+      background-color: #fafafa;
+    }
+    .panel-body {
+      padding: 10px 15px 5px 15px;
+    }
+    .MAT20 {
+      margin-top: 0px !important;
+      margin-bottom: 10px;
+      color: #666;
+    }
+    i.required {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background: #d9534f;
+      border-radius: 50%;
+      position: relative;
+      margin-right: 3px;
+      vertical-align: middle;
+    }
+    i.required::after {
+      content: "!";
+      color: #fff;
+      font-size: 9px;
+      font-weight: bold;
+      position: absolute;
+      left: 4px;
+      top: -1px;
+    }
+
+    table.list {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 0px;
+      border-top: 1px solid #ddd;
+    }
+    table.list th {
+      background-color: #f7f9fa;
+      color: #333333;
+      font-weight: bold;
+      text-align: left;
+      padding: 8px 12px;
+      border: 1px solid #e7e7e7;
+      vertical-align: middle;
+      font-size: 12px;
+      width: 140px;
+    }
+    table.list td {
+      padding: 8px 12px;
+      border: 1px solid #e7e7e7;
+      vertical-align: middle;
+      font-size: 12px;
+      background-color: #ffffff;
+    }
+    .form-control {
+      height: 30px;
+      padding: 4px 8px;
+      font-size: 12px;
+      border: 1px solid #cccccc;
+      border-radius: 3px;
+      color: #555555;
+      background-color: #ffffff;
+      box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+      box-sizing: border-box;
+    }
+    .form-control:focus {
+      border-color: #66afe9;
+      outline: 0;
+      box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(102,175,233,0.6);
+    }
+    .text-right {
+      text-align: right;
+    }
+    .search_btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      height: 26px;
+      padding: 0 8px;
+      background: #555555;
+      color: #ffffff !important;
+      border-radius: 3px;
+      font-size: 11px;
+      text-decoration: none !important;
+      vertical-align: middle;
+    }
+    .search_btn:hover {
+      background: #333333;
+    }
+    .error_msg {
+      color: #d9534f;
+      font-size: 11px;
+      margin-top: 3px;
+    }
+    .mobile_clear {
+      display: inline-block;
+    }
+    .MAT10 {
+      margin-top: 6px;
+      display: inline-block;
+    }
+    .text-danger {
+      color: #d9534f;
+    }
+
+    .btn {
+      height: 30px;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3px;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      border: 1px solid transparent;
+      line-height: 1;
+      text-decoration: none;
+    }
+    .btn-default {
+      background-color: #ffffff;
+      border-color: #cccccc;
+      color: #333333;
+    }
+    .btn-default:hover {
+      background-color: #e6e6e6;
+    }
+    .btn-danger {
+      background-color: #d9534f;
+      border-color: #d43f3a;
+      color: #ffffff;
+    }
+    .btn-danger:hover {
+      background-color: #c9302c;
+    }
+    .btn-xs {
+      height: 22px;
+      padding: 0 8px;
+      font-size: 11px;
+    }
+
+    .help_box {
+      margin-top: 20px;
+      padding: 14px 18px;
+      background: #fafafa;
+      border-left: 3px solid #d9534f;
+      border-top: 1px solid #eeeeee;
+      border-right: 1px solid #eeeeee;
+      border-bottom: 1px solid #eeeeee;
+      font-size: 12px;
+      line-height: 1.8;
+      color: #555555;
+    }
+    .help_box ul {
+      margin: 0;
+      padding-left: 15px;
+    }
+
+    #footer {
+      margin-top: 35px;
+      padding: 20px 0;
+      text-align: center;
+      font-size: 11px;
+      color: #888888;
+      border-top: 1px solid #eeeeee;
+      line-height: 1.6;
+    }
+    #footer a {
+      color: #555555;
+      text-decoration: none;
+    }
+
+    .file {
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .file .add a {
+      color: #d9534f;
+      font-size: 11px;
+      text-decoration: none;
+    }
+    .file .move_sor {
+      cursor: move;
+      color: #888888;
+    }
+  </style>
+</head>
+<body>
+<div id="le_on"></div>
+
+<!-- 1. TOP HEADER -->
+<div id="header">
+	<p id="logo"><a href="/af/ad_lec/lists/sn/3267">광주풍향초등학교</a></p>
+	<h1>
+    <a href="#none;" class="btn_icon">늘봄학교 <i class="fa title fa-angle-down"></i></a> 
+		<span class="box_position">
+			<div class="my_service">
+				<span class="arrow"><i class="fa fa-sort-asc"></i></span>
+				<ul>
+					<li><a href="/af/ad_lec/lists/sn/3267">늘봄학교</a></li>
+					<li><a href="/sczigi/service/lists/sn/3267">학교관리 돌아가기</a></li>
+				</ul>
+			</div>
+		</span>
+	</h1>
+	<p class="menu_btn"><i class="fa fa-bars"></i></p>
+</div>
+
+<!-- 2. MAIN CONTAINER -->
+<div id="container">
+	<!-- LEFT SIDEBAR -->
+	<div id="left_menu" class="content mCustomScrollbar light" data-mcs-theme="minimal-dark">
+		<div class="user_box">
+			<p class="user_t"></p>
+			<dl class="user">
+				<dt>관리자(김혜련)님 <span class="ball_num"><a href="/af/notification/lists/sn/3267"><i class="fa fa-bell"></i><i class="num">0</i></a></span></dt>
+				<dd><a href="/member/logout/sn/3267">[로그아웃]</a></dd>
+				<dd><a href="/member/modify/sn/3267">[정보수정]</a></dd>
+			</dl>
+							
+			<ul class="main_btn">
+				<li class="btn01"><a href="/af/ad_lec/lists/sn/3267">홈으로</a></li>				
+				<li class="btn02"><a href="/af/ad_lec/write/sn/3267">강좌등록</a></li>
+			</ul>	
+		</div>
+		<ul class="parent">
+			<li><a href="/af/ad_faq/main/sn/3267"><i class="fa fa-download"></i><strong>매뉴얼</strong></a></li>
+			<li><a href="/af/qanda/lists/sn/3267"><i class="fa fa-phone"></i><strong>고객지원 게시판</strong></a></li>
+			<li class="admin"><a href="/sczigi/service/lists/sn/3267"><i class="fa fa-cog"></i><strong>학교관리</strong></a></li>
+			<li><a href="/af/ad_lec/lists/sn/3267" class="on"><i class="fa fa-futbol-o"></i><strong>강좌관리</strong></a></li>
+			<li><a href="/af/ad_app/lists/sn/3267"><i class="fa fa-slideshare"></i><strong>신청자관리</strong></a></li>
+			<li><a href="/af/ad_wait/lists/sn/3267"><i class="fa fa-slideshare"></i><strong>대기자관리</strong></a></li>	
+			<li><a href="/af/ad_att/stat/sn/3267"><i class="fa fa-check-square-o"></i><strong>출석부관리</strong></a></li>	
+			<li><a href="/af/ad_ref/lists/sn/3267"><i class="fa fa-slideshare"></i><strong>환불/취소관리</strong></a></li>	
+			<li class="has-sub"><a href="#none;"><i class="fa fa-university"></i><strong>지원금관리</strong><span class="fa fa-chevron-down" style="float:right;"></span></a>
+				<ul class="depth">
+					<li><a href="/af/ad_free2_stu/lists/sn/3267"><i class="fa fa-volume-up"></i>대상자관리</a></li>
+					<li><a href="/af/ad_free2_app/lists/sn/3267"><i class="fa fa-volume-up"></i>수강자관리</a></li>
+					<li><a href="/af/ad_free2_cfg/main/sn/3267"><i class="fa fa-volume-up"></i>지원금설정</a></li>						
+					<li><a href="/af/ad_free2_cfg/free1/sn/3267"><i class="fa fa-volume-up"></i>순위구분설정</a></li>
+				</ul>
+			</li>	
+			<li><a href="/af/ad_rsch/lists/sn/3267"><i class="fa fa-calendar"></i><strong>귀가일정표</strong></a></li>	
+			<li><a href="/af/ad_abs/lists/sn/3267"><i class="fa fa-calendar-o"></i><strong>결석/귀가신청</strong></a></li>	
+			<li><a href="/af/ad_tea/lists/sn/3267"><i class="fa fa-briefcase"></i><strong>강사관리</strong><span class="fa badge-xm"></span></a></li>
+			<li class="has-sub"><a href="#none;"><i class="fa fa-pie-chart"></i><strong>설문관리</strong><span class="fa fa-chevron-down" style="float:right;"></span></a>
+				<ul class="depth">
+					<li><a href="/af/ad_sur/lists/sn/3267"><i class="fa fa-volume-up"></i>설문</a></li>
+					<li><a href="/af/ad_surs/lists/sn/3267"><i class="fa fa-volume-up"></i>샘플설문</a></li>					
+				</ul>
+			</li>				
+			<li class="has-sub"><a href="#none;"><i class="fa fa-cog"></i><strong>환경설정</strong><span class="fa fa-chevron-down" style="float:right;"></span></a>
+				<ul class="depth">
+					<li><a href="/af/ad_cfg/main/sn/3267"><i class="fa fa-volume-up"></i>기본설정</a></li>
+					<li><a href="/af/ad_time/lists/sn/3267"><i class="fa fa-volume-up"></i>신청기간</a></li>
+					<li><a href="/af/ad_cfg/period/sn/3267"><i class="fa fa-volume-up"></i>강의시간</a></li>
+					<li><a href="/af/ad_cfg/afDiv/sn/3267"><i class="fa fa-volume-up"></i>강좌구분</a></li>
+					<li><a href="/af/ad_cfg/appLiGrp/sn/3267"><i class="fa fa-volume-up"></i>중복제한그룹</a></li>						
+					<li><a href="/af/ad_verify/main/sn/3267"><i class="fa fa-volume-up"></i>학적검증</a></li>
+					<li><a href="/af/ad_neis_edufine/lists/sn/3267"><i class="fa fa-volume-up"></i>나이스/에듀파인 설정</a></li>						
+					<li><a href="/af/ad_cfg/message/sn/3267"><i class="fa fa-volume-up"></i>안내글설정</a></li>
+					<li><a href="/af/ad_cfg/clear/sn/3267"><i class="fa fa-volume-up"></i>초기화</a></li>
+					<li><a href="/af/ad_info/modify/sn/3267"><i class="fa fa-volume-up"></i>담당자정보</a></li>
+				</ul>
+			</li>									
+			<li><a href="/af/notification/lists/sn/3267"><i class="fa fa-volume-up"></i><strong>알림관리</strong></a></li>
+			<li><a href="/af/spush/lists/sn/3267"><i class="fa fa-bell" style="font-size:18px;"></i><strong>푸시알림관리</strong></a></li>
+			<li><a href="/af/ad_extension/lists/sn/3267"><i class="fa fa-calendar-o"></i><strong>연장신청<span class="badge badge-xm">191일 남음</span></strong></a></li>
+		</ul>
+	</div>
+
+	<!-- CONTENTS BOX -->
+	<div id="contents_box">
+		<div id="contents_title">
+			<i class="fa fa-file-text-o"></i> 강좌관리 <br><span class="title">광주풍향초등학교 늘봄학교</span>
+			<p class="write_yun"><a href="/af/ad_app/lists/sn/3267"><i class="fa fa-slideshare"></i><br><span class="write">신청자관리</span></a></p>				
+		</div>
+		<div id="contents">
+			<div class="panel_main panel-default_main">
+				<div class="new_help_manualbox hm_loca1">
+					<p class="hm_title"><i class="fa fa-file-text-o" aria-hidden="true"></i>매뉴얼</p>
+					<ul>
+						<li>
+							<a href="https://www.dbdbschool.kr/help/go_data/num/74/data/link1" target="_blank" class="manual_btn"><i class="fa fa-youtube-play"></i> 강좌등록</a>
+						</li>
+					</ul>
+				</div>
+				
+				<div class="panel-heading">등록</div>
+				<div class="panel-body">
+					<p class="MAT20"><i class="fa required" title="필수항목"></i><span class="font-12"> 표시가 있는 항목은 반드시 입력해야 합니다.</span></p>
+				</div>
+				
+				<form action="/af/ad_lec/write/sn/3267" name="fm_edit" id="fm_edit" onsubmit="return fm_edit_check(this);" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+				<input type="hidden" name="csrf_test_name" value="7a9c979df4b0f4840c713573a40a42de">
+				<input type="hidden" name="form_open_date_use_chk_csrf" value="2026-08-21 15:15:03">
+					<table class="table table-bordered table-hover list" style="margin-top:0px;">
+						<colgroup>
+							<col width="60">
+							<col width="60">
+							<col width="">
+						</colgroup>
+						<tbody>
+						<tr>
+							<th colspan="2">강좌명 <span><i class="fa required" title="필수항목"></i></span></th>
+							<td>
+								<input id="lec_name" name="lec_name" type="text" title="강좌명" value="" class="form-control" style="width:80%;" maxlength="100">
+								<div class="error_msg" id="err_lec_name"></div>
+							</td>	
+						</tr>
+								
+						<tr>
+							<th colspan="2">강좌구분 <span><i class="fa required" title="필수항목"></i></span></th>
+							<td>
+								<select name="lec_div" id="lec_div" class="form-control">
+									<option value="">=선택=</option>
+									<option value="5">3월</option>
+									<option value="6">26년 4월</option>
+									<option value="7">26년 5월</option>
+									<option value="8">26년 6월</option>
+									<option value="9">26년 7월</option>
+									<option value="10">26년 8월</option>
+									<option value="11" selected="selected">26년 9월</option>
+								</select>
+								<div class="error_msg" id="err_lec_div"></div>
+							</td>	
+						</tr>
+						
+						<tr>
+							<th colspan="2">늘봄과정 <span><i class="fa required" title="필수항목"></i></span></th>
+							<td>
+								<select name="lec_pro_type" id="lec_pro_type" class="form-control">
+									<option value="">=선택=</option>
+									<option value="1">방과후</option>
+									<option value="2">맞춤형</option>
+									<option value="3">돌봄</option>
+								</select>
+								<div class="error_msg" id="err_lec_pro_type"></div>
+							</td>	
+						</tr>
+					
+						<tr>
+							<th colspan="2">강사ID <span><i class="fa required" title="필수항목"></i></span></th>
+							<td>
+								<input id="tea_id" name="tea_id" type="text" title="강사ID" size="11" value="" class="form-control size40" maxlength="15" style="width:100px;">
+								&nbsp;<a href="javascript:void(0);" onclick="openAfTeaWin('tea_id'); return false;" class="search_btn"><i class="fa fa-binoculars"></i>검색하기</a>
+								<br><span class="mobile_clear MAT10"><input type="checkbox" name="tea_id_chk" id="tea_id_chk" value="Y"> <label for="tea_id_chk"> 강사 ID가 같은 다른 강좌에 이미 신청되어 있는 경우 중복해서 신청할 수 없음</label></span>			
+								<div class="error_msg error_tea_id" id="err_tea_id"></div>
+								<div class="error_msg error_tea_id_chk"></div>
+							</td>	
+						</tr>
+						<tr>
+							<th colspan="2">보조강사ID</th>
+							<td>
+								<input id="tea_id1" name="tea_id1" type="text" title="보조강사ID" size="30" value="" class="form-control size40" maxlength="60" style="width:200px;">
+								&nbsp;<a href="javascript:void(0);" onclick="openAfTeaWin('tea_id1'); return false;" class="search_btn"><i class="fa fa-binoculars"></i>검색하기</a>
+								<br><span style="color:#666;">(대표 강사와 똑같은 권한으로 강좌 관련 업무를 보실 수 있습니다)</span>
+								<div class="error_msg error_tea_id1"></div>
+							</td>	
+						</tr>		
+						<tr>
+							<th colspan="2">대상학년 <span><i class="fa required" title="필수항목"></i></span>
+								<br><input type="checkbox" name="check_all_grade" id="check_all_grade" value="" onclick="chk_all(this);" title="전체선택/취소" style="float:none;">
+							</th>
+							<td>
+								<span class="mobile_clear">	
+									<span><input type="checkbox" name="lec_grade[]" id="lec_grade_grade_1" value="1"> <label for="lec_grade_grade_1">1학년</label></span>
+									<span><input type="checkbox" name="lec_grade[]" id="lec_grade_grade_2" value="2"> <label for="lec_grade_grade_2">2학년</label></span>
+									<span><input type="checkbox" name="lec_grade[]" id="lec_grade_grade_3" value="3"> <label for="lec_grade_grade_3">3학년</label></span>
+									<span><input type="checkbox" name="lec_grade[]" id="lec_grade_grade_4" value="4"> <label for="lec_grade_grade_4">4학년</label></span>
+									<span><input type="checkbox" name="lec_grade[]" id="lec_grade_grade_5" value="5"> <label for="lec_grade_grade_5">5학년</label></span>
+									<span><input type="checkbox" name="lec_grade[]" id="lec_grade_grade_6" value="6"> <label for="lec_grade_grade_6">6학년</label></span>
+								</span>
+								<div class="error_msg error_lec_grade" id="err_lec_grade"></div>
+							</td>	
+						</tr>
+						
+						<tr>
+							<th colspan="2">강의시간 <span><i class="fa required" title="필수항목"></i></span></th>
+							<td>
+								<input id="lec_time_" name="lec_time_" type="text" title="강의시간" size="30" value="" readonly="readonly" class="form-control size90" maxlength="100" style="width:50%; background:#f9f9f9;">&nbsp;
+								<input type="hidden" id="lec_time" name="lec_time" value="">
+								<span class="mobile_clear MAT10"><a href="javascript:void(0);" onclick="openLecTimeWin(); return false;" class="search_btn"><i class="fa fa-binoculars"></i>검색하기</a></span>
+								<br><span class="mobile_clear MAT10"><input type="checkbox" name="lec_time_not_chk" id="lec_time_not_chk" value="Y"> <label for="lec_time_not_chk"> 강좌 신청 시 다른 강좌와 강의시간이 같더라도 중복해서 신청할 수 있음</label></span>
+								<div class="error_msg error_lec_time" id="err_lec_time"></div>
+								<div class="error_msg error_lec_time_not_chk"></div>
+							</td>	
+						</tr>
+						<tr>
+							<th colspan="2">정원 <span><i class="fa required" title="필수항목"></i></span></th>
+							<td>
+								<input id="lec_max_sin" name="lec_max_sin" type="text" title="정원" size="11" value="0" class="form-control size40 text-right" maxlength="4" style="width:100px;"> 명
+								<div class="error_msg" id="err_lec_max_sin"></div>
+							</td>	
+						</tr>
+						
+						<tr>
+							<th colspan="2">대기정원 <span><i class="fa required" title="필수항목"></i></span></th>
+							<td>
+								<input id="lec_max_wait" name="lec_max_wait" type="text" title="대기정원" size="11" value="0" class="form-control size40 text-right" maxlength="4" style="width:100px;"> 명
+								<div class="error_msg" id="err_lec_max_wait"></div>
+							</td>	
+						</tr>
+						
+						<tr>
+							<th colspan="2">운영기간 <span><i class="fa required" title="필수항목"></i></span></th>
+							<td>
+								<input id="lec_sdate" name="lec_sdate" value="" type="text" maxlength="10" title="시작일자" placeholder="YYYY-MM-DD" class="form-control form-date hasDatepicker" style="width:160px;"> ~
+								<input id="lec_edate" name="lec_edate" value="" type="text" maxlength="10" title="종료일자" placeholder="YYYY-MM-DD" class="form-control form-date hasDatepicker" style="width:160px;">
+								<div class="error_msg error_lec_sdate" id="err_lec_sdate"></div>
+								<div class="error_msg error_lec_edate" id="err_lec_edate"></div>
+							</td>	
+						</tr>
+						<tr>
+							<th colspan="2">총시수 </th>
+							<td>
+								<input id="lec_tot_sisu" name="lec_tot_sisu" type="text" title="총시수" size="11" value="0" class="form-control size40 text-right" maxlength="3" style="width:100px;"> 시간
+								<div class="error_msg"></div>
+							</td>	
+						</tr>		
+							
+						<tr>
+							<th colspan="2">강의실 </th>
+							<td>
+								<select name="lec_room_" id="lec_room_" class="form-control PAD0" onchange="handleRoomSelect(this)">
+									<option value="">== 선택 ==</option>
+									<option value="강당">강당</option>
+									<option value="본관2층 컴퓨터교실">본관2층 컴퓨터교실</option>
+									<option value="본관3층 늘봄프로그램실 1">본관3층 늘봄프로그램실 1</option>
+									<option value="본관3층 늘봄프로그램실 2">본관3층 늘봄프로그램실 2</option>
+									<option value="본관3층 늘봄프로그램실 3">본관3층 늘봄프로그램실 3</option>
+									<option value="본관3층 늘봄프로그램실 4">본관3층 늘봄프로그램실 4</option>
+									<option value="후관1층 늘봄프로그램실">후관1층 늘봄프로그램실</option>
+									<option value="후관1층 늘봄프로그램실/강당">후관1층 늘봄프로그램실/강당</option>
+									<option value="후관1층 돌봄교실">후관1층 돌봄교실</option>
+									<option value="후관2층 늘봄프로그램실 5">후관2층 늘봄프로그램실 5</option>
+									<option value="후관2층 늘봄프로그램실 6">후관2층 늘봄프로그램실 6</option>
+								</select>
+								<input id="lec_room" name="lec_room" value="" type="text" maxlength="20" placeholder="신규입력" title="신규입력" class="form-control" style="width:160px;">
+								<div class="error_msg error_lec_room"></div>
+							</td>	
+						</tr>
+								
+						<tr>
+							<th colspan="2">수강료 </th>
+							<td>
+								<input id="lec_pay" name="lec_pay" type="text" title="수강료" size="11" value="0" class="form-control size40 text-right" maxlength="9" style="width:100px;" onkeyup="chkLecPay(this);" onblur="chkLecPay(this);"> 원(강사료 + 수용비)
+								<div class="error_msg error_lec_pay"></div>	
+								
+								<div><input type="checkbox" name="not_free2_pay" id="not_free2_pay" value="Y"> <label for="not_free2_pay"> 1학년 지원금 차감 제외</label></div>
+								<div class="error_msg error_not_free2_pay"></div>
+								<div><input type="checkbox" name="not_free3_pay" id="not_free3_pay" value="Y"> <label for="not_free3_pay"> 3학년 지원금 차감 제외</label></div>
+								<div class="error_msg error_not_free3_pay"></div>
+								<div><input type="checkbox" name="not_free1_pay" id="not_free1_pay" value="Y"> <label for="not_free1_pay"> 자유수강권 차감 제외</label></div>
+								<div class="error_msg error_not_free1_pay"></div>
+							</td>	
+						</tr>
+										
+						<tr>
+							<th colspan="2">수용비 </th>
+							<td>
+								<input id="lec_use_cost" name="lec_use_cost" type="text" title="수용비" size="11" value="0" class="form-control size40 text-right" maxlength="9" style="width:100px;" onkeyup="chkLecPay(this);" onblur="chkLecPay(this);"> 원			
+								<div class="error_msg error_lec_use_cost"></div>
+							</td>	
+						</tr>
+						<tr>
+							<th colspan="2">강사료 </th>
+							<td>
+								<input id="lec_tea_fee" name="lec_tea_fee" type="text" title="강사료" size="11" value="0" class="form-control size40 text-right" maxlength="9" style="width:100px; background:#eeeeee;" disabled> 원			
+								<div class="error_msg error_lec_tea_fee"></div>
+							</td>	
+						</tr>				
+						<tr>
+							<th colspan="2">교재비 </th>
+							<td>
+								<input id="lec_pay_book" name="lec_pay_book" type="text" title="교재비" size="11" value="0" class="form-control size40 text-right" maxlength="9" style="width:100px;" onkeyup="chkMoney(this);" onblur="chkMoney(this);"> 원
+								<div class="error_msg error_lec_pay_book"></div>
+						
+								<div><input type="checkbox" name="not_free2_pay_book" id="not_free2_pay_book" value="Y"> <label for="not_free2_pay_book"> 1학년 지원금 차감 제외</label></div>
+								<div class="error_msg error_not_free2_pay_book"></div>				
+								<div><input type="checkbox" name="not_free3_pay_book" id="not_free3_pay_book" value="Y"> <label for="not_free3_pay_book"> 3학년 지원금 차감 제외</label></div>
+								<div class="error_msg error_not_free3_pay_book"></div>				
+								<div><input type="checkbox" name="not_free1_pay_book" id="not_free1_pay_book" value="Y"> <label for="not_free1_pay_book"> 자유수강권 차감 제외</label></div>
+								<div class="error_msg error_not_free1_pay_book"></div>				
+							</td>	
+						</tr>
+						<tr>
+							<th colspan="2">재료비 </th>
+							<td>
+								<input id="lec_pay_item" name="lec_pay_item" type="text" title="재료비" size="11" value="0" class="form-control size40 text-right" maxlength="9" style="width:100px;" onkeyup="chkMoney(this);" onblur="chkMoney(this);"> 원
+								<div class="error_msg error_lec_pay_item"></div>				
+						
+								<div><input type="checkbox" name="not_free2_pay_item" id="not_free2_pay_item" value="Y"> <label for="not_free2_pay_item"> 1학년 지원금 차감 제외</label></div>
+								<div class="error_msg error_not_free2_pay_item"></div>
+								<div><input type="checkbox" name="not_free3_pay_item" id="not_free3_pay_item" value="Y"> <label for="not_free3_pay_item"> 3학년 지원금 차감 제외</label></div>
+								<div class="error_msg error_not_free3_pay_item"></div>
+								<div><input type="checkbox" name="not_free1_pay_item" id="not_free1_pay_item" value="Y"> <label for="not_free1_pay_item"> 자유수강권 차감 제외</label></div>
+								<div class="error_msg error_not_free1_pay_item"></div>
+							</td>	
+						</tr>		
+					
+						<tr>
+							<th colspan="2">내용 </th>
+							<td>
+								<textarea id="lec_content" name="lec_content" class="form-control" rows="15" style="width:100%; height:200px;"></textarea>
+								<div class="error_msg error_lec_content"></div>
+							</td>	
+						</tr>
+						<tr>
+							<th colspan="2">첨부파일 </th>
+							<td>
+								<div id="file_box"></div>
+								<div><a href="#none;" onclick="add_file(); return false;" class="btn btn-default btn-xs font-12 MAT10" role="button">파일추가</a></div>
+								<div style="color:#777; margin-top:4px;">(※ 한 번에 최대 3M 이하만 올릴 수 있습니다.)</div>
+							</td>
+						</tr>
+						<tr>
+							<th colspan="2">수강료 출력 </th>
+							<td>
+								<input type="checkbox" name="lec_pay_view" id="lec_pay_view" value="Y"> <label for="lec_pay_view"> 학생의 신청 조회 화면에 수강료, 교재비, 재료비 출력</label>
+								<div class="error_msg error_lec_pay_view"></div>
+							</td>	
+						</tr>		
+						<tr>
+							<th colspan="2">강사마감 </th>
+							<td>
+								<input type="checkbox" name="lec_tea_finish" id="lec_tea_finish" value="Y"> <label for="lec_tea_finish"> 강사는 신청자 등록(삭제) 및 수강료 수정 불가</label>
+								<div class="error_msg error_lec_tea_finish"></div>
+							</td>	
+						</tr>		
+						<tr>
+							<th colspan="2">강사 강좌 편집 </th>
+							<td>
+								<input type="checkbox" name="lec_tea_edit" id="lec_tea_edit" value="Y"> <label for="lec_tea_edit"> 강좌 수정 및 삭제 허용(<span class="text-danger">강사 마감 전, 대기 중인 강좌만 허용</span>)</label>
+								<div class="error_msg error_lec_tea_edit"></div>
+							</td>	
+						</tr>
+						<tr>
+							<th colspan="2">환불마감 </th>
+							<td>
+								<input type="checkbox" name="refund_status" id="refund_status" value="1"> <label for="refund_status">강사 및 학생은 환불 신청 불가</label>
+								<div class="error_msg error_refund_status"></div>
+							</td>	
+						</tr>
+
+						<tr>
+							<th colspan="2">상태 <span><i class="fa required" title="필수항목"></i></span></th>
+							<td>
+								<span class="mobile_clear">	
+									<span><input id="lec_status_1" name="lec_status" type="radio" value="1" checked="checked"> <label for="lec_status_1">출력</label>&nbsp;&nbsp;</span>
+									<span><input id="lec_status_0" name="lec_status" type="radio" value="0"> <label for="lec_status_0">대기</label>&nbsp;&nbsp;</span>
+									<span><input id="lec_status_2" name="lec_status" type="radio" value="2"> <label for="lec_status_2">종료</label></span>
+									<span><div class="error_msg error_lec_status"></div></span>
+								</span>
+							</td>	
+						</tr>
+					</tbody>
+					</table>
+					
+					<p class="text-center MAT30" style="margin-top:25px; margin-bottom:30px; text-align:center;">
+						<input type="button" onclick="history.back(-1); return false;" class="btn btn-default" value="취소" style="margin-right:6px; min-width:65px;"> 
+						<input type="submit" value="등록" data-loading-text="처리중 .." class="btn btn-danger" style="min-width:65px; background:#d9534f; border-color:#d43f3a; color:#ffffff;">
+					</p>
+				</form>
+			</div>
+
+			<div class="help_box">
+				<ul>
+					<li> 강사ID : 등록된 강사를 지정하지 않을 경우 <span class="text-danger" style="font-weight:bold;">가명을 입력</span>해도 강좌 등록은 가능합니다.</li>	
+					<li> 상태(출력) : 학생, 강사 화면에 <span class="text-danger" style="font-weight:bold;">출력</span>합니다.</li>
+					<li> 상태(대기) : 학생 화면에 <span class="text-danger" style="font-weight:bold;">출력하지</span> 않습니다.</li>
+					<li> 상태(종료) : 학생, 강사 화면에 출력은 하지만, <span class="text-danger" style="font-weight:bold;">신청은 불가능</span>합니다.</li>
+					<li>신청 제한(강의 시간, 운영 기간) : 운영 기간과 강의 시간이 중복되는 강좌는 1개만 신청 가능합니다.</li>
+					<li>신청 제한(중복제한그룹) : 같은 '중복제한그룹'에 있는 강좌는 환경 설정에 지정된 개수까지만 신청할 수 있습니다.</li>
+				</ul>
+			</div>	
+
+			<div id="footer">
+				Copyright ⓒ <span class="copyright_name"><a href="http://www.xmecca.com" target="_blank"><strong>x</strong>mecca.com</a></span> All Rights Reserved.
+				<br><i class="fa fa-envelope"></i> dbdbschool@naver.com
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- ==================== 강사 검색 모달 ==================== -->
+<div id="teaSearchModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); z-index:9999; justify-content:center; align-items:center;">
+  <div style="background:#fff; width:480px; max-width:95vw; border-radius:4px; box-shadow:0 4px 15px rgba(0,0,0,0.3); overflow:hidden;">
+    <div style="background:#3c8dbc; color:#fff; padding:10px 15px; font-weight:bold; font-size:13px; display:flex; justify-content:space-between; align-items:center;">
+      <span><i class="fa fa-binoculars"></i> 강사 검색</span>
+      <span onclick="closeAfTeaModal()" style="cursor:pointer; font-size:18px;">&times;</span>
+    </div>
+    <div style="padding:15px;">
+      <div style="display:flex; gap:6px; margin-bottom:12px;">
+        <input type="text" id="popupTeaKeyword" class="form-control" placeholder="강사명 또는 ID 검색" style="flex:1;">
+        <button type="button" class="btn btn-default" onclick="doSearchTeaPopup()">검색</button>
+      </div>
+      <div style="max-height:220px; overflow-y:auto; border:1px solid #ddd;">
+        <table class="table table-bordered text-center" style="margin:0; font-size:12px;">
+          <thead>
+            <tr style="background:#f7f9fa;">
+              <th style="width:90px; text-align:center;">강사ID</th>
+              <th style="text-align:center;">강사명</th>
+              <th style="width:70px; text-align:center;">선택</th>
+            </tr>
+          </thead>
+          <tbody id="teaSearchResultBody">
+            <tr><td colspan="3" style="color:#888;">강사명을 입력하거나 검색 버튼을 누르세요.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div style="background:#f7f7f7; padding:8px 15px; text-align:right; border-top:1px solid #eee;">
+      <button type="button" class="btn btn-default btn-xs" onclick="closeAfTeaModal()">닫기</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 강의시간 선택 모달 ==================== -->
+<div id="lecTimeModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); z-index:9999; justify-content:center; align-items:center;">
+  <div style="background:#fff; width:520px; max-width:95vw; border-radius:4px; box-shadow:0 4px 15px rgba(0,0,0,0.3); overflow:hidden;">
+    <div style="background:#3c8dbc; color:#fff; padding:10px 15px; font-weight:bold; font-size:13px; display:flex; justify-content:space-between; align-items:center;">
+      <span><i class="fa fa-clock-o"></i> 강의시간 선택</span>
+      <span onclick="closeLecTimeModal()" style="cursor:pointer; font-size:18px;">&times;</span>
+    </div>
+    <div style="padding:15px;">
+      <p style="font-size:12px; color:#666; margin-bottom:10px;">원하는 요일 및 시간대를 선택해주세요.</p>
+      <table class="table table-bordered text-center" style="font-size:12px; margin-bottom:12px;">
+        <thead>
+          <tr style="background:#f7f9fa;">
+            <th>구분</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1부 (13:00~13:40)</td>
+            <td><input type="checkbox" class="time-opt" value="월1부(13:00~13:40)"></td>
+            <td><input type="checkbox" class="time-opt" value="화1부(13:00~13:40)"></td>
+            <td><input type="checkbox" class="time-opt" value="수1부(13:00~13:40)"></td>
+            <td><input type="checkbox" class="time-opt" value="목1부(13:00~13:40)"></td>
+            <td><input type="checkbox" class="time-opt" value="금1부(13:00~13:40)"></td>
+          </tr>
+          <tr>
+            <td>2부 (13:50~14:30)</td>
+            <td><input type="checkbox" class="time-opt" value="월2부(13:50~14:30)"></td>
+            <td><input type="checkbox" class="time-opt" value="화2부(13:50~14:30)"></td>
+            <td><input type="checkbox" class="time-opt" value="수2부(13:50~14:30)"></td>
+            <td><input type="checkbox" class="time-opt" value="목2부(13:50~14:30)"></td>
+            <td><input type="checkbox" class="time-opt" value="금2부(13:50~14:30)"></td>
+          </tr>
+          <tr>
+            <td>3부 (14:40~15:20)</td>
+            <td><input type="checkbox" class="time-opt" value="월3부(14:40~15:20)"></td>
+            <td><input type="checkbox" class="time-opt" value="화3부(14:40~15:20)"></td>
+            <td><input type="checkbox" class="time-opt" value="수3부(14:40~15:20)"></td>
+            <td><input type="checkbox" class="time-opt" value="목3부(14:40~15:20)"></td>
+            <td><input type="checkbox" class="time-opt" value="금3부(14:40~15:20)"></td>
+          </tr>
+          <tr>
+            <td>4부 (15:30~16:10)</td>
+            <td><input type="checkbox" class="time-opt" value="월4부(15:30~16:10)"></td>
+            <td><input type="checkbox" class="time-opt" value="화4부(15:30~16:10)"></td>
+            <td><input type="checkbox" class="time-opt" value="수4부(15:30~16:10)"></td>
+            <td><input type="checkbox" class="time-opt" value="목4부(15:30~16:10)"></td>
+            <td><input type="checkbox" class="time-opt" value="금4부(15:30~16:10)"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="background:#f7f7f7; padding:8px 15px; text-align:right; border-top:1px solid #eee;">
+      <button type="button" class="btn btn-default btn-xs" onclick="closeLecTimeModal()" style="margin-right:4px;">취소</button>
+      <button type="button" class="btn btn-danger btn-xs" onclick="applySelectedLecTime()">적용</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 공식 인터랙티브 스크립트 ==================== -->
+<script type="text/javascript">
+  var activeTeaField = 'tea_id';
+
+  function filterNum(str) {
+    if (!str) return '0';
+    return ('' + str).replace(/[^0-9]/g, '') || '0';
+  }
+
+  function commaSplit(num) {
+    var n = parseInt(num, 10) || 0;
+    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  function chkMoney(obj) {
+    var val = filterNum($(obj).val());
+    $(obj).val(commaSplit(val));
+  }
+
+  function chkLecPay(obj) {
+    chkMoney(obj);
+    var lec_pay = parseInt(filterNum($('#lec_pay').val()), 10) || 0;
+    var lec_use_cost = parseInt(filterNum($('#lec_use_cost').val()), 10) || 0;
+
+    if (lec_use_cost > lec_pay) {
+      $('#lec_use_cost').val(0);
+      alert('수용비 : 수강료보다 클 수 없습니다.');
+      $('#lec_tea_fee').val(commaSplit(lec_pay));
+      return false;
+    }
+    $('#lec_tea_fee').val(commaSplit(lec_pay - lec_use_cost));
+  }
+
+  function chk_all(obj) {
+    var checked = obj.checked;
+    $('input[name="lec_grade[]"]').each(function() {
+      this.checked = checked;
+    });
+  }
+
+  function handleRoomSelect(sel) {
+    if (sel.value) {
+      $('#lec_room').val(sel.value);
+    }
+  }
+
+  function add_file() {
+    var $file_list_box = $('#file_box');
+    var $file_sample_box = $(
+      '<div class="file">' +
+        '<input type="file" name="add_file[]" class="file textbox" style="font-size:12px;" />' +
+        '<span class="add"><a href="#none;" onclick="del_file(this); return false;">[삭제]</a></span>' +
+        '<span class="move_sor"><i class="fa fa-arrows"></i></span>' +
+      '</div>'
+    );
+    $file_list_box.append($file_sample_box);
+  }
+
+  function del_file(obj) {
+    $(obj).closest('.file').remove();
+  }
+
+  // 강사 검색 모달
+  function openAfTeaWin(targetId) {
+    activeTeaField = targetId || 'tea_id';
+    $('#teaSearchModal').css('display', 'flex');
+    doSearchTeaPopup();
+  }
+
+  function closeAfTeaModal() {
+    $('#teaSearchModal').hide();
+  }
+
+  async function doSearchTeaPopup() {
+    var kw = $('#popupTeaKeyword').val().trim();
+    var list = [];
+    try {
+      var res = await fetch('/api/af/ad_tea/list/3267');
+      if (res.ok) {
+        list = await res.json();
+      }
+    } catch(e) {}
+
+    if (!list || list.length === 0) {
+      list = [
+        { id: 'tea01', name: '김선생', phone: '010-1234-5678' },
+        { id: 'tea02', name: '이선생', phone: '010-2345-6789' },
+        { id: 'tea03', name: '박선생', phone: '010-3456-7890' },
+        { id: 'tea04', name: '돌봄전담사', phone: '010-4567-8901' },
+        { id: 'tea05', name: '창의강사', phone: '010-5678-9012' }
+      ];
+    }
+
+    if (kw) {
+      list = list.filter(function(t) {
+        return (t.name && t.name.indexOf(kw) !== -1) || (t.id && t.id.indexOf(kw) !== -1);
+      });
+    }
+
+    var tbody = $('#teaSearchResultBody');
+    tbody.empty();
+    if (list.length === 0) {
+      tbody.append('<tr><td colspan="3" style="color:#888;">일치하는 강사가 없습니다.</td></tr>');
+      return;
+    }
+
+    list.forEach(function(t) {
+      var tr = $('<tr>' +
+        '<td style="text-align:center;">' + (t.id || '') + '</td>' +
+        '<td style="text-align:center;">' + (t.name || '') + '</td>' +
+        '<td style="text-align:center;"><button type="button" class="btn btn-default btn-xs">선택</button></td>' +
+      '</tr>');
+      tr.find('button').click(function() {
+        $('#' + activeTeaField).val(t.id || t.name);
+        closeAfTeaModal();
+      });
+      tbody.append(tr);
+    });
+  }
+
+  // 강의시간 선택 모달
+  function openLecTimeWin() {
+    $('#lecTimeModal').css('display', 'flex');
+  }
+
+  function closeLecTimeModal() {
+    $('#lecTimeModal').hide();
+  }
+
+  function applySelectedLecTime() {
+    var arr = [];
+    $('.time-opt:checked').each(function() {
+      arr.push($(this).val());
+    });
+    var val = arr.join(', ');
+    $('#lec_time_').val(val);
+    $('#lec_time').val(val);
+    closeLecTimeModal();
+  }
+
+  // 폼 검증 및 등록 처리
+  function fm_edit_check(fm) {
+    $('.error_msg').text('');
+
+    if (!fm.lec_name.value.trim()) {
+      alert('강좌명 : 필수항목입니다.');
+      $('#err_lec_name').text('강좌명을 입력하세요.');
+      fm.lec_name.focus();
+      return false;
+    }
+
+    if (!fm.lec_div.value) {
+      alert('강좌구분 : 필수항목입니다.');
+      $('#err_lec_div').text('강좌구분을 선택하세요.');
+      fm.lec_div.focus();
+      return false;
+    }
+
+    if (!fm.lec_pro_type.value) {
+      alert('늘봄과정 : 필수항목입니다.');
+      $('#err_lec_pro_type').text('늘봄과정을 선택하세요.');
+      fm.lec_pro_type.focus();
+      return false;
+    }
+
+    if (!fm.tea_id.value.trim()) {
+      alert('강사ID : 필수항목입니다.');
+      $('#err_tea_id').text('강사ID를 입력하세요.');
+      fm.tea_id.focus();
+      return false;
+    }
+
+    var gradeChecked = $('input[name="lec_grade[]"]:checked').length;
+    if (gradeChecked === 0) {
+      alert('대상학년 : 필수항목입니다.');
+      $('#err_lec_grade').text('대상학년을 최소 1개 이상 선택하세요.');
+      return false;
+    }
+
+    if (!fm.lec_time.value && !fm.lec_time_.value) {
+      alert('강의시간 : 필수항목입니다.');
+      $('#err_lec_time').text('강의시간을 선택하거나 입력하세요.');
+      return false;
+    }
+
+    if (!fm.lec_max_sin.value || parseInt(fm.lec_max_sin.value, 10) <= 0) {
+      alert('정원 : 필수항목입니다.');
+      $('#err_lec_max_sin').text('정원을 1명 이상 입력하세요.');
+      fm.lec_max_sin.focus();
+      return false;
+    }
+
+    if (!fm.lec_max_wait.value) {
+      alert('대기 정원 : 필수항목입니다.');
+      $('#err_lec_max_wait').text('대기 정원을 입력하세요.');
+      fm.lec_max_wait.focus();
+      return false;
+    }
+
+    if (!fm.lec_sdate.value.trim()) {
+      alert('강의기간(시작일자) : 필수항목입니다.');
+      $('#err_lec_sdate').text('시작일자를 입력하세요.');
+      fm.lec_sdate.focus();
+      return false;
+    }
+
+    if (!fm.lec_edate.value.trim()) {
+      alert('강의기간(종료일자) : 필수항목입니다.');
+      $('#err_lec_edate').text('종료일자를 입력하세요.');
+      fm.lec_edate.focus();
+      return false;
+    }
+
+    submitFormViaApi(fm);
+    return false;
+  }
+
+  async function submitFormViaApi(fm) {
+    var selectedGrades = [];
+    $('input[name="lec_grade[]"]:checked').each(function() {
+      selectedGrades.push($(this).val());
+    });
+
+    var categoryMap = { '5': '3월', '6': '26년 4월', '7': '26년 5월', '8': '26년 6월', '9': '26년 7월', '10': '26년 8월', '11': '26년 9월' };
+    var neulbomTypeMap = { '1': '방과후', '2': '맞춤형', '3': '돌봄' };
+
+    var fee = parseInt(filterNum(fm.lec_pay.value), 10) || 0;
+    var costFacility = parseInt(filterNum(fm.lec_use_cost.value), 10) || 0;
+
+    var payload = {
+      schoolId: '3267',
+      category: categoryMap[fm.lec_div.value] || '26년 9월',
+      neulbomType: neulbomTypeMap[fm.lec_pro_type.value] || '방과후',
+      title: fm.lec_name.value.trim(),
+      instructor: fm.tea_id.value.trim(),
+      assistantInstructor: fm.tea_id1.value.trim(),
+      targetGrade: selectedGrades.join(','),
+      scheduleTime: fm.lec_time_.value || fm.lec_time.value,
+      capacity: parseInt(filterNum(fm.lec_max_sin.value), 10) || 20,
+      waitingCapacity: parseInt(filterNum(fm.lec_max_wait.value), 10) || 0,
+      period: fm.lec_sdate.value + ' ~ ' + fm.lec_edate.value,
+      totalHours: parseInt(filterNum(fm.lec_tot_sisu.value), 10) || 0,
+      classroom: fm.lec_room.value.trim() || '후관1층 늘봄프로그램실',
+      tuitionFee: fee,
+      fee: fee,
+      costFacility: costFacility,
+      costInstructor: fee - costFacility,
+      textbookFee: parseInt(filterNum(fm.lec_pay_book.value), 10) || 0,
+      materialFee: parseInt(filterNum(fm.lec_pay_item.value), 10) || 0,
+      content: fm.lec_content.value,
+      feeReceipt: $('#lec_pay_view').is(':checked') ? 'Y' : 'N',
+      teacherClosed: $('#lec_tea_finish').is(':checked') ? 'Y' : 'N',
+      teacherEditable: $('#lec_tea_edit').is(':checked') ? 'Y' : 'N',
+      refundClosed: $('#refund_status').is(':checked') ? 'Y' : 'N',
+      status: $('input[name="lec_status"]:checked').val() === '1' ? 'OUTPUT' : ($('input[name="lec_status"]:checked').val() === '0' ? 'WAITING' : 'CLOSED')
+    };
+
+    try {
+      var res = await fetch('/api/af/ad_lec/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      var data = await res.json();
+      if (res.ok && data.success) {
+        alert(data.message || '강좌가 성공적으로 등록되었습니다.');
+        window.location.href = '/af/ad_lec/lists/sn/3267';
+      } else {
+        alert(data.message || data.error || '등록 중 오류가 발생했습니다.');
+      }
+    } catch(e) {
+      alert('서버 통신 중 오류가 발생했습니다.');
+    }
+  }
+
+  $(function() {
+    // jQuery UI datepicker
+    if ($.fn.datepicker) {
+      $('.hasDatepicker').datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true
+      });
+    }
+
+    // 서비스 드롭다운
+    $('#header h1 a.btn_icon').click(function(e) {
+      e.stopPropagation();
+      $(this).find('i.fa').toggleClass('fa-angle-down fa-angle-up');
+      $('.my_service').toggle();
+    });
+
+    $(document).click(function() {
+      $('.my_service').hide();
+      $('#header h1 a.btn_icon i.fa').removeClass('fa-angle-up').addClass('fa-angle-down');
+    });
+
+    // 사이드바 서브메뉴
+    $('ul.parent > li.has-sub > a').click(function(e) {
+      e.preventDefault();
+      $(this).next('ul.depth').slideToggle(200);
+      $(this).find('span.fa').toggleClass('fa-chevron-down fa-chevron-up');
+    });
+  });
+</script>
+</body>
+</html>

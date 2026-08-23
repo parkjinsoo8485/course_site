@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const token = localStorage.getItem('token');
   if (!token) {
-    window.location.replace('../login/login.html');
+    window.location.replace('/af/ad_lec/lists/sn/3267');
     return;
   }
 
@@ -861,7 +861,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    window.location.href = '../login/login.html';
+    window.location.href = '/af/ad_lec/lists/sn/3267';
   }
 
   // Initialize
