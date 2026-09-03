@@ -81,6 +81,11 @@ app.post(['/login', '/login/', '/member/login', '/member/login/', '/member/login
   return res.redirect('/af/ad_faq/main/sn/3267');
 });
 
+// ==================== 로그아웃 처리 -> 로그인 페이지로 리다이렉트 ====================
+app.get(['/member/logout', '/member/logout/', '/member/logout/sn/:school_id', '/member/logout/sn/:school_id/', '/logout'], (req, res) => {
+  return res.redirect('/member/login/sn/3267');
+});
+
 // ==================== 29. 매뉴얼 / FAQ 클론 페이지 & 다운로드/영상 라우트 ====================
 app.get(['/af/ad_faq/main/sn/:school_id', '/af/ad_faq/main/sn/:school_id/'], (req, res) => {
   const clonedPath = path.join(__dirname, 'af/ad_faq/main/sn/3267/index.html');

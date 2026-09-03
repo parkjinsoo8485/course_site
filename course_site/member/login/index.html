@@ -218,17 +218,56 @@
       flex-shrink: 0;
     }
 
-    /* Student Select Row */
+    /* Student Select Row - Premium Custom Dropdowns */
     .student-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px;
+      gap: 10px;
       margin-bottom: 16px;
     }
-    .student-grid select.custom-input {
+    .student-select-box {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .student-select-box .select-label {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #64748b;
+      padding-left: 4px;
+    }
+    .student-select-box select.custom-select {
+      width: 100% !important;
+      height: 46px !important;
+      -webkit-appearance: none !important;
+      -moz-appearance: none !important;
+      appearance: none !important;
+      background-color: #f8fafc !important;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2364748b'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important;
+      background-position: right 10px center !important;
+      background-size: 16px !important;
+      border: 1.5px solid #e2e8f0 !important;
+      border-radius: 10px !important;
       padding-left: 12px !important;
-      padding-right: 12px !important;
-      text-align: center;
+      padding-right: 28px !important;
+      font-size: 14px !important;
+      font-weight: 600 !important;
+      color: #1e293b !important;
+      outline: none !important;
+      cursor: pointer !important;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      text-align: center !important;
+      text-align-last: center !important;
+    }
+    .student-select-box select.custom-select:hover {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+    }
+    .student-select-box select.custom-select:focus {
+      background-color: #ffffff !important;
+      border-color: #3b82f6 !important;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12) !important;
     }
 
     /* Options Row */
@@ -365,27 +404,41 @@
             </div>
             
             <div class="student-grid">
-              <select name="login_stu_grade" id="login_stu_grade" class="custom-input">
-                <option value="1">1학년</option>
-                <option value="2">2학년</option>
-                <option value="3">3학년</option>
-                <option value="4">4학년</option>
-                <option value="5">5학년</option>
-                <option value="6">6학년</option>
-              </select>
-              <select name="login_stu_class" id="login_stu_class" class="custom-input">
-                <option value="1">1반</option>
-                <option value="2">2반</option>
-                <option value="3">3반</option>
-                <option value="4">4반</option>
-              </select>
-              <select name="login_stu_bunho" id="login_stu_bunho" class="custom-input">
-                <option value="1">1번</option>
-                <option value="2">2번</option>
-                <option value="3">3번</option>
-                <option value="4">4번</option>
-                <option value="5">5번</option>
-              </select>
+              <div class="student-select-box">
+                <span class="select-label">학년</span>
+                <select name="login_stu_grade" id="login_stu_grade" class="custom-select">
+                  <option value="1" selected>1학년</option>
+                  <option value="2">2학년</option>
+                  <option value="3">3학년</option>
+                  <option value="4">4학년</option>
+                  <option value="5">5학년</option>
+                  <option value="6">6학년</option>
+                </select>
+              </div>
+              <div class="student-select-box">
+                <span class="select-label">반</span>
+                <select name="login_stu_class" id="login_stu_class" class="custom-select">
+                  <option value="1" selected>1반</option>
+                  <option value="2">2반</option>
+                  <option value="3">3반</option>
+                  <option value="4">4반</option>
+                  <option value="5">5반</option>
+                  <option value="6">6반</option>
+                </select>
+              </div>
+              <div class="student-select-box">
+                <span class="select-label">번호</span>
+                <select name="login_stu_bunho" id="login_stu_bunho" class="custom-select">
+                  <option value="1" selected>1번</option>
+                  <option value="2">2번</option>
+                  <option value="3">3번</option>
+                  <option value="4">4번</option>
+                  <option value="5">5번</option>
+                  <option value="6">6번</option>
+                  <option value="7">7번</option>
+                  <option value="8">8번</option>
+                </select>
+              </div>
             </div>
 
             <div class="input-group-custom">

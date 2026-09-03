@@ -2640,4 +2640,45 @@ window.viewAppSchedule = viewAppSchedule;
 window.openAppTestMode = openAppTestMode;
 window.executeTestApply = executeTestApply;
 
+// ==================== 담당자 정보수정 모달 & 로그아웃 핸들러 ====================
+function openAfAdminInfoModal() {
+  const modal = document.getElementById('afAdminInfoModal');
+  if (modal) {
+    modal.style.display = 'flex';
+  }
+}
 
+function closeAfAdminInfoModal() {
+  const modal = document.getElementById('afAdminInfoModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+function handleAfAdminInfoSave(e) {
+  if (e) e.preventDefault();
+  const name = document.getElementById('afAdminInfoName')?.value?.trim() || '원희자(김채원)';
+  const phone = document.getElementById('afAdminInfoPhone')?.value?.trim() || '010-2494-1479';
+  const email = document.getElementById('afAdminInfoEmail')?.value?.trim() || 'khh147979@naver.com';
+
+  // Update left top profile header dynamically
+  const userDts = document.querySelectorAll('#left_menu dl.user dt');
+  userDts.forEach(dt => {
+    dt.innerHTML = `${name}님 <span class="ball_num"><a href="/af/notification/lists/sn/3267"><i class="fa fa-bell"></i><i class="num">1</i></a></span>`;
+  });
+
+  closeAfAdminInfoModal();
+  alert('담당자 정보가 성공적으로 수정되었습니다.');
+}
+
+function handleAfUserLogout(e) {
+  if (e) e.preventDefault();
+  if (confirm('로그아웃 하시겠습니까?')) {
+    window.location.href = '/member/login/sn/3267';
+  }
+}
+
+window.openAfAdminInfoModal = openAfAdminInfoModal;
+window.closeAfAdminInfoModal = closeAfAdminInfoModal;
+window.handleAfAdminInfoSave = handleAfAdminInfoSave;
+window.handleAfUserLogout = handleAfUserLogout;

@@ -2762,45 +2762,68 @@
     </div>
   </div>
 
-  <!-- Modal: 늘봄 관리자 정보수정 -->
-  <div class="modal-overlay" id="afAdminInfoModal">
-    <div class="modal-card" style="max-width: 480px;">
-      <div class="modal-header" style="background:#1e3a8a; color:#fff;">
-        <h3><i class="fa-solid fa-user-gear"></i> 관리자(박진수) 정보수정</h3>
-        <button class="modal-close-btn" onclick="closeAfAdminInfoModal()">&times;</button>
+  <!-- Modal: dbdbschool 공식 담당자 정보수정 모달 클론 -->
+  <div class="modal-backdrop" id="afAdminInfoModal" style="position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:10050; display:none; align-items:center; justify-content:center;">
+    <div class="modal-box" style="background:#fff; width:100%; max-width:540px; border-radius:6px; box-shadow:0 10px 25px rgba(0,0,0,0.25); overflow:hidden; font-family:'Malgun Gothic', dotum, sans-serif;">
+      <div class="modal-header" style="background:#4791d2; color:#fff; padding:12px 18px; display:flex; justify-content:space-between; align-items:center;">
+        <h3 style="margin:0; font-size:15px; font-weight:bold;"><i class="fa fa-id-card-o"></i> 담당자 정보 수정</h3>
+        <button type="button" class="close" onclick="closeAfAdminInfoModal()" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer; line-height:1;">&times;</button>
       </div>
-      <form onsubmit="handleAfAdminInfoSave(event)">
-        <div class="modal-body">
-          <table style="width:100%; font-size:12.5px; border-collapse:collapse;">
-            <tr style="border-bottom:1px solid #eee;">
-              <td style="padding:8px; font-weight:bold; background:#f8fafc; width:110px;">관리자 ID</td>
-              <td style="padding:8px;"><input type="text" id="afAdminInfoId" value="admin_jinsoo" readonly style="width:100%; padding:6px; background:#f1f5f9; border:1px solid #cbd5e1; border-radius:3px;"></td>
-            </tr>
-            <tr style="border-bottom:1px solid #eee;">
-              <td style="padding:8px; font-weight:bold; background:#f8fafc;">관리자 성명</td>
-              <td style="padding:8px;"><input type="text" id="afAdminInfoName" value="박진수" required style="width:100%; padding:6px; border:1px solid #cbd5e1; border-radius:3px;"></td>
-            </tr>
-            <tr style="border-bottom:1px solid #eee;">
-              <td style="padding:8px; font-weight:bold; background:#f8fafc;">휴대폰 번호</td>
-              <td style="padding:8px;"><input type="text" id="afAdminInfoPhone" value="010-3267-1188" required style="width:100%; padding:6px; border:1px solid #cbd5e1; border-radius:3px;"></td>
-            </tr>
-            <tr style="border-bottom:1px solid #eee;">
-              <td style="padding:8px; font-weight:bold; background:#f8fafc;">이메일</td>
-              <td style="padding:8px;"><input type="email" id="afAdminInfoEmail" value="jinsoo@gwangju-es.kr" required style="width:100%; padding:6px; border:1px solid #cbd5e1; border-radius:3px;"></td>
-            </tr>
-            <tr style="border-bottom:1px solid #eee;">
-              <td style="padding:8px; font-weight:bold; background:#f8fafc;">새 비밀번호</td>
-              <td style="padding:8px;"><input type="password" id="afAdminInfoNewPw" placeholder="변경 시에만 입력" style="width:100%; padding:6px; border:1px solid #cbd5e1; border-radius:3px;"></td>
-            </tr>
-            <tr>
-              <td style="padding:8px; font-weight:bold; background:#f8fafc;">비밀번호 확인</td>
-              <td style="padding:8px;"><input type="password" id="afAdminInfoNewPwChk" placeholder="새 비밀번호 재입력" style="width:100%; padding:6px; border:1px solid #cbd5e1; border-radius:3px;"></td>
-            </tr>
+      <form id="fm_admin_info_modify" onsubmit="handleAfAdminInfoSave(event)">
+        <div class="modal-body" style="padding:18px 22px; font-size:12.5px; max-height:75vh; overflow-y:auto;">
+          <div style="background:#edf5fc; border-left:4px solid #4791d2; padding:10px 12px; font-size:12px; color:#31708f; margin-bottom:14px; border-radius:2px;">
+            <i class="fa fa-info-circle"></i> ☑ 표시가 있는 항목은 반드시 입력해야 합니다.
+          </div>
+          <table class="table table-bordered" style="width:100%; margin-bottom:0; font-size:12.5px; border:1px solid #ddd;">
+            <tbody>
+              <tr>
+                <td style="width:120px; font-weight:bold; background:#f9f9f9; vertical-align:middle; padding:8px 10px;">학교명</td>
+                <td style="vertical-align:middle; padding:8px 10px; font-weight:bold; color:#333;">광주풍향초등학교 늘봄학교</td>
+              </tr>
+              <tr>
+                <td style="font-weight:bold; background:#f9f9f9; vertical-align:middle; padding:8px 10px;">성명 ☑</td>
+                <td style="padding:8px 10px;">
+                  <input type="text" id="afAdminInfoName" value="원희자(김채원)" required class="form-control input-sm" style="width:180px; height:30px; display:inline-block;">
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:bold; background:#f9f9f9; vertical-align:middle; padding:8px 10px;">휴대폰 ☑</td>
+                <td style="padding:8px 10px;">
+                  <input type="text" id="afAdminInfoPhone" value="010-2494-1479" required class="form-control input-sm" style="width:180px; height:30px; display:inline-block;">
+                  <div style="font-size:11px; color:#888; margin-top:3px;">※ 서비스 운영에 관련된 문자메시지 알림을 받으실 수 있습니다.</div>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:bold; background:#f9f9f9; vertical-align:middle; padding:8px 10px;">일반전화</td>
+                <td style="padding:8px 10px;">
+                  <input type="text" id="afAdminInfoTel" value="062-609-1182" class="form-control input-sm" style="width:180px; height:30px; display:inline-block;">
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:bold; background:#f9f9f9; vertical-align:middle; padding:8px 10px;">이메일 ☑</td>
+                <td style="padding:8px 10px;">
+                  <input type="email" id="afAdminInfoEmail" value="khh147979@naver.com" required class="form-control input-sm" style="width:260px; height:30px; display:inline-block;">
+                  <div style="font-size:11px; color:#888; margin-top:3px;">※ 안내 이메일을 전달받으실 수 있습니다.</div>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:bold; background:#f9f9f9; vertical-align:middle; padding:8px 10px;">새 비밀번호</td>
+                <td style="padding:8px 10px;">
+                  <input type="password" id="afAdminInfoNewPw" placeholder="변경 시에만 입력하세요" class="form-control input-sm" style="width:200px; height:30px; display:inline-block;">
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:bold; background:#f9f9f9; vertical-align:middle; padding:8px 10px;">비밀번호 확인</td>
+                <td style="padding:8px 10px;">
+                  <input type="password" id="afAdminInfoNewPwChk" placeholder="새 비밀번호 재입력" class="form-control input-sm" style="width:200px; height:30px; display:inline-block;">
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
-        <div class="modal-footer" style="padding:10px 16px; background:#f8fafc; border-top:1px solid #e2e8f0; display:flex; justify-content:flex-end; gap:8px;">
-          <button type="button" class="btn-db btn-db-gray" onclick="closeAfAdminInfoModal()">닫기</button>
-          <button type="submit" class="btn-db btn-db-green"><i class="fa-solid fa-floppy-disk"></i> 저장하기</button>
+        <div class="modal-footer" style="padding:10px 18px; background:#f5f5f5; border-top:1px solid #e5e5e5; display:flex; justify-content:flex-end; gap:8px;">
+          <button type="button" class="btn btn-default btn-sm" onclick="closeAfAdminInfoModal()" style="height:30px; padding:0 14px; border:1px solid #ccc; background:#fff; border-radius:3px; cursor:pointer;">취소</button>
+          <button type="submit" class="btn btn-primary btn-sm" style="height:30px; padding:0 16px; background:#4791d2; border-color:#3581c4; color:#fff; font-weight:bold; border-radius:3px; cursor:pointer;"><i class="fa fa-check"></i> 수정 & 확인 완료</button>
         </div>
       </form>
     </div>
