@@ -26,6 +26,145 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* ==================== 매뉴얼 & FAQ (전체 사이트 톤앤매너 완벽 동기화) ==================== */
+    /* 1. 상단 타이틀 영역: 사이트 표준 파란색(#4791d2) 포인트 라인 */
+    #panel_ad_faq_main .content-card {
+      background: #ffffff !important;
+      border: 1px solid #d1d5db !important;
+      border-radius: 4px !important;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03) !important;
+      padding: 18px 22px !important;
+    }
+    #panel_ad_faq_main div[style*="border-bottom:2px"] {
+      border-bottom: 2px solid #4791d2 !important;
+      padding-bottom: 12px !important;
+      margin-bottom: 18px !important;
+    }
+    #panel_ad_faq_main h2 {
+      font-size: 1.45rem !important;
+      font-weight: 800 !important;
+      color: #1e293b !important;
+    }
+    #panel_ad_faq_main p {
+      font-size: 1.02rem !important;
+      color: #64748b !important;
+      margin-top: 4px !important;
+    }
+
+    /* 2. 각 섹터 상단 띠 헤더 (사이트 표준 회색 배경 + 좌측 포인트 바 + 1px 테두리) */
+    #panel_ad_faq_main div[style*="border-left:4px"] {
+      border: 1px solid #cbd5e1 !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+      border-left: 4px solid !important;
+      border-radius: 4px 4px 0 0 !important;
+      background: #f8fafc !important;
+      padding: 10px 16px !important;
+      font-size: 1.15rem !important;
+      font-weight: 700 !important;
+      color: #1e293b !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+
+    /* 3. 각 섹터 바디 박스 (수강신청 운영절차, 양식, 매뉴얼) */
+    #panel_ad_faq_main div[style*="border:1px solid #e2e8f0"] {
+      border: 1px solid #cbd5e1 !important;
+      border-top: none !important;
+      border-radius: 0 0 4px 4px !important;
+      background: #ffffff !important;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02) !important;
+      padding: 10px 16px !important;
+    }
+
+    /* 4. 수강신청 운영 절차 (1~23번) 본문 텍스트 복원 (1.18rem) 및 순번 뱃지 (28px) */
+    #panel_ad_faq_main #operationsListContainer > div {
+      padding: 8px 4px !important;
+      font-size: 1.18rem !important;
+      line-height: 1.6 !important;
+      border-bottom: 1px solid #f1f5f9 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+    }
+    #panel_ad_faq_main #operationsListContainer span[style*="border-radius:50%"] {
+      width: 28px !important;
+      height: 28px !important;
+      background: #4791d2 !important;
+      color: #ffffff !important;
+      border-radius: 50% !important;
+      font-size: 0.92rem !important;
+      font-weight: 800 !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-shrink: 0 !important;
+    }
+
+    /* 5. 양식 다운로드 및 매뉴얼 다운로드 본문 텍스트 복원 (1.20rem) */
+    #panel_ad_faq_main #templateDownloadsContainer > div,
+    #panel_ad_faq_main #manualDownloadsContainer > div {
+      padding: 10px 4px !important;
+      font-size: 1.20rem !important;
+      line-height: 1.6 !important;
+      border-bottom: 1px solid #f1f5f9 !important;
+    }
+
+    /* 6. FAQ 카테고리별 개별 카드 박스 본문 텍스트 복원 (1.15rem) */
+    #panel_ad_faq_main #faqColLeft > div,
+    #panel_ad_faq_main #faqColRight > div {
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 4px !important;
+      background: #ffffff !important;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02) !important;
+      overflow: hidden !important;
+      margin-bottom: 14px !important;
+    }
+    #panel_ad_faq_main #faqColLeft div[style*="background:#f8fafc"],
+    #panel_ad_faq_main #faqColRight div[style*="background:#f8fafc"] {
+      background: #f8fafc !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+      padding: 9px 14px !important;
+      font-size: 1.12rem !important;
+      font-weight: 700 !important;
+      color: #1e293b !important;
+    }
+    #panel_ad_faq_main #faqColLeft div[style*="justify-content:space-between"],
+    #panel_ad_faq_main #faqColRight div[style*="justify-content:space-between"] {
+      padding: 8px 4px !important;
+      font-size: 1.15rem !important;
+      line-height: 1.55 !important;
+      border-bottom: 1px solid #f8fafc !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+    }
+
+    /* 7. 버튼 (.manual_btn) 원본 규격 유지 */
+    #panel_ad_faq_main .manual_btn {
+      font-size: 9pt !important;
+      border: 1px solid #CCCCCC !important;
+      background: #FFF !important;
+      border-radius: 3px !important;
+      padding: 1px 5px !important;
+      color: #555555 !important;
+      margin: 2px 2px !important;
+      line-height: 140% !important;
+      display: inline-block !important;
+      text-decoration: none !important;
+      transition: all 0.15s ease !important;
+    }
+    #panel_ad_faq_main .manual_btn:hover {
+      background: #f4f4f4 !important;
+      border-color: #999999 !important;
+    }
+    #panel_ad_faq_main .manual_btn .fa-youtube-play {
+      color: #CB5F5F !important;
+    }
+    #panel_ad_faq_main .manual_btn .txt {
+      color: #555555 !important;
+    }
+
     /* dbdbschool Original Theme Overrides - Pixel-Exact 45px Item Heights */
     #header { background: #4791d2 !important; height: 60px !important; position: relative; z-index: 1000; }
     #header #logo { background: #366d9d !important; height: 60px !important; line-height: 60px !important; padding: 0 20px; float: left; }
@@ -33,17 +172,137 @@
     #header h1 { float: left; margin: 0; padding: 0 20px; line-height: 60px; font-size: 16px; }
     #header h1 a { color: #fff; text-decoration: none; font-weight: bold; }
     
-    #container { display: flex; min-height: calc(100vh - 60px); }
+    /* ==================== 사이드바와 본문 영역 물리적 완전 격리 레이아웃 ==================== */
+    html, body {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100% !important;
+      overflow-x: hidden !important;
+      background: #f8fafc !important;
+    }
+
+    /* 1. 상단 글로벌 헤더: 화면 상단 완전 고정 */
+    #header {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 60px !important;
+      background: #4791d2 !important;
+      z-index: 2000 !important;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+    }
+
+    /* 2. 전체 컨테이너: 헤더 아래에서 시작 */
+    #container {
+      display: block !important;
+      position: relative !important;
+      width: 100% !important;
+      min-height: calc(100vh - 60px) !important;
+      margin-top: 60px !important;
+      padding: 0 !important;
+      float: none !important;
+      clear: both !important;
+      box-sizing: border-box !important;
+    }
+
+    /* 3. 사이드바: 좌측 고정 (Fixed) & 독립 스크롤 (절대 본문과 겹치지 않음) */
     #left_menu {
-      position: fixed;
-      width: 240px;
-      height: calc(100vh - 60px);
-      top: 60px;
-      left: 0;
-      background: #f4f4f4;
-      z-index: 100;
-      overflow-y: auto;
-      border-right: 1px #dddddd solid;
+      position: fixed !important;
+      top: 60px !important;
+      left: 0 !important;
+      width: 240px !important;
+      height: calc(100vh - 60px) !important;
+      background: #f4f4f4 !important;
+      border-right: 1px solid #dddddd !important;
+      z-index: 1000 !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      box-sizing: border-box !important;
+      margin: 0 !important;
+      float: none !important;
+    }
+
+    /* 4. 본문 컨텐츠 영역: 사이드바 우측에서 상단부터 즉시 시작 (Drop 현상 완벽 방지) */
+    .main-content, #contents_box {
+      display: block !important;
+      float: none !important;
+      clear: none !important;
+      position: relative !important;
+      margin-left: 240px !important;
+      margin-top: 0 !important;
+      margin-right: 0 !important;
+      margin-bottom: 0 !important;
+      width: calc(100% - 240px) !important;
+      max-width: calc(100% - 240px) !important;
+      min-width: 0 !important;
+      min-height: calc(100vh - 60px) !important;
+      padding: 20px 24px !important;
+      background: #f8fafc !important;
+      box-sizing: border-box !important;
+      z-index: 1 !important;
+    }
+
+    /* 5. 본문 내부 패널 및 카드: 상단 정렬 및 100% 너비 유지 */
+    .submodel-panel {
+      display: none;
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-sizing: border-box !important;
+      clear: both !important;
+    }
+    .submodel-panel.active {
+      display: block !important;
+    }
+    .content-card {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      margin-bottom: 20px !important;
+    }
+    .table-responsive, .table-responsive-container {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: auto !important;
+      box-sizing: border-box !important;
+    }
+
+    /* dbdbschool Original Theme Overrides - Pixel-Exact 45px Item Heights */
+    #header { background: #4791d2 !important; height: 60px !important; position: relative; z-index: 1000; }
+    #header #logo { background: #366d9d !important; height: 60px !important; line-height: 60px !important; padding: 0 20px; float: left; }
+    #header #logo a { color: #fff; font-size: 16px; font-weight: bold; text-decoration: none; }
+    #header h1 { float: left; margin: 0; padding: 0 20px; line-height: 60px; font-size: 16px; }
+    #header h1 a { color: #fff; text-decoration: none; font-weight: bold; }
+    
+    /* ==================== 사이드바와 본문 영역 물리적 완전 격리 레이아웃 ==================== */
+    #container {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: stretch !important;
+      width: 100% !important;
+      min-height: calc(100vh - 60px) !important;
+      position: relative !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+    }
+    #left_menu {
+      position: sticky !important;
+      top: 60px !important;
+      flex: 0 0 240px !important;
+      width: 240px !important;
+      min-width: 240px !important;
+      max-width: 240px !important;
+      height: calc(100vh - 60px) !important;
+      background: #f4f4f4 !important;
+      z-index: 50 !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      border-right: 1px solid #dddddd !important;
+      box-sizing: border-box !important;
+      margin: 0 !important;
+      left: auto !important;
     }
     #left_menu .user_box {
       float: left;
@@ -209,11 +468,34 @@
       border-right: none;
     }
     .main-content {
-      margin-left: 240px;
-      flex: 1;
-      width: calc(100% - 240px);
-      min-width: 0;
-      background: #f8fafc;
+      flex: 1 1 0% !important;
+      min-width: 0 !important;
+      width: calc(100% - 240px) !important;
+      max-width: calc(100% - 240px) !important;
+      margin-left: 0 !important;
+      padding: 18px 24px !important;
+      background: #f8fafc !important;
+      height: calc(100vh - 60px) !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      box-sizing: border-box !important;
+      position: relative !important;
+    }
+    /* 본문 패널 및 테이블 폭 제어로 사이드바 침범 원천 차단 */
+    .submodel-panel {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    .content-card {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    .table-responsive, .table-responsive-container {
+      max-width: 100% !important;
+      overflow-x: auto !important;
+      box-sizing: border-box !important;
     }
     .modal-overlay {
       display: none !important;
@@ -228,6 +510,171 @@
     .modal-overlay.active {
       display: flex !important;
     }
+  
+
+/* ==================== 전 메뉴 본문 텍스트 & 버튼 가독성 일괄 상향 (매뉴얼 기준 완벽 통일) ==================== */
+/* 1. 상단 타이틀 영역 */
+.page-title-box h1 {
+  font-size: 1.45rem !important;
+  font-weight: 800 !important;
+  color: #1e293b !important;
+  margin: 0 0 4px 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+.page-title-box .subtitle {
+  font-size: 1.02rem !important;
+  color: #64748b !important;
+}
+
+/* 2. 카드 상단 바 & 섹션 제목 */
+.card-top-bar {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 14px !important;
+  padding-bottom: 10px !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+}
+.card-top-bar .section-title {
+  font-size: 1.25rem !important;
+  font-weight: 800 !important;
+  color: #1e293b !important;
+}
+
+/* 3. 알림/안내 박스 가독성 */
+.alert-box {
+  background-color: #fffbeb !important;
+  border: 1px solid #fef3c7 !important;
+  color: #b45309 !important;
+  padding: 12px 18px !important;
+  border-radius: 4px !important;
+  font-size: 1.02rem !important;
+  line-height: 1.6 !important;
+  margin-bottom: 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+.alert-box i {
+  font-size: 1.25rem !important;
+}
+
+/* 4. 검색 필터 바 & 폼 요소 */
+.filter-container {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  padding: 10px 14px !important;
+  border-radius: 4px !important;
+  margin-bottom: 14px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+.filter-container select,
+.filter-container input[type="text"],
+.filter-container input[type="date"],
+.filter-container input[type="search"] {
+  height: 32px !important;
+  padding: 3px 10px !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 3px !important;
+  font-size: 0.95rem !important;
+  background-color: #ffffff !important;
+  color: #334155 !important;
+}
+
+/* 5. 버튼 크기 및 폰트 표준화 (매뉴얼 기준 & 프로젝트 표준 규칙 일치) */
+.btn-db {
+  height: 32px !important;
+  padding: 0 14px !important;
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  gap: 6px !important;
+  border-radius: 3px !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+}
+.helper-btn {
+  height: 30px !important;
+  padding: 0 12px !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  gap: 5px !important;
+  border-radius: 3px !important;
+  text-decoration: none !important;
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #475569 !important;
+}
+.helper-btn:hover {
+  background: #f8fafc !important;
+  color: #1e293b !important;
+}
+
+/* 6. 데이터 테이블 본문 텍스트 시원하게 확대 (매뉴얼 본문 1.15rem 기준 조화) */
+.db-table, table.list {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  font-size: 1.02rem !important;
+}
+.db-table th, table.list th {
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  padding: 11px 10px !important;
+  background-color: #f1f5f9 !important;
+  color: #1e293b !important;
+  text-align: center !important;
+  border: 1px solid #d1d5db !important;
+}
+.db-table td, table.list td {
+  font-size: 1.02rem !important;
+  padding: 10px 10px !important;
+  line-height: 1.55 !important;
+  color: #1e293b !important;
+  border: 1px solid #e5e7eb !important;
+  vertical-align: middle !important;
+}
+.db-table td a, table.list td a {
+  font-size: 1.02rem !important;
+  color: #1e293b !important;
+  text-decoration: none !important;
+}
+.db-table td a:hover, table.list td a:hover {
+  color: #2563eb !important;
+  text-decoration: underline !important;
+}
+
+/* 7. 상태 뱃지 가독성 */
+.badge-status {
+  font-size: 0.88rem !important;
+  padding: 3px 8px !important;
+  font-weight: 700 !important;
+  border-radius: 3px !important;
+  display: inline-block !important;
+}
+
+/* 8. 하단 안내문 */
+.bottom-notice-box {
+  font-size: 0.95rem !important;
+  line-height: 1.6 !important;
+  padding: 14px 18px !important;
+  border-left: 4px solid #ef4444 !important;
+  background-color: #ffffff !important;
+  margin-top: 16px !important;
+  border-radius: 0 4px 4px 0 !important;
+}
+
   </style>
 </head>
 <body>
@@ -275,7 +722,7 @@
       <!-- Navigation Menus (Exact dbdbschool Live Order) -->
       <ul class="parent sidebar-menu" id="adminSidebar">
         <li id="sub_ad_faq_main">
-          <a href="/af/ad_faq/main/sn/3267">
+          <a href="/af/ad_faq/main/sn/3267" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')">
             <i class="fa fa-download"></i><strong>매뉴얼</strong>
           </a>
         </li>
@@ -402,6 +849,61 @@
         <h1 id="viewMainTitle"><i class="fa-solid fa-file-lines"></i> 강좌관리</h1>
         <div class="subtitle">광주풍향초등학교 늘봄학교</div>
       </div>
+
+      <!-- ==================== 0. 매뉴얼 & FAQ (/af/ad_faq/main) ==================== -->
+      <div class="submodel-panel" id="panel_ad_faq_main" style="display:none;">
+        <div class="content-card" style="padding:20px 24px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid #e2e8f0;">
+            <div>
+              <h2 style="margin:0;font-size:1.1rem;font-weight:700;color:#1e293b;">안내 &amp; FAQ</h2>
+              <p style="margin:4px 0 0;font-size:0.82rem;color:#64748b;">&#8251; 아래 내용을 먼저 확인 후 고객지원 게시판을 이용하시기 바랍니다.</p>
+            </div>
+            <div style="display:flex;gap:8px;flex-shrink:0;">
+              <a href="/downloads/manual_faq/manual_af.zip" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;background:#2563eb;color:#fff;border-radius:4px;font-size:0.82rem;font-weight:700;text-decoration:none;" onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563eb'">
+                <i class="fa fa-download"></i> 매뉴얼 다운로드
+              </a>
+              <a href="https://www.youtube.com/playlist?list=PLA-pyXX5hMe9nkqFKeJKOCtGwlIVD2Ck2" target="_blank" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;background:#ef4444;color:#fff;border-radius:4px;font-size:0.82rem;font-weight:700;text-decoration:none;" onmouseover="this.style.background='#dc2626'" onmouseout="this.style.background='#ef4444'">
+                <i class="fa fa-youtube-play"></i> 동영상 매뉴얼
+              </a>
+            </div>
+          </div>
+          <div style="margin-bottom:20px;">
+            <div style="background:#f1f5f9;padding:8px 14px;border-radius:5px 5px 0 0;font-weight:700;font-size:0.9rem;color:#1e293b;border-left:4px solid #2563eb;display:flex;align-items:center;gap:6px;">
+              <i class="fa fa-list-ol" style="color:#2563eb;"></i> 수강신청 운영 절차
+            </div>
+            <div style="border:1px solid #e2e8f0;border-top:none;border-radius:0 0 5px 5px;padding:8px 14px;background:#fff;">
+              <div id="operationsListContainer" style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px;"><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">1</span><span style="color:#1e293b;">학교홈페이지 배너 등록</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/239/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">2</span><span style="color:#1e293b;">학생 이용 동의서 받기</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/182/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">3</span><span style="color:#1e293b;">가정통신문 발송</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/183/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">4</span><span style="color:#1e293b;">학생등록</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/71/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/71/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">5</span><span style="color:#1e293b;">강사등록</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/185/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/72/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">6</span><span style="color:#1e293b;">환경설정</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/73/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/73/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">7</span><span style="color:#1e293b;">강좌등록</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/74/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/74/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">8</span><span style="color:#1e293b;">수강신청 기간 설정</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/75/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/75/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">9</span><span style="color:#1e293b;">수강신청 테스트</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/76/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/76/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">10</span><span style="color:#1e293b;">대기자 관리</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/77/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/77/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">11</span><span style="color:#1e293b;">추첨하기</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/78/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/78/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">12</span><span style="color:#1e293b;">신청결과 조회</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/186/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">13</span><span style="color:#1e293b;">출석부 관리</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/237/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">14</span><span style="color:#1e293b;">수강료 산출</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/80/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/80/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">15</span><span style="color:#1e293b;">강사마감</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/81/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/81/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">16</span><span style="color:#1e293b;">지원금 관리</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/255/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">17</span><span style="color:#1e293b;">자유수강권자 관리</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/187/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/82/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">18</span><span style="color:#1e293b;">스쿨뱅킹 파일 다운로드</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/84/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/84/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">19</span><span style="color:#1e293b;">다음달 수강신청 준비</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/188/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">20</span><span style="color:#1e293b;">환불자 관리</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/85/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/85/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">21</span><span style="color:#1e293b;">데이터 백업 및 초기화</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/190/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/86/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">22</span><span style="color:#1e293b;">설문조사 가정통신문</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/191/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #f3f4f6;font-size:0.83rem;"><div style="display:flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:#2563eb;color:#fff;border-radius:50%;font-size:0.67rem;font-weight:700;">23</span><span style="color:#1e293b;">설문조사 관리</span></div><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/45/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/45/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div></div>
+              </div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+            <div>
+              <div style="background:#f1f5f9;padding:8px 14px;border-radius:5px 5px 0 0;font-weight:700;font-size:0.9rem;color:#1e293b;border-left:4px solid #16a34a;display:flex;align-items:center;gap:6px;">
+                <i class="fa fa-file-text-o" style="color:#16a34a;"></i> 양식 다운로드
+              </div>
+              <div style="border:1px solid #e2e8f0;border-top:none;border-radius:0 0 5px 5px;padding:8px 14px;background:#fff;min-height:80px;">
+                <div id="templateDownloadsContainer"><div style="padding:6px 0;border-bottom:1px solid #f1f5f9;font-size:0.85rem;"><span style="font-weight:600;color:#1e293b;">배너 / 팝업 이미지</span> <a href="/help/go_data/num/177/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 배너 문서</a> <a href="/help/go_data/num/178/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 팝업 이미지 문서</a></div><div style="padding:6px 0;border-bottom:1px solid #f1f5f9;font-size:0.85rem;"><span style="font-weight:600;color:#1e293b;">학생 수강신청 안내 동영상</span> <a href="/help/go_data/num/88/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a> <a href="/help/go_data/num/168/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 다운로드</a></div><div style="padding:6px 0;border-bottom:1px solid #f1f5f9;font-size:0.85rem;"><span style="font-weight:600;color:#1e293b;">모바일 앱 이용 방법</span> <a href="/help/go_data/num/181/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a></div></div>
+              </div>
+            </div>
+            <div>
+              <div style="background:#f1f5f9;padding:8px 14px;border-radius:5px 5px 0 0;font-weight:700;font-size:0.9rem;color:#1e293b;border-left:4px solid #7c3aed;display:flex;align-items:center;gap:6px;">
+                <i class="fa fa-book" style="color:#7c3aed;"></i> 매뉴얼 다운로드
+              </div>
+              <div style="border:1px solid #e2e8f0;border-top:none;border-radius:0 0 5px 5px;padding:8px 14px;background:#fff;min-height:80px;">
+                <div id="manualDownloadsContainer"><div style="padding:6px 0;border-bottom:1px solid #f1f5f9;font-size:0.85rem;"><span style="font-weight:600;color:#1e293b;">관리자 수강신청 관리 매뉴얼</span> <a href="/help/go_data/num/161/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a></div><div style="padding:6px 0;border-bottom:1px solid #f1f5f9;font-size:0.85rem;"><span style="font-weight:600;color:#1e293b;">강사 매뉴얼</span> <a href="/help/go_data/num/101/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a> <a href="/help/go_data/num/162/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 초등학교 문서</a> <a href="/help/go_data/num/163/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 중고등학교 문서</a></div><div style="padding:6px 0;border-bottom:1px solid #f1f5f9;font-size:0.85rem;"><span style="font-weight:600;color:#1e293b;">담임 매뉴얼</span> <a href="/help/go_data/num/166/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a></div><div style="padding:6px 0;border-bottom:1px solid #f1f5f9;font-size:0.85rem;"><span style="font-weight:600;color:#1e293b;">수강신청 전 필수 점검사항</span> <a href="/help/go_data/num/164/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a></div><div style="padding:6px 0;border-bottom:1px solid #f1f5f9;font-size:0.85rem;"><span style="font-weight:600;color:#dc2626;">월별 마감 및 다음 달 수강신청 준비 절차</span> <a href="/help/go_data/num/165/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a></div></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div style="background:#f1f5f9;padding:8px 14px;border-radius:5px 5px 0 0;font-weight:700;font-size:0.9rem;color:#1e293b;border-left:4px solid #f59e0b;display:flex;align-items:center;gap:6px;margin-bottom:12px;">
+              <i class="fa fa-question-circle" style="color:#f59e0b;"></i> FAQ <span style="font-size:0.8rem;font-weight:400;color:#64748b;">(자주하는 질문)</span>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div id="faqColLeft" style="display:flex;flex-direction:column;gap:10px;"><div style="border:1px solid #e2e8f0;border-radius:6px;background:#fff;overflow:hidden;margin-bottom:10px;"><div style="background:#f8fafc;padding:8px 12px;font-weight:700;color:#1e293b;border-bottom:1px solid #e2e8f0;font-size:0.88rem;">학생관리 <span style="font-size:0.75rem;font-weight:400;color:#64748b;">(8)</span></div><div style="padding:4px 12px;"><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">학생 비밀번호를 초기화하고 싶어요</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/89/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/89/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">로그인 화면에 번호가 다 출력되지 않아요</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/154/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">학생 진급 처리는 어떻게 하나요?</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/61/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/90/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">1학년 학적이 나오지 않아 가학적으로 받고 싶어요</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/62/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/62/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">학생 학적이 중간에 변경되었는데 어떻게 반영하나요?</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/134/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">학생 학적을 일괄변경하고 싶어요</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/135/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">다자녀 기능은 어떻게 활용하나요?</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/155/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">학생 성별 일괄 업데이트 방법</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/156/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div></div></div><div style="border:1px solid #e2e8f0;border-radius:6px;background:#fff;overflow:hidden;margin-bottom:10px;"><div style="background:#f8fafc;padding:8px 12px;font-weight:700;color:#1e293b;border-bottom:1px solid #e2e8f0;font-size:0.88rem;">교직원관리 <span style="font-size:0.75rem;font-weight:400;color:#64748b;">(1)</span></div><div style="padding:4px 12px;"><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">추가로 서비스 관리자를 지정하고 싶어요</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/70/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/70/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div></div></div><div style="border:1px solid #e2e8f0;border-radius:6px;background:#fff;overflow:hidden;margin-bottom:10px;"><div style="background:#f8fafc;padding:8px 12px;font-weight:700;color:#1e293b;border-bottom:1px solid #e2e8f0;font-size:0.88rem;">강사관리 <span style="font-size:0.75rem;font-weight:400;color:#64748b;">(5)</span></div><div style="padding:4px 12px;"><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">강사권한 설정(수강생 등록, 삭제, 수강료 입력)</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/150/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/95/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">강사에게 강좌 등록 권한을 주고 싶어요</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/146/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">강사에게 전체 강좌 조회 권한을 주고 싶어요</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/149/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">강사가 바뀌었어요</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/148/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">강사 모바일 출결 문자 발송 기능 이용 안내</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/151/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/151/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div></div></div><div style="border:1px solid #e2e8f0;border-radius:6px;background:#fff;overflow:hidden;margin-bottom:10px;"><div style="background:#f8fafc;padding:8px 12px;font-weight:700;color:#1e293b;border-bottom:1px solid #e2e8f0;font-size:0.88rem;">강좌관리 <span style="font-size:0.75rem;font-weight:400;color:#64748b;">(6)</span></div><div style="padding:4px 12px;"><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">강좌 일괄 입력</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/92/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/92/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">강좌 일괄 수정 - 엑셀로 강좌 정보를 일괄수정하고 싶어요</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/138/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">강좌 일괄 삭제 - 강좌를 한꺼번에 지우고 싶어요</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/158/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">강좌 통계 기능 활용하기</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/93/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/93/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">강좌 상태 "출력, 종료, 대기" 이해하기</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/159/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">수강료를 강사료와 수용비로 나눠 관리하고 싶어요</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/44/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div></div></div><div style="border:1px solid #e2e8f0;border-radius:6px;background:#fff;overflow:hidden;margin-bottom:10px;"><div style="background:#f8fafc;padding:8px 12px;font-weight:700;color:#1e293b;border-bottom:1px solid #e2e8f0;font-size:0.88rem;">신청자 관리 <span style="font-size:0.75rem;font-weight:400;color:#64748b;">(7)</span></div><div style="padding:4px 12px;"><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">수강신청 테스트 하고 싶어요</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/76/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/96/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">신청자 등록 / 신청자를 미리 입력해 놓고 싶어요</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/171/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">신청자 삭제 / 특정 강좌의 신청자를 모두 삭제하고 싶어요</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/172/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">신청자 이동 / 신청자를 다른 강좌로 옮기고 싶어요</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/174/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">신청자 복사 / 신청자를 다른 강좌로 복사하고 싶어요</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/175/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">방과후학교를 수강한 학생수(단수)를 어디에서 확인하나요?</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/58/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">학생화면에 이전 강좌구분을 출력하지 않게하는 방법</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/176/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div></div></div><div style="border:1px solid #e2e8f0;border-radius:6px;background:#fff;overflow:hidden;margin-bottom:10px;"><div style="background:#f8fafc;padding:8px 12px;font-weight:700;color:#1e293b;border-bottom:1px solid #e2e8f0;font-size:0.88rem;">자유수강권자 관리 <span style="font-size:0.75rem;font-weight:400;color:#64748b;">(3)</span></div><div style="padding:4px 12px;"><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">자유수강권자를 추가하고 개별 처리하는 방법</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/94/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/94/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">자유수강권자를 환불하고 개별 처리하는 방법</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/192/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">학생 자유수강권 잔액 조회 기능 활성화</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/193/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div></div></div></div>
+              <div id="faqColRight" style="display:flex;flex-direction:column;gap:10px;"><div style="border:1px solid #e2e8f0;border-radius:6px;background:#fff;overflow:hidden;margin-bottom:10px;"><div style="background:#f8fafc;padding:8px 12px;font-weight:700;color:#1e293b;border-bottom:1px solid #e2e8f0;font-size:0.88rem;">스쿨뱅킹 &amp; 나이스 <span style="font-size:0.75rem;font-weight:400;color:#64748b;">(4)</span></div><div style="padding:4px 12px;"><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">에듀파인 감면자 일괄입력 파일 다운로드</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/169/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">에듀파인 개인부담금반환 입력용 파일 다운로드</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/170/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">분기 접수, 월별 징수 처리 방법</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/126/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">나이스 방과후학교 프로그램 수강생, 수강료 일괄입력 파일 다운로드</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/97/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> <a href="/help/go_data/num/97/data/link1" target="_blank" class="manual_btn" style="color:#c0392b;"><i class="fa fa-youtube-play"></i> <span class="txt">동영상</span></a></div></div></div></div><div style="border:1px solid #e2e8f0;border-radius:6px;background:#fff;overflow:hidden;margin-bottom:10px;"><div style="background:#f8fafc;padding:8px 12px;font-weight:700;color:#1e293b;border-bottom:1px solid #e2e8f0;font-size:0.88rem;">환경설정 <span style="font-size:0.75rem;font-weight:400;color:#64748b;">(2)</span></div><div style="padding:4px 12px;"><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">학생 최대 신청 강좌수를 제한할 수 있나요?</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/194/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">안내글 설정</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/100/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div></div></div><div style="border:1px solid #e2e8f0;border-radius:6px;background:#fff;overflow:hidden;margin-bottom:10px;"><div style="background:#f8fafc;padding:8px 12px;font-weight:700;color:#1e293b;border-bottom:1px solid #e2e8f0;font-size:0.88rem;">알림관리 <span style="font-size:0.75rem;font-weight:400;color:#64748b;">(1)</span></div><div style="padding:4px 12px;"><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">알림 관리</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/195/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div></div></div><div style="border:1px solid #e2e8f0;border-radius:6px;background:#fff;overflow:hidden;margin-bottom:10px;"><div style="background:#f8fafc;padding:8px 12px;font-weight:700;color:#1e293b;border-bottom:1px solid #e2e8f0;font-size:0.88rem;">모바일앱 <span style="font-size:0.75rem;font-weight:400;color:#64748b;">(1)</span></div><div style="padding:4px 12px;"><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">모바일 푸시 알림은 어떻게 등록하나요?</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/167/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div></div></div><div style="border:1px solid #e2e8f0;border-radius:6px;background:#fff;overflow:hidden;margin-bottom:10px;"><div style="background:#f8fafc;padding:8px 12px;font-weight:700;color:#1e293b;border-bottom:1px solid #e2e8f0;font-size:0.88rem;">계약 <span style="font-size:0.75rem;font-weight:400;color:#64748b;">(1)</span></div><div style="padding:4px 12px;"><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">계약을 연장하고 싶어요</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/160/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div></div></div><div style="border:1px solid #e2e8f0;border-radius:6px;background:#fff;overflow:hidden;margin-bottom:10px;"><div style="background:#f8fafc;padding:8px 12px;font-weight:700;color:#1e293b;border-bottom:1px solid #e2e8f0;font-size:0.88rem;">설문관리 <span style="font-size:0.75rem;font-weight:400;color:#64748b;">(1)</span></div><div style="padding:4px 12px;"><div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:0.82rem;"><span style="color:#334155;">설문 참여율을 높이는 설문참여 안내 문자 발송하는 법</span><div style="display:flex;gap:3px;flex-shrink:0;"><a href="/help/go_data/num/47/data/link2" target="_blank" class="manual_btn"><i class="fa fa-download"></i> 문서</a> </div></div></div></div></div>
+            </div>
+          </div>
+        </div>
 
       <!-- ==================== 1. 강좌관리 (/af/ad_lec/lists) ==================== -->
       <div class="submodel-panel active" id="panel_ad_lec_lists">
@@ -2311,128 +2813,64 @@
 
       <!-- ==================== 28. 고객지원 게시판 (/af/qanda/lists) ==================== -->
       <div class="submodel-panel" id="panel_qanda_lists" style="display: none;">
-        <div class="panel_main panel-default_main" style="background:#ffffff; border:1px solid #d2d6de; padding:0; box-shadow:0 1px 1px rgba(0,0,0,0.05);">
-          <div class="panel-heading" style="padding:10px 15px; background:#f5f5f5; border-bottom:1px solid #ddd; font-weight:bold; color:#333; font-size:14px;">목록</div>
-          <div class="panel-body" style="padding:0;">
-            <div class="top_message_box" style="padding:12px 15px; background:#fff; border-bottom:1px solid #eee;">
-              <p style="margin:0; font-size:13px;"><span class="text-danger" style="color:#a94442;"><i class="fa fa-info-circle"></i> 문의사항을 고객지원 게시판에 올려주시면 <span class="blue_text" style="color:#428bca; font-weight:bold;">담당자가 빠르게 확인하고 신속하게 답변</span>드리겠습니다.</span></p>
+        <div class="content-card">
+          <!-- Card Top Bar -->
+          <div class="card-top-bar">
+            <div class="section-title"><i class="fa-solid fa-headset" style="color:#2563eb; margin-right:6px;"></i>고객지원 게시판</div>
+            <div class="helper-badges">
+              <a href="/af/ad_faq/main/sn/3267" class="helper-btn" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')"><i class="fa-solid fa-file-lines"></i> 매뉴얼</a>
             </div>
-          </div>	
-          <div class="MAT0 panel-search" style="padding:10px 15px; background:#f9f9f9; border-bottom:1px solid #eee;">
-            <form action="javascript:void(0);" name="fm_list_search" id="fm_list_search" onsubmit="filterQaList(); return false;" style="margin:0;">
-              <ul style="list-style:none; padding:0; margin:0; display:flex; justify-content:flex-end; align-items:center; gap:6px;">
-                <li class="PAD0" style="text-align:center; display:flex; align-items:center; gap:6px;">
-                  <select name="as" id="qaStatusFilter" onchange="filterQaList();" class="form-control input-sm PAD0" style="height:30px; padding:2px 8px; font-size:12px; border:1px solid #ccc; border-radius:3px; background:#fff;">
-                    <option value="all">=진행상태=</option>
-                    <option value="0">접수</option>
-                    <option value="1">처리중</option>
-                    <option value="2">완료</option>
-                    <option value="3">답변완료</option>
-                  </select>	
-                  <select name="st" id="qaSearchType" class="form-control input-sm PAD0 mobile_none" style="height:30px; padding:2px 8px; font-size:12px; border:1px solid #ccc; border-radius:3px; background:#fff;">
-                    <option value="sub_con" selected="selected">제목 + 내용</option>
-                    <option value="subject">제목</option>
-                    <option value="contents">내용</option>
-                  </select>
-                  <input type="text" name="sw" id="qaSearchKeyword" value="" size="15" class="form-control input-sm" style="height:30px; width:200px; padding:2px 8px; font-size:12px; border:1px solid #ccc; border-radius:3px;" onkeyup="if(event.key==='Enter') filterQaList();">
-                  <input type="button" value="검색" class="btn btn-default btn-sm" onclick="filterQaList();" style="height:30px; padding:0 12px; font-size:12px; border:1px solid #ccc; background:#fff; cursor:pointer;">
-                  <input type="button" value="전체" class="btn btn-default btn-sm" onclick="resetQaFilter();" style="height:30px; padding:0 12px; font-size:12px; border:1px solid #ccc; background:#fff; cursor:pointer;">
-                </li>
-              </ul>
-            </form>		
           </div>
-          <div class="panel-body" style="padding:10px 15px;">
-            <ul style="list-style:none; padding:0; margin:0; display:flex; justify-content:flex-end; align-items:center;">		
-              <li class="pull-right PAD0" style="position:relative; font-size:12px; color:#555;">
-                ※ <a href="/af/ad_faq/main/sn/3267" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')"><span class="text-danger" style="color:#d9534f; text-decoration:underline; font-weight:bold;"><u>매뉴얼</u></span></a>을 먼저 확인 후 고객지원 게시판을 이용하시기 바랍니다.&nbsp;&nbsp;
-                <input type="button" value="등록" class="btn btn-primary btn-sm" onclick="openQaWriteModal();" style="height:30px; padding:0 16px; font-size:12px; font-weight:bold; background:#337ab7; border-color:#2e6da4; color:#fff; border-radius:3px; cursor:pointer;">
-              </li>
-            </ul>
-          </div>	
-            
-          <div id="main_table_responsive_container" class="table-responsive-container" style="padding:0 15px 20px 15px;">	
-            <table class="table AlignCenter table-hover_sm list MAT0" style="width:100%; font-size:12px; text-align:center; border-collapse:collapse; border-top:1px solid #ddd; border-bottom:1px solid #ddd;">
+
+          <!-- Alert / Notice Box -->
+          <div class="alert-box">
+            <i class="fa-solid fa-circle-info"></i>
+            <div>
+              <strong>문의사항을 고객지원 게시판에 올려주시면 <span style="color:#2563eb;">담당자가 빠르게 확인하고 신속하게 답변</span>드리겠습니다.</strong><br>
+              ※ 자주 묻는 질문은 <a href="/af/ad_faq/main/sn/3267" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')" style="color:#2563eb; text-decoration:underline; font-weight:bold;">매뉴얼 (FAQ)</a>에 정리되어 있으니 이곳을 먼저 참고해 주시기 바랍니다.
+            </div>
+          </div>
+
+          <!-- Filter & Action Bar (Unified Height 30px & Flex Centering) -->
+          <div class="filter-container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
+            <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+              <select name="as" id="qaStatusFilter" onchange="filterQaList();" style="height:30px; padding:0 10px; font-size:12px; border:1px solid #d1d5db; border-radius:3px; background:#fff; color:#333; cursor:pointer;">
+                <option value="all">=진행상태 전체=</option>
+                <option value="0">접수</option>
+                <option value="1">처리중</option>
+                <option value="2">완료</option>
+                <option value="3">답변완료</option>
+              </select>	
+              <select name="st" id="qaSearchType" style="height:30px; padding:0 10px; font-size:12px; border:1px solid #d1d5db; border-radius:3px; background:#fff; color:#333; cursor:pointer;">
+                <option value="sub_con" selected="selected">제목 + 내용</option>
+                <option value="subject">제목</option>
+                <option value="contents">내용</option>
+              </select>
+              <input type="text" name="sw" id="qaSearchKeyword" placeholder="검색어를 입력하세요" style="height:30px; width:220px; padding:0 10px; font-size:12px; border:1px solid #d1d5db; border-radius:3px; background:#fff;" onkeyup="if(event.key==='Enter') filterQaList();">
+              <button type="button" class="btn-db btn-db-gray" onclick="filterQaList();" style="height:30px; padding:0 14px; display:inline-flex; align-items:center; justify-content:center; line-height:1; gap:4px;"><i class="fa-solid fa-magnifying-glass"></i> 검색</button>
+              <button type="button" class="btn-db btn-db-gray" onclick="resetQaFilter();" style="height:30px; padding:0 14px; display:inline-flex; align-items:center; justify-content:center; line-height:1;">전체</button>
+            </div>
+            <div>
+              <button type="button" class="btn-db btn-db-blue" onclick="openQaWriteModal();" style="height:30px; padding:0 16px; display:inline-flex; align-items:center; justify-content:center; line-height:1; font-weight:700; gap:5px;"><i class="fa-solid fa-pen-to-square"></i> 문의 등록</button>
+            </div>
+          </div>
+
+          <!-- Table Container (사이트 표준 db-table) -->
+          <div class="table-responsive" style="border:1px solid #d1d5db; border-radius:4px; overflow:hidden;">
+            <table class="db-table" style="width:100%; border-collapse:collapse; table-layout:fixed; margin-bottom:0;">
               <thead>
-                <tr style="background:#f9f9f9; height:38px; border-bottom:1px solid #ddd; color:#333; font-weight:bold;">
-                  <th class="mobile_none" width="60" style="text-align:center; border-right:1px solid #eee;">연번</th>
-                  <th style="text-align:center; border-right:1px solid #eee;">제목</th>
-                  <th width="100" style="text-align:center; border-right:1px solid #eee;">등록일자</th>
-                  <th width="80" style="text-align:center; border-right:1px solid #eee;">진행</th>
-                  <th width="60" style="text-align:center;">답변</th>								
+                <tr style="background:#f8fafc; height:40px; border-bottom:1px solid #cbd5e1;">
+                  <th style="width:65px; text-align:center; font-weight:700; color:#334155;">연번</th>
+                  <th style="text-align:left; padding-left:16px; font-weight:700; color:#334155;">제목</th>
+                  <th style="width:120px; text-align:center; font-weight:700; color:#334155;">등록일자</th>
+                  <th style="width:95px; text-align:center; font-weight:700; color:#334155;">진행상태</th>
+                  <th style="width:95px; text-align:center; font-weight:700; color:#334155;">답변일자</th>
                 </tr>
               </thead>
               <tbody id="qaTbody">
-                <tr><td colspan="5" class="center" style="padding:40px; color:#999999;">Q&A 질문 목록을 불러오는 중입니다...</td></tr>
+                <tr><td colspan="5" class="center" style="padding:40px; color:#888;">Q&A 질문 목록을 불러오는 중입니다...</td></tr>
               </tbody>
             </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- ==================== 29. 매뉴얼 (FAQ) (/af/ad_faq/main) ==================== -->
-      <div class="submodel-panel" id="panel_ad_faq_main" style="display: none;">
-        <div class="content-card">
-          <div class="card-top-bar">
-            <div class="section-title"><i class="fa-solid fa-book-open" style="color:#2563eb;"></i> 디비디비스쿨 매뉴얼 & 자주 묻는 질문 (FAQ)</div>
-            <div class="helper-badges">
-              <button class="btn-db btn-db-blue" onclick="downloadManualZip()"><i class="fa-solid fa-download"></i> 매뉴얼 다운로드</button>
-              <button class="btn-db btn-db-coral" onclick="openVideoPlayer('https://www.youtube.com/embed/videoseries?list=PLA-pyXX5hMe9nkqFKeJKOCtGwlIVD2Ck2', '디비디비스쿨 공식 동영상 매뉴얼 전체 재생목록')"><i class="fa-solid fa-play"></i> 동영상 매뉴얼</button>
-            </div>
-          </div>
-
-          <div class="alert-box" style="background:#fef2f2; border:1px solid #fee2e2; color:#b91c1c; font-weight:600;">
-            <i class="fa-solid fa-circle-exclamation"></i>
-            <span>※ 아래 내용을 먼저 확인 후 고객지원 게시판을 이용하시기 바랍니다.</span>
-          </div>
-
-          <!-- Top Grid: Operations (50%) & Downloads (50%) - Perfectly matched without empty whitespace -->
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; align-items: start;">
-            <!-- Left: 수강신청 운영 절차 (1 ~ 23) (50% 폭) -->
-            <div style="border: 1px solid #cbd5e1; border-radius: 6px; background: #ffffff; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04);">
-              <div style="background: #f1f5f9; padding: 8px 12px; font-weight: 700; border-bottom: 1px solid #cbd5e1; display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-size: 0.88rem; color: #1e293b;"><i class="fa-solid fa-list-ol" style="color:#2563eb;"></i> 수강신청 운영 절차 (1 ~ 23)</span>
-                <span style="font-size:0.75rem; color:#2563eb; font-weight: 700; background: #eff6ff; border: 1px solid #dbeafe; padding: 2px 8px; border-radius: 12px;">23단계</span>
-              </div>
-              <div id="operationsListContainer" style="padding: 4px 10px;">
-                <!-- Dynamically loaded via loadFaqList() -->
-              </div>
-            </div>
-
-            <!-- Right: 양식 다운로드 & 매뉴얼 다운로드 (50% 폭) -->
-            <div style="display: flex; flex-direction: column; gap: 16px;">
-              <!-- 1. 양식 다운로드 -->
-              <div style="border: 1px solid #cbd5e1; border-radius: 6px; background: #ffffff; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04);">
-                <div style="background: #f1f5f9; padding: 10px 14px; font-weight: 700; border-bottom: 1px solid #cbd5e1; display:flex; justify-content:space-between; align-items:center;">
-                  <span style="font-size: 0.9rem; color: #1e293b;"><i class="fa-solid fa-file-arrow-down" style="color:#16a34a;"></i> 양식 다운로드</span>
-                  <span style="font-size:0.75rem; color:#16a34a; font-weight: 700; background: #f0fdf4; border: 1px solid #dcfce7; padding: 2px 8px; border-radius: 12px;">3건</span>
-                </div>
-                <div id="templateDownloadsContainer" style="padding: 6px 12px;">
-                  <!-- Template downloads -->
-                </div>
-              </div>
-
-              <!-- 2. 매뉴얼 다운로드 -->
-              <div style="border: 1px solid #cbd5e1; border-radius: 6px; background: #ffffff; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04);">
-                <div style="background: #f1f5f9; padding: 10px 14px; font-weight: 700; border-bottom: 1px solid #cbd5e1; display:flex; justify-content:space-between; align-items:center;">
-                  <span style="font-size: 0.9rem; color: #1e293b;"><i class="fa-solid fa-book" style="color:#ea580c;"></i> 매뉴얼 다운로드</span>
-                  <span style="font-size:0.75rem; color:#ea580c; font-weight: 700; background: #fff7ed; border: 1px solid #ffedd5; padding: 2px 8px; border-radius: 12px;">5건</span>
-                </div>
-                <div id="manualDownloadsContainer" style="padding: 6px 12px;">
-                  <!-- Manual downloads -->
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bottom: FAQ Categories Grid -->
-          <div style="border-top: 2px solid #e2e8f0; padding-top: 18px;">
-            <h3 style="font-size: 1.1rem; color: #1e293b; margin-bottom: 14px; display:flex; align-items:center; gap:8px;">
-              <i class="fa-solid fa-circle-question" style="color:#0284c7;"></i> 자주 묻는 질문 (FAQ)
-            </h3>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;" id="faqGridContainer">
-              <div id="faqColLeft" style="display:flex; flex-direction:column; gap:14px;"></div>
-              <div id="faqColRight" style="display:flex; flex-direction:column; gap:14px;"></div>
-            </div>
           </div>
         </div>
       </div>
@@ -3284,6 +3722,16 @@
 
   <!-- Client Script -->
   <script src="/af/ad_lec/lists/sn/admin_lec.js"></script>
+<script>
+// FAQ 패널 초기화 보장
+document.addEventListener("DOMContentLoaded", function() {
+  requestAnimationFrame(function() {
+    if (typeof loadFaqList === "function") {
+      try { loadFaqList(); } catch(e) { console.warn("loadFaqList error:", e); }
+    }
+  });
+});
+</script>
 </body>
 </html>
 
