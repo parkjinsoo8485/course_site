@@ -68,8 +68,16 @@ app.get([
   return res.sendFile(path.join(__dirname, 'af', 'ad_lec', 'lists', 'sn', 'index.html'));
 });
 
-// ==================== 로그인 및 메인 진입 -> 매뉴얼 페이지 리다이렉트 ====================
+// ==================== 로그인 페이지 서빙 및 로그인 후 매뉴얼 페이지 연결 ====================
 app.get(['/login', '/login/', '/member/login', '/member/login/', '/member/login/sn/:school_id', '/member/login/sn/:school_id/'], (req, res) => {
+  const loginPath = path.join(__dirname, 'member', 'login', 'sn', '3267', 'index.html');
+  if (fs.existsSync(loginPath)) {
+    return res.sendFile(loginPath);
+  }
+  return res.redirect('/af/ad_faq/main/sn/3267');
+});
+
+app.post(['/login', '/login/', '/member/login', '/member/login/', '/member/login/sn/:school_id', '/member/login/sn/:school_id/'], (req, res) => {
   return res.redirect('/af/ad_faq/main/sn/3267');
 });
 

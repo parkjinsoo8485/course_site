@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="늘봄학교,방과후학교,자유학기제,우유신청 등 수강신청 및 학교 업무 경감 프로그램" />
+  <meta name="keywords" content="방과후, 늘봄, 늘봄학교, 방과후학교, 자유학기제, 자유학년제, 방과후학교 신청" />
+  <meta name="author" content="엑스메카" />		
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/mobile_ico_2.png">
+  <title>늘봄학교 - 로그인</title>
+  <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" />
+  <link href="/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
+  <link href="/css/default.css" rel="stylesheet" type="text/css" />
+  <link href="/icon/css/font-awesome.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    @font-face {
+      font-family: 'FontAwesome';
+      src: url('/icon/fonts/fontawesome-webfont.woff?v=4.2.0') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+    body {
+      background: #f4f4f4;
+      font-family: "Malgun Gothic", "맑은 고딕", AppleSDGothicNeo-Regular, "돋움", dotum, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .login {
+      width: 400px;
+      margin: 60px auto 0 auto;
+    }
+    .login h1 {
+      text-align: center;
+      font-size: 26px;
+      color: #333;
+      margin-bottom: 25px;
+      font-weight: bold;
+      line-height: 1.3;
+    }
+    .login h1 span.s_name {
+      font-size: 16px;
+      color: #4791d2;
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .login_box {
+      background: #fff;
+      border: 1px solid #dcdcdc;
+      border-radius: 4px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+    .choice_user {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      border-bottom: 1px solid #ddd;
+      background: #f9f9f9;
+    }
+    .choice_user li {
+      flex: 1;
+      text-align: center;
+    }
+    .choice_user li a {
+      display: block;
+      padding: 12px 0;
+      font-size: 14px;
+      color: #777;
+      text-decoration: none;
+      font-weight: bold;
+      border-right: 1px solid #eee;
+    }
+    .choice_user li:last-child a {
+      border-right: none;
+    }
+    .choice_user li a.on {
+      background: #fff;
+      color: #4791d2;
+      border-bottom: 2px solid #4791d2;
+    }
+    .user_off {
+      padding: 20px;
+    }
+    .in_box {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .in_box li {
+      position: relative;
+      margin-bottom: 12px;
+    }
+    .in_box li i.fa {
+      position: absolute;
+      left: 12px;
+      top: 10px;
+      color: #999;
+      font-size: 16px;
+    }
+    .in_box li i.fa span {
+      display: none;
+    }
+    .in_box li input.form-control,
+    .in_box li select.form-control {
+      padding-left: 36px;
+      height: 38px;
+      font-size: 13px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    #stu_log_top_txt {
+      font-size: 11px;
+      color: #666;
+      background: #fdf8e2;
+      border: 1px solid #faebcc;
+      padding: 8px 10px;
+      border-radius: 3px;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    .student_select_row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .student_select_row select {
+      flex: 1;
+      height: 34px;
+      font-size: 12px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      padding: 0 4px;
+    }
+    .login_btn {
+      padding: 0 20px 20px 20px;
+    }
+    .login_btn .options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 14px;
+    }
+    .login_btn .options label {
+      cursor: pointer;
+      margin-left: 4px;
+    }
+    .login_btn .go_btn {
+      width: 100%;
+      height: 44px;
+      background: #4791d2;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .login_btn .go_btn:hover {
+      background: #366d9d;
+    }
+    .login_footer {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 12px;
+      color: #777;
+    }
+    .login_footer a {
+      color: #555;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+    .login_footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login">
+    <h1>
+      <span class="s_name">광주풍향초등학교</span>
+      늘봄학교
+    </h1>
+
+    <div class="login_box">
+      <ul class="choice_user">
+        <li class="login_user_grp1"><a href="javascript:void(0);" onclick="selectTab(1)" id="tab_grp1" class="on">교직원</a></li>
+        <li class="login_user_grp2"><a href="javascript:void(0);" onclick="selectTab(2)" id="tab_grp2">학생</a></li>
+        <li class="login_user_grp4"><a href="javascript:void(0);" onclick="selectTab(4)" id="tab_grp4">강사</a></li>
+      </ul>
+
+      <form id="fm_login" action="/member/login/sn/3267" method="post" onsubmit="handleLoginSubmit(event)">
+        <input type="hidden" id="login_user_grp" name="login_user_grp" value="1" />
+
+        <!-- 1. 교직원 로그인 폼 -->
+        <div id="box_grp1" class="user_off">
+          <ul class="in_box">
+            <li>
+              <i class="fa fa-user"></i>
+              <input type="text" name="login_id" id="login_id" value="admin" placeholder="아이디를 입력하세요." class="form-control" required />
+            </li>
+            <li>
+              <i class="fa fa-key"></i>
+              <input type="password" name="login_passwd" id="login_passwd" value="1234" placeholder="비밀번호를 입력하세요." class="form-control" required />
+            </li>
+          </ul>
+        </div>
+
+        <!-- 2. 학생/학부모 로그인 폼 -->
+        <div id="box_grp2" class="user_off" style="display:none;">
+          <div id="stu_log_top_txt">
+            * 학년, 반, 번호, 이름 입력 후 초기비밀번호 1234 입력 로그인<br />
+            * 늘봄학교 수강신청 및 출석/귀가 관리가 가능합니다.
+          </div>
+          <div class="student_select_row">
+            <select name="login_stu_grade" id="login_stu_grade">
+              <option value="1">1학년</option>
+              <option value="2">2학년</option>
+              <option value="3">3학년</option>
+              <option value="4">4학년</option>
+              <option value="5">5학년</option>
+              <option value="6">6학년</option>
+            </select>
+            <select name="login_stu_class" id="login_stu_class">
+              <option value="1">1반</option>
+              <option value="2">2반</option>
+              <option value="3">3반</option>
+            </select>
+            <select name="login_stu_bunho" id="login_stu_bunho">
+              <option value="1">1번</option>
+              <option value="2">2번</option>
+              <option value="3">3번</option>
+              <option value="4">4번</option>
+              <option value="5">5번</option>
+            </select>
+          </div>
+          <ul class="in_box">
+            <li>
+              <i class="fa fa-user"></i>
+              <input type="text" name="login_stu_name" id="login_stu_name" value="김채원" placeholder="학생 이름을 입력하세요." class="form-control" />
+            </li>
+            <li>
+              <i class="fa fa-key"></i>
+              <input type="password" name="login_stu_passwd" id="login_stu_passwd" value="1234" placeholder="비밀번호(초기 1234)" class="form-control" />
+            </li>
+          </ul>
+        </div>
+
+        <!-- 3. 강사 로그인 폼 -->
+        <div id="box_grp4" class="user_off" style="display:none;">
+          <ul class="in_box">
+            <li>
+              <i class="fa fa-user"></i>
+              <input type="text" name="login_tea_id" id="login_tea_id" value="teacher01" placeholder="강사 아이디를 입력하세요." class="form-control" />
+            </li>
+            <li>
+              <i class="fa fa-key"></i>
+              <input type="password" name="login_tea_passwd" id="login_tea_passwd" value="1234" placeholder="비밀번호를 입력하세요." class="form-control" />
+            </li>
+          </ul>
+        </div>
+
+        <div class="login_btn">
+          <div class="options">
+            <span><input type="checkbox" id="save_id" checked /><label for="save_id">아이디 저장</label></span>
+            <span><input type="checkbox" id="remember" /><label for="remember">로그인 유지</label></span>
+          </div>
+          <p style="margin:0;">
+            <input type="submit" id="btn_submit" value="로그인" class="go_btn" />
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <div class="login_footer">
+      <a href="/af/ad_faq/main/sn/3267">매뉴얼 바로가기</a> |
+      <a href="javascript:void(0);" onclick="alert('초기 비밀번호는 1234입니다. 변경 후 분실 시 학교 관리자에게 문의하세요.');">비밀번호 찾기</a> |
+      <a href="/af/qanda/lists/sn/3267">고객지원 게시판</a>
+    </div>
+  </div>
+
+  <script>
+    function selectTab(grp) {
+      document.getElementById('login_user_grp').value = grp;
+      
+      // Tabs
+      document.querySelectorAll('.choice_user li a').forEach(a => a.classList.remove('on'));
+      document.getElementById('tab_grp' + grp).classList.add('on');
+
+      // Boxes
+      document.getElementById('box_grp1').style.display = (grp === 1) ? 'block' : 'none';
+      document.getElementById('box_grp2').style.display = (grp === 2) ? 'block' : 'none';
+      document.getElementById('box_grp4').style.display = (grp === 4) ? 'block' : 'none';
+    }
+
+    function handleLoginSubmit(e) {
+      e.preventDefault();
+      // 요청사항: 로그인 페이지에서 로그인 클릭하고 들어오면 http://localhost:3005/af/ad_faq/main/sn/3267 페이지로 연결
+      window.location.href = '/af/ad_faq/main/sn/3267';
+    }
+  </script>
+</body>
+</html>

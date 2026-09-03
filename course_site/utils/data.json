@@ -3541,6 +3541,25 @@
   ],
   "qnaList": [
     {
+      "id": "qna_1788401452639",
+      "num": 3,
+      "createdAt": "2026-09-03",
+      "status": "0",
+      "statusText": "접수",
+      "answerDate": "",
+      "answerContent": "",
+      "schoolId": "3267",
+      "authorName": "원희자(김채원)",
+      "hp1": "010",
+      "hp2": "2494",
+      "hp3": "1479",
+      "phone": "062-609-1182",
+      "email": "khh147979@naver.com",
+      "subject": "테스트",
+      "contents": "테스트",
+      "files": []
+    },
+    {
       "id": "qna_8806",
       "num": 2,
       "schoolId": "3267",

@@ -2,11 +2,48 @@
 
 const SCHOOL_SN = '3267';
 let currentSubmodelKey = 'ad_lec_lists';
+var currentViewingQaId = null;
+var qaItems = [
+  {
+    id: 'qna_8806',
+    num: 2,
+    authorName: '원희자(김채원)',
+    hp1: '010',
+    hp2: '2494',
+    hp3: '1479',
+    phone: '062-609-1182',
+    email: 'khh147979@naver.com',
+    subject: '2026학년도 1학기 늘봄학교 만족도 조사 설문지',
+    contents: '2026학년도 바뀐 설문지 양식 첨부하여 보내드립니다.\n늘봄학교 1학기 만족도 조사 설문 등록 부탁드립니다.\n감사합니다.',
+    status: '2',
+    statusText: '완료',
+    createdAt: '2026-06-01',
+    answerDate: '06/01',
+    answerContent: '안녕하세요. 디비디비스쿨 고객지원팀입니다.\n자료 올려 주셔서 대단히 감사합니다.\n4가지 샘플 설문에 정상 등록해드렸으니 설문관리 메뉴에서 바로 확인 및 활용 가능하십니다.\n추가 문의사항이 있으시면 언제든지 말씀해 주세요.'
+  },
+  {
+    id: 'qna_3356',
+    num: 1,
+    authorName: '원희자(김채원)',
+    hp1: '010',
+    hp2: '2494',
+    hp3: '1479',
+    phone: '062-609-1182',
+    email: 'khh147979@naver.com',
+    subject: '지원금 스쿨뱅킹 현황',
+    contents: '1학기 지원금 스쿨뱅킹 수납 현황 파일 확인 및 에듀파인 규격 매핑 부탁드립니다.',
+    status: '2',
+    statusText: '완료',
+    createdAt: '2025-06-13',
+    answerDate: '06/13',
+    answerContent: '안녕하세요. 요청하신 지원금 스쿨뱅킹 수납 현황을 에듀파인 연계 규격에 맞게 생성하여 등록 처리 완료하였습니다.\n감사합니다.'
+  }
+];
 
 const submodelTitles = {
   // 단독 대메뉴 (13개)
   ad_faq_main: '<i class="fa-solid fa-book"></i> 매뉴얼 (FAQ) (/af/ad_faq/main)',
-  qanda_lists: '<i class="fa-solid fa-comments"></i> 고객지원 게시판 (/af/qanda/lists)',
+  qanda_lists: '<i class="fa fa-file-text-o"></i> 고객지원 게시판 <span style="font-size:12px; color:#a6a6a6; font-weight:normal;">광주풍향초등학교 늘봄학교</span>',
   sczigi_service_lists: '<i class="fa-solid fa-school"></i> 학교관리 (/sczigi/service/lists)',
   ad_lec_lists: '<i class="fa-solid fa-book-open"></i> 강좌관리 (/af/ad_lec/lists)',
   ad_app_lists: '<i class="fa-solid fa-users"></i> 신청자관리 (/af/ad_app/lists)',
@@ -2269,63 +2306,62 @@ function escHtml(str) {
 
 window.loadFaqList = loadFaqList;
 
-// ==================== 28. 고객지원 게시판 (/af/qanda/lists) ====================
-let qaItems = [
-  {
-    id: '8806',
-    num: 2,
-    authorName: '김혜련',
-    hp1: '010',
-    hp2: '2494',
-    hp3: '1479',
-    phone: '062-609-1182',
-    email: 'khh147979@naver.com',
-    subject: '2026학년도 1학기 늘봄학교 만족도 조사 설문지',
-    contents: '2026학년도 바뀐 설문지 보내드립니다.\n감사합니다.',
-    files: [{ id: 'f_1', name: '2026학년도1학기늘봄학교만족도조사설문지.hwp' }],
-    status: '2',
-    statusText: '완료',
-    createdAt: '2026-06-01',
-    answerDate: '06/01',
-    answerContent: '자료 올려 주셔서 감사합니다.\n4가지 샘플 설문에 등록해드렸습니다.\n확인 바랍니다.'
-  },
-  {
-    id: '3356',
-    num: 1,
-    authorName: '김혜련',
-    hp1: '010',
-    hp2: '2494',
-    hp3: '1479',
-    phone: '062-609-1182',
-    email: 'khh147979@naver.com',
-    subject: '지원금 스쿨뱅킹 현황',
-    contents: '1학기 지원금 스쿨뱅킹 수납 현황 파일 확인 부탁드립니다.',
-    files: [],
-    status: '2',
-    statusText: '완료',
-    createdAt: '2026-05-15',
-    answerDate: '05/16',
-    answerContent: '요청하신 지원금 스쿨뱅킹 수납 현황을 에듀파인 연계 규격에 맞게 생성하여 등록 처리하였습니다.'
-  }
-];
 
-let currentViewingQaId = null;
+// ---------------- 28. Q&A 고객지원 게시판 모듈 완벽 구현 ----------------
 
 async function loadQaList() {
-  const tbody = document.getElementById('qaTbody');
-  if (!tbody) return;
+  if (!qaItems || qaItems.length === 0) {
+    qaItems = [
+      {
+        id: 'qna_8806',
+        num: 2,
+        authorName: '원희자(김채원)',
+        hp1: '010',
+        hp2: '2494',
+        hp3: '1479',
+        phone: '062-609-1182',
+        email: 'khh147979@naver.com',
+        subject: '2026학년도 1학기 늘봄학교 만족도 조사 설문지',
+        contents: '2026학년도 바뀐 설문지 양식 첨부하여 보내드립니다.\n늘봄학교 1학기 만족도 조사 설문 등록 부탁드립니다.\n감사합니다.',
+        status: '2',
+        statusText: '완료',
+        createdAt: '2026-06-01',
+        answerDate: '06/01',
+        answerContent: '안녕하세요. 디비디비스쿨 고객지원팀입니다.\n자료 올려 주셔서 대단히 감사합니다.\n4가지 샘플 설문에 정상 등록해드렸으니 설문관리 메뉴에서 바로 확인 및 활용 가능하십니다.\n추가 문의사항이 있으시면 언제든지 말씀해 주세요.'
+      },
+      {
+        id: 'qna_3356',
+        num: 1,
+        authorName: '원희자(김채원)',
+        hp1: '010',
+        hp2: '2494',
+        hp3: '1479',
+        phone: '062-609-1182',
+        email: 'khh147979@naver.com',
+        subject: '지원금 스쿨뱅킹 현황',
+        contents: '1학기 지원금 스쿨뱅킹 수납 현황 파일 확인 및 에듀파인 규격 매핑 부탁드립니다.',
+        status: '2',
+        statusText: '완료',
+        createdAt: '2025-06-13',
+        answerDate: '06/13',
+        answerContent: '안녕하세요. 요청하신 지원금 스쿨뱅킹 수납 현황을 에듀파인 연계 규격에 맞게 생성하여 등록 처리 완료하였습니다.\n감사합니다.'
+      }
+    ];
+  }
+  renderQaTable(qaItems);
 
   try {
     const res = await fetch(`/api/af/qanda/lists/sn/${SCHOOL_SN}`);
     if (res.ok) {
       const data = await res.json();
-      if (data.items && Array.isArray(data.items)) {
+      if (data.items && data.items.length > 0) {
         qaItems = data.items;
+        renderQaTable(qaItems);
       }
     }
-  } catch (_) {}
-
-  renderQaTable(qaItems);
+  } catch (err) {
+    console.warn('Failed to fetch QA from server, using local items:', err);
+  }
 }
 
 function renderQaTable(items) {
@@ -2333,31 +2369,32 @@ function renderQaTable(items) {
   if (!tbody) return;
 
   if (!items || items.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="5" class="center" style="padding:40px; color:#888;">등록된 질문이 없습니다.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5" class="center" style="padding:40px; color:#888;">등록된 고객지원 문의가 없습니다.</td></tr>';
     return;
   }
 
-  tbody.innerHTML = items.map(item => {
-    let statusBadge = '<span style="color:#666;">접수</span>';
-    let answerBadge = '<span style="color:#999;">미답변</span>';
+  tbody.innerHTML = items.map((item, idx) => {
+    let statusBadge = '<span style="color:#428bca; font-weight:bold;">접수</span>';
+    let answerText = item.answerDate || '-';
     if (item.status === '1') {
       statusBadge = '<span style="color:#d9534f; font-weight:bold;">처리중</span>';
-    } else if (item.status === '2') {
-      statusBadge = '<span style="color:#337ab7; font-weight:bold;">완료</span>';
-      answerBadge = `<span style="color:#337ab7; font-weight:bold;"><i class="fa-solid fa-check"></i> ${escHtml(item.answerDate || '완료')}</span>`;
+    } else if (item.status === '2' || item.status === '3' || item.statusText === '완료') {
+      statusBadge = '<span style="color:#EB9316; font-weight:bold;">완료</span>';
     }
 
+    const rowNum = item.num || (items.length - idx);
+
     return `
-      <tr style="border-bottom:1px solid #eee; height:38px;">
-        <td style="border-right:1px solid #eee;">${item.num || item.id}</td>
-        <td style="text-align:left; padding-left:12px; border-right:1px solid #eee;">
-          <a href="javascript:void(0);" onclick="openQaViewModal('${item.id}')" style="color:#337ab7; font-weight:bold; text-decoration:none;">
+      <tr style="height:38px; cursor:pointer;" onclick="openQaViewModal('${item.id}')">
+        <td class="mobile_none">${rowNum}</td>
+        <td class="noti_title text-left" style="text-align:left; padding-left:14px;">
+          <a href="javascript:void(0);" onclick="openQaViewModal('${item.id}'); event.stopPropagation();" class="link_type" style="color:#333; text-decoration:none; font-weight:500;">
             ${escHtml(item.subject)}
           </a>
         </td>
-        <td style="border-right:1px solid #eee; font-size:11px; color:#666;">${item.createdAt || ''}</td>
-        <td style="border-right:1px solid #eee;">${statusBadge}</td>
-        <td>${answerBadge}</td>
+        <td style="color:#666; font-size:12px;">${item.createdAt || ''}</td>
+        <td>${statusBadge}</td>
+        <td style="color:#666; font-size:12px;">${escHtml(answerText)}</td>
       </tr>
     `;
   }).join('');
@@ -2374,11 +2411,11 @@ function filterQaList() {
   }
   if (kw) {
     if (type === 'subject') {
-      filtered = filtered.filter(i => i.subject.toLowerCase().includes(kw));
+      filtered = filtered.filter(i => (i.subject || '').toLowerCase().includes(kw));
     } else if (type === 'contents') {
-      filtered = filtered.filter(i => i.contents.toLowerCase().includes(kw));
+      filtered = filtered.filter(i => (i.contents || '').toLowerCase().includes(kw));
     } else {
-      filtered = filtered.filter(i => i.subject.toLowerCase().includes(kw) || (i.contents && i.contents.toLowerCase().includes(kw)));
+      filtered = filtered.filter(i => (i.subject || '').toLowerCase().includes(kw) || (i.contents && i.contents.toLowerCase().includes(kw)));
     }
   }
   renderQaTable(filtered);
@@ -2392,8 +2429,21 @@ function resetQaFilter() {
 }
 
 function openQaWriteModal() {
-  const modal = document.getElementById('modalQaWrite');
-  if (modal) modal.style.display = 'flex';
+  const modal = document.getElementById('qaWriteModal');
+  if (modal) {
+    modal.style.display = 'block';
+    // 폼 초기화
+    if (document.getElementById('qaNewSubject')) document.getElementById('qaNewSubject').value = '';
+    if (document.getElementById('qaNewContents')) document.getElementById('qaNewContents').value = '';
+    setTimeout(() => {
+      document.getElementById('qaNewSubject')?.focus();
+    }, 100);
+  }
+}
+
+function closeQaWriteModal() {
+  const modal = document.getElementById('qaWriteModal');
+  if (modal) modal.style.display = 'none';
 }
 
 function openQaViewModal(id) {
@@ -2401,67 +2451,101 @@ function openQaViewModal(id) {
   if (!item) return;
 
   currentViewingQaId = id;
-  const modal = document.getElementById('modalQaView');
+  const modal = document.getElementById('qaViewModal');
   const body = document.getElementById('qaViewBody');
   if (!modal || !body) return;
 
-  let answerHtml = `
-    <div style="background:#f5f8fc; border:1px solid #d2e4f7; padding:12px 16px; border-radius:4px; margin-top:16px;">
-      <div style="font-weight:bold; color:#2b669a; margin-bottom:6px;"><i class="fa-solid fa-reply"></i> 디비디비스쿨 고객지원 담당자 답변</div>
-      <div style="color:#555; white-space:pre-line; line-height:1.6;">${escHtml(item.answerContent || '문의가 접수되었습니다. 신속히 확인 후 답변드리겠습니다.')}</div>
-    </div>
-  `;
+  let answerHtml = '';
+  if (item.answerContent) {
+    answerHtml = `
+      <div style="background:#f5f8fc; border:1px solid #d2e4f7; padding:15px 18px; border-radius:4px; margin-top:16px;">
+        <div style="font-weight:bold; color:#2b669a; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+          <i class="fa fa-reply"></i> 디비디비스쿨 고객지원 담당자 공식 답변
+          <span style="font-size:11px; color:#888; font-weight:normal; margin-left:auto;">답변일시: ${escHtml(item.answerDate || item.createdAt)}</span>
+        </div>
+        <div style="color:#444; white-space:pre-line; line-height:1.7; font-size:13px;">${escHtml(item.answerContent)}</div>
+      </div>
+    `;
+  } else {
+    answerHtml = `
+      <div style="background:#fcf8e3; border:1px solid #faebcc; padding:12px 16px; border-radius:4px; margin-top:16px; color:#8a6d3b;">
+        <i class="fa fa-clock-o"></i> 문의글이 정상 접수되었습니다. 고객지원 담당자가 확인 후 신속하게 답변을 등록해 드립니다.
+      </div>
+    `;
+  }
 
   body.innerHTML = `
-    <table class="db-table" style="width:100%; font-size:12.5px; margin-bottom:12px;">
+    <table class="table AlignLeft" style="width:100%; font-size:13px; margin-bottom:0; border-top:2px solid #337ab7;">
       <tbody>
         <tr>
-          <td style="width:120px; font-weight:bold; background:#f8fafc;">제목</td>
-          <td style="font-weight:bold; font-size:14px; color:#1e293b;">${escHtml(item.subject)}</td>
+          <th style="width:120px; background:#f9f9f9; padding:10px 14px; border-bottom:1px solid #ddd; font-weight:bold;">제목</th>
+          <td style="font-weight:bold; font-size:14px; color:#1e293b; padding:10px 14px; border-bottom:1px solid #ddd;">${escHtml(item.subject)}</td>
         </tr>
         <tr>
-          <td style="font-weight:bold; background:#f8fafc;">작성자</td>
-          <td>${escHtml(item.authorName)} (${item.hp1}-${item.hp2}-${item.hp3})</td>
+          <th style="background:#f9f9f9; padding:10px 14px; border-bottom:1px solid #ddd; font-weight:bold;">작성자</th>
+          <td style="padding:10px 14px; border-bottom:1px solid #ddd;">${escHtml(item.authorName || '원희자(김채원)')} (${escHtml(item.hp1 || '010')}-${escHtml(item.hp2 || '2494')}-${escHtml(item.hp3 || '1479')})</td>
         </tr>
         <tr>
-          <td style="font-weight:bold; background:#f8fafc;">등록일시</td>
-          <td>${escHtml(item.createdAt)}</td>
+          <th style="background:#f9f9f9; padding:10px 14px; border-bottom:1px solid #ddd; font-weight:bold;">등록일시</th>
+          <td style="padding:10px 14px; border-bottom:1px solid #ddd;">${escHtml(item.createdAt || '')}</td>
         </tr>
         <tr>
-          <td style="font-weight:bold; background:#f8fafc;">진행상태</td>
-          <td><span class="badge" style="background:#337ab7; color:#fff; padding:3px 8px; border-radius:3px;">${item.statusText || (item.status === '2' ? '완료' : '접수')}</span></td>
+          <th style="background:#f9f9f9; padding:10px 14px; border-bottom:1px solid #ddd; font-weight:bold;">진행상태</th>
+          <td style="padding:10px 14px; border-bottom:1px solid #ddd;">
+            <span class="badge" style="background:#4791d2; color:#fff; padding:4px 10px; border-radius:3px; font-size:11px;">
+              ${item.status === '2' ? '완료' : (item.status === '1' ? '처리중' : '접수')}
+            </span>
+          </td>
         </tr>
         <tr>
-          <td style="font-weight:bold; background:#f8fafc; vertical-align:top; padding-top:10px;">문의내용</td>
-          <td style="white-space:pre-line; line-height:1.6; padding:10px 8px;">${escHtml(item.contents)}</td>
+          <th style="background:#f9f9f9; padding:14px 14px; border-bottom:1px solid #ddd; font-weight:bold; vertical-align:top;">문의내용</th>
+          <td style="white-space:pre-line; line-height:1.7; padding:14px 14px; border-bottom:1px solid #ddd; font-size:13px; color:#333;">${escHtml(item.contents)}</td>
         </tr>
       </tbody>
     </table>
     ${answerHtml}
   `;
 
-  modal.style.display = 'flex';
+  modal.style.display = 'block';
 }
 
-function closeQaModal(id) {
-  const modal = document.getElementById(id);
+function closeQaViewModal() {
+  const modal = document.getElementById('qaViewModal');
   if (modal) modal.style.display = 'none';
 }
 
-async function handleQaWriteSubmit(e) {
-  e.preventDefault();
-  const subject = document.getElementById('qa_subject')?.value;
-  const contents = document.getElementById('qa_contents')?.value;
-  const authorName = document.getElementById('qa_author_name')?.value || '김혜련';
-  const hp1 = document.getElementById('qa_hp1')?.value || '010';
-  const hp2 = document.getElementById('qa_hp2')?.value || '2494';
-  const hp3 = document.getElementById('qa_hp3')?.value || '1479';
-  const phone = document.getElementById('qa_phone')?.value || '062-609-1182';
-  const email = document.getElementById('qa_email')?.value || 'khh147979@naver.com';
+async function submitQaWrite(e) {
+  if (e) e.preventDefault();
+  const subject = document.getElementById('qaNewSubject')?.value?.trim();
+  const contents = document.getElementById('qaNewContents')?.value?.trim();
+  const authorName = document.getElementById('qaNewAuthor')?.value?.trim() || '원희자(김채원)';
+  const hp1 = document.getElementById('qaNewHp1')?.value?.trim() || '010';
+  const hp2 = document.getElementById('qaNewHp2')?.value?.trim() || '2494';
+  const hp3 = document.getElementById('qaNewHp3')?.value?.trim() || '1479';
+  const phone = document.getElementById('qaNewPhone')?.value?.trim() || '062-609-1182';
+  const email = document.getElementById('qaNewEmail')?.value?.trim() || 'khh147979@naver.com';
+
+  if (!subject) {
+    alert('문의 제목을 입력해 주세요.');
+    document.getElementById('qaNewSubject')?.focus();
+    return;
+  }
+  if (!contents) {
+    alert('문의 내용을 입력해 주세요.');
+    document.getElementById('qaNewContents')?.focus();
+    return;
+  }
+
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  const dateStr = `${yyyy}-${mm}-${dd}`;
 
   const newItem = {
-    id: String(Date.now()),
+    id: 'qna_' + Date.now(),
     num: qaItems.length + 1,
+    schoolId: SCHOOL_SN,
     authorName,
     hp1,
     hp2,
@@ -2473,7 +2557,7 @@ async function handleQaWriteSubmit(e) {
     files: [],
     status: '0',
     statusText: '접수',
-    createdAt: new Date().toISOString().split('T')[0],
+    createdAt: dateStr,
     answerDate: '',
     answerContent: ''
   };
@@ -2487,17 +2571,19 @@ async function handleQaWriteSubmit(e) {
         ...newItem
       })
     });
-  } catch (_) {}
+  } catch (err) {
+    console.warn('API call error, saved locally:', err);
+  }
 
   qaItems.unshift(newItem);
   renderQaTable(qaItems);
-  closeQaModal('modalQaWrite');
-  alert('고객지원 문의가 등록되었습니다.');
+  closeQaWriteModal();
+  alert('고객지원 문의글이 성공적으로 등록되었습니다.\n담당자가 빠르게 확인 후 신속하게 답변드리겠습니다.');
 }
 
 async function deleteCurrentQaItem() {
   if (!currentViewingQaId) return;
-  if (!window.confirm('정말 삭제하시겠습니까?')) return;
+  if (!window.confirm('해당 문의글을 삭제하시겠습니까?')) return;
 
   try {
     await fetch('/api/af/qanda/delete', {
@@ -2509,17 +2595,18 @@ async function deleteCurrentQaItem() {
 
   qaItems = qaItems.filter(i => String(i.id) !== String(currentViewingQaId));
   renderQaTable(qaItems);
-  closeQaModal('modalQaView');
-  alert('삭제되었습니다.');
+  closeQaViewModal();
+  alert('문의글이 삭제되었습니다.');
 }
 
 window.loadQaList = loadQaList;
 window.filterQaList = filterQaList;
 window.resetQaFilter = resetQaFilter;
 window.openQaWriteModal = openQaWriteModal;
+window.closeQaWriteModal = closeQaWriteModal;
 window.openQaViewModal = openQaViewModal;
-window.closeQaModal = closeQaModal;
-window.handleQaWriteSubmit = handleQaWriteSubmit;
+window.closeQaViewModal = closeQaViewModal;
+window.submitQaWrite = submitQaWrite;
 window.deleteCurrentQaItem = deleteCurrentQaItem;
 
 // Export Applicant Functions
