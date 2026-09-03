@@ -42,7 +42,7 @@ var qaItems = [
 
 const submodelTitles = {
   // 단독 대메뉴 (13개)
-  ad_faq_main: '<i class="fa-solid fa-book"></i> 매뉴얼 (FAQ) (/af/ad_faq/main)',
+  ad_faq_main: '<i class="fa fa-file-text-o"></i> 매뉴얼 <span style="font-size:12px; color:#a6a6a6; font-weight:normal;">광주풍향초등학교 늘봄학교</span>',
   qanda_lists: '<i class="fa fa-file-text-o"></i> 고객지원 게시판 <span style="font-size:12px; color:#a6a6a6; font-weight:normal;">광주풍향초등학교 늘봄학교</span>',
   sczigi_service_lists: '<i class="fa-solid fa-school"></i> 학교관리 (/sczigi/service/lists)',
   ad_lec_lists: '<i class="fa-solid fa-book-open"></i> 강좌관리 (/af/ad_lec/lists)',
@@ -79,42 +79,73 @@ const submodelTitles = {
   ad_info_modify: '<i class="fa-solid fa-id-card"></i> 환경설정 > 담당자정보 (/af/ad_info/modify)'
 };
 
+function getSubmodelKeyFromPath(path) {
+  if (!path) return 'ad_lec_lists';
+  if (path.includes('/af/ad_faq/main')) return 'ad_faq_main';
+  if (path.includes('/af/qanda/lists')) return 'qanda_lists';
+  if (path.includes('/sczigi/service/lists')) return 'sczigi_service_lists';
+  if (path.includes('/af/ad_lec/lists') || path.includes('/af/ad_lec/main')) return 'ad_lec_lists';
+  if (path.includes('/af/ad_app/lists') || path.includes('/af/ad_stu/lists')) return 'ad_app_lists';
+  if (path.includes('/af/ad_wait/lists')) return 'ad_wait_lists';
+  if (path.includes('/af/ad_att/stat')) return 'ad_att_stat';
+  if (path.includes('/af/ad_ref/lists')) return 'ad_ref_lists';
+  if (path.includes('/af/ad_rsch/lists')) return 'ad_rsch_lists';
+  if (path.includes('/af/ad_abs/lists')) return 'ad_abs_lists';
+  if (path.includes('/af/ad_tea/lists')) return 'ad_tea_lists';
+  if (path.includes('/af/notification/lists')) return 'notification_lists';
+  if (path.includes('/af/spush/lists')) return 'spush_lists';
+  if (path.includes('/af/ad_extension/lists')) return 'ad_extension_lists';
+  if (path.includes('/af/ad_free2_stu')) return 'ad_free2_stu';
+  if (path.includes('/af/ad_free2_app')) return 'ad_free2_app';
+  if (path.includes('/af/ad_free2_cfg/free1')) return 'ad_free2_cfg_free1';
+  if (path.includes('/af/ad_free2_cfg/main')) return 'ad_free2_cfg_main';
+  if (path.includes('/af/ad_surs/lists')) return 'ad_surs_lists';
+  if (path.includes('/af/ad_sur/lists')) return 'ad_sur_lists';
+  if (path.includes('/af/ad_cfg/period')) return 'ad_cfg_period';
+  if (path.includes('/af/ad_cfg/afDiv')) return 'ad_cfg_afDiv';
+  if (path.includes('/af/ad_cfg/appLiGrp')) return 'ad_cfg_appLiGrp';
+  if (path.includes('/af/ad_time/lists')) return 'ad_time_lists';
+  if (path.includes('/af/ad_verify/main')) return 'ad_verify_main';
+  if (path.includes('/af/ad_neis_edufine/lists')) return 'ad_neis_edufine_lists';
+  if (path.includes('/af/ad_cfg/message')) return 'ad_cfg_message';
+  if (path.includes('/af/ad_cfg/clear')) return 'ad_cfg_clear';
+  if (path.includes('/af/ad_info/modify')) return 'ad_info_modify';
+  if (path.includes('/af/ad_cfg/main')) return 'ad_cfg_main';
+  return 'ad_lec_lists';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const path = window.location.pathname;
-  let initialKey = 'ad_lec_lists';
-
-  // Match live URL routes
-  if (path.includes('/af/ad_faq/main')) initialKey = 'ad_faq_main';
-  else if (path.includes('/af/qanda/lists')) initialKey = 'qanda_lists';
-  else if (path.includes('/sczigi/service/lists')) initialKey = 'sczigi_service_lists';
-  else if (path.includes('/af/ad_lec/lists')) initialKey = 'ad_lec_lists';
-  else if (path.includes('/af/ad_app/lists') || path.includes('/af/ad_stu/lists')) initialKey = 'ad_app_lists';
-  else if (path.includes('/af/ad_wait/lists')) initialKey = 'ad_wait_lists';
-  else if (path.includes('/af/ad_att/stat')) initialKey = 'ad_att_stat';
-  else if (path.includes('/af/ad_ref/lists')) initialKey = 'ad_ref_lists';
-  else if (path.includes('/af/ad_abs/lists')) initialKey = 'ad_abs_lists';
-  else if (path.includes('/af/ad_tea/lists')) initialKey = 'ad_tea_lists';
-  else if (path.includes('/af/notification/lists')) initialKey = 'notification_lists';
-  else if (path.includes('/af/spush/lists')) initialKey = 'spush_lists';
-  else if (path.includes('/af/ad_extension/lists')) initialKey = 'ad_extension_lists';
-  else if (path.includes('/af/ad_free2_stu')) initialKey = 'ad_free2_stu';
-  else if (path.includes('/af/ad_free2_app')) initialKey = 'ad_free2_app';
-  else if (path.includes('/af/ad_free2_cfg/free1')) initialKey = 'ad_free2_cfg_free1';
-  else if (path.includes('/af/ad_free2_cfg/main')) initialKey = 'ad_free2_cfg_main';
-  else if (path.includes('/af/ad_surs/lists')) initialKey = 'ad_surs_lists';
-  else if (path.includes('/af/ad_sur/lists')) initialKey = 'ad_sur_lists';
-  else if (path.includes('/af/ad_cfg/period')) initialKey = 'ad_cfg_period';
-  else if (path.includes('/af/ad_cfg/afDiv')) initialKey = 'ad_cfg_afDiv';
-  else if (path.includes('/af/ad_cfg/appLiGrp')) initialKey = 'ad_cfg_appLiGrp';
-  else if (path.includes('/af/ad_time/lists')) initialKey = 'ad_time_lists';
-  else if (path.includes('/af/ad_verify/main')) initialKey = 'ad_verify_main';
-  else if (path.includes('/af/ad_neis_edufine/lists')) initialKey = 'ad_neis_edufine_lists';
-  else if (path.includes('/af/ad_cfg/message')) initialKey = 'ad_cfg_message';
-  else if (path.includes('/af/ad_cfg/clear')) initialKey = 'ad_cfg_clear';
-  else if (path.includes('/af/ad_info/modify')) initialKey = 'ad_info_modify';
-  else if (path.includes('/af/ad_cfg/main')) initialKey = 'ad_cfg_main';
-
+  const initialKey = getSubmodelKeyFromPath(path);
   switchSubmodelView(null, initialKey, path, false);
+
+  // ==================== 전역 사이드바 SPA 내비게이션 인터셉터 ====================
+  // 사이드바의 어떤 메뉴를 클릭하더라도 브라우저 전체 새로고침을 100% 원천 차단하고
+  // 사이드바 DOM과 크기는 그대로 유지한 채 본문 페이지만 번개처럼 교체합니다!
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('#left_menu a');
+    if (!link) return;
+
+    const href = link.getAttribute('href');
+    // 로그아웃, 모달창 팝업, 자바스크립트 명령, 빈 링크는 고유 핸들러에 위임
+    if (!href || href === '#' || href.startsWith('javascript:') || href.includes('/logout') || href.includes('/modify')) {
+      return;
+    }
+
+    // 브라우저 페이지 전체 새로고침 100% 방지!
+    e.preventDefault();
+    e.stopPropagation();
+
+    const targetKey = getSubmodelKeyFromPath(href);
+    switchSubmodelView(null, targetKey, href, true);
+  });
+
+  // 브라우저 뒤로가기 / 앞으로가기 완벽 지원
+  window.addEventListener('popstate', (e) => {
+    const path = window.location.pathname;
+    const targetKey = e.state?.key || getSubmodelKeyFromPath(path);
+    switchSubmodelView(null, targetKey, path, false);
+  });
 });
 
 // Dynamic Sub-model Switcher & SPA URL PushState

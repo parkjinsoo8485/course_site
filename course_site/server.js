@@ -86,12 +86,8 @@ app.get(['/member/logout', '/member/logout/', '/member/logout/sn/:school_id', '/
   return res.redirect('/member/login/sn/3267');
 });
 
-// ==================== 29. 매뉴얼 / FAQ 클론 페이지 & 다운로드/영상 라우트 ====================
-app.get(['/af/ad_faq/main/sn/:school_id', '/af/ad_faq/main/sn/:school_id/'], (req, res) => {
-  const clonedPath = path.join(__dirname, 'af/ad_faq/main/sn/3267/index.html');
-  if (fs.existsSync(clonedPath)) {
-    return res.sendFile(clonedPath);
-  }
+// ==================== 29. 매뉴얼 / FAQ SPA 통합 서빙 & 다운로드/영상 라우트 ====================
+app.get(['/af/ad_faq/main', '/af/ad_faq/main/', '/af/ad_faq/main/sn/:school_id', '/af/ad_faq/main/sn/:school_id/'], (req, res) => {
   return res.sendFile(path.join(__dirname, 'af/ad_lec/lists/sn/index.html'));
 });
 
@@ -534,31 +530,17 @@ app.post('/api/dbdbschool/3267/enroll', (req, res) => {
   }
 });
 
-// dbdbschool Page Routing Middleware (Serves individual sczigi static pages or falls back to master SPA)
+// dbdbschool Page Routing Middleware: 관리자 사이드바 전체 경로를 통일된 SPA 마스터 파일로 서빙
 app.use((req, res, next) => {
-  const fs = require('fs');
-  if (req.path && req.path.startsWith('/sczigi/')) {
-    const cleanPath = req.path.replace(/^\/sczigi\//, '').replace(/\/$/, '');
-    const directIndexPath = path.join(__dirname, 'sczigi', cleanPath, 'index.html');
-    const directHtmlPath = path.join(__dirname, 'sczigi', `${cleanPath}.html`);
-    const fallbackSnPath = path.join(__dirname, 'sczigi', cleanPath, 'sn', '3267', 'index.html');
-    if (fs.existsSync(directIndexPath)) {
-      return res.sendFile(directIndexPath);
-    }
-    if (fs.existsSync(directHtmlPath)) {
-      return res.sendFile(directHtmlPath);
-    }
-    if (fs.existsSync(fallbackSnPath)) {
-      return res.sendFile(fallbackSnPath);
-    }
-  }
-
   if (req.path && (req.path.startsWith('/af/') || req.path.startsWith('/sczigi/'))) {
-    if (req.path.endsWith('.js') || req.path.endsWith('.css') || req.path.endsWith('.png') || req.path.endsWith('.ico') || req.path.endsWith('.jpg')) {
+    // 정적 자산(js, css, 이미지 등)은 통과
+    if (req.path.endsWith('.js') || req.path.endsWith('.css') || req.path.endsWith('.png') || req.path.endsWith('.ico') || req.path.endsWith('.jpg') || req.path.endsWith('.woff') || req.path.endsWith('.woff2') || req.path.endsWith('.ttf') || req.path.endsWith('.svg')) {
       return next();
     }
+    // 모든 사이드바 관리자 경로는 동일한 사이드바와 레이아웃을 보장하는 통합 마스터 HTML 서빙
     return res.sendFile(path.join(__dirname, 'af', 'ad_lec', 'lists', 'sn', 'index.html'));
   }
+
   // Super Admin fallback: /admin/* 하위 미등록 경로는 대시보드로
   if (req.path && req.path.startsWith('/admin/') && !req.path.includes('.')) {
     return res.sendFile(path.join(__dirname, 'admin', 'index.html'));
