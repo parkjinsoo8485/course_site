@@ -222,59 +222,27 @@ body {
   background: #94a3b8;
 }
 
-.sidebar-menu li {
-  border-bottom: 1px solid #edf2f7;
-}
-
-.sidebar-menu li a {
+.top-navbar {
+  height: 52px;
+  background: #4791d2 !important;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 10px 14px;
-  color: var(--sidebar-text);
-  text-decoration: none;
-  font-size: 0.88rem;
-  font-weight: 500;
-  transition: all 0.15s ease;
-  cursor: pointer;
-}
-
-.sidebar-menu li a:hover {
-  background-color: #ffffff;
-  color: #1e293b;
-}
-
-.sidebar-menu li.active > a {
-  color: var(--sidebar-active-text);
-  background-color: #ffffff;
-  font-weight: 700;
-}
-
-.sidebar-menu li .menu-label {
-  display: flex;
   align-items: center;
-  gap: 9px;
+  padding: 0 20px;
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-.sidebar-menu li .menu-label i {
-  width: 16px;
-  text-align: center;
-  font-size: 0.95rem;
-  color: #64748b;
-}
-
-.sidebar-menu li.active .menu-label i {
-  color: var(--sidebar-active-text);
-}
-
-.arrow-icon {
-  font-size: 0.7rem;
-  color: #94a3b8;
-  transition: transform 0.2s ease;
-}
-
-.sidebar-menu li.open .arrow-icon {
-  transform: rotate(90deg);
+.top-navbar .school-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  background: #366d9d;
+  padding: 6px 14px;
+  border-radius: 3px;
 }
 
 /* Submenu Lists */

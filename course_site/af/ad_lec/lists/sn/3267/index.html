@@ -4,170 +4,395 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>방과후학교 프로그램 관리자 시스템 | 디비디비스쿨 통합 플랫폼</title>
+  <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" />
+  <link href="/css/default.css" rel="stylesheet" type="text/css" />
+  <link href="/css/content.css" rel="stylesheet" type="text/css" />
+  <link href="/css/font-awesome.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/af/ad_lec/lists/sn/admin_lec.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @font-face {
+      font-family: 'FontAwesome';
+      src: url('/icon/fonts/fontawesome-webfont.woff?v=4.2.0') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+    .fa {
+      font-family: 'FontAwesome' !important;
+      display: inline-block;
+      font: normal normal normal 14px/1 FontAwesome;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* dbdbschool Original Theme Overrides - Pixel-Exact 45px Item Heights */
+    #header { background: #4791d2 !important; height: 60px !important; position: relative; z-index: 1000; }
+    #header #logo { background: #366d9d !important; height: 60px !important; line-height: 60px !important; padding: 0 20px; float: left; }
+    #header #logo a { color: #fff; font-size: 16px; font-weight: bold; text-decoration: none; }
+    #header h1 { float: left; margin: 0; padding: 0 20px; line-height: 60px; font-size: 16px; }
+    #header h1 a { color: #fff; text-decoration: none; font-weight: bold; }
+    
+    #container { display: flex; min-height: calc(100vh - 60px); }
+    #left_menu {
+      position: fixed;
+      width: 240px;
+      height: calc(100vh - 60px);
+      top: 60px;
+      left: 0;
+      background: #f4f4f4;
+      z-index: 100;
+      overflow-y: auto;
+      border-right: 1px #dddddd solid;
+    }
+    #left_menu .user_box {
+      float: left;
+      width: 100%;
+      background: #f4f4f4;
+      position: relative;
+    }
+    #left_menu .user_box p.user_t {
+      position: absolute;
+      left: 10px;
+      top: 15px;
+      width: 50px;
+      height: 50px;
+      background: url(/images/af/user_face01.png) left top no-repeat;
+    }
+    #left_menu dl.user {
+      padding: 0 0 10px 70px;
+      min-height: 78px;
+      margin: 0;
+    }
+    #left_menu dl.user dt {
+      width: 100%;
+      padding: 15px 0 3px 0;
+      line-height: 160%;
+      color: #3d3d3d;
+      font-size: 13px;
+      font-weight: bold;
+    }
+    #left_menu dl.user dd {
+      display: inline;
+      padding: 0 4px 0 0;
+      font-size: 11px;
+    }
+    #left_menu dl.user dd a {
+      color: #7d7d7d;
+      text-decoration: none;
+    }
+    #left_menu .main_btn {
+      width: 100%;
+      height: 45px;
+      color: #fff;
+      position: relative;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    #left_menu .main_btn li {
+      float: left;
+      width: 50%;
+      height: 45px;
+      line-height: 45px;
+      text-align: center;
+      font-weight: bold;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    #left_menu .main_btn li a {
+      color: #fff;
+      display: block;
+      height: 45px;
+      line-height: 45px;
+      text-decoration: none;
+    }
+    #left_menu .main_btn li.btn01 { background: #34ae95; }
+    #left_menu .main_btn li.btn02 { background: #dd7075; }
+
+    #left_menu ul.parent {
+      width: 100%;
+      padding-bottom: 120px;
+      margin: 0;
+      list-style: none;
+      padding-left: 0;
+    }
+    #left_menu ul.parent li {
+      width: 100%;
+      clear: both;
+      border-bottom: 1px #dddddd solid;
+      line-height: 40px;
+      height: 45px;
+      position: relative;
+      box-sizing: border-box;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    #left_menu ul.parent li a {
+      display: block;
+      color: #787878;
+      height: 44px;
+      line-height: 44px;
+      padding: 0 !important;
+      text-decoration: none;
+    }
+    #left_menu ul.parent li.admin a {
+      color: #dd7075;
+    }
+    #left_menu ul.parent li i.fa {
+      font-size: 20px;
+      margin: 0 10px 0 0;
+      width: 45px;
+      text-align: center;
+      border-right: 1px #dddddd solid;
+      line-height: 44px;
+      float: left;
+    }
+    #left_menu ul.parent li strong {
+      font-weight: normal;
+      font-size: 15px;
+      line-height: 44px;
+      float: left;
+    }
+    #left_menu ul.parent li span.fa {
+      position: absolute;
+      right: 10px;
+      top: 18px;
+      font-weight: normal;
+      font-size: 11px;
+    }
+    #left_menu ul.parent li.active > a,
+    #left_menu ul.parent li a.on {
+      background-color: #2e6da4 !important;
+      color: #ffffff !important;
+    }
+    #left_menu ul.parent li.active > a i.fa,
+    #left_menu ul.parent li a.on i.fa {
+      border-right-color: #255986 !important;
+      color: #ffffff !important;
+    }
+    #left_menu ul.parent li.active > a strong,
+    #left_menu ul.parent li a.on strong {
+      font-weight: bold;
+      color: #ffffff !important;
+    }
+    #left_menu ul.parent li ul.depth {
+      display: none;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+    #left_menu ul.parent li.open ul.depth {
+      display: block !important;
+    }
+    #left_menu ul.parent li ul.depth li {
+      border-top: 1px #dddddd solid;
+      line-height: 32px;
+      height: 33px;
+      background: #e9e9e9;
+      border-bottom: 0px;
+      width: 100%;
+    }
+    #left_menu ul.parent li ul.depth li a {
+      height: 32px;
+      line-height: 32px;
+      font-size: 12px;
+      padding-left: 15px !important;
+    }
+    #left_menu ul.parent li ul.depth li i.fa {
+      line-height: 32px;
+      width: 25px;
+      font-size: 13px;
+      border-right: none;
+    }
+    .main-content {
+      margin-left: 240px;
+      flex: 1;
+      width: calc(100% - 240px);
+      min-width: 0;
+      background: #f8fafc;
+    }
+    .modal-overlay {
+      display: none !important;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.show,
+    .modal-overlay.active {
+      display: flex !important;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- 1. TOP GLOBAL BLUE NAVBAR -->
-  <header class="top-navbar">
-    <div class="school-title" id="topSchoolTitle" style="cursor:pointer;" onclick="window.location.href='/sczigi/service/lists/sn/3267'" title="학교관리 페이지로 이동">광주풍향초등학교</div>
-    <div class="center-selector" style="position:relative;">
-      <button id="afServiceBtn" onclick="toggleAfServiceDropdown(event)" style="background:rgba(255,255,255,0.15); border:none; color:white; font-size:0.88rem; font-weight:bold; padding:4px 10px; border-radius:3px; cursor:pointer; display:flex; align-items:center; gap:6px;">
-        <span>늘봄학교</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem;"></i>
-      </button>
-      <div id="afServiceDropdown" style="display:none; position:absolute; top:36px; left:0; background:#fff; color:#333; border:1px solid #ddd; border-radius:4px; box-shadow:0 4px 12px rgba(0,0,0,0.15); min-width:170px; z-index:1100; padding:4px 0; text-align:left;">
-        <div style="padding:6px 12px; font-size:11px; font-weight:bold; color:#777; border-bottom:1px solid #eee;">서비스 전환</div>
-        <a href="/af/ad_lec/lists/sn/3267" style="display:block; padding:8px 12px; font-size:12px; font-weight:bold; color:#3c8dbc; background:#f0f7fd;"><i class="fa-solid fa-chart-line" style="margin-right:6px;"></i> 늘봄학교 (현재)</a>
-        <a href="/sczigi/service/lists/sn/3267" style="display:block; padding:8px 12px; font-size:12px; color:#333; font-weight:bold;"><i class="fa-solid fa-school" style="color:#3c8dbc; margin-right:6px;"></i> 학교관리 돌아가기</a>
-      </div>
-    </div>
-    <div class="right-controls">
-      <select id="roleSwitcher" style="background:#1d4ed8; color:white; border:1px solid #60a5fa; border-radius:3px; padding:3px 8px; font-size:0.8rem;" onchange="switchRole(this.value)">
+  <!-- 1. TOP GLOBAL BLUE NAVBAR (dbdbschool Official Architecture) -->
+  <div id="header">
+    <p id="logo"><a href="/af/ad_faq/main/sn/3267">광주풍향초등학교</a></p>
+    <h1><a href="#none;" class="btn_icon">늘봄학교 <i class="fa title fa-angle-down"></i></a> 
+      <span class="box_position">
+        <div class="my_service" style="display:none;">
+          <span class="arrow"><i class="fa fa-sort-asc"></i></span>
+          <ul>
+            <li><a href="/af/ad_lec/lists/sn/3267">늘봄학교</a></li>
+          </ul>
+        </div>
+      </span>
+    </h1>
+    <div class="user_right_controls" style="position:absolute; right:20px; top:16px; color:#fff; display:flex; align-items:center; gap:12px;">
+      <select id="roleSwitcher" style="background:#285e8e; color:white; border:1px solid #60a5fa; border-radius:3px; padding:3px 8px; font-size:12px;" onchange="switchRole(this.value)">
         <option value="school_admin" selected>학교 관리자 (Admin)</option>
         <option value="teacher">강사 (Instructor)</option>
         <option value="parent">학생/학부모 (Parent)</option>
       </select>
-      <span style="cursor:pointer;" onclick="handleAfUserLogout(event)"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</span>
+      <a href="/member/logout/sn/3267" onclick="handleAfUserLogout(event)" style="color:#fff; text-decoration:none; font-size:12px;"><i class="fa fa-power-off"></i> 로그아웃</a>
     </div>
-  </header>
+  </div>
 
-  <div class="admin-layout">
-    <!-- 2. SIDEBAR NAVIGATION -->
-    <aside class="sidebar">
-      <!-- User Profile Header Card -->
-      <div class="user-profile-card">
-        <div class="user-profile-header">
-          <div class="user-avatar-circle"><i class="fa-solid fa-user"></i></div>
-          <div class="user-name-text">관리자(박진수)님 <span class="badge-bell"><i class="fa-solid fa-bell"></i> 0</span></div>
-        </div>
-        <div class="user-links">
-          <a href="javascript:void(0);" onclick="handleAfUserLogout(event)">[로그아웃]</a>
-          <a href="javascript:void(0);" onclick="openAfAdminInfoModal()">[정보수정]</a>
-        </div>
-        <div class="user-action-buttons">
-          <button class="btn-home" onclick="window.location.href='/sczigi/service/lists/sn/3267'" style="background:#3c8dbc; color:#fff; font-weight:bold;"><i class="fa-solid fa-school"></i> 학교관리</button>
-          <button class="btn-course-reg" onclick="window.location.href='/af/ad_lec/write/sn/3267'"><i class="fa-solid fa-plus"></i> 강좌등록</button>
-        </div>
+  <div id="container">
+    <!-- 2. SIDEBAR NAVIGATION (Exact 1:1 dbdbschool Official Cloned Architecture) -->
+    <div id="left_menu" class="content mCustomScrollbar light" data-mcs-theme="minimal-dark">
+      <div class="user_box">
+        <p class="user_t"></p>
+        <dl class="user">
+          <dt>원희자(김채원)님 <span class="ball_num"><a href="/af/notification/lists/sn/3267" onclick="switchSubmodelView(event, 'notification_lists', '/af/notification/lists/sn/3267')"><i class="fa fa-bell"></i><i class="num">1</i></a></span></dt>
+          <dd><a href="/member/logout/sn/3267" onclick="handleAfUserLogout(event)">[로그아웃]</a></dd>
+          <dd><a href="javascript:void(0);" onclick="openAfAdminInfoModal()">[정보수정]</a></dd>
+        </dl>
+        
+        <ul class="main_btn">
+          <li class="btn01"><a href="/af/ad_faq/main/sn/3267">홈으로</a></li>
+          <li class="btn02"><a href="javascript:void(0);" onclick="openAddModal()">강좌등록</a></li>
+        </ul>
       </div>
 
       <!-- Navigation Menus (Exact dbdbschool Live Order) -->
-      <ul class="sidebar-menu" id="adminSidebar">
-        <li class="subitem" id="sub_ad_faq_main">
-          <a href="/af/ad_faq/main/sn/3267" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-book"></i> 매뉴얼</span>
+      <ul class="parent sidebar-menu" id="adminSidebar">
+        <li id="sub_ad_faq_main">
+          <a href="/af/ad_faq/main/sn/3267">
+            <i class="fa fa-download"></i><strong>매뉴얼</strong>
           </a>
         </li>
-        <li class="subitem" id="sub_qanda_lists">
+        <li id="sub_qanda_lists">
           <a href="/af/qanda/lists/sn/3267" onclick="switchSubmodelView(event, 'qanda_lists', '/af/qanda/lists/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-comments"></i> 고객지원 게시판</span>
+            <i class="fa fa-phone"></i><strong>고객지원 게시판</strong>
           </a>
         </li>
-        <li class="subitem" id="sub_sczigi_service_lists">
-          <a href="/sczigi/service/lists/sn/3267" onclick="window.location.href='/sczigi/service/lists/sn/3267'; return false;">
-            <span class="menu-label"><i class="fa-solid fa-school" style="color:#ef4444;"></i> 학교관리</span>
+        <li class="admin" id="sub_sczigi_service_lists">
+          <a href="/sczigi/service/lists/sn/3267">
+            <i class="fa fa-cog"></i><strong>학교관리</strong>
           </a>
         </li>
-        <li class="subitem active" id="sub_ad_lec_lists">
+        <li class="active" id="sub_ad_lec_lists">
           <a href="/af/ad_lec/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_lec_lists', '/af/ad_lec/lists/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-futbol"></i> 강좌관리</span>
+            <i class="fa fa-futbol-o"></i><strong>강좌관리</strong>
           </a>
         </li>
-        <li class="subitem" id="sub_ad_app_lists">
+        <li id="sub_ad_app_lists">
           <a href="/af/ad_app/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_app_lists', '/af/ad_app/lists/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-user-group"></i> 신청자관리</span>
+            <i class="fa fa-slideshare"></i><strong>신청자관리</strong>
           </a>
         </li>
-        <li class="subitem" id="sub_ad_wait_lists">
+        <li id="sub_ad_wait_lists">
           <a href="/af/ad_wait/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_wait_lists', '/af/ad_wait/lists/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-user-clock"></i> 대기자관리</span>
+            <i class="fa fa-slideshare"></i><strong>대기자관리</strong>
           </a>
         </li>
-        <li class="subitem" id="sub_ad_att_stat">
+        <li id="sub_ad_att_stat">
           <a href="/af/ad_att/stat/sn/3267" onclick="switchSubmodelView(event, 'ad_att_stat', '/af/ad_att/stat/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-square-check"></i> 출석부관리</span>
+            <i class="fa fa-check-square-o"></i><strong>출석부관리</strong>
           </a>
         </li>
-        <li class="subitem" id="sub_ad_ref_lists">
+        <li id="sub_ad_ref_lists">
           <a href="/af/ad_ref/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_ref_lists', '/af/ad_ref/lists/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-user-minus"></i> 환불/취소관리</span>
+            <i class="fa fa-slideshare"></i><strong>환불/취소관리</strong>
           </a>
         </li>
 
         <!-- 지원금관리 ∨ -->
         <li class="has-submenu" id="menu_ad_subsidy">
-          <a onclick="toggleSubmenu(this)">
-            <span class="menu-label"><i class="fa-solid fa-building-columns"></i> 지원금관리</span>
-            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          <a href="javascript:void(0);" onclick="toggleSubmenu(this)">
+            <i class="fa fa-university"></i><strong>지원금관리</strong>
+            <span class="fa fa-chevron-down arrow-icon"></span>
           </a>
-          <ul class="submenu-list">
-            <li class="subitem" id="sub_ad_free2_stu"><a href="/af/ad_free2_stu/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_free2_stu', '/af/ad_free2_stu/lists/sn/3267')">대상자관리</a></li>
-            <li class="subitem" id="sub_ad_free2_app"><a href="/af/ad_free2_app/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_free2_app', '/af/ad_free2_app/lists/sn/3267')">수강자관리</a></li>
-            <li class="subitem" id="sub_ad_free2_cfg_main"><a href="/af/ad_free2_cfg/main/sn/3267" onclick="switchSubmodelView(event, 'ad_free2_cfg_main', '/af/ad_free2_cfg/main/sn/3267')">지원금설정</a></li>
-            <li class="subitem" id="sub_ad_free2_cfg_free1"><a href="/af/ad_free2_cfg/free1/sn/3267" onclick="switchSubmodelView(event, 'ad_free2_cfg_free1', '/af/ad_free2_cfg/free1/sn/3267')">순위구분설정</a></li>
+          <ul class="depth submenu-list" style="display:none;">
+            <li id="sub_ad_free2_stu"><a href="/af/ad_free2_stu/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_free2_stu', '/af/ad_free2_stu/lists/sn/3267')"><i class="fa fa-volume-up"></i>대상자관리</a></li>
+            <li id="sub_ad_free2_app"><a href="/af/ad_free2_app/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_free2_app', '/af/ad_free2_app/lists/sn/3267')"><i class="fa fa-volume-up"></i>수강자관리</a></li>
+            <li id="sub_ad_free2_cfg_main"><a href="/af/ad_free2_cfg/main/sn/3267" onclick="switchSubmodelView(event, 'ad_free2_cfg_main', '/af/ad_free2_cfg/main/sn/3267')"><i class="fa fa-volume-up"></i>지원금설정</a></li>
+            <li id="sub_ad_free2_cfg_free1"><a href="/af/ad_free2_cfg/free1/sn/3267" onclick="switchSubmodelView(event, 'ad_free2_cfg_free1', '/af/ad_free2_cfg/free1/sn/3267')"><i class="fa fa-volume-up"></i>순위구분설정</a></li>
           </ul>
         </li>
 
-        <li class="subitem" id="sub_ad_abs_lists">
-          <a href="/af/ad_abs/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_abs_lists', '/af/ad_abs/lists/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-calendar-xmark"></i> 결석/귀가신청</span>
+        <li id="sub_ad_rsch_lists">
+          <a href="/af/ad_rsch/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_rsch_lists', '/af/ad_rsch/lists/sn/3267')">
+            <i class="fa fa-calendar"></i><strong>귀가일정표</strong>
           </a>
         </li>
-        <li class="subitem" id="sub_ad_tea_lists">
+        <li id="sub_ad_abs_lists">
+          <a href="/af/ad_abs/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_abs_lists', '/af/ad_abs/lists/sn/3267')">
+            <i class="fa fa-calendar-o"></i><strong>결석/귀가신청</strong>
+          </a>
+        </li>
+        <li id="sub_ad_tea_lists">
           <a href="/af/ad_tea/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_tea_lists', '/af/ad_tea/lists/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-briefcase"></i> 강사관리</span>
+            <i class="fa fa-briefcase"></i><strong>강사관리</strong>
           </a>
         </li>
 
         <!-- 설문관리 ∨ -->
         <li class="has-submenu" id="menu_ad_survey">
-          <a onclick="toggleSubmenu(this)">
-            <span class="menu-label"><i class="fa-solid fa-chart-pie"></i> 설문관리</span>
-            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          <a href="javascript:void(0);" onclick="toggleSubmenu(this)">
+            <i class="fa fa-pie-chart"></i><strong>설문관리</strong>
+            <span class="fa fa-chevron-down arrow-icon"></span>
           </a>
-          <ul class="submenu-list">
-            <li class="subitem" id="sub_ad_sur_lists"><a href="/af/ad_sur/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_sur_lists', '/af/ad_sur/lists/sn/3267')">설문</a></li>
-            <li class="subitem" id="sub_ad_surs_lists"><a href="/af/ad_surs/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_surs_lists', '/af/ad_surs/lists/sn/3267')">샘플설문</a></li>
+          <ul class="depth submenu-list" style="display:none;">
+            <li id="sub_ad_sur_lists"><a href="/af/ad_sur/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_sur_lists', '/af/ad_sur/lists/sn/3267')"><i class="fa fa-volume-up"></i>설문</a></li>
+            <li id="sub_ad_surs_lists"><a href="/af/ad_surs/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_surs_lists', '/af/ad_surs/lists/sn/3267')"><i class="fa fa-volume-up"></i>샘플설문</a></li>
           </ul>
         </li>
 
         <!-- 환경설정 ∨ -->
         <li class="has-submenu" id="menu_ad_config">
-          <a onclick="toggleSubmenu(this)">
-            <span class="menu-label"><i class="fa-solid fa-gear"></i> 환경설정</span>
-            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          <a href="javascript:void(0);" onclick="toggleSubmenu(this)">
+            <i class="fa fa-cog"></i><strong>환경설정</strong>
+            <span class="fa fa-chevron-down arrow-icon"></span>
           </a>
-          <ul class="submenu-list">
-            <li class="subitem" id="sub_ad_cfg_main"><a href="/af/ad_cfg/main/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_main', '/af/ad_cfg/main/sn/3267')">기본설정</a></li>
-            <li class="subitem" id="sub_ad_time_lists"><a href="/af/ad_time/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_time_lists', '/af/ad_time/lists/sn/3267')">신청기간</a></li>
-            <li class="subitem" id="sub_ad_cfg_period"><a href="/af/ad_cfg/period/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_period', '/af/ad_cfg/period/sn/3267')">강의시간</a></li>
-            <li class="subitem" id="sub_ad_cfg_afDiv"><a href="/af/ad_cfg/afDiv/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_afDiv', '/af/ad_cfg/afDiv/sn/3267')">강좌구분</a></li>
-            <li class="subitem" id="sub_ad_cfg_appLiGrp"><a href="/af/ad_cfg/appLiGrp/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_appLiGrp', '/af/ad_cfg/appLiGrp/sn/3267')">중복제한그룹</a></li>
-            <li class="subitem" id="sub_ad_verify_main"><a href="/af/ad_verify/main/sn/3267" onclick="switchSubmodelView(event, 'ad_verify_main', '/af/ad_verify/main/sn/3267')">학적검증</a></li>
-            <li class="subitem" id="sub_ad_neis_edufine_lists"><a href="/af/ad_neis_edufine/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_neis_edufine_lists', '/af/ad_neis_edufine/lists/sn/3267')">나이스/에듀파인 설정</a></li>
-            <li class="subitem" id="sub_ad_cfg_message"><a href="/af/ad_cfg/message/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_message', '/af/ad_cfg/message/sn/3267')">안내글설정</a></li>
-            <li class="subitem" id="sub_ad_cfg_clear"><a href="/af/ad_cfg/clear/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_clear', '/af/ad_cfg/clear/sn/3267')">초기화</a></li>
-            <li class="subitem" id="sub_ad_info_modify"><a href="/af/ad_info/modify/sn/3267" onclick="switchSubmodelView(event, 'ad_info_modify', '/af/ad_info/modify/sn/3267')">담당자정보</a></li>
+          <ul class="depth submenu-list" style="display:none;">
+            <li id="sub_ad_cfg_main"><a href="/af/ad_cfg/main/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_main', '/af/ad_cfg/main/sn/3267')"><i class="fa fa-volume-up"></i>기본설정</a></li>
+            <li id="sub_ad_time_lists"><a href="/af/ad_time/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_time_lists', '/af/ad_time/lists/sn/3267')"><i class="fa fa-volume-up"></i>신청기간</a></li>
+            <li id="sub_ad_cfg_period"><a href="/af/ad_cfg/period/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_period', '/af/ad_cfg/period/sn/3267')"><i class="fa fa-volume-up"></i>강의시간</a></li>
+            <li id="sub_ad_cfg_afDiv"><a href="/af/ad_cfg/afDiv/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_afDiv', '/af/ad_cfg/afDiv/sn/3267')"><i class="fa fa-volume-up"></i>강좌구분</a></li>
+            <li id="sub_ad_cfg_appLiGrp"><a href="/af/ad_cfg/appLiGrp/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_appLiGrp', '/af/ad_cfg/appLiGrp/sn/3267')"><i class="fa fa-volume-up"></i>중복제한그룹</a></li>
+            <li id="sub_ad_verify_main"><a href="/af/ad_verify/main/sn/3267" onclick="switchSubmodelView(event, 'ad_verify_main', '/af/ad_verify/main/sn/3267')"><i class="fa fa-volume-up"></i>학적검증</a></li>
+            <li id="sub_ad_neis_edufine_lists"><a href="/af/ad_neis_edufine/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_neis_edufine_lists', '/af/ad_neis_edufine/lists/sn/3267')"><i class="fa fa-volume-up"></i>나이스/에듀파인 설정</a></li>
+            <li id="sub_ad_cfg_message"><a href="/af/ad_cfg/message/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_message', '/af/ad_cfg/message/sn/3267')"><i class="fa fa-volume-up"></i>안내글설정</a></li>
+            <li id="sub_ad_cfg_clear"><a href="/af/ad_cfg/clear/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_clear', '/af/ad_cfg/clear/sn/3267')"><i class="fa fa-volume-up"></i>초기화</a></li>
+            <li id="sub_ad_info_modify"><a href="/af/ad_info/modify/sn/3267" onclick="switchSubmodelView(event, 'ad_info_modify', '/af/ad_info/modify/sn/3267')"><i class="fa fa-volume-up"></i>담당자정보</a></li>
           </ul>
         </li>
 
-        <li class="subitem" id="sub_notification_lists">
+        <li id="sub_notification_lists">
           <a href="/af/notification/lists/sn/3267" onclick="switchSubmodelView(event, 'notification_lists', '/af/notification/lists/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-volume-high"></i> 알림관리</span>
+            <i class="fa fa-volume-up"></i><strong>알림관리</strong>
           </a>
         </li>
-        <li class="subitem" id="sub_spush_lists">
+        <li id="sub_spush_lists">
           <a href="/af/spush/lists/sn/3267" onclick="switchSubmodelView(event, 'spush_lists', '/af/spush/lists/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-bell"></i> 푸시알림관리</span>
+            <i class="fa fa-bell" style="font-size:18px;"></i><strong>푸시알림관리</strong>
           </a>
         </li>
-        <li class="subitem" id="sub_ad_extension_lists">
+        <li id="sub_ad_extension_lists">
           <a href="/af/ad_extension/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_extension_lists', '/af/ad_extension/lists/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-calendar-check"></i> 연장신청 <span class="badge-days">198일 남음</span></span>
+            <i class="fa fa-calendar-o"></i><strong>연장신청<span class="badge badge-xm">178일 남음</span></strong>
           </a>
         </li>
       </ul>
-    </aside>
+    </div>
 
     <!-- 3. MAIN CONTENT PANELS -->
     <main class="main-content">
@@ -179,169 +404,111 @@
 
       <!-- ==================== 1. 강좌관리 (/af/ad_lec/lists) ==================== -->
       <div class="submodel-panel active" id="panel_ad_lec_lists">
-        <div class="content-card" style="background:#fff; border:1px solid #ddd; border-radius:4px; padding:15px; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
-          
-          <!-- Card Header & Manual Buttons (Screenshot Exact Match) -->
-          <div class="card-top-bar new_help_manualbox hm_loca1" style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #337ab7; padding-bottom:8px; margin-bottom:12px;">
-            <div class="section-title" style="font-weight:bold; font-size:16px; color:#333;">목록</div>
-            <div class="helper-badges" style="display:flex; gap:6px; align-items:center;">
-              <a href="/af/ad_faq/main/sn/3267" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')" class="btn btn-default btn-xs" style="background:#fff; border:1px solid #ccc; font-size:12px; padding:3px 8px; color:#333; text-decoration:none; display:inline-flex; align-items:center; gap:4px; border-radius:3px;">
-                <i class="fa-regular fa-file-lines" style="color:#555;"></i> 매뉴얼
-              </a>
-              <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="btn btn-default btn-xs" style="background:#fff; border:1px solid #ccc; font-size:12px; padding:3px 8px; color:#333; text-decoration:none; display:inline-flex; align-items:center; gap:4px; border-radius:3px;">
-                <i class="fa-solid fa-play" style="color:#d9534f;"></i> 강좌등록
-              </a>
-              <a href="#" onclick="alert('방과후학교 월별 수강신청 마감 및 다음 달 수강신청 준비 절차 매뉴얼이 열립니다.'); return false;" class="btn btn-default btn-xs" style="background:#fff; border:1px solid #ccc; font-size:12px; padding:3px 8px; color:#333; text-decoration:none; display:inline-flex; align-items:center; gap:4px; border-radius:3px;">
-                <i class="fa-solid fa-download" style="color:#337ab7;"></i> 월마감 &amp; 다음달 준비절차
-              </a>
+        <div class="content-card">
+          <div class="card-top-bar">
+            <div class="section-title">목록</div>
+            <div class="helper-badges">
+              <a href="/af/ad_faq/main/sn/3267" class="helper-btn" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')"><i class="fa-solid fa-file-lines"></i> 매뉴얼</a>
+              <button class="helper-btn" onclick="openAddModal()"><i class="fa-solid fa-play"></i> 강좌등록</button>
+              <button class="helper-btn" onclick="alert('월마감 & 다음달 준비절차 가이드가 열립니다.')"><i class="fa-solid fa-download"></i> 월마감 & 다음달 준비절차</button>
             </div>
           </div>
 
-          <!-- Top Notice Alerts (Red Info Circles) -->
-          <div class="top_message_box" style="background:#fff; padding:0 0 10px 0; font-size:12px; line-height:1.7;">
-            <p style="margin:0 0 3px 0; color:#d9534f;">
-              <i class="fa-solid fa-circle-info" style="margin-right:4px;"></i> 수강신청 시작시간은 학교수 제한이 있으므로 가정통신문 발송 전에 반드시 <a href="/af/ad_time/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_time_lists', '/af/ad_time/lists/sn/3267')" style="color:#d9534f; text-decoration:underline; font-weight:bold;">수강신청 기간을 미리 설정</a>하세요.
-            </p>
-            <p style="margin:0; color:#d9534f;">
-              <i class="fa-solid fa-circle-info" style="margin-right:4px;"></i> 자주 하는 질문이 "<a href="/af/ad_faq/main/sn/3267" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')" style="color:#d9534f; text-decoration:underline; font-weight:bold;">매뉴얼</a>"에 정리되어 있으니 이곳을 참고하시고 기타 문의사항은 "<a href="/af/qanda/lists/sn/3267" onclick="switchSubmodelView(event, 'qanda_lists', '/af/qanda/lists/sn/3267')" style="color:#d9534f; text-decoration:underline; font-weight:bold;">고객지원 게시판</a>"에 접수 바랍니다.
-            </p>
-          </div>
-
-          <!-- Live Form Search Bar (Screenshot Exact Match) -->
-          <div class="panel-search select_box_menu_parent" style="margin-bottom:10px; background:#f9f9f9; border:1px solid #e5e5e5; padding:8px 10px; border-radius:3px;">
-            <button id="main_control_box_btn01" style="display:none;"></button>
-            <div id="main_control_box_search" style="display:flex; flex-wrap:wrap; align-items:center; gap:5px;">
-              <select id="categoryFilter" class="form-control input-sm" style="height:30px; font-size:12px; width:auto; padding:2px 8px; border-radius:3px;" onchange="loadLectures()">
-                <option value="all">=구분전체=</option>
-                <option value="3월">3월</option>
-                <option value="26년 4월">26년 4월</option>
-                <option value="26년 5월">26년 5월</option>
-                <option value="26년 6월">26년 6월</option>
-                <option value="26년 7월">26년 7월</option>
-                <option value="26년 8월">26년 8월</option>
-                <option value="26년 9월" selected>26년 9월</option>
-              </select>
-              <select id="neulbomFilter" class="form-control input-sm" style="height:30px; font-size:12px; width:auto; padding:2px 8px; border-radius:3px;" onchange="loadLectures()">
-                <option value="all">=늘봄과정=</option>
-                <option value="방과후">방과후</option>
-                <option value="맞춤형">맞춤형</option>
-                <option value="돌봄">돌봄</option>
-              </select>
-              <select id="statusFilter" class="form-control input-sm" style="height:30px; font-size:12px; width:auto; padding:2px 8px; border-radius:3px;" onchange="loadLectures()">
-                <option value="all">=상태전체=</option>
-                <option value="OUTPUT">출력</option>
-                <option value="WAITING">대기</option>
-                <option value="CLOSED">종료</option>
-              </select>
-              <select id="gradeFilter" class="form-control input-sm" style="height:30px; font-size:12px; width:auto; padding:2px 8px; border-radius:3px;" onchange="loadLectures()">
-                <option value="">=학년=</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-              </select>
-              <select id="searchTypeFilter" class="form-control input-sm" style="height:30px; font-size:12px; width:auto; padding:2px 8px; border-radius:3px;">
-                <option value="lec_name">강좌명</option>
-                <option value="tea_id">강사ID</option>
-              </select>
-              <input type="text" id="searchKeyword" class="form-control input-sm" style="height:30px; width:140px; font-size:12px; border-radius:3px;" placeholder="검색어" onkeyup="if(event.key==='Enter') loadLectures()">
-              <button type="button" class="btn btn-default btn-sm" style="height:30px; padding:0 12px; font-size:12px; border-radius:3px; background:#fff; border:1px solid #ccc;" onclick="loadLectures()">검색</button>
-              <button type="button" class="btn btn-default btn-sm" style="height:30px; padding:0 12px; font-size:12px; border-radius:3px; background:#fff; border:1px solid #ccc;" onclick="resetLectureSearch()">전체</button>
-              <button type="button" class="btn btn-default btn-sm" style="height:30px; padding:0 12px; font-size:12px; border-radius:3px; background:#fff; border:1px solid #ccc;" onclick="exportToExcel()">검색결과엑셀출력</button>
-            </div>
-          </div>
-
-          <!-- Action Toolbar Row (Screenshot Exact Button Colors) -->
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
+          <div class="alert-box">
+            <i class="fa-solid fa-circle-info"></i>
             <div>
-              <button type="button" class="btn btn-success btn-sm" style="height:30px; background:#5cb85c; border-color:#4cae4c; color:#fff; font-weight:bold; padding:0 14px; border-radius:3px; font-size:12px;" onclick="printAttendanceSheet()">출석부 출력</button>
-            </div>
-            <div style="display:flex; gap:4px; align-items:center; flex-wrap:wrap;">
-              <button type="button" class="btn btn-primary btn-sm" style="height:30px; background:#337ab7; border-color:#2e6da4; color:#fff; font-weight:bold; padding:0 14px; border-radius:3px; font-size:12px;" onclick="window.location.href='/af/ad_lec/write/sn/3267'">강좌 등록</button>
-              <button type="button" class="btn btn-warning btn-sm" style="height:30px; background:#f0ad4e; border-color:#eea236; color:#fff; font-weight:bold; padding:0 14px; border-radius:3px; font-size:12px;" onclick="openBatchUploadModal()">강좌 일괄입력</button>
-              <button type="button" class="btn btn-info btn-sm" style="height:30px; background:#5bc0de; border-color:#46b8da; color:#fff; font-weight:bold; padding:0 14px; border-radius:3px; font-size:12px;" onclick="batchToggleTeacherLock(true)">강좌 일괄수정</button>
-              <button type="button" class="btn btn-info btn-sm" style="height:30px; background:#5bc0de; border-color:#46b8da; color:#fff; font-weight:bold; padding:0 14px; border-radius:3px; font-size:12px;" onclick="openBatchCopyModal()">강좌 일괄복사</button>
-              <button type="button" class="btn btn-default btn-sm" style="height:30px; background:#fff; border:1px solid #ccc; color:#333; font-weight:bold; padding:0 14px; border-radius:3px; font-size:12px;" onclick="switchSubmodelView(event, 'ad_lec_stats', '/af/ad_lec/stats/sn/3267')">강좌 통계</button>
+              <strong>수강신청 시작시간은 학교수 제한이 있으므로 <a href="/af/ad_time/lists/sn/3267" style="color:#2563eb; text-decoration:underline;" onclick="switchSubmodelView(event, 'ad_time_lists', '/af/ad_time/lists/sn/3267')">수강신청 기간을 미리 설정</a>하세요.</strong><br>
+              자주 하는 질문이 "매뉴얼"에 정리되어 있으니 이곳을 참고하시고 기타 문의사항은 "<a href="/af/qanda/lists/sn/3267" style="color:#2563eb; text-decoration:underline;" onclick="switchSubmodelView(event, 'qanda_lists', '/af/qanda/lists/sn/3267')">고객지원 게시판</a>"에 접수 바랍니다.
             </div>
           </div>
 
-          <!-- Table Container (18 Official Columns - Screenshot Match) -->
-          <div class="table-responsive" style="border:1px solid #ddd; overflow-x:auto;">
-            <table class="table table-bordered table-hover" style="min-width:1300px; width:100%; border-collapse:collapse; font-size:12px; margin-bottom:0;">
+          <!-- Filter Container -->
+          <div class="filter-container">
+            <select id="categoryFilter" onchange="loadLectures()">
+              <option value="26년 8월" selected>26년 8월</option>
+              <option value="26년 9월">26년 9월</option>
+              <option value="2026년 1분기">2026년 1분기</option>
+              <option value="전체">전체 구분</option>
+            </select>
+            <select id="neulbomFilter">
+              <option value="=늘봄과정=">=늘봄과정=</option>
+              <option value="방과후">방과후</option>
+              <option value="맞춤형">맞춤형</option>
+              <option value="돌봄">돌봄</option>
+            </select>
+            <select id="statusFilter" onchange="loadLectures()">
+              <option value="전체">=상태전체=</option>
+              <option value="OUTPUT">출력</option>
+              <option value="CLOSED">종료</option>
+              <option value="WAITING">대기</option>
+            </select>
+            <select id="gradeFilter">
+              <option value="=학년=">=학년=</option>
+              <option value="1">1학년</option>
+              <option value="2">2학년</option>
+              <option value="3">3학년</option>
+            </select>
+            <select id="searchTypeFilter">
+              <option value="강좌명">강좌명</option>
+              <option value="강사명">강사명</option>
+            </select>
+            <input type="text" id="searchKeyword" placeholder="검색어" onkeyup="if(event.key==='Enter') loadLectures()">
+            <button class="btn-db btn-db-gray" onclick="loadLectures()">검색</button>
+            <button class="btn-db btn-db-gray" onclick="document.getElementById('searchKeyword').value=''; loadLectures();">전체</button>
+            <button class="btn-db btn-db-green" onclick="exportToExcel()"><i class="fa-solid fa-file-excel"></i> 검색결과엑셀출력</button>
+          </div>
+
+          <!-- Action Buttons Bar -->
+          <div class="btn-action-group">
+            <div>
+              <button class="btn-db btn-db-green" onclick="alert('출석부 인쇄 미리보기가 열립니다.')"><i class="fa-solid fa-print"></i> 출석부 출력</button>
+            </div>
+            <div style="display:flex; gap:5px; flex-wrap:wrap;">
+              <button class="btn-db btn-db-blue" onclick="openAddModal()"><i class="fa-solid fa-plus"></i> 강좌 등록</button>
+              <button class="btn-db btn-db-orange" onclick="openBatchUploadModal()"><i class="fa-solid fa-file-import"></i> 강좌 일괄입력</button>
+              <button class="btn-db btn-db-cyan" onclick="batchToggleTeacherLock(true)"><i class="fa-solid fa-pen-to-square"></i> 강좌 일괄수정</button>
+              <button class="btn-db btn-db-cyan" onclick="openBatchCopyModal()"><i class="fa-solid fa-clone"></i> 강좌 일괄복사</button>
+              <button class="btn-db btn-db-gray" onclick="switchSubmodelView(event, 'ad_lec_stats', '/af/ad_lec/stats/sn/3267')"><i class="fa-solid fa-chart-simple"></i> 강좌 통계</button>
+            </div>
+          </div>
+
+          <!-- Table Container -->
+          <div class="table-responsive">
+            <table class="db-table">
               <thead>
-                <tr style="background:#f9f9f9; color:#333; height:34px; text-align:center;">
-                  <th style="width:35px; text-align:center; vertical-align:middle;"><input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)" title="전체선택/취소"></th>
-                  <th style="width:50px; text-align:center; vertical-align:middle;">연번</th>
-                  <th style="width:50px; text-align:center; vertical-align:middle;">수정</th>
-                  <th style="width:90px; text-align:center; vertical-align:middle; line-height:1.2;">구분<br><span style="font-size:11px; font-weight:normal;">(늘봄과정)</span></th>
-                  <th style="text-align:center; vertical-align:middle;"><a href="javascript:void(0)" onclick="sortLectureTable('title')" style="color:#333; text-decoration:none;">강좌명 <i class="fa-solid fa-arrow-up-long" style="font-size:10px;"></i></a></th>
-                  <th style="width:90px; text-align:center; vertical-align:middle;">강사ID</th>
-                  <th style="width:70px; text-align:center; vertical-align:middle; line-height:1.2;">신청<br>/정원</th>
-                  <th style="width:80px; text-align:center; vertical-align:middle; line-height:1.2;">대기자<br>/정원</th>
-                  <th style="width:75px; text-align:center; vertical-align:middle;">학년</th>
-                  <th style="width:110px; text-align:center; vertical-align:middle;">운영기간</th>
-                  <th style="width:120px; text-align:center; vertical-align:middle;">강의시간</th>
-                  <th style="width:70px; text-align:center; vertical-align:middle;">수강료</th>
-                  <th style="width:60px; text-align:center; vertical-align:middle; line-height:1.2;">수강료<br>출력</th>
-                  <th style="width:60px; text-align:center; vertical-align:middle; line-height:1.2;">강사<br>마감</th>
-                  <th style="width:60px; text-align:center; vertical-align:middle; line-height:1.2;">강사<br>편집</th>
-                  <th style="width:60px; text-align:center; vertical-align:middle; line-height:1.2;">환불<br>마감</th>
-                  <th style="width:65px; text-align:center; vertical-align:middle;">상태</th>
-                  <th style="width:50px; text-align:center; vertical-align:middle;">삭제</th>
+                <tr>
+                  <th style="width:30px;"><input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)"></th>
+                  <th>연번</th>
+                  <th>수정</th>
+                  <th>구분(늘봄과정)</th>
+                  <th>강좌명↑</th>
+                  <th>강사ID</th>
+                  <th>신청/정원</th>
+                  <th>대기자/정원</th>
+                  <th>학년</th>
+                  <th>운영기간</th>
+                  <th>강의시간</th>
+                  <th>수강료</th>
+                  <th>수강료출력</th>
+                  <th>강사마감</th>
+                  <th>강사편집</th>
+                  <th>환불마감</th>
+                  <th>상태</th>
+                  <th>삭제</th>
                 </tr>
               </thead>
               <tbody id="lectureTbody">
-                <tr><td colspan="18" style="padding:40px; text-align:center; color:#777;">데이터를 불러오는 중입니다...</td></tr>
+                <tr><td colspan="18" class="center" style="padding:40px;">데이터를 불러오는 중입니다...</td></tr>
               </tbody>
             </table>
           </div>
 
-          <!-- Bottom Batch Bar (Screenshot Exact Match) -->
-          <div style="display:flex; align-items:center; justify-content:flex-start; gap:8px; padding:15px 0 10px 0;">
-            <select id="bottom_batch_action" class="form-control input-sm" style="width:200px; height:30px; font-size:12px; border-radius:3px;">
-              <option value="">===== 일괄적용 ======</option>
-              <option value="status_1">[상태변경] 출력</option>
-              <option value="status_0">[상태변경] 대기</option>
-              <option value="status_2">[상태변경] 종료</option>
-              <option value="" disabled>-------------------------------</option>
-              <option value="tuition_output_yes">[수강료출력] 출력</option>
-              <option value="tuition_output_no">[수강료출력] 미출력</option>
-              <option value="" disabled>-------------------------------</option>
-              <option value="teacher_close_yes">[강사마감] 마감</option>
-              <option value="teacher_close_no">[강사마감] 해제</option>
-              <option value="" disabled>-------------------------------</option>
-              <option value="teacher_edit_yes">[강사편집] 허용</option>
-              <option value="teacher_edit_no">[강사편집] 금지</option>
-              <option value="" disabled>-------------------------------</option>
-              <option value="refund_close_yes">[환불마감] 마감</option>
-              <option value="refund_close_no">[환불마감] 해제</option>
-              <option value="" disabled>-------------------------------</option>
-              <option value="batch_delete" style="color:#d9534f; font-weight:bold;">[선택강좌] 일괄삭제</option>
-            </select>
-            <button type="button" class="btn btn-default btn-sm" style="height:30px; padding:0 14px; font-size:12px; border-radius:3px; background:#fff; border:1px solid #ccc; font-weight:bold;" onclick="applyBatchAction()">적용하기</button>
-            <span style="font-size:12px; color:#777; margin-left:10px;">선택된 강좌: <strong id="selectedCoursesCount" style="color:#337ab7;">0</strong>개</span>
-          </div>
-
-          <!-- Bottom Footnote Explanations (Screenshot 1:1 Match) -->
-          <div class="help_box" style="margin-top:20px; padding:15px 0 20px 0; border-top:1px solid #e5e5e5; font-size:12px; line-height:1.9; color:#333;">
-            <ul style="list-style:none; padding-left:0; margin:0;">
-              <li><span style="color:#d9534f; font-weight:bold; margin-right:4px;">•</span> <strong>수강료 출력</strong> : 학생의 신청 조회 화면에 수강료 정보를 출력합니다.</li>
-              <li><span style="color:#d9534f; font-weight:bold; margin-right:4px;">•</span> <strong>강사 마감</strong> : 강사는 신청자 등록 및 수강료 정보를 수정할 수 없습니다.</li>
-              <li><span style="color:#d9534f; font-weight:bold; margin-right:4px;">•</span> <strong>강사 편집</strong> : 강사는 강좌를 수정 및 삭제할 수 없습니다(강사 마감 전, 대기 중인 강좌만 가능).</li>
-              <li><span style="color:#d9534f; font-weight:bold; margin-right:4px;">•</span> <strong>상태(출력)</strong> : 학생, 강사 화면에 출력합니다.</li>
-              <li><span style="color:#d9534f; font-weight:bold; margin-right:4px;">•</span> <strong>상태(대기)</strong> : 학생 화면에 출력하지 않습니다.</li>
-              <li><span style="color:#d9534f; font-weight:bold; margin-right:4px;">•</span> <strong>상태(종료)</strong> : 학생, 강사 화면에 출력은 하지만, 신청은 불가능합니다.</li>
+          <div class="bottom-notice-box">
+            <ul>
+              <li>수강신청 전 각 강좌의 상태를 "출력"으로 설정해야 학생 화면에 노출됩니다.</li>
+              <li>강좌 복사 시 수강료 및 시간표가 다음 분기로 자동 이관됩니다.</li>
             </ul>
           </div>
-
-          <!-- Footer (Screenshot 1:1 Match) -->
-          <div style="text-align:center; padding:25px 0 10px 0; font-size:11px; color:#777; border-top:1px solid #eee; margin-top:15px;">
-            <div>Copyright © <strong style="color:#333;">xmecca.com</strong> All Rights Reserved.</div>
-            <div style="margin-top:3px;"><i class="fa-regular fa-envelope" style="margin-right:3px;"></i> dbdbschool@naver.com</div>
-          </div>
-
         </div>
       </div>
 
@@ -352,10 +519,11 @@
           <div class="card-top-bar">
             <div class="section-title">신청목록</div>
             <div class="helper-badges">
-              <a href="/af/ad_faq/main/sn/3267" class="helper-btn" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')"><i class="fa-solid fa-file-lines"></i> 매뉴얼</a>
-              <button class="helper-btn" onclick="openAppCreateModal()"><i class="fa-solid fa-user-plus"></i> 신청자 등록</button>
-              <button class="helper-btn" onclick="openAppTestMode()"><i class="fa-solid fa-play"></i> 수강신청 테스트</button>
-              <button class="helper-btn" onclick="downloadSchoolBankingCsv()"><i class="fa-solid fa-file-csv"></i> 스쿨뱅킹 파일 다운로드</button>
+              <a href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/%EC%8B%A0%EC%B2%AD%EC%9E%90%20%EA%B4%80%EB%A6%AC_02_%EC%8B%A0%EC%B2%AD%EC%9E%90%20%EB%93%B1%EB%A1%9D.hwp" target="_blank" class="helper-btn" style="background:#2563eb; color:#fff;"><i class="fa-solid fa-download"></i> 신청자 등록 (HWP)</a>
+              <a href="https://www.dbdbschool.kr/help/go_data/num/76/data/link1" target="_blank" class="helper-btn" style="background:#dc2626; color:#fff;"><i class="fa-brands fa-youtube"></i> 수강신청 테스트</a>
+              <a href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/%EC%9A%B4%EC%98%81%EC%A0%88%EC%B0%A8_12_%EC%8B%A0%EC%B2%AD%EA%B2%B0%EA%B3%BC%20%EC%A1%B0%ED%9A%8C.hwp" target="_blank" class="helper-btn" style="background:#2563eb; color:#fff;"><i class="fa-solid fa-download"></i> 신청결과 조회 (HWP)</a>
+              <a href="https://www.dbdbschool.kr/help/go_data/num/84/data/link1" target="_blank" class="helper-btn" style="background:#dc2626; color:#fff;"><i class="fa-brands fa-youtube"></i> 스쿨뱅킹 파일 다운로드</a>
+              <button class="helper-btn" onclick="downloadSchoolBankingCsv()" style="background:#16a34a; color:#fff;"><i class="fa-solid fa-file-csv"></i> 스쿨뱅킹 CSV 즉시 다운로드</button>
             </div>
           </div>
 
@@ -2271,350 +2439,6 @@
         </div>
       </div>
 
-      <!-- ==================== 강좌등록 (/af/ad_lec/write) ==================== -->
-      <div class="submodel-panel" id="panel_ad_lec_write" style="display:none;">
-        <div class="content-card" style="background:#fff; border:1px solid #ddd; border-radius:4px; padding:20px; box-shadow:0 1px 3px rgba(0,0,0,0.05); position:relative;">
-          
-          <div class="new_help_manualbox hm_loca1" style="position:absolute; right:20px; top:20px;">
-            <a href="https://www.dbdbschool.kr/help/go_data/num/74/data/link1" target="_blank" class="manual_btn" style="display:inline-flex; align-items:center; gap:5px; padding:4px 10px; background:#f9f9f9; border:1px solid #ccc; border-radius:3px; color:#333; text-decoration:none; font-size:11px; font-weight:bold;">
-              <i class="fa-brands fa-youtube" style="color:#cc181e; font-size:14px;"></i> 강좌등록
-            </a>
-          </div>
-
-          <div style="font-size:16px; font-weight:bold; color:#333; border-bottom:2px solid #337ab7; padding-bottom:8px; margin-bottom:12px;">등록</div>
-          <div style="margin-bottom:12px; color:#666; font-size:12px;">
-            <span style="display:inline-block; width:12px; height:12px; background:#d9534f; border-radius:50%; text-align:center; line-height:12px; color:#fff; font-size:9px; font-weight:bold; margin-right:3px;">!</span> 표시가 있는 항목은 반드시 입력해야 합니다.
-          </div>
-
-          <form id="fm_edit_panel" onsubmit="return handlePanelCourseSubmit(event);" method="post">
-            <table class="table table-bordered list" style="width:100%; border-collapse:collapse; margin-bottom:0; font-size:12px; border:1px solid #e7e7e7;">
-              <colgroup>
-                <col width="140">
-                <col width="">
-              </colgroup>
-              <tbody>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">강좌명 <span style="color:#d9534f;">*</span></th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <input id="p_lec_name" name="lec_name" type="text" title="강좌명" class="form-control" style="width:80%; height:30px; border:1px solid #ccc; border-radius:3px; padding:0 8px;" maxlength="100" required>
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">강좌구분 <span style="color:#d9534f;">*</span></th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <select id="p_lec_div" name="lec_div" class="form-control" style="height:30px; border:1px solid #ccc; border-radius:3px; padding:0 6px;" required>
-                      <option value="">=선택=</option>
-                      <option value="3월">3월</option>
-                      <option value="26년 4월">26년 4월</option>
-                      <option value="26년 5월">26년 5월</option>
-                      <option value="26년 6월">26년 6월</option>
-                      <option value="26년 7월">26년 7월</option>
-                      <option value="26년 8월">26년 8월</option>
-                      <option value="26년 9월" selected>26년 9월</option>
-                    </select>
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">늘봄과정 <span style="color:#d9534f;">*</span></th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <select id="p_lec_pro_type" name="lec_pro_type" class="form-control" style="height:30px; border:1px solid #ccc; border-radius:3px; padding:0 6px;" required>
-                      <option value="">=선택=</option>
-                      <option value="방과후" selected>방과후</option>
-                      <option value="맞춤형">맞춤형</option>
-                      <option value="돌봄">돌봄</option>
-                    </select>
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">강사ID <span style="color:#d9534f;">*</span></th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <input id="p_tea_id" name="tea_id" type="text" class="form-control" style="width:120px; height:30px; border:1px solid #ccc; border-radius:3px; padding:0 8px; display:inline-block;" maxlength="15" required>
-                    <button type="button" class="btn btn-default btn-xs" onclick="openAfTeaWin('p_tea_id')" style="height:28px; padding:0 8px; vertical-align:middle; background:#555; color:#fff; border:none; border-radius:3px;"><i class="fa-solid fa-magnifying-glass"></i> 검색하기</button>
-                    <div style="margin-top:6px; color:#555;"><label><input type="checkbox" id="p_tea_id_chk" value="Y"> 강사 ID가 같은 다른 강좌에 이미 신청되어 있는 경우 중복해서 신청할 수 없음</label></div>
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">보조강사ID</th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <input id="p_tea_id1" name="tea_id1" type="text" class="form-control" style="width:200px; height:30px; border:1px solid #ccc; border-radius:3px; padding:0 8px; display:inline-block;" maxlength="60">
-                    <button type="button" class="btn btn-default btn-xs" onclick="openAfTeaWin('p_tea_id1')" style="height:28px; padding:0 8px; vertical-align:middle; background:#555; color:#fff; border:none; border-radius:3px;"><i class="fa-solid fa-magnifying-glass"></i> 검색하기</button>
-                    <div style="margin-top:4px; color:#777;">(대표 강사와 똑같은 권한으로 강좌 관련 업무를 보실 수 있습니다)</div>
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">
-                    대상학년 <span style="color:#d9534f;">*</span><br>
-                    <label style="font-size:11px; font-weight:normal; cursor:pointer;"><input type="checkbox" id="p_chk_all_grade" onclick="toggleAllPanelGrade(this)"> 전체선택</label>
-                  </th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <span style="display:flex; gap:12px; flex-wrap:wrap;">
-                      <label><input type="checkbox" class="p-grade-chk" value="1"> 1학년</label>
-                      <label><input type="checkbox" class="p-grade-chk" value="2"> 2학년</label>
-                      <label><input type="checkbox" class="p-grade-chk" value="3"> 3학년</label>
-                      <label><input type="checkbox" class="p-grade-chk" value="4"> 4학년</label>
-                      <label><input type="checkbox" class="p-grade-chk" value="5"> 5학년</label>
-                      <label><input type="checkbox" class="p-grade-chk" value="6"> 6학년</label>
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">강의시간 <span style="color:#d9534f;">*</span></th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <input id="p_lec_time_" type="text" class="form-control" style="width:50%; height:30px; border:1px solid #ccc; border-radius:3px; padding:0 8px; background:#f9f9f9; display:inline-block;" readonly required>
-                    <button type="button" class="btn btn-default btn-xs" onclick="openLecTimeWin()" style="height:28px; padding:0 8px; vertical-align:middle; background:#555; color:#fff; border:none; border-radius:3px;"><i class="fa-solid fa-magnifying-glass"></i> 검색하기</button>
-                    <div style="margin-top:6px; color:#555;"><label><input type="checkbox" id="p_lec_time_not_chk" value="Y"> 강좌 신청 시 다른 강좌와 강의시간이 같더라도 중복해서 신청할 수 있음</label></div>
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">정원 <span style="color:#d9534f;">*</span></th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <input id="p_lec_max_sin" type="text" value="0" class="form-control text-right" style="width:100px; height:30px; border:1px solid #ccc; border-radius:3px; padding:0 8px; display:inline-block; text-align:right;" required> 명
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">대기정원 <span style="color:#d9534f;">*</span></th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <input id="p_lec_max_wait" type="text" value="0" class="form-control text-right" style="width:100px; height:30px; border:1px solid #ccc; border-radius:3px; padding:0 8px; display:inline-block; text-align:right;" required> 명
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">운영기간 <span style="color:#d9534f;">*</span></th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <input id="p_lec_sdate" type="text" placeholder="YYYY-MM-DD" class="form-control" style="width:160px; height:30px; border:1px solid #ccc; border-radius:3px; padding:0 8px; display:inline-block;" required> ~
-                    <input id="p_lec_edate" type="text" placeholder="YYYY-MM-DD" class="form-control" style="width:160px; height:30px; border:1px solid #ccc; border-radius:3px; padding:0 8px; display:inline-block;" required>
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">총시수</th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <input id="p_lec_tot_sisu" type="text" value="0" class="form-control text-right" style="width:100px; height:30px; border:1px solid #ccc; border-radius:3px; padding:0 8px; display:inline-block; text-align:right;"> 시간
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">강의실</th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <select id="p_lec_room_sel" class="form-control" style="height:30px; border:1px solid #ccc; border-radius:3px; padding:0 6px; display:inline-block; vertical-align:middle;" onchange="if(this.value)$('#p_lec_room').val(this.value)">
-                      <option value="">== 선택 ==</option>
-                      <option value="강당">강당</option>
-                      <option value="본관2층 컴퓨터교실">본관2층 컴퓨터교실</option>
-                      <option value="본관3층 늘봄프로그램실 1">본관3층 늘봄프로그램실 1</option>
-                      <option value="본관3층 늘봄프로그램실 2">본관3층 늘봄프로그램실 2</option>
-                      <option value="본관3층 늘봄프로그램실 3">본관3층 늘봄프로그램실 3</option>
-                      <option value="본관3층 늘봄프로그램실 4">본관3층 늘봄프로그램실 4</option>
-                      <option value="후관1층 늘봄프로그램실">후관1층 늘봄프로그램실</option>
-                      <option value="후관1층 돌봄교실">후관1층 돌봄교실</option>
-                      <option value="후관2층 늘봄프로그램실 5">후관2층 늘봄프로그램실 5</option>
-                      <option value="후관2층 늘봄프로그램실 6">후관2층 늘봄프로그램실 6</option>
-                    </select>
-                    <input id="p_lec_room" type="text" placeholder="신규입력" class="form-control" style="width:160px; height:30px; border:1px solid #ccc; border-radius:3px; padding:0 8px; display:inline-block; vertical-align:middle;">
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">수강료</th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <input id="p_lec_pay" type="text" value="0" class="form-control text-right" style="width:100px; height:30px; border:1px solid #ccc; border-radius:3px; padding:0 8px; display:inline-block; text-align:right;" onkeyup="chkPanelLecPay(this)"> 원(강사료 + 수용비)
-                    <div style="margin-top:6px; display:flex; flex-direction:column; gap:4px; color:#555;">
-                      <label><input type="checkbox" id="p_not_free2_pay" value="Y"> 1학년 지원금 차감 제외</label>
-                      <label><input type="checkbox" id="p_not_free3_pay" value="Y"> 3학년 지원금 차감 제외</label>
-                      <label><input type="checkbox" id="p_not_free1_pay" value="Y"> 자유수강권 차감 제외</label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">수용비</th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <input id="p_lec_use_cost" type="text" value="0" class="form-control text-right" style="width:100px; height:30px; border:1px solid #ccc; border-radius:3px; padding:0 8px; display:inline-block; text-align:right;" onkeyup="chkPanelLecPay(this)"> 원
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">강사료</th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <input id="p_lec_tea_fee" type="text" value="0" class="form-control text-right" style="width:100px; height:30px; border:1px solid #ccc; border-radius:3px; padding:0 8px; display:inline-block; text-align:right; background:#eee;" disabled> 원
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">교재비</th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <input id="p_lec_pay_book" type="text" value="0" class="form-control text-right" style="width:100px; height:30px; border:1px solid #ccc; border-radius:3px; padding:0 8px; display:inline-block; text-align:right;" onkeyup="chkMoney(this)"> 원
-                    <div style="margin-top:6px; display:flex; flex-direction:column; gap:4px; color:#555;">
-                      <label><input type="checkbox" id="p_not_free2_pay_book" value="Y"> 1학년 지원금 차감 제외</label>
-                      <label><input type="checkbox" id="p_not_free3_pay_book" value="Y"> 3학년 지원금 차감 제외</label>
-                      <label><input type="checkbox" id="p_not_free1_pay_book" value="Y"> 자유수강권 차감 제외</label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">재료비</th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <input id="p_lec_pay_item" type="text" value="0" class="form-control text-right" style="width:100px; height:30px; border:1px solid #ccc; border-radius:3px; padding:0 8px; display:inline-block; text-align:right;" onkeyup="chkMoney(this)"> 원
-                    <div style="margin-top:6px; display:flex; flex-direction:column; gap:4px; color:#555;">
-                      <label><input type="checkbox" id="p_not_free2_pay_item" value="Y"> 1학년 지원금 차감 제외</label>
-                      <label><input type="checkbox" id="p_not_free3_pay_item" value="Y"> 3학년 지원금 차감 제외</label>
-                      <label><input type="checkbox" id="p_not_free1_pay_item" value="Y"> 자유수강권 차감 제외</label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">내용</th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <textarea id="p_lec_content" class="form-control" rows="10" style="width:100%; border:1px solid #ccc; border-radius:3px; padding:8px;"></textarea>
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">첨부파일</th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <div id="p_file_box"></div>
-                    <div><button type="button" class="btn btn-default btn-xs" onclick="addPanelFile()" style="margin-top:4px;">파일추가</button></div>
-                    <div style="color:#888; font-size:11px; margin-top:4px;">(※ 한 번에 최대 3M 이하만 올릴 수 있습니다.)</div>
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">수강료 출력</th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <label><input type="checkbox" id="p_lec_pay_view" value="Y"> 학생의 신청 조회 화면에 수강료, 교재비, 재료비 출력</label>
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">강사마감</th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <label><input type="checkbox" id="p_lec_tea_finish" value="Y"> 강사는 신청자 등록(삭제) 및 수강료 수정 불가</label>
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">강사 강좌 편집</th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <label><input type="checkbox" id="p_lec_tea_edit" value="Y"> 강좌 수정 및 삭제 허용(<span style="color:#d9534f;">강사 마감 전, 대기 중인 강좌만 허용</span>)</label>
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">환불마감</th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <label><input type="checkbox" id="p_refund_status" value="1"> 강사 및 학생은 환불 신청 불가</label>
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">상태 <span style="color:#d9534f;">*</span></th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <label style="margin-right:12px;"><input type="radio" name="p_lec_status" value="1" checked> 출력</label>
-                    <label style="margin-right:12px;"><input type="radio" name="p_lec_status" value="0"> 대기</label>
-                    <label><input type="radio" name="p_lec_status" value="2"> 종료</label>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-            <div style="margin-top:25px; margin-bottom:20px; text-align:center; display:flex; justify-content:center; gap:8px;">
-              <button type="button" class="btn btn-default" onclick="switchSubmodelView(event, 'ad_lec_lists', '/af/ad_lec/lists/sn/3267')" style="min-width:65px;">취소</button>
-              <button type="submit" class="btn btn-danger" style="min-width:65px; background:#d9534f; border-color:#d43f3a; color:#fff;">등록</button>
-            </div>
-          </form>
-
-          <div class="help_box" style="margin-top:20px; padding:15px; border-left:3px solid #d9534f; background:#fafafa; font-size:12px; line-height:1.8; color:#555;">
-            <ul style="padding-left:18px; margin:0;">
-              <li>강사ID : 등록된 강사를 지정하지 않을 경우 <span style="color:#d9534f; font-weight:bold;">가명을 입력</span>해도 강좌 등록은 가능합니다.</li>
-              <li>상태(출력) : 학생, 강사 화면에 <span style="color:#d9534f; font-weight:bold;">출력</span>합니다.</li>
-              <li>상태(대기) : 학생 화면에 <span style="color:#d9534f; font-weight:bold;">출력하지</span> 않습니다.</li>
-              <li>상태(종료) : 학생, 강사 화면에 출력은 하지만, <span style="color:#d9534f; font-weight:bold;">신청은 불가능</span>합니다.</li>
-              <li>신청 제한(강의 시간, 운영 기간) : 운영 기간과 강의 시간이 중복되는 강좌는 1개만 신청 가능합니다.</li>
-              <li>신청 제한(중복제한그룹) : 같은 '중복제한그룹'에 있는 강좌는 환경 설정에 지정된 개수까지만 신청할 수 있습니다.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- ==================== 강좌 일괄입력 (/af/ad_lec/input) ==================== -->
-      <div class="submodel-panel" id="panel_ad_lec_input" style="display:none;">
-        <div class="content-card" style="background:#fff; border:1px solid #ddd; border-radius:4px; padding:20px; box-shadow:0 1px 3px rgba(0,0,0,0.05); position:relative;">
-          
-          <div class="new_help_manualbox hm_loca1" style="position:absolute; right:20px; top:20px;">
-            <a href="https://www.dbdbschool.kr/help/go_data/num/92/data/link1" target="_blank" class="manual_btn" style="display:inline-flex; align-items:center; gap:5px; padding:4px 10px; background:#f9f9f9; border:1px solid #ccc; border-radius:3px; color:#333; text-decoration:none; font-size:11px; font-weight:bold;">
-              <i class="fa-brands fa-youtube" style="color:#cc181e; font-size:14px;"></i> 강좌 일괄입력
-            </a>
-          </div>
-
-          <div style="font-size:16px; font-weight:bold; color:#333; border-bottom:2px solid #337ab7; padding-bottom:8px; margin-bottom:12px;">일괄입력</div>
-          <div style="margin-bottom:12px; color:#666; font-size:12px;">
-            <span style="display:inline-block; width:12px; height:12px; background:#d9534f; border-radius:50%; text-align:center; line-height:12px; color:#fff; font-size:9px; font-weight:bold; margin-right:3px;">!</span> 표시가 있는 항목은 반드시 입력해야 합니다.
-          </div>
-
-          <form id="fm_edit_panel_input" onsubmit="return handlePanelBatchInputSubmit(event);" method="post" enctype="multipart/form-data">
-            <table class="table table-bordered list" style="width:100%; border-collapse:collapse; margin-bottom:0; font-size:12px; border:1px solid #e7e7e7;">
-              <colgroup>
-                <col width="160">
-                <col width="">
-              </colgroup>
-              <tbody>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">강좌구분 <span style="color:#d9534f;">*</span></th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <select id="p_input_lec_div" name="lec_div" class="form-control" style="width:160px; height:30px; border:1px solid #ccc; border-radius:3px; padding:0 6px;" required>
-                      <option value="">=선택=</option>
-                      <option value="5">3월</option>
-                      <option value="6">26년 4월</option>
-                      <option value="7">26년 5월</option>
-                      <option value="8">26년 6월</option>
-                      <option value="9">26년 7월</option>
-                      <option value="10">26년 8월</option>
-                      <option value="11" selected>26년 9월</option>
-                    </select>
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">엑셀 데이터 파일 <span style="color:#d9534f;">*</span></th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <input id="p_input_userfile" name="userfile" type="file" style="display:inline-block; font-size:12px;" required>&nbsp;
-                    <span>(<a href="/af/ad_lec/inputs/sn/3267" download="강좌일괄입력_샘플양식.csv" style="color:#337ab7; text-decoration:underline; font-weight:bold;">일괄입력 샘플 다운로드</a>)</span>
-                    <div style="margin-top:6px; color:#555;">
-                      <i class="fa-solid fa-circle-question"></i> <a href="https://www.dbdbschool.kr/help/view/num/261/p/1/pdc/faq/sn/3267" target="_blank" style="border-bottom:1px dashed #777; color:#555; text-decoration:none;">한셀로 만들어진 엑셀파일은 변환 후 사용할 수 있습니다.</a>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">기존 데이터 <span style="color:#d9534f;">*</span></th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7;">
-                    <label><input type="radio" name="p_input_type" value="add" checked> 추가 입력(수정)</label>
-                  </td>
-                </tr>
-                <tr>
-                  <th style="background:#f7f9fa; font-weight:bold; padding:8px 12px; border:1px solid #e7e7e7;">참고사항</th>
-                  <td style="padding:8px 12px; border:1px solid #e7e7e7; line-height:1.7; color:#444;">
-                    - 샘플파일 <span style="color:#d9534f;">첫 번째 줄의 내용은 변경할 수 없습니다.</span><br>
-                    - <span style="color:#d9534f;">늘봄과정 : 늘봄과정 구분을 사용하는 경우에만 필수</span> 항목입니다.<br>
-                    - 중복제한그룹 : 선택 항목입니다.<br>
-                    - <span style="color:#d9534f;">강좌명 : 필수</span> 항목입니다.<br>
-                    - <span style="color:#d9534f;">강사ID : 필수</span> 항목입니다.<br>
-                    - <span style="color:#d9534f;">대상학년 : 필수</span> 항목입니다.<br>
-                    - <span style="color:#d9534f;">대상학과 : 학과 설정이 되어 있는 경우에만 필수</span> 항목입니다.<br>
-                    - <span style="color:#d9534f;">강의시간 : 필수</span> 항목입니다.<br>
-                    - 강의시간중복허용 : 선택 항목입니다.<br>
-                    - <span style="color:#d9534f;">정원 : 필수</span> 항목입니다.<br>
-                    - <span style="color:#d9534f;">대기정원 : 대기자 기능을 사용하는 경우에만 필수</span> 항목입니다.<br>
-                    - <span style="color:#d9534f;">운영기간(시작) : 필수</span> 항목입니다.<br>
-                    - <span style="color:#d9534f;">운영기간(종료) : 필수</span> 항목입니다.<br>
-                    - 총시수, 강의실, 수강료, 수용비, 교재비, 재료비, 지원금차감제외, 최대지원금액, 내용 : 선택 항목입니다.<br>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-            <div style="margin-top:25px; margin-bottom:20px; text-align:center; display:flex; justify-content:center; gap:8px;">
-              <button type="button" class="btn btn-default" onclick="switchSubmodelView(event, 'ad_lec_lists', '/af/ad_lec/lists/sn/3267')" style="min-width:65px;">취소</button>
-              <button type="submit" class="btn btn-danger" style="min-width:65px; background:#d9534f; border-color:#d43f3a; color:#fff;">등록</button>
-            </div>
-          </form>
-
-          <div class="help_box" style="margin-top:20px; padding:15px; border-left:3px solid #d9534f; background:#fafafa; font-size:12px; line-height:1.8; color:#555;">
-            <ul style="padding-left:18px; margin:0;">
-              <li>중복제한그룹은 <span style="color:#d9534f; font-weight:bold;">환경설정 &gt; 중복제한그룹 &gt; 코드명</span>과 일치하도록 입력해 주세요.</li>
-              <li>학과를 입력하는 경우 <span style="color:#d9534f; font-weight:bold;">학교환경설정 &gt; 학과설정 &gt; 코드명</span>과 일치하도록 입력해 주세요.</li>
-              <li>강의시간은 <span style="color:#d9534f; font-weight:bold;">환경설정 &gt; 수업교시 &gt; 코드명</span>과 일치하도록 입력해 주세요.</li>
-              <li>지원금명은 <span style="color:#d9534f; font-weight:bold;">지원금관리 &gt; 지원금설정 &gt; 지원금명</span>과 일치하도록 입력해 주세요.</li>
-              <li><span style="color:#d9534f; font-weight:bold;">강좌명이 같은 데이터는 수정</span>됩니다.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
       <!-- FOOTER -->
       <footer class="site-footer">
         Copyright ⓒ <strong>xmecca.com</strong> All Rights Reserved. &nbsp;|&nbsp; ✉ dbdbschool@naver.com
@@ -2930,13 +2754,23 @@
           </tbody>
         </table>
 
-        <!-- Read-Only Super Admin Reply Box -->
-        <div id="qaAnswerReadOnlyBox" style="margin-top:18px; background:#f0fdf4; border:1px solid #bbf7d0; padding:14px; border-radius:3px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; border-bottom:1px solid #dcfce7; padding-bottom:6px;">
-            <h4 style="margin:0; font-size:13px; color:#166534; font-weight:bold;"><i class="fa-solid fa-check-circle"></i> 최고 관리자 답변</h4>
-            <span id="qaAnswerStatusBadge" style="font-size:11px; background:#16a34a; color:#fff; font-weight:bold; padding:2px 8px; border-radius:3px;">진행상태: 완료</span>
+        <!-- Admin Answer Box -->
+        <div style="margin-top:18px; background:#fbfbfb; border:1px solid #e7e7e7; padding:14px; border-radius:3px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <h4 style="margin:0; font-size:13px; color:#337ab7; font-weight:bold;"><i class="fa-solid fa-reply"></i> 고객지원 답변 & 상태 변경</h4>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <label style="font-size:12px; font-weight:bold;">진행상태:</label>
+              <select id="qaReplyStatusSelect" style="height:26px; font-size:12px; padding:2px 6px; border:1px solid #ccc; border-radius:2px;">
+                <option value="0">접수</option>
+                <option value="1">처리중</option>
+                <option value="2">완료</option>
+              </select>
+            </div>
           </div>
-          <div id="qaAnswerContentDisplay" style="font-size:12px; color:#1e293b; line-height:1.6; white-space:pre-wrap;"></div>
+          <textarea id="qaReplyTextarea" placeholder="답변 내용을 작성해 주세요..." style="width:100%; height:80px; padding:6px 8px; font-size:12px; border:1px solid #ccc; border-radius:2px; resize:vertical;"></textarea>
+          <div style="display:flex; justify-content:flex-end; margin-top:8px;">
+            <button type="button" class="btn-db btn-db-green" onclick="saveQaReply()" style="font-weight:bold;">답변 저장하기</button>
+          </div>
         </div>
       </div>
       <div style="padding:10px 18px; background:#f9f9f9; border-top:1px solid #eeeeee; display:flex; justify-content:space-between;">
@@ -2947,7 +2781,7 @@
   </div>
 
   <!-- Modal: 늘봄 관리자 정보수정 -->
-  <div class="modal-overlay" id="afAdminInfoModal" style="display:none;">
+  <div class="modal-overlay" id="afAdminInfoModal">
     <div class="modal-card" style="max-width: 480px;">
       <div class="modal-header" style="background:#1e3a8a; color:#fff;">
         <h3><i class="fa-solid fa-user-gear"></i> 관리자(박진수) 정보수정</h3>
@@ -3440,540 +3274,77 @@
     </div>
   </div>
 
-  <!-- ==================== LECTURE MANAGEMENT MODALS (01~09) ==================== -->
-  
-  <!-- 1. Modal: 강좌 등록 (01_강좌등록 기반) -->
-  <div class="modal-backdrop" id="addModal" style="display:none;">
-    <div class="modal-box" style="max-width: 820px; max-height:94vh; display:flex; flex-direction:column;">
+  <!-- 9. Modal: Q&A 문의글 작성 -->
+  <div class="modal-backdrop" id="modalQaWrite" style="display:none;">
+    <div class="modal-box" style="max-width: 780px;">
       <div class="modal-header" style="background:#337ab7; color:#fff;">
-        <h3><i class="fa-solid fa-plus-circle"></i> 강좌 등록 (01_강좌등록)</h3>
-        <button class="close-btn" onclick="closeAddModal()">&times;</button>
+        <h3><i class="fa-solid fa-pen-to-square"></i> 고객지원 문의 등록</h3>
+        <button class="close-btn" onclick="closeQaModal('modalQaWrite')">&times;</button>
       </div>
-      <div class="modal-body" style="padding:16px 22px; overflow-y:auto;">
-        <form id="formAddLecture" onsubmit="submitAddCourse(event)">
-          <table class="db-table" style="width:100%; font-size:12px;">
+      <div class="modal-body" style="padding:16px 20px;">
+        <form id="fm_qa_write" onsubmit="handleQaWriteSubmit(event)">
+          <table class="db-table" style="width:100%; font-size:12.5px;">
             <tbody>
               <tr>
-                <td style="width:130px; font-weight:bold; background:#f9f9f9;">강좌구분 *</td>
-                <td>
-                  <select id="addCategory" style="height:28px; border:1px solid #ccc; border-radius:3px; padding:0 6px;" required>
-                    <option value="26년 9월" selected>26년 9월</option>
-                    <option value="26년 8월">26년 8월</option>
-                    <option value="26년 7월">26년 7월</option>
-                    <option value="26년 6월">26년 6월</option>
-                    <option value="26년 5월">26년 5월</option>
-                    <option value="26년 4월">26년 4월</option>
-                    <option value="3월">3월</option>
-                  </select>
-                </td>
-                <td style="width:110px; font-weight:bold; background:#f9f9f9;">늘봄과정 *</td>
-                <td>
-                  <select id="addNeulbomType" style="height:28px; border:1px solid #ccc; border-radius:3px; padding:0 6px;">
-                    <option value="방과후">방과후</option>
-                    <option value="맞춤형">맞춤형</option>
-                    <option value="돌봄">돌봄</option>
-                  </select>
-                </td>
+                <td style="width:130px; font-weight:bold; background:#f8fafc;">작성자</td>
+                <td><input type="text" id="qa_author_name" value="김혜련" required style="width:180px; height:28px; border:1px solid #ccc; padding:2px 6px;"></td>
               </tr>
               <tr>
-                <td style="font-weight:bold; background:#f9f9f9;">강좌명 *</td>
-                <td colspan="3"><input type="text" id="addTitle" placeholder="강좌명을 입력하세요 (예: 창의로봇 1부)" required style="width:100%; height:28px; border:1px solid #ccc; padding:0 8px; border-radius:3px;"></td>
-              </tr>
-              <tr>
-                <td style="font-weight:bold; background:#f9f9f9;">강사명 *</td>
+                <td style="font-weight:bold; background:#f8fafc;">휴대폰</td>
                 <td>
-                  <div style="display:flex; gap:6px; align-items:center;">
-                    <input type="text" id="addInstructor" placeholder="강사명" required style="width:140px; height:28px; border:1px solid #ccc; padding:0 6px;">
-                    <label style="font-size:11px; cursor:pointer; color:#555;"><input type="checkbox" id="addNoSameTeacher"> 강사 직접입력</label>
-                  </div>
-                </td>
-                <td style="font-weight:bold; background:#f9f9f9;">강의실</td>
-                <td><input type="text" id="addClassroom" placeholder="예: 과학실, 1-1교실" style="width:100%; height:28px; border:1px solid #ccc; padding:0 6px;"></td>
-              </tr>
-              <tr>
-                <td style="font-weight:bold; background:#f9f9f9;">대상 학년 *</td>
-                <td colspan="3">
-                  <div style="display:flex; gap:12px; align-items:center;">
-                    <label style="cursor:pointer; font-weight:bold;"><input type="checkbox" id="check_all_grade_add" onchange="toggleAllGradeCheck('add', this)"> 전체</label>
-                    <label style="cursor:pointer;"><input type="checkbox" class="grade-chk-add" value="1" checked> 1학년</label>
-                    <label style="cursor:pointer;"><input type="checkbox" class="grade-chk-add" value="2" checked> 2학년</label>
-                    <label style="cursor:pointer;"><input type="checkbox" class="grade-chk-add" value="3" checked> 3학년</label>
-                    <label style="cursor:pointer;"><input type="checkbox" class="grade-chk-add" value="4"> 4학년</label>
-                    <label style="cursor:pointer;"><input type="checkbox" class="grade-chk-add" value="5"> 5학년</label>
-                    <label style="cursor:pointer;"><input type="checkbox" class="grade-chk-add" value="6"> 6학년</label>
-                  </div>
-                  <input type="hidden" id="addTargetGrade" value="1,2,3">
-                </td>
-              </tr>
-              <tr>
-                <td style="font-weight:bold; background:#f9f9f9;">강의 요일 / 시간</td>
-                <td>
-                  <div style="display:flex; gap:6px;">
-                    <input type="text" id="addDayOfWeek" placeholder="예: 월,수 또는 금" value="금" style="width:70px; height:28px; border:1px solid #ccc; padding:0 6px;">
-                    <input type="text" id="addScheduleTime" placeholder="예: 14:00~14:50" value="14:00~14:50" style="flex:1; height:28px; border:1px solid #ccc; padding:0 6px;">
-                  </div>
-                </td>
-                <td style="font-weight:bold; background:#f9f9f9;">총 시수</td>
-                <td><input type="number" id="addTotalHours" value="12" style="width:70px; height:28px; border:1px solid #ccc; padding:0 6px;"> 회차</td>
-              </tr>
-              <tr>
-                <td style="font-weight:bold; background:#f9f9f9;">정원 / 대기정원 *</td>
-                <td>
-                  <div style="display:flex; gap:6px; align-items:center;">
-                    <span>정원:</span><input type="number" id="addCapacity" value="20" required style="width:65px; height:28px; border:1px solid #ccc; padding:0 6px;"> 명
-                    <span style="margin-left:8px;">대기:</span><input type="number" id="addWaitingCapacity" value="3" required style="width:65px; height:28px; border:1px solid #ccc; padding:0 6px;"> 명
-                  </div>
-                </td>
-                <td style="font-weight:bold; background:#f9f9f9;">운영 기간</td>
-                <td>
-                  <div style="display:flex; gap:4px; align-items:center;">
-                    <input type="text" id="addSdate" value="2026-09-01" style="width:85px; height:28px; border:1px solid #ccc; font-size:11px; text-align:center;"> ~
-                    <input type="text" id="addEdate" value="2026-09-30" style="width:85px; height:28px; border:1px solid #ccc; font-size:11px; text-align:center;">
+                  <div style="display:flex; align-items:center; gap:4px;">
+                    <select id="qa_hp1" style="height:28px; border:1px solid #ccc;"><option value="010">010</option><option value="011">011</option></select>
+                    - <input type="text" id="qa_hp2" value="2494" maxlength="4" style="width:50px; height:28px; border:1px solid #ccc; text-align:center;">
+                    - <input type="text" id="qa_hp3" value="1479" maxlength="4" style="width:50px; height:28px; border:1px solid #ccc; text-align:center;">
                   </div>
                 </td>
               </tr>
               <tr>
-                <td style="font-weight:bold; background:#f9f9f9;">수강료(원)</td>
-                <td>
-                  <input type="number" id="addTuitionFee" value="0" style="width:110px; height:28px; border:1px solid #ccc; padding:0 6px;"> 원
-                </td>
-                <td style="font-weight:bold; background:#f9f9f9;">수용비(원)</td>
-                <td>
-                  <input type="number" id="addCostFacility" value="0" style="width:110px; height:28px; border:1px solid #ccc; padding:0 6px;"> 원
-                </td>
+                <td style="font-weight:bold; background:#f8fafc;">일반전화</td>
+                <td><input type="text" id="qa_phone" value="062-609-1182" style="width:180px; height:28px; border:1px solid #ccc; padding:2px 6px;"></td>
               </tr>
               <tr>
-                <td style="font-weight:bold; background:#f9f9f9;">교재비 / 재료비</td>
-                <td colspan="3">
-                  <div style="display:flex; gap:16px; align-items:center;">
-                    <span>교재비:</span> <input type="number" id="addTextbookFee" value="0" style="width:90px; height:28px; border:1px solid #ccc; padding:0 6px;"> 원
-                    <span>재료비:</span> <input type="number" id="addMaterialFee" value="0" style="width:90px; height:28px; border:1px solid #ccc; padding:0 6px;"> 원
-                    <label style="margin-left:14px; cursor:pointer;"><input type="checkbox" id="addAllowConflict"> 시간표 중복허용</label>
-                  </div>
-                </td>
+                <td style="font-weight:bold; background:#f8fafc;">이메일</td>
+                <td><input type="email" id="qa_email" value="khh147979@naver.com" style="width:260px; height:28px; border:1px solid #ccc; padding:2px 6px;"></td>
               </tr>
               <tr>
-                <td style="font-weight:bold; background:#f9f9f9;">강좌 설명</td>
-                <td colspan="3">
-                  <textarea id="addDescription" placeholder="강좌 준비물 및 커리큘럼 안내 사항" style="width:100%; height:60px; border:1px solid #ccc; padding:6px; border-radius:2px; resize:vertical;"></textarea>
-                </td>
+                <td style="font-weight:bold; background:#f8fafc;">제목</td>
+                <td><input type="text" id="qa_subject" placeholder="문의 제목을 입력하세요." required style="width:100%; height:30px; border:1px solid #ccc; padding:2px 8px; font-weight:bold;"></td>
+              </tr>
+              <tr>
+                <td style="font-weight:bold; background:#f8fafc; vertical-align:top; padding-top:8px;">내용</td>
+                <td><textarea id="qa_contents" rows="6" placeholder="문의하실 내용을 상세히 적어주세요." required style="width:100%; border:1px solid #ccc; padding:8px; line-height:1.5; resize:vertical;"></textarea></td>
               </tr>
             </tbody>
           </table>
-          <div style="display:flex; justify-content:center; gap:8px; margin-top:16px;">
-            <button type="button" class="btn-db btn-db-gray" onclick="closeAddModal()">취소</button>
-            <button type="submit" class="btn-db btn-db-blue" style="font-weight:bold;"><i class="fa-solid fa-check"></i> 강좌 등록</button>
+          <div style="display:flex; justify-content:flex-end; gap:6px; margin-top:16px;">
+            <button type="button" class="btn-db btn-db-gray" onclick="closeQaModal('modalQaWrite')">취소</button>
+            <button type="submit" class="btn-db btn-db-blue" style="font-weight:bold;"><i class="fa-solid fa-check"></i> 문의 등록하기</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 
-  <!-- 2. Modal: 강좌 일괄입력 (02_강좌_일괄입력 기반) -->
-  <div class="modal-backdrop" id="batchUploadModal" style="display:none;">
-    <div class="modal-box" style="max-width: 860px; max-height:92vh; display:flex; flex-direction:column;">
-      <div class="modal-header" style="background:#f0ad4e; color:#fff;">
-        <h3><i class="fa-solid fa-file-excel"></i> 강좌 일괄입력 (02_강좌_일괄입력)</h3>
-        <button class="close-btn" onclick="closeBatchUploadModal()">&times;</button>
+  <!-- 10. Modal: Q&A 문의글 상세 및 답변 조회 -->
+  <div class="modal-backdrop" id="modalQaView" style="display:none;">
+    <div class="modal-box" style="max-width: 800px;">
+      <div class="modal-header" style="background:#2b669a; color:#fff;">
+        <h3 id="qaViewTitle"><i class="fa-solid fa-file-lines"></i> 고객지원 문의 상세</h3>
+        <button class="close-btn" onclick="closeQaModal('modalQaView')">&times;</button>
       </div>
-      <div class="modal-body" style="padding:16px 22px; overflow-y:auto;">
-        <div style="background:#fcf8e3; border:1px solid #faebcc; color:#8a6d3b; padding:10px 14px; border-radius:3px; font-size:12px; margin-bottom:14px;">
-          <strong>※ 엑셀 파일(.xls, .xlsx, .csv)을 업로드하거나 아래 그리드에서 여러 강좌를 한 번에 입력할 수 있습니다.</strong><br>
-          ※ 수강인원, 요일, 시간, 수강료가 포함된 서식 양식을 다운로드하여 작성 후 등록하세요.
+      <div class="modal-body" style="padding:16px 20px;">
+        <div id="qaViewBody">
+          <!-- Dynamically populated -->
         </div>
-        <table class="db-table" style="width:100%; font-size:12px; margin-bottom:14px;">
-          <tbody>
-            <tr>
-              <td style="width:130px; font-weight:bold; background:#f9f9f9;">강좌구분 선택 *</td>
-              <td>
-                <select id="batchUploadCategory" style="height:28px; border:1px solid #ccc; border-radius:3px; padding:0 6px;">
-                  <option value="26년 9월" selected>26년 9월</option>
-                  <option value="26년 8월">26년 8월</option>
-                  <option value="2026년 2분기">2026년 2분기</option>
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <td style="font-weight:bold; background:#f9f9f9;">엑셀 파일 업로드</td>
-              <td>
-                <div style="display:flex; gap:8px; align-items:center;">
-                  <input type="file" id="batchUploadFile" accept=".xls,.xlsx,.csv" style="font-size:12px;">
-                  <button type="button" class="btn-db btn-db-green" onclick="downloadLectureTemplate()"><i class="fa-solid fa-download"></i> 엑셀 서식 다운로드</button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td style="font-weight:bold; background:#f9f9f9;">기존 데이터 처리</td>
-              <td>
-                <label style="margin-right:16px; cursor:pointer;"><input type="radio" name="batchUploadType" value="add" checked> 기존 강좌 유지 후 추가 등록</label>
-                <label style="cursor:pointer; color:#d9534f;"><input type="radio" name="batchUploadType" value="replace"> 기존 강좌 모두 삭제 후 새로 덮어쓰기</label>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <!-- Web Direct Grid Input -->
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-          <strong style="font-size:12.5px; color:#333;"><i class="fa-solid fa-table-cells"></i> 직접 다중 입력 그리드</strong>
-          <button type="button" class="btn-db btn-db-blue" onclick="addBatchUploadRow()" style="padding:2px 8px; font-size:11px;"><i class="fa-solid fa-plus"></i> 행 추가</button>
-        </div>
-        <div class="table-responsive" style="max-height:220px; overflow-y:auto; border:1px solid #ddd;">
-          <table class="db-table" style="width:100%; font-size:11px; text-align:center;">
-            <thead>
-              <tr style="background:#f5f5f5;">
-                <th style="width:30px;">#</th>
-                <th style="width:80px;">늘봄과정</th>
-                <th>강좌명</th>
-                <th style="width:75px;">강사명</th>
-                <th style="width:65px;">학년</th>
-                <th style="width:60px;">요일</th>
-                <th style="width:90px;">시간</th>
-                <th style="width:55px;">정원</th>
-                <th style="width:75px;">수강료</th>
-                <th style="width:40px;">삭제</th>
-              </tr>
-            </thead>
-            <tbody id="batchUploadTbody">
-              <!-- Default initial rows rendered dynamically -->
-            </tbody>
-          </table>
-        </div>
-
-        <div style="display:flex; justify-content:center; gap:8px; margin-top:16px;">
-          <button type="button" class="btn-db btn-db-gray" onclick="closeBatchUploadModal()">취소</button>
-          <button type="button" class="btn-db btn-db-orange" onclick="executeBatchUpload()" style="font-weight:bold;"><i class="fa-solid fa-check"></i> 일괄 등록 실행</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 3. Modal: 강좌 일괄수정 (03_강좌_일괄수정 기반) -->
-  <div class="modal-backdrop" id="batchEditModal" style="display:none;">
-    <div class="modal-box" style="max-width: 900px; max-height:94vh; display:flex; flex-direction:column;">
-      <div class="modal-header" style="background:#5bc0de; color:#fff;">
-        <h3><i class="fa-solid fa-pen-to-square"></i> 강좌 일괄수정 (03_강좌_일괄수정)</h3>
-        <button class="close-btn" onclick="closeBatchEditModal()">&times;</button>
-      </div>
-      <div class="modal-body" style="padding:16px 22px; overflow-y:auto;">
-        <div style="background:#d9edf7; border:1px solid #bce8f1; color:#31708f; padding:10px 14px; border-radius:3px; font-size:12px; margin-bottom:14px;">
-          <strong>※ 일괄 수정할 항목의 체크박스를 켜고 값을 입력한 뒤, 적용할 대상 강좌를 선택하세요.</strong>
-        </div>
-        
-        <!-- Batch Edit Field Options Grid -->
-        <table class="db-table" style="width:100%; font-size:12px; margin-bottom:14px;">
-          <tbody>
-            <tr>
-              <td style="width:140px; font-weight:bold; background:#f9f9f9;"><label><input type="checkbox" id="chkEditCategory"> 강좌구분 변경</label></td>
-              <td>
-                <select id="bulkEditCategoryVal" style="height:26px; border:1px solid #ccc;">
-                  <option value="26년 9월">26년 9월</option>
-                  <option value="26년 8월">26년 8월</option>
-                  <option value="2026년 2분기">2026년 2분기</option>
-                </select>
-              </td>
-              <td style="width:140px; font-weight:bold; background:#f9f9f9;"><label><input type="checkbox" id="chkEditDate"> 운영기간 변경</label></td>
-              <td>
-                <input type="text" id="bulkEditSdate" value="2026-09-01" style="width:85px; height:26px; border:1px solid #ccc; font-size:11px; text-align:center;"> ~
-                <input type="text" id="bulkEditEdate" value="2026-09-30" style="width:85px; height:26px; border:1px solid #ccc; font-size:11px; text-align:center;">
-              </td>
-            </tr>
-            <tr>
-              <td style="font-weight:bold; background:#f9f9f9;"><label><input type="checkbox" id="chkEditInstructor"> 강사명 일괄변경</label></td>
-              <td><input type="text" id="bulkEditInstructorVal" placeholder="변경할 강사명" style="width:130px; height:26px; border:1px solid #ccc; padding:0 6px;"></td>
-              <td style="font-weight:bold; background:#f9f9f9;"><label><input type="checkbox" id="chkEditCapacity"> 정원/대기 변경</label></td>
-              <td>
-                정원: <input type="number" id="bulkEditCapacityVal" value="20" style="width:55px; height:26px; border:1px solid #ccc; padding:0 4px;"> 명 /
-                대기: <input type="number" id="bulkEditWaitVal" value="3" style="width:50px; height:26px; border:1px solid #ccc; padding:0 4px;"> 명
-              </td>
-            </tr>
-            <tr>
-              <td style="font-weight:bold; background:#f9f9f9;"><label><input type="checkbox" id="chkEditTuition"> 수강료 일괄변경</label></td>
-              <td><input type="number" id="bulkEditTuitionVal" value="0" style="width:100px; height:26px; border:1px solid #ccc; padding:0 6px;"> 원</td>
-              <td style="font-weight:bold; background:#f9f9f9;"><label><input type="checkbox" id="chkEditStatus"> 강좌상태 변경</label></td>
-              <td>
-                <select id="bulkEditStatusVal" style="height:26px; border:1px solid #ccc;">
-                  <option value="OUTPUT">출력</option>
-                  <option value="WAITING">대기</option>
-                  <option value="CLOSED">종료</option>
-                </select>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <!-- Target Course Checklist -->
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-          <strong style="font-size:12.5px; color:#333;"><i class="fa-solid fa-list-check"></i> 적용 대상 강좌 선택 (<span id="bulkEditSelectedCount">0</span>개 선택됨)</strong>
-          <label style="cursor:pointer; font-size:12px;"><input type="checkbox" id="bulkEditSelectAll" onchange="toggleBulkEditSelectAll(this)"> 전체 선택</label>
-        </div>
-        <div class="table-responsive" style="max-height:240px; overflow-y:auto; border:1px solid #ddd;">
-          <table class="db-table" style="width:100%; font-size:11px; text-align:center;">
-            <thead>
-              <tr style="background:#f5f5f5;">
-                <th style="width:30px;">선택</th>
-                <th style="width:45px;">연번</th>
-                <th style="width:80px;">구분</th>
-                <th style="text-align:left; padding-left:8px;">강좌명</th>
-                <th style="width:75px;">강사명</th>
-                <th style="width:80px;">정원(신청)</th>
-                <th style="width:80px;">수강료</th>
-                <th style="width:60px;">상태</th>
-              </tr>
-            </thead>
-            <tbody id="bulkEditTbody">
-              <!-- Rendered dynamically from current lectures -->
-            </tbody>
-          </table>
-        </div>
-
-        <div style="display:flex; justify-content:center; gap:8px; margin-top:16px;">
-          <button type="button" class="btn-db btn-db-gray" onclick="closeBatchEditModal()">취소</button>
-          <button type="button" class="btn-db btn-db-cyan" onclick="executeBatchEdit()" style="font-weight:bold;"><i class="fa-solid fa-check"></i> 일괄수정 적용</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 4. Modal: 강좌 일괄복사 (04_강좌_일괄복사 기반) -->
-  <div class="modal-backdrop" id="batchCopyModal" style="display:none;">
-    <div class="modal-box" style="max-width: 820px; max-height:92vh; display:flex; flex-direction:column;">
-      <div class="modal-header" style="background:#5bc0de; color:#fff;">
-        <h3><i class="fa-solid fa-copy"></i> 강좌 일괄복사 (04_강좌_일괄복사)</h3>
-        <button class="close-btn" onclick="closeBatchCopyModal()">&times;</button>
-      </div>
-      <div class="modal-body" style="padding:16px 22px; overflow-y:auto;">
-        <table class="db-table" style="width:100%; font-size:12px; margin-bottom:14px;">
-          <tbody>
-            <tr>
-              <td style="width:130px; font-weight:bold; background:#f9f9f9;">복사 기준 구분</td>
-              <td>
-                <select id="copySourceCategory" style="height:28px; border:1px solid #ccc; padding:0 6px;">
-                  <option value="26년 8월">26년 8월</option>
-                  <option value="26년 9월">26년 9월</option>
-                  <option value="3월">3월</option>
-                </select>
-              </td>
-              <td style="width:130px; font-weight:bold; background:#f9f9f9;">복사 대상 구분 *</td>
-              <td>
-                <select id="copyTargetCategory" style="height:28px; border:1px solid #ccc; padding:0 6px;">
-                  <option value="26년 9월" selected>26년 9월 (다음 달)</option>
-                  <option value="26년 10월">26년 10월</option>
-                  <option value="2026년 2분기">2026년 2분기</option>
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <td style="font-weight:bold; background:#f9f9f9;">복사 옵션</td>
-              <td colspan="3">
-                <label style="margin-right:16px; cursor:pointer;"><input type="checkbox" id="copyFeesCheck" checked> 수강료/재료비/교재비 정보 포함</label>
-                <label style="margin-right:16px; cursor:pointer;"><input type="checkbox" id="copyScheduleCheck" checked> 강의시간표/강의실 포함</label>
-                <label style="cursor:pointer;"><input type="checkbox" id="copyTeacherCheck" checked> 강사 배정 정보 포함</label>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <!-- Copy Target Course Checklist -->
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-          <strong style="font-size:12.5px; color:#333;"><i class="fa-solid fa-list-check"></i> 복사할 강좌 목록</strong>
-          <label style="cursor:pointer; font-size:12px;"><input type="checkbox" id="batchCopySelectAll" onchange="toggleBatchCopySelectAll(this)" checked> 전체 선택</label>
-        </div>
-        <div class="table-responsive" style="max-height:220px; overflow-y:auto; border:1px solid #ddd;">
-          <table class="db-table" style="width:100%; font-size:11px; text-align:center;">
-            <thead>
-              <tr style="background:#f5f5f5;">
-                <th style="width:30px;">선택</th>
-                <th style="width:45px;">연번</th>
-                <th style="width:80px;">구분</th>
-                <th style="text-align:left; padding-left:8px;">강좌명</th>
-                <th style="width:75px;">강사명</th>
-                <th style="width:75px;">정원</th>
-                <th style="width:80px;">수강료</th>
-              </tr>
-            </thead>
-            <tbody id="batchCopyTbody">
-              <!-- Rendered dynamically -->
-            </tbody>
-          </table>
-        </div>
-
-        <div style="display:flex; justify-content:center; gap:8px; margin-top:16px;">
-          <button type="button" class="btn-db btn-db-gray" onclick="closeBatchCopyModal()">취소</button>
-          <button type="button" class="btn-db btn-db-cyan" onclick="executeBatchCopySubmit()" style="font-weight:bold;"><i class="fa-solid fa-copy"></i> 일괄 복사 실행</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 5. Modal: 강좌 통계 (05_강좌_통계 기반) -->
-  <div class="modal-backdrop" id="lecStatsModal" style="display:none;">
-    <div class="modal-box" style="max-width: 960px; max-height:92vh; display:flex; flex-direction:column;">
-      <div class="modal-header" style="background:#334155; color:#fff;">
-        <h3><i class="fa-solid fa-chart-pie"></i> 강좌 통계 현황 (05_강좌_통계)</h3>
-        <button class="close-btn" onclick="closeLecStatsModal()">&times;</button>
-      </div>
-      <div class="modal-body" style="padding:16px 20px; overflow-y:auto;">
-        <div style="display:flex; justify-content:flex-end; margin-bottom:10px;">
-          <button class="btn-db btn-db-green" onclick="exportToExcel()"><i class="fa-solid fa-file-excel"></i> 통계 엑셀 출력</button>
-        </div>
-        <div class="table-responsive">
-          <table class="db-table" style="width:100%; font-size:11.5px; text-align:center;">
-            <thead>
-              <tr style="background:#f1f5f9;">
-                <th rowspan="2" style="width:85px;">구분</th>
-                <th colspan="4">강좌수</th>
-                <th colspan="4">수강인원 통계</th>
-                <th colspan="2">행정 관리 상태</th>
-              </tr>
-              <tr style="background:#f8fafc;">
-                <th style="width:50px;">출력</th>
-                <th style="width:50px;">대기</th>
-                <th style="width:50px;">종료</th>
-                <th style="width:55px; font-weight:bold;">총합</th>
-                <th style="width:60px;">총정원</th>
-                <th style="width:60px;">신청인원</th>
-                <th style="width:55px;">대기자</th>
-                <th style="width:65px;">충원율</th>
-                <th style="width:65px;">수강료출력</th>
-                <th style="width:65px;">강사마감</th>
-              </tr>
-            </thead>
-            <tbody id="lecStatsTbody">
-              <!-- Dynamically populated stats -->
-            </tbody>
-          </table>
-        </div>
-        <div style="display:flex; justify-content:flex-end; margin-top:16px;">
-          <button type="button" class="btn-db btn-db-gray" onclick="closeLecStatsModal()">닫기</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 6. Modal: 강좌 단건 상세 수정 (09_강좌_상세수정화면 기반) -->
-  <div class="modal-backdrop" id="editCourseModal" style="display:none;">
-    <div class="modal-box" style="max-width: 820px; max-height:94vh; display:flex; flex-direction:column;">
-      <div class="modal-header" style="background:#337ab7; color:#fff;">
-        <h3><i class="fa-solid fa-gear"></i> 강좌 상세 수정 (09_강좌_상세수정화면)</h3>
-        <button class="close-btn" onclick="closeEditCourseModal()">&times;</button>
-      </div>
-      <div class="modal-body" style="padding:16px 22px; overflow-y:auto;">
-        <form id="formEditCourse" onsubmit="submitEditCourse(event)">
-          <input type="hidden" id="editCourseId">
-          <table class="db-table" style="width:100%; font-size:12px;">
-            <tbody>
-              <tr>
-                <td style="width:130px; font-weight:bold; background:#f9f9f9;">강좌구분 *</td>
-                <td>
-                  <select id="editCategory" style="height:28px; border:1px solid #ccc; border-radius:3px; padding:0 6px;" required>
-                    <option value="26년 9월">26년 9월</option>
-                    <option value="26년 8월">26년 8월</option>
-                    <option value="26년 7월">26년 7월</option>
-                    <option value="26년 6월">26년 6월</option>
-                    <option value="26년 5월">26년 5월</option>
-                    <option value="26년 4월">26년 4월</option>
-                    <option value="3월">3월</option>
-                  </select>
-                </td>
-                <td style="width:110px; font-weight:bold; background:#f9f9f9;">늘봄과정 *</td>
-                <td>
-                  <select id="editNeulbomType" style="height:28px; border:1px solid #ccc; border-radius:3px; padding:0 6px;">
-                    <option value="방과후">방과후</option>
-                    <option value="맞춤형">맞춤형</option>
-                    <option value="돌봄">돌봄</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td style="font-weight:bold; background:#f9f9f9;">강좌명 *</td>
-                <td colspan="3"><input type="text" id="editTitle" required style="width:100%; height:28px; border:1px solid #ccc; padding:0 8px; border-radius:3px;"></td>
-              </tr>
-              <tr>
-                <td style="font-weight:bold; background:#f9f9f9;">강사명 *</td>
-                <td>
-                  <div style="display:flex; gap:6px; align-items:center;">
-                    <input type="text" id="editInstructor" required style="width:140px; height:28px; border:1px solid #ccc; padding:0 6px;">
-                  </div>
-                </td>
-                <td style="font-weight:bold; background:#f9f9f9;">강의실</td>
-                <td><input type="text" id="editClassroom" style="width:100%; height:28px; border:1px solid #ccc; padding:0 6px;"></td>
-              </tr>
-              <tr>
-                <td style="font-weight:bold; background:#f9f9f9;">대상 학년 *</td>
-                <td colspan="3">
-                  <div style="display:flex; gap:12px; align-items:center;">
-                    <label style="cursor:pointer; font-weight:bold;"><input type="checkbox" id="check_all_grade_edit" onchange="toggleAllGradeCheck('edit', this)"> 전체</label>
-                    <label style="cursor:pointer;"><input type="checkbox" class="grade-chk-edit" value="1"> 1학년</label>
-                    <label style="cursor:pointer;"><input type="checkbox" class="grade-chk-edit" value="2"> 2학년</label>
-                    <label style="cursor:pointer;"><input type="checkbox" class="grade-chk-edit" value="3"> 3학년</label>
-                    <label style="cursor:pointer;"><input type="checkbox" class="grade-chk-edit" value="4"> 4학년</label>
-                    <label style="cursor:pointer;"><input type="checkbox" class="grade-chk-edit" value="5"> 5학년</label>
-                    <label style="cursor:pointer;"><input type="checkbox" class="grade-chk-edit" value="6"> 6학년</label>
-                  </div>
-                  <input type="hidden" id="editTargetGrade">
-                </td>
-              </tr>
-              <tr>
-                <td style="font-weight:bold; background:#f9f9f9;">강의 요일 / 시간</td>
-                <td>
-                  <div style="display:flex; gap:6px;">
-                    <input type="text" id="editDayOfWeek" style="width:70px; height:28px; border:1px solid #ccc; padding:0 6px;">
-                    <input type="text" id="editScheduleTime" style="flex:1; height:28px; border:1px solid #ccc; padding:0 6px;">
-                  </div>
-                </td>
-                <td style="font-weight:bold; background:#f9f9f9;">총 시수</td>
-                <td><input type="number" id="editTotalHours" style="width:70px; height:28px; border:1px solid #ccc; padding:0 6px;"> 회차</td>
-              </tr>
-              <tr>
-                <td style="font-weight:bold; background:#f9f9f9;">정원 / 대기정원 *</td>
-                <td>
-                  <div style="display:flex; gap:6px; align-items:center;">
-                    <span>정원:</span><input type="number" id="editCapacity" required style="width:65px; height:28px; border:1px solid #ccc; padding:0 6px;"> 명
-                    <span style="margin-left:8px;">대기:</span><input type="number" id="editWaitingCapacity" required style="width:65px; height:28px; border:1px solid #ccc; padding:0 6px;"> 명
-                  </div>
-                </td>
-                <td style="font-weight:bold; background:#f9f9f9;">운영 기간</td>
-                <td>
-                  <div style="display:flex; gap:4px; align-items:center;">
-                    <input type="text" id="editSdate" style="width:85px; height:28px; border:1px solid #ccc; font-size:11px; text-align:center;"> ~
-                    <input type="text" id="editEdate" style="width:85px; height:28px; border:1px solid #ccc; font-size:11px; text-align:center;">
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td style="font-weight:bold; background:#f9f9f9;">수강료(원)</td>
-                <td>
-                  <input type="number" id="editTuitionFee" style="width:110px; height:28px; border:1px solid #ccc; padding:0 6px;"> 원
-                </td>
-                <td style="font-weight:bold; background:#f9f9f9;">상태 관리</td>
-                <td>
-                  <select id="editStatus" style="height:28px; border:1px solid #ccc; padding:0 6px;">
-                    <option value="OUTPUT">출력</option>
-                    <option value="WAITING">대기</option>
-                    <option value="CLOSED">종료</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td style="font-weight:bold; background:#f9f9f9;">교재비 / 재료비</td>
-                <td colspan="3">
-                  <div style="display:flex; gap:16px; align-items:center;">
-                    <span>교재비:</span> <input type="number" id="editTextbookFee" style="width:90px; height:28px; border:1px solid #ccc; padding:0 6px;"> 원
-                    <span>재료비:</span> <input type="number" id="editMaterialFee" style="width:90px; height:28px; border:1px solid #ccc; padding:0 6px;"> 원
-                    <label style="margin-left:14px; cursor:pointer;"><input type="checkbox" id="editAllowConflict"> 시간표 중복허용</label>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px;">
-            <button type="button" class="btn-db btn-db-coral" onclick="deleteCurrentEditCourse()"><i class="fa-regular fa-trash-can"></i> 강좌 삭제</button>
-            <div style="display:flex; gap:8px;">
-              <button type="button" class="btn-db btn-db-gray" onclick="closeEditCourseModal()">취소</button>
-              <button type="submit" class="btn-db btn-db-blue" style="font-weight:bold;"><i class="fa-solid fa-check"></i> 수정 완료</button>
-            </div>
+        <div style="display:flex; justify-content:space-between; margin-top:16px; border-top:1px solid #eee; padding-top:12px;">
+          <div>
+            <button type="button" class="btn-db btn-db-coral" id="btnQaDelete" onclick="deleteCurrentQaItem()"><i class="fa-solid fa-trash"></i> 삭제</button>
           </div>
-        </form>
+          <div style="display:flex; gap:6px;">
+            <button type="button" class="btn-db btn-db-gray" onclick="closeQaModal('modalQaView')">목록으로</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

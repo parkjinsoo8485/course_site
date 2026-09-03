@@ -6,3 +6,5 @@ node_modules/
 crawled_assets/har/
 __pycache__/
 *.pyc
+*.zip
+course_site/public/downloads/manual_faq_all_files.zip

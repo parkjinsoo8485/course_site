@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const path = require('path');
+const fs = require('fs');
 
 // Domain Routers
 const authRoutes = require('./routes/auth.routes');
@@ -40,19 +41,118 @@ app.get(/^\/af\/ad_lec\/inputs/, (req, res) => {
 });
 
 app.get([
-  /^\/af\/ad_lec\/write/,
-  /^\/af\/ad_lec\/input/,
-  /^\/af\/ad_lec\/lists/,
-  /^\/af\/ad_lec\/modifyField/,
-  /^\/af\/ad_lec\/copy/,
-  /^\/af\/ad_lec\/stat/,
-  /^\/af\/ad_lec\/modify/
+  /^\/af\/ad_lec/,
+  /^\/af\/ad_app/,
+  /^\/af\/ad_wait/,
+  /^\/af\/ad_att/,
+  /^\/af\/ad_ref/,
+  /^\/af\/ad_free2_/,
+  /^\/af\/ad_rsch/,
+  /^\/af\/ad_abs/,
+  /^\/af\/ad_tea/,
+  /^\/af\/ad_sur/,
+  /^\/af\/ad_cfg/,
+  /^\/af\/ad_time/,
+  /^\/af\/ad_verify/,
+  /^\/af\/ad_neis_edufine/,
+  /^\/af\/ad_info/,
+  /^\/af\/notification/,
+  /^\/af\/spush/,
+  /^\/af\/ad_extension/,
+  /^\/af\/qanda/
 ], (req, res, next) => {
   // 정적 리소스 파일(.css, .js, .png, .woff 등) 요청인 경우 다음 정적 미들웨어로 전달
   if (req.path && req.path.includes('.') && !req.path.endsWith('.html')) {
     return next();
   }
   return res.sendFile(path.join(__dirname, 'af', 'ad_lec', 'lists', 'sn', 'index.html'));
+});
+
+// ==================== 로그인 및 메인 진입 -> 매뉴얼 페이지 리다이렉트 ====================
+app.get(['/login', '/login/', '/member/login', '/member/login/', '/member/login/sn/:school_id', '/member/login/sn/:school_id/'], (req, res) => {
+  return res.redirect('/af/ad_faq/main/sn/3267');
+});
+
+// ==================== 29. 매뉴얼 / FAQ 클론 페이지 & 다운로드/영상 라우트 ====================
+app.get(['/af/ad_faq/main/sn/:school_id', '/af/ad_faq/main/sn/:school_id/'], (req, res) => {
+  const clonedPath = path.join(__dirname, 'af/ad_faq/main/sn/3267/index.html');
+  if (fs.existsSync(clonedPath)) {
+    return res.sendFile(clonedPath);
+  }
+  return res.sendFile(path.join(__dirname, 'af/ad_lec/lists/sn/index.html'));
+});
+
+// ==================== DBDBSCHOOL 매뉴얼 / FAQ 파일 다운로드 & 영상 연동 엔드포인트 ====================
+app.get('/help/go_data/num/:num/data/:type', (req, res) => {
+  const { num, type } = req.params;
+  const fullUrl = `https://www.dbdbschool.kr/help/go_data/num/${num}/data/${type}`;
+
+  const mappingPath = path.join(__dirname, 'utils/manual_faq_mapping.json');
+  let mapping = {};
+  if (fs.existsSync(mappingPath)) {
+    try {
+      mapping = JSON.parse(fs.readFileSync(mappingPath, 'utf8'));
+    } catch (e) {}
+  }
+
+  const item = mapping[fullUrl];
+  if (!item) {
+    return res.status(404).send('해당 매뉴얼/FAQ 항목을 찾을 수 없습니다.');
+  }
+
+  // 1) 동영상인 경우: 공식 YouTube 영상으로 즉시 리다이렉트
+  if (item.isVideo && item.youtubeUrl) {
+    return res.redirect(item.youtubeUrl);
+  }
+
+  // 2) 문서 파일인 경우: 구글 드라이브 설정 확인 후 로컬 또는 드라이브 서빙
+  const driveConfigPath = path.join(__dirname, 'config/drive_config.json');
+  let driveConfig = {};
+  if (fs.existsSync(driveConfigPath)) {
+    try {
+      driveConfig = JSON.parse(fs.readFileSync(driveConfigPath, 'utf8'));
+    } catch (e) {}
+  }
+
+  // 구글 드라이브 연동 활성화 상태인 경우
+  if (driveConfig.drive_enabled && driveConfig.drive_file_base_url && item.localFile) {
+    const driveUrl = `${driveConfig.drive_file_base_url.replace(/\/$/, '')}/${encodeURIComponent(item.localFile)}`;
+    return res.redirect(driveUrl);
+  }
+
+  // 기본 동작: 로컬 다운로드 파일 서빙
+  if (item.localFile) {
+    const localFilePath = path.join(__dirname, 'public/downloads/manual_faq', item.localFile);
+    if (fs.existsSync(localFilePath)) {
+      return res.download(localFilePath, item.localFile);
+    }
+  }
+
+  // 로컬 파일이 없고 원본 타깃 URL이 존재하는 경우 외부 리다이렉트
+  if (item.targetUrl) {
+    return res.redirect(item.targetUrl);
+  }
+
+  return res.status(404).send('다운로드 파일을 찾을 수 없습니다.');
+});
+
+// 전체 매뉴얼 파일 일괄 압축본 다운로드 (구글 드라이브 백업용)
+app.get('/downloads/manual_faq_all_files.zip', (req, res) => {
+  const zipPath = path.join(__dirname, 'public/downloads/manual_faq_all_files.zip');
+  if (fs.existsSync(zipPath)) {
+    return res.download(zipPath, 'dbdbschool_manual_faq_all_files.zip');
+  }
+  res.status(404).send('압축 파일을 찾을 수 없습니다.');
+});
+
+// 개별 다운로드 파일 정적 서빙
+app.get('/downloads/manual_faq/:filename', (req, res) => {
+  const filename = req.params.filename;
+  const filePath = path.join(__dirname, 'public/downloads/manual_faq', filename);
+  if (fs.existsSync(filePath)) {
+    return res.download(filePath, filename);
+  }
+  res.status(404).send('파일을 찾을 수 없습니다.');
 });
 
 app.use(express.static(__dirname));
@@ -273,16 +373,10 @@ app.get(['/af/ad_app/lists/sn/:school_id', '/af/ad_app/lists/sn/:school_id/'], (
   res.sendFile(path.join(__dirname, 'af/ad_lec/lists/sn/index.html'));
 });
 
-app.get(['/af/ad_faq/main/sn/:school_id', '/af/ad_faq/main/sn/:school_id/'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'af/ad_lec/lists/sn/index.html'));
-});
+
 
 app.get(['/af/qanda/lists/sn/:school_id', '/af/qanda/lists/sn/:school_id/'], (req, res) => {
   res.sendFile(path.join(__dirname, 'af/ad_lec/lists/sn/index.html'));
-});
-
-app.get(['/member/login/sn/3267', '/member/login/sn/3267/'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'af/ad_lec/lists/sn/3267/index.html'));
 });
 
 app.get(['/member/findpw/sn/3267', '/member/findpw/sn/3267/'], (req, res) => {

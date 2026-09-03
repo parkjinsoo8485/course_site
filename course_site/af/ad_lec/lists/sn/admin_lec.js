@@ -95,7 +95,7 @@ function switchSubmodelView(event, key, url, pushState = true) {
     titleEl.innerHTML = submodelTitles[key];
   }
 
-  document.querySelectorAll('.sidebar-menu li.subitem').forEach(li => li.classList.remove('active'));
+  document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
   let activeSubitem = document.getElementById('sub_' + key);
   if (!activeSubitem && (key === 'ad_lec_write' || key === 'ad_lec_input')) {
     activeSubitem = document.getElementById('sub_ad_lec_lists');
@@ -103,7 +103,11 @@ function switchSubmodelView(event, key, url, pushState = true) {
   if (activeSubitem) {
     activeSubitem.classList.add('active');
     const parentMenu = activeSubitem.closest('.has-submenu');
-    if (parentMenu) parentMenu.classList.add('open');
+    if (parentMenu) {
+      parentMenu.classList.add('open');
+      const depthUl = parentMenu.querySelector('.depth, .submenu-list');
+      if (depthUl) depthUl.style.display = 'block';
+    }
   }
 
   document.querySelectorAll('.submodel-panel').forEach(panel => {

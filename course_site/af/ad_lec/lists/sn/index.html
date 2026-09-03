@@ -4,170 +4,395 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>방과후학교 프로그램 관리자 시스템 | 디비디비스쿨 통합 플랫폼</title>
+  <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" />
+  <link href="/css/default.css" rel="stylesheet" type="text/css" />
+  <link href="/css/content.css" rel="stylesheet" type="text/css" />
+  <link href="/css/font-awesome.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/af/ad_lec/lists/sn/admin_lec.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @font-face {
+      font-family: 'FontAwesome';
+      src: url('/icon/fonts/fontawesome-webfont.woff?v=4.2.0') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+    .fa {
+      font-family: 'FontAwesome' !important;
+      display: inline-block;
+      font: normal normal normal 14px/1 FontAwesome;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* dbdbschool Original Theme Overrides - Pixel-Exact 45px Item Heights */
+    #header { background: #4791d2 !important; height: 60px !important; position: relative; z-index: 1000; }
+    #header #logo { background: #366d9d !important; height: 60px !important; line-height: 60px !important; padding: 0 20px; float: left; }
+    #header #logo a { color: #fff; font-size: 16px; font-weight: bold; text-decoration: none; }
+    #header h1 { float: left; margin: 0; padding: 0 20px; line-height: 60px; font-size: 16px; }
+    #header h1 a { color: #fff; text-decoration: none; font-weight: bold; }
+    
+    #container { display: flex; min-height: calc(100vh - 60px); }
+    #left_menu {
+      position: fixed;
+      width: 240px;
+      height: calc(100vh - 60px);
+      top: 60px;
+      left: 0;
+      background: #f4f4f4;
+      z-index: 100;
+      overflow-y: auto;
+      border-right: 1px #dddddd solid;
+    }
+    #left_menu .user_box {
+      float: left;
+      width: 100%;
+      background: #f4f4f4;
+      position: relative;
+    }
+    #left_menu .user_box p.user_t {
+      position: absolute;
+      left: 10px;
+      top: 15px;
+      width: 50px;
+      height: 50px;
+      background: url(/images/af/user_face01.png) left top no-repeat;
+    }
+    #left_menu dl.user {
+      padding: 0 0 10px 70px;
+      min-height: 78px;
+      margin: 0;
+    }
+    #left_menu dl.user dt {
+      width: 100%;
+      padding: 15px 0 3px 0;
+      line-height: 160%;
+      color: #3d3d3d;
+      font-size: 13px;
+      font-weight: bold;
+    }
+    #left_menu dl.user dd {
+      display: inline;
+      padding: 0 4px 0 0;
+      font-size: 11px;
+    }
+    #left_menu dl.user dd a {
+      color: #7d7d7d;
+      text-decoration: none;
+    }
+    #left_menu .main_btn {
+      width: 100%;
+      height: 45px;
+      color: #fff;
+      position: relative;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    #left_menu .main_btn li {
+      float: left;
+      width: 50%;
+      height: 45px;
+      line-height: 45px;
+      text-align: center;
+      font-weight: bold;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    #left_menu .main_btn li a {
+      color: #fff;
+      display: block;
+      height: 45px;
+      line-height: 45px;
+      text-decoration: none;
+    }
+    #left_menu .main_btn li.btn01 { background: #34ae95; }
+    #left_menu .main_btn li.btn02 { background: #dd7075; }
+
+    #left_menu ul.parent {
+      width: 100%;
+      padding-bottom: 120px;
+      margin: 0;
+      list-style: none;
+      padding-left: 0;
+    }
+    #left_menu ul.parent li {
+      width: 100%;
+      clear: both;
+      border-bottom: 1px #dddddd solid;
+      line-height: 40px;
+      height: 45px;
+      position: relative;
+      box-sizing: border-box;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    #left_menu ul.parent li a {
+      display: block;
+      color: #787878;
+      height: 44px;
+      line-height: 44px;
+      padding: 0 !important;
+      text-decoration: none;
+    }
+    #left_menu ul.parent li.admin a {
+      color: #dd7075;
+    }
+    #left_menu ul.parent li i.fa {
+      font-size: 20px;
+      margin: 0 10px 0 0;
+      width: 45px;
+      text-align: center;
+      border-right: 1px #dddddd solid;
+      line-height: 44px;
+      float: left;
+    }
+    #left_menu ul.parent li strong {
+      font-weight: normal;
+      font-size: 15px;
+      line-height: 44px;
+      float: left;
+    }
+    #left_menu ul.parent li span.fa {
+      position: absolute;
+      right: 10px;
+      top: 18px;
+      font-weight: normal;
+      font-size: 11px;
+    }
+    #left_menu ul.parent li.active > a,
+    #left_menu ul.parent li a.on {
+      background-color: #2e6da4 !important;
+      color: #ffffff !important;
+    }
+    #left_menu ul.parent li.active > a i.fa,
+    #left_menu ul.parent li a.on i.fa {
+      border-right-color: #255986 !important;
+      color: #ffffff !important;
+    }
+    #left_menu ul.parent li.active > a strong,
+    #left_menu ul.parent li a.on strong {
+      font-weight: bold;
+      color: #ffffff !important;
+    }
+    #left_menu ul.parent li ul.depth {
+      display: none;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+    #left_menu ul.parent li.open ul.depth {
+      display: block !important;
+    }
+    #left_menu ul.parent li ul.depth li {
+      border-top: 1px #dddddd solid;
+      line-height: 32px;
+      height: 33px;
+      background: #e9e9e9;
+      border-bottom: 0px;
+      width: 100%;
+    }
+    #left_menu ul.parent li ul.depth li a {
+      height: 32px;
+      line-height: 32px;
+      font-size: 12px;
+      padding-left: 15px !important;
+    }
+    #left_menu ul.parent li ul.depth li i.fa {
+      line-height: 32px;
+      width: 25px;
+      font-size: 13px;
+      border-right: none;
+    }
+    .main-content {
+      margin-left: 240px;
+      flex: 1;
+      width: calc(100% - 240px);
+      min-width: 0;
+      background: #f8fafc;
+    }
+    .modal-overlay {
+      display: none !important;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.show,
+    .modal-overlay.active {
+      display: flex !important;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- 1. TOP GLOBAL BLUE NAVBAR -->
-  <header class="top-navbar">
-    <div class="school-title" id="topSchoolTitle" style="cursor:pointer;" onclick="window.location.href='/sczigi/service/lists/sn/3267'" title="학교관리 페이지로 이동">광주풍향초등학교</div>
-    <div class="center-selector" style="position:relative;">
-      <button id="afServiceBtn" onclick="toggleAfServiceDropdown(event)" style="background:rgba(255,255,255,0.15); border:none; color:white; font-size:0.88rem; font-weight:bold; padding:4px 10px; border-radius:3px; cursor:pointer; display:flex; align-items:center; gap:6px;">
-        <span>늘봄학교</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem;"></i>
-      </button>
-      <div id="afServiceDropdown" style="display:none; position:absolute; top:36px; left:0; background:#fff; color:#333; border:1px solid #ddd; border-radius:4px; box-shadow:0 4px 12px rgba(0,0,0,0.15); min-width:170px; z-index:1100; padding:4px 0; text-align:left;">
-        <div style="padding:6px 12px; font-size:11px; font-weight:bold; color:#777; border-bottom:1px solid #eee;">서비스 전환</div>
-        <a href="/af/ad_lec/lists/sn/3267" style="display:block; padding:8px 12px; font-size:12px; font-weight:bold; color:#3c8dbc; background:#f0f7fd;"><i class="fa-solid fa-chart-line" style="margin-right:6px;"></i> 늘봄학교 (현재)</a>
-        <a href="/sczigi/service/lists/sn/3267" style="display:block; padding:8px 12px; font-size:12px; color:#333; font-weight:bold;"><i class="fa-solid fa-school" style="color:#3c8dbc; margin-right:6px;"></i> 학교관리 돌아가기</a>
-      </div>
-    </div>
-    <div class="right-controls">
-      <select id="roleSwitcher" style="background:#1d4ed8; color:white; border:1px solid #60a5fa; border-radius:3px; padding:3px 8px; font-size:0.8rem;" onchange="switchRole(this.value)">
+  <!-- 1. TOP GLOBAL BLUE NAVBAR (dbdbschool Official Architecture) -->
+  <div id="header">
+    <p id="logo"><a href="/af/ad_faq/main/sn/3267">광주풍향초등학교</a></p>
+    <h1><a href="#none;" class="btn_icon">늘봄학교 <i class="fa title fa-angle-down"></i></a> 
+      <span class="box_position">
+        <div class="my_service" style="display:none;">
+          <span class="arrow"><i class="fa fa-sort-asc"></i></span>
+          <ul>
+            <li><a href="/af/ad_lec/lists/sn/3267">늘봄학교</a></li>
+          </ul>
+        </div>
+      </span>
+    </h1>
+    <div class="user_right_controls" style="position:absolute; right:20px; top:16px; color:#fff; display:flex; align-items:center; gap:12px;">
+      <select id="roleSwitcher" style="background:#285e8e; color:white; border:1px solid #60a5fa; border-radius:3px; padding:3px 8px; font-size:12px;" onchange="switchRole(this.value)">
         <option value="school_admin" selected>학교 관리자 (Admin)</option>
         <option value="teacher">강사 (Instructor)</option>
         <option value="parent">학생/학부모 (Parent)</option>
       </select>
-      <span style="cursor:pointer;" onclick="handleAfUserLogout(event)"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</span>
+      <a href="/member/logout/sn/3267" onclick="handleAfUserLogout(event)" style="color:#fff; text-decoration:none; font-size:12px;"><i class="fa fa-power-off"></i> 로그아웃</a>
     </div>
-  </header>
+  </div>
 
-  <div class="admin-layout">
-    <!-- 2. SIDEBAR NAVIGATION -->
-    <aside class="sidebar">
-      <!-- User Profile Header Card -->
-      <div class="user-profile-card">
-        <div class="user-profile-header">
-          <div class="user-avatar-circle"><i class="fa-solid fa-user"></i></div>
-          <div class="user-name-text">관리자(박진수)님 <span class="badge-bell"><i class="fa-solid fa-bell"></i> 0</span></div>
-        </div>
-        <div class="user-links">
-          <a href="javascript:void(0);" onclick="handleAfUserLogout(event)">[로그아웃]</a>
-          <a href="javascript:void(0);" onclick="openAfAdminInfoModal()">[정보수정]</a>
-        </div>
-        <div class="user-action-buttons">
-          <button class="btn-home" onclick="window.location.href='/sczigi/service/lists/sn/3267'" style="background:#3c8dbc; color:#fff; font-weight:bold;"><i class="fa-solid fa-school"></i> 학교관리</button>
-          <button class="btn-course-reg" onclick="openAddModal()"><i class="fa-solid fa-plus"></i> 강좌등록</button>
-        </div>
+  <div id="container">
+    <!-- 2. SIDEBAR NAVIGATION (Exact 1:1 dbdbschool Official Cloned Architecture) -->
+    <div id="left_menu" class="content mCustomScrollbar light" data-mcs-theme="minimal-dark">
+      <div class="user_box">
+        <p class="user_t"></p>
+        <dl class="user">
+          <dt>원희자(김채원)님 <span class="ball_num"><a href="/af/notification/lists/sn/3267" onclick="switchSubmodelView(event, 'notification_lists', '/af/notification/lists/sn/3267')"><i class="fa fa-bell"></i><i class="num">1</i></a></span></dt>
+          <dd><a href="/member/logout/sn/3267" onclick="handleAfUserLogout(event)">[로그아웃]</a></dd>
+          <dd><a href="javascript:void(0);" onclick="openAfAdminInfoModal()">[정보수정]</a></dd>
+        </dl>
+        
+        <ul class="main_btn">
+          <li class="btn01"><a href="/af/ad_faq/main/sn/3267">홈으로</a></li>
+          <li class="btn02"><a href="javascript:void(0);" onclick="openAddModal()">강좌등록</a></li>
+        </ul>
       </div>
 
       <!-- Navigation Menus (Exact dbdbschool Live Order) -->
-      <ul class="sidebar-menu" id="adminSidebar">
-        <li class="subitem" id="sub_ad_faq_main">
-          <a href="/af/ad_faq/main/sn/3267" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-book"></i> 매뉴얼</span>
+      <ul class="parent sidebar-menu" id="adminSidebar">
+        <li id="sub_ad_faq_main">
+          <a href="/af/ad_faq/main/sn/3267">
+            <i class="fa fa-download"></i><strong>매뉴얼</strong>
           </a>
         </li>
-        <li class="subitem" id="sub_qanda_lists">
+        <li id="sub_qanda_lists">
           <a href="/af/qanda/lists/sn/3267" onclick="switchSubmodelView(event, 'qanda_lists', '/af/qanda/lists/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-comments"></i> 고객지원 게시판</span>
+            <i class="fa fa-phone"></i><strong>고객지원 게시판</strong>
           </a>
         </li>
-        <li class="subitem" id="sub_sczigi_service_lists">
-          <a href="/sczigi/service/lists/sn/3267" onclick="window.location.href='/sczigi/service/lists/sn/3267'; return false;">
-            <span class="menu-label"><i class="fa-solid fa-school" style="color:#ef4444;"></i> 학교관리</span>
+        <li class="admin" id="sub_sczigi_service_lists">
+          <a href="/sczigi/service/lists/sn/3267">
+            <i class="fa fa-cog"></i><strong>학교관리</strong>
           </a>
         </li>
-        <li class="subitem active" id="sub_ad_lec_lists">
+        <li class="active" id="sub_ad_lec_lists">
           <a href="/af/ad_lec/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_lec_lists', '/af/ad_lec/lists/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-futbol"></i> 강좌관리</span>
+            <i class="fa fa-futbol-o"></i><strong>강좌관리</strong>
           </a>
         </li>
-        <li class="subitem" id="sub_ad_app_lists">
+        <li id="sub_ad_app_lists">
           <a href="/af/ad_app/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_app_lists', '/af/ad_app/lists/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-user-group"></i> 신청자관리</span>
+            <i class="fa fa-slideshare"></i><strong>신청자관리</strong>
           </a>
         </li>
-        <li class="subitem" id="sub_ad_wait_lists">
+        <li id="sub_ad_wait_lists">
           <a href="/af/ad_wait/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_wait_lists', '/af/ad_wait/lists/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-user-clock"></i> 대기자관리</span>
+            <i class="fa fa-slideshare"></i><strong>대기자관리</strong>
           </a>
         </li>
-        <li class="subitem" id="sub_ad_att_stat">
+        <li id="sub_ad_att_stat">
           <a href="/af/ad_att/stat/sn/3267" onclick="switchSubmodelView(event, 'ad_att_stat', '/af/ad_att/stat/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-square-check"></i> 출석부관리</span>
+            <i class="fa fa-check-square-o"></i><strong>출석부관리</strong>
           </a>
         </li>
-        <li class="subitem" id="sub_ad_ref_lists">
+        <li id="sub_ad_ref_lists">
           <a href="/af/ad_ref/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_ref_lists', '/af/ad_ref/lists/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-user-minus"></i> 환불/취소관리</span>
+            <i class="fa fa-slideshare"></i><strong>환불/취소관리</strong>
           </a>
         </li>
 
         <!-- 지원금관리 ∨ -->
         <li class="has-submenu" id="menu_ad_subsidy">
-          <a onclick="toggleSubmenu(this)">
-            <span class="menu-label"><i class="fa-solid fa-building-columns"></i> 지원금관리</span>
-            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          <a href="javascript:void(0);" onclick="toggleSubmenu(this)">
+            <i class="fa fa-university"></i><strong>지원금관리</strong>
+            <span class="fa fa-chevron-down arrow-icon"></span>
           </a>
-          <ul class="submenu-list">
-            <li class="subitem" id="sub_ad_free2_stu"><a href="/af/ad_free2_stu/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_free2_stu', '/af/ad_free2_stu/lists/sn/3267')">대상자관리</a></li>
-            <li class="subitem" id="sub_ad_free2_app"><a href="/af/ad_free2_app/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_free2_app', '/af/ad_free2_app/lists/sn/3267')">수강자관리</a></li>
-            <li class="subitem" id="sub_ad_free2_cfg_main"><a href="/af/ad_free2_cfg/main/sn/3267" onclick="switchSubmodelView(event, 'ad_free2_cfg_main', '/af/ad_free2_cfg/main/sn/3267')">지원금설정</a></li>
-            <li class="subitem" id="sub_ad_free2_cfg_free1"><a href="/af/ad_free2_cfg/free1/sn/3267" onclick="switchSubmodelView(event, 'ad_free2_cfg_free1', '/af/ad_free2_cfg/free1/sn/3267')">순위구분설정</a></li>
+          <ul class="depth submenu-list" style="display:none;">
+            <li id="sub_ad_free2_stu"><a href="/af/ad_free2_stu/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_free2_stu', '/af/ad_free2_stu/lists/sn/3267')"><i class="fa fa-volume-up"></i>대상자관리</a></li>
+            <li id="sub_ad_free2_app"><a href="/af/ad_free2_app/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_free2_app', '/af/ad_free2_app/lists/sn/3267')"><i class="fa fa-volume-up"></i>수강자관리</a></li>
+            <li id="sub_ad_free2_cfg_main"><a href="/af/ad_free2_cfg/main/sn/3267" onclick="switchSubmodelView(event, 'ad_free2_cfg_main', '/af/ad_free2_cfg/main/sn/3267')"><i class="fa fa-volume-up"></i>지원금설정</a></li>
+            <li id="sub_ad_free2_cfg_free1"><a href="/af/ad_free2_cfg/free1/sn/3267" onclick="switchSubmodelView(event, 'ad_free2_cfg_free1', '/af/ad_free2_cfg/free1/sn/3267')"><i class="fa fa-volume-up"></i>순위구분설정</a></li>
           </ul>
         </li>
 
-        <li class="subitem" id="sub_ad_abs_lists">
-          <a href="/af/ad_abs/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_abs_lists', '/af/ad_abs/lists/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-calendar-xmark"></i> 결석/귀가신청</span>
+        <li id="sub_ad_rsch_lists">
+          <a href="/af/ad_rsch/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_rsch_lists', '/af/ad_rsch/lists/sn/3267')">
+            <i class="fa fa-calendar"></i><strong>귀가일정표</strong>
           </a>
         </li>
-        <li class="subitem" id="sub_ad_tea_lists">
+        <li id="sub_ad_abs_lists">
+          <a href="/af/ad_abs/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_abs_lists', '/af/ad_abs/lists/sn/3267')">
+            <i class="fa fa-calendar-o"></i><strong>결석/귀가신청</strong>
+          </a>
+        </li>
+        <li id="sub_ad_tea_lists">
           <a href="/af/ad_tea/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_tea_lists', '/af/ad_tea/lists/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-briefcase"></i> 강사관리</span>
+            <i class="fa fa-briefcase"></i><strong>강사관리</strong>
           </a>
         </li>
 
         <!-- 설문관리 ∨ -->
         <li class="has-submenu" id="menu_ad_survey">
-          <a onclick="toggleSubmenu(this)">
-            <span class="menu-label"><i class="fa-solid fa-chart-pie"></i> 설문관리</span>
-            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          <a href="javascript:void(0);" onclick="toggleSubmenu(this)">
+            <i class="fa fa-pie-chart"></i><strong>설문관리</strong>
+            <span class="fa fa-chevron-down arrow-icon"></span>
           </a>
-          <ul class="submenu-list">
-            <li class="subitem" id="sub_ad_sur_lists"><a href="/af/ad_sur/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_sur_lists', '/af/ad_sur/lists/sn/3267')">설문</a></li>
-            <li class="subitem" id="sub_ad_surs_lists"><a href="/af/ad_surs/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_surs_lists', '/af/ad_surs/lists/sn/3267')">샘플설문</a></li>
+          <ul class="depth submenu-list" style="display:none;">
+            <li id="sub_ad_sur_lists"><a href="/af/ad_sur/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_sur_lists', '/af/ad_sur/lists/sn/3267')"><i class="fa fa-volume-up"></i>설문</a></li>
+            <li id="sub_ad_surs_lists"><a href="/af/ad_surs/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_surs_lists', '/af/ad_surs/lists/sn/3267')"><i class="fa fa-volume-up"></i>샘플설문</a></li>
           </ul>
         </li>
 
         <!-- 환경설정 ∨ -->
         <li class="has-submenu" id="menu_ad_config">
-          <a onclick="toggleSubmenu(this)">
-            <span class="menu-label"><i class="fa-solid fa-gear"></i> 환경설정</span>
-            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          <a href="javascript:void(0);" onclick="toggleSubmenu(this)">
+            <i class="fa fa-cog"></i><strong>환경설정</strong>
+            <span class="fa fa-chevron-down arrow-icon"></span>
           </a>
-          <ul class="submenu-list">
-            <li class="subitem" id="sub_ad_cfg_main"><a href="/af/ad_cfg/main/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_main', '/af/ad_cfg/main/sn/3267')">기본설정</a></li>
-            <li class="subitem" id="sub_ad_time_lists"><a href="/af/ad_time/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_time_lists', '/af/ad_time/lists/sn/3267')">신청기간</a></li>
-            <li class="subitem" id="sub_ad_cfg_period"><a href="/af/ad_cfg/period/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_period', '/af/ad_cfg/period/sn/3267')">강의시간</a></li>
-            <li class="subitem" id="sub_ad_cfg_afDiv"><a href="/af/ad_cfg/afDiv/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_afDiv', '/af/ad_cfg/afDiv/sn/3267')">강좌구분</a></li>
-            <li class="subitem" id="sub_ad_cfg_appLiGrp"><a href="/af/ad_cfg/appLiGrp/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_appLiGrp', '/af/ad_cfg/appLiGrp/sn/3267')">중복제한그룹</a></li>
-            <li class="subitem" id="sub_ad_verify_main"><a href="/af/ad_verify/main/sn/3267" onclick="switchSubmodelView(event, 'ad_verify_main', '/af/ad_verify/main/sn/3267')">학적검증</a></li>
-            <li class="subitem" id="sub_ad_neis_edufine_lists"><a href="/af/ad_neis_edufine/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_neis_edufine_lists', '/af/ad_neis_edufine/lists/sn/3267')">나이스/에듀파인 설정</a></li>
-            <li class="subitem" id="sub_ad_cfg_message"><a href="/af/ad_cfg/message/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_message', '/af/ad_cfg/message/sn/3267')">안내글설정</a></li>
-            <li class="subitem" id="sub_ad_cfg_clear"><a href="/af/ad_cfg/clear/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_clear', '/af/ad_cfg/clear/sn/3267')">초기화</a></li>
-            <li class="subitem" id="sub_ad_info_modify"><a href="/af/ad_info/modify/sn/3267" onclick="switchSubmodelView(event, 'ad_info_modify', '/af/ad_info/modify/sn/3267')">담당자정보</a></li>
+          <ul class="depth submenu-list" style="display:none;">
+            <li id="sub_ad_cfg_main"><a href="/af/ad_cfg/main/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_main', '/af/ad_cfg/main/sn/3267')"><i class="fa fa-volume-up"></i>기본설정</a></li>
+            <li id="sub_ad_time_lists"><a href="/af/ad_time/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_time_lists', '/af/ad_time/lists/sn/3267')"><i class="fa fa-volume-up"></i>신청기간</a></li>
+            <li id="sub_ad_cfg_period"><a href="/af/ad_cfg/period/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_period', '/af/ad_cfg/period/sn/3267')"><i class="fa fa-volume-up"></i>강의시간</a></li>
+            <li id="sub_ad_cfg_afDiv"><a href="/af/ad_cfg/afDiv/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_afDiv', '/af/ad_cfg/afDiv/sn/3267')"><i class="fa fa-volume-up"></i>강좌구분</a></li>
+            <li id="sub_ad_cfg_appLiGrp"><a href="/af/ad_cfg/appLiGrp/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_appLiGrp', '/af/ad_cfg/appLiGrp/sn/3267')"><i class="fa fa-volume-up"></i>중복제한그룹</a></li>
+            <li id="sub_ad_verify_main"><a href="/af/ad_verify/main/sn/3267" onclick="switchSubmodelView(event, 'ad_verify_main', '/af/ad_verify/main/sn/3267')"><i class="fa fa-volume-up"></i>학적검증</a></li>
+            <li id="sub_ad_neis_edufine_lists"><a href="/af/ad_neis_edufine/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_neis_edufine_lists', '/af/ad_neis_edufine/lists/sn/3267')"><i class="fa fa-volume-up"></i>나이스/에듀파인 설정</a></li>
+            <li id="sub_ad_cfg_message"><a href="/af/ad_cfg/message/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_message', '/af/ad_cfg/message/sn/3267')"><i class="fa fa-volume-up"></i>안내글설정</a></li>
+            <li id="sub_ad_cfg_clear"><a href="/af/ad_cfg/clear/sn/3267" onclick="switchSubmodelView(event, 'ad_cfg_clear', '/af/ad_cfg/clear/sn/3267')"><i class="fa fa-volume-up"></i>초기화</a></li>
+            <li id="sub_ad_info_modify"><a href="/af/ad_info/modify/sn/3267" onclick="switchSubmodelView(event, 'ad_info_modify', '/af/ad_info/modify/sn/3267')"><i class="fa fa-volume-up"></i>담당자정보</a></li>
           </ul>
         </li>
 
-        <li class="subitem" id="sub_notification_lists">
+        <li id="sub_notification_lists">
           <a href="/af/notification/lists/sn/3267" onclick="switchSubmodelView(event, 'notification_lists', '/af/notification/lists/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-volume-high"></i> 알림관리</span>
+            <i class="fa fa-volume-up"></i><strong>알림관리</strong>
           </a>
         </li>
-        <li class="subitem" id="sub_spush_lists">
+        <li id="sub_spush_lists">
           <a href="/af/spush/lists/sn/3267" onclick="switchSubmodelView(event, 'spush_lists', '/af/spush/lists/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-bell"></i> 푸시알림관리</span>
+            <i class="fa fa-bell" style="font-size:18px;"></i><strong>푸시알림관리</strong>
           </a>
         </li>
-        <li class="subitem" id="sub_ad_extension_lists">
+        <li id="sub_ad_extension_lists">
           <a href="/af/ad_extension/lists/sn/3267" onclick="switchSubmodelView(event, 'ad_extension_lists', '/af/ad_extension/lists/sn/3267')">
-            <span class="menu-label"><i class="fa-solid fa-calendar-check"></i> 연장신청 <span class="badge-days">198일 남음</span></span>
+            <i class="fa fa-calendar-o"></i><strong>연장신청<span class="badge badge-xm">178일 남음</span></strong>
           </a>
         </li>
       </ul>
-    </aside>
+    </div>
 
     <!-- 3. MAIN CONTENT PANELS -->
     <main class="main-content">

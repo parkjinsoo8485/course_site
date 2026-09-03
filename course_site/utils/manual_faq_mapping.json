@@ -1,0 +1,884 @@
+{
+  "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/manual/af/manual_af.zip?23091501": {
+    "originalUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/manual/af/manual_af.zip?23091501",
+    "localFile": "manual_af.zip",
+    "size": 42578458,
+    "isFile": true
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/239/data/link2": {
+    "num": "239",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_01_학교홈페이지 방과후학교 신청 배너 등록.hwp?202609031003",
+    "isFile": true,
+    "localFile": "239_link2_운영절차_01_학교홈페이지 방과후학교 신청 배너 등록.hwp",
+    "size": 50688
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/182/data/link2": {
+    "num": "182",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_02_방과후학교 프로그램 이용 동의서.hwp?202609031003",
+    "isFile": true,
+    "localFile": "182_link2_운영절차_02_방과후학교 프로그램 이용 동의서.hwp",
+    "size": 178688
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/183/data/link2": {
+    "num": "183",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_03_가정통신문 발송.hwp?202609031003",
+    "isFile": true,
+    "localFile": "183_link2_운영절차_03_가정통신문 발송.hwp",
+    "size": 1507328
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/71/data/link2": {
+    "num": "71",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_04_학생등록.hwp?202609031003",
+    "isFile": true,
+    "localFile": "71_link2_운영절차_04_학생등록.hwp",
+    "size": 588800
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/71/data/link1": {
+    "num": "71",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtu.be/04ec6jcVwvk",
+    "isVideo": true,
+    "youtubeUrl": "https://youtu.be/04ec6jcVwvk"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/185/data/link2": {
+    "num": "185",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_05_강사 담임 등록.hwp?202609031003",
+    "isFile": true,
+    "localFile": "185_link2_운영절차_05_강사 담임 등록.hwp",
+    "size": 302592
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/72/data/link1": {
+    "num": "72",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtu.be/cgLxvXa5msA",
+    "isVideo": true,
+    "youtubeUrl": "https://youtu.be/cgLxvXa5msA"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/73/data/link2": {
+    "num": "73",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_06_환경설정.hwp?202609031003",
+    "isFile": true,
+    "localFile": "73_link2_운영절차_06_환경설정.hwp",
+    "size": 770048
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/73/data/link1": {
+    "num": "73",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtu.be/RWScR6b2a4g",
+    "isVideo": true,
+    "youtubeUrl": "https://youtu.be/RWScR6b2a4g"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/74/data/link2": {
+    "num": "74",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_07_강좌등록.hwp?202609031003",
+    "isFile": true,
+    "localFile": "74_link2_운영절차_07_강좌등록.hwp",
+    "size": 480256
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/74/data/link1": {
+    "num": "74",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtube.com/playlist?list=PLA-pyXX5hMe-HC6eZL2F6A-OvgkEBgKeG&si=kPpC6McYhe4a4czj",
+    "isVideo": true,
+    "youtubeUrl": "https://youtube.com/playlist?list=PLA-pyXX5hMe-HC6eZL2F6A-OvgkEBgKeG&si=kPpC6McYhe4a4czj"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/75/data/link2": {
+    "num": "75",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_08_수강신청 기간 설정.hwp?202609031003",
+    "isFile": true,
+    "localFile": "75_link2_운영절차_08_수강신청 기간 설정.hwp",
+    "size": 360448
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/75/data/link1": {
+    "num": "75",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtu.be/2X6rCZxFAls",
+    "isVideo": true,
+    "youtubeUrl": "https://youtu.be/2X6rCZxFAls"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/76/data/link2": {
+    "num": "76",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/신청자 관리_01_수강신청 테스트.hwp?202609031003",
+    "isFile": true,
+    "localFile": "76_link2_신청자 관리_01_수강신청 테스트.hwp",
+    "size": 1104384
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/76/data/link1": {
+    "num": "76",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtu.be/q9hPB-_gTkk",
+    "isVideo": true,
+    "youtubeUrl": "https://youtu.be/q9hPB-_gTkk"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/77/data/link2": {
+    "num": "77",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_10_대기자 관리.hwp?202609031003",
+    "isFile": true,
+    "localFile": "77_link2_운영절차_10_대기자 관리.hwp",
+    "size": 686592
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/77/data/link1": {
+    "num": "77",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtu.be/MFd7IwonIyw",
+    "isVideo": true,
+    "youtubeUrl": "https://youtu.be/MFd7IwonIyw"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/78/data/link2": {
+    "num": "78",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_11_추첨하기.hwp?202609031003",
+    "isFile": true,
+    "localFile": "78_link2_운영절차_11_추첨하기.hwp",
+    "size": 2195968
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/78/data/link1": {
+    "num": "78",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://www.youtube.com/playlist?list=PLA-pyXX5hMe-U9vZ2eJNWtEa1rT0K9tW-",
+    "isVideo": true,
+    "youtubeUrl": "https://www.youtube.com/playlist?list=PLA-pyXX5hMe-U9vZ2eJNWtEa1rT0K9tW-"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/186/data/link2": {
+    "num": "186",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_12_신청결과 조회.hwp?202609031003",
+    "isFile": true,
+    "localFile": "186_link2_운영절차_12_신청결과 조회.hwp",
+    "size": 518656
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/237/data/link2": {
+    "num": "237",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_23_출석부관리.hwp?202609031003",
+    "isFile": true,
+    "localFile": "237_link2_운영절차_23_출석부관리.hwp",
+    "size": 1641984
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/79/data/link1": {
+    "num": "79",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtu.be/DMG4LE_lDz4",
+    "isVideo": true,
+    "youtubeUrl": "https://youtu.be/DMG4LE_lDz4"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/80/data/link2": {
+    "num": "80",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_14_수강료 산출.hwp?202609031003",
+    "isFile": true,
+    "localFile": "80_link2_운영절차_14_수강료 산출.hwp",
+    "size": 875520
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/80/data/link1": {
+    "num": "80",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtu.be/enBBSxcaQUg",
+    "isVideo": true,
+    "youtubeUrl": "https://youtu.be/enBBSxcaQUg"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/81/data/link2": {
+    "num": "81",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_15_강사마감.hwp?202609031003",
+    "isFile": true,
+    "localFile": "81_link2_운영절차_15_강사마감.hwp",
+    "size": 939008
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/81/data/link1": {
+    "num": "81",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtu.be/9NwqVcY0aW4",
+    "isVideo": true,
+    "youtubeUrl": "https://youtu.be/9NwqVcY0aW4"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/255/data/link2": {
+    "num": "255",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_16_지원금 관리.hwp?202609031003",
+    "isFile": true,
+    "localFile": "255_link2_운영절차_16_지원금 관리.hwp",
+    "size": 4104704
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/187/data/link2": {
+    "num": "187",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_16_자유수강권자 관리.hwp?202609031003",
+    "isFile": true,
+    "localFile": "187_link2_운영절차_16_자유수강권자 관리.hwp",
+    "size": 1589248
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/82/data/link1": {
+    "num": "82",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://www.youtube.com/playlist?list=PLA-pyXX5hMe8eUZ-PtDWXWp7-z2H0pI5u",
+    "isVideo": true,
+    "youtubeUrl": "https://www.youtube.com/playlist?list=PLA-pyXX5hMe8eUZ-PtDWXWp7-z2H0pI5u"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/84/data/link2": {
+    "num": "84",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_17_스쿨뱅킹 파일 다운로드.hwp?202609031003",
+    "isFile": true,
+    "localFile": "84_link2_운영절차_17_스쿨뱅킹 파일 다운로드.hwp",
+    "size": 1036288
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/84/data/link1": {
+    "num": "84",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://www.youtube.com/playlist?list=PLA-pyXX5hMe_JXCrK4WeJb-5Q0PStuCdW",
+    "isVideo": true,
+    "youtubeUrl": "https://www.youtube.com/playlist?list=PLA-pyXX5hMe_JXCrK4WeJb-5Q0PStuCdW"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/188/data/link2": {
+    "num": "188",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_18_다음달 수강신청 준비.hwp?202609031003",
+    "isFile": true,
+    "localFile": "188_link2_운영절차_18_다음달 수강신청 준비.hwp",
+    "size": 1104384
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/85/data/link2": {
+    "num": "85",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_19_환불관리.hwp?202609031003",
+    "isFile": true,
+    "localFile": "85_link2_운영절차_19_환불관리.hwp",
+    "size": 2290176
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/85/data/link1": {
+    "num": "85",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://www.youtube.com/playlist?list=PLA-pyXX5hMe-oPSMgl9qbvNJzHf08ZGa5",
+    "isVideo": true,
+    "youtubeUrl": "https://www.youtube.com/playlist?list=PLA-pyXX5hMe-oPSMgl9qbvNJzHf08ZGa5"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/190/data/link2": {
+    "num": "190",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_20_데이터 백업 및 초기화.hwp?202609031003",
+    "isFile": true,
+    "localFile": "190_link2_운영절차_20_데이터 백업 및 초기화.hwp",
+    "size": 1193984
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/86/data/link1": {
+    "num": "86",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtu.be/1vI7TlHBzzI",
+    "isVideo": true,
+    "youtubeUrl": "https://youtu.be/1vI7TlHBzzI"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/191/data/link2": {
+    "num": "191",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_21_가정통신문_방과후학교 설문참여 안내.hwp?202609031003",
+    "isFile": true,
+    "localFile": "191_link2_운영절차_21_가정통신문_방과후학교 설문참여 안내.hwp",
+    "size": 559616
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/45/data/link2": {
+    "num": "45",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/운영절차_22_방과후학교 설문조사 관리(최종).hwp?202609031003",
+    "isFile": true,
+    "localFile": "45_link2_운영절차_22_방과후학교 설문조사 관리(최종).hwp",
+    "size": 2104320
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/45/data/link1": {
+    "num": "45",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://www.youtube.com/playlist?list=PLA-pyXX5hMe_5eVTTkUWnoJYUHGV6IQ11",
+    "isVideo": true,
+    "youtubeUrl": "https://www.youtube.com/playlist?list=PLA-pyXX5hMe_5eVTTkUWnoJYUHGV6IQ11"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/177/data/link2": {
+    "num": "177",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/양식_02_배너.ZIP?202609031003",
+    "isFile": true,
+    "localFile": "177_link2_양식_02_배너.ZIP",
+    "size": 18728
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/178/data/link2": {
+    "num": "178",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/양식_03_팝업.ZIP?202609031003",
+    "isFile": true,
+    "localFile": "178_link2_양식_03_팝업.ZIP",
+    "size": 36788
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/88/data/link1": {
+    "num": "88",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtu.be/Ko8w1az70Sk",
+    "isVideo": true,
+    "youtubeUrl": "https://youtu.be/Ko8w1az70Sk"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/168/data/link2": {
+    "num": "168",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/늘봄 학생 수강신청 안내.mp4?202609031003",
+    "isFile": true,
+    "localFile": "168_link2_늘봄 학생 수강신청 안내.mp4",
+    "size": 18311071
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/181/data/link2": {
+    "num": "181",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/양식_06_모바일앱 이용 방법.hwp?202609031003",
+    "isFile": true,
+    "localFile": "181_link2_양식_06_모바일앱 이용 방법.hwp",
+    "size": 773632
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/161/data/link2": {
+    "num": "161",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/매뉴얼_01_방과후학교 프로그램 관리자.hwp?202609031003",
+    "isFile": true,
+    "localFile": "161_link2_매뉴얼_01_방과후학교 프로그램 관리자.hwp",
+    "size": 22708224
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/101/data/link1": {
+    "num": "101",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://www.youtube.com/playlist?list=PLA-pyXX5hMe8BH7bblLSo79aF8f2w2HRF",
+    "isVideo": true,
+    "youtubeUrl": "https://www.youtube.com/playlist?list=PLA-pyXX5hMe8BH7bblLSo79aF8f2w2HRF"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/162/data/link2": {
+    "num": "162",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/매뉴얼_30_강사.hwp?202609031003",
+    "isFile": true,
+    "localFile": "162_link2_매뉴얼_30_강사.hwp",
+    "size": 8344576
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/163/data/link2": {
+    "num": "163",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/매뉴얼_03_강사 매뉴얼(고등학교).hwp?202609031003",
+    "isFile": true,
+    "localFile": "163_link2_매뉴얼_03_강사 매뉴얼(고등학교).hwp",
+    "size": 4090368
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/166/data/link2": {
+    "num": "166",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/매뉴얼_06_담임 매뉴얼.hwp?202609031003",
+    "isFile": true,
+    "localFile": "166_link2_매뉴얼_06_담임 매뉴얼.hwp",
+    "size": 644608
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/164/data/link2": {
+    "num": "164",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/매뉴얼_04_방과후학교 수강신청 전 필수 점검사항.hwp?202609031003",
+    "isFile": true,
+    "localFile": "164_link2_매뉴얼_04_방과후학교 수강신청 전 필수 점검사항.hwp",
+    "size": 859136
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/165/data/link2": {
+    "num": "165",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/매뉴얼_05_방과후학교 월별 수강신청 마감 및 다음 달 수강신청 준비 절차.hwp?202609031003",
+    "isFile": true,
+    "localFile": "165_link2_매뉴얼_05_방과후학교 월별 수강신청 마감 및 다음 달 수강신청 준비 절차.hwp",
+    "size": 2570752
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/89/data/link2": {
+    "num": "89",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/FAQ_학생관리_01_학생 비밀번호 초기화.hwp?202609031003",
+    "isFile": true,
+    "localFile": "89_link2_FAQ_학생관리_01_학생 비밀번호 초기화.hwp",
+    "size": 343040
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/89/data/link1": {
+    "num": "89",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtu.be/TGkGj5kCzKA",
+    "isVideo": true,
+    "youtubeUrl": "https://youtu.be/TGkGj5kCzKA"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/154/data/link2": {
+    "num": "154",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/FAQ_학생관리_03_학생 로그인 화면에 번호가 다 출력되지 않아요.hwp?202609031003",
+    "isFile": true,
+    "localFile": "154_link2_FAQ_학생관리_03_학생 로그인 화면에 번호가 다 출력되지 않아요.hwp",
+    "size": 150528
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/61/data/link2": {
+    "num": "61",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/FAQ_학생관리_04_학생 진급처리는 어떻게 하나요.hwp?202609031003",
+    "isFile": true,
+    "localFile": "61_link2_FAQ_학생관리_04_학생 진급처리는 어떻게 하나요.hwp",
+    "size": 1517056
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/90/data/link1": {
+    "num": "90",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtu.be/Gk1ovcFPnfQ",
+    "isVideo": true,
+    "youtubeUrl": "https://youtu.be/Gk1ovcFPnfQ"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/62/data/link2": {
+    "num": "62",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/매뉴얼_10_신학기 재학생 신입생 수강신청 및 진급처리.hwp?202609031003",
+    "isFile": true
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/62/data/link1": {
+    "num": "62",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtu.be/7PROc70TkS0",
+    "isVideo": true,
+    "youtubeUrl": "https://youtu.be/7PROc70TkS0"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/134/data/link2": {
+    "num": "134",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/FAQ_학생관리_05_학생 학적이 중간에 변경되었는데 어떻게 반영하나요.hwp?202609031003",
+    "isFile": true,
+    "localFile": "134_link2_FAQ_학생관리_05_학생 학적이 중간에 변경되었는데 어떻게 반영하나요.hwp",
+    "size": 209920
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/135/data/link2": {
+    "num": "135",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/FAQ_학생관리_08_학생 학적을 일괄변경하고 싶어요.hwp?202609031003",
+    "isFile": true,
+    "localFile": "135_link2_FAQ_학생관리_08_학생 학적을 일괄변경하고 싶어요.hwp",
+    "size": 684544
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/155/data/link2": {
+    "num": "155",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/FAQ_학생관리_06_다자녀 기능은 어떻게 활용하나요.hwp?202609031003",
+    "isFile": true,
+    "localFile": "155_link2_FAQ_학생관리_06_다자녀 기능은 어떻게 활용하나요.hwp",
+    "size": 200704
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/156/data/link2": {
+    "num": "156",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/FAQ_학생성별일괄업데이트방법.pdf?202609031003",
+    "isFile": true,
+    "localFile": "156_link2_FAQ_학생성별일괄업데이트방법.pdf",
+    "size": 299544
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/70/data/link2": {
+    "num": "70",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/FAQ_교직원관리_01_추가 서비스 관리자 지정.hwp?202609031003",
+    "isFile": true,
+    "localFile": "70_link2_FAQ_교직원관리_01_추가 서비스 관리자 지정.hwp",
+    "size": 470528
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/70/data/link1": {
+    "num": "70",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtu.be/yXZsRRXbr1k",
+    "isVideo": true,
+    "youtubeUrl": "https://youtu.be/yXZsRRXbr1k"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/150/data/link2": {
+    "num": "150",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/FAQ_강사관리_04_강사권한 설정.hwp?202609031003",
+    "isFile": true,
+    "localFile": "150_link2_FAQ_강사관리_04_강사권한 설정.hwp",
+    "size": 247808
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/95/data/link1": {
+    "num": "95",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtu.be/v4cfyd8d9zI?si=-_CHyWMTzJgg0eXH",
+    "isVideo": true,
+    "youtubeUrl": "https://youtu.be/v4cfyd8d9zI?si=-_CHyWMTzJgg0eXH"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/146/data/link2": {
+    "num": "146",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/FAQ_강사관리_02_강사에게 강좌등록 권한을 주고 싶어요.hwp?202609031003",
+    "isFile": true,
+    "localFile": "146_link2_FAQ_강사관리_02_강사에게 강좌등록 권한을 주고 싶어요.hwp",
+    "size": 489984
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/149/data/link2": {
+    "num": "149",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/FAQ_강사관리_03_강사에게 전체강좌 조회 권한을 주고 싶어요.hwp?202609031003",
+    "isFile": true,
+    "localFile": "149_link2_FAQ_강사관리_03_강사에게 전체강좌 조회 권한을 주고 싶어요.hwp",
+    "size": 133632
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/148/data/link2": {
+    "num": "148",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/FAQ_강사관리_01_강사가 바뀌었어요.hwp?202609031003",
+    "isFile": true,
+    "localFile": "148_link2_FAQ_강사관리_01_강사가 바뀌었어요.hwp",
+    "size": 135168
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/151/data/link2": {
+    "num": "151",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/FAQ_기타_강사 모바일 출결 문자 발송 기능 이용 안내.hwp?202609031003",
+    "isFile": true,
+    "localFile": "151_link2_FAQ_기타_강사 모바일 출결 문자 발송 기능 이용 안내.hwp",
+    "size": 1551360
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/151/data/link1": {
+    "num": "151",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtu.be/YAmJL8ABV7w",
+    "isVideo": true,
+    "youtubeUrl": "https://youtu.be/YAmJL8ABV7w"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/92/data/link2": {
+    "num": "92",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/강좌관리_01_엑셀로 강좌 일괄 등록 하기.hwp?202609031003",
+    "isFile": true,
+    "localFile": "92_link2_강좌관리_01_엑셀로 강좌 일괄 등록 하기.hwp",
+    "size": 154624
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/92/data/link1": {
+    "num": "92",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtu.be/rvaws6t7iXk?si=GneudyWGirYHnDJg",
+    "isVideo": true,
+    "youtubeUrl": "https://youtu.be/rvaws6t7iXk?si=GneudyWGirYHnDJg"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/138/data/link2": {
+    "num": "138",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/강좌관리_02_엑셀로 강좌 일괄 수정 하기.hwp?202609031003",
+    "isFile": true,
+    "localFile": "138_link2_강좌관리_02_엑셀로 강좌 일괄 수정 하기.hwp",
+    "size": 576000
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/158/data/link2": {
+    "num": "158",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/강좌관리_03_강좌 일괄 삭제.hwp?202609031003",
+    "isFile": true,
+    "localFile": "158_link2_강좌관리_03_강좌 일괄 삭제.hwp",
+    "size": 165376
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/93/data/link2": {
+    "num": "93",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/강좌관리_04_강좌 통계 기능 활용.hwp?202609031003",
+    "isFile": true,
+    "localFile": "93_link2_강좌관리_04_강좌 통계 기능 활용.hwp",
+    "size": 125440
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/93/data/link1": {
+    "num": "93",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtu.be/2hmAalCCKlI",
+    "isVideo": true,
+    "youtubeUrl": "https://youtu.be/2hmAalCCKlI"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/159/data/link2": {
+    "num": "159",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/강좌관리_05_강좌 상태 이해하기.hwp?202609031003",
+    "isFile": true,
+    "localFile": "159_link2_강좌관리_05_강좌 상태 이해하기.hwp",
+    "size": 142336
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/44/data/link2": {
+    "num": "44",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/강좌관리_07_수용비 기능 이용 안내.hwp?202609031003",
+    "isFile": true,
+    "localFile": "44_link2_강좌관리_07_수용비 기능 이용 안내.hwp",
+    "size": 1064960
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/96/data/link1": {
+    "num": "96",
+    "type": "link1",
+    "statusCode": 500,
+    "targetUrl": null
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/171/data/link2": {
+    "num": "171",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/신청자 관리_02_신청자 등록.hwp?202609031003",
+    "isFile": true,
+    "localFile": "171_link2_신청자 관리_02_신청자 등록.hwp",
+    "size": 357888
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/172/data/link2": {
+    "num": "172",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/신청자 관리_03_신청자 삭제.hwp?202609031003",
+    "isFile": true,
+    "localFile": "172_link2_신청자 관리_03_신청자 삭제.hwp",
+    "size": 222208
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/174/data/link2": {
+    "num": "174",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/신청자 관리_04_신청자 이동.hwp?202609031003",
+    "isFile": true,
+    "localFile": "174_link2_신청자 관리_04_신청자 이동.hwp",
+    "size": 123392
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/175/data/link2": {
+    "num": "175",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/신청자 관리_05_신청자 복사.hwp?202609031003",
+    "isFile": true,
+    "localFile": "175_link2_신청자 관리_05_신청자 복사.hwp",
+    "size": 100864
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/58/data/link2": {
+    "num": "58",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/신청자 관리_07_신청자 통계.hwp?202609031003",
+    "isFile": true,
+    "localFile": "58_link2_신청자 관리_07_신청자 통계.hwp",
+    "size": 220672
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/176/data/link2": {
+    "num": "176",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/신청자 관리_08_학생 신청화면 강좌구분 출력 설정.hwp?202609031003",
+    "isFile": true,
+    "localFile": "176_link2_신청자 관리_08_학생 신청화면 강좌구분 출력 설정.hwp",
+    "size": 200192
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/94/data/link2": {
+    "num": "94",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/자유수강권자 관리_01_자유수강권자를 추가하고 개별 처리하는 방법.hwp?202609031003",
+    "isFile": true,
+    "localFile": "94_link2_자유수강권자 관리_01_자유수강권자를 추가하고 개별 처리하는 방법.hwp",
+    "size": 652288
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/94/data/link1": {
+    "num": "94",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtu.be/s2pUlqx2LgA",
+    "isVideo": true,
+    "youtubeUrl": "https://youtu.be/s2pUlqx2LgA"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/192/data/link2": {
+    "num": "192",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/자유수강권자 관리_01_자유수강권자를 환불하고 개별 처리하는 방법.hwp?202609031003",
+    "isFile": true,
+    "localFile": "192_link2_자유수강권자 관리_01_자유수강권자를 환불하고 개별 처리하는 방법.hwp",
+    "size": 569856
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/193/data/link2": {
+    "num": "193",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/자유수강권자 관리_02_학생 자유수강권 잔액 조회 기능 활성화.hwp?202609031003",
+    "isFile": true,
+    "localFile": "193_link2_자유수강권자 관리_02_학생 자유수강권 잔액 조회 기능 활성화.hwp",
+    "size": 302592
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/169/data/link2": {
+    "num": "169",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/스쿨뱅킹_01_에듀파인 감면자 입력용 파일 다운로드.hwp?202609031003",
+    "isFile": true,
+    "localFile": "169_link2_스쿨뱅킹_01_에듀파인 감면자 입력용 파일 다운로드.hwp",
+    "size": 756224
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/170/data/link2": {
+    "num": "170",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/스쿨뱅킹_02_에듀파인 개인부담금반환 입력용 파일 다운로드.hwp?202609031003",
+    "isFile": true,
+    "localFile": "170_link2_스쿨뱅킹_02_에듀파인 개인부담금반환 입력용 파일 다운로드.hwp",
+    "size": 179712
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/126/data/link2": {
+    "num": "126",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/스쿨뱅킹_04_분기 접수, 월별 징수 처리 방법.hwp?202609031003",
+    "isFile": true,
+    "localFile": "126_link2_스쿨뱅킹_04_분기 접수, 월별 징수 처리 방법.hwp",
+    "size": 1085440
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/97/data/link2": {
+    "num": "97",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/나이스_01_나이스 방과후학교 프로그램 수강생, 수강료 일괄입력 파일 다운로드.hwp?202609031003",
+    "isFile": true,
+    "localFile": "97_link2_나이스_01_나이스 방과후학교 프로그램 수강생, 수강료 일괄입력 파일 다운로드.hwp",
+    "size": 819712
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/97/data/link1": {
+    "num": "97",
+    "type": "link1",
+    "statusCode": 307,
+    "targetUrl": "https://youtu.be/iGXBANFfUoE",
+    "isVideo": true,
+    "youtubeUrl": "https://youtu.be/iGXBANFfUoE"
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/194/data/link2": {
+    "num": "194",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/환경설정_01_학생 최대 신청 강좌수를 제한할 수 있나요.hwp?202609031003",
+    "isFile": true,
+    "localFile": "194_link2_환경설정_01_학생 최대 신청 강좌수를 제한할 수 있나요.hwp",
+    "size": 133632
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/100/data/link2": {
+    "num": "100",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/환경설정_02_안내글 설정.hwp?202609031003",
+    "isFile": true,
+    "localFile": "100_link2_환경설정_02_안내글 설정.hwp",
+    "size": 770048
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/195/data/link2": {
+    "num": "195",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/알림_01_알림관리.hwp?202609031003",
+    "isFile": true,
+    "localFile": "195_link2_알림_01_알림관리.hwp",
+    "size": 409600
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/167/data/link2": {
+    "num": "167",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/모바일_01_모바일 푸시 알림은 어떻게 등록하나요.hwp?202609031003",
+    "isFile": true,
+    "localFile": "167_link2_모바일_01_모바일 푸시 알림은 어떻게 등록하나요.hwp",
+    "size": 462848
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/160/data/link2": {
+    "num": "160",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/common/FAQ_계약_01_연장 신청을 위한 견적서는 어디에서 받나요.hwp?202609031003",
+    "isFile": true,
+    "localFile": "160_link2_FAQ_계약_01_연장 신청을 위한 견적서는 어디에서 받나요.hwp",
+    "size": 206336
+  },
+  "https://www.dbdbschool.kr/help/go_data/num/47/data/link2": {
+    "num": "47",
+    "type": "link2",
+    "statusCode": 307,
+    "targetUrl": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/설문관리_01_설문 참여율을 높이는 설문참여 안내 문자 발송하는 법.hwp?202609031003",
+    "isFile": true,
+    "localFile": "47_link2_설문관리_01_설문 참여율을 높이는 설문참여 안내 문자 발송하는 법.hwp",
+    "size": 399360
+  }
+}

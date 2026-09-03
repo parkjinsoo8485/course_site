@@ -1,0 +1,6 @@
+{
+  "drive_enabled": false,
+  "drive_folder_url": "",
+  "drive_file_base_url": "",
+  "instructions": "구글 드라이브에 /downloads/manual_faq_all_files.zip을 업로드하여 압축을 푼 뒤, 공유 폴더 URL을 drive_folder_url에 설정하거나 파일 직접 다운로드 URL 패턴을 설정하면 다른 컴퓨터에서도 구글 드라이브 클라우드 스토리지와 연동됩니다. 설정하지 않더라도 프로젝트 내 로컬 다운로드 폴더(/public/downloads/manual_faq)를 통해 오프라인/다른 PC 어디서든 즉시 다운로드 가능합니다."
+}

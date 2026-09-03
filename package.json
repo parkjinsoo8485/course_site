@@ -1,4 +1,10 @@
 {
+  "name": "course_site_root",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node course_site/server.js",
+    "dev": "node course_site/server.js"
+  },
   "devDependencies": {
     "playwright": "^1.62.1"
   }
