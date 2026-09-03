@@ -1005,10 +1005,11 @@ function handleAfAdminInfoSave(e) {
 }
 
 function handleAfUserLogout(e) {
-  if (e) e.preventDefault();
-  if (confirm('로그아웃 하시겠습니까?')) {
-    window.location.href = '/member/login/sn/3267';
+  if (e) {
+    try { e.preventDefault(); } catch (_) {}
+    try { e.stopPropagation(); } catch (_) {}
   }
+  window.location.href = '/member/login/sn/3267';
 }
 </script>
 
