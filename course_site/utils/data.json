@@ -247,7 +247,6 @@
       "feeReceipt": "Y",
       "teacherClosed": "Y",
       "refundClosed": "N",
-      "teacherEditable": "N",
       "status": "출력",
       "createdAt": "2026-08-17T02:04:07.770Z",
       "instructorClosed": true

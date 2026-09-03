@@ -96,7 +96,10 @@ function switchSubmodelView(event, key, url, pushState = true) {
   }
 
   document.querySelectorAll('.sidebar-menu li.subitem').forEach(li => li.classList.remove('active'));
-  const activeSubitem = document.getElementById('sub_' + key);
+  let activeSubitem = document.getElementById('sub_' + key);
+  if (!activeSubitem && (key === 'ad_lec_write' || key === 'ad_lec_input')) {
+    activeSubitem = document.getElementById('sub_ad_lec_lists');
+  }
   if (activeSubitem) {
     activeSubitem.classList.add('active');
     const parentMenu = activeSubitem.closest('.has-submenu');

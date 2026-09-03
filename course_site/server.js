@@ -15,12 +15,205 @@ const sczigiRoutes = require('./routes/sczigi.routes');
 
 const app = express();
 
-// Global Middlewares
+// Middleware
 app.use(cors());
 app.use(helmet({
-  contentSecurityPolicy: false // Allow loading inline scripts & cdn resources for smooth developer demo
+  contentSecurityPolicy: false,
+  crossOriginEmbedderPolicy: false
 }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// ==================== 강좌관리 (ad_lec) 페이지 라우팅 매핑 ====================
+app.get(/^\/af\/ad_lec\/inputs/, (req, res) => {
+  // 강좌 일괄입력 공식 CSV 샘플 파일 다운로드
+  const sampleCsv = '\uFEFF' + [
+    '강좌구분,늘봄과정,중복제한그룹,강좌명,강사ID,보조강사ID,대상학년,강의시간,강의시간중복허용,정원,대기정원,운영시작일,운영종료일,총시수,강의실,수강료,수용비,교재비,재료비,내용',
+    '26년 9월,방과후,,창의로봇(초급),tea01,,1;2;3,월1부(13:00~13:40),N,20,5,2026-09-01,2026-09-30,16,본관2층 컴퓨터교실,30000,3000,10000,5000,로봇 기초 조립 및 코딩 수업',
+    '26년 9월,맞춤형,,신나는 미술놀이,tea02,,1;2,화1부(13:00~13:40),N,15,3,2026-09-01,2026-09-30,16,본관3층 늘봄프로그램실 1,25000,2500,5000,10000,다양한 미술 재료를 활용한 감성 표현',
+    '26년 9월,돌봄,,오후 돌봄교실,tea04,,1;2,월~금(13:00~17:00),Y,25,5,2026-09-01,2026-09-30,80,후관1층 돌봄교실,0,0,0,0,안전한 방과후 돌봄 및 독서 지도'
+  ].join('\n');
+
+  res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+  res.setHeader('Content-Disposition', 'attachment; filename="lecture_batch_sample.csv"');
+  return res.send(sampleCsv);
+});
+
+app.get([
+  /^\/af\/ad_lec\/write/,
+  /^\/af\/ad_lec\/input/,
+  /^\/af\/ad_lec\/lists/,
+  /^\/af\/ad_lec\/modifyField/,
+  /^\/af\/ad_lec\/copy/,
+  /^\/af\/ad_lec\/stat/,
+  /^\/af\/ad_lec\/modify/
+], (req, res, next) => {
+  // 정적 리소스 파일(.css, .js, .png, .woff 등) 요청인 경우 다음 정적 미들웨어로 전달
+  if (req.path && req.path.includes('.') && !req.path.endsWith('.html')) {
+    return next();
+  }
+  return res.sendFile(path.join(__dirname, 'af', 'ad_lec', 'lists', 'sn', 'index.html'));
+});
+
+app.use(express.static(__dirname));
+
+// 강좌관리 검색결과 엑셀 출력 (/af/ad_lec/listse/*)
+app.get(/^\/af\/ad_lec\/listse/, (req, res) => {
+  const lectures = db.getLecturesBySchool('sch_1', {});
+  let tableRows = '';
+  lectures.forEach((lec, idx) => {
+    tableRows += `
+      <tr>
+        <td style="text-align:center;">${idx + 1}</td>
+        <td style="text-align:center;">${lec.category || ''} (${lec.neulbomType || ''})</td>
+        <td style="text-align:left;">${lec.title || ''}</td>
+        <td style="text-align:center;">${lec.teacherName || ''}</td>
+        <td style="text-align:center;">${lec.applied || 0} / ${lec.capacity || 20}</td>
+        <td style="text-align:center;">${lec.waiting || 0} / ${lec.waitingCapacity || 5}</td>
+        <td style="text-align:center;">${lec.grade || '전학년'}</td>
+        <td style="text-align:center;">${lec.period || ''}</td>
+        <td style="text-align:center;">${lec.schedule || ''}</td>
+        <td style="text-align:right; mso-number-format:'\\#,##0';">${(lec.fee || 0).toLocaleString()}</td>
+        <td style="text-align:center;">${lec.status === 'OUTPUT' ? '출력' : (lec.status === 'WAITING' ? '대기' : '종료')}</td>
+      </tr>
+    `;
+  });
+
+  const excelHtml = `
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <style>
+    table { border-collapse: collapse; font-family: '맑은 고딕', sans-serif; font-size: 10pt; }
+    th { background-color: #f2f4f7; border: 1px solid #ccc; padding: 6px 10px; font-weight: bold; text-align: center; }
+    td { border: 1px solid #ddd; padding: 5px 8px; vertical-align: middle; }
+    .title-cell { font-size: 16pt; font-weight: bold; text-align: center; color: #204d74; padding: 12px; }
+  </style>
+</head>
+<body>
+  <table>
+    <tr><td colspan="11" class="title-cell">광주풍향초등학교 늘봄학교 강좌 목록</td></tr>
+    <tr><td colspan="11" style="font-size:10pt; color:#666; padding:4px;">■ 출력 일시: ${new Date().toLocaleString('ko-KR')} | 총 강좌수: ${lectures.length}개</td></tr>
+    <tr>
+      <th>연번</th>
+      <th>구분(늘봄과정)</th>
+      <th>강좌명</th>
+      <th>강사ID</th>
+      <th>신청/정원</th>
+      <th>대기자/정원</th>
+      <th>학년</th>
+      <th>운영기간</th>
+      <th>강의시간</th>
+      <th>수강료(원)</th>
+      <th>상태</th>
+    </tr>
+    ${tableRows}
+  </table>
+</body>
+</html>
+  `.trim();
+
+  const filename = `강좌목록_${new Date().toISOString().split('T')[0]}.xls`;
+  res.setHeader('Content-Type', 'application/vnd.ms-excel; charset=utf-8');
+  res.setHeader('Content-Disposition', `attachment; filename="${encodeURIComponent(filename)}"; filename*=UTF-8''${encodeURIComponent(filename)}`);
+  return res.send(Buffer.from(excelHtml, 'utf-8'));
+});
+
+// 강좌 정원 단건 인라인 수정 API (/api/af/ad_lec/capacity)
+app.patch('/api/af/ad_lec/capacity', (req, res) => {
+  const { id, capacity } = req.body;
+  if (!id || typeof capacity === 'undefined') {
+    return res.status(400).json({ success: false, message: '강좌 ID와 정원을 입력하세요.' });
+  }
+  const updated = db.updateLectureCapacity('sch_1', id, parseInt(capacity, 10));
+  if (updated) {
+    return res.json({ success: true, message: '정원이 성공적으로 수정되었습니다.', lecture: updated });
+  }
+  return res.status(404).json({ success: false, message: '강좌를 찾을 수 없습니다.' });
+});
+
+// 강좌 일괄 수정 API (/api/af/ad_lec/bulk-update)
+app.post('/api/af/ad_lec/bulk-update', (req, res) => {
+  const { courseIds, updates } = req.body;
+  if (!courseIds || !Array.isArray(courseIds) || !updates) {
+    return res.status(400).json({ success: false, message: '수정할 강좌 목록과 변경 데이터를 전달하세요.' });
+  }
+  const updatedCount = db.bulkUpdateLectures('sch_1', courseIds, updates);
+  return res.json({ success: true, message: `${updatedCount}개 강좌의 정보가 일괄 수정되었습니다.`, count: updatedCount });
+});
+
+// 강좌 통계 조회 API (/api/af/ad_lec/stats)
+app.get('/api/af/ad_lec/stats', (req, res) => {
+  const stats = db.getLectureStats('sch_1');
+  return res.json({ success: true, stats });
+});
+
+// Tuition Pay Entry Page (/af/ad_pay/edit/...)
+app.get(/^\/af\/ad_pay\/edit/, (req, res) => {
+  return res.sendFile(path.join(__dirname, 'af', 'ad_pay', 'edit', 'sn', '3267', 'index.html'));
+});
+
+// GET /api/af/ad_pay/data/sn/3267
+app.get('/api/af/ad_pay/data/sn/:sn', (req, res) => {
+  const { sld, sln } = req.query;
+  const currentSld = sld || '10';
+  const currentSln = sln || '1552375';
+
+  let students = applicantDb.filter(a => String(a.courseId) === String(currentSln));
+  if (students.length === 0) {
+    students = applicantDb;
+  }
+
+  return res.json({
+    success: true,
+    schoolName: '광주풍향초등학교',
+    currentSld,
+    currentSln,
+    courses: payCoursesList,
+    students
+  });
+});
+
+// POST /api/af/ad_pay/update-single
+app.post('/api/af/ad_pay/update-single', (req, res) => {
+  const { applicantId, tuitionFee, accommodationFee, bookFee, materialFee } = req.body;
+  const applicant = applicantDb.find(a => a.id === applicantId);
+  if (!applicant) {
+    return res.status(404).json({ success: false, message: '학생을 찾을 수 없습니다.' });
+  }
+
+  applicant.tuitionFee = Number(tuitionFee) || 0;
+  applicant.accommodationFee = Number(accommodationFee) || 0;
+  applicant.bookFee = Number(bookFee) || 0;
+  applicant.materialFee = Number(materialFee) || 0;
+  applicant.totalFee = applicant.tuitionFee + applicant.accommodationFee + applicant.bookFee + applicant.materialFee;
+  applicant.teacherFee = Math.floor(applicant.tuitionFee * 0.7);
+
+  return res.json({ success: true, applicant });
+});
+
+// POST /api/af/ad_pay/update-bulk
+app.post('/api/af/ad_pay/update-bulk', (req, res) => {
+  const { lec_num, students } = req.body;
+  
+  if (!students || !Array.isArray(students)) {
+    return res.status(400).json({ success: false, message: '잘못된 요청입니다.' });
+  }
+
+  students.forEach(updateData => {
+    const applicant = applicantDb.find(a => a.id === updateData.id);
+    if (applicant) {
+      applicant.tuitionFee = Number(updateData.tuitionFee) || 0;
+      applicant.accommodationFee = Number(updateData.accommodationFee) || 0;
+      applicant.bookFee = Number(updateData.bookFee) || 0;
+      applicant.materialFee = Number(updateData.materialFee) || 0;
+      applicant.totalFee = applicant.tuitionFee + applicant.accommodationFee + applicant.bookFee + applicant.materialFee;
+      applicant.teacherFee = Math.floor(applicant.tuitionFee * 0.7);
+    }
+  });
+
+  return res.json({ success: true, message: '일괄 저장되었습니다.' });
+});
 
 // Mount Domain API Routes
 app.use('/api/auth', authRoutes);
