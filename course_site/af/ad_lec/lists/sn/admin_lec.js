@@ -2264,6 +2264,20 @@ function openAddModal(course = null) {
     m.style.display = 'flex';
     m.classList.add('show');
     document.body.style.overflow = 'hidden';
+    // 모달 피처 초기화 (강좌구분 동적로드 + 강의시간 슬롯 로드)
+    if (typeof initAddModalFeatures === 'function') initAddModalFeatures();
+    // 강사ID 입력 이벤트 연결 (모달이 열리면 매c88 재바인딩)
+    const teaInput = m.querySelector('#add_tea_id');
+    if (teaInput) {
+      teaInput.oninput = (e) => checkInstructorConflict(e.target.value.trim());
+      teaInput.onblur = (e) => checkInstructorConflict(e.target.value.trim());
+    }
+    // 강의시간 입력 이벤트 연결
+    const timeInput = m.querySelector('#add_lec_time_disp');
+    if (timeInput) {
+      timeInput.oninput = (e) => checkTimeConflict(e.target.value.trim());
+      timeInput.onblur = (e) => checkTimeConflict(e.target.value.trim());
+    }
   }
 }
 
@@ -2592,11 +2606,223 @@ function filterByStatCategory(catName, statusVal) {
   }
 }
 
+// =====================================================================
+// ╔════════════════════════════════════════════════════════════╗
+// ║  강좌와 모달 기능 구현 (수정 → 이 옆부터 신규 추가)
+// ╠════════════════════════════════════════════════════════════╣
+// ║  1. 강좌구분 동적 로드                                                ║
+// ║  2. 강의시간 DB 슬롯 선택 UI                                         ║
+// ║  3. 강사ID 중복 배정 실시간 체크                                ║
+// ║  4. 강의시간 충돌 감지                                             ║
+// ║  5. 첨부파일 실제 서버 업로드                                      ║
+// ╚════════════════════════════════════════════════════════════╝
+// =====================================================================
+
+// ── [1] 강좌구분 동적 로드 ──
+async function loadLecDivisions() {
+  const sel = document.getElementById('add_lec_div');
+  if (!sel) return;
+  try {
+    const sn = (typeof SCHOOL_SN !== 'undefined' && SCHOOL_SN) ? SCHOOL_SN : '3267';
+    const res = await fetch(`/api/af/ad_lec/divisions?sn=${sn}`);
+    if (!res.ok) return;
+    const data = await res.json();
+    if (!data.success || !data.divisions) return;
+    const current = sel.value;
+    sel.innerHTML = '<option value="">=선택=</option>';
+    data.divisions.forEach(d => {
+      const opt = document.createElement('option');
+      opt.value = d.value;
+      opt.textContent = d.label;
+      if (d.value === current || d.value === '26년 9월') opt.selected = true;
+      sel.appendChild(opt);
+    });
+  } catch(e) { /* 실패시 기본값 유지 */ }
+}
+
+// ── [2] 강의시간 DB 슬롯 선택 UI ──
+let _timeSlots = [];   // 캐시: 서버 슬롯 데이터
+let _usedTimes = [];   // 캐시: 이미 사용중 시간
+
+async function loadAndRenderTimeSlots() {
+  const sn = (typeof SCHOOL_SN !== 'undefined' && SCHOOL_SN) ? SCHOOL_SN : '3267';
+  try {
+    const res = await fetch(`/api/af/ad_lec/time-slots?sn=${sn}`);
+    if (!res.ok) return;
+    const data = await res.json();
+    if (!data.success) return;
+    _timeSlots = data.slots || [];
+    _usedTimes = data.usedTimes || [];
+  } catch(e) {}
+  renderTimeSlotGrid();
+}
+
+function renderTimeSlotGrid() {
+  const container = document.getElementById('lecTimeSlotGrid');
+  if (!container || _timeSlots.length === 0) return;
+
+  const days = ['월', '화', '수', '목', '금', '토', '일'];
+  const periods = [...new Set(_timeSlots.map(s => s.period))];
+
+  // 다중 선택 지원: 현재 입력값에서 선택된 항목 복원
+  const currentDisp = document.getElementById('add_lec_time_disp')?.value || '';
+  const preSelected = new Set(currentDisp.split(', ').filter(Boolean));
+
+  let html = '<table style="border-collapse:collapse; width:100%; font-size:12px;">';
+  html += '<thead><tr><th style="border:1px solid #ddd; padding:5px 8px; background:#f5f7fa; text-align:center; min-width:50px;"></th>';
+  days.forEach(d => {
+    html += `<th style="border:1px solid #ddd; padding:5px 8px; background:#f5f7fa; text-align:center; min-width:70px; font-weight:600;">${d}</th>`;
+  });
+  html += '</tr></thead><tbody>';
+
+  periods.forEach(period => {
+    const slot0 = _timeSlots.find(s => s.period === period);
+    const timeLabel = slot0 ? `(${slot0.start}~${slot0.end})` : '';
+    html += `<tr><td style="border:1px solid #ddd; padding:5px 6px; background:#fafafa; text-align:center; font-weight:600; white-space:nowrap;">${period}<br><span style="font-size:10px; color:#888; font-weight:normal;">${timeLabel}</span></td>`;
+    days.forEach(day => {
+      const slot = _timeSlots.find(s => s.day === day && s.period === period);
+      if (!slot) { html += '<td style="border:1px solid #ddd;"></td>'; return; }
+      const val = slot.value;
+      const isUsed = _usedTimes.includes(val);
+      const isChecked = preSelected.has(val);
+      const cellBg = isUsed ? '#fff8e1' : '#fff';
+      const usedBadge = isUsed ? '<span style="display:block;font-size:10px;color:#f59e0b;">사용중</span>' : '';
+      html += `<td style="border:1px solid #ddd; padding:6px 4px; text-align:center; background:${cellBg}; cursor:pointer;" onclick="toggleTimeSlot('${val}', this)">
+        <label style="cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; margin:0;">
+          <input type="checkbox" class="time-slot-chk" value="${val}" ${isChecked ? 'checked' : ''} onchange="syncTimeSlotDisplay()" style="cursor:pointer;">
+          ${usedBadge}
+        </label></td>`;
+    });
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  container.innerHTML = html;
+}
+
+function toggleTimeSlot(val, td) {
+  const cb = td.querySelector('.time-slot-chk');
+  if (cb) { cb.checked = !cb.checked; syncTimeSlotDisplay(); }
+}
+
+function syncTimeSlotDisplay() {
+  const checked = [];
+  document.querySelectorAll('.time-slot-chk:checked').forEach(cb => checked.push(cb.value));
+  const input = document.getElementById('add_lec_time_disp');
+  if (input) input.value = checked.join(', ');
+  // 첫번째 선택시 요일도 자동 세팅
+  if (checked.length > 0) {
+    const dayMatch = checked[0].match(/^([월화수목금토일])/);
+    if (dayMatch) {
+      const dayKr = dayMatch[1];
+      const dayMap = { '월': '월', '화': '화', '수': '수', '목': '목', '금': '금', '토': '토', '일': '일' };
+      window._autoDay = dayKr;
+    }
+  }
+}
+
+// ── [3] 강사ID 중복 배정 실시간 체크 ──
+let _instructorCheckTimer = null;
+async function checkInstructorConflict(teaId) {
+  if (!teaId || teaId.length < 2) return;
+  clearTimeout(_instructorCheckTimer);
+  _instructorCheckTimer = setTimeout(async () => {
+    const scheduleTime = document.getElementById('add_lec_time_disp')?.value?.trim() || '';
+    const editId = document.getElementById('fm_course_add')?.dataset?.editId || '';
+    try {
+      const params = new URLSearchParams({ teaId });
+      if (scheduleTime) params.set('scheduleTime', scheduleTime.split(', ')[0]);
+      if (editId) params.set('excludeId', editId);
+      const res = await fetch(`/api/af/ad_lec/check-instructor?${params}`);
+      const data = await res.json();
+      const msgEl = document.querySelector('#addModal .error_msg.error_tea_id');
+      if (data.conflict && data.conflicts.length > 0) {
+        const titles = data.conflicts.map(c => `「${c.title}」(${c.scheduleTime})`).join(', ');
+        const warnMsg = `⚠️ 해당 강사가 이미 ${titles} 강좌에 배정되어 있습니다. (중복 허용하려면 찭학 ID 체크를 켜주세요)`;
+        if (msgEl) {
+          msgEl.textContent = warnMsg;
+          msgEl.style.color = '#e67e22';
+          msgEl.style.display = 'block';
+        }
+      } else {
+        if (msgEl) { msgEl.textContent = ''; msgEl.style.display = 'none'; }
+      }
+    } catch(e) {}
+  }, 600);
+}
+
+// ── [4] 강의시간 충돌 감지 ──
+let _timeConflictTimer = null;
+async function checkTimeConflict(scheduleTime) {
+  if (!scheduleTime) return;
+  clearTimeout(_timeConflictTimer);
+  _timeConflictTimer = setTimeout(async () => {
+    const editId = document.getElementById('fm_course_add')?.dataset?.editId || '';
+    // 강의시간 충돌 쭔크 비활성 체크 시 패스
+    const notChk = document.getElementById('add_lec_time_not_chk');
+    if (notChk && notChk.checked) return;  // 중복 허용 체크될 시 거너띄
+    const firstSlot = scheduleTime.split(', ')[0];
+    try {
+      const params = new URLSearchParams({ scheduleTime: firstSlot });
+      if (editId) params.set('excludeId', editId);
+      const res = await fetch(`/api/af/ad_lec/check-time-conflict?${params}`);
+      const data = await res.json();
+      const msgEl = document.querySelector('#addModal .error_msg.error_lec_time');
+      if (data.conflict && data.conflicts.length > 0) {
+        const titles = data.conflicts.map(c => `「${c.title}」`).join(', ');
+        const warnMsg = `⚠️ ${firstSlot} 시간대에 ${titles} 강좌가 이미 있습니다. (중복 허용하려면 위 쬼끼 체크를 켜주세요)`;
+        if (msgEl) {
+          msgEl.textContent = warnMsg;
+          msgEl.style.color = '#e67e22';
+          msgEl.style.display = 'block';
+        }
+      } else {
+        if (msgEl) { msgEl.textContent = ''; msgEl.style.display = 'none'; }
+      }
+    } catch(e) {}
+  }, 600);
+}
+
+// ── [5] 첨부파일 실제 서버 업로드 ──
+async function uploadLecFiles(lecId) {
+  const fileBoxInputs = document.querySelectorAll('#file_box input[type="file"]');
+  const filesToUpload = [];
+  fileBoxInputs.forEach(input => {
+    if (input.files && input.files.length > 0) {
+      for (let f of input.files) filesToUpload.push(f);
+    }
+  });
+  if (filesToUpload.length === 0) return { success: true, files: [] };
+
+  const formData = new FormData();
+  filesToUpload.forEach(f => formData.append('file[]', f));
+  if (lecId) formData.append('lecId', lecId);
+
+  try {
+    const res = await fetch('/api/af/ad_lec/upload-file', {
+      method: 'POST',
+      body: formData  // Content-Type은 FormData가 자동 설정
+    });
+    const data = await res.json();
+    return data;
+  } catch(e) {
+    return { success: false, message: '파일 업로드 중 네트워크 오류가 발생했습니다.' };
+  }
+}
+
+// ── 모달 열릴 때 기능 초기화 ──
+async function initAddModalFeatures() {
+  // [1] 강좌구분 동적 로드
+  await loadLecDivisions();
+  // [2] 강의시간 슬롯 로드
+  await loadAndRenderTimeSlots();
+}
+
 // ---------------- 강사 검색 모달 기능 ----------------
 function openInstructorSearchModal(type) {
   activeInstructorTargetId = (type === 'sub') ? 'add_tea_id1' : 'add_tea_id';
   const modal = document.getElementById('teaSearchModal');
   if (modal) {
+    modal.style.zIndex = '100050';
     modal.style.display = 'flex';
   }
   const kwInput = document.getElementById('popupTeaKeyword');
@@ -2685,12 +2911,17 @@ function selectInstructor(id, name) {
 function openTimeSelectHelper() {
   const modal = document.getElementById('lecTimeModal');
   if (modal) {
+    modal.style.zIndex = '100050';
     modal.style.display = 'flex';
   }
   const currentVal = document.getElementById('add_lec_time_disp')?.value || '';
-  document.querySelectorAll('.time-opt-cb').forEach(cb => {
-    cb.checked = currentVal.includes(cb.value);
-  });
+  if (typeof _timeSlots !== 'undefined' && _timeSlots.length > 0) {
+    renderTimeSlotGrid();
+  } else {
+    document.querySelectorAll('.time-opt-cb').forEach(cb => {
+      cb.checked = currentVal.includes(cb.value);
+    });
+  }
 }
 
 function closeTimeSelectHelper() {
@@ -2701,13 +2932,17 @@ function closeTimeSelectHelper() {
 }
 
 function applySelectedTime() {
-  const selected = [];
-  document.querySelectorAll('.time-opt-cb:checked').forEach(cb => {
-    selected.push(cb.value);
+  const selected = new Set();
+  document.querySelectorAll('.time-opt-cb:checked, .time-slot-chk:checked').forEach(cb => {
+    if (cb.value) selected.add(cb.value);
   });
+  const selectedArr = Array.from(selected);
   const input = document.getElementById('add_lec_time_disp');
   if (input) {
-    input.value = selected.length > 0 ? selected.join(', ') : '';
+    input.value = selectedArr.length > 0 ? selectedArr.join(', ') : '';
+    if (typeof checkTimeConflict === 'function') {
+      checkTimeConflict(input.value);
+    }
   }
   closeTimeSelectHelper();
 }
@@ -2889,7 +3124,19 @@ async function submitAddCourse(e) {
     const data = await res.json();
     if (res.ok && data.success) {
       window.lastRegisteredCourseId = data.lecture ? data.lecture.id : (editId || null);
-      alert(data.message || (editId ? `'${lecName}' 강좌가 성공적으로 수정되었습니다.` : `'${lecName}' 강좌가 성공적으로 등록되었습니다.`));
+
+      // 첨부파일 업로드 (강좌 등록 성공 후)
+      const lecId = data.lecture ? data.lecture.id : editId;
+      const fileResult = await uploadLecFiles(lecId);
+      let fileMsg = '';
+      if (fileResult && fileResult.files && fileResult.files.length > 0) {
+        fileMsg = `\n첨부파일 ${fileResult.files.length}개 업로드 완료.`;
+      } else if (fileResult && !fileResult.success && fileResult.message) {
+        fileMsg = `\n(첨부파일: ${fileResult.message})`;
+      }
+
+      const defaultMsg = editId ? `'${lecName}' 강좌가 성공적으로 수정되었습니다.` : `'${lecName}' 강좌가 성공적으로 등록되었습니다.`;
+      alert((data.message || defaultMsg) + fileMsg);
       closeAddModal();
 
       // 등록된 강좌의 구분(category)으로 목록 필터를 자동 동기화하여 즉시 화면에 반영

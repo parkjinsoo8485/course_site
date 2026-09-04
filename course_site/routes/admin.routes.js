@@ -3,6 +3,31 @@ const router = express.Router();
 const db = require('../utils/db');
 const { authenticateToken } = require('../middleware/auth');
 const manualData = require('../utils/manualData');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+
+// ── 첨부파일 업로드 multer 설정 ──
+const uploadDir = path.join(__dirname, '..', 'uploads', 'lec_files');
+if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, uploadDir),
+  filename: (req, file, cb) => {
+    const ts = Date.now();
+    const safe = Buffer.from(file.originalname, 'latin1').toString('utf8');
+    cb(null, `${ts}_${safe}`);
+  }
+});
+const upload = multer({
+  storage,
+  limits: { fileSize: 3 * 1024 * 1024 }, // 3MB 제한
+  fileFilter: (req, file, cb) => {
+    const allowed = ['.jpg','.jpeg','.png','.gif','.pdf','.hwp','.docx','.xlsx','.zip','.txt'];
+    const ext = path.extname(file.originalname).toLowerCase();
+    if (allowed.includes(ext)) cb(null, true);
+    else cb(new Error('허용되지 않는 파일 형식입니다.'));
+  }
+});
 
 // Helper to resolve school ID or SN code
 const resolveSchoolId = (schoolIdParam) => {
@@ -268,6 +293,139 @@ router.get('/af/ad_lec/stats', (req, res) => {
   } catch (err) {
     return res.status(500).json({ success: false, message: '강좌 통계를 불러오는 중 오류가 발생했습니다.' });
   }
+});
+
+// ── 강좌구분(lec_div) 동적 목록 조회 ──
+// GET /api/af/ad_lec/divisions?sn=3267
+router.get('/af/ad_lec/divisions', (req, res) => {
+  try {
+    const schoolId = resolveSchoolId(req.query.sn || req.query.schoolId);
+    // afDivisions 기반 + 현재 강좌에서 사용 중인 category 수집
+    const lectures = db.getLecturesBySchool(schoolId, {});
+    const fromLec = [...new Set(lectures.map(l => l.category).filter(Boolean))];
+    const baseDivs = [
+      { value: '3월', label: '3월' },
+      { value: '26년 4월', label: '26년 4월' },
+      { value: '26년 5월', label: '26년 5월' },
+      { value: '26년 6월', label: '26년 6월' },
+      { value: '26년 7월', label: '26년 7월' },
+      { value: '26년 8월', label: '26년 8월' },
+      { value: '26년 9월', label: '26년 9월' },
+      { value: '26년 10월', label: '26년 10월' },
+      { value: '26년 11월', label: '26년 11월' },
+      { value: '26년 12월', label: '26년 12월' },
+    ];
+    fromLec.forEach(cat => {
+      if (!baseDivs.find(d => d.value === cat)) baseDivs.unshift({ value: cat, label: cat });
+    });
+    return res.json({ success: true, divisions: baseDivs });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: '강좌구분 목록 조회 중 오류가 발생했습니다.' });
+  }
+});
+
+// ── 강의시간 슬롯 목록 조회 ──
+// GET /api/af/ad_lec/time-slots?sn=3267
+router.get('/af/ad_lec/time-slots', (req, res) => {
+  try {
+    // 원본 dbdbschool 방식: 요일 × 부번 조합 슬롯
+    const days = ['월', '화', '수', '목', '금', '토', '일'];
+    const periods = [
+      { label: '1부', start: '13:00', end: '13:40' },
+      { label: '2부', start: '13:50', end: '14:30' },
+      { label: '3부', start: '14:40', end: '15:20' },
+      { label: '4부', start: '15:30', end: '16:10' },
+      { label: '5부', start: '16:20', end: '17:00' },
+      { label: '6부', start: '17:10', end: '17:50' },
+      { label: '7부', start: '18:00', end: '18:40' },
+    ];
+    const slots = [];
+    days.forEach(day => {
+      periods.forEach(p => {
+        const value = `${day}${p.label} (${p.start}~${p.end})`;
+        slots.push({ day, period: p.label, start: p.start, end: p.end, value, label: value });
+      });
+    });
+    // 이미 사용중인 시간대 강조를 위해 현재 강좌 스케줄 포함
+    const schoolId = resolveSchoolId(req.query.sn || req.query.schoolId);
+    const lectures = db.getLecturesBySchool(schoolId, {});
+    const usedTimes = lectures.map(l => l.scheduleTime).filter(Boolean);
+    return res.json({ success: true, slots, usedTimes });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: '강의시간 슬롯 조회 중 오류가 발생했습니다.' });
+  }
+});
+
+// ── 강사 중복 배정 체크 ──
+// GET /api/af/ad_lec/check-instructor?teaId=tea01&scheduleTime=월1부&excludeId=crs_xxx
+router.get('/af/ad_lec/check-instructor', (req, res) => {
+  try {
+    const { teaId, scheduleTime, excludeId } = req.query;
+    if (!teaId) return res.json({ success: true, conflict: false });
+    const lectures = db.getLecturesBySchool('sch_1', {});
+    const conflicts = lectures.filter(l => {
+      if (excludeId && l.id === excludeId) return false;
+      const sameTeacher = (l.instructor === teaId || l.teacherName === teaId ||
+        l.teacherId === teaId || l.assistantInstructor === teaId);
+      if (!sameTeacher) return false;
+      if (scheduleTime && l.scheduleTime) {
+        return l.scheduleTime === scheduleTime;
+      }
+      return true;
+    });
+    return res.json({
+      success: true,
+      conflict: conflicts.length > 0,
+      conflicts: conflicts.map(l => ({ id: l.id, title: l.title, scheduleTime: l.scheduleTime, category: l.category }))
+    });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: '강사 중복 체크 중 오류가 발생했습니다.' });
+  }
+});
+
+// ── 강의시간 충돌 감지 ──
+// GET /api/af/ad_lec/check-time-conflict?scheduleTime=월1부&excludeId=crs_xxx
+router.get('/af/ad_lec/check-time-conflict', (req, res) => {
+  try {
+    const { scheduleTime, excludeId } = req.query;
+    if (!scheduleTime) return res.json({ success: true, conflict: false, conflicts: [] });
+    const lectures = db.getLecturesBySchool('sch_1', {});
+    const conflicts = lectures.filter(l => {
+      if (excludeId && l.id === excludeId) return false;
+      return l.scheduleTime && l.scheduleTime.includes(scheduleTime.split(' ')[0]);
+    });
+    return res.json({
+      success: true,
+      conflict: conflicts.length > 0,
+      conflicts: conflicts.map(l => ({ id: l.id, title: l.title, scheduleTime: l.scheduleTime, category: l.category }))
+    });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: '강의시간 충돌 체크 중 오류가 발생했습니다.' });
+  }
+});
+
+// ── 첨부파일 서버 업로드 ──
+// POST /api/af/ad_lec/upload-file (multipart/form-data, field: file[])
+router.post('/af/ad_lec/upload-file', (req, res) => {
+  upload.array('file[]', 5)(req, res, (err) => {
+    if (err) {
+      if (err.code === 'LIMIT_FILE_SIZE') {
+        return res.status(400).json({ success: false, message: '파일 크기는 3MB 이하만 허용됩니다.' });
+      }
+      return res.status(400).json({ success: false, message: err.message || '파일 업로드 중 오류가 발생했습니다.' });
+    }
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ success: false, message: '업로드할 파일이 없습니다.' });
+    }
+    const uploaded = req.files.map(f => ({
+      fieldname: f.fieldname,
+      originalName: Buffer.from(f.originalname, 'latin1').toString('utf8'),
+      filename: f.filename,
+      size: f.size,
+      url: `/uploads/lec_files/${f.filename}`
+    }));
+    return res.json({ success: true, files: uploaded, message: `${uploaded.length}개 파일이 업로드되었습니다.` });
+  });
 });
 
 // POST /api/af/ad_lec/apply-facility-fee (3.9 강좌 수용비 신청자 일괄 적용)

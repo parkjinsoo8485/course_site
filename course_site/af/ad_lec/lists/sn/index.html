@@ -3328,7 +3328,7 @@
   </div>
 
   <!-- ==================== 강사 검색 모달 ==================== -->
-  <div id="teaSearchModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:10070; align-items:center; justify-content:center;">
+  <div id="teaSearchModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:100050 !important; align-items:center; justify-content:center;">
     <div style="background:#fff; width:520px; max-width:95vw; border-radius:4px; box-shadow:0 5px 20px rgba(0,0,0,0.3); overflow:hidden; border:1px solid #999;">
       <div style="background:#4791d2; color:#fff; padding:12px 18px; font-weight:bold; font-size:14px; display:flex; justify-content:space-between; align-items:center;">
         <span style="display:flex; align-items:center; gap:8px;"><i class="fa fa-binoculars"></i> 강사 검색</span>
@@ -3362,7 +3362,7 @@
   </div>
 
   <!-- ==================== 강의시간 선택 모달 ==================== -->
-  <div id="lecTimeModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:10070; align-items:center; justify-content:center;">
+  <div id="lecTimeModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:100050 !important; align-items:center; justify-content:center;">
     <div style="background:#fff; width:680px; max-width:96vw; border-radius:4px; box-shadow:0 5px 20px rgba(0,0,0,0.3); overflow:hidden; border:1px solid #999;">
       <div style="background:#4791d2; color:#fff; padding:12px 18px; font-weight:bold; font-size:14px; display:flex; justify-content:space-between; align-items:center;">
         <span style="display:flex; align-items:center; gap:8px;"><i class="fa fa-clock-o"></i> 강의시간 선택</span>
@@ -3370,7 +3370,7 @@
       </div>
       <div style="padding:16px;">
         <p style="font-size:12px; color:#555; margin:0 0 12px 0;">원하는 요일 및 시간대를 체크 후 [적용] 버튼을 눌러주세요. (월~일요일 지원)</p>
-        <div style="overflow-x:auto; border:1px solid #ddd; border-radius:3px;">
+        <div id="lecTimeSlotGrid" style="overflow-x:auto; border:1px solid #ddd; border-radius:3px;">
           <table class="table table-bordered text-center" style="width:100%; margin:0; font-size:12px; border-collapse:collapse;">
             <thead>
               <tr style="background:#f1f5f9; border-bottom:1px solid #ddd;">
