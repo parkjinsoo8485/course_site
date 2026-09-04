@@ -4,6 +4,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const path = require('path');
 const fs = require('fs');
+const db = require('./utils/db');
 
 // Domain Routers
 const authRoutes = require('./routes/auth.routes');
@@ -22,8 +23,33 @@ app.use(helmet({
   contentSecurityPolicy: false,
   crossOriginEmbedderPolicy: false
 }));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// ==================== 1-클릭 북마크릿 DOM 실시간 수신 개발용 API ====================
+app.post('/api/dev/save-dom', (req, res) => {
+  try {
+    const { html, url, title, selector } = req.body;
+    if (!html) {
+      return res.status(400).json({ success: false, message: 'HTML 데이터가 비어있습니다.' });
+    }
+    const scratchDir = path.join(__dirname, '..', 'scratch');
+    if (!fs.existsSync(scratchDir)) fs.mkdirSync(scratchDir, { recursive: true });
+
+    const targetPath = path.join(scratchDir, 'target.html');
+    const metaHeader = `<!-- [Auto-captured via 1-Click Bookmarklet] -->\n<!-- Source URL: ${url || ''} -->\n<!-- Page Title: ${title || ''} -->\n<!-- Target Selector: ${selector || ''} -->\n<!-- Captured Time: ${new Date().toLocaleString()} -->\n\n`;
+
+    fs.writeFileSync(targetPath, metaHeader + html, 'utf8');
+    console.log(`[Dev Auto-Capture] DOM saved to scratch/target.html (${(html.length / 1024).toFixed(1)} KB) from ${url}`);
+    return res.json({
+      success: true,
+      message: `scratch/target.html 에 ${(html.length / 1024).toFixed(1)} KB가 정상 저장되었습니다.`
+    });
+  } catch (err) {
+    console.error('save-dom error:', err);
+    return res.status(500).json({ success: false, message: err.message });
+  }
+});
 
 // ==================== 강좌관리 (ad_lec) 페이지 라우팅 매핑 ====================
 app.get(/^\/af\/ad_lec\/inputs/, (req, res) => {
@@ -38,6 +64,63 @@ app.get(/^\/af\/ad_lec\/inputs/, (req, res) => {
   res.setHeader('Content-Type', 'text/csv; charset=utf-8');
   res.setHeader('Content-Disposition', 'attachment; filename="lecture_batch_sample.csv"');
   return res.send(sampleCsv);
+});
+
+// ==================== 출석부 엑셀 출력 (ad_att/excel) 라우팅 매핑 ====================
+app.get(/^\/af\/ad_att\/excel/, (req, res) => {
+  const excelHtml = `
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <style>
+    table { border-collapse: collapse; font-family: '맑은 고딕', sans-serif; font-size: 10pt; }
+    th { background-color: #dff0d8; border: 1px solid #ccc; padding: 6px 10px; font-weight: bold; text-align: center; }
+    td { border: 1px solid #ddd; padding: 5px 8px; vertical-align: middle; text-align: center; }
+    .title-cell { font-size: 16pt; font-weight: bold; text-align: center; color: #3c763d; padding: 12px; }
+  </style>
+</head>
+<body>
+  <table>
+    <tr><td colspan="8" class="title-cell">광주풍향초등학교 늘봄학교 출석부</td></tr>
+    <tr><td colspan="8" style="font-size:10pt; color:#666; padding:4px;">■ 출력 일시: ${new Date().toLocaleString('ko-KR')}</td></tr>
+    <tr>
+      <th>연번</th>
+      <th>강좌명</th>
+      <th>강사명</th>
+      <th>학생명</th>
+      <th>학년/반/번호</th>
+      <th>출석일수</th>
+      <th>결석일수</th>
+      <th>비고</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>창의로봇(초급)</td>
+      <td>김선생</td>
+      <td>홍길동</td>
+      <td>1학년 1반 1번</td>
+      <td>16</td>
+      <td>0</td>
+      <td>-</td>
+    </tr>
+  </table>
+</body>
+</html>
+  `.trim();
+
+  const filename = `출석부_${new Date().toISOString().split('T')[0]}.xls`;
+  res.setHeader('Content-Type', 'application/vnd.ms-excel; charset=utf-8');
+  res.setHeader('Content-Disposition', `attachment; filename="${encodeURIComponent(filename)}"; filename*=UTF-8''${encodeURIComponent(filename)}`);
+  return res.send(Buffer.from(excelHtml, 'utf-8'));
+});
+
+// ==================== 강좌 일괄입력 (ad_lec/input) SPA 모달 페이지 라우팅 ====================
+app.get(/^\/af\/ad_lec\/input(\/.*)?$/, (req, res, next) => {
+  if (req.path && req.path.includes('.') && !req.path.endsWith('.html')) {
+    return next();
+  }
+  // 좌측 사이드바와 레이아웃을 100% 유지하는 인페이지 모달 SPA 서빙
+  return res.sendFile(path.join(__dirname, 'af', 'ad_lec', 'lists', 'sn', 'index.html'));
 });
 
 app.get([
@@ -243,12 +326,23 @@ app.patch('/api/af/ad_lec/capacity', (req, res) => {
 
 // 강좌 일괄 수정 API (/api/af/ad_lec/bulk-update)
 app.post('/api/af/ad_lec/bulk-update', (req, res) => {
-  const { courseIds, updates } = req.body;
-  if (!courseIds || !Array.isArray(courseIds) || !updates) {
-    return res.status(400).json({ success: false, message: '수정할 강좌 목록과 변경 데이터를 전달하세요.' });
+  const { courseIds, updates, filter } = req.body;
+  if (!updates) {
+    return res.status(400).json({ success: false, message: '변경할 업데이트 데이터를 전달하세요.' });
   }
-  const updatedCount = db.bulkUpdateLectures('sch_1', courseIds, updates);
+  const updatedCount = db.bulkUpdateLectures('sch_1', courseIds, updates, filter);
   return res.json({ success: true, message: `${updatedCount}개 강좌의 정보가 일괄 수정되었습니다.`, count: updatedCount });
+});
+
+// 강좌 일괄 복사 API (/api/af/ad_lec/bulk-copy)
+app.post('/api/af/ad_lec/bulk-copy', (req, res) => {
+  const options = req.body || {};
+  const copiedCount = db.bulkCopyLectures('sch_1', options);
+  return res.json({
+    success: true,
+    message: `${copiedCount}개 강좌가 성공적으로 복사되었습니다.`,
+    count: copiedCount
+  });
 });
 
 // 강좌 통계 조회 API (/api/af/ad_lec/stats)

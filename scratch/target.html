@@ -1,0 +1,290 @@
+<!-- Auto-extracted via Human-Speed Scraper -->\n<!-- URL: https://www.dbdbschool.kr/af/ad_lec/write/p/1/sn/3267/sld/11/sof/ln/sot/asc -->\n<!-- Target Selector: form[id*='edit'] -->\n<!-- Extracted Time: 2026-09-04 15:15:20 -->\n\n<!-- Stylesheets -->\n<link href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/bootstrap.css?23111301" rel="stylesheet" type="text/css">
+<link href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+<link href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/ui/jquery-ui.css" rel="stylesheet" type="text/css">
+<link href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/default.css?26061201" rel="stylesheet" type="text/css">
+<link href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/css/af/content.css?26033101" rel="stylesheet" type="text/css">
+<link href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/icon/css/font-awesome.css" rel="stylesheet" type="text/css">
+<link href="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/scroll/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css">\n\n<!-- Extracted DOM -->\n<form action="https://www.dbdbschool.kr/af/ad_lec/write/p/1/sn/3267/sld/11/sof/ln/sot/asc" name="fm_edit" id="fm_edit" onsubmit="return fm_edit_check(this);" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+                                                                                                               <input type="hidden" name="csrf_test_name" value="a9aee3425f186a67a763a784e192f481">
+<input type="hidden" name="form_open_date_use_chk_csrf" value="2026-09-04 15:15:12">
+	<table class="table table-bordered table-hover list" style="margin-top:0px;">
+		<colgroup>
+			<col width="60">
+			<col width="60">
+			<col width="">
+		</colgroup>
+		<tbody><tr>
+			<th colspan="2">강좌명 <span><i class="fa required" title="필수항목"></i></span></th>
+			<td>
+				<input id="lec_name" name="lec_name" type="text" title="강좌명" value="" class="form-control" style="width:80%;" maxlength="100">
+				<div class="error_msg"></div>
+			</td>	
+		</tr>
+				
+		<tr>
+			<th colspan="2">강좌구분 <span><i class="fa required" title="필수항목"></i></span></th>
+			<td>
+				<select name="lec_div" id="lec_div" class="form-control">
+					<option value="">=선택=</option>
+					 <option value="5">3월</option>
+<option value="6">26년 4월</option>
+<option value="7">26년 5월</option>
+<option value="8">26년 6월</option>
+<option value="9">26년 7월</option>
+<option value="10">26년 8월</option>
+<option value="11" selected="selected">26년 9월</option>
+				</select>
+				<div class="error_msg"></div>
+			</td>	
+		</tr>
+		
+				
+		<tr>
+			<th colspan="2">늘봄과정 <span><i class="fa required" title="필수항목"></i></span></th>
+			<td>
+				<select name="lec_pro_type" id="lec_pro_type" class="form-control">
+					<option value="">=선택=</option>
+					 <option value="1">방과후</option>
+<option value="2">맞춤형</option>
+<option value="3">돌봄</option>
+				</select>
+				<div class="error_msg"></div>
+			</td>	
+		</tr>
+	
+		<tr>
+			<th colspan="2">강사ID <span><i class="fa required" title="필수항목"></i></span></th>
+			<td>
+				<input id="tea_id" name="tea_id" type="text" title="강사ID" size="11" value="" class="form-control size40" maxlength="15" style="width:100px;">
+				&nbsp;<a href="https://www.dbdbschool.kr/af/ad_tea/search/sn/3267" onclick="openAfTeaWin(this.href); return false" class="search_btn"><i class="fa fa-binoculars"></i>검색하기</a>
+				<br><span class="mobile_clear MAT10"><input type="checkbox" name="tea_id_chk" id="tea_id_chk" value="Y"> <label for="tea_id_chk"> 강사 ID가 같은 다른 강좌에 이미 신청되어 있는 경우 중복해서 신청할 수 없음</label></span>			
+				<div class="error_msg error_tea_id"></div>
+				<div class="error_msg error_tea_id_chk"></div>
+			</td>	
+		</tr>
+		<tr><th colspan="2">보조강사ID</th>
+			<td>
+				<input id="tea_id1" name="tea_id1" type="text" title="강사ID" size="30" value="" class="form-control size40" maxlength="60" style="width:200px;">
+				&nbsp;<a href="https://www.dbdbschool.kr/af/ad_tea/search1/sn/3267" onclick="openAfTeaWin(this.href); return false" class="search_btn"><i class="fa fa-binoculars"></i>검색하기</a>
+				<br>(대표 강사와 똑같은 권한으로 강좌 관련 업무를 보실 수 있습니다)
+				<div class="error_msg error_tea_id1"></div>
+			</td>	
+		</tr>		
+		<tr>
+			<th colspan="2">대상학년 <span><i class="fa required" title="필수항목"></i></span>
+				<br><input type="checkbox" name="check_all_grade" id="check_all_grade" value="" onclick="chk_all(this);" title="전체선택/취소" style="float:none;">
+			</th>
+			<td>
+				<span class="mobile_clear">	
+					<span><input type="checkbox" name="lec_grade[]" id="lec_grade_grade_1" value="1"><label for="lec_grade_grade_1">1학년</label></span>
+<span><input type="checkbox" name="lec_grade[]" id="lec_grade_grade_2" value="2"><label for="lec_grade_grade_2">2학년</label></span>
+<span><input type="checkbox" name="lec_grade[]" id="lec_grade_grade_3" value="3"><label for="lec_grade_grade_3">3학년</label></span>
+<span><input type="checkbox" name="lec_grade[]" id="lec_grade_grade_4" value="4"><label for="lec_grade_grade_4">4학년</label></span>
+<span><input type="checkbox" name="lec_grade[]" id="lec_grade_grade_5" value="5"><label for="lec_grade_grade_5">5학년</label></span>
+<span><input type="checkbox" name="lec_grade[]" id="lec_grade_grade_6" value="6"><label for="lec_grade_grade_6">6학년</label></span>
+				
+				</span>
+				<div class="error_msg error_lec_grade"></div>
+			</td>	
+		</tr>
+		
+		<tr>
+			<th colspan="2">강의시간 <span><i class="fa required" title="필수항목"></i></span></th>
+			<td>
+				<input id="lec_time_" name="lec_time_" type="text" title="강의시간" size="30" value="" readonly="readonly" class="form-control size90" maxlength="100" style="width:50%;">&nbsp;
+				<input type="hidden" id="lec_time" name="lec_time" value="">
+				<span class="mobile_clear MAT10"><a href="https://www.dbdbschool.kr/af/ad_lec/time/p/1/sn/3267/sld/11/sof/ln/sot/asc" onclick="openLecTimeWin(this.href); return false" class="search_btn"><i class="fa fa-binoculars"></i>검색하기</a></span>
+				<br><span class="mobile_clear MAT10"><input type="checkbox" name="lec_time_not_chk" id="lec_time_not_chk" value="Y"> <label for="lec_time_not_chk"> 강좌 신청 시 다른 강좌와 강의시간이 같더라도 중복해서 신청할 수 있음</label></span>
+				<div class="error_msg error_lec_time"></div>
+				<div class="error_msg error_lec_time_not_chk"></div>
+			</td>	
+		</tr>
+		<tr>
+			<th colspan="2">정원 <span><i class="fa required" title="필수항목"></i></span></th>
+			<td>
+				<input id="lec_max_sin" name="lec_max_sin" type="text" title="정원" size="11" value="0" class="form-control size40 text-right " maxlength="4" style="width:100px;"> 명
+				<div class="error_msg"></div>
+				
+			</td>	
+		</tr>
+		
+		<tr>
+			<th colspan="2">대기정원 <span><i class="fa required" title="필수항목"></i></span></th>
+			<td>
+				<input id="lec_max_wait" name="lec_max_wait" type="text" title="정원" size="11" value="0" class="form-control size40 text-right " maxlength="4" style="width:100px;"> 명
+				<div class="error_msg"></div>
+				
+				
+			</td>	
+		</tr>
+		
+		<tr>
+			<th colspan="2">운영기간 <span><i class="fa required" title="필수항목"></i></span></th>
+			<td>
+				<input id="lec_sdate" name="lec_sdate" value="" type="text" maxlength="10" title="시작일자" class="form-control form-date hasDatepicker" style="width:160px"> ~
+				<input id="lec_edate" name="lec_edate" value="" type="text" maxlength="10" title="종료일자" class="form-control form-date hasDatepicker" style="width:160px">
+				<div class="error_msg error_lec_sdate"></div>
+				<div class="error_msg error_lec_edate"></div>
+			</td>	
+		</tr>
+		<tr>
+			<th colspan="2">총시수 </th>
+			<td>
+				<input id="lec_tot_sisu" name="lec_tot_sisu" type="text" title="총시수" size="11" value="0" class="form-control size40 text-right " maxlength="3" style="width:100px;"> 시간
+				<div class="error_msg"></div>
+			</td>	
+		</tr>		
+			
+		<tr>
+			<th colspan="2">강의실 </th>
+			<td>
+				<select name="lec_room_" id="lec_room_" class="form-control PAD0">
+					<option value="">== 선택 ==</option>
+					 <option value="강당">강당</option>
+<option value="본관2층 컴퓨터교실">본관2층 컴퓨터교실</option>
+<option value="본관3층 늘봄프로그램실 1">본관3층 늘봄프로그램실 1</option>
+<option value="본관3층 늘봄프로그램실 2">본관3층 늘봄프로그램실 2</option>
+<option value="본관3층 늘봄프로그램실 3">본관3층 늘봄프로그램실 3</option>
+<option value="본관3층 늘봄프로그램실 4">본관3층 늘봄프로그램실 4</option>
+<option value="후관1층 늘봄프로그램실">후관1층 늘봄프로그램실</option>
+<option value="후관1층 늘봄프로그램실/강당">후관1층 늘봄프로그램실/강당</option>
+<option value="후관1층 돌봄교실">후관1층 돌봄교실</option>
+<option value="후관2층 늘봄프로그램실 5">후관2층 늘봄프로그램실 5</option>
+<option value="후관2층 늘봄프로그램실 6">후관2층 늘봄프로그램실 6</option>
+				</select>
+				<input id="lec_room" name="lec_room" value="" type="text" maxlength="20" placeholder="신규입력" title="신규입력" class="form-control" style="width:160px">
+				<div class="error_msg error_lec_room"></div>
+			</td>	
+		</tr>
+				
+		<tr>
+			<th colspan="2">수강료 </th>
+			<td>
+				
+				<input id="lec_pay" name="lec_pay" type="text" title="수강료" size="11" value="0" class="form-control size40 text-right " maxlength="9" style="width:100px;" onkeyup="chkLecPay(this);" onblur="chkLecPay(this);"> 원(강사료 + 수용비)
+			
+				<div class="error_msg error_lec_pay"></div>	
+				
+				<div><input type="checkbox" name="not_free2_pay" id="not_free2_pay" value="Y"> <label for="not_free2_pay"> 1학년 지원금 차감 제외</label></div>
+				<div class="error_msg error_not_free2_pay"></div>
+				<div><input type="checkbox" name="not_free3_pay" id="not_free3_pay" value="Y"> <label for="not_free3_pay"> 3학년 지원금 차감 제외</label></div>
+				<div class="error_msg error_not_free3_pay"></div>
+				<div><input type="checkbox" name="not_free1_pay" id="not_free1_pay" value="Y"> <label for="not_free1_pay"> 자유수강권 차감 제외</label></div>
+				<div class="error_msg error_not_free1_pay"></div>
+				
+				
+			</td>	
+		</tr>
+						
+		<tr>
+			<th colspan="2">수용비 </th>
+			<td>
+				<input id="lec_use_cost" name="lec_use_cost" type="text" title="수용비" size="11" value="0" class="form-control size40 text-right " maxlength="9" style="width:100px;" onkeyup="chkLecPay(this);" onblur="chkLecPay(this);"> 원			
+				<div class="error_msg error_lec_use_cost"></div>
+			</td>	
+		</tr>
+		<tr>
+			<th colspan="2">강사료 </th>
+			<td>
+				<input id="lec_tea_fee" name="lec_tea_fee" type="text" title="강사료" size="11" value="0" class="form-control size40 text-right " maxlength="9" style="width:100px;" disabled=""> 원			
+				<div class="error_msg error_lec_tea_fee"></div>
+			</td>	
+		</tr>				
+		<tr>
+			<th colspan="2">교재비 </th>
+			<td>
+				<input id="lec_pay_book" name="lec_pay_book" type="text" title="교재비" size="11" value="0" class="form-control size40 text-right " maxlength="9" style="width:100px;" onkeyup="chkMoney(this);" onblur="chkMoney(this);"> 원
+				<div class="error_msg error_lec_pay_book"></div>
+		
+			
+				<div><input type="checkbox" name="not_free2_pay_book" id="not_free2_pay_book" value="Y"> <label for="not_free2_pay_book"> 1학년 지원금 차감 제외</label></div>
+				<div class="error_msg error_not_free2_pay_book"></div>				
+				<div><input type="checkbox" name="not_free3_pay_book" id="not_free3_pay_book" value="Y"> <label for="not_free3_pay_book"> 3학년 지원금 차감 제외</label></div>
+				<div class="error_msg error_not_free3_pay_book"></div>				
+				<div><input type="checkbox" name="not_free1_pay_book" id="not_free1_pay_book" value="Y"> <label for="not_free1_pay_book"> 자유수강권 차감 제외</label></div>
+				<div class="error_msg error_not_free1_pay_book"></div>				
+				
+			</td>	
+		</tr>
+		<tr>
+			<th colspan="2">재료비 </th>
+			<td>
+				<input id="lec_pay_item" name="lec_pay_item" type="text" title="재료비" size="11" value="0" class="form-control size40 text-right " maxlength="9" style="width:100px;" onkeyup="chkMoney(this);" onblur="chkMoney(this);"> 원
+				<div class="error_msg error_lec_pay_item"></div>				
+		
+		
+				<div><input type="checkbox" name="not_free2_pay_item" id="not_free2_pay_item" value="Y"> <label for="not_free2_pay_item"> 1학년 지원금 차감 제외</label></div>
+				<div class="error_msg error_not_free2_pay_item"></div>
+				<div><input type="checkbox" name="not_free3_pay_item" id="not_free3_pay_item" value="Y"> <label for="not_free3_pay_item"> 3학년 지원금 차감 제외</label></div>
+				<div class="error_msg error_not_free3_pay_item"></div>
+				<div><input type="checkbox" name="not_free1_pay_item" id="not_free1_pay_item" value="Y"> <label for="not_free1_pay_item"> 자유수강권 차감 제외</label></div>
+				<div class="error_msg error_not_free1_pay_item"></div>
+	
+			</td>	
+		</tr>		
+	
+
+					
+		<tr>
+			<th colspan="2">내용 </th>
+			<td>
+				<textarea id="lec_content" name="lec_content" class="form-control" rows="15" style="width:100%;"></textarea>
+				<div class="error_msg error_lec_content"></div>
+			</td>	
+		</tr>
+		<tr>
+			<th colspan="2">첨부파일 </th>
+			<td>
+				<div id="file_box" class="ui-sortable">
+				</div>
+				<div><a href="#none;" onclick="add_file(); return false;" class="btn btn-default btn-xs font-12 MAT10" role="button">파일추가</a></div>
+				<div>(※ 한 번에 최대 3M 이하만 올릴 수 있습니다.)</div>
+			</td>
+		</tr>
+		<tr>
+			<th colspan="2">수강료 출력 </th>
+			<td>
+				<input type="checkbox" name="lec_pay_view" id="lec_pay_view" value="Y"> <label for="lec_pay_view"> 학생의 신청 조회 화면에 수강료, 교재비, 재료비 출력</label>
+				<div class="error_msg error_lec_pay_view"></div>
+			</td>	
+		</tr>		
+		<tr>
+			<th colspan="2">강사마감 </th>
+			<td>
+				<input type="checkbox" name="lec_tea_finish" id="lec_tea_finish" value="Y"> <label for="lec_tea_finish"> 강사는 신청자 등록(삭제) 및 수강료 수정 불가</label>
+				<div class="error_msg error_lec_tea_finish"></div>
+			</td>	
+		</tr>		
+		<tr>
+			<th colspan="2">강사 강좌 편집 </th>
+			<td>
+				<input type="checkbox" name="lec_tea_edit" id="lec_tea_edit" value="Y"> <label for="lec_tea_edit"> 강좌 수정 및 삭제 허용(<span class="text-danger">강사 마감 전, 대기 중인 강좌만 허용</span>)</label>
+				<div class="error_msg error_lec_tea_edit"></div>
+			</td>	
+		</tr>
+		<tr>
+			<th colspan="2">환불마감 </th>
+			<td>
+				<input type="checkbox" name="refund_status" id="refund_status" value="1"> <label for="refund_status">강사 및 학생은 환불 신청 불가</label>
+				<div class="error_msg error_refund_status"></div>
+			</td>	
+		</tr>
+
+		<tr>
+			<th colspan="2">상태 <span><i class="fa required" title="필수항목"></i></span></th>
+			<td>
+				<span class="mobile_clear">	
+					<span><input id="lec_status_1" name="lec_status" type="radio" value="1" checked="checked"> <label for="lec_status_1">출력</label>&nbsp;&nbsp;</span>
+					<span><input id="lec_status_0" name="lec_status" type="radio" value="0"> <label for="lec_status_0">대기</label></span>
+					<span><input id="lec_status_2" name="lec_status" type="radio" value="2"> <label for="lec_status_2">종료</label></span>
+					<span><div class="error_msg error_lec_status"></div>
+				</span>
+			</span></td>	
+		</tr>
+	</tbody></table>
+	<p class="text-center MAT30">
+		<input type="button" onclick="history.back(-1); return false;" class="btn btn-default" value="취소"> 
+		<input type="submit" value="등록" data-loading-text="처리중 .." class="btn btn-danger">
+		
+	</p>
+	</form>

@@ -94,6 +94,7 @@ router.post('/af/ad_lec/create', (req, res) => {
     }
 
     const newCourse = db.createCourse({
+      ...req.body,
       schoolId: targetSchoolId,
       category: category || '2026년 1분기',
       title,
@@ -108,14 +109,46 @@ router.post('/af/ad_lec/create', (req, res) => {
       dayOfWeek: dayOfWeek || '월',
       scheduleTime: scheduleTime || '14:00~14:50',
       schedule: `${dayOfWeek || '월'}:${scheduleTime || '14:00~14:50'}`,
-      location: location || '방과후 교실',
-      status: 'OUTPUT'
+      location: location || req.body.classroom || '방과후 교실',
+      status: req.body.status || 'OUTPUT'
     });
 
     return res.json({ success: true, lecture: newCourse, message: `'${title}' 강좌가 성공적으로 등록되었습니다.` });
   } catch (err) {
     console.error('Create Lecture Error:', err);
     return res.status(500).json({ success: false, message: '강좌 등록 중 오류가 발생했습니다.' });
+  }
+});
+
+// POST /af/ad_lec/update (강좌 정보 수정)
+router.post('/af/ad_lec/update', (req, res) => {
+  try {
+    const { id } = req.body;
+    if (!id) {
+      return res.status(400).json({ success: false, message: '수정할 강좌 ID가 필요합니다.' });
+    }
+    const updated = db.updateCourse(id, req.body);
+    if (!updated) {
+      return res.status(404).json({ success: false, message: '수정할 강좌를 찾을 수 없습니다.' });
+    }
+    return res.json({ success: true, lecture: updated, message: `'${updated.title}' 강좌가 성공적으로 수정되었습니다.` });
+  } catch (err) {
+    console.error('Update Lecture Error:', err);
+    return res.status(500).json({ success: false, message: '강좌 수정 중 오류가 발생했습니다.' });
+  }
+});
+
+// DELETE /api/af/ad_lec/:course_id (강좌 삭제)
+router.delete(['/af/ad_lec/:course_id', '/af/ad_lec/delete/:course_id'], (req, res) => {
+  try {
+    const courseId = req.params.course_id;
+    const deleted = db.deleteCourse(courseId);
+    if (deleted) {
+      return res.json({ success: true, message: '강좌가 성공적으로 삭제되었습니다.' });
+    }
+    return res.status(404).json({ success: false, message: '삭제할 강좌를 찾을 수 없습니다.' });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: '강좌 삭제 중 오류가 발생했습니다.' });
   }
 });
 

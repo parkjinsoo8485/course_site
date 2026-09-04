@@ -566,29 +566,29 @@
 		</div>
 		<div id="contents">
 			<div class="panel_main panel-default_main">
-				<div class="new_help_manualbox hm_loca1">
-					<p class="hm_title"><i class="fa fa-file-text-o" aria-hidden="true"></i>매뉴얼</p>
-					<ul>
-						<li>
-							<a href="https://www.dbdbschool.kr/help/go_data/num/92/data/link1" target="_blank" class="manual_btn"><i class="fa fa-youtube-play"></i> 강좌 일괄입력</a>
-						</li>
-					</ul>
+				<div class="panel-heading" style="display: flex; align-items: center; justify-content: space-between;">
+					<span>일괄입력</span>
+					<div class="top_btn_box" style="display: flex; gap: 6px;">
+						<a href="/af/ad_faq/main/sn/3267" class="btn btn-default btn-xs" style="height: 24px; padding: 0 10px; font-size: 12px; display: inline-flex; align-items: center; gap: 4px; line-height: 1; text-decoration: none; color: #333; background: #fff; border: 1px solid #ccc; border-radius: 3px;"><i class="fa fa-book"></i> 매뉴얼</a>
+						<a href="https://www.dbdbschool.kr/help/go_data/num/92/data/link1" target="_blank" class="btn btn-danger btn-xs" style="height: 24px; padding: 0 10px; font-size: 12px; display: inline-flex; align-items: center; gap: 4px; line-height: 1; text-decoration: none; color: #fff; background: #d9534f; border: 1px solid #d43f3a; border-radius: 3px;"><i class="fa fa-youtube-play"></i> 강좌 일괄입력</a>
+					</div>
 				</div>
-				
-				<div class="panel-heading">일괄입력</div>
-				<div class="panel-body">
-					<p class="MAT20"><i class="fa required" title="필수항목"></i><span class="font-12"> 표시가 있는 항목은 반드시 입력해야 합니다.</span></p>
+				<div class="panel-body" style="padding: 14px 15px 8px 15px;">
+					<p class="MAT20" style="margin: 0 0 10px 0; font-size: 12px; color: #555; display: flex; align-items: center; gap: 5px;">
+						<i class="fa fa-check-square" style="color: #337ab7; font-size: 13px;"></i>
+						<span>표시가 있는 항목은 반드시 입력해야 합니다.</span>
+					</p>
 				</div>
 
 				<form action="/af/ad_lec/input/sn/3267" name="fm_edit" id="fm_edit" onsubmit="return fm_edit_check(this);" enctype="multipart/form-data" method="post" accept-charset="utf-8">
 				<input type="hidden" name="csrf_test_name" value="e43c6256fddf4af68d2ce6925f075607">
-				<input type="hidden" name="form_open_date_use_chk_csrf" value="2026-08-20 16:04:44">
+				<input type="hidden" name="form_open_date_use_chk_csrf" value="2026-09-04 13:21:00">
 					<table class="table table-bordered table-hover">
 						<tbody>
 						<tr>
-							<th>강좌구분 <span><i class="fa required" title="필수항목"></i></span></th>
+							<th>강좌구분 <i class="fa fa-check-square" style="color: #337ab7; font-size: 12px; margin-left: 2px;"></i></th>
 							<td>
-								<select name="lec_div" id="lec_div" class="form-control" style="width:160px;">
+								<select name="lec_div" id="lec_div" class="form-control" style="width: 160px; height: 30px; line-height: normal !important; box-sizing: border-box !important; vertical-align: middle; padding: 0 10px;">
 									<option value="">=선택=</option>
 									<option value="5">3월</option>
 									<option value="6">26년 4월</option>
@@ -602,55 +602,58 @@
 						</tr>
 						
 						<tr>
-							<th width="160" style="min-width:73px;">엑셀 데이터 파일 <span><i class="fa required" title="필수항목"></i></span></th>
+							<th width="160" style="min-width:73px;">엑셀 데이터 파일 <i class="fa fa-check-square" style="color: #337ab7; font-size: 12px; margin-left: 2px;"></i></th>
 							<td>
-								<input id="userfile" name="userfile" type="file" title="데이터파일" value="" class="size90" style="display:inline-block;">&nbsp;
-								<span class="mobile_clear">(<a href="/af/ad_lec/inputs/sn/3267" download="강좌일괄입력_샘플양식.csv" class="link_type">일괄입력 샘플 다운로드</a>)</span>
-								<div style="margin-top:6px; color:#555;">
-									<i class="fa fa-question-circle"></i> <a href="https://www.dbdbschool.kr/help/view/num/261/p/1/pdc/faq/sn/3267" target="_blank" style="border-bottom:1px dashed; color:#555; text-decoration:none;">한셀로 만들어진 엑셀파일은 변환 후 사용할 수 있습니다.</a><br>
+								<input id="userfile" name="userfile" type="file" title="데이터파일" value="" class="size90" style="display:inline-block; vertical-align: middle;">&nbsp;
+								<span class="mobile_clear">(<a href="/af/ad_lec/inputs" download="lecture_batch_sample.csv" class="link_type" style="color: #337ab7; text-decoration: underline;">일괄입력 샘플 다운로드</a>)</span>
+								<div style="margin-top:6px; color:#555; font-size: 12px;">
+									<i class="fa fa-question-circle" style="color: #666;"></i> <a href="https://www.dbdbschool.kr/help/view/num/261/p/1/pdc/faq/sn/3267" target="_blank" style="border-bottom:1px dashed #777; color:#555; text-decoration:none;">한셀로 만들어진 엑셀파일은 변환 후 사용할 수 있습니다.</a>
 								</div>				
 							</td>
 						</tr>
 						<tr>
-							<th>기존 데이터 <span><i class="fa required" title="필수항목"></i></span></th>
+							<th>기존 데이터 <i class="fa fa-check-square" style="color: #337ab7; font-size: 12px; margin-left: 2px;"></i></th>
 							<td>
-								<span class="mobile_clear"><input type="radio" name="input_type" id="input_type_add" value="add" checked="checked"> <label for="input_type_add">추가 입력(수정)</label></span>
+								<span class="mobile_clear" style="display: inline-flex; align-items: center; gap: 5px;">
+									<input type="radio" name="input_type" id="input_type_add" value="add" checked="checked" style="margin: 0; vertical-align: middle;">
+									<label for="input_type_add" style="margin: 0; cursor: pointer; font-weight: normal;">추가 입력(수정)</label>
+								</span>
 							</td>
 						</tr>		
 						<tr>
 							<th>참고사항</th>
-							<td>
-								- 샘플파일  <span class="text-danger">첫 번째 줄의 내용은 변경할 수 없습니다.</span> <br>
-								- <span class="text-danger">늘봄과정 : 늘봄과정 구분을 사용하는 경우에만 필수</span> 항목입니다.<br>
-								- 중복제한그룹	: 선택 항목입니다.<br>
-								- <span class="text-danger">강좌명	: 필수</span> 항목입니다.<br>
-								- <span class="text-danger">강사ID : 필수</span> 항목입니다.<br>
-								- <span class="text-danger">대상학년 : 필수</span> 항목입니다.<br>
-								- <span class="text-danger">대상학과 : 학과 설정이 되어 있는 경우에만 필수</span> 항목입니다.<br>
-								- <span class="text-danger">강의시간 : 필수</span> 항목입니다.<br>
+							<td style="line-height: 1.8; color: #444;">
+								- 샘플파일 <span class="text-danger" style="color: #d9534f;">첫 번째 줄의 내용은 변경할 수 없습니다.</span><br>
+								- <span class="text-danger" style="color: #d9534f;">늘봄과정 : 늘봄과정 구분을 사용하는 경우에만 필수</span> 항목입니다.<br>
+								- 중복제한그룹 : 선택 항목입니다.<br>
+								- <span class="text-danger" style="color: #d9534f;">강좌명 : 필수</span> 항목입니다.<br>
+								- <span class="text-danger" style="color: #d9534f;">강사ID : 필수</span> 항목입니다.<br>
+								- <span class="text-danger" style="color: #d9534f;">대상학년 : 필수</span> 항목입니다.<br>
+								- <span class="text-danger" style="color: #d9534f;">대상학과 : 학과 설정이 되어 있는 경우에만 필수</span> 항목입니다.<br>
+								- <span class="text-danger" style="color: #d9534f;">강의시간 : 필수</span> 항목입니다.<br>
 								- 강의시간중복허용 : 선택 항목입니다.<br>
-								- <span class="text-danger">정원 : 필수</span> 항목입니다.<br>
-								- <span class="text-danger">대기정원 : 대기자 기능을 사용하는 경우에만 필수</span> 항목입니다.<br>				
-								- <span class="text-danger">운영기간(시작) : 필수</span> 항목입니다.<br>
-								- <span class="text-danger">운영기간(종료) : 필수</span> 항목입니다.<br>
+								- <span class="text-danger" style="color: #d9534f;">정원 : 필수</span> 항목입니다.<br>
+								- <span class="text-danger" style="color: #d9534f;">대기정원 : 대기자 기능을 사용하는 경우에만 필수</span> 항목입니다.<br>				
+								- <span class="text-danger" style="color: #d9534f;">운영기간(시작) : 필수</span> 항목입니다.<br>
+								- <span class="text-danger" style="color: #d9534f;">운영기간(종료) : 필수</span> 항목입니다.<br>
 								- 총시수, 강의실, 수강료, 수용비, 교재비, 재료비, 지원금차감제외, 최대지원금액, 내용 : 선택 항목입니다.<br>
 							</td>
 						</tr>
 					</tbody></table>
 					<p class="text-center MAT30" style="margin-top:25px; margin-bottom:30px; text-align:center;">
-						<input type="button" value="취소" onclick="location.href='/af/ad_lec/lists/sn/3267';" class="btn btn-default" style="margin-right:6px; min-width:65px;">	
-						<input type="submit" value="등록" class="btn btn-danger" style="min-width:65px; background:#d9534f; border-color:#d43f3a; color:#ffffff;">
+						<input type="button" value="취소" onclick="location.href='/af/ad_lec/lists/sn/3267';" class="btn btn-default" style="margin-right:6px; min-width:65px; height:30px; padding:0 14px; display:inline-flex; align-items:center; justify-content:center; line-height:1; box-sizing:border-box; border:1px solid #ccc; background:#fff; color:#333; border-radius:3px; font-weight:bold; cursor:pointer;">	
+						<input type="submit" value="등록" class="btn btn-danger" style="min-width:65px; height:30px; padding:0 14px; display:inline-flex; align-items:center; justify-content:center; line-height:1; box-sizing:border-box; background:#d9534f; border:1px solid #d43f3a; color:#ffffff; border-radius:3px; font-weight:bold; cursor:pointer;">
 					</p>
 				</form>
 			</div>
 
 			<div class="help_box">
-				<ul>
-					<li>중복제한그룹은 <span class="text-danger" style="font-weight:bold;">환경설정 &gt; 중복제한그룹 &gt; 코드명</span>과 일치하도록 입력해 주세요.</li>
-					<li>학과를 입력하는 경우 <span class="text-danger" style="font-weight:bold;">학교환경설정 &gt; 학과설정 &gt; 코드명</span>과 일치하도록 입력해 주세요.</li>
-					<li>강의시간은 <span class="text-danger" style="font-weight:bold;">환경설정 &gt; 수업교시 &gt; 코드명</span>과 일치하도록 입력해 주세요.</li>
-					<li>지원금명은 <span class="text-danger" style="font-weight:bold;">지원금관리 &gt; 지원금설정 &gt; 지원금명</span>과 일치하도록 입력해 주세요.</li>
-					<li><span class="text-danger" style="font-weight:bold;">강좌명이 같은 데이터는 수정</span>됩니다.</li>
+				<ul style="list-style: none; padding: 0; margin: 0; line-height: 1.9;">
+					<li><span style="color: #d9534f; margin-right: 6px;">■</span>중복제한그룹은 <span class="text-danger" style="color: #d9534f; font-weight:bold;">환경설정 &gt; 중복제한그룹 &gt; 코드명</span>과 일치하도록 입력해 주세요.</li>
+					<li><span style="color: #d9534f; margin-right: 6px;">■</span>학과를 입력하는 경우 <span class="text-danger" style="color: #d9534f; font-weight:bold;">학교환경설정 &gt; 학과설정 &gt; 코드명</span>과 일치하도록 입력해 주세요.</li>
+					<li><span style="color: #d9534f; margin-right: 6px;">■</span>강의시간은 <span class="text-danger" style="color: #d9534f; font-weight:bold;">환경설정 &gt; 수업교시 &gt; 코드명</span>과 일치하도록 입력해 주세요.</li>
+					<li><span style="color: #d9534f; margin-right: 6px;">■</span>지원금명은 <span class="text-danger" style="color: #d9534f; font-weight:bold;">지원금관리 &gt; 지원금설정 &gt; 지원금명</span>과 일치하도록 입력해 주세요.</li>
+					<li><span style="color: #d9534f; margin-right: 6px;">■</span><span class="text-danger" style="color: #d9534f; font-weight:bold;">강좌명이 같은 데이터는 수정</span>됩니다.</li>
 				</ul>
 			</div>	
 
@@ -686,26 +689,73 @@
 			return false;
 		}
 
-		var formData = new FormData();
-		formData.append('userfile', file);
-		formData.append('lec_div', fm.lec_div.value);
-		formData.append('schoolId', '3267');
+		// CSV/텍스트 파일 읽기 및 파싱
+		var reader = new FileReader();
+		reader.onload = async function(e) {
+			try {
+				var text = e.target.result;
+				var lines = text.split(/\r?\n/).filter(function(line) { return line.trim().length > 0; });
+				if (lines.length <= 1) {
+					alert("업로드할 강좌 데이터가 파일에 없습니다.");
+					return;
+				}
 
-		try {
-			var res = await fetch('/api/af/ad_lec/batch-upload', {
-				method: 'POST',
-				body: formData
-			});
-			var result = await res.json();
-			if (res.ok && result.success) {
-				alert(result.message || '강좌가 성공적으로 일괄 등록되었습니다.');
-				location.href = '/af/ad_lec/lists/sn/3267';
-			} else {
-				alert(result.message || result.error || '일괄입력 처리 중 오류가 발생했습니다.');
+				// 첫 번째 헤더 라인 제외한 데이터 라인 파싱
+				var parsedRows = [];
+				for (var i = 1; i < lines.length; i++) {
+					var cols = lines[i].split(',').map(function(c) { return c.trim(); });
+					if (cols.length < 4 || !cols[3]) continue; // 강좌명이 없으면 스킵
+
+					parsedRows.push({
+						category: cols[0] || fm.lec_div.options[fm.lec_div.selectedIndex].text,
+						programType: cols[1] || '방과후',
+						limitGroup: cols[2] || '',
+						name: cols[3],
+						instructorId: cols[4] || 'tea01',
+						assistantId: cols[5] || '',
+						targetGrades: cols[6] ? cols[6].split(';') : ['1', '2'],
+						time: cols[7] || '월1부(13:00~13:40)',
+						allowTimeConflict: cols[8] === 'Y',
+						capacity: parseInt(cols[9], 10) || 20,
+						waitingCapacity: parseInt(cols[10], 10) || 5,
+						startDate: cols[11] || '2026-09-01',
+						endDate: cols[12] || '2026-09-30',
+						totalHours: parseInt(cols[13], 10) || 16,
+						room: cols[14] || '본관2층 컴퓨터교실',
+						fee: parseInt(cols[15], 10) || 30000,
+						facilityFee: parseInt(cols[16], 10) || 3000,
+						bookFee: parseInt(cols[17], 10) || 0,
+						materialFee: parseInt(cols[18], 10) || 0,
+						description: cols[19] || ''
+					});
+				}
+
+				if (parsedRows.length === 0) {
+					alert("유효한 강좌 데이터 행이 없습니다.");
+					return;
+				}
+
+				var res = await fetch('/api/af/ad_lec/batch-upload', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+						schoolId: '3267',
+						rows: parsedRows
+					})
+				});
+				var result = await res.json();
+				if (res.ok && result.success) {
+					alert(result.message || '강좌가 성공적으로 일괄 등록되었습니다.');
+					location.href = '/af/ad_lec/lists/sn/3267';
+				} else {
+					alert(result.message || result.error || '일괄입력 처리 중 오류가 발생했습니다.');
+				}
+			} catch (err) {
+				console.error('Batch upload error:', err);
+				alert('일괄입력 처리 중 오류가 발생했습니다: ' + err.message);
 			}
-		} catch (e) {
-			alert('서버 통신 중 오류가 발생했습니다.');
-		}
+		};
+		reader.readAsText(file, 'euc-kr'); // 또는 utf-8
 		
 		return false;		
 	}	

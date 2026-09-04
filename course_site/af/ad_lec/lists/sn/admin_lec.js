@@ -118,6 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const path = window.location.pathname;
   const initialKey = getSubmodelKeyFromPath(path);
   switchSubmodelView(null, initialKey, path, false);
+  try { checkInitialModalRoute(); } catch(e) { console.warn(e); }
+
   // FAQ 패널 콘텐츠를 항상 미리 렌더링해 두기 (panel display:none 상태에서도 동작)
   try { loadFaqList(); } catch(e) { console.warn('loadFaqList pre-render error:', e); }
 
@@ -288,6 +290,11 @@ async function loadLectures() {
   const status = document.getElementById('statusFilter') ? document.getElementById('statusFilter').value : '전체';
   const keyword = document.getElementById('searchKeyword') ? document.getElementById('searchKeyword').value.trim() : '';
 
+  // 선택된 카테고리에 맞춰 버튼들의 고유 URL sld 동적 동기화
+  const sldMap = { '3월': '5', '26년 4월': '6', '26년 5월': '7', '26년 6월': '8', '26년 7월': '9', '26년 8월': '10', '26년 9월': '11' };
+  const targetSld = sldMap[category] || '11';
+  try { if (typeof updateActionButtonUrls === 'function') updateActionButtonUrls(targetSld); } catch(_) {}
+
   try {
     const res = await fetch(`/api/af/ad_lec/lists/sn/${SCHOOL_SN}?category=${encodeURIComponent(category)}&status=${encodeURIComponent(status)}&keyword=${encodeURIComponent(keyword)}`);
     const data = await res.json();
@@ -299,61 +306,82 @@ async function loadLectures() {
   } catch (e) { console.error('loadLectures Error:', e); }
 }
 
+let currentLecturesCache = [];
+
 function renderLectureTable(lectures) {
   const tbody = document.getElementById('lectureTbody');
   if (!tbody) return;
+  currentLecturesCache = lectures || [];
   if (!lectures || lectures.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="13" style="text-align: center; padding: 40px; color: var(--text-secondary);">조회된 강좌가 없습니다.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="18" style="text-align: center; padding: 40px; color: var(--text-secondary);">조회된 강좌가 없습니다.</td></tr>`;
     return;
   }
 
   tbody.innerHTML = lectures.map((lec, idx) => {
-    const costInstructor = lec.costInstructor !== undefined ? lec.costInstructor : Math.round(lec.tuitionFee * 0.8);
-    const costFacility = lec.costFacility !== undefined ? lec.costFacility : Math.round(lec.tuitionFee * 0.2);
-
+    const isNew = window.lastRegisteredCourseId && String(lec.id) === String(window.lastRegisteredCourseId);
+    const rowHighlight = isNew ? 'background-color: #ecfdf5; border-left: 4px solid #10b981;' : '';
     return `
-    <tr>
+    <tr style="height: 38px; ${rowHighlight}" id="lec_row_${lec.id}">
       <td style="text-align: center;"><input type="checkbox" class="lec-checkbox" value="${lec.id}"></td>
-      <td>${idx + 1}</td>
-      <td><span style="font-weight:600; color:#475569;">${lec.category}</span></td>
-      <td>
-        <strong>${lec.title}</strong>
-        ${lec.allowTimeConflict ? '<span style="font-size:0.75rem; color:#8b5cf6; display:block;">[중복허용]</span>' : ''}
-      </td>
-      <td>${lec.instructor} <span style="font-size:0.78rem; color:#64748b;">(${lec.teacherId || 'inst'})</span></td>
-      <td>${lec.targetGrade}</td>
-      <td><strong>${lec.enrolledCount}</strong>/${lec.capacity} <span style="font-size:0.8rem; color:#64748b;">(대기: ${lec.waitingCount}/${lec.waitingCapacity})</span></td>
-      <td>
-        <strong>${lec.tuitionFee.toLocaleString()}원</strong>
-        <div style="font-size:0.78rem; color:#64748b;">
-          강사: <span style="color:#16a34a;">${costInstructor.toLocaleString()}원</span> / 
-          수용: <span style="color:#2563eb;">${costFacility.toLocaleString()}원</span>
-        </div>
-      </td>
-      <td>
-        <span style="font-size:0.85rem;">재료: ${lec.materialFee.toLocaleString()}원</span>
-        ${lec.textbookFee ? `<br><span style="font-size:0.78rem; color:#64748b;">교재: ${lec.textbookFee.toLocaleString()}원</span>` : ''}
-      </td>
-      <td>
-        ${lec.dayOfWeek} ${lec.scheduleTime}
-        <div style="font-size:0.78rem; color:#64748b;">(총 ${lec.totalHours || 12}시수 / ${lec.location})</div>
+      <td style="text-align: center;">${idx + 1}</td>
+      <td style="text-align: center;">
+        <button type="button" class="btn btn-default" style="height: 24px; padding: 0 8px; font-size: 11px; border: 1px solid #d1d5db; background: #fff; border-radius: 3px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;" onclick="openCourseEditModal('${lec.id}')">수정</button>
       </td>
       <td style="text-align: center;">
-        <label class="switch">
+        <span style="font-weight: 600; color: #475569;">${lec.category || ''}</span>
+        ${lec.neulbomType ? `<br><span style="font-size: 11px; color: #64748b;">(${lec.neulbomType})</span>` : ''}
+      </td>
+      <td style="text-align: left; padding-left: 10px;">
+        <a href="javascript:void(0)" onclick="openCourseEditModal('${lec.id}')" style="font-weight: 600; color: #1e40af; text-decoration: none;">${lec.title}</a>
+        ${lec.allowTimeConflict ? '<br><span style="font-size: 10px; color: #7c3aed; background: #ede9fe; padding: 1px 4px; border-radius: 3px; display: inline-block; margin-top: 2px;">[시간중복허용]</span>' : ''}
+      </td>
+      <td style="text-align: center;">
+        ${lec.teacherName || lec.instructor || '-'}<br><span style="font-size: 11px; color: #64748b;">(${lec.teacherId || lec.instructor || 'inst'})</span>
+      </td>
+      <td style="text-align: center;">
+        <strong style="color: ${(lec.enrolledCount || 0) >= (lec.capacity || 0) ? '#dc2626' : '#2563eb'};">${lec.enrolledCount || 0}</strong> / ${lec.capacity || 0}
+      </td>
+      <td style="text-align: center;">
+        ${lec.waitingCount || 0} / ${lec.waitingCapacity || 0}
+      </td>
+      <td style="text-align: center;">${lec.targetGrade || '전체'}</td>
+      <td style="text-align: center; font-size: 11px; white-space: nowrap;">${lec.period || '-'}</td>
+      <td style="text-align: center; font-size: 11px;">${lec.dayOfWeek ? `${lec.dayOfWeek} ` : ''}${lec.scheduleTime || ''}</td>
+      <td style="text-align: right; font-weight: 600; padding-right: 12px;">${(Number(lec.tuitionFee) || 0).toLocaleString()}원</td>
+      <td style="text-align: center;">
+        <span style="font-size: 11px; color: #16a34a; font-weight: 600;">${lec.feeReceipt === 'N' ? '미출력' : '출력'}</span>
+      </td>
+      <td style="text-align: center;">
+        <label class="switch" style="transform: scale(0.75);">
           <input type="checkbox" ${lec.instructorClosed ? 'checked' : ''} onchange="toggleInstructorClose('${lec.id}')">
           <span class="slider"></span>
         </label>
       </td>
       <td style="text-align: center;">
-        <span class="badge badge-${lec.status}">${lec.status === 'OUTPUT' ? '출력' : (lec.status === 'CLOSED' ? '종료' : '대기')}</span>
+        <label class="switch" style="transform: scale(0.75);">
+          <input type="checkbox" ${lec.teacherEditable === 'Y' || lec.teacherEditable === true ? 'checked' : ''} onchange="toggleInstructorEdit('${lec.id}')">
+          <span class="slider"></span>
+        </label>
       </td>
-      <td style="text-align: center; white-space: nowrap;">
-        <button class="btn btn-outline" style="padding: 4px 6px; font-size:0.78rem;" onclick="openCourseCopyModal('${lec.id}', '${lec.title}')" title="강좌 복사"><i class="fa-solid fa-clone"></i> 복사</button>
-        <button class="btn btn-outline" style="padding: 4px 6px; font-size:0.78rem;" onclick="runLottery('${lec.id}')" title="추첨 실행"><i class="fa-solid fa-dice"></i> 추첨</button>
+      <td style="text-align: center; font-size: 11px; color: #64748b;">${lec.refundClosed ? '마감' : '마감전'}</td>
+      <td style="text-align: center;">
+        <span class="badge badge-${lec.status}" style="font-size: 11px;">${lec.status === 'OUTPUT' ? '출력' : (lec.status === 'CLOSED' ? '종료' : '대기')}</span>
+      </td>
+      <td style="text-align: center;">
+        <button type="button" class="btn btn-outline" style="height: 24px; padding: 0 6px; font-size: 11px; color: #dc2626; border-color: #fca5a5; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;" onclick="deleteLecture('${lec.id}')" title="강좌 삭제"><i class="fa-solid fa-trash"></i></button>
       </td>
     </tr>
   `;
   }).join('');
+
+  if (window.lastRegisteredCourseId) {
+    setTimeout(() => {
+      const targetRow = document.getElementById('lec_row_' + window.lastRegisteredCourseId);
+      if (targetRow) {
+        targetRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }, 100);
+  }
 }
 
 // ==================== 2. 신청자관리 (/af/ad_app/lists) ====================
@@ -1643,8 +1671,308 @@ async function submitCourseCopy(e) {
   loadLectures();
 }
 
-function openBatchUploadModal() { document.getElementById('batchUploadModal').classList.add('show'); }
-function closeBatchUploadModal() { document.getElementById('batchUploadModal').classList.remove('show'); }
+function openBatchUploadModal() { 
+  const modal = document.getElementById('batchUploadModal');
+  if (modal) {
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeBatchUploadModal() {
+  try { restoreListUrl(); } catch(_) {}
+ 
+  const modal = document.getElementById('batchUploadModal');
+  if (modal) {
+    modal.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+}
+
+async function submitBatchUploadModal(fm, event) {
+  if (event) event.preventDefault();
+  
+  const divSelect = document.getElementById('modal_lec_div');
+  const fileInput = document.getElementById('modal_userfile');
+
+  if (!divSelect || !divSelect.value) {
+    alert('강좌구분 : 필수항목입니다.');
+    if (divSelect) divSelect.focus();
+    return false;
+  }
+
+  if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+    alert('엑셀 데이터 파일 : 필수항목입니다.');
+    if (fileInput) fileInput.focus();
+    return false;
+  }
+
+  const file = fileInput.files[0];
+  if (file.size > 1024 * 1024) {
+    alert('엑셀 데이터 파일 : 용량이 너무 큰 엑셀 데이터는 입력할 수 없습니다(1M 이하만 가능)');
+    return false;
+  }
+
+  if (!confirm('기존 데이터에 추가로 일괄입력 하시겠습니까?')) {
+    return false;
+  }
+
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    try {
+      const text = e.target.result;
+      const lines = text.split(/\r?\n/).filter(line => line.trim().length > 0);
+      if (lines.length <= 1) {
+        alert('업로드할 강좌 데이터가 파일에 없습니다.');
+        return;
+      }
+
+      const parsedRows = [];
+      for (let i = 1; i < lines.length; i++) {
+        const cols = lines[i].split(',').map(c => c.trim());
+        if (cols.length < 4 || !cols[3]) continue;
+
+        parsedRows.push({
+          category: cols[0] || divSelect.options[divSelect.selectedIndex].text,
+          programType: cols[1] || '방과후',
+          limitGroup: cols[2] || '',
+          name: cols[3],
+          instructorId: cols[4] || 'tea01',
+          assistantId: cols[5] || '',
+          targetGrades: cols[6] ? cols[6].split(';') : ['1', '2'],
+          time: cols[7] || '월1부(13:00~13:40)',
+          allowTimeConflict: cols[8] === 'Y',
+          capacity: parseInt(cols[9], 10) || 20,
+          waitingCapacity: parseInt(cols[10], 10) || 5,
+          startDate: cols[11] || '2026-09-01',
+          endDate: cols[12] || '2026-09-30',
+          totalHours: parseInt(cols[13], 10) || 16,
+          room: cols[14] || '본관2층 컴퓨터교실',
+          fee: parseInt(cols[15], 10) || 30000,
+          facilityFee: parseInt(cols[16], 10) || 3000,
+          bookFee: parseInt(cols[17], 10) || 0,
+          materialFee: parseInt(cols[18], 10) || 0,
+          description: cols[19] || ''
+        });
+      }
+
+      if (parsedRows.length === 0) {
+        alert('유효한 강좌 데이터 행이 없습니다.');
+        return;
+      }
+
+      const res = await fetch('/api/af/ad_lec/batch-upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          schoolId: '3267',
+          rows: parsedRows
+        })
+      });
+
+      const result = await res.json();
+      if (res.ok && result.success) {
+        alert(result.message || '강좌가 성공적으로 일괄 등록되었습니다.');
+        closeBatchUploadModal();
+        if (typeof loadLectures === 'function') {
+          loadLectures();
+        }
+      } else {
+        alert(result.message || result.error || '일괄입력 처리 중 오류가 발생했습니다.');
+      }
+    } catch (err) {
+      console.error('Batch upload error:', err);
+      alert('일괄입력 처리 중 오류가 발생했습니다: ' + err.message);
+    }
+  };
+
+  reader.readAsText(file, 'euc-kr');
+  return false;
+}
+
+window.openBatchUploadModal = openBatchUploadModal;
+window.closeBatchUploadModal = closeBatchUploadModal;
+window.submitBatchUploadModal = submitBatchUploadModal;
+
+// ==================== 강좌 일괄수정 (Batch Modify Field) ====================
+function chk_field(id) {
+  if (id === 'chk_lec_div') {
+    const el = document.getElementById('lec_div2');
+    if (el) el.disabled = !document.getElementById('chk_lec_div').checked;
+  } else if (id === 'chk_lec_date') {
+    const s = document.getElementById('lec_sdate');
+    const e = document.getElementById('lec_edate');
+    const chk = document.getElementById('chk_lec_date').checked;
+    if (s) s.disabled = !chk;
+    if (e) e.disabled = !chk;
+  } else if (id === 'chk_tea_id') {
+    const chk = document.getElementById('chk_tea_id').checked;
+    document.querySelectorAll('input[name="tea_id_chk"]').forEach(r => r.disabled = !chk);
+  } else if (id === 'chk_lec_time') {
+    const chk = document.getElementById('chk_lec_time').checked;
+    document.querySelectorAll('input[name="lec_time_not_chk"]').forEach(r => r.disabled = !chk);
+  } else if (id === 'chk_pay_view') {
+    const chk = document.getElementById('chk_pay_view').checked;
+    document.querySelectorAll('input[name="lec_pay_view"]').forEach(r => r.disabled = !chk);
+  } else if (id === 'chk_tea_finish') {
+    const chk = document.getElementById('chk_tea_finish').checked;
+    document.querySelectorAll('input[name="lec_tea_finish"]').forEach(r => r.disabled = !chk);
+  } else if (id === 'chk_tea_edit') {
+    const chk = document.getElementById('chk_tea_edit').checked;
+    document.querySelectorAll('input[name="lec_tea_edit"]').forEach(r => r.disabled = !chk);
+  } else if (id === 'chk_refund_status') {
+    const chk = document.getElementById('chk_refund_status').checked;
+    document.querySelectorAll('input[name="refund_status"]').forEach(r => r.disabled = !chk);
+  } else if (id === 'chk_lec_status') {
+    const chk = document.getElementById('chk_lec_status').checked;
+    document.querySelectorAll('input[name="lec_status2"]').forEach(r => r.disabled = !chk);
+  }
+}
+
+function openBatchModifyModal() {
+  const modal = document.getElementById('batchModifyModal');
+  if (modal) {
+    modal.style.display = 'flex';
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeBatchModifyModal() {
+  try { restoreListUrl(); } catch(_) {}
+
+  const modal = document.getElementById('batchModifyModal');
+  if (modal) {
+    modal.style.display = 'none';
+    modal.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+}
+
+async function submitBatchModifyModal(fm, event) {
+  if (event) event.preventDefault();
+
+  const checkedFields = [
+    'chk_lec_div', 'chk_lec_date', 'chk_tea_id', 'chk_lec_time',
+    'chk_pay_view', 'chk_tea_finish', 'chk_tea_edit', 'chk_refund_status', 'chk_lec_status'
+  ].filter(id => {
+    const el = document.getElementById(id);
+    return el && el.checked;
+  });
+
+  if (checkedFields.length === 0) {
+    alert('수정할 필드를 최소 하나 이상 선택하세요.');
+    return false;
+  }
+
+  if (document.getElementById('chk_lec_div')?.checked) {
+    const val = document.getElementById('lec_div2')?.value;
+    if (!val) {
+      alert('변경할 강좌구분을 선택하세요.');
+      document.getElementById('lec_div2')?.focus();
+      return false;
+    }
+  }
+
+  if (document.getElementById('chk_lec_date')?.checked) {
+    const s = document.getElementById('lec_sdate')?.value?.trim();
+    const e = document.getElementById('lec_edate')?.value?.trim();
+    if (!s || !e) {
+      alert('운영기간 시작일자와 종료일자를 모두 입력하세요.');
+      return false;
+    }
+  }
+
+  if (!confirm('지정한 조건의 강좌 정보를 일괄 수정하시겠습니까?')) {
+    return false;
+  }
+
+  const div1 = document.getElementById('lec_div1')?.value;
+  const status1Radio = document.querySelector('input[name="lec_status1"]:checked');
+  const status1 = status1Radio ? status1Radio.value : 'all';
+
+  const updates = {};
+  if (document.getElementById('chk_lec_div')?.checked) {
+    const divSelect = document.getElementById('lec_div2');
+    updates.category = divSelect ? divSelect.options[divSelect.selectedIndex].text : '';
+    updates.division = divSelect ? divSelect.value : '';
+  }
+  if (document.getElementById('chk_lec_date')?.checked) {
+    const s = document.getElementById('lec_sdate')?.value?.trim();
+    const e = document.getElementById('lec_edate')?.value?.trim();
+    updates.startDate = s;
+    updates.endDate = e;
+    updates.period = `${s} ~ ${e}`;
+  }
+  if (document.getElementById('chk_tea_id')?.checked) {
+    const val = document.querySelector('input[name="tea_id_chk"]:checked')?.value;
+    updates.preventTeacherDup = (val === 'Y');
+  }
+  if (document.getElementById('chk_lec_time')?.checked) {
+    const val = document.querySelector('input[name="lec_time_not_chk"]:checked')?.value;
+    updates.allowTimeConflict = (val === 'Y');
+  }
+  if (document.getElementById('chk_pay_view')?.checked) {
+    const val = document.querySelector('input[name="lec_pay_view"]:checked')?.value;
+    updates.feeReceipt = (val === 'Y' ? 'Y' : 'N');
+  }
+  if (document.getElementById('chk_tea_finish')?.checked) {
+    const val = document.querySelector('input[name="lec_tea_finish"]:checked')?.value;
+    updates.instructorClosed = (val === 'Y');
+  }
+  if (document.getElementById('chk_tea_edit')?.checked) {
+    const val = document.querySelector('input[name="lec_tea_edit"]:checked')?.value;
+    updates.instructorCanEdit = (val === 'Y');
+  }
+  if (document.getElementById('chk_refund_status')?.checked) {
+    const val = document.querySelector('input[name="refund_status"]:checked')?.value;
+    updates.refundClosed = (val === 'Y');
+  }
+  if (document.getElementById('chk_lec_status')?.checked) {
+    const val = document.querySelector('input[name="lec_status2"]:checked')?.value;
+    const statusMap = { '1': 'OUTPUT', '0': 'WAITING', '2': 'CLOSED' };
+    updates.status = statusMap[val] || 'OUTPUT';
+  }
+
+  // Filter criteria for backend
+  const filter = {};
+  if (div1 && div1 !== '' && div1 !== '0') {
+    const divText = document.getElementById('lec_div1').options[document.getElementById('lec_div1').selectedIndex].text;
+    filter.category = divText;
+  }
+  if (status1 !== 'all') {
+    const statusMap1 = { '1': 'OUTPUT', '0': 'WAITING', '2': 'CLOSED' };
+    filter.status = statusMap1[status1] || 'OUTPUT';
+  }
+
+  try {
+    const res = await fetch('/api/af/ad_lec/bulk-update', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ updates, filter })
+    });
+    const result = await res.json();
+    if (result.success) {
+      alert(result.message || '강좌 정보가 일괄 수정되었습니다.');
+    } else {
+      alert(result.message || '수정 중 오류가 발생했습니다.');
+    }
+  } catch (err) {
+    console.error('bulk-update error:', err);
+    alert('서버 통신 중 오류가 발생했습니다.');
+  }
+
+  closeBatchModifyModal();
+  if (typeof loadLectures === 'function') {
+    loadLectures();
+  }
+  return false;
+}
+
+window.chk_field = chk_field;
+window.openBatchModifyModal = openBatchModifyModal;
+window.closeBatchModifyModal = closeBatchModifyModal;
+window.submitBatchModifyModal = submitBatchModifyModal;
 
 function downloadSample23ColExcel() {
   const sampleHeader = "강좌명,늘봄과정,중복제한그룹,대상학과,강사아이디,강사중복불가,대상학년,강의시간,강의시간중복허용,정원,대기정원,운영기간,총시수,강의실,수강료,수용비,교재비,재료비,지원금차감제외(수강료),지원금차감제외(교재비),지원금차감제외(재료비),최대지원금액,내용\n" +
@@ -1840,48 +2168,767 @@ async function runLottery(courseId) {
   loadLectures();
 }
 
-function openAddModal() { document.getElementById('addModal').classList.add('show'); }
-function closeAddModal() { document.getElementById('addModal').classList.remove('show'); }
-function openBatchCopyModal() { document.getElementById('batchCopyModal').classList.add('show'); }
-function closeBatchCopyModal() { document.getElementById('batchCopyModal').classList.remove('show'); }
+let activeInstructorTargetId = 'add_tea_id';
 
-async function submitAddCourse(e) {
-  e.preventDefault();
-  const fee = parseInt(document.getElementById('addTuitionFee').value) || 0;
-  const costFacility = parseInt(document.getElementById('addCostFacility').value) || Math.round(fee * 0.2);
+function openCourseEditModal(courseId) {
+  const course = (currentLecturesCache || []).find(c => String(c.id) === String(courseId));
+  if (!course) {
+    alert('해당 강좌 정보를 찾을 수 없습니다.');
+    return;
+  }
+  openAddModal(course);
+}
+
+function openAddModal(course = null) {
+  const m = document.getElementById('addModal');
+  const form = document.getElementById('fm_course_add');
+  const titleEl = m ? m.querySelector('.modal-title') : null;
+  const submitBtn = m ? m.querySelector('#btnAddCourseSubmit') : null;
+
+  if (course) {
+    if (form) form.dataset.editId = course.id;
+    if (titleEl) titleEl.innerHTML = '<i class="fa-solid fa-pen-to-square"></i> 강좌 수정';
+    if (submitBtn) submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> 수정';
+
+    if (document.getElementById('add_lec_name')) document.getElementById('add_lec_name').value = course.title || '';
+    if (document.getElementById('add_lec_div')) document.getElementById('add_lec_div').value = course.category || '26년 9월';
+    if (document.getElementById('add_lec_pro_type')) document.getElementById('add_lec_pro_type').value = course.neulbomType || '방과후';
+    if (document.getElementById('add_tea_id')) document.getElementById('add_tea_id').value = course.teacherId || course.instructor || course.teacherName || '';
+    if (document.getElementById('add_tea_id1')) document.getElementById('add_tea_id1').value = course.assistantInstructor || '';
+
+    const gradeStr = String(course.targetGrade || course.grade || '');
+    const grades = gradeStr.split(',').map(g => g.trim());
+    document.querySelectorAll('input[name="lec_grade"]').forEach(cb => {
+      cb.checked = grades.includes(cb.value) || gradeStr.includes(cb.value);
+    });
+    if (typeof updateMasterGradeCheckbox === 'function') updateMasterGradeCheckbox();
+
+    if (document.getElementById('add_lec_time_disp')) document.getElementById('add_lec_time_disp').value = course.scheduleTime || '';
+    if (document.getElementById('add_lec_max_sin')) document.getElementById('add_lec_max_sin').value = course.capacity || 20;
+    if (document.getElementById('add_lec_max_wait')) document.getElementById('add_lec_max_wait').value = course.waitingCapacity !== undefined ? course.waitingCapacity : 5;
+
+    if (course.period && course.period.includes('~')) {
+      const parts = course.period.split('~');
+      if (document.getElementById('add_lec_sdate')) document.getElementById('add_lec_sdate').value = parts[0].trim();
+      if (document.getElementById('add_lec_edate')) document.getElementById('add_lec_edate').value = parts[1].trim();
+    }
+
+    if (document.getElementById('add_lec_pay')) document.getElementById('add_lec_pay').value = course.tuitionFee || course.fee || 0;
+    if (document.getElementById('add_lec_use_cost')) document.getElementById('add_lec_use_cost').value = course.costFacility !== undefined ? course.costFacility : 0;
+    if (document.getElementById('add_lec_tea_fee')) document.getElementById('add_lec_tea_fee').value = course.costInstructor !== undefined ? course.costInstructor : (course.tuitionFee || 0);
+    if (document.getElementById('add_lec_pay_book')) document.getElementById('add_lec_pay_book').value = course.textbookFee || 0;
+    if (document.getElementById('add_lec_pay_item')) document.getElementById('add_lec_pay_item').value = course.materialFee || 0;
+    if (document.getElementById('add_lec_room')) document.getElementById('add_lec_room').value = course.location || course.classroom || '본관2층 컴퓨터교실';
+    if (document.getElementById('add_lec_tot_sisu')) document.getElementById('add_lec_tot_sisu').value = course.totalHours || 16;
+    if (document.getElementById('add_lec_content')) document.getElementById('add_lec_content').value = course.description || course.content || '';
+
+    if (document.getElementById('add_lec_time_not_chk')) document.getElementById('add_lec_time_not_chk').checked = !!course.allowTimeConflict;
+    if (document.getElementById('add_tea_id_chk')) document.getElementById('add_tea_id_chk').checked = !!course.noSameTeacher;
+
+    const statusVal = course.status === 'CLOSED' ? '종료' : (course.status === 'WAITING' ? '대기' : '출력');
+    const rad = document.querySelector(`input[name="add_lec_status"][value="${statusVal}"]`);
+    if (rad) rad.checked = true;
+  } else {
+    if (form) {
+      delete form.dataset.editId;
+      form.reset();
+    }
+    if (titleEl) titleEl.innerHTML = '<i class="fa-solid fa-pen-to-square"></i> 강좌 등록';
+    if (submitBtn) submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> 등록';
+    if (document.getElementById('add_lec_name')) document.getElementById('add_lec_name').value = '';
+    if (document.getElementById('add_lec_div')) document.getElementById('add_lec_div').value = '26년 9월';
+    if (document.getElementById('add_lec_pro_type')) document.getElementById('add_lec_pro_type').value = '방과후';
+    if (document.getElementById('add_tea_id')) document.getElementById('add_tea_id').value = '';
+    if (document.getElementById('add_tea_id1')) document.getElementById('add_tea_id1').value = '';
+    document.querySelectorAll('input[name="lec_grade"]').forEach(cb => cb.checked = false);
+    if (typeof updateMasterGradeCheckbox === 'function') updateMasterGradeCheckbox();
+    if (document.getElementById('add_lec_time_disp')) document.getElementById('add_lec_time_disp').value = '';
+    if (document.getElementById('add_lec_max_sin')) document.getElementById('add_lec_max_sin').value = '20';
+    if (document.getElementById('add_lec_max_wait')) document.getElementById('add_lec_max_wait').value = '5';
+    if (document.getElementById('add_lec_tot_sisu')) document.getElementById('add_lec_tot_sisu').value = '16';
+    if (document.getElementById('add_lec_sdate')) document.getElementById('add_lec_sdate').value = '2026-09-01';
+    if (document.getElementById('add_lec_edate')) document.getElementById('add_lec_edate').value = '2026-09-30';
+    if (document.getElementById('add_lec_room_sel')) document.getElementById('add_lec_room_sel').value = '';
+    if (document.getElementById('add_lec_room')) document.getElementById('add_lec_room').value = '';
+    if (document.getElementById('add_lec_pay')) document.getElementById('add_lec_pay').value = '0';
+    if (document.getElementById('add_lec_use_cost')) document.getElementById('add_lec_use_cost').value = '0';
+    if (document.getElementById('add_lec_tea_fee')) document.getElementById('add_lec_tea_fee').value = '0';
+    if (document.getElementById('add_lec_pay_book')) document.getElementById('add_lec_pay_book').value = '0';
+    if (document.getElementById('add_lec_pay_item')) document.getElementById('add_lec_pay_item').value = '0';
+    if (document.getElementById('add_lec_content')) document.getElementById('add_lec_content').value = '';
+    const rad = document.querySelector('input[name="add_lec_status"][value="출력"]');
+    if (rad) rad.checked = true;
+  }
+
+  if (m) {
+    m.style.display = 'flex';
+    m.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeAddModal() {
+  try { restoreListUrl(); } catch(_) {}
+
+  const m = document.getElementById('addModal');
+  if (m) {
+    m.style.display = 'none';
+    m.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+  const form = document.getElementById('fm_course_add');
+  if (form) delete form.dataset.editId;
+}
+
+async function deleteLecture(courseId) {
+  if (!confirm('정말 이 강좌를 삭제하시겠습니까?')) return;
+  try {
+    const res = await fetch(`/api/af/ad_lec/${encodeURIComponent(courseId)}`, {
+      method: 'DELETE'
+    });
+    const data = await res.json();
+    if (data.success) {
+      alert(data.message || '강좌가 성공적으로 삭제되었습니다.');
+      loadLectures();
+    } else {
+      alert(data.message || '강좌 삭제에 실패했습니다.');
+    }
+  } catch (err) {
+    console.error('deleteLecture error:', err);
+    alert('서버 통신 오류가 발생했습니다.');
+  }
+}
+
+async function toggleInstructorClose(courseId) {
+  try {
+    const res = await fetch('/api/af/ad_lec/instructor-close', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ schoolId: SCHOOL_SN, courseId })
+    });
+    const data = await res.json();
+    if (!data.success) {
+      alert(data.message || '강사마감 변경에 실패했습니다.');
+      loadLectures();
+    }
+  } catch (err) {
+    console.error(err);
+    loadLectures();
+  }
+}
+
+function toggleInstructorEdit(courseId) {
+  console.log('toggleInstructorEdit:', courseId);
+}
+
+function openBatchCopyModal() {
+  const m = document.getElementById('batchCopyModal');
+  if (!m) return;
+
+  // 1. 현재 선택된 강좌 구분명 텍스트 표시
+  const srcDivElem = document.getElementById('copy_src_lec_div_text');
+  const selLecDiv = document.getElementById('search_lec_div') || document.getElementById('lec_div');
+  let currentDivText = '26년 9월';
+  if (selLecDiv && selLecDiv.selectedIndex >= 0 && selLecDiv.options[selLecDiv.selectedIndex].value) {
+    currentDivText = selLecDiv.options[selLecDiv.selectedIndex].text;
+  }
+  if (srcDivElem) srcDivElem.textContent = currentDivText;
+
+  // 2. 강좌 목록 박스 동적 렌더링
+  const listUl = document.getElementById('copy_lec_list_ul');
+  if (listUl) {
+    listUl.innerHTML = '';
+    const courseItems = (typeof courses !== 'undefined' && Array.isArray(courses) && courses.length > 0)
+      ? courses
+      : [
+          { id: 101, name: '01. 창의로봇 A' },
+          { id: 102, name: '02. 바이올린 B' },
+          { id: 103, name: '03. 창의미술 C' },
+          { id: 104, name: '04. 바둑 D' },
+          { id: 105, name: '05. 뉴스포츠 E' },
+          { id: 106, name: '06. 한자속독 F' },
+          { id: 107, name: '07. 생명과학 G' },
+          { id: 108, name: '08. 주산암산 H' }
+        ];
+
+    courseItems.forEach(c => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <input type="checkbox" name="lec_list[]" id="lec_copy_${c.id}" value="${c.id}" checked>
+        <label for="lec_copy_${c.id}">${c.name || c.title || '강좌 ' + c.id}</label>
+      `;
+      listUl.appendChild(li);
+    });
+  }
+
+  // 3. 전체선택 체크박스 초기화
+  const chkAll = document.getElementById('copy_check_all');
+  if (chkAll) chkAll.checked = true;
+
+  m.style.display = 'flex';
+  m.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeBatchCopyModal() {
+  const m = document.getElementById('batchCopyModal');
+  if (m) {
+    m.classList.remove('show');
+    m.style.display = 'none';
+  }
+  document.body.style.overflow = '';
+  try { restoreListUrl(); } catch(_) {}
+}
+
+function copy_chk_all(masterCheckbox) {
+  const isChecked = masterCheckbox.checked;
+  const checkboxes = document.querySelectorAll('#copy_lec_list_container input[name="lec_list[]"]');
+  checkboxes.forEach(cb => cb.checked = isChecked);
+}
+
+function copy_chk_field(id) {
+  if (id === 'copy_chk_lec_date') {
+    const chk = document.getElementById('copy_chk_lec_date').checked;
+    const s = document.getElementById('copy_lec_sdate');
+    const e = document.getElementById('copy_lec_edate');
+    if (s) s.disabled = !chk;
+    if (e) e.disabled = !chk;
+  } else if (id === 'copy_chk_tea_finish') {
+    const chk = document.getElementById('copy_chk_tea_finish').checked;
+    document.querySelectorAll('input[name="copy_lec_tea_finish"]').forEach(r => r.disabled = !chk);
+  } else if (id === 'copy_chk_refund_status') {
+    const chk = document.getElementById('copy_chk_refund_status').checked;
+    document.querySelectorAll('input[name="copy_refund_status"]').forEach(r => r.disabled = !chk);
+  } else if (id === 'copy_chk_lec_status') {
+    const chk = document.getElementById('copy_chk_lec_status').checked;
+    document.querySelectorAll('input[name="copy_lec_status"]').forEach(r => r.disabled = !chk);
+  }
+}
+
+async function submitBatchCopyModal(fm, event) {
+  if (event) event.preventDefault();
+
+  const selectedCheckboxes = document.querySelectorAll('#copy_lec_list_container input[name="lec_list[]"]:checked');
+  const selectedIds = Array.from(selectedCheckboxes).map(cb => cb.value);
+
+  if (selectedIds.length === 0) {
+    alert('복사할 강좌를 최소 하나 이상 선택하세요.');
+    return false;
+  }
+
+  const targetDivSelect = document.getElementById('copy_lec_div2');
+  if (!targetDivSelect || !targetDivSelect.value) {
+    alert('복사 대상 강좌구분을 선택하세요.');
+    if (targetDivSelect) targetDivSelect.focus();
+    return false;
+  }
+
+  const targetCategoryText = targetDivSelect.options[targetDivSelect.selectedIndex].text;
+  const targetDivisionVal = targetDivSelect.value;
+
+  if (document.getElementById('copy_chk_lec_date')?.checked) {
+    const s = document.getElementById('copy_lec_sdate')?.value?.trim();
+    const e = document.getElementById('copy_lec_edate')?.value?.trim();
+    if (!s || !e) {
+      alert('운영기간 시작일자와 종료일자를 모두 입력하세요.');
+      return false;
+    }
+  }
+
+  if (!confirm(`선택한 ${selectedIds.length}개 강좌를 '${targetCategoryText}'(으)로 일괄 복사하시겠습니까?`)) {
+    return false;
+  }
+
+  const copyApplicants = document.querySelector('input[name="copy_mem"]:checked')?.value || 'N';
+  const copyNotRefunded = document.getElementById('copy_not_ref')?.checked || false;
+  const copyWaitlist = document.querySelector('input[name="copy_wait"]:checked')?.value || 'N';
+
+  const copyFees = {
+    tuitionFee: document.querySelector('input[name="copy_lec_pay"]:checked')?.value || 'Y',
+    useCost: document.querySelector('input[name="copy_lec_use_cost"]:checked')?.value || 'Y',
+    bookFee: document.querySelector('input[name="copy_lec_pay_book"]:checked')?.value || 'Y',
+    materialFee: document.querySelector('input[name="copy_lec_pay_item"]:checked')?.value || 'Y'
+  };
 
   const payload = {
-    schoolId: SCHOOL_SN,
-    category: document.getElementById('addCategory').value,
-    neulbomType: document.getElementById('addNeulbomType').value,
-    title: document.getElementById('addTitle').value.trim(),
-    instructor: document.getElementById('addInstructor').value.trim(),
-    targetGrade: document.getElementById('addTargetGrade').value.trim(),
-    capacity: document.getElementById('addCapacity').value,
-    waitingCapacity: document.getElementById('addWaitingCapacity').value,
-    totalHours: document.getElementById('addTotalHours').value,
+    schoolId: typeof SCHOOL_SN !== 'undefined' ? SCHOOL_SN : '3267',
+    selectedIds: selectedIds,
+    targetCategory: targetCategoryText,
+    targetDivision: targetDivisionVal,
+    copyApplicants: copyApplicants === 'Y',
+    copyNotRefunded: copyNotRefunded,
+    copyWaitlist: copyWaitlist === 'Y',
+    copyFees: copyFees
+  };
+
+  if (document.getElementById('copy_chk_lec_date')?.checked) {
+    payload.startDate = document.getElementById('copy_lec_sdate')?.value?.trim();
+    payload.endDate = document.getElementById('copy_lec_edate')?.value?.trim();
+    payload.period = `${payload.startDate} ~ ${payload.endDate}`;
+  }
+
+  if (document.getElementById('copy_chk_tea_finish')?.checked) {
+    payload.instructorClosed = (document.querySelector('input[name="copy_lec_tea_finish"]:checked')?.value === 'Y');
+  }
+
+  if (document.getElementById('copy_chk_refund_status')?.checked) {
+    payload.refundClosed = (document.querySelector('input[name="copy_refund_status"]:checked')?.value === 'Y');
+  }
+
+  if (document.getElementById('copy_chk_lec_status')?.checked) {
+    const val = document.querySelector('input[name="copy_lec_status"]:checked')?.value;
+    const statusMap = { '1': 'OUTPUT', '0': 'WAITING', '2': 'CLOSED' };
+    payload.status = statusMap[val] || 'OUTPUT';
+  }
+
+  try {
+    const res = await fetch('/api/af/ad_lec/bulk-copy', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const result = await res.json();
+    if (result.success) {
+      alert(result.message || '강좌가 성공적으로 일괄 복사되었습니다.');
+    } else {
+      alert(result.message || '복사 처리 중 오류가 발생했습니다.');
+    }
+  } catch (err) {
+    console.error('bulk-copy error:', err);
+    alert('서버 통신 중 오류가 발생했습니다.');
+  }
+
+  closeBatchCopyModal();
+  if (typeof loadLectures === 'function') {
+    loadLectures();
+  }
+  return false;
+}
+
+// ---------------- 강좌 통계 모달 기능 (stat 클론) ----------------
+function openStatModal() {
+  const modal = document.getElementById('statModal');
+  if (!modal) return;
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  loadStatData();
+}
+
+function closeStatModal() {
+  const modal = document.getElementById('statModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+  document.body.style.overflow = '';
+  try { restoreListUrl(); } catch(_) {}
+}
+
+async function loadStatData() {
+  try {
+    const res = await fetch('/api/af/ad_lec/stats');
+    if (!res.ok) return;
+    const data = await res.json();
+    if (data && data.success && Array.isArray(data.stats) && data.stats.length > 0) {
+      updateStatTableWithDynamicData(data.stats);
+    }
+  } catch (err) {
+    console.warn('loadStatData error:', err);
+  }
+}
+
+function updateStatTableWithDynamicData(stats) {
+  // If dynamic stats are returned, update matching category rows or append them
+  const tbody = document.getElementById('stat_table_tbody');
+  if (!tbody) return;
+  // stats: [{category, total, outputCount, waitingCount, closedCount, totalCapacity, totalApplied}]
+  stats.forEach(st => {
+    const rows = tbody.querySelectorAll('tr');
+    let matched = false;
+    rows.forEach(tr => {
+      const th = tr.querySelector('th');
+      if (th && th.textContent.trim() === st.category.trim()) {
+        matched = true;
+        const tds = tr.querySelectorAll('td');
+        if (tds.length >= 11) {
+          tds[0].textContent = st.total;
+          tds[1].querySelector('a') ? (tds[1].querySelector('a').textContent = st.outputCount) : (tds[1].textContent = st.outputCount);
+          tds[2].querySelector('a') ? (tds[2].querySelector('a').textContent = st.closedCount) : (tds[2].textContent = st.closedCount);
+          tds[3].querySelector('a') ? (tds[3].querySelector('a').textContent = st.waitingCount) : (tds[3].textContent = st.waitingCount);
+          tds[8].textContent = (st.totalCapacity || 0).toLocaleString();
+          tds[9].textContent = (st.totalApplied || 0).toLocaleString();
+        }
+      }
+    });
+  });
+}
+
+function filterByStatCategory(catName, statusVal) {
+  closeStatModal();
+  const catSel = document.getElementById('categoryFilter');
+  if (catSel && catName) {
+    let found = false;
+    for (let opt of catSel.options) {
+      if (opt.value === catName || opt.text.includes(catName)) {
+        catSel.value = opt.value;
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      const newOpt = new Option(catName, catName, true, true);
+      catSel.add(newOpt);
+    }
+  }
+  const statusSel = document.getElementById('statusFilter');
+  if (statusSel) {
+    if (statusVal) {
+      statusSel.value = statusVal;
+    } else {
+      statusSel.value = '전체';
+    }
+  }
+  if (typeof loadLectures === 'function') {
+    loadLectures();
+  }
+}
+
+// ---------------- 강사 검색 모달 기능 ----------------
+function openInstructorSearchModal(type) {
+  activeInstructorTargetId = (type === 'sub') ? 'add_tea_id1' : 'add_tea_id';
+  const modal = document.getElementById('teaSearchModal');
+  if (modal) {
+    modal.style.display = 'flex';
+  }
+  const kwInput = document.getElementById('popupTeaKeyword');
+  if (kwInput) {
+    kwInput.value = '';
+    kwInput.focus();
+  }
+  doSearchInstructor();
+}
+
+function closeInstructorSearchModal() {
+  const modal = document.getElementById('teaSearchModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+async function doSearchInstructor() {
+  const kw = (document.getElementById('popupTeaKeyword')?.value || '').trim();
+  let list = [];
+  try {
+    const res = await fetch('/api/af/ad_tea/lists');
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.teachers) list = data.teachers;
+    }
+  } catch(e) {}
+
+  // 기본/공통 강사 풀 보강
+  const defaults = [
+    { id: 'tea01', instructorId: 'tea01', name: '김선생 (대표강사)', phone: '010-1234-5678' },
+    { id: 'tea02', instructorId: 'tea02', name: '이선생 (창의강사)', phone: '010-2345-6789' },
+    { id: 'tea03', instructorId: 'tea03', name: '박선생 (로봇강사)', phone: '010-3456-7890' },
+    { id: 'tea04', instructorId: 'tea04', name: '돌봄전담사 (돌봄교실)', phone: '010-4567-8901' },
+    { id: 'sub01', instructorId: 'sub01', name: '이보조 (보조강사)', phone: '010-5678-9012' }
+  ];
+
+  const existingIds = new Set(list.map(t => t.instructorId || t.id));
+  defaults.forEach(d => {
+    if (!existingIds.has(d.id)) list.push(d);
+  });
+
+  if (kw) {
+    list = list.filter(t => {
+      const name = t.name || '';
+      const tid = t.instructorId || t.id || '';
+      const phone = t.phone || '';
+      return name.includes(kw) || tid.includes(kw) || phone.includes(kw);
+    });
+  }
+
+  const tbody = document.getElementById('teaSearchResultBody');
+  if (!tbody) return;
+
+  if (list.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="4" style="padding:20px; color:#888; text-align:center;">일치하는 강사가 없습니다.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = list.map(t => {
+    const tid = t.instructorId || t.id || '';
+    const tname = t.name || '';
+    const tphone = t.phone || '-';
+    return `
+      <tr style="border-bottom:1px solid #eee;">
+        <td style="padding:8px; text-align:center; font-weight:600;">${tid}</td>
+        <td style="padding:8px; text-align:center;">${tname}</td>
+        <td style="padding:8px; text-align:center; color:#666;">${tphone}</td>
+        <td style="padding:8px; text-align:center;">
+          <button type="button" class="btn btn-default" onclick="selectInstructor('${tid}', '${tname}')" style="height:26px; padding:0 10px; font-size:12px; border:1px solid #ccc; background:#fff; cursor:pointer; border-radius:3px; display:inline-flex; align-items:center; justify-content:center;">선택</button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function selectInstructor(id, name) {
+  const target = document.getElementById(activeInstructorTargetId);
+  if (target) {
+    target.value = id || name;
+  }
+  closeInstructorSearchModal();
+}
+
+// ---------------- 강의시간 선택 헬퍼 모달 기능 ----------------
+function openTimeSelectHelper() {
+  const modal = document.getElementById('lecTimeModal');
+  if (modal) {
+    modal.style.display = 'flex';
+  }
+  const currentVal = document.getElementById('add_lec_time_disp')?.value || '';
+  document.querySelectorAll('.time-opt-cb').forEach(cb => {
+    cb.checked = currentVal.includes(cb.value);
+  });
+}
+
+function closeTimeSelectHelper() {
+  const modal = document.getElementById('lecTimeModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+function applySelectedTime() {
+  const selected = [];
+  document.querySelectorAll('.time-opt-cb:checked').forEach(cb => {
+    selected.push(cb.value);
+  });
+  const input = document.getElementById('add_lec_time_disp');
+  if (input) {
+    input.value = selected.length > 0 ? selected.join(', ') : '';
+  }
+  closeTimeSelectHelper();
+}
+
+// ---------------- 대상학년 전체선택 토글 ----------------
+function toggleAllGrades(master) {
+  const checked = master.checked;
+  document.querySelectorAll('input[name="lec_grade"]').forEach(cb => {
+    cb.checked = checked;
+  });
+}
+
+function updateMasterGradeCheckbox() {
+  const all = document.querySelectorAll('input[name="lec_grade"]');
+  const checked = document.querySelectorAll('input[name="lec_grade"]:checked');
+  const master = document.getElementById('add_check_all_grade');
+  if (master) {
+    master.checked = (all.length > 0 && all.length === checked.length);
+  }
+}
+
+function chk_all(master) {
+  toggleAllGrades(master);
+}
+
+function add_file() {
+  const fileBox = document.getElementById('file_box');
+  if (!fileBox) return;
+  const div = document.createElement('div');
+  div.style.marginTop = '6px';
+  div.style.display = 'flex';
+  div.style.alignItems = 'center';
+  div.style.gap = '6px';
+  div.innerHTML = `
+    <input type="file" name="file[]" class="form-control input-sm" style="display:inline-block; width:80%; height:32px; border:1px solid #ccc; box-sizing:border-box;">
+    <button type="button" class="btn btn-default btn-xs" onclick="this.parentElement.remove()" style="height:30px; padding:0 8px; line-height:1; display:inline-flex; align-items:center; cursor:pointer;">&times;</button>
+  `;
+  fileBox.appendChild(div);
+}
+
+function chkLecPay(el) {
+  if (typeof calculateTuitionSplit === 'function') calculateTuitionSplit();
+}
+
+function chkMoney(el) {
+  // 금액 입력 시 부가 검증/계산
+}
+
+// ---------------- 수강료/수용비/강사료 분할 자동계산 ----------------
+function calculateTuitionSplit() {
+  const payInput = document.getElementById('add_lec_pay');
+  const useCostInput = document.getElementById('add_lec_use_cost');
+  const teaFeeInput = document.getElementById('add_lec_tea_fee');
+  if (!payInput || !useCostInput || !teaFeeInput) return;
+
+  const pay = parseInt(payInput.value, 10) || 0;
+  const useCost = parseInt(useCostInput.value, 10) || 0;
+  const teaFee = Math.max(0, pay - useCost);
+  teaFeeInput.value = teaFee;
+}
+
+// ---------------- 강좌 등록 제출 (Submit) ----------------
+async function submitAddCourse(e) {
+  if (e) e.preventDefault();
+
+  const lecName = document.getElementById('add_lec_name')?.value?.trim();
+  if (!lecName) {
+    alert('강좌명 : 필수항목입니다.');
+    document.getElementById('add_lec_name')?.focus();
+    return false;
+  }
+
+  const lecDiv = document.getElementById('add_lec_div')?.value;
+  if (!lecDiv) {
+    alert('강좌구분 : 필수항목입니다.');
+    document.getElementById('add_lec_div')?.focus();
+    return false;
+  }
+
+  const proType = document.getElementById('add_lec_pro_type')?.value;
+  if (!proType) {
+    alert('늘봄과정 : 필수항목입니다.');
+    document.getElementById('add_lec_pro_type')?.focus();
+    return false;
+  }
+
+  const teaId = document.getElementById('add_tea_id')?.value?.trim();
+  if (!teaId) {
+    alert('강사ID : 필수항목입니다.');
+    document.getElementById('add_tea_id')?.focus();
+    return false;
+  }
+
+  const selectedGrades = [];
+  document.querySelectorAll('input[name="lec_grade"]:checked').forEach(cb => selectedGrades.push(cb.value));
+  if (selectedGrades.length === 0) {
+    alert('대상학년 : 필수항목입니다.');
+    return false;
+  }
+
+  const lecTime = document.getElementById('add_lec_time_disp')?.value?.trim();
+  if (!lecTime) {
+    alert('강의시간 : 필수항목입니다.');
+    document.getElementById('add_lec_time_disp')?.focus();
+    return false;
+  }
+
+  const maxSin = parseInt(document.getElementById('add_lec_max_sin')?.value, 10) || 0;
+  if (maxSin <= 0) {
+    alert('정원 : 필수항목입니다.');
+    document.getElementById('add_lec_max_sin')?.focus();
+    return false;
+  }
+
+  const maxWait = parseInt(document.getElementById('add_lec_max_wait')?.value, 10) || 0;
+  const sdate = document.getElementById('add_lec_sdate')?.value?.trim();
+  const edate = document.getElementById('add_lec_edate')?.value?.trim();
+  if (!sdate || !edate) {
+    alert('운영기간 : 필수항목입니다.');
+    return false;
+  }
+
+  const fee = parseInt(document.getElementById('add_lec_pay')?.value, 10) || 0;
+  const costFacility = parseInt(document.getElementById('add_lec_use_cost')?.value, 10) || 0;
+  const costInstructor = parseInt(document.getElementById('add_lec_tea_fee')?.value, 10) || (fee - costFacility);
+  const bookFee = parseInt(document.getElementById('add_lec_pay_book')?.value, 10) || 0;
+  const materialFee = parseInt(document.getElementById('add_lec_pay_item')?.value, 10) || 0;
+  const classroom = document.getElementById('add_lec_room')?.value?.trim() || document.getElementById('add_lec_room_sel')?.value || '본관2층 컴퓨터교실';
+  const totalHours = parseInt(document.getElementById('add_lec_tot_sisu')?.value, 10) || 16;
+  const assistantId = document.getElementById('add_tea_id1')?.value?.trim() || '';
+  const content = document.getElementById('add_lec_content')?.value || '';
+  const statusEl = document.querySelector('input[name="add_lec_status"]:checked');
+  const statusVal = statusEl ? statusEl.value : '출력';
+
+  let dayOfWeek = '월';
+  const dayMatch = lecTime.match(/^(월|화|수|목|금|토|일)/);
+  if (dayMatch) dayOfWeek = dayMatch[1];
+
+  const payload = {
+    schoolId: SCHOOL_SN || 'sch_1',
+    category: lecDiv,
+    neulbomType: proType,
+    title: lecName,
+    instructor: teaId,
+    teacherName: teaId,
+    assistantInstructor: assistantId,
+    targetGrade: selectedGrades.join(','),
+    capacity: maxSin,
+    waitingCapacity: maxWait,
+    totalHours: totalHours,
+    period: `${sdate} ~ ${edate}`,
     tuitionFee: fee,
     fee: fee,
     costFacility: costFacility,
-    costInstructor: fee - costFacility,
-    textbookFee: document.getElementById('addTextbookFee').value || 0,
-    materialFee: document.getElementById('addMaterialFee').value || 0,
-    classroom: document.getElementById('addClassroom').value.trim(),
-    dayOfWeek: document.getElementById('addDayOfWeek').value.trim(),
-    scheduleTime: document.getElementById('addScheduleTime').value.trim(),
-    allowTimeConflict: document.getElementById('addAllowConflict').checked,
-    noSameTeacher: document.getElementById('addNoSameTeacher').checked
+    costInstructor: costInstructor,
+    textbookFee: bookFee,
+    materialFee: materialFee,
+    classroom: classroom,
+    location: classroom,
+    dayOfWeek: dayOfWeek,
+    scheduleTime: lecTime,
+    schedule: `${dayOfWeek}:${lecTime}`,
+    allowTimeConflict: document.getElementById('add_lec_time_not_chk')?.checked || false,
+    noSameTeacher: document.getElementById('add_tea_id_chk')?.checked || false,
+    content: content,
+    status: statusVal === '출력' ? 'OUTPUT' : (statusVal === '대기' ? 'WAITING' : 'CLOSED')
   };
 
-  const res = await fetch('/api/af/ad_lec/create', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  });
-  const data = await res.json();
-  alert(data.message);
-  closeAddModal();
-  loadLectures();
+  const editId = document.getElementById('fm_course_add')?.dataset?.editId;
+  const apiUrl = editId ? '/api/af/ad_lec/update' : '/api/af/ad_lec/create';
+  if (editId) payload.id = editId;
+
+  try {
+    const res = await fetch(apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (res.ok && data.success) {
+      window.lastRegisteredCourseId = data.lecture ? data.lecture.id : (editId || null);
+      alert(data.message || (editId ? `'${lecName}' 강좌가 성공적으로 수정되었습니다.` : `'${lecName}' 강좌가 성공적으로 등록되었습니다.`));
+      closeAddModal();
+
+      // 등록된 강좌의 구분(category)으로 목록 필터를 자동 동기화하여 즉시 화면에 반영
+      const catFilter = document.getElementById('categoryFilter');
+      if (catFilter) {
+        let found = false;
+        for (let opt of catFilter.options) {
+          if (opt.value === lecDiv) {
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          const opt = document.createElement('option');
+          opt.value = lecDiv;
+          opt.text = lecDiv;
+          catFilter.add(opt, 0);
+        }
+        catFilter.value = lecDiv;
+      }
+
+      // 검색어 및 상태 필터 초기화하여 새 강좌가 누락되지 않도록 보장
+      const kwFilter = document.getElementById('searchKeyword');
+      if (kwFilter) kwFilter.value = '';
+      const stFilter = document.getElementById('statusFilter');
+      if (stFilter) stFilter.value = '전체';
+
+      // 화면 목록 재조회
+      if (typeof loadLectures === 'function') {
+        await loadLectures();
+      }
+    } else {
+      alert(data.message || '강좌 등록 중 오류가 발생했습니다.');
+    }
+  } catch (err) {
+    console.error('submitAddCourse error:', err);
+    alert('서버 통신 중 오류가 발생했습니다.');
+  }
+  return false;
 }
 
 async function submitBatchCopy(e) {
@@ -2017,11 +3064,32 @@ window.toggleSelectAll = toggleSelectAll;
 window.toggleSelectAllApps = toggleSelectAllApps;
 window.changeSelectedStatus = changeSelectedStatus;
 window.toggleInstructorClose = toggleInstructorClose;
+window.toggleInstructorEdit = toggleInstructorEdit;
+window.deleteLecture = deleteLecture;
+window.openCourseEditModal = openCourseEditModal;
 window.runLottery = runLottery;
 window.openAddModal = openAddModal;
 window.closeAddModal = closeAddModal;
+window.openInstructorSearchModal = openInstructorSearchModal;
+window.closeInstructorSearchModal = closeInstructorSearchModal;
+window.doSearchInstructor = doSearchInstructor;
+window.selectInstructor = selectInstructor;
+window.openTimeSelectHelper = openTimeSelectHelper;
+window.closeTimeSelectHelper = closeTimeSelectHelper;
+window.applySelectedTime = applySelectedTime;
+window.toggleAllGrades = toggleAllGrades;
+window.chk_all = chk_all;
+window.add_file = add_file;
+window.chkLecPay = chkLecPay;
+window.chkMoney = chkMoney;
+window.updateMasterGradeCheckbox = updateMasterGradeCheckbox;
+window.calculateTuitionSplit = calculateTuitionSplit;
+window.submitAddCourse = submitAddCourse;
 window.openBatchCopyModal = openBatchCopyModal;
 window.closeBatchCopyModal = closeBatchCopyModal;
+window.copy_chk_all = copy_chk_all;
+window.copy_chk_field = copy_chk_field;
+window.submitBatchCopyModal = submitBatchCopyModal;
 window.openCourseCopyModal = openCourseCopyModal;
 window.closeCourseCopyModal = closeCourseCopyModal;
 window.submitCourseCopy = submitCourseCopy;
@@ -2034,7 +3102,6 @@ window.batchToggleTeacherLock = batchToggleTeacherLock;
 window.exportToNeis = exportToNeis;
 window.exportEdufine = exportEdufine;
 window.calcFeesLive = calcFeesLive;
-window.submitAddCourse = submitAddCourse;
 window.submitBatchCopy = submitBatchCopy;
 function switchRole(role) {
   if (role === 'teacher') {
@@ -2056,21 +3123,25 @@ function openSafetyModal() {
   }
 }
 
+function approveSelectedStudent() { alert('선택된 학생이 승인되었습니다.'); }
+function cancelSelectedStudent() { alert('선택된 학생의 신청이 취소되었습니다.'); }
+function approveApplicant(id) { alert('신청이 승인되었습니다.'); }
+
 window.switchRole = switchRole;
 window.openSafetyModal = openSafetyModal;
-window.openVideoPlayer = openVideoPlayer;
-window.closeVideoPlayer = closeVideoPlayer;
-window.openDocViewer = openDocViewer;
-window.closeDocViewer = closeDocViewer;
-window.downloadManualZip = downloadManualZip;
+if (typeof openVideoPlayer !== 'undefined') window.openVideoPlayer = openVideoPlayer;
+if (typeof closeVideoPlayer !== 'undefined') window.closeVideoPlayer = closeVideoPlayer;
+if (typeof openDocViewer !== 'undefined') window.openDocViewer = openDocViewer;
+if (typeof closeDocViewer !== 'undefined') window.closeDocViewer = closeDocViewer;
+if (typeof downloadManualZip !== 'undefined') window.downloadManualZip = downloadManualZip;
 window.approveSelectedStudent = approveSelectedStudent;
 window.cancelSelectedStudent = cancelSelectedStudent;
 window.approveApplicant = approveApplicant;
-window.promoteWaitStudent = promoteWaitStudent;
-window.batchStampAttendance = batchStampAttendance;
-window.approveAbsence = approveAbsence;
-window.submitPushNotification = submitPushNotification;
-window.exportToExcel = exportToExcel;
+if (typeof promoteWaitStudent !== 'undefined') window.promoteWaitStudent = promoteWaitStudent;
+if (typeof batchStampAttendance !== 'undefined') window.batchStampAttendance = batchStampAttendance;
+if (typeof approveAbsence !== 'undefined') window.approveAbsence = approveAbsence;
+if (typeof submitPushNotification !== 'undefined') window.submitPushNotification = submitPushNotification;
+if (typeof exportToExcel !== 'undefined') window.exportToExcel = exportToExcel;
 
 // ==================== 14. 매뉴얼 & FAQ (/af/ad_faq/main) ====================
 
@@ -2723,3 +3794,103 @@ window.openAfAdminInfoModal = openAfAdminInfoModal;
 window.closeAfAdminInfoModal = closeAfAdminInfoModal;
 window.handleAfAdminInfoSave = handleAfAdminInfoSave;
 window.handleAfUserLogout = handleAfUserLogout;
+
+
+// ==================== [타깃 사이트 고유 URL 및 모달 연동 엔진] ====================
+let currentLecSld = '11';
+
+function getActionUrl(action, sld) {
+  const schoolId = '3267';
+  const targetSld = sld || currentLecSld || '11';
+  switch(action) {
+    case 'write':
+      return `/af/ad_lec/write/p/1/sn/${schoolId}/sld/${targetSld}/sof/ln/sot/asc`;
+    case 'input':
+      return `/af/ad_lec/input/p/1/sn/${schoolId}/sld/${targetSld}/sof/ln/sot/asc`;
+    case 'modifyField':
+      return `/af/ad_lec/modifyField/p/1/sn/${schoolId}/sld/${targetSld}/sof/ln/sot/asc`;
+    case 'copy':
+      return `/af/ad_lec/copy/p/1/sn/${schoolId}/sld/${targetSld}/sof/ln/sot/asc`;
+    case 'stat':
+      return `/af/ad_lec/stat/sn/${schoolId}`;
+    case 'att_excel':
+      return `/af/ad_att/excel/p/1/sn/${schoolId}/sld/${targetSld}/sof/ln/sot/asc`;
+    default:
+      return `/af/ad_lec/lists/sn/${schoolId}`;
+  }
+}
+
+function updateActionButtonUrls(sld) {
+  if (sld) currentLecSld = String(sld);
+  const btnWrite = document.getElementById('btn_action_write');
+  const btnInput = document.getElementById('btn_action_input');
+  const btnModify = document.getElementById('btn_action_modify');
+  const btnCopy = document.getElementById('btn_action_copy');
+  const btnStat = document.getElementById('btn_action_stat');
+  const btnAtt = document.getElementById('btn_action_att');
+
+  if (btnWrite) btnWrite.setAttribute('href', getActionUrl('write', currentLecSld));
+  if (btnInput) btnInput.setAttribute('href', getActionUrl('input', currentLecSld));
+  if (btnModify) btnModify.setAttribute('href', getActionUrl('modifyField', currentLecSld));
+  if (btnCopy) btnCopy.setAttribute('href', getActionUrl('copy', currentLecSld));
+  if (btnStat) btnStat.setAttribute('href', getActionUrl('stat', currentLecSld));
+  if (btnAtt) btnAtt.setAttribute('href', getActionUrl('att_excel', currentLecSld));
+}
+
+function handleActionUrl(event, action, modalOpenFn) {
+  if (event) {
+    try { event.preventDefault(); } catch(_) {}
+    try { event.stopPropagation(); } catch(_) {}
+  }
+  const url = getActionUrl(action, currentLecSld);
+  try {
+    window.history.pushState({ modalAction: action }, '', url);
+  } catch(e) {}
+
+  if (typeof modalOpenFn === 'function') {
+    modalOpenFn();
+  }
+}
+
+function handleAttendanceExcel(event, url) {
+  // 출석부 출력 안내 및 엑셀 다운로드 트리거
+  alert('출석부 엑셀 파일을 다운로드합니다.');
+  // 링크 이동 허용 또는 다운로드 진행
+}
+
+function restoreListUrl() {
+  const currentPath = window.location.pathname;
+  if (currentPath !== '/af/ad_lec/lists/sn/3267' && (currentPath.includes('/af/ad_lec/') || currentPath.includes('/af/ad_att/'))) {
+    try {
+      window.history.pushState({ modalAction: 'list' }, '', '/af/ad_lec/lists/sn/3267');
+    } catch(e) {}
+  }
+}
+
+function checkInitialModalRoute() {
+  const path = window.location.pathname;
+  if (path.includes('/af/ad_lec/write')) {
+    setTimeout(() => { if (typeof openAddModal === 'function') openAddModal(); }, 100);
+  } else if (path.includes('/af/ad_lec/input') && !path.includes('/af/ad_lec/inputs')) {
+    setTimeout(() => { if (typeof openBatchUploadModal === 'function') openBatchUploadModal(); }, 100);
+  } else if (path.includes('/af/ad_lec/modifyField')) {
+    setTimeout(() => { if (typeof openBatchModifyModal === 'function') openBatchModifyModal(); }, 100);
+  } else if (path.includes('/af/ad_lec/copy')) {
+    setTimeout(() => { if (typeof openBatchCopyModal === 'function') openBatchCopyModal(); }, 100);
+  } else if (path.includes('/af/ad_lec/stat')) {
+    setTimeout(() => { if (typeof openStatModal === 'function') openStatModal(); }, 100);
+  }
+}
+
+// Window global exports
+window.getActionUrl = getActionUrl;
+window.updateActionButtonUrls = updateActionButtonUrls;
+window.handleActionUrl = handleActionUrl;
+window.handleAttendanceExcel = handleAttendanceExcel;
+window.restoreListUrl = restoreListUrl;
+window.checkInitialModalRoute = checkInitialModalRoute;
+window.openStatModal = openStatModal;
+window.closeStatModal = closeStatModal;
+window.loadStatData = loadStatData;
+window.filterByStatCategory = filterByStatCategory;
+

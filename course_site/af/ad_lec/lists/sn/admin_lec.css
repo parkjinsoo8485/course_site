@@ -558,20 +558,24 @@ body {
 
 /* Modals */
 .modal-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.45);
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(0, 0, 0, 0.5) !important;
   display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 99999 !important;
 }
 
 .modal-backdrop.show {
-  display: flex;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .modal-box {
@@ -581,6 +585,8 @@ body {
   max-width: 600px;
   box-shadow: 0 20px 25px -5px rgba(0,0,0,0.15);
   overflow: hidden;
+  margin: auto !important;
+  position: relative !important;
 }
 
 .modal-header {
@@ -609,6 +615,83 @@ body {
 
 .modal-body {
   padding: 18px;
+}
+
+/* ==================== Batch Upload / Modify / Copy Modal Vertical Alignment Standard ==================== */
+#batchUploadModal table th,
+#batchUploadModal table td,
+#batchModifyModal table th,
+#batchModifyModal table td,
+#batchCopyModal table th,
+#batchCopyModal table td {
+  vertical-align: middle !important;
+}
+
+#batchUploadModal select,
+#batchUploadModal .form-control,
+#batchModifyModal select,
+#batchModifyModal .form-control,
+#batchCopyModal select,
+#batchCopyModal .form-control {
+  height: 30px !important;
+  line-height: normal !important;
+  box-sizing: border-box !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 10px !important;
+  padding-right: 24px !important;
+  vertical-align: middle !important;
+  font-size: 12px !important;
+}
+
+#batchUploadModal table th span,
+#batchUploadModal table td label,
+#batchModifyModal table th span,
+#batchModifyModal table td label,
+#batchCopyModal table th span,
+#batchCopyModal table td label {
+  display: inline-flex !important;
+  align-items: center !important;
+  vertical-align: middle !important;
+}
+
+#batchCopyModal .lec-list-scroll {
+  max-height: 180px;
+  overflow-y: auto;
+  border: 1px solid #EAEAEA;
+  padding: 8px 12px;
+  background: #fff;
+  border-radius: 3px;
+}
+
+#batchCopyModal .lec-list-scroll ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#batchCopyModal .lec-list-scroll li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #333;
+}
+
+#batchCopyModal .lec-list-scroll li input[type="checkbox"] {
+  margin: 0;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+#batchCopyModal .lec-list-scroll li label {
+  margin: 0;
+  cursor: pointer;
+  font-weight: normal;
+  user-select: none;
 }
 
 
@@ -774,3 +857,63 @@ body {
   margin-top: 16px !important;
   border-radius: 0 4px 4px 0 !important;
 }
+
+/* 9. 강좌통계 모달 (#statModal) */
+#statModal .modal-box {
+  max-width: 960px !important;
+  width: 95% !important;
+  max-height: 92vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  border-radius: 4px !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+  margin: auto !important;
+  position: relative !important;
+  background: #fff !important;
+}
+
+#statModal table.list {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  font-size: 13px !important;
+  text-align: center !important;
+  margin-top: 0 !important;
+}
+
+#statModal table.list th {
+  background-color: #f1f5f9 !important;
+  color: #1e293b !important;
+  font-weight: bold !important;
+  padding: 8px 6px !important;
+  border: 1px solid #d1d5db !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  font-size: 12px !important;
+}
+
+#statModal table.list td {
+  padding: 8px 6px !important;
+  border: 1px solid #e5e7eb !important;
+  vertical-align: middle !important;
+  text-align: center !important;
+  color: #333 !important;
+  font-size: 13px !important;
+}
+
+#statModal table.list a.link_type {
+  color: #2563eb !important;
+  text-decoration: underline !important;
+  cursor: pointer !important;
+  font-weight: normal !important;
+}
+
+#statModal table.list a.link_type:hover {
+  color: #1d4ed8 !important;
+}
+
+#statModal .stat-total-row {
+  background-color: #f8fafc !important;
+  font-weight: bold !important;
+}
+

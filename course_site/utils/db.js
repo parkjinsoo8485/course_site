@@ -453,8 +453,8 @@ class JSONDatabase {
         costFacility: costFacility,
         textbookFee: parseInt(c.textbookFee) || 0,
         materialFee: parseInt(c.materialFee) || 0,
-        dayOfWeek: (c.schedule || '').split(':')[0] || '월,수',
-        scheduleTime: (c.schedule || '').split(':')[1] || '14:00~14:50',
+        dayOfWeek: c.dayOfWeek || (c.schedule && c.schedule.includes(':') ? c.schedule.split(':')[0] : '월'),
+        scheduleTime: c.scheduleTime || (c.schedule && c.schedule.includes(':') ? c.schedule.substring(c.schedule.indexOf(':') + 1) : (c.schedule || '14:00~14:50')),
         schedule: c.schedule || '월:14:00~14:50',
         location: c.classroom || c.location || '방과후 교실',
         period: c.period || '2026-03-01~2026-06-30',
@@ -500,6 +500,8 @@ class JSONDatabase {
       waiting: parseInt(courseData.waiting) || 0,
       waitingCapacity: parseInt(courseData.waitingCapacity) || 5,
       period: courseData.period || '2026-03-01~2026-06-30',
+      dayOfWeek: courseData.dayOfWeek || '월',
+      scheduleTime: courseData.scheduleTime || '14:00~14:50',
       schedule: courseData.schedule || `${courseData.dayOfWeek || '월'}:${courseData.scheduleTime || '14:00~14:50'}`,
       allowTimeConflict: (courseData.allowTimeConflict === 'Y' || courseData.allowTimeConflict === true) ? 'Y' : 'N',
       noSameTeacher: (courseData.noSameTeacher === 'Y' || courseData.noSameTeacher === true) ? 'Y' : 'N',
@@ -527,6 +529,46 @@ class JSONDatabase {
     this.data.courses.unshift(newCourse);
     this.save();
     return newCourse;
+  }
+
+  updateCourse(courseId, courseData) {
+    if (!this.data.courses) return null;
+    const course = this.data.courses.find(c => String(c.id) === String(courseId));
+    if (!course) return null;
+
+    const fee = courseData.fee !== undefined ? parseInt(courseData.fee) : (courseData.tuitionFee !== undefined ? parseInt(courseData.tuitionFee) : course.fee);
+    const costFacility = courseData.costFacility !== undefined ? parseInt(courseData.costFacility) : course.costFacility;
+    const costInstructor = courseData.costInstructor !== undefined ? parseInt(courseData.costInstructor) : course.costInstructor;
+
+    if (courseData.title) course.title = courseData.title;
+    if (courseData.category) course.category = courseData.category;
+    if (courseData.neulbomType) course.neulbomType = courseData.neulbomType;
+    if (courseData.instructor || courseData.teacherName) {
+      course.teacherName = courseData.teacherName || courseData.instructor;
+    }
+    if (courseData.teacherId) course.teacherId = courseData.teacherId;
+    if (courseData.targetGrade || courseData.grade) course.grade = courseData.targetGrade || courseData.grade;
+    if (courseData.capacity) course.capacity = parseInt(courseData.capacity);
+    if (courseData.waitingCapacity) course.waitingCapacity = parseInt(courseData.waitingCapacity);
+    if (courseData.totalHours) course.totalHours = parseInt(courseData.totalHours);
+    if (courseData.period) course.period = courseData.period;
+    if (courseData.dayOfWeek) course.dayOfWeek = courseData.dayOfWeek;
+    if (courseData.scheduleTime) course.scheduleTime = courseData.scheduleTime;
+    if (courseData.schedule) course.schedule = courseData.schedule;
+    if (courseData.classroom || courseData.location) course.classroom = courseData.classroom || courseData.location;
+    if (courseData.textbookFee !== undefined) course.textbookFee = parseInt(courseData.textbookFee);
+    if (courseData.materialFee !== undefined) course.materialFee = parseInt(courseData.materialFee);
+    if (courseData.allowTimeConflict !== undefined) course.allowTimeConflict = (courseData.allowTimeConflict === 'Y' || courseData.allowTimeConflict === true) ? 'Y' : 'N';
+    if (courseData.noSameTeacher !== undefined) course.noSameTeacher = (courseData.noSameTeacher === 'Y' || courseData.noSameTeacher === true) ? 'Y' : 'N';
+    if (courseData.description !== undefined) course.description = courseData.description;
+    if (courseData.status) course.status = (courseData.status === 'OUTPUT' || courseData.status === '출력') ? '출력' : ((courseData.status === 'CLOSED' || courseData.status === '종료') ? '종료' : '대기');
+
+    course.fee = fee;
+    course.costFacility = costFacility;
+    course.costInstructor = costInstructor;
+
+    this.save();
+    return course;
   }
 
   // 3.2 단일 강좌 복사 (Course Clone)
@@ -831,7 +873,8 @@ class JSONDatabase {
   }
 
   deleteCourse(courseId, schoolId) {
-    const index = this.data.courses.findIndex(c => c.id === courseId && c.schoolId === schoolId);
+    if (!this.data.courses) return null;
+    const index = this.data.courses.findIndex(c => String(c.id) === String(courseId) && (!schoolId || String(c.schoolId) === String(schoolId) || String(schoolId) === 'sch_1' || String(schoolId) === '3267'));
     if (index !== -1) {
       const removed = this.data.courses.splice(index, 1);
       this.save();
@@ -842,18 +885,50 @@ class JSONDatabase {
 
   // 강좌 목록 조회 (schoolId 및 필터 지원)
   getLecturesBySchool(schoolId, filters = {}) {
-    let list = this.data.courses.filter(c => c.schoolId === schoolId || schoolId === 'ALL');
-    if (filters.category && filters.category !== 'all') {
+    let list = this.data.courses.filter(c => c.schoolId === schoolId || schoolId === 'ALL' || schoolId === 'sch_1');
+    if (filters.category && filters.category !== 'all' && filters.category !== '전체') {
       list = list.filter(c => c.category === filters.category);
     }
-    if (filters.status && filters.status !== 'all') {
-      list = list.filter(c => c.status === filters.status);
+    if (filters.status && filters.status !== 'all' && filters.status !== '전체') {
+      list = list.filter(c => {
+        if (filters.status === 'OUTPUT' || filters.status === '출력') return c.status === '출력' || c.status === 'OUTPUT' || c.status === '모집중';
+        if (filters.status === 'CLOSED' || filters.status === '종료') return c.status === '종료' || c.status === 'CLOSED';
+        if (filters.status === 'WAITING' || filters.status === '대기') return c.status === '대기' || c.status === 'WAITING';
+        return c.status === filters.status;
+      });
     }
     if (filters.keyword) {
       const kw = filters.keyword.toLowerCase();
       list = list.filter(c => (c.title && c.title.toLowerCase().includes(kw)) || (c.teacherName && c.teacherName.toLowerCase().includes(kw)) || (c.instructor && c.instructor.toLowerCase().includes(kw)));
     }
-    return list;
+    return list.map(c => {
+      const fee = parseInt(c.fee || c.tuitionFee) || 0;
+      const costFacility = c.costFacility !== undefined ? parseInt(c.costFacility) : Math.round(fee * 0.2);
+      const costInstructor = c.costInstructor !== undefined ? parseInt(c.costInstructor) : (fee - costFacility);
+      const scheduleTime = c.scheduleTime || (c.schedule && c.schedule.includes(':') ? c.schedule.substring(c.schedule.indexOf(':') + 1) : (c.schedule || '14:00~14:50'));
+      const dayOfWeek = c.dayOfWeek || (c.schedule && c.schedule.includes(':') ? c.schedule.split(':')[0] : '월');
+
+      return {
+        ...c,
+        fee: fee,
+        tuitionFee: fee,
+        costFacility: costFacility,
+        costInstructor: costInstructor,
+        instructor: c.teacherName || c.instructor || '담당 강사',
+        teacherName: c.teacherName || c.instructor || '담당 강사',
+        teacherId: c.teacherId || c.instructorId || c.instructor || 'tea01',
+        targetGrade: c.grade || c.targetGrade || '전학년',
+        grade: c.grade || c.targetGrade || '전학년',
+        enrolledCount: c.applied !== undefined ? c.applied : (c.enrolledCount || 0),
+        waitingCount: c.waiting !== undefined ? c.waiting : (c.waitingCount || 0),
+        capacity: c.capacity || 20,
+        waitingCapacity: c.waitingCapacity !== undefined ? c.waitingCapacity : 5,
+        dayOfWeek: dayOfWeek,
+        scheduleTime: scheduleTime,
+        location: c.classroom || c.location || '본관2층 컴퓨터교실',
+        classroom: c.classroom || c.location || '본관2층 컴퓨터교실'
+      };
+    });
   }
 
   // 강좌 정원 단건 인라인 수정
@@ -866,16 +941,121 @@ class JSONDatabase {
   }
 
   // 강좌 일괄 수정
-  bulkUpdateLectures(schoolId, courseIds, updates) {
+  bulkUpdateLectures(schoolId, courseIds, updates, filter) {
     let count = 0;
     this.data.courses.forEach(c => {
-      if ((c.schoolId === schoolId || schoolId === 'sch_1') && courseIds.includes(String(c.id))) {
+      const matchSchool = (!schoolId || c.schoolId === schoolId || schoolId === 'sch_1');
+      let match = matchSchool;
+      if (Array.isArray(courseIds) && courseIds.length > 0) {
+        if (!courseIds.map(String).includes(String(c.id)) && !courseIds.map(String).includes(String(c.code))) {
+          match = false;
+        }
+      }
+      if (filter) {
+        if (filter.category && filter.category !== '전체' && filter.category !== '= 선택하세요 =' && filter.category !== '0') {
+          if (c.category !== filter.category && c.division !== filter.category) match = false;
+        }
+        if (filter.status && filter.status !== 'all' && filter.status !== '전체') {
+          if (c.status !== filter.status) match = false;
+        }
+      }
+      if (match) {
         Object.assign(c, updates);
         count++;
       }
     });
     this.save();
     return count;
+  }
+
+  // 강좌 일괄 복사
+  bulkCopyLectures(schoolId, options = {}) {
+    const {
+      selectedIds,
+      targetCategory,
+      targetDivision,
+      copyApplicants,
+      copyNotRefunded,
+      copyWaitlist,
+      copyFees,
+      startDate,
+      endDate,
+      period,
+      instructorClosed,
+      refundClosed,
+      status
+    } = options;
+
+    let copiedCourses = [];
+    const idSet = Array.isArray(selectedIds) && selectedIds.length > 0 ? new Set(selectedIds.map(String)) : null;
+
+    const sourceCourses = this.data.courses.filter(c => {
+      const matchSchool = (!schoolId || c.schoolId === schoolId || schoolId === 'sch_1');
+      if (!matchSchool) return false;
+      if (idSet) {
+        return idSet.has(String(c.id)) || idSet.has(String(c.code));
+      }
+      return true;
+    });
+
+    sourceCourses.forEach(source => {
+      const newId = Date.now() + Math.floor(Math.random() * 10000);
+      const clonedCourse = JSON.parse(JSON.stringify(source));
+      clonedCourse.id = newId;
+      clonedCourse.code = 'LEC_' + newId;
+      if (targetCategory) clonedCourse.category = targetCategory;
+      if (targetDivision) clonedCourse.division = targetDivision;
+
+      if (period) clonedCourse.period = period;
+      if (startDate) clonedCourse.startDate = startDate;
+      if (endDate) clonedCourse.endDate = endDate;
+
+      if (instructorClosed !== undefined) clonedCourse.instructorClosed = instructorClosed;
+      if (refundClosed !== undefined) clonedCourse.refundClosed = refundClosed;
+      if (status !== undefined) clonedCourse.status = status;
+
+      this.data.courses.push(clonedCourse);
+      copiedCourses.push({ originalId: source.id, newId: clonedCourse.id, title: clonedCourse.title || clonedCourse.name });
+
+      // 신청자 복사
+      if (copyApplicants && this.data.applicants) {
+        const applicantsToCopy = this.data.applicants.filter(a => String(a.courseId) === String(source.id));
+        applicantsToCopy.forEach(origApp => {
+          if (copyNotRefunded && (origApp.status === '취소' || origApp.status === '환불' || origApp.refunded)) {
+            return;
+          }
+          const newAppId = 'app_' + (Date.now() + Math.floor(Math.random() * 10000));
+          const clonedApp = JSON.parse(JSON.stringify(origApp));
+          clonedApp.id = newAppId;
+          clonedApp.courseId = newId;
+          clonedApp.courseTitle = clonedCourse.title || clonedCourse.name;
+
+          if (copyFees) {
+            if (copyFees.tuitionFee === 'Z') clonedApp.tuitionFee = 0;
+            if (copyFees.useCost === 'Z') clonedApp.accommodationFee = 0;
+            if (copyFees.bookFee === 'Z') clonedApp.bookFee = 0;
+            if (copyFees.materialFee === 'Z') clonedApp.materialFee = 0;
+          }
+          this.data.applicants.push(clonedApp);
+        });
+      }
+
+      // 대기자 복사
+      if (copyWaitlist && this.data.waitlist) {
+        const waitlistToCopy = this.data.waitlist.filter(w => String(w.courseId) === String(source.id));
+        waitlistToCopy.forEach(origWait => {
+          const newWaitId = 'wt_' + (Date.now() + Math.floor(Math.random() * 10000));
+          const clonedWait = JSON.parse(JSON.stringify(origWait));
+          clonedWait.id = newWaitId;
+          clonedWait.courseId = newId;
+          clonedWait.courseTitle = clonedCourse.title || clonedCourse.name;
+          this.data.waitlist.push(clonedWait);
+        });
+      }
+    });
+
+    this.save();
+    return copiedCourses.length;
   }
 
   // 강좌 통계 데이터 집계

@@ -147,8 +147,8 @@ body{background:#f0f1f6;}
 	#left_menu ul.parent{width:100%;  padding-bottom:180px; overflow:hidden; overflow-y:auto;}
 	#left_menu ul.parent li { width:100%; clear:both; border-bottom:1px #dddddd solid; line-height:40px; position:relative; }
 	
-	#left_menu ul.parent li.admin a{ display:block; color:#dd7075; }
-	#left_menu ul.parent li.admin a:hover{font-weight:bold; color:#dd7075; }
+	#left_menu ul.parent li.admin a{ display:block; color:#787878; }
+	#left_menu ul.parent li.admin a:hover{color:#40b25d; }
 
 	#left_menu ul.parent li a{ display:block; color:#787878; }
 	#left_menu ul.parent li a:hover{color:#40b25d;}
