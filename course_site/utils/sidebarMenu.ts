@@ -59,12 +59,6 @@ export const ADMIN_SIDEBAR_MENUS: MenuItem[] = [
     href: (sn) => `/af/ad_wait/lists/sn/${sn}`,
   },
   {
-    id: 'ad_att_stat',
-    name: '출석부관리',
-    icon: 'fa-solid fa-square-check',
-    href: (sn) => `/af/ad_att/stat/sn/${sn}`,
-  },
-  {
     id: 'ad_ref_lists',
     name: '환불/취소관리',
     icon: 'fa-solid fa-user-minus',

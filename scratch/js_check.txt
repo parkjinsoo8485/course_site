@@ -1,0 +1,21 @@
+﻿PASS: openRefundSinModal
+PASS: closeRefundSinModal
+PASS: searchRefundStudent
+PASS: selectRefundStudent
+PASS: setRefundStudent
+PASS: onRefundTypeChanged
+PASS: onRefundDivChanged
+PASS: onRefundCourseChanged
+PASS: calculateRefundModalAmounts
+PASS: calcFacilityRefund
+PASS: submitRefundSin
+PASS: openRefundBatchModal
+PASS: closeRefundBatchModal
+PASS: onRefundBatchDivChanged
+PASS: onRefundBatchCourseChanged
+PASS: toggleRefundBatchAllStudents
+PASS: onRefundBatchStudentToggle
+PASS: calculateRefundBatchAmounts
+PASS: calcBatchFacilityRefund
+PASS: submitRefundBatch
+JS RESULT: 20/20

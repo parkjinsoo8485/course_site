@@ -516,6 +516,12 @@ class JSONDatabase {
       subsidyExcludeTuition: courseData.subsidyExcludeTuition || '',
       subsidyExcludeTextbook: courseData.subsidyExcludeTextbook || '',
       subsidyExcludeMaterial: courseData.subsidyExcludeMaterial || '',
+      notFree2Pay: !!courseData.notFree2Pay,
+      notFree3Pay: !!courseData.notFree3Pay,
+      notFree1Pay: !!courseData.notFree1Pay,
+      notFree2PayBook: !!courseData.notFree2PayBook,
+      notFree3PayBook: !!courseData.notFree3PayBook,
+      notFree1PayBook: !!courseData.notFree1PayBook,
       maxSubsidyAmount: parseInt(courseData.maxSubsidyAmount) || 0,
       description: courseData.description || '',
       autoRenew: courseData.autoRenew || 'Y',
@@ -560,6 +566,12 @@ class JSONDatabase {
     if (courseData.materialFee !== undefined) course.materialFee = parseInt(courseData.materialFee);
     if (courseData.allowTimeConflict !== undefined) course.allowTimeConflict = (courseData.allowTimeConflict === 'Y' || courseData.allowTimeConflict === true) ? 'Y' : 'N';
     if (courseData.noSameTeacher !== undefined) course.noSameTeacher = (courseData.noSameTeacher === 'Y' || courseData.noSameTeacher === true) ? 'Y' : 'N';
+    if (courseData.notFree2Pay !== undefined) course.notFree2Pay = !!courseData.notFree2Pay;
+    if (courseData.notFree3Pay !== undefined) course.notFree3Pay = !!courseData.notFree3Pay;
+    if (courseData.notFree1Pay !== undefined) course.notFree1Pay = !!courseData.notFree1Pay;
+    if (courseData.notFree2PayBook !== undefined) course.notFree2PayBook = !!courseData.notFree2PayBook;
+    if (courseData.notFree3PayBook !== undefined) course.notFree3PayBook = !!courseData.notFree3PayBook;
+    if (courseData.notFree1PayBook !== undefined) course.notFree1PayBook = !!courseData.notFree1PayBook;
     if (courseData.description !== undefined) course.description = courseData.description;
     if (courseData.status) course.status = (courseData.status === 'OUTPUT' || courseData.status === '출력') ? '출력' : ((courseData.status === 'CLOSED' || courseData.status === '종료') ? '종료' : '대기');
 
@@ -1968,45 +1980,204 @@ class JSONDatabase {
   // --- Additional Live dbdbschool Submodel Data Stores ---
 
   // 1. Waitlist Management (/af/ad_wait/lists)
-  getWaitlist(schoolId) {
+  getWaitlist(filters = {}) {
     if (!this.data.waitlist) {
-      this.data.waitlist = [
-        { id: 'wait_1', schoolId: 'sch_1', studentName: '이지우', gradeClass: '1학년 3반', parentPhone: '010-3333-4444', courseTitle: '[특기적성] 창의 로봇교실 A반', rank: 1, appliedAt: '2026-03-02 10:05:22', status: '대기중' },
-        { id: 'wait_2', schoolId: 'sch_1', studentName: '최예준', gradeClass: '2학년 1반', parentPhone: '010-5555-6666', courseTitle: '[특기적성] 창의 로봇교실 A반', rank: 2, appliedAt: '2026-03-02 10:08:14', status: '대기중' },
-        { id: 'wait_3', schoolId: 'sch_1', studentName: '정하은', gradeClass: '3학년 2반', parentPhone: '010-7777-9999', courseTitle: '01. [특기] 바이올린 A반', rank: 1, appliedAt: '2026-03-02 10:12:00', status: '대기중' }
-      ];
+      this.data.waitlist = [];
     }
-    return (this.data.waitlist || []).filter(w => !schoolId || w.schoolId === schoolId);
+    let list = this.data.waitlist;
+    if (typeof filters === 'string') {
+      filters = { schoolId: filters };
+    }
+    if (filters.schoolId) {
+      list = list.filter(w => !w.schoolId || w.schoolId === filters.schoolId);
+    }
+    if (filters.sld && filters.sld !== 'all') {
+      const monthMap = { '5': '3월', '6': '4월', '7': '5월', '8': '6월', '9': '7월', '10': '8월', '11': '9월' };
+      const mStr = monthMap[filters.sld] || filters.sld;
+      list = list.filter(w => (w.division && w.division.includes(mStr)) || (w.category && w.category.includes(mStr)));
+    }
+    if (filters.slp && filters.slp !== 'all') {
+      const typeMap = { '1': '방과후', '2': '맞춤형', '3': '돌봄' };
+      const tStr = typeMap[filters.slp] || filters.slp;
+      list = list.filter(w => (w.neulbomType && w.neulbomType.includes(tStr)) || (w.division && w.division.includes(tStr)));
+    }
+    if (filters.sln) {
+      list = list.filter(w => (w.courseTitle && w.courseTitle.includes(filters.sln)) || (w.courseId && String(w.courseId) === String(filters.sln)));
+    }
+    if (filters.sgr) {
+      list = list.filter(w => String(w.grade) === String(filters.sgr));
+    }
+    if (filters.scl) {
+      list = list.filter(w => String(w.class) === String(filters.scl));
+    }
+    if (filters.sw) {
+      const sw = filters.sw.trim().toLowerCase();
+      if (filters.st === 'tel') {
+        list = list.filter(w => w.parentPhone && w.parentPhone.toLowerCase().includes(sw));
+      } else {
+        list = list.filter(w => w.studentName && w.studentName.toLowerCase().includes(sw));
+      }
+    }
+    return list;
   }
 
-  getAllSchools() {
-    return this.data.schools || [];
+  addWaitlist(entry) {
+    if (!this.data.waitlist) this.data.waitlist = [];
+    const courseTitle = entry.courseTitle || '(금) 돌봄 4부';
+    const sameCourse = this.data.waitlist.filter(w => w.courseTitle === courseTitle);
+    const maxRank = sameCourse.reduce((max, w) => Math.max(max, parseInt(w.rank) || 0), 0);
+    const newEntry = {
+      id: String(entry.id || Date.now()),
+      schoolId: entry.schoolId || 'sch_1',
+      rank: maxRank + 1,
+      division: entry.division || (entry.category ? `${entry.category} ${entry.neulbomType || ''}` : '26년 8월 돌봄'),
+      category: entry.category || '26년 8월',
+      neulbomType: entry.neulbomType || '돌봄',
+      courseTitle: courseTitle,
+      grade: String(entry.grade || '1'),
+      class: String(entry.class || '1'),
+      studentNum: String(entry.studentNum || '1'),
+      studentName: entry.studentName || '신규대기자',
+      parentPhone: entry.parentPhone || entry.phone || '010-0000-0000',
+      appliedAt: entry.appliedAt || new Date().toISOString().replace('T', ' ').substring(0, 19),
+      status: '대기'
+    };
+    this.data.waitlist.push(newEntry);
+    this.save();
+    return newEntry;
   }
 
   promoteWaitlist(waitId) {
-    if (!this.data.waitlist) this.getWaitlist();
-    let item = (this.data.waitlist || []).find(w => w.id === waitId);
-    if (!item && (this.data.waitlist || []).length > 0) {
-      item = this.data.waitlist[0];
-    }
-    if (!item) return null;
-    item.status = '승격완료';
+    if (!this.data.waitlist) this.data.waitlist = [];
+    const idx = this.data.waitlist.findIndex(w => String(w.id) === String(waitId));
+    if (idx === -1) return null;
+    const item = this.data.waitlist[idx];
     const newApp = {
       id: 'app_' + Date.now(),
       schoolId: item.schoolId || 'sch_1',
       studentName: item.studentName,
-      gradeClass: item.gradeClass,
+      gradeClass: `${item.grade}학년 ${item.class}반 ${item.studentNum}번`,
+      grade: item.grade,
+      class: item.class,
+      studentNum: item.studentNum,
       parentPhone: item.parentPhone,
       courseTitle: item.courseTitle,
+      division: item.division,
+      category: item.category,
+      neulbomType: item.neulbomType,
       subsidyType: '일반',
       paymentStatus: '결제대기',
       status: '수강승인',
-      appliedAt: new Date().toISOString()
+      appliedAt: new Date().toISOString().replace('T', ' ').substring(0, 19)
     };
     if (!this.data.applicants) this.data.applicants = [];
     this.data.applicants.push(newApp);
+
+    // 대기자 목록에서 제거하고 해당 강좌의 순위 재조정
+    const courseTitle = item.courseTitle;
+    this.data.waitlist.splice(idx, 1);
+    let curRank = 1;
+    this.data.waitlist.forEach(w => {
+      if (w.courseTitle === courseTitle) {
+        w.rank = curRank++;
+      }
+    });
     this.save();
-    return newApp;
+    return { newApp, promotedWaitlist: item };
+  }
+
+  deleteWaitlist(waitId) {
+    if (!this.data.waitlist) this.data.waitlist = [];
+    const idx = this.data.waitlist.findIndex(w => String(w.id) === String(waitId));
+    if (idx === -1) return false;
+    const item = this.data.waitlist[idx];
+    const courseTitle = item.courseTitle;
+    this.data.waitlist.splice(idx, 1);
+    let curRank = 1;
+    this.data.waitlist.forEach(w => {
+      if (w.courseTitle === courseTitle) {
+        w.rank = curRank++;
+      }
+    });
+    this.save();
+    return true;
+  }
+
+  batchDeleteWaitlist(ids = []) {
+    if (!this.data.waitlist) this.data.waitlist = [];
+    const idSet = new Set(ids.map(String));
+    const affectedCourses = new Set();
+    this.data.waitlist.forEach(w => {
+      if (idSet.has(String(w.id))) {
+        affectedCourses.add(w.courseTitle);
+      }
+    });
+    this.data.waitlist = this.data.waitlist.filter(w => !idSet.has(String(w.id)));
+    // 순위 재조정
+    affectedCourses.forEach(cTitle => {
+      let curRank = 1;
+      this.data.waitlist.forEach(w => {
+        if (w.courseTitle === cTitle) {
+          w.rank = curRank++;
+        }
+      });
+    });
+    this.save();
+    return true;
+  }
+
+  batchInputWaitlist(entries = []) {
+    if (!this.data.waitlist) this.data.waitlist = [];
+    const added = [];
+    entries.forEach(e => {
+      const addedItem = this.addWaitlist(e);
+      added.push(addedItem);
+    });
+    return added;
+  }
+
+  copyWaitlist(sourceCourse, targetCourse, mode = 'append') {
+    if (!this.data.waitlist) this.data.waitlist = [];
+    const sources = this.data.waitlist.filter(w => w.courseTitle === sourceCourse);
+    if (sources.length === 0) return { copiedCount: 0 };
+    if (mode === 'overwrite') {
+      this.data.waitlist = this.data.waitlist.filter(w => w.courseTitle !== targetCourse);
+    }
+    const targetSame = this.data.waitlist.filter(w => w.courseTitle === targetCourse);
+    let startRank = targetSame.reduce((max, w) => Math.max(max, parseInt(w.rank) || 0), 0) + 1;
+    const copied = [];
+    sources.forEach(s => {
+      const copyItem = {
+        ...s,
+        id: String(Date.now() + Math.floor(Math.random() * 100000)),
+        courseTitle: targetCourse,
+        rank: startRank++,
+        appliedAt: new Date().toISOString().replace('T', ' ').substring(0, 19)
+      };
+      this.data.waitlist.push(copyItem);
+      copied.push(copyItem);
+    });
+    this.save();
+    return { copiedCount: copied.length, copied };
+  }
+
+  reorderWaitlist(courseTitle, orderedIds = []) {
+    if (!this.data.waitlist) this.data.waitlist = [];
+    orderedIds.forEach((id, idx) => {
+      const item = this.data.waitlist.find(w => String(w.id) === String(id));
+      if (item && item.courseTitle === courseTitle) {
+        item.rank = idx + 1;
+      }
+    });
+    // 정렬
+    this.data.waitlist.sort((a, b) => {
+      if (a.courseTitle === b.courseTitle) {
+        return (parseInt(a.rank) || 0) - (parseInt(b.rank) || 0);
+      }
+      return 0;
+    });
+    this.save();
+    return true;
   }
 
   // 2. Attendance Stats & Stamp Printing (/af/ad_att/stat)
@@ -2023,10 +2194,98 @@ class JSONDatabase {
 
   // 3. Refunds & Cancellation Management (/af/ad_ref/lists)
   getRefunds(schoolId) {
-    if (!this.data.refunds) {
+    if (!this.data.refunds || this.data.refunds.length === 0) {
       this.data.refunds = [
-        { id: 'ref_1', schoolId: 'sch_1', studentName: '박서준', gradeClass: '2학년 2반', courseTitle: '[특기적성] 창의 로봇교실 A반', fee: 35000, totalDays: 12, attendedDays: 3, rule: '1/3경과전(2/3환불)', refundAmount: 23330, status: '환불완료', requestedAt: '2026-03-10' },
-        { id: 'ref_2', schoolId: 'sch_1', studentName: '윤도현', gradeClass: '3학년 1반', courseTitle: '01. [특기] 바이올린 A반', fee: 30000, totalDays: 12, attendedDays: 5, rule: '1/2경과전(1/2환불)', refundAmount: 15000, status: '처리대기', requestedAt: '2026-03-15' }
+        {
+          id: 'ref_1',
+          schoolId: 'sch_1',
+          status: '처리완료',
+          appType: '일반',
+          neulbomType: '방과후',
+          courseTitle: '[특기적성] 창의 로봇교실 A반',
+          grade: '2',
+          classNo: '2',
+          studentNo: '14',
+          studentName: '박서준',
+          parentPhone: '010-3849-1928',
+          lastAttendedDate: '2026-08-10',
+          tuitionFee: 30000,
+          tuitionRefund: 20000,
+          receptiveFee: 3000,
+          receptiveRefund: 2000,
+          textbookFee: 0,
+          textbookRefund: 0,
+          materialFee: 5000,
+          materialRefund: 0,
+          beforeCollection: 'N',
+          effectiveDate: '2026-08-11',
+          reason: '타 지역 이사 및 전학',
+          createdAt: '2026-08-11',
+          totalDays: 12,
+          attendedDays: 3,
+          rule: '1/3경과전(2/3환불)',
+          refundAmount: 22000
+        },
+        {
+          id: 'ref_2',
+          schoolId: 'sch_1',
+          status: '접수',
+          appType: '자유수강권',
+          neulbomType: '방과후',
+          courseTitle: '01. [특기] 바이올린 A반',
+          grade: '3',
+          classNo: '1',
+          studentNo: '08',
+          studentName: '윤도현',
+          parentPhone: '010-9182-3746',
+          lastAttendedDate: '2026-08-14',
+          tuitionFee: 30000,
+          tuitionRefund: 15000,
+          receptiveFee: 0,
+          receptiveRefund: 0,
+          textbookFee: 10000,
+          textbookRefund: 0,
+          materialFee: 0,
+          materialRefund: 0,
+          beforeCollection: 'N',
+          effectiveDate: '2026-08-15',
+          reason: '학원 시간표 중복 사유',
+          createdAt: '2026-08-15',
+          totalDays: 12,
+          attendedDays: 5,
+          rule: '1/2경과전(1/2환불)',
+          refundAmount: 15000
+        },
+        {
+          id: 'ref_3',
+          schoolId: 'sch_1',
+          status: '강사확인',
+          appType: '일반',
+          neulbomType: '맞춤형',
+          courseTitle: '놀이체육 1부',
+          grade: '1',
+          classNo: '1',
+          studentNo: '05',
+          studentName: '손희안',
+          parentPhone: '010-5432-9876',
+          lastAttendedDate: '2026-08-01',
+          tuitionFee: 25000,
+          tuitionRefund: 25000,
+          receptiveFee: 2500,
+          receptiveRefund: 2500,
+          textbookFee: 0,
+          textbookRefund: 0,
+          materialFee: 0,
+          materialRefund: 0,
+          beforeCollection: 'Y',
+          effectiveDate: '2026-08-02',
+          reason: '개강 전 취소 (수강료 미징수)',
+          createdAt: '2026-08-02',
+          totalDays: 12,
+          attendedDays: 0,
+          rule: '수업시작전(100%환불)',
+          refundAmount: 27500
+        }
       ];
     }
     return (this.data.refunds || []).filter(r => !schoolId || r.schoolId === schoolId);
@@ -2034,23 +2293,76 @@ class JSONDatabase {
 
   addRefund(schoolId, refundData) {
     if (!this.data.refunds) this.data.refunds = [];
+    const tuitionRefund = parseInt(refundData.tuitionRefund) || 0;
+    const receptiveRefund = parseInt(refundData.receptiveRefund) || 0;
+    const textbookRefund = parseInt(refundData.textbookRefund) || 0;
+    const materialRefund = parseInt(refundData.materialRefund) || 0;
+    const totalRefund = parseInt(refundData.refundAmount) || (tuitionRefund + receptiveRefund + textbookRefund + materialRefund);
+
     const newRef = {
-      id: 'ref_' + Date.now(),
+      id: 'ref_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
       schoolId: schoolId || 'sch_1',
-      studentName: refundData.studentName,
-      gradeClass: refundData.gradeClass || '',
-      courseTitle: refundData.courseTitle,
-      fee: parseInt(refundData.fee) || 0,
+      status: refundData.status || '접수',
+      appType: refundData.appType || '일반',
+      neulbomType: refundData.neulbomType || '방과후',
+      courseTitle: refundData.courseTitle || '',
+      grade: String(refundData.grade || ''),
+      classNo: String(refundData.classNo || ''),
+      studentNo: String(refundData.studentNo || ''),
+      studentName: refundData.studentName || '',
+      parentPhone: refundData.parentPhone || '',
+      lastAttendedDate: refundData.lastAttendedDate || '',
+      tuitionFee: parseInt(refundData.tuitionFee || refundData.fee) || 0,
+      tuitionRefund: tuitionRefund,
+      receptiveFee: parseInt(refundData.receptiveFee) || 0,
+      receptiveRefund: receptiveRefund,
+      textbookFee: parseInt(refundData.textbookFee) || 0,
+      textbookRefund: textbookRefund,
+      materialFee: parseInt(refundData.materialFee) || 0,
+      materialRefund: materialRefund,
+      beforeCollection: refundData.beforeCollection === 'Y' || refundData.beforeCollection === true ? 'Y' : 'N',
+      effectiveDate: refundData.effectiveDate || new Date().toISOString().slice(0, 10),
+      reason: refundData.reason || '',
+      createdAt: new Date().toISOString().slice(0, 10),
       totalDays: parseInt(refundData.totalDays) || 12,
       attendedDays: parseInt(refundData.attendedDays) || 0,
-      rule: refundData.rule || '일할계산',
-      refundAmount: parseInt(refundData.refundAmount) || 0,
-      status: refundData.status || '처리대기',
-      requestedAt: new Date().toISOString().slice(0, 10)
+      rule: refundData.rule || '법정기준',
+      refundAmount: totalRefund
     };
-    this.data.refunds.push(newRef);
+    this.data.refunds.unshift(newRef);
     this.save();
     return newRef;
+  }
+
+  deleteRefund(schoolId, id) {
+    if (!this.data.refunds) return false;
+    const initialLen = this.data.refunds.length;
+    this.data.refunds = this.data.refunds.filter(r => r.id !== id);
+    if (this.data.refunds.length !== initialLen) {
+      this.save();
+      return true;
+    }
+    return false;
+  }
+
+  updateRefundStatus(schoolId, id, status) {
+    if (!this.data.refunds) return null;
+    const item = this.data.refunds.find(r => r.id === id);
+    if (item) {
+      item.status = status;
+      this.save();
+    }
+    return item;
+  }
+
+  batchAddRefunds(schoolId, list) {
+    if (!Array.isArray(list)) return [];
+    const added = [];
+    for (const item of list) {
+      const saved = this.addRefund(schoolId, item);
+      added.push(saved);
+    }
+    return added;
   }
 
   // 4. Absences & Dismissal Pickup (/af/ad_abs/lists)
@@ -2618,6 +2930,13 @@ class JSONDatabase {
     });
     this.save();
     return count;
+  }
+
+  getAllSchools() {
+    return this.data.schools || [
+      { id: 'sch_1', code: '3267', name: '광주풍향초등학교', status: 'active', plan: 'standard' },
+      { id: 'sch_2', code: 'UNCHON2025', name: '운천초등학교', status: 'active', plan: 'standard' }
+    ];
   }
 }
 

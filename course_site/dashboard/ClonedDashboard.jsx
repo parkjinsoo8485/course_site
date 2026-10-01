@@ -500,12 +500,6 @@ export default function ClonedDashboard() {
               </a>
             </li>
             <li style={{ padding: '8px 15px' }}>
-              <a href={`/af/ad_att/stat/sn/${schoolId}`} style={{ color: '#555', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
-                <i className="fa fa-check-square-o" style={{ width: '22px' }}></i>
-                <span>출석부관리</span>
-              </a>
-            </li>
-            <li style={{ padding: '8px 15px' }}>
               <a href={`/af/ad_ref/lists/sn/${schoolId}`} style={{ color: '#555', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
                 <i className="fa fa-slideshare" style={{ width: '22px' }}></i>
                 <span>환불/취소관리</span>

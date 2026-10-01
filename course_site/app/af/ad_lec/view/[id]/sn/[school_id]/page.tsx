@@ -150,20 +150,6 @@ export default function CourseViewPage({ params }: PageProps) {
           >
             👥 수강 신청자 명단 확인
           </Link>
-          <Link
-            href={`/af/ad_att/stat/sn/${schoolId}`}
-            style={{
-              padding: '8px 18px',
-              backgroundColor: '#16a34a',
-              color: '#ffffff',
-              borderRadius: '4px',
-              fontWeight: 600,
-              fontSize: '0.88rem',
-              textDecoration: 'none',
-            }}
-          >
-            📋 출석부 기록 조회
-          </Link>
         </div>
       </div>
     </div>

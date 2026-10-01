@@ -114,6 +114,19 @@ app.get(/^\/af\/ad_att\/excel/, (req, res) => {
   return res.send(Buffer.from(excelHtml, 'utf-8'));
 });
 
+// ==================== 환불/취소 일괄등록 CSV 샘플 템플릿 다운로드 ====================
+app.get(/^\/af\/ad_ref\/template/, (req, res) => {
+  const sampleCsv = '\uFEFF' + [
+    '학년,반,번호,이름,연락처,강좌명,최종수강일,출석시수,총시수,수강료,환불금액,사유',
+    '1,1,5,김민준,010-1234-5678,놀이체육 1부,2026-08-10,3,12,25000,16660,개인사정',
+    '2,3,12,이서연,010-9876-5432,창의로봇(초급),2026-08-01,0,12,30000,30000,개강전취소',
+    '3,2,8,박지훈,010-5555-6666,논술 1부,2026-08-16,6,12,30000,15000,시간중복'
+  ].join('\n');
+  res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+  res.setHeader('Content-Disposition', 'attachment; filename="refund_batch_sample.csv"');
+  return res.send(sampleCsv);
+});
+
 // ==================== 강좌 일괄입력 (ad_lec/input) SPA 모달 페이지 라우팅 ====================
 app.get(/^\/af\/ad_lec\/input(\/.*)?$/, (req, res, next) => {
   if (req.path && req.path.includes('.') && !req.path.endsWith('.html')) {
@@ -123,11 +136,16 @@ app.get(/^\/af\/ad_lec\/input(\/.*)?$/, (req, res, next) => {
   return res.sendFile(path.join(__dirname, 'af', 'ad_lec', 'lists', 'sn', 'index.html'));
 });
 
+// ==================== 삭제된 출석부관리 (/af/ad_att/stat) 리다이렉트 ====================
+app.get(/^\/af\/ad_att\/stat/, (req, res) => {
+  return res.redirect('/af/ad_wait/lists/sn/3267');
+});
+
 app.get([
   /^\/af\/ad_lec/,
   /^\/af\/ad_app/,
+  /^\/af\/ad_pay/,
   /^\/af\/ad_wait/,
-  /^\/af\/ad_att/,
   /^\/af\/ad_ref/,
   /^\/af\/ad_free2_/,
   /^\/af\/ad_rsch/,
@@ -473,6 +491,18 @@ app.get(['/af/ad_lec/lists/sn/:school_id', '/af/ad_lec/lists/sn/:school_id/'], (
 });
 
 app.get(['/af/ad_app/lists/sn/:school_id', '/af/ad_app/lists/sn/:school_id/'], (req, res) => {
+  res.sendFile(path.join(__dirname, 'af/ad_lec/lists/sn/index.html'));
+});
+
+// Deep-link routes for 1:1 authentic export & print pages
+app.get([
+  /^\/af\/ad_app\/excel(\/.*)?$/,
+  /^\/af\/ad_app\/pdf(\/.*)?$/,
+  /^\/af\/ad_app\/pdf1(\/.*)?$/,
+  /^\/af\/ad_app\/pdf2(\/.*)?$/,
+  /^\/af\/ad_app\/com(\/.*)?$/,
+  /^\/af\/ad_app\/list1(\/.*)?$/
+], (req, res) => {
   res.sendFile(path.join(__dirname, 'af/ad_lec/lists/sn/index.html'));
 });
 

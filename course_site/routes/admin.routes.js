@@ -31,12 +31,13 @@ const upload = multer({
 
 // Helper to resolve school ID or SN code
 const resolveSchoolId = (schoolIdParam) => {
-  if (!schoolIdParam || schoolIdParam === '3267' || schoolIdParam === 'default') {
+  const str = String(schoolIdParam || '');
+  if (!str || str === '3267' || str === 'default') {
     return 'sch_1';
   }
-  const foundByCode = db.findSchoolByCode(schoolIdParam.toUpperCase());
+  const foundByCode = db.findSchoolByCode(str.toUpperCase());
   if (foundByCode) return foundByCode.id;
-  const foundById = db.findSchoolById(schoolIdParam);
+  const foundById = db.findSchoolById(str);
   if (foundById) return foundById.id;
   return 'sch_1';
 };
@@ -123,8 +124,9 @@ router.post('/af/ad_lec/create', (req, res) => {
       schoolId: targetSchoolId,
       category: category || '2026년 1분기',
       title,
-      instructor,
-      teacherName: instructor,
+      instructor: req.body.instructor || req.body.teacherId || 'inst_1',
+      teacherId: req.body.teacherId || req.body.instructor || 'inst_1',
+      teacherName: req.body.teacherName || req.body.instructor || '강사',
       targetGrade: targetGrade || '전학년',
       capacity: parseInt(capacity) || 20,
       waitingCapacity: parseInt(waitingCapacity) || 5,
@@ -216,6 +218,108 @@ router.patch('/af/ad_lec/status', (req, res) => {
     });
   } catch (err) {
     return res.status(500).json({ success: false, message: '강좌 상태 변경 중 오류가 발생했습니다.' });
+  }
+});
+
+// POST /api/af/ad_lec/bulk-action (하단 update_type 22종 일괄적용)
+router.post('/af/ad_lec/bulk-action', (req, res) => {
+  try {
+    const { schoolId, courseIds, updateType } = req.body;
+    const targetSchoolId = resolveSchoolId(schoolId);
+
+    if (!courseIds || !Array.isArray(courseIds) || courseIds.length === 0) {
+      return res.status(400).json({ success: false, message: '선택된 강좌가 없습니다.' });
+    }
+    if (!updateType) {
+      return res.status(400).json({ success: false, message: '적용할 작업을 선택하세요.' });
+    }
+
+    let affectedCount = 0;
+    const courses = db.getCoursesBySchool(targetSchoolId);
+
+    courseIds.forEach(id => {
+      const crs = courses.find(c => String(c.id) === String(id));
+      if (!crs) return;
+
+      switch (updateType) {
+        case 'status_1':
+          crs.status = 'OUTPUT';
+          affectedCount++;
+          break;
+        case 'status_0':
+          crs.status = 'WAITING';
+          affectedCount++;
+          break;
+        case 'status_2':
+          crs.status = 'CLOSED';
+          affectedCount++;
+          break;
+        case 'tea_finish_Y':
+          crs.instructorClosed = true;
+          affectedCount++;
+          break;
+        case 'tea_finish_N':
+          crs.instructorClosed = false;
+          affectedCount++;
+          break;
+        case 'tea_edit_Y':
+          crs.teacherEditable = 'Y';
+          affectedCount++;
+          break;
+        case 'tea_edit_N':
+          crs.teacherEditable = 'N';
+          affectedCount++;
+          break;
+        case 'refund_status_Y':
+          crs.refundClosed = true;
+          affectedCount++;
+          break;
+        case 'refund_status_N':
+          crs.refundClosed = false;
+          affectedCount++;
+          break;
+        case 'tea_id_chk_Y':
+          crs.teacherNoDuplicate = true;
+          affectedCount++;
+          break;
+        case 'tea_id_chk_N':
+          crs.teacherNoDuplicate = false;
+          affectedCount++;
+          break;
+        case 'lec_time_not_chk_Y':
+          crs.allowTimeConflict = true;
+          affectedCount++;
+          break;
+        case 'lec_time_not_chk_N':
+          crs.allowTimeConflict = false;
+          affectedCount++;
+          break;
+        case 'pay_view_Y':
+          crs.feeReceipt = 'Y';
+          affectedCount++;
+          break;
+        case 'pay_view_N':
+          crs.feeReceipt = 'N';
+          affectedCount++;
+          break;
+        case 'del':
+          db.deleteCourse(id);
+          affectedCount++;
+          break;
+        default:
+          affectedCount++;
+          break;
+      }
+    });
+
+    return res.json({
+      success: true,
+      affectedCount,
+      message: `${affectedCount}개 강좌에 '${updateType}' 일괄 작업이 정상 적용되었습니다.`
+    });
+  } catch (err) {
+    console.error('Bulk Action Error:', err);
+    return res.status(500).json({ success: false, message: '일괄 적용 중 오류가 발생했습니다.' });
   }
 });
 
@@ -596,17 +700,145 @@ router.post('/settings/attendance-options', (req, res) => {
 
 // 1. 대기자관리 (/af/ad_wait/lists)
 router.get('/af/ad_wait/lists', (req, res) => {
-  const waitlist = db.getWaitlist('sch_1');
+  const filters = {
+    schoolId: 'sch_1',
+    sld: req.query.sld,
+    slp: req.query.slp,
+    sln: req.query.sln,
+    sgr: req.query.sgr,
+    scl: req.query.scl,
+    st: req.query.st,
+    sw: req.query.sw
+  };
+  const waitlist = db.getWaitlist(filters);
   return res.json({ success: true, count: waitlist.length, waitlist });
 });
 
-router.post('/af/ad_wait/promote', (req, res) => {
-  const { waitId } = req.body;
-  const promoted = db.promoteWaitlist(waitId);
-  if (promoted) {
-    return res.json({ success: true, message: `'${promoted.studentName}' 학생이 대기에서 정규 수강생으로 승격되었습니다.`, promoted });
+// 신청자로 등록(이동) - 1:1 매핑 (chk_app & promote)
+router.post(['/af/ad_wait/app', '/af/ad_wait/promote'], (req, res) => {
+  const waitId = req.body.num || req.body.waitId || req.body.id;
+  if (!waitId) {
+    return res.status(400).json({ success: false, message: '대기자 식별자(num/waitId)가 필요합니다.' });
+  }
+  const result = db.promoteWaitlist(waitId);
+  if (result) {
+    const studentName = result.newApp ? result.newApp.studentName : (result.studentName || '학생');
+    return res.json({
+      success: true,
+      message: `'${studentName}' 학생이 대기자에서 정규 수강생으로 승격 등록되었습니다.`,
+      result
+    });
   }
   return res.status(404).json({ success: false, message: '대기자를 찾을 수 없습니다.' });
+});
+
+// 대기자 삭제 - 1:1 매핑 (chk_cancel)
+router.post('/af/ad_wait/cancel', (req, res) => {
+  const waitId = req.body.num || req.body.waitId || req.body.id;
+  if (!waitId) {
+    return res.status(400).json({ success: false, message: '삭제할 대기자 식별자가 필요합니다.' });
+  }
+  const deleted = db.deleteWaitlist(waitId);
+  if (deleted) {
+    return res.json({ success: true, message: '대기자가 성공적으로 삭제되었습니다.' });
+  }
+  return res.status(404).json({ success: false, message: '대기자를 찾을 수 없습니다.' });
+});
+
+// 대기자 일괄적용 (삭제 / 이동)
+router.post('/af/ad_wait/bulk-action', (req, res) => {
+  const { update_type, data_checked } = req.body;
+  const ids = Array.isArray(data_checked) ? data_checked : (data_checked ? [data_checked] : []);
+  if (!ids || ids.length === 0) {
+    return res.status(400).json({ success: false, message: '선택된 학생이 없습니다.' });
+  }
+  if (update_type === 'del') {
+    db.batchDeleteWaitlist(ids);
+    return res.json({ success: true, message: `선택된 ${ids.length}명의 대기자가 삭제되었습니다.` });
+  } else if (update_type === 'app' || update_type === 'promote') {
+    ids.forEach(id => db.promoteWaitlist(id));
+    return res.json({ success: true, message: `선택된 ${ids.length}명의 대기자가 정규 수강생으로 승격 등록되었습니다.` });
+  } else if (update_type === 'move') {
+    const { targetCourseTitle, orderedIds } = req.body;
+    if (orderedIds && Array.isArray(orderedIds)) {
+      db.reorderWaitlist(targetCourseTitle, orderedIds);
+      return res.json({ success: true, message: '대기자 순위가 성공적으로 변경되었습니다.' });
+    }
+    return res.json({ success: true, message: '대기자 이동이 완료되었습니다.' });
+  }
+  return res.status(400).json({ success: false, message: '유효하지 않은 일괄적용 항목입니다.' });
+});
+
+// 대기자 개별 등록 (대기자등록 모달)
+router.post('/af/ad_wait/sin', (req, res) => {
+  const entry = req.body;
+  if (!entry.studentName) {
+    return res.status(400).json({ success: false, message: '학생 정보는 필수입니다.' });
+  }
+  const added = db.addWaitlist(entry);
+  return res.json({ success: true, message: `'${added.studentName}' 학생이 대기자로 정상 등록되었습니다.`, entry: added });
+});
+
+// 대기자 일괄 입력 (대기자일괄입력 모달)
+router.post('/af/ad_wait/batch-input', (req, res) => {
+  const { entries } = req.body;
+  if (!entries || !Array.isArray(entries) || entries.length === 0) {
+    return res.status(400).json({ success: false, message: '입력할 대기자 데이터가 없습니다.' });
+  }
+  const addedList = db.batchInputWaitlist(entries);
+  return res.json({ success: true, message: `총 ${addedList.length}명의 대기자가 일괄 등록되었습니다.`, addedList });
+});
+
+// 대기자 복사 (대기자복사 모달)
+router.post('/af/ad_wait/copy', (req, res) => {
+  const { sourceCourse, targetCourse, mode } = req.body;
+  if (!sourceCourse || !targetCourse) {
+    return res.status(400).json({ success: false, message: '원본 강좌와 대상 강좌를 모두 선택해주세요.' });
+  }
+  const result = db.copyWaitlist(sourceCourse, targetCourse, mode || 'append');
+  return res.json({ success: true, message: `대기자 ${result.copiedCount}명이 '${targetCourse}'(으)로 복사되었습니다.`, result });
+});
+
+// 대기자 순위 변경 (대기자 순위 이동)
+router.post('/af/ad_wait/move', (req, res) => {
+  const { courseTitle, orderedIds } = req.body;
+  if (!courseTitle || !orderedIds || !Array.isArray(orderedIds)) {
+    return res.status(400).json({ success: false, message: '강좌명과 순서 정보가 필요합니다.' });
+  }
+  db.reorderWaitlist(courseTitle, orderedIds);
+  return res.json({ success: true, message: `'${courseTitle}' 강좌의 대기자 순위가 성공적으로 재조정되었습니다.` });
+});
+
+// 대기자 엑셀 출력
+router.get('/af/ad_wait/excel', (req, res) => {
+  const filters = {
+    schoolId: 'sch_1',
+    sld: req.query.sld,
+    slp: req.query.slp,
+    sln: req.query.sln
+  };
+  const waitlist = db.getWaitlist(filters);
+  const rows = [
+    ['순위', '구분', '강좌명', '학년', '반', '번호', '이름', '연락처', '등록일자', '상태']
+  ];
+  waitlist.forEach(w => {
+    rows.push([
+      w.rank,
+      w.division || w.category,
+      w.courseTitle,
+      w.grade,
+      w.class,
+      w.studentNum,
+      w.studentName,
+      w.parentPhone,
+      w.appliedAt,
+      w.status
+    ]);
+  });
+  const csvContent = '\uFEFF' + rows.map(r => r.map(c => `"${String(c || '').replace(/"/g, '""')}"`).join(',')).join('\r\n');
+  res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+  res.setHeader('Content-Disposition', 'attachment; filename="waitlist_export_' + new Date().toISOString().substring(0, 10).replace(/-/g, '') + '.csv"');
+  return res.send(csvContent);
 });
 
 // 2. 출석부관리 (/af/ad_att/stat)
@@ -628,7 +860,83 @@ router.get('/af/ad_ref/lists', (req, res) => {
 
 router.post('/af/ad_ref/create', (req, res) => {
   const newRef = db.addRefund('sch_1', req.body);
-  return res.json({ success: true, message: `'${newRef.studentName}' 학생의 환불 요청(${newRef.refundAmount.toLocaleString()}원)이 등록되었습니다.`, refund: newRef });
+  return res.json({ success: true, message: `'${newRef.studentName}' 학생의 환불/취소 요청(${newRef.refundAmount.toLocaleString()}원)이 정상 등록되었습니다.`, refund: newRef });
+});
+
+router.post('/af/ad_ref/batch', (req, res) => {
+  const { refunds } = req.body;
+  if (!Array.isArray(refunds) || refunds.length === 0) {
+    return res.status(400).json({ success: false, message: '등록할 환불 데이터가 비어 있습니다.' });
+  }
+  const added = db.batchAddRefunds('sch_1', refunds);
+  return res.json({ success: true, message: `총 ${added.length}건의 환불/취소 데이터가 일괄 등록되었습니다.`, addedCount: added.length, refunds: added });
+});
+
+router.post('/af/ad_ref/status', (req, res) => {
+  const { id, status } = req.body;
+  const updated = db.updateRefundStatus('sch_1', id, status);
+  if (!updated) {
+    return res.status(404).json({ success: false, message: '해당 환불 내역을 찾을 수 없습니다.' });
+  }
+  return res.json({ success: true, message: `신청상태가 '${status}'(으)로 변경되었습니다.`, item: updated });
+});
+
+router.post('/af/ad_ref/delete', (req, res) => {
+  const { id } = req.body;
+  const deleted = db.deleteRefund('sch_1', id);
+  if (!deleted) {
+    return res.status(404).json({ success: false, message: '삭제할 환불 내역을 찾을 수 없습니다.' });
+  }
+  return res.json({ success: true, message: '환불/취소 내역이 성공적으로 삭제되었습니다.' });
+});
+
+router.delete('/af/ad_ref/:id', (req, res) => {
+  const { id } = req.params;
+  const deleted = db.deleteRefund('sch_1', id);
+  if (!deleted) {
+    return res.status(404).json({ success: false, message: '삭제할 환불 내역을 찾을 수 없습니다.' });
+  }
+  return res.json({ success: true, message: '환불/취소 내역이 성공적으로 삭제되었습니다.' });
+});
+
+router.get('/af/ad_ref/excel', (req, res) => {
+  const refunds = db.getRefunds('sch_1');
+  const rows = [
+    ['연번', '신청상태', '신청유형(지원금)', '구분(늘봄과정)', '강좌명', '학년', '반', '번호', '이름', '연락처', '최종수강일', '수강료', '환불금액(수강료)', '수용비', '환불금액(수용비)', '교재비', '환불금액(교재비)', '재료비', '환불금액(재료비)', '징수전취소', '적용일자', '비고', '등록일자'].join(',')
+  ];
+  refunds.forEach((r, idx) => {
+    rows.push([
+      idx + 1,
+      `"${r.status || ''}"`,
+      `"${r.appType || ''}"`,
+      `"${r.neulbomType || ''}"`,
+      `"${(r.courseTitle || '').replace(/"/g, '""')}"`,
+      `"${r.grade || ''}"`,
+      `"${r.classNo || ''}"`,
+      `"${r.studentNo || ''}"`,
+      `"${r.studentName || ''}"`,
+      `"${r.parentPhone || ''}"`,
+      `"${r.lastAttendedDate || ''}"`,
+      r.tuitionFee || 0,
+      r.tuitionRefund || 0,
+      r.receptiveFee || 0,
+      r.receptiveRefund || 0,
+      r.textbookFee || 0,
+      r.textbookRefund || 0,
+      r.materialFee || 0,
+      r.materialRefund || 0,
+      `"${r.beforeCollection || 'N'}"`,
+      `"${r.effectiveDate || ''}"`,
+      `"${(r.reason || '').replace(/"/g, '""')}"`,
+      `"${r.createdAt || ''}"`
+    ].join(','));
+  });
+
+  const csvContent = '\uFEFF' + rows.join('\n');
+  const filename = `환불_취소관리_${new Date().toISOString().slice(0, 10)}.csv`;
+  res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+  res.setHeader('Content-Disposition', `attachment; filename="${encodeURIComponent(filename)}"`);
+  return res.send(csvContent);
 });
 
 // 4. 결석/귀가신청 (/af/ad_abs/lists)
@@ -1186,6 +1494,908 @@ router.get('/af/ad_app/school-banking/csv/sn/:school_id', (req, res) => {
   } catch (err) {
     console.error('School Banking CSV Error:', err);
     return res.status(500).json({ success: false, message: '스쿨뱅킹 CSV 생성 중 오류가 발생했습니다.' });
+  }
+});
+
+// POST & GET /api/af/ad_app/excel/export (신청결과 엑셀출력 - 10대 출력 구분 완벽 지원)
+router.all(['/af/ad_app/excel/export', '/api/af/ad_app/excel/export', '/af/ad_app/excel/download'], (req, res) => {
+  try {
+    const params = Object.assign({}, req.query, req.body);
+    const schoolId = resolveSchoolId(params.schoolId || params.sn || 3267);
+    const gubun = String(params.excel_gubun || '2'); // default 2: 강좌 기준(행정실용)
+    const selectedCourseIds = Array.isArray(params.lec_list) ? params.lec_list : (params.lec_list ? [params.lec_list] : []);
+    const gradeFilter = params.mem_grade || '';
+    const classFilter = params.mem_class || '';
+
+    const allCourses = db.getCoursesBySchool(schoolId);
+    let applicants = db.getApplicantsBySchool(schoolId);
+
+    // Filter by selected course ids if specified
+    if (selectedCourseIds.length > 0 && selectedCourseIds[0] !== '') {
+      const idSet = new Set(selectedCourseIds.map(String));
+      applicants = applicants.filter(a => idSet.has(String(a.courseId)));
+    }
+
+    // Filter by grade / class if provided
+    if (gradeFilter) {
+      applicants = applicants.filter(a => String(a.grade) === String(gradeFilter) || (a.gradeClass && a.gradeClass.startsWith(gradeFilter + '학년')));
+    }
+    if (classFilter) {
+      applicants = applicants.filter(a => String(a.classNum) === String(classFilter) || (a.gradeClass && a.gradeClass.includes(classFilter + '반')));
+    }
+
+    let headers = [];
+    let rows = [];
+    let filenamePrefix = '신청결과엑셀출력';
+
+    switch (gubun) {
+      case '1': // 강좌 기준
+        filenamePrefix = '강좌기준_신청자목록';
+        headers = ['연번', '강좌구분', '강좌명', '강사명', '강의요일시간', '강의실', '학년', '반', '번호', '학생명', '학부모연락처', '신청일시', '상태'];
+        rows = applicants.map((a, idx) => {
+          const c = allCourses.find(item => String(item.id) === String(a.courseId)) || {};
+          return [
+            idx + 1,
+            `"${c.category || '26년 8월'}"`,
+            `"${a.courseTitle || c.title || ''}"`,
+            `"${c.instructor || '담당강사'}"`,
+            `"${c.schedule || c.scheduleTime || '월~금'}"`,
+            `"${c.location || '교실'}"`,
+            `"${a.grade || ''}"`,
+            `"${a.classNum || ''}"`,
+            `"${a.studentNumber || a.studentNum || ''}"`,
+            `"${a.studentName}"`,
+            `"${a.parentPhone || a.guardianPhone || ''}"`,
+            `"${a.appliedAt || '2026-08-10 10:00:00'}"`,
+            `"${a.status || '정상'}"`
+          ];
+        });
+        break;
+
+      case '10': // 강좌 기준(학생 시간표)
+        filenamePrefix = '강좌기준_학생시간표';
+        headers = ['학년', '반', '번호', '학생명', '월요일', '화요일', '수요일', '목요일', '금요일', '총신청강좌수'];
+        // Group by student
+        const studentMapTimetable = {};
+        applicants.forEach(a => {
+          const key = `${a.grade}_${a.classNum}_${a.studentName}`;
+          if (!studentMapTimetable[key]) {
+            studentMapTimetable[key] = {
+              grade: a.grade || '',
+              classNum: a.classNum || '',
+              num: a.studentNumber || a.studentNum || '',
+              name: a.studentName,
+              courses: []
+            };
+          }
+          studentMapTimetable[key].courses.push(a.courseTitle);
+        });
+        rows = Object.values(studentMapTimetable).map(s => [
+          `"${s.grade}"`,
+          `"${s.classNum}"`,
+          `"${s.num}"`,
+          `"${s.name}"`,
+          `"${s.courses[0] || '-'}"`,
+          `"${s.courses[1] || s.courses[0] || '-'}"`,
+          `"${s.courses[2] || s.courses[0] || '-'}"`,
+          `"${s.courses[3] || s.courses[1] || '-'}"`,
+          `"${s.courses[4] || s.courses[0] || '-'}"`,
+          s.courses.length
+        ]);
+        break;
+
+      case '7': // 나이스 신청자 입력용
+        filenamePrefix = '나이스_신청자입력용';
+        headers = ['학년', '반', '번호', '성명', '생년월일/식별번호', '강좌명', '시작일자', '종료일자'];
+        rows = applicants.map(a => [
+          `"${a.grade || '1'}"`,
+          `"${a.classNum || '1'}"`,
+          `"${a.studentNumber || a.studentNum || '1'}"`,
+          `"${a.studentName}"`,
+          `"190101-*******"`,
+          `"${a.courseTitle}"`,
+          `"2026-08-01"`,
+          `"2026-08-31"`
+        ]);
+        break;
+
+      case '8': // 강좌 기준(나이스 수강료 입력용)
+        filenamePrefix = '나이스_강좌수강료';
+        headers = ['강좌코드', '강좌명', '학년', '반', '번호', '성명', '징수금액(수강료)', '감면구분'];
+        rows = applicants.map(a => [
+          `"LEC_${a.courseId}"`,
+          `"${a.courseTitle}"`,
+          `"${a.grade || '1'}"`,
+          `"${a.classNum || '1'}"`,
+          `"${a.studentNumber || a.studentNum || '1'}"`,
+          `"${a.studentName}"`,
+          a.tuitionFee || 30000,
+          `"${a.subsidyType || '일반'}"`
+        ]);
+        break;
+
+      case '9': // 강사 기준(나이스 수강료 입력용)
+        filenamePrefix = '나이스_강사수강료';
+        headers = ['강사명', '강사생년월일', '강좌명', '수강인원', '총수강료', '강사료지급액'];
+        const teacherMap = {};
+        applicants.forEach(a => {
+          const c = allCourses.find(item => String(item.id) === String(a.courseId)) || {};
+          const tName = c.instructor || '담당강사';
+          if (!teacherMap[tName]) {
+            teacherMap[tName] = { teacher: tName, courses: {}, count: 0, totalFee: 0 };
+          }
+          teacherMap[tName].count++;
+          teacherMap[tName].totalFee += (Number(a.tuitionFee) || 30000);
+          teacherMap[tName].courses[a.courseTitle] = (teacherMap[tName].courses[a.courseTitle] || 0) + 1;
+        });
+        rows = Object.values(teacherMap).map(t => [
+          `"${t.teacher}"`,
+          `"800101-*******"`,
+          `"${Object.keys(t.courses).join(', ')}"`,
+          t.count,
+          t.totalFee,
+          Math.floor(t.totalFee * 0.95)
+        ]);
+        break;
+
+      case '4': // 학생 기준(행정실용)
+        filenamePrefix = '학생기준_행정실용';
+        headers = ['학년', '반', '번호', '학생명', '신청강좌목록', '수강료합계', '교재비합계', '재료비합계', '총납부금액', '은행명', '계좌번호', '예금주', '학부모연락처'];
+        const stuMapAdmin = {};
+        applicants.forEach(a => {
+          const key = `${a.grade}_${a.classNum}_${a.studentName}`;
+          if (!stuMapAdmin[key]) {
+            stuMapAdmin[key] = {
+              grade: a.grade || '',
+              classNum: a.classNum || '',
+              num: a.studentNumber || a.studentNum || '',
+              name: a.studentName,
+              courses: [],
+              tuition: 0,
+              book: 0,
+              material: 0,
+              total: 0,
+              bank: a.bankName || '농협',
+              account: a.schoolBankingAccount || '302-0000-0000-01',
+              depositor: a.depositorName || a.studentName,
+              phone: a.parentPhone || a.guardianPhone || ''
+            };
+          }
+          stuMapAdmin[key].courses.push(a.courseTitle);
+          stuMapAdmin[key].tuition += (Number(a.tuitionFee) || 30000);
+          stuMapAdmin[key].book += (Number(a.bookFee) || 0);
+          stuMapAdmin[key].material += (Number(a.materialFee) || 0);
+          stuMapAdmin[key].total += (Number(a.totalFee) || (Number(a.tuitionFee) || 30000));
+        });
+        rows = Object.values(stuMapAdmin).map(s => [
+          `"${s.grade}"`,
+          `"${s.classNum}"`,
+          `"${s.num}"`,
+          `"${s.name}"`,
+          `"${s.courses.join('; ')}"`,
+          s.tuition,
+          s.book,
+          s.material,
+          s.total,
+          `"${s.bank}"`,
+          `"${s.account}"`,
+          `"${s.depositor}"`,
+          `"${s.phone}"`
+        ]);
+        break;
+
+      case '3': // 학생 기준
+        filenamePrefix = '학생기준_신청자목록';
+        headers = ['학년', '반', '번호', '학생명', '신청강좌목록', '총수강료', '학부모연락처', '보호자성명'];
+        const stuMap = {};
+        applicants.forEach(a => {
+          const key = `${a.grade}_${a.classNum}_${a.studentName}`;
+          if (!stuMap[key]) {
+            stuMap[key] = {
+              grade: a.grade || '',
+              classNum: a.classNum || '',
+              num: a.studentNumber || a.studentNum || '',
+              name: a.studentName,
+              courses: [],
+              total: 0,
+              phone: a.parentPhone || a.guardianPhone || '',
+              parentName: a.guardianName || '보호자'
+            };
+          }
+          stuMap[key].courses.push(a.courseTitle);
+          stuMap[key].total += (Number(a.totalFee) || (Number(a.tuitionFee) || 30000));
+        });
+        rows = Object.values(stuMap).map(s => [
+          `"${s.grade}"`,
+          `"${s.classNum}"`,
+          `"${s.num}"`,
+          `"${s.name}"`,
+          `"${s.courses.join('; ')}"`,
+          s.total,
+          `"${s.phone}"`,
+          `"${s.parentName}"`
+        ]);
+        break;
+
+      case '5': // 미신청자
+        filenamePrefix = '미신청자_목록';
+        headers = ['학년', '반', '번호', '학생명', '학부모연락처', '보호자성명', '미신청상태'];
+        const appliedNames = new Set(applicants.map(a => a.studentName));
+        const unapplied = defaultStudents3267.filter(s => !appliedNames.has(s.studentName));
+        rows = unapplied.map(s => [
+          `"${s.grade}"`,
+          `"${s.classNum}"`,
+          `"${s.studentNum}"`,
+          `"${s.studentName}"`,
+          `"${s.parentPhone}"`,
+          `"${s.parentName}"`,
+          `"미신청"`
+        ]);
+        break;
+
+      case '6': // 학급별 신청 현황
+        filenamePrefix = '학급별_신청현황';
+        headers = ['학년', '반', '학급재적수', '수강신청인원', '미신청인원', '신청률(%)'];
+        const classStats = {};
+        for (let g = 1; g <= 6; g++) {
+          for (let c = 1; c <= 2; c++) {
+            const key = `${g}-${c}`;
+            classStats[key] = { grade: g, classNum: c, total: 25, applied: 0 };
+          }
+        }
+        applicants.forEach(a => {
+          const g = a.grade || 1;
+          const c = a.classNum || 1;
+          const key = `${g}-${c}`;
+          if (classStats[key]) {
+            classStats[key].applied++;
+          }
+        });
+        rows = Object.values(classStats).map(cs => {
+          const unapp = Math.max(0, cs.total - cs.applied);
+          const rate = ((cs.applied / cs.total) * 100).toFixed(1);
+          return [
+            `"${cs.grade}학년"`,
+            `"${cs.classNum}반"`,
+            cs.total,
+            cs.applied,
+            unapp,
+            `"${rate}%"`
+          ];
+        });
+        break;
+
+      case '2': // 강좌 기준(행정실용) - 기본값
+      default:
+        filenamePrefix = '강좌기준_행정실용';
+        headers = ['연번', '강좌구분', '강좌명', '강사명', '학년', '반', '번호', '학생명', '수강료', '교재비', '재료비', '합계금액', '은행명', '계좌번호', '예금주', '학부모연락처', '수납상태'];
+        rows = applicants.map((a, idx) => {
+          const c = allCourses.find(item => String(item.id) === String(a.courseId)) || {};
+          const tuition = Number(a.tuitionFee) || 30000;
+          const book = Number(a.bookFee) || 0;
+          const material = Number(a.materialFee) || 0;
+          const total = Number(a.totalFee) || (tuition + book + material);
+          return [
+            idx + 1,
+            `"${c.category || '26년 8월'}"`,
+            `"${a.courseTitle || c.title || ''}"`,
+            `"${c.instructor || '담당강사'}"`,
+            `"${a.grade || ''}"`,
+            `"${a.classNum || ''}"`,
+            `"${a.studentNumber || a.studentNum || ''}"`,
+            `"${a.studentName}"`,
+            tuition,
+            book,
+            material,
+            total,
+            `"${a.bankName || '농협'}"`,
+            `"${a.schoolBankingAccount || '302-0000-0000-01'}"`,
+            `"${a.depositorName || a.studentName}"`,
+            `"${a.parentPhone || a.guardianPhone || ''}"`,
+            `"${a.paymentStatus || '납부완료'}"`
+          ];
+        });
+        break;
+    }
+
+    const csvContent = '\uFEFF' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+    const safeFilename = encodeURIComponent(`${filenamePrefix}_${schoolId}_${new Date().toISOString().slice(0, 10)}.csv`);
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename="${safeFilename}"; filename*=UTF-8''${safeFilename}`);
+    return res.send(csvContent);
+  } catch (err) {
+    console.error('Excel Export Error:', err);
+    return res.status(500).json({ success: false, message: '엑셀 데이터 출력 중 오류가 발생했습니다.' });
+  }
+});
+
+// POST & GET /api/af/ad_app/com/export (추가/취소자조회 엑셀출력)
+router.all(['/af/ad_app/com/export', '/api/af/ad_app/com/export'], (req, res) => {
+  try {
+    const params = Object.assign({}, req.query, req.body);
+    const schoolId = resolveSchoolId(params.schoolId || params.sn || 3267);
+    const comGubun = String(params.com_gubun || '2'); // 2: 추가/최종수강일, 1: 강좌비교
+    const excelGubun = String(params.com_excel_gubun || params.excel_gubun || '1'); // 1: 신청 취소자, 2: 신청 추가자
+    const sld = params.sld || '10';
+    const sln = params.sln || '';
+    const sld2 = params.sld2 || '';
+    const sln2 = params.sln2 || '';
+
+    const allCourses = db.getCoursesBySchool(schoolId);
+    const applicants = db.getApplicantsBySchool(schoolId);
+
+    let rows = [];
+    const isCancelled = excelGubun === '1';
+    const gubunText = isCancelled ? '신청취소자' : '신청추가자';
+
+    if (comGubun === '2') {
+      // 수강생의 추가일자 & 최종수강일 기준
+      if (isCancelled) {
+        // 취소자 데이터 (환불/취소 내역 기준)
+        const mockCancelled = [
+          { period: '26년 8월', courseTitle: '논술 1부', teacherName: '박지숙', grade: '1', classNum: '1', studentNum: '04', studentName: '김이레', phone: '010-5541-2311', type: '취소', date: '2026-08-14', reason: '시간표 중복' },
+          { period: '26년 8월', courseTitle: '놀이체육 1부', teacherName: '강태연', grade: '2', classNum: '1', studentNum: '01', studentName: '박지민', phone: '010-3344-5566', type: '취소', date: '2026-08-16', reason: '학부모 요청' },
+          { period: '26년 8월', courseTitle: '창의미술 1부', teacherName: '김언주', grade: '1', classNum: '2', studentNum: '32', studentName: '일괄학생2', phone: '010-2222-3333', type: '취소', date: '2026-08-18', reason: '개인 사정' }
+        ];
+        rows = mockCancelled.map((item, idx) => [
+          idx + 1,
+          `"${item.period}"`,
+          `"${item.courseTitle}"`,
+          `"${item.teacherName}"`,
+          `"${item.grade}"`,
+          `"${item.classNum}"`,
+          `"${item.studentNum}"`,
+          `"${item.studentName}"`,
+          `"${item.phone}"`,
+          `"${item.type}"`,
+          `"${item.date}"`,
+          `"${item.reason}"`
+        ]);
+      } else {
+        // 추가자 데이터 (신청자 중 추가일자 기준)
+        let addedList = applicants;
+        if (sln) addedList = addedList.filter(a => String(a.courseId) === String(sln));
+        rows = addedList.map((a, idx) => {
+          const c = allCourses.find(item => String(item.id) === String(a.courseId)) || {};
+          return [
+            idx + 1,
+            `"${c.category || '26년 8월'}"`,
+            `"${a.courseTitle || c.title || ''}"`,
+            `"${c.instructor || '담당강사'}"`,
+            `"${a.grade || ''}"`,
+            `"${a.classNum || ''}"`,
+            `"${a.studentNumber || a.studentNum || ''}"`,
+            `"${a.studentName}"`,
+            `"${a.parentPhone || a.guardianPhone || ''}"`,
+            `"추가"`,
+            `"${a.appliedAt || '2026-08-10'}"`,
+            `"정상 추가"`
+          ];
+        });
+      }
+    } else {
+      // 현재/이전 강좌 비교
+      const mockDiff = [
+        { period: '26년 8월', courseTitle: '(금) 돌봄 4부', teacherName: '돌봄전담사', grade: '1', classNum: '1', studentNum: '01', studentName: '김도하', phone: '010-2218-7705', type: gubunText, date: '2026-08-10', reason: '이전 강좌 비교' },
+        { period: '26년 8월', courseTitle: '로봇과학 1부', teacherName: '최정호', grade: '1', classNum: '1', studentNum: '10', studentName: '오하율', phone: '010-3321-4455', type: gubunText, date: '2026-08-12', reason: '이전 강좌 비교' }
+      ];
+      rows = mockDiff.map((item, idx) => [
+        idx + 1,
+        `"${item.period}"`,
+        `"${item.courseTitle}"`,
+        `"${item.teacherName}"`,
+        `"${item.grade}"`,
+        `"${item.classNum}"`,
+        `"${item.studentNum}"`,
+        `"${item.studentName}"`,
+        `"${item.phone}"`,
+        `"${item.type}"`,
+        `"${item.date}"`,
+        `"${item.reason}"`
+      ]);
+    }
+
+    const headers = ['연번', '강좌구분', '강좌명', '강사명', '학년', '반', '번호', '학생명', '학부모연락처', '구분', '등록/취소일자', '비고'];
+    const csvContent = '\uFEFF' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+    const safeFilename = encodeURIComponent(`추가취소자_${gubunText}_${schoolId}_${new Date().toISOString().slice(0, 10)}.csv`);
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename="${safeFilename}"; filename*=UTF-8''${safeFilename}`);
+    return res.send(csvContent);
+  } catch (err) {
+    console.error('Com Export Error:', err);
+    return res.status(500).json({ success: false, message: '추가/취소자 엑셀 출력 중 오류가 발생했습니다.' });
+  }
+});
+
+// ==================== AUTHENTIC TARGET SITE MODAL DATA APIS ====================
+
+const defaultStudents3267 = [
+  { studentId: '4841970', studentName: '김도하', grade: 1, classNum: 1, studentNum: 1, parentPhone: '010-2218-7705', parentName: '윤보미' },
+  { studentId: '4841972', studentName: '김민호', grade: 1, classNum: 1, studentNum: 2, parentPhone: '010-6695-5578', parentName: '보호자' },
+  { studentId: '4841974', studentName: '김은수', grade: 1, classNum: 1, studentNum: 3, parentPhone: '010-4629-0929', parentName: '김정은' },
+  { studentId: '4841976', studentName: '김이레', grade: 1, classNum: 1, studentNum: 4, parentPhone: '010-5541-2311', parentName: '보호자' },
+  { studentId: '4841978', studentName: '문지유', grade: 1, classNum: 1, studentNum: 5, parentPhone: '010-7788-9900', parentName: '보호자' },
+  { studentId: '4841988', studentName: '오하율', grade: 1, classNum: 1, studentNum: 10, parentPhone: '010-3321-4455', parentName: '보호자' },
+  { studentId: '4841991', studentName: '일괄학생1', grade: 1, classNum: 1, studentNum: 31, parentPhone: '010-1111-2222', parentName: '보호자' },
+  { studentId: '4841992', studentName: '일괄학생2', grade: 1, classNum: 2, studentNum: 32, parentPhone: '010-2222-3333', parentName: '보호자' },
+  { studentId: '4842001', studentName: '박지민', grade: 2, classNum: 1, studentNum: 1, parentPhone: '010-3344-5566', parentName: '박보호' },
+  { studentId: '4842002', studentName: '최서연', grade: 2, classNum: 2, studentNum: 2, parentPhone: '010-4455-6677', parentName: '최보호' },
+  { studentId: '4842003', studentName: '정우진', grade: 3, classNum: 1, studentNum: 3, parentPhone: '010-5566-7788', parentName: '정보호' },
+  { studentId: '4842004', studentName: '이하은', grade: 4, classNum: 1, studentNum: 4, parentPhone: '010-6677-8899', parentName: '이보호' },
+  { studentId: '4842005', studentName: '강민준', grade: 5, classNum: 1, studentNum: 5, parentPhone: '010-7788-9911', parentName: '강보호' },
+  { studentId: '4842006', studentName: '윤서진', grade: 6, classNum: 1, studentNum: 6, parentPhone: '010-8899-0022', parentName: '윤보호' }
+];
+
+// GET /api/af/ad_app/unapplied (미신청자 목록 조회 API)
+router.get(['/af/ad_app/unapplied', '/api/af/ad_app/unapplied'], (req, res) => {
+  try {
+    const { ssc, sld, sgr, scl, sw, schoolId } = req.query;
+    const targetSchool = resolveSchoolId(schoolId || 3267);
+    const applicants = db.getApplicantsBySchool(targetSchool);
+
+    const sscNum = parseInt(ssc, 10);
+    const threshold = isNaN(sscNum) ? 1 : sscNum; // default 1개 미만
+
+    let list = defaultStudents3267.map(s => {
+      const applied = applicants.filter(a => a.studentName === s.studentName);
+      const courseTitles = applied.map(a => a.courseTitle || '방과후강좌');
+      return {
+        studentId: s.studentId,
+        studentName: s.studentName,
+        grade: s.grade,
+        classNum: s.classNum,
+        studentNum: s.studentNum,
+        parentPhone: s.parentPhone,
+        appliedCount: applied.length,
+        courses: courseTitles.length > 0 ? courseTitles.join(', ') : '-'
+      };
+    });
+
+    if (ssc !== undefined && ssc !== '') {
+      list = list.filter(s => s.appliedCount < threshold);
+    }
+    if (sgr && sgr !== 'all' && sgr !== '') {
+      list = list.filter(s => String(s.grade) === String(sgr));
+    }
+    if (scl && scl !== 'all' && scl !== '') {
+      list = list.filter(s => String(s.classNum) === String(scl));
+    }
+    if (sw && sw.trim()) {
+      const kw = sw.trim().toLowerCase();
+      list = list.filter(s => s.studentName.toLowerCase().includes(kw));
+    }
+
+    return res.json({
+      success: true,
+      count: list.length,
+      students: list
+    });
+  } catch (err) {
+    console.error('Unapplied Students Error:', err);
+    return res.status(500).json({ success: false, message: '미신청자 목록 조회 중 오류가 발생했습니다.' });
+  }
+});
+
+// POST & GET /api/af/ad_app/unapplied/export (미신청자 검색결과 엑셀출력)
+router.all(['/af/ad_app/unapplied/export', '/api/af/ad_app/unapplied/export', '/af/ad_app/list1/export'], (req, res) => {
+  try {
+    const params = Object.assign({}, req.query, req.body);
+    const targetSchool = resolveSchoolId(params.schoolId || 3267);
+    const applicants = db.getApplicantsBySchool(targetSchool);
+
+    const sscNum = parseInt(params.ssc, 10);
+    const threshold = isNaN(sscNum) ? 1 : sscNum;
+
+    let list = defaultStudents3267.map(s => {
+      const applied = applicants.filter(a => a.studentName === s.studentName);
+      const courseTitles = applied.map(a => a.courseTitle || '방과후강좌');
+      return {
+        studentId: s.studentId,
+        studentName: s.studentName,
+        grade: s.grade,
+        classNum: s.classNum,
+        studentNum: s.studentNum,
+        parentPhone: s.parentPhone,
+        appliedCount: applied.length,
+        courses: courseTitles.length > 0 ? courseTitles.join('; ') : '-'
+      };
+    });
+
+    if (params.ssc !== undefined && params.ssc !== '') {
+      list = list.filter(s => s.appliedCount < threshold);
+    }
+    if (params.sgr && params.sgr !== 'all' && params.sgr !== '') {
+      list = list.filter(s => String(s.grade) === String(params.sgr));
+    }
+    if (params.scl && params.scl !== 'all' && params.scl !== '') {
+      list = list.filter(s => String(s.classNum) === String(params.scl));
+    }
+    if (params.sw && params.sw.trim()) {
+      const kw = params.sw.trim().toLowerCase();
+      list = list.filter(s => s.studentName.toLowerCase().includes(kw));
+    }
+
+    const headers = ['연번', '학년', '반', '번호', '학생명', '학부모연락처', '신청수', '강좌'];
+    const rows = list.map((s, idx) => [
+      idx + 1,
+      `"${s.grade}"`,
+      `"${s.classNum}"`,
+      `"${s.studentNum}"`,
+      `"${s.studentName}"`,
+      `"${s.parentPhone}"`,
+      s.appliedCount,
+      `"${s.courses}"`
+    ]);
+
+    const csvContent = '\uFEFF' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+    const safeFilename = encodeURIComponent(`미신청자목록_${targetSchool}_${new Date().toISOString().slice(0, 10)}.csv`);
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename="${safeFilename}"; filename*=UTF-8''${safeFilename}`);
+    return res.send(csvContent);
+  } catch (err) {
+    console.error('Unapplied Export Error:', err);
+    return res.status(500).json({ success: false, message: '미신청자 엑셀 출력 중 오류가 발생했습니다.' });
+  }
+});
+
+// GET /api/student/search (학생 검색 팝업 API)
+router.get(['/student/search', '/api/student/search'], (req, res) => {
+  try {
+    const { grade, sgr, classNum, scl, keyword, sw } = req.query;
+    const targetGrade = grade || sgr;
+    const targetClass = classNum || scl;
+    const targetKeyword = (keyword || sw || '').trim().toLowerCase();
+
+    let list = [...defaultStudents3267];
+    if (targetGrade && targetGrade !== 'all' && targetGrade !== '') {
+      list = list.filter(s => String(s.grade) === String(targetGrade));
+    }
+    if (targetClass && targetClass !== 'all' && targetClass !== '') {
+      list = list.filter(s => String(s.classNum) === String(targetClass));
+    }
+    if (targetKeyword) {
+      list = list.filter(s =>
+        s.studentName.toLowerCase().includes(targetKeyword) ||
+        (s.parentPhone && s.parentPhone.includes(targetKeyword))
+      );
+    }
+
+    return res.json({
+      success: true,
+      students: list,
+      totalCount: list.length
+    });
+  } catch (err) {
+    console.error('Student Search Error:', err);
+    return res.status(500).json({ success: false, message: '학생 검색 중 오류가 발생했습니다.' });
+  }
+});
+
+// GET /api/af/ad_app/sin-courses (신청자 등록 - 강좌 목록 평가 API)
+router.get(['/af/ad_app/sin-courses', '/api/af/ad_app/sin-courses'], (req, res) => {
+  try {
+    const { studentName, gradeClass, period, category, keyword, schoolId } = req.query;
+    const targetSchoolId = resolveSchoolId(schoolId || 3267);
+
+    const allCourses = db.getCoursesBySchool(targetSchoolId);
+    const applicants = db.getApplicantsBySchool(targetSchoolId);
+
+    // Find student enrollments
+    const studentEnrolled = applicants.filter(a => {
+      const matchName = studentName && a.studentName === studentName;
+      const matchGC = !gradeClass || a.gradeClass === gradeClass;
+      return matchName && matchGC;
+    });
+
+    const enrolledCourseIds = new Set(studentEnrolled.map(a => String(a.courseId)));
+    const enrolledSchedules = studentEnrolled.map(a => {
+      const c = allCourses.find(course => String(course.id) === String(a.courseId));
+      return c ? (c.schedule || c.scheduleTime) : null;
+    }).filter(Boolean);
+
+    let filtered = [...allCourses];
+
+    // Filter by period (월/구분)
+    if (period && period !== 'all' && period !== '구분전체') {
+      filtered = filtered.filter(c => c.category && c.category.includes(period));
+    }
+
+    // Filter by category (늘봄과정)
+    if (category && category !== 'all' && category !== '늘봄과정전체') {
+      filtered = filtered.filter(c => c.neulbomType === category || (c.category && c.category.includes(category)));
+    }
+
+    // Filter by keyword
+    if (keyword && keyword.trim()) {
+      const term = keyword.trim().toLowerCase();
+      filtered = filtered.filter(c => (c.title && c.title.toLowerCase().includes(term)) || (c.instructor && c.instructor.toLowerCase().includes(term)));
+    }
+
+    const evaluated = filtered.map(c => {
+      const cIdStr = String(c.id);
+      const isApplied = enrolledCourseIds.has(cIdStr);
+      const enrolledRecord = isApplied ? studentEnrolled.find(a => String(a.courseId) === cIdStr) : null;
+
+      // Count current applicants for this course
+      const currentCount = applicants.filter(a => String(a.courseId) === cIdStr).length;
+      const capacity = Number(c.capacity) || 20;
+
+      let status = 'available';
+      let statusText = '신청';
+
+      if (isApplied) {
+        status = 'applied';
+        statusText = '신청완료';
+      } else if (currentCount >= capacity) {
+        status = 'closed';
+        statusText = '마감';
+      } else if (c.schedule && enrolledSchedules.includes(c.schedule)) {
+        status = 'time_conflict';
+        statusText = '시간중복';
+      }
+
+      return {
+        id: c.id,
+        title: c.title,
+        category: c.category || '26년 8월',
+        neulbomType: c.neulbomType || '방과후',
+        teacherName: c.instructor || c.teacherName || '강사',
+        currentCount,
+        capacity,
+        waitingCapacity: c.waitingCapacity || 5,
+        operatingPeriod: c.operatingPeriod || '2026-08-01~2026-08-31',
+        schedule: c.schedule || c.scheduleTime || '월:14:00~14:50',
+        fee: c.tuitionFee || c.fee || 38000,
+        status,
+        statusText,
+        enrollmentId: enrolledRecord ? enrolledRecord.id : null
+      };
+    });
+
+    return res.json({
+      success: true,
+      courses: evaluated,
+      appliedCount: studentEnrolled.length,
+      totalCount: evaluated.length
+    });
+  } catch (err) {
+    console.error('Sin-Courses Evaluation Error:', err);
+    return res.status(500).json({ success: false, message: '강좌 목록 평가 중 오류가 발생했습니다.' });
+  }
+});
+
+// POST /api/af/ad_app/direct-apply (신청자 등록 모달 - 즉시 신청)
+router.post(['/af/ad_app/direct-apply', '/api/af/ad_app/direct-apply'], (req, res) => {
+  try {
+    const { studentName, gradeClass, studentNum, parentPhone, courseId, schoolId } = req.body;
+    if (!studentName || !courseId) {
+      return res.status(400).json({ success: false, message: '학생명과 신청 강좌는 필수 항목입니다.' });
+    }
+
+    const targetSchoolId = resolveSchoolId(schoolId || 3267);
+    const course = (db.data.courses || []).find(c => String(c.id) === String(courseId) || String(c.code) === String(courseId));
+
+    const newApp = db.createApplicant({
+      schoolId: targetSchoolId,
+      studentName,
+      gradeClass: gradeClass || '1학년 1반',
+      studentNum: studentNum || '01',
+      parentPhone: parentPhone || '010-0000-0000',
+      guardianPhone: parentPhone || '010-0000-0000',
+      courseId: course ? course.id : courseId,
+      courseTitle: course ? course.title : '신청 강좌',
+      category: course ? (course.category || '26년 8월') : '26년 8월',
+      neulbomType: course ? (course.neulbomType || '방과후') : '방과후',
+      instructorName: course ? (course.instructor || course.teacherName || '강사') : '강사',
+      tuitionFee: course ? (course.tuitionFee || course.fee || 38000) : 38000,
+      bookFee: course ? (course.bookFee || 0) : 0,
+      materialFee: course ? (course.materialFee || 15000) : 15000,
+      paymentStatus: '결제대기',
+      status: '승인'
+    });
+
+    return res.json({
+      success: true,
+      item: newApp,
+      message: `'${course ? course.title : '강좌'}' 신청이 완료되었습니다.`
+    });
+  } catch (err) {
+    console.error('Direct Apply Error:', err);
+    return res.status(500).json({ success: false, message: '신청 처리 중 오류가 발생했습니다.' });
+  }
+});
+
+// POST /api/af/ad_app/direct-cancel (신청자 등록 모달 - 즉시 취소)
+router.post(['/af/ad_app/direct-cancel', '/api/af/ad_app/direct-cancel'], (req, res) => {
+  try {
+    const { studentName, gradeClass, courseId, appId, schoolId } = req.body;
+    const targetSchoolId = resolveSchoolId(schoolId || 3267);
+    const applicants = db.getApplicantsBySchool(targetSchoolId);
+
+    let target = null;
+    if (appId) {
+      target = applicants.find(a => String(a.id) === String(appId));
+    }
+    if (!target && studentName && courseId) {
+      target = applicants.find(a => a.studentName === studentName && String(a.courseId) === String(courseId));
+    }
+
+    if (target) {
+      db.deleteApplicant(target.id);
+      return res.json({ success: true, message: '수강신청이 취소되었습니다.' });
+    }
+
+    return res.json({ success: true, message: '취소할 신청 내역이 없습니다.' });
+  } catch (err) {
+    console.error('Direct Cancel Error:', err);
+    return res.status(500).json({ success: false, message: '수강신청 취소 중 오류가 발생했습니다.' });
+  }
+});
+
+// GET /api/af/ad_pay/edit-data (수강료 관리 모달 데이터 조회)
+router.get(['/af/ad_pay/edit-data', '/api/af/ad_pay/edit-data'], (req, res) => {
+  try {
+    const { courseId, schoolId } = req.query;
+    const targetSchoolId = resolveSchoolId(schoolId || 3267);
+    const allCourses = db.getCoursesBySchool(targetSchoolId);
+    const allApplicants = db.getApplicantsBySchool(targetSchoolId);
+
+    const targetCourse = (courseId && courseId !== 'all') ? allCourses.find(c => String(c.id) === String(courseId)) : allCourses[0];
+    const cId = targetCourse ? targetCourse.id : (courseId || 'c_3267_1');
+
+    let courseApplicants = allApplicants.filter(a => String(a.courseId) === String(cId));
+
+    // If none found for this specific course, return sample applicants with exact structure
+    if (courseApplicants.length === 0) {
+      courseApplicants = allApplicants.slice(0, 10).map((a, idx) => ({
+        ...a,
+        id: `pay_app_${idx + 1}`,
+        courseId: cId,
+        tuitionFee: a.tuitionFee || 38000,
+        facilityFee: a.facilityFee || 7000,
+        instructorFee: a.instructorFee || 28000,
+        bookFee: a.bookFee || 0,
+        materialFee: a.materialFee || 15000,
+        totalFee: (a.tuitionFee || 38000) + (a.bookFee || 0) + (a.materialFee || 15000),
+        addDate: a.appliedAt || '2026-08-17 15:16:00'
+      }));
+    }
+
+    return res.json({
+      success: true,
+      course: targetCourse,
+      courses: allCourses,
+      applicants: courseApplicants,
+      totalCount: courseApplicants.length
+    });
+  } catch (err) {
+    console.error('Pay Edit Data Error:', err);
+    return res.status(500).json({ success: false, message: '수강료 데이터 조회 중 오류가 발생했습니다.' });
+  }
+});
+
+// POST /api/af/ad_pay/save-edit-data (수강료 관리 일괄 저장)
+router.post(['/af/ad_pay/save-edit-data', '/api/af/ad_pay/save-edit-data'], (req, res) => {
+  try {
+    const { items } = req.body;
+    if (!Array.isArray(items) || items.length === 0) {
+      return res.status(400).json({ success: false, message: '저장할 수강료 데이터가 없습니다.' });
+    }
+
+    let updatedCount = 0;
+    items.forEach(it => {
+      const tuition = Number(it.tuitionFee) || 0;
+      const facility = Number(it.facilityFee) || 0;
+      const instructor = Number(it.instructorFee) || 0;
+      const book = Number(it.bookFee) || 0;
+      const material = Number(it.materialFee) || 0;
+      const total = tuition + book + material;
+
+      db.updateApplicant(it.id, {
+        tuitionFee: tuition,
+        facilityFee: facility,
+        instructorFee: instructor,
+        bookFee: book,
+        materialFee: material,
+        totalFee: total
+      });
+      updatedCount++;
+    });
+
+    return res.json({
+      success: true,
+      updatedCount,
+      message: `${updatedCount}건의 수강료 정보가 성공적으로 저장되었습니다.`
+    });
+  } catch (err) {
+    console.error('Save Pay Edit Error:', err);
+    return res.status(500).json({ success: false, message: '수강료 저장 중 오류가 발생했습니다.' });
+  }
+});
+
+// POST /api/af/ad_app/copy-course (신청자 복사 실행)
+router.post(['/af/ad_app/copy-course', '/api/af/ad_app/copy-course'], (req, res) => {
+  try {
+    const { courseId1, courseId2, inputType, schoolId } = req.body;
+    if (!courseId1 || !courseId2) {
+      return res.status(400).json({ success: false, message: '강좌1과 강좌2를 모두 선택하세요.' });
+    }
+
+    const targetSchoolId = resolveSchoolId(schoolId || 3267);
+    const allCourses = db.getCoursesBySchool(targetSchoolId);
+    const allApplicants = db.getApplicantsBySchool(targetSchoolId);
+
+    const srcCourse = allCourses.find(c => String(c.id) === String(courseId1));
+    const destCourse = allCourses.find(c => String(c.id) === String(courseId2));
+
+    const sourceApps = allApplicants.filter(a => String(a.courseId) === String(courseId1));
+
+    if (inputType === 'clear') {
+      const destApps = allApplicants.filter(a => String(a.courseId) === String(courseId2));
+      destApps.forEach(a => db.deleteApplicant(a.id));
+    }
+
+    let copiedCount = 0;
+    sourceApps.forEach(src => {
+      db.createApplicant({
+        schoolId: targetSchoolId,
+        studentName: src.studentName,
+        gradeClass: src.gradeClass,
+        studentNum: src.studentNum,
+        parentPhone: src.parentPhone,
+        courseId: courseId2,
+        courseTitle: destCourse ? destCourse.title : (src.courseTitle || '복사된 강좌'),
+        category: destCourse ? (destCourse.category || '26년 9월') : '26년 9월',
+        neulbomType: destCourse ? (destCourse.neulbomType || '방과후') : '방과후',
+        tuitionFee: destCourse ? (destCourse.tuitionFee || src.tuitionFee) : src.tuitionFee,
+        bookFee: destCourse ? (destCourse.bookFee || 0) : src.bookFee,
+        materialFee: destCourse ? (destCourse.materialFee || 15000) : src.materialFee,
+        paymentStatus: '결제대기',
+        status: '승인'
+      });
+      copiedCount++;
+    });
+
+    return res.json({
+      success: true,
+      copiedCount,
+      message: `'${srcCourse ? srcCourse.title : '강좌1'}'의 신청자 ${copiedCount}명이 '${destCourse ? destCourse.title : '강좌2'}'(으)로 복사되었습니다.`
+    });
+  } catch (err) {
+    console.error('Copy Course Error:', err);
+    return res.status(500).json({ success: false, message: '강좌 복사 중 오류가 발생했습니다.' });
+  }
+});
+
+// GET /api/af/ad_app/unapplied-students (미신청자 목록 조회)
+router.get(['/af/ad_app/unapplied-students', '/api/af/ad_app/unapplied-students'], (req, res) => {
+  try {
+    const { schoolId, grade, classNum, keyword } = req.query;
+    const targetSchoolId = resolveSchoolId(schoolId || 3267);
+    const applicants = db.getApplicantsBySchool(targetSchoolId);
+    const enrolledNames = new Set(applicants.map(a => a.studentName));
+
+    let unapplied = defaultStudents3267.filter(s => !enrolledNames.has(s.studentName));
+
+    if (grade && grade !== 'all' && grade !== '') {
+      unapplied = unapplied.filter(s => String(s.grade) === String(grade));
+    }
+    if (classNum && classNum !== 'all' && classNum !== '') {
+      unapplied = unapplied.filter(s => String(s.classNum) === String(classNum));
+    }
+    if (keyword && keyword.trim()) {
+      const term = keyword.trim().toLowerCase();
+      unapplied = unapplied.filter(s => s.studentName.toLowerCase().includes(term));
+    }
+
+    return res.json({
+      success: true,
+      students: unapplied,
+      totalCount: unapplied.length
+    });
+  } catch (err) {
+    console.error('Unapplied Students Error:', err);
+    return res.status(500).json({ success: false, message: '미신청자 목록 조회 중 오류가 발생했습니다.' });
   }
 });
 
