@@ -45,6 +45,13 @@
     3. **원칙 3: 헤더 영역별 파스텔 컬러 블록 (Header Color-Coding)**: 기본정보(`f1f5f9`), 신청/산출(`e0f2fe`), 지원금 차감(`dbeafe`), 실징수액/결과(`ffedd5`/`fed7aa`) 등 데이터 성격에 따라 명확히 색상 구분.
     4. **원칙 4: 숫자 셀 천단위 포맷 및 지브라 행 (Data Readability)**: 홀/짝수 행 배경 교차(`f8fafc`/`ffffff`), 금액/수량 셀에 엑셀 전용 천단위 콤마 포맷(`mso-number-format: "#,##0"`) 적용 및 우측 정렬, 식별자 중앙 정렬.
     5. **원칙 5: 하단 총 결산 합계 행 (Total Summary Row)**: 최하단에 `총 결산 합계 (Total)` 행 필수 배치 (`background: #fef3c7`, 상하 2px 앰버 테두리, 수강총액/지원금총액/실징수액 최종 집계).
+- **Next Session Auto-Resume Directive (사용자가 "이어서 계속해" 입력 시 즉각 실행 지침)**:
+  - 사용자가 **"이어서 계속해"**, **"계속 진행해"**, **"다음 작업 진행해"** 등 간단한 재개 프롬프트만 입력하면, 다른 질문이나 확인 절차 없이 즉시 [docs/NEXT_SESSION_AUTO_RESUME.md](file:///c:/Users/user/My%20project/course/course_site/docs/NEXT_SESSION_AUTO_RESUME.md)를 로드하여 다음 대기 작업(Sprint 4: 환경설정 파트 B)을 아래 5단계 하네스 파이프라인으로 전자동 실행한다:
+    1. **CDP 실시간 DOM 덤프**: 타깃 URL (`/af/ad_time/lists`, `/af/ad_cfg/period`, `/af/ad_cfg/afDiv`, `/af/ad_cfg/appLiGrp`, `/af/ad_verify/main`, `/af/ad_neis_edufine/lists` 등)의 `contents_box` outerHTML 덤프.
+    2. **스펙 추출 및 자동 필드 Diff**: 모든 input, select, textarea, button 추출 및 `missing: []` 검증 준비.
+    3. **1:1 패널 및 모달 구현**: 기존 사이드바 100% 유지 + 로컬 테마(`#337ab7`) 적용 + 전수 속성/이벤트 이식.
+    4. **무결성 자동화 하네스 실행 (`scratch/test_verify_*.js`)**: 100% PASS 확인.
+    5. **서버(PORT 3005) 재기동 및 브라우저 스모크 검증 완료**.
 
 
 
