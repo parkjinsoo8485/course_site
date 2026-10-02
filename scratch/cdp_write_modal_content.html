@@ -1,0 +1,570 @@
+<div id="contents">
+			<div class="panel_main panel-default_main">
+	<div class="panel-heading">수강자 등록</div>
+	<div class="panel-body">
+		<p class=""><i class="fa required" title="필수항목"></i><span class="font-12"> 표시가 있는 항목은 반드시 입력해야 합니다.</span></p>
+	</div>
+<form action="https://www.dbdbschool.kr/af/ad_free2_app/write/p/1/sn/3267/smt/3" name="fm_edit" id="fm_edit" onsubmit="return fm_edit_check(this);" method="post" accept-charset="utf-8">
+                      <input type="hidden" name="csrf_test_name" value="4a1780fbc12d51eb33cb3ea82167f4e8">
+<input type="hidden" name="form_open_date_use_chk_csrf" value="2026-10-02 12:57:13">
+	<table class="table table-bordered table-hover list MAT0">
+		<tbody><tr>
+			<th colspan="2">대상 월 <span><i class="fa required" title="필수항목"></i></span></th>
+			<td>
+				
+				<select name="month" id="month" class="form-control">
+					 <option value="3" selected="selected">3월</option>
+				</select>
+				<div class="error_msg"></div>		
+	
+			</td>
+		</tr>		
+		<tr>
+			<th colspan="2">월 최대<br>지원 금액 <span><i class="fa required" title="필수항목"></i></span></th>
+			<td>
+				
+				<input id="max_support_pay" name="max_support_pay" type="text" title="월 최대 지원금액" size="11" value="0" class="form-control size40 text-right " maxlength="9" style="width:100px; background:yellow; font-weight:bold;" onkeyup="chkMoney(this);" onblur="chkMoney(this);">원
+					
+				(강좌 합산)
+				<br>('0'원인 경우 제한 없이 지원됩니다.)			
+				<br>※ 자동으로 지원금을 계산하는 경우에만 조건으로 사용됩니다.
+				<div class="error_msg"></div>			
+			</td>
+		</tr>			
+		<tr>
+			<th colspan="2">이름 <span><i class="fa required" title="필수항목"></i></span></th>
+			<td>
+				<span id="app_mem_name"></span>
+						
+				<span class="mobile_clear MAT10"><a href="https://www.dbdbschool.kr/af/ad_free2_stu/search/tn/af_free2_app/smt/3/sn/3267" onclick="openAppWin(this.href); return false" class="btn btn-success btn-sm" style="color:#FFFFFF;"><i class="fa fa-binoculars"></i> 신청자 검색</a></span>
+				<input type="hidden" id="app_num" name="app_num" value="">
+				<div class="error_msg error_app_num"></div>
+				
+			</td>
+		</tr>		
+		<tr>
+			<th colspan="2">학년</th>
+			<td>
+				<span id="app_mem_grade"></span>학년
+			</td>
+		</tr>
+			
+		<tr>
+			<th colspan="2">반</th>
+			<td>
+				<span id="app_mem_class"></span>반
+			</td>
+		</tr>
+		<tr>
+			<th colspan="2">번호</th>
+			<td>
+				<span id="app_mem_bunho"></span>번
+			</td>
+		</tr>	
+		<tr>
+			<th rowspan="7" width="70" style="min-width:70px;">신청정보
+				
+			</th>		
+			<th width="120">강좌명</th>
+			<td>
+				<span id="lec_name"></span>
+			</td>	
+		</tr>	
+		<tr>
+			<th>수강료</th>
+			<td>
+				<input name="app_lec_pay" id="app_lec_pay" title="수강료" value="0" size="10" maxlength="9" style="width:80px;" readonly="" class="form-control text-right">원 (강사료 + 수용비)	
+						
+				<div class="error_msg error_app_lec_pay"></div>
+			</td>
+		</tr>	
+		<tr>
+			<th>강사료</th>
+			<td>
+				<input name="app_lec_tea_fee" id="app_lec_tea_fee" title="강사료" value="0" size="10" maxlength="9" style="width:80px;" readonly="" class="form-control text-right">원
+					
+				<div class="error_msg error_app_lec_tea_fee"></div>
+			</td>
+		</tr>
+		<tr>
+			<th>수용비</th>
+			<td>
+				<input name="app_lec_use_cost" id="app_lec_use_cost" title="수용비" value="0" size="10" maxlength="9" style="width:80px;" readonly="" class="form-control text-right">원
+						
+				<div class="error_msg error_app_lec_use_cost"></div>
+			</td>
+		</tr>		
+		
+		<tr>
+			<th>교재비</th>
+			<td>
+				<input name="app_lec_pay_book" id="app_lec_pay_book" title="교재비" value="0" size="10" maxlength="9" style="width:80px;" readonly="" class="form-control text-right">원
+					
+				<div class="error_msg error_app_lec_pay_book"></div>
+			</td>
+		</tr>	
+		<tr>
+			<th>재료비</th>
+			<td>
+				<input name="app_lec_pay_item" id="app_lec_pay_item" title="재료비" value="0" size="10" maxlength="9" style="width:80px;" readonly="" class="form-control text-right">원
+					
+				<div class="error_msg error_app_lec_pay_item"></div>
+			</td>
+		</tr>
+		<tr>
+			<th style="font-weight:bold;">비용 합계</th>
+			<td>
+				<input name="tot_app_lec_pay" id="tot_app_lec_pay" title="비용 합계" value="0" size="10" maxlength="9" style="width:80px; background:yellow; font-weight:bold; " readonly="" class="form-control text-right">원
+				<div class="error_msg error_tot_app_lec_pay"></div>
+			</td>
+		</tr>			
+		<tr style="border-top:2px solid #B5B5B5 !important;">
+			<th rowspan="6" width="90" style="min-width:70px;">1학년 지원금			</th>		
+			<th>수강료</th>
+			<td>
+				<input name="free2_lec_pay" id="free2_lec_pay" title="1학년 지원금 수강료" value="0" size="10" maxlength="9" style="width:80px;" class="form-control text-right free_pay" readonly="readonly" onkeyup="chkMoney(this);" onblur="chkFreeMoney(this);">원 (강사료 + 수용비)			
+				<div class="error_msg error_free2_lec_pay"></div>					
+			</td>
+		</tr>	
+		<tr>
+			<th>강사료</th>
+			<td>
+				<input name="free2_lec_tea_fee" id="free2_lec_tea_fee" title="1학년 지원금 강사료" value="0" size="10" maxlength="9" style="width:80px;" class="form-control text-right free_pay" onkeyup="chkMoney(this);" onblur="chkFreeMoney(this);">원
+				<div class="error_msg error_free2_lec_tea_fee"></div>
+			</td>
+		</tr>
+		<tr>
+			<th>수용비</th>
+			<td>
+				<input name="free2_lec_use_cost" id="free2_lec_use_cost" title="1학년 지원금 수용비" value="0" size="10" maxlength="9" style="width:80px;" class="form-control text-right free_pay" onkeyup="chkMoney(this);" onblur="chkFreeMoney(this);">원
+				<div class="error_msg error_free2_lec_use_cost"></div>
+			</td>
+		</tr>
+		
+		<tr>
+			<th>교재비</th>
+			<td>
+				<input name="free2_lec_pay_book" id="free2_lec_pay_book" title="1학년 지원금 교재비" value="0" size="10" maxlength="9" style="width:80px;" class="form-control text-right free_pay" onkeyup="chkMoney(this);" onblur="chkFreeMoney(this);">원
+				<div class="error_msg error_free2_lec_pay_book"></div>
+			</td>
+		</tr>	
+		<tr>
+			<th>재료비</th>
+			<td>
+				<input name="free2_lec_pay_item" id="free2_lec_pay_item" title="1학년 지원금 재료비" value="0" size="10" maxlength="9" style="width:80px;" class="form-control text-right free_pay" onkeyup="chkMoney(this);" onblur="chkFreeMoney(this);">원
+				<div class="error_msg error_free2_lec_pay_item"></div>
+			</td>
+		</tr>		
+		<tr>
+			<th style="font-weight:bold;">지원금액 합계</th>
+			<td>
+				<input name="free2_deduct_pay" id="free2_deduct_pay" title="1학년 지원금 지원금액 합계" value="0" size="10" maxlength="9" style="width:80px; background:yellow; font-weight:bold;" readonly="" class="form-control text-right free_pay">원
+				<div class="error_msg error_free2_deduct_pay"></div>
+			</td>
+		</tr>			
+		<tr style="">
+			<th rowspan="6" width="90" style="min-width:70px;">3학년 지원금			</th>		
+			<th>수강료</th>
+			<td>
+				<input name="free3_lec_pay" id="free3_lec_pay" title="3학년 지원금 수강료" value="0" size="10" maxlength="9" style="width:80px;" class="form-control text-right free_pay" readonly="readonly" onkeyup="chkMoney(this);" onblur="chkFreeMoney(this);">원 (강사료 + 수용비)			
+				<div class="error_msg error_free3_lec_pay"></div>					
+			</td>
+		</tr>	
+		<tr>
+			<th>강사료</th>
+			<td>
+				<input name="free3_lec_tea_fee" id="free3_lec_tea_fee" title="3학년 지원금 강사료" value="0" size="10" maxlength="9" style="width:80px;" class="form-control text-right free_pay" onkeyup="chkMoney(this);" onblur="chkFreeMoney(this);">원
+				<div class="error_msg error_free3_lec_tea_fee"></div>
+			</td>
+		</tr>
+		<tr>
+			<th>수용비</th>
+			<td>
+				<input name="free3_lec_use_cost" id="free3_lec_use_cost" title="3학년 지원금 수용비" value="0" size="10" maxlength="9" style="width:80px;" class="form-control text-right free_pay" onkeyup="chkMoney(this);" onblur="chkFreeMoney(this);">원
+				<div class="error_msg error_free3_lec_use_cost"></div>
+			</td>
+		</tr>
+		
+		<tr>
+			<th>교재비</th>
+			<td>
+				<input name="free3_lec_pay_book" id="free3_lec_pay_book" title="3학년 지원금 교재비" value="0" size="10" maxlength="9" style="width:80px;" class="form-control text-right free_pay" onkeyup="chkMoney(this);" onblur="chkFreeMoney(this);">원
+				<div class="error_msg error_free3_lec_pay_book"></div>
+			</td>
+		</tr>	
+		<tr>
+			<th>재료비</th>
+			<td>
+				<input name="free3_lec_pay_item" id="free3_lec_pay_item" title="3학년 지원금 재료비" value="0" size="10" maxlength="9" style="width:80px;" class="form-control text-right free_pay" onkeyup="chkMoney(this);" onblur="chkFreeMoney(this);">원
+				<div class="error_msg error_free3_lec_pay_item"></div>
+			</td>
+		</tr>		
+		<tr>
+			<th style="font-weight:bold;">지원금액 합계</th>
+			<td>
+				<input name="free3_deduct_pay" id="free3_deduct_pay" title="3학년 지원금 지원금액 합계" value="0" size="10" maxlength="9" style="width:80px; background:yellow; font-weight:bold;" readonly="" class="form-control text-right free_pay">원
+				<div class="error_msg error_free3_deduct_pay"></div>
+			</td>
+		</tr>			
+		<tr style="">
+			<th rowspan="6" width="90" style="min-width:70px;">자유수강권			</th>		
+			<th>수강료</th>
+			<td>
+				<input name="free1_lec_pay" id="free1_lec_pay" title="자유수강권 수강료" value="0" size="10" maxlength="9" style="width:80px;" class="form-control text-right free_pay" readonly="readonly" onkeyup="chkMoney(this);" onblur="chkFreeMoney(this);">원 (강사료 + 수용비)			
+				<div class="error_msg error_free1_lec_pay"></div>					
+			</td>
+		</tr>	
+		<tr>
+			<th>강사료</th>
+			<td>
+				<input name="free1_lec_tea_fee" id="free1_lec_tea_fee" title="자유수강권 강사료" value="0" size="10" maxlength="9" style="width:80px;" class="form-control text-right free_pay" onkeyup="chkMoney(this);" onblur="chkFreeMoney(this);">원
+				<div class="error_msg error_free1_lec_tea_fee"></div>
+			</td>
+		</tr>
+		<tr>
+			<th>수용비</th>
+			<td>
+				<input name="free1_lec_use_cost" id="free1_lec_use_cost" title="자유수강권 수용비" value="0" size="10" maxlength="9" style="width:80px;" class="form-control text-right free_pay" onkeyup="chkMoney(this);" onblur="chkFreeMoney(this);">원
+				<div class="error_msg error_free1_lec_use_cost"></div>
+			</td>
+		</tr>
+		
+		<tr>
+			<th>교재비</th>
+			<td>
+				<input name="free1_lec_pay_book" id="free1_lec_pay_book" title="자유수강권 교재비" value="0" size="10" maxlength="9" style="width:80px;" class="form-control text-right free_pay" onkeyup="chkMoney(this);" onblur="chkFreeMoney(this);">원
+				<div class="error_msg error_free1_lec_pay_book"></div>
+			</td>
+		</tr>	
+		<tr>
+			<th>재료비</th>
+			<td>
+				<input name="free1_lec_pay_item" id="free1_lec_pay_item" title="자유수강권 재료비" value="0" size="10" maxlength="9" style="width:80px;" class="form-control text-right free_pay" onkeyup="chkMoney(this);" onblur="chkFreeMoney(this);">원
+				<div class="error_msg error_free1_lec_pay_item"></div>
+			</td>
+		</tr>		
+		<tr>
+			<th style="font-weight:bold;">지원금액 합계</th>
+			<td>
+				<input name="free1_deduct_pay" id="free1_deduct_pay" title="자유수강권 지원금액 합계" value="0" size="10" maxlength="9" style="width:80px; background:yellow; font-weight:bold;" readonly="" class="form-control text-right free_pay">원
+				<div class="error_msg error_free1_deduct_pay"></div>
+			</td>
+		</tr>			
+	
+		<tr>
+			<th style="font-weight:bold;" colspan="2">지원금액 전체 합계</th>
+			<td style="font-weight:bold;">
+				<input name="free_deduct_pay" id="free_deduct_pay" title="지원금액 전체 합계" value="0" size="10" maxlength="9" style="width:80px; background:yellow; font-weight:bold;" readonly="" class="form-control text-right">원
+				<div class="error_msg error_free_deduct_pay"></div>
+			</td>
+		</tr>
+		<tr style="border-top:2px solid #B5B5B5 !important;">
+			<th rowspan="6" width="70" style="min-width:70px;">징수금액</th>		
+			<th>수강료</th>
+			<td>
+				<input name="co_amount_lec_pay" id="co_amount_lec_pay" title="수강료" value="0" size="10" maxlength="9" style="width:80px;" readonly="" class="form-control text-right">원 (강사료 + 수용비)	
+				<div class="error_msg error_co_amount_lec_pay"></div>							
+			</td>
+		</tr>	
+		<tr>
+			<th>강사료</th>
+			<td>
+				<input name="co_amount_lec_tea_fee" id="co_amount_lec_tea_fee" title="강사료" value="0" size="10" maxlength="9" style="width:80px;" readonly="" class="form-control text-right">원
+				<div class="error_msg error_co_amount_lec_tea_fee"></div>
+			</td>
+		</tr>
+		<tr>
+			<th>수용비</th>
+			<td>
+				<input name="co_amount_lec_use_cost" id="co_amount_lec_use_cost" title="수용비" value="0" size="10" maxlength="9" style="width:80px;" readonly="" class="form-control text-right">원
+				<div class="error_msg error_co_amount_lec_use_cost"></div>
+			</td>
+		</tr>
+		
+		<tr>
+			<th>교재비</th>
+			<td>
+				<input name="co_amount_lec_pay_book" id="co_amount_lec_pay_book" title="교재비" value="0" size="10" maxlength="9" style="width:80px;" readonly="" class="form-control text-right">원
+				<div class="error_msg error_co_amount_lec_pay_book"></div>
+			</td>
+		</tr>	
+		<tr>
+			<th>재료비</th>
+			<td>
+				<input name="co_amount_lec_pay_item" id="co_amount_lec_pay_item" title="재료비" value="0" size="10" maxlength="9" style="width:80px;" readonly="" class="form-control text-right">원
+				<div class="error_msg error_co_amount_lec_pay_item"></div>
+			</td>
+		</tr>		
+		<tr>
+			<th style="font-weight:bold;">징수금액 합계</th>
+			<td>
+				<input name="co_amount_pay" id="co_amount_pay" title="징수금액 합계" value="0" size="10" maxlength="9" style="width:80px; background:yellow; font-weight:bold;" class="form-control text-right">원
+				<div class="error_msg error_co_amount_pay"></div>
+			</td>
+		</tr>					
+		<tr>
+			<th colspan="2">비고</th>
+			<td>
+				<textarea name="bigo" id="bigo" class="form-control" rows="5" maxlength="100" style="width:80%;"></textarea>
+			</td>
+		</tr>			
+		<tr>
+			<th colspan="2">지원금 계산 로그</th>
+			<td>
+				<textarea name="log_data" id="log_data" class="form-control" rows="10" maxlength="100" style="width:80%;" readonly="readonly"></textarea>
+			</td>
+		</tr>	
+		
+	</tbody></table>
+	<p class="text-center MAT30">
+		<input type="button" value="취소" onclick="location.href='https://www.dbdbschool.kr/af/ad_free2_app/lists/p/1/sn/3267/smt/3';" class="btn btn-default">	
+		<input type="submit" value="등록" data-loading-text="처리중 .." class="btn btn-primary">
+	</p>
+	</form>
+</div>
+
+<div class="help_box">
+	<ul>
+		<li>대상 월 : 수강자를 저장할 월</li>	
+		<li>신청자 정보 : 강좌에 신청된 학생을 검색하여 등록할 수 있습니다.</li>
+	</ul>
+</div>	
+
+<script type="text/javascript" src="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/form_common.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/form_ajax.js" charset="utf-8"></script>
+<script type="text/javascript"> 
+	var useCost = 'Y';
+
+	function chkSumFreeMoney(show_msg) {
+		// 지원금액 전체 합계, 징수금액 적용
+		var pay_list = {};
+		pay_list['lec_pay'] = 0;
+		if (useCost == 'Y') {		
+			pay_list['lec_tea_fee'] = 0;
+			pay_list['lec_use_cost'] = 0;
+		}
+		pay_list['lec_pay_item'] = 0;
+		pay_list['lec_pay_book'] = 0;
+		pay_list['deduct_pay'] = 0;
+
+		$('#fm_edit input.free_pay').each(function() {
+			var free_key = this.id.split('_')[0];
+			var free_pay_key = this.id.replace(free_key + '_', "");
+			if (this.value) {
+				pay_list[free_pay_key] += parseInt(filterNum(this.value));
+				//console.log(free_pay_key + ':' + pay_list[free_pay_key]);
+			}
+		});
+
+		var app_lec_pay = parseInt(filterNum($('#fm_edit #app_lec_pay').val()), 10);
+		if (useCost == 'Y') {
+			var app_lec_tea_fee = parseInt(filterNum($('#fm_edit #app_lec_tea_fee').val()), 10);
+			var app_lec_use_cost = parseInt(filterNum($('#fm_edit #app_lec_use_cost').val()), 10);	
+		}
+		var app_lec_pay_book = parseInt(filterNum($('#fm_edit #app_lec_pay_book').val()), 10);
+		var app_lec_pay_item = parseInt(filterNum($('#fm_edit #app_lec_pay_item').val()), 10);
+		var tot_app_lec_pay = parseInt(filterNum($('#fm_edit #tot_app_lec_pay').val()), 10);
+		
+		// 지원금액 전체 합계 적용
+		$('#fm_edit #free_deduct_pay').val(commaSplit(pay_list['deduct_pay']));
+
+		// { 징수금액 적용
+		var co_amount_pay_list = {};
+		co_amount_pay_list['lec_pay'] = app_lec_pay - pay_list['lec_pay'];
+		if (useCost == 'Y') {		
+			co_amount_pay_list['lec_tea_fee'] = app_lec_tea_fee - pay_list['lec_tea_fee'];
+			co_amount_pay_list['lec_use_cost'] = app_lec_use_cost - pay_list['lec_use_cost'];
+		}
+		co_amount_pay_list['lec_pay_book'] = app_lec_pay_book - pay_list['lec_pay_book'];
+		co_amount_pay_list['lec_pay_item'] = app_lec_pay_item - pay_list['lec_pay_item'];
+		co_amount_pay_list['pay'] = tot_app_lec_pay - pay_list['deduct_pay'];
+
+		var err_cnt = 0;
+		for (var [key, value] of Object.entries(pay_list)) {
+			if (key == 'deduct_pay') { key = 'pay'; }
+			
+			let $tmp = $('#fm_edit #co_amount_' + key);
+			$tmp.val(commaSplit(co_amount_pay_list[key])); // 징수금액에 변경값 적용
+			if (co_amount_pay_list[key] < 0) {
+				//console.log(key + ':' + co_amount_pay_list[key]);
+				$tmp.css('color', 'red');
+				err_cnt++;
+			} else {
+				$tmp.css('color', '');
+			}
+		}
+
+		if (err_cnt > 0) {
+			if (show_msg == true) {
+				alert('징수금액 : (-)로 계산된 금액을 확인해 주시기 바랍니다.');
+			}
+			return false;
+		}
+		// }
+
+		return true;
+	}
+
+	function chkFreeMoney(obj) {						
+		var obj_id = obj.id;
+		if (!obj_id.startsWith('free')) {
+			return false; 
+		}
+
+		var free_key = obj_id.split('_')[0];
+		var free_lec_pay = 0;
+		var free_lec_tea_fee = 0;
+		var free_lec_use_cost = 0;		
+		var free_lec_pay_book = 0;
+		var free_lec_pay_item = 0;
+		var free_deduct_pay = 0;
+
+		if (useCost == 'Y') {
+			free_lec_tea_fee = parseInt(filterNum($('#fm_edit #' + free_key + '_lec_tea_fee').val()), 10);
+			free_lec_use_cost = parseInt(filterNum($('#fm_edit #' + free_key + '_lec_use_cost').val()), 10);
+
+			if (obj_id == free_key + '_lec_tea_fee' || obj_id == free_key + '_lec_use_cost') {
+				// 수강료 = 강사료 + 수용비 처리
+				$('#fm_edit #' + free_key + '_lec_pay').val(commaSplit(free_lec_tea_fee + free_lec_use_cost));
+			}
+		}
+
+		free_lec_pay = parseInt(filterNum($('#fm_edit #' + free_key + '_lec_pay').val()), 10);
+		free_lec_pay_book = parseInt(filterNum($('#fm_edit #' + free_key + '_lec_pay_book').val()), 10);
+		free_lec_pay_item = parseInt(filterNum($('#fm_edit #' + free_key + '_lec_pay_item').val()), 10);
+
+		free_deduct_pay = free_lec_pay + free_lec_pay_book + free_lec_pay_item;
+		$('#fm_edit #' + free_key + '_deduct_pay').val(commaSplit(free_deduct_pay)); // 합계에 변경값 적용
+
+		//console.log(obj_id + ') free_deduct_pay(' + free_deduct_pay + '), free_lec_pay(' + free_lec_pay + ', free_lec_tea_fee(' + free_lec_tea_fee + '), free_lec_use_cost(' + free_lec_use_cost + '), free_lec_pay_book(' + free_lec_pay_book + '), free_lec_pay_item(' + free_lec_pay_item + ')');
+
+		chkSumFreeMoney();
+	}
+
+	function fm_edit_check(fm) {
+		try {
+			if(!validate_required(fm.month)) {
+				alert('대상 월 : 선택해 주세요.');
+				return false;
+			}
+
+			if(!validate_required(fm.app_num)) {
+				alert('신청자 정보 : 검색 후 선택해 주시기 바랍니다.');
+				return false;
+			}	
+
+			if (!chkSumFreeMoney(true)) {
+				return false;
+			}
+					
+			if(confirm('적용하시겠습니까?')) {
+				//return true;
+				fm_ajax(fm);
+			}
+			return false;
+		} catch (error) {
+			console.error(error);
+    		return false;
+		}				
+	}
+	
+	function openAppWin(dest) 
+	{
+		window.name = ''; // 이름이 같은 경우 새창 안뜨는 문제 처리
+		win = window.open(dest, "openAppWin", "scrollbars=yes,toolbar=no,status=yes,location=no,directories=no,width=750,height=500,resizable=no,menubar=no,left=10,top=10");
+		win.focus();
+	}
+
+	var ajax_loding = false;
+	var ajax_pro_obj = null;
+
+	// { 순위구분 검색
+	function chk_free_level(obj) {
+		if(!obj.value) { 
+			alert('순위를 먼저 선택해 주세요.');
+			return false;
+		}
+				
+		if(chk_ajax_loding()) { 
+			return false;
+		}
+
+		// 초기화	
+		$('#free_gubun > option').each(function() {
+			if(this.value.length != 0) {
+				$(this).remove();			
+			}
+            //options.push({value: $(this).val(), text: $(this).text()});
+        });
+		
+		callback = { 'before':fm_chk_free_level_before, 'error':fm_chk_free_level_error, 'success':fm_chk_free_level_success }
+		//cfg = { 'async':false, 'msg_style':'modal', 'callback':callback }
+		cfg = { 'callback':callback }
+
+		ajax_pro_obj = obj;
+		$('#chk_free_level').val(obj.value);
+		fm_ajax($('#fm_chk_free_level').get(0), cfg);
+		return true;
+	}
+
+	function fm_chk_free_level_before(fm_id) {
+		ajaxLoding('show');
+	}
+
+	function fm_chk_free_level_error(xhr, textStatus, errorThrown, fm_id) {
+		ajaxLoding('hide');
+
+		fm_chk_free_level_cancel(fm_id);
+	}
+
+	var tr_info_list = new Array();
+	function fm_chk_free_level_success(json_data, fm_id) {
+		// return 값 처리
+		var cnt = json_data.length;
+		var error = false;
+		var $target = $('#free_gubun');
+		$.each(json_data, function(key, val){
+			if(key == 'errors' && val['message']) {
+				error = true;
+				fm_chk_free_level_cancel(fm_id);
+			} else if(key == 'list') {
+				$target.index(0);
+				$.each(val, function(key1, val1){	
+					// 적용
+					tmp = key1.split('_');
+					$target.append('<option value="' + tmp[1] + '">' + val1 + '</option>');
+				});			
+			}
+		});
+
+		ajaxLoding('hide');
+	}
+	
+ 	// ajax loading
+	function ajaxLoding(mode) {
+		var $obj = $(ajax_pro_obj);
+
+		if(mode == 'show') {
+			ajax_loding = true;
+			
+			var $loding = $('<div class="ajaxLoading1"><img src="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/images/spinner_squares_circle.gif" alt="loading" /></div>');
+			if($obj) { $loding.insertAfter($obj); } 
+
+			$loding.show(); 
+		} else if(mode == 'hide') {
+			ajax_loding = false;
+
+			var $loding = $obj.next('.ajaxLoading1');
+			$loding.remove();
+		}
+	}
+
+	function chk_ajax_loding() {
+		if(ajax_loding) { 
+			alert('이미 처리 중인 내용이 있습니다.\n\n잠시 후에 이용하세요.');
+			return true;
+		}
+
+		return false;
+	}	
+</script>			</div>

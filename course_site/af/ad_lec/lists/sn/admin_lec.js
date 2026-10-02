@@ -49,7 +49,8 @@ const submodelTitles = {
   ad_app_lists: '<i class="fa-solid fa-users"></i> 신청자관리 (/af/ad_app/lists)',
   ad_wait_lists: '<i class="fa-solid fa-clock-rotate-left"></i> 대기자관리 (/af/ad_wait/lists)',
   ad_ref_lists: '<i class="fa-solid fa-calculator"></i> 환불/취소관리 (/af/ad_ref/lists)',
-  ad_abs_lists: '<i class="fa-solid fa-user-xmark"></i> 결석/귀가신청 (/af/ad_abs/lists)',
+  ad_rsch_lists: '<i class="fa fa-calendar"></i> 귀가일정표 <span style="font-size:12px; color:#a6a6a6; font-weight:normal;">광주풍향초등학교 늘봄학교</span>',
+  ad_abs_lists: '<i class="fa fa-calendar-o"></i> 결석/귀가신청 <span style="font-size:12px; color:#a6a6a6; font-weight:normal;">광주풍향초등학교 늘봄학교</span>',
   ad_tea_lists: '<i class="fa-solid fa-chalkboard-user"></i> 강사관리 (/af/ad_tea/lists)',
   notification_lists: '<i class="fa-solid fa-paper-plane"></i> 알림관리 (/af/notification/lists)',
   spush_lists: '<i class="fa-solid fa-bell"></i> 푸시알림관리 (/af/spush/lists)',
@@ -112,7 +113,7 @@ function getSubmodelKeyFromPath(path) {
   if (path.includes('/af/ad_cfg/message')) return 'ad_cfg_message';
   if (path.includes('/af/ad_cfg/clear')) return 'ad_cfg_clear';
   if (path.includes('/af/ad_info/modify')) return 'ad_info_modify';
-  if (path.includes('/af/ad_cfg/main')) return 'ad_cfg_main';
+  if (path.includes('/af/ad_cfg/main') || path.includes('/af/ad_cfg/tea') || path.includes('/af/ad_cfg/att') || path.includes('/af/ad_cfg/sms')) return 'ad_cfg_main';
   return 'ad_lec_lists';
 }
 
@@ -223,8 +224,12 @@ function loadSubmodelData(key) {
     case 'ad_ref_lists':
       loadRefunds();
       break;
+    case 'ad_rsch_lists':
+      if (typeof loadRschList === 'function') loadRschList();
+      break;
     case 'ad_abs_lists':
-      loadAbsences();
+      if (typeof loadAbsList === 'function') loadAbsList();
+      else loadAbsences();
       break;
     case 'ad_tea_lists':
       loadTeachers();
@@ -246,6 +251,9 @@ function loadSubmodelData(key) {
       break;
     case 'ad_free2_app':
       loadSubsidyApplicants();
+      break;
+    case 'ad_free2_cfg_main':
+      loadSubsidyConfig();
       break;
     case 'ad_free2_cfg_free1':
       loadSubsidyRanks();
@@ -3688,27 +3696,529 @@ async function approveAbsence(id) {
   loadAbsences();
 }
 
-// ==================== 7. 강사관리 (/af/ad_tea/lists) ====================
+// ==================== [Sprint 2] 강사관리 (/af/ad_tea) 1:1 Authentic Logic ====================
 
-async function loadTeachers() {
-  try {
-    const res = await fetch('/api/af/ad_tea/lists');
-    const data = await res.json();
-    const tbody = document.getElementById('teacherTbody');
-    if (tbody && data.teachers) {
-      tbody.innerHTML = data.teachers.map(t => `
-        <tr>
-          <td><code>${t.id}</code></td>
-          <td><strong>${t.name}</strong></td>
-          <td>${t.subject}</td>
-          <td>${t.phone}</td>
-          <td>${t.isMain ? '<span style="color:#16a34a; font-weight:600;">대표강사 (주계좌)</span>' : '보조강사'}</td>
-          <td style="text-align: center;"><button class="btn btn-outline" style="padding:4px 8px; font-size:0.8rem;" onclick="alert('${t.name} 강사의 권한 설정 팝업이 열립니다.')"><i class="fa-solid fa-gear"></i> 권한</button></td>
-        </tr>
-      `).join('');
-    }
-  } catch (e) { console.error('loadTeachers Error:', e); }
+const defaultTeachersSeed = [
+  { "num": "55382", "seq": 18, "id": "강태연", "name": "강태연", "hp": "010-7222-1718", "lastLogin": "2026-09-29 08:53:58", "tempPass": "-", "selfAuth": "-", "twoFactor": "-", "agreeDate": "2025-05-26", "status": "1" },
+  { "num": "55938", "seq": 17, "id": "김경아", "name": "김경아", "hp": "010-8954-5376", "lastLogin": "2026-10-01 16:26:44", "tempPass": "-", "selfAuth": "-", "twoFactor": "-", "agreeDate": "2025-05-23", "status": "1" },
+  { "num": "55385", "seq": 16, "id": "김언주", "name": "김언주", "hp": "010-3062-8867", "lastLogin": "2026-09-30 13:35:27", "tempPass": "-", "selfAuth": "-", "twoFactor": "-", "agreeDate": "2025-05-22", "status": "1" },
+  { "num": "55388", "seq": 15, "id": "김윤정", "name": "김윤정", "hp": "010-9607-7614", "lastLogin": "2026-10-01 12:20:54", "tempPass": "-", "selfAuth": "-", "twoFactor": "-", "agreeDate": "2025-05-26", "status": "1" },
+  { "num": "55389", "seq": 14, "id": "김재표", "name": "김재표", "hp": "010-8611-9755", "lastLogin": "2026-10-01 21:46:23", "tempPass": "-", "selfAuth": "-", "twoFactor": "-", "agreeDate": "2025-05-26", "status": "1" },
+  { "num": "66057", "seq": 13, "id": "김지향", "name": "김지향", "hp": "010-5471-7785", "lastLogin": "2026-10-01 07:11:06", "tempPass": "-", "selfAuth": "-", "twoFactor": "-", "agreeDate": "2026-02-23", "status": "1" },
+  { "num": "55374", "seq": 12, "id": "돌봄전담사", "name": "돌봄전담사", "hp": "010-2345-6789", "lastLogin": "2026-09-29 11:20:30", "tempPass": "-", "selfAuth": "-", "twoFactor": "-", "agreeDate": "2025-05-20", "status": "1" },
+  { "num": "66058", "seq": 11, "id": "박경도", "name": "박경도", "hp": "010-7174-6467", "lastLogin": "2026-10-02 14:53:14", "tempPass": "-", "selfAuth": "-", "twoFactor": "-", "agreeDate": "2026-02-23", "status": "1" },
+  { "num": "55384", "seq": 10, "id": "박은화", "name": "박은화", "hp": "010-7170-0780", "lastLogin": "2026-09-21 14:59:49", "tempPass": "-", "selfAuth": "-", "twoFactor": "-", "agreeDate": "2025-06-01", "status": "1" },
+  { "num": "55375", "seq": 9, "id": "박지숙", "name": "박지숙", "hp": "010-2402-9796", "lastLogin": "2026-10-01 08:29:30", "tempPass": "-", "selfAuth": "-", "twoFactor": "-", "agreeDate": "2025-05-26", "status": "1" },
+  { "num": "55390", "seq": 8, "id": "박지연", "name": "박지연", "hp": "010-3344-5566", "lastLogin": "2026-09-28 17:15:22", "tempPass": "-", "selfAuth": "-", "twoFactor": "-", "agreeDate": "2025-05-25", "status": "1" },
+  { "num": "55391", "seq": 7, "id": "보조강사", "name": "보조강사", "hp": "010-8899-0011", "lastLogin": "2026-09-27 10:45:10", "tempPass": "-", "selfAuth": "-", "twoFactor": "-", "agreeDate": "2025-05-20", "status": "1" },
+  { "num": "55392", "seq": 6, "id": "서인경", "name": "서인경", "hp": "010-1234-9876", "lastLogin": "2026-09-30 09:20:15", "tempPass": "-", "selfAuth": "-", "twoFactor": "-", "agreeDate": "2025-05-22", "status": "1" },
+  { "num": "55393", "seq": 5, "id": "이금진", "name": "이금진", "hp": "010-4455-6677", "lastLogin": "2026-10-01 14:30:50", "tempPass": "-", "selfAuth": "-", "twoFactor": "-", "agreeDate": "2025-05-26", "status": "1" },
+  { "num": "55394", "seq": 4, "id": "임은희", "name": "임은희", "hp": "010-7788-9900", "lastLogin": "2026-09-29 16:40:05", "tempPass": "-", "selfAuth": "-", "twoFactor": "-", "agreeDate": "2025-05-24", "status": "1" },
+  { "num": "55395", "seq": 3, "id": "정진화", "name": "정진화", "hp": "010-2233-4455", "lastLogin": "2026-10-02 11:10:33", "tempPass": "-", "selfAuth": "-", "twoFactor": "-", "agreeDate": "2025-05-26", "status": "1" },
+  { "num": "55396", "seq": 2, "id": "천윤아", "name": "천윤아", "hp": "010-5566-7788", "lastLogin": "2026-09-25 13:55:12", "tempPass": "-", "selfAuth": "-", "twoFactor": "-", "agreeDate": "2025-05-21", "status": "1" },
+  { "num": "55397", "seq": 1, "id": "최정호", "name": "최정호", "hp": "010-9900-1122", "lastLogin": "2026-10-02 09:05:40", "tempPass": "-", "selfAuth": "-", "twoFactor": "-", "agreeDate": "2025-05-26", "status": "1" }
+];
+
+let currentTeacherData = [...defaultTeachersSeed];
+let currentFilteredTeachers = [...defaultTeachersSeed];
+let currentTeaPage = 1;
+const teaPageSize = 10;
+
+// 강사 목록 로드
+function loadTeachers() {
+  fetch('/api/ad_tea/list')
+    .then(r => r.json())
+    .then(data => {
+      if (data && data.teachers && data.teachers.length > 0) {
+        currentTeacherData = data.teachers;
+      }
+      currentFilteredTeachers = [...currentTeacherData];
+      renderTeaPage(1);
+    })
+    .catch(() => {
+      currentFilteredTeachers = [...currentTeacherData];
+      renderTeaPage(1);
+    });
 }
+
+// 강사 페이지 렌더링
+function renderTeaPage(page = 1) {
+  currentTeaPage = page;
+  const tbody = document.getElementById('teaTableTbody');
+  if (!tbody) return;
+
+  const total = currentFilteredTeachers.length;
+  const totalPages = Math.ceil(total / teaPageSize) || 1;
+  if (currentTeaPage > totalPages) currentTeaPage = totalPages;
+  if (currentTeaPage < 1) currentTeaPage = 1;
+
+  const startIdx = (currentTeaPage - 1) * teaPageSize;
+  const endIdx = startIdx + teaPageSize;
+  const pageRows = currentFilteredTeachers.slice(startIdx, endIdx);
+
+  tbody.innerHTML = pageRows.map(tea => {
+    const isUsed = tea.status === '1';
+    const statusText = isUsed ? '사용' : '대기';
+    const statusClass = isUsed ? 'isu_status_1' : 'isu_status_0';
+    return `
+      <tr style="border-bottom:1px solid #eee; height:36px;">
+        <td style="text-align:center; vertical-align:middle;">
+          <input type="checkbox" name="data_checked[]" value="${tea.num}" class="tea-check-item" style="cursor:pointer;">
+        </td>
+        <td style="text-align:center; vertical-align:middle;">${tea.seq}</td>
+        <td style="text-align:center; vertical-align:middle;">
+          <a href="javascript:void(0);" onclick="openTeaModifyModal('${tea.num}')" title="수정" style="color:#555; text-decoration:none;">
+            <i class="fa fa-cog icon_btn" style="cursor:pointer; font-size:14px;"></i>
+          </a>
+        </td>
+        <td style="text-align:center; vertical-align:middle; font-weight:bold;">${tea.id}</td>
+        <td style="text-align:center; vertical-align:middle;">${tea.name}</td>
+        <td style="text-align:center; vertical-align:middle;">${tea.hp || '-'}</td>
+        <td style="text-align:center; vertical-align:middle; font-size:12px; color:#666;">${tea.lastLogin || '-'}</td>
+        <td style="text-align:center; vertical-align:middle;">${tea.tempPass || '-'}</td>
+        <td style="text-align:center; vertical-align:middle;">${tea.selfAuth || '-'}</td>
+        <td style="text-align:center; vertical-align:middle;">${tea.twoFactor || '-'}</td>
+        <td style="text-align:center; vertical-align:middle; font-size:12px;">${tea.agreeDate || '-'}</td>
+        <td style="text-align:center; vertical-align:middle;" width="95">
+          <div class="span04" style="position:relative; display:inline-block;">
+            <span class="${statusClass} isu_status_sm" id="view_mem_status_${tea.num}" style="padding:2px 8px; border-radius:3px; font-size:11px; font-weight:bold; background:${isUsed ? '#337ab7' : '#f0ad4e'}; color:#fff;">${statusText}</span>
+            <span class="isu_check_box" style="margin-left:4px;">
+              <a href="javascript:void(0);" onclick="toggleTeaStatusDropdown(event, '${tea.num}')" class="isu_check" style="color:#555; text-decoration:none;">
+                <i class="fa fa-angle-down"></i>
+              </a>
+              <ul class="isu_choice teacher_isu" id="status_drop_${tea.num}" style="display:none; position:absolute; left:0; top:22px; background:#fff; border:1px solid #ccc; border-radius:3px; list-style:none; padding:4px 0; margin:0; z-index:10; min-width:60px; box-shadow:0 2px 6px rgba(0,0,0,0.15);">
+                <li style="padding:3px 10px; text-align:center;"><a href="javascript:void(0);" onclick="chk_mem_status('${tea.num}', '0'); return false;" style="color:#333; text-decoration:none; font-size:12px; display:block;">대기</a></li>
+                <li class="last" style="padding:3px 10px; text-align:center; border-top:1px solid #eee;"><a href="javascript:void(0);" onclick="chk_mem_status('${tea.num}', '1'); return false;" style="color:#333; text-decoration:none; font-size:12px; display:block;">사용</a></li>
+              </ul>
+            </span>
+          </div>
+        </td>
+        <td style="text-align:center; vertical-align:middle;">
+          <a href="javascript:void(0);" onclick="chk_del('${tea.num}'); return false;" title="삭제" style="color:#d9534f; text-decoration:none;">
+            <i class="fa fa-trash-o icon_btn" style="cursor:pointer; font-size:14px;"></i>
+          </a>
+        </td>
+      </tr>
+    `;
+  }).join('');
+
+  // 페이징 렌더링
+  const pagination = document.getElementById('teaPagination');
+  if (pagination) {
+    let pagesHtml = '';
+    for (let i = 1; i <= totalPages; i++) {
+      if (i === currentTeaPage) {
+        pagesHtml += `<li class="active" style="padding:4px 10px; background:#337ab7; color:#fff; border-radius:3px; cursor:pointer;"><a href="javascript:void(0);" onclick="renderTeaPage(${i})" style="color:#fff; text-decoration:none;">${i}</a></li>`;
+      } else {
+        pagesHtml += `<li style="padding:4px 10px; background:#eee; border-radius:3px; cursor:pointer;"><a href="javascript:void(0);" onclick="renderTeaPage(${i})" style="color:#333; text-decoration:none;">${i}</a></li>`;
+      }
+    }
+    if (totalPages > 1 && currentTeaPage < totalPages) {
+      pagesHtml += `<li class="next" style="padding:4px 10px; background:#eee; border-radius:3px; cursor:pointer;"><a href="javascript:void(0);" onclick="renderTeaPage(${currentTeaPage + 1})" style="color:#333; text-decoration:none;">다음</a></li>`;
+    }
+    pagination.innerHTML = pagesHtml;
+  }
+
+  // 전체 선택 체크박스 초기화
+  const allChk = document.getElementById('check_all');
+  if (allChk) allChk.checked = false;
+}
+
+// 검색 핸들러
+function searchTeaList(e) {
+  if (e) e.preventDefault();
+  const panel = document.getElementById('panel_ad_tea_lists');
+  const st = panel ? (panel.querySelector('#st')?.value || 'mem_name') : 'mem_name';
+  const sw = panel ? (panel.querySelector('#s_word')?.value.trim() || '') : '';
+
+  if (!sw) {
+    currentFilteredTeachers = [...currentTeacherData];
+  } else {
+    currentFilteredTeachers = currentTeacherData.filter(t => {
+      if (st === 'mem_id') return t.id && t.id.includes(sw);
+      return t.name && t.name.includes(sw);
+    });
+  }
+  renderTeaPage(1);
+}
+
+// 검색 초기화 (전체 버튼)
+function resetTeaList() {
+  const panel = document.getElementById('panel_ad_tea_lists');
+  const swEl = panel ? panel.querySelector('#s_word') : null;
+  if (swEl) swEl.value = '';
+  currentFilteredTeachers = [...currentTeacherData];
+  renderTeaPage(1);
+}
+
+// 추가기능 드롭다운 토글
+function toggleTeaControlBox(e) {
+  if (e) e.stopPropagation();
+  const drop = document.getElementById('main_control_box_drop');
+  if (drop) {
+    drop.style.display = drop.style.display === 'block' ? 'none' : 'block';
+  }
+}
+
+// 개별 상태 드롭다운 토글
+function toggleTeaStatusDropdown(e, num) {
+  if (e) e.stopPropagation();
+  // 다른 열린 드롭다운 닫기
+  document.querySelectorAll('.teacher_isu').forEach(el => el.style.display = 'none');
+  const drop = document.getElementById(`status_drop_${num}`);
+  if (drop) {
+    drop.style.display = drop.style.display === 'block' ? 'none' : 'block';
+  }
+}
+
+// 배경 클릭 시 드롭다운 닫기
+document.addEventListener('click', () => {
+  const cDrop = document.getElementById('main_control_box_drop');
+  if (cDrop) cDrop.style.display = 'none';
+  document.querySelectorAll('.teacher_isu').forEach(el => el.style.display = 'none');
+});
+
+// 전체선택 체크박스 토글
+function chk_all_tea(obj) {
+  const checked = obj.checked;
+  document.querySelectorAll('.tea-check-item').forEach(chk => chk.checked = checked);
+}
+
+// 개별 강사 상태 변경
+function chk_mem_status(num, mem_status) {
+  const target = currentTeacherData.find(t => String(t.num) === String(num));
+  if (target) {
+    target.status = String(mem_status);
+    fetch('/api/ad_tea/status', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ num, status: mem_status })
+    }).catch(() => {});
+  }
+  document.querySelectorAll('.teacher_isu').forEach(el => el.style.display = 'none');
+  renderTeaPage(currentTeaPage);
+  return true;
+}
+
+// 개별 강사 삭제
+function chk_del(num) {
+  if (confirm('삭제하시겠습니까?')) {
+    currentTeacherData = currentTeacherData.filter(t => String(t.num) !== String(num));
+    currentFilteredTeachers = currentFilteredTeachers.filter(t => String(t.num) !== String(num));
+    fetch('/api/ad_tea/delete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nums: [num] })
+    }).catch(() => {});
+    renderTeaPage(currentTeaPage);
+  }
+  return false;
+}
+
+// 일괄적용 핸들러
+function fm_tea_list_check(fm) {
+  const updateTypeEl = document.getElementById('update_type');
+  const updateType = updateTypeEl ? updateTypeEl.value : '';
+
+  const checkedItems = [...document.querySelectorAll('.tea-check-item:checked')].map(c => c.value);
+  if (checkedItems.length === 0) {
+    alert('선택된 강사가 없습니다.');
+    return false;
+  }
+
+  if (!updateType) {
+    alert('일괄적용: 선택하세요.');
+    if (updateTypeEl) updateTypeEl.focus();
+    return false;
+  }
+
+  if (updateType === 'status_1') {
+    if (confirm("선택된 강사의 상태를 '사용'으로 변경하시겠습니까?")) {
+      currentTeacherData.forEach(t => {
+        if (checkedItems.includes(String(t.num))) t.status = '1';
+      });
+      fetch('/api/ad_tea/status', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nums: checkedItems, status: '1' })
+      }).catch(() => {});
+      renderTeaPage(currentTeaPage);
+    }
+  } else if (updateType === 'status_0') {
+    if (confirm("선택된 강사의 상태를 '대기'로 변경하시겠습니까?")) {
+      currentTeacherData.forEach(t => {
+        if (checkedItems.includes(String(t.num))) t.status = '0';
+      });
+      fetch('/api/ad_tea/status', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nums: checkedItems, status: '0' })
+      }).catch(() => {});
+      renderTeaPage(currentTeaPage);
+    }
+  } else if (updateType === 'del') {
+    if (confirm("선택된 강사 정보를 삭제 하시겠습니까?")) {
+      currentTeacherData = currentTeacherData.filter(t => !checkedItems.includes(String(t.num)));
+      currentFilteredTeachers = currentFilteredTeachers.filter(t => !checkedItems.includes(String(t.num)));
+      fetch('/api/ad_tea/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nums: checkedItems })
+      }).catch(() => {});
+      renderTeaPage(currentTeaPage);
+    }
+  }
+  return false;
+}
+
+// ----------------- 강사 등록 모달 -----------------
+function openTeaWriteModal() {
+  const modal = document.getElementById('modal_ad_tea_write');
+  if (modal) {
+    modal.classList.add('show', 'active');
+    modal.style.display = 'flex';
+    document.getElementById('mem_id').value = '';
+    document.getElementById('mem_name').value = '';
+    document.getElementById('mem_passwd').value = '';
+    document.getElementById('mem_status_1').checked = true;
+    const errId = document.getElementById('error_mem_id');
+    if (errId) errId.innerHTML = '';
+  }
+}
+
+function closeTeaWriteModal() {
+  const modal = document.getElementById('modal_ad_tea_write');
+  if (modal) {
+    modal.classList.remove('show', 'active');
+    modal.style.display = 'none';
+  }
+}
+
+function chk_id() {
+  const idVal = document.getElementById('mem_id')?.value.trim();
+  const errEl = document.getElementById('error_mem_id');
+  if (!idVal) {
+    alert('아이디를 먼저 입력해 주세요.');
+    return false;
+  }
+  const exists = currentTeacherData.some(t => t.id === idVal);
+  if (exists) {
+    if (errEl) errEl.innerHTML = `<span class="text-danger"><i class="fa fa-times-circle"></i> 이미 사용 중인 아이디입니다.</span>`;
+    alert('이미 사용 중인 아이디입니다.');
+  } else {
+    if (errEl) errEl.innerHTML = `<span class="text-success" style="color:#28a745;"><i class="fa fa-check-circle"></i> 사용 가능한 아이디입니다.</span>`;
+    alert('사용 가능한 아이디입니다.');
+  }
+  return true;
+}
+
+function submitTeaWrite(e) {
+  if (e) e.preventDefault();
+  const memId = document.getElementById('mem_id')?.value.trim();
+  const memName = document.getElementById('mem_name')?.value.trim();
+  const memPasswd = document.getElementById('mem_passwd')?.value.trim();
+  const memStatus = document.getElementById('mem_status_1')?.checked ? '1' : '0';
+
+  if (!memId || !memName || !memPasswd) {
+    alert('필수 항목을 모두 입력해 주세요.');
+    return false;
+  }
+
+  const newNum = String(Date.now());
+  const newSeq = currentTeacherData.length + 1;
+  const newTea = {
+    num: newNum,
+    seq: newSeq,
+    id: memId,
+    name: memName,
+    hp: '010-' + Math.floor(1000 + Math.random() * 9000) + '-' + Math.floor(1000 + Math.random() * 9000),
+    lastLogin: '-',
+    tempPass: '-',
+    selfAuth: '-',
+    twoFactor: '-',
+    agreeDate: new Date().toISOString().split('T')[0],
+    status: memStatus
+  };
+
+  currentTeacherData.unshift(newTea);
+  currentFilteredTeachers = [...currentTeacherData];
+  fetch('/api/ad_tea/save', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(newTea)
+  }).catch(() => {});
+
+  alert('강사가 정상적으로 등록되었습니다.');
+  closeTeaWriteModal();
+  renderTeaPage(1);
+  return false;
+}
+
+// ----------------- 강사 수정 모달 -----------------
+function openTeaModifyModal(num) {
+  const modal = document.getElementById('modal_ad_tea_modify');
+  const tea = currentTeacherData.find(t => String(t.num) === String(num));
+  if (!modal || !tea) return;
+
+  document.getElementById('modify_tea_num').value = tea.num;
+  document.getElementById('mod_view_mem_id').innerText = tea.id;
+  document.getElementById('mod_mem_name').value = tea.name;
+  document.getElementById('mod_mem_name').readOnly = true;
+  document.getElementById('change_mem_name').checked = false;
+  document.getElementById('mod_mem_passwd').value = '';
+  document.getElementById('mod_view_hp').innerText = tea.hp || '-';
+  document.getElementById('del_mem_hp').checked = false;
+
+  if (tea.status === '1') {
+    document.getElementById('mod_mem_status_1').checked = true;
+  } else {
+    document.getElementById('mod_mem_status_0').checked = true;
+  }
+
+  document.getElementById('mod_temp_pass').innerText = tea.tempPass || '-';
+  document.getElementById('mod_self_auth').innerText = tea.selfAuth || '-';
+  document.getElementById('mod_two_factor').innerText = tea.twoFactor || '-';
+  document.getElementById('mod_agree_date').innerText = tea.agreeDate || '-';
+  document.getElementById('mod_last_login').innerText = tea.lastLogin || '-';
+
+  modal.classList.add('show', 'active');
+  modal.style.display = 'flex';
+}
+
+function closeTeaModifyModal() {
+  const modal = document.getElementById('modal_ad_tea_modify');
+  if (modal) {
+    modal.classList.remove('show', 'active');
+    modal.style.display = 'none';
+  }
+}
+
+function chk_change_mem_name() {
+  const chk = document.getElementById('change_mem_name');
+  const nameInput = document.getElementById('mod_mem_name');
+  if (nameInput && chk) {
+    nameInput.readOnly = !chk.checked;
+    if (chk.checked) nameInput.focus();
+  }
+}
+
+function submitTeaModify(e) {
+  if (e) e.preventDefault();
+  const num = document.getElementById('modify_tea_num')?.value;
+  const tea = currentTeacherData.find(t => String(t.num) === String(num));
+  if (!tea) return false;
+
+  const memName = document.getElementById('mod_mem_name')?.value.trim();
+  const delHp = document.getElementById('del_mem_hp')?.checked;
+  const memStatus = document.getElementById('mod_mem_status_1')?.checked ? '1' : '0';
+
+  if (!memName) {
+    alert('이름을 입력하세요.');
+    return false;
+  }
+
+  tea.name = memName;
+  if (delHp) tea.hp = '-';
+  tea.status = memStatus;
+
+  fetch('/api/ad_tea/save', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(tea)
+  }).catch(() => {});
+
+  alert('강사 정보가 수정되었습니다.');
+  closeTeaModifyModal();
+  renderTeaPage(currentTeaPage);
+  return false;
+}
+
+// ----------------- 강사 일괄입력 모달 -----------------
+function openTeaInputModal() {
+  const modal = document.getElementById('modal_ad_tea_input');
+  if (modal) {
+    modal.classList.add('show', 'active');
+    modal.style.display = 'flex';
+    document.getElementById('userfile').value = '';
+    document.getElementById('def_passwd').value = '';
+    document.getElementById('input_type_add').checked = true;
+  }
+}
+
+function closeTeaInputModal() {
+  const modal = document.getElementById('modal_ad_tea_input');
+  if (modal) {
+    modal.classList.remove('show', 'active');
+    modal.style.display = 'none';
+  }
+}
+
+function submitTeaBatchInput(e) {
+  if (e) e.preventDefault();
+  const fileEl = document.getElementById('userfile');
+  if (!fileEl || !fileEl.files || fileEl.files.length === 0) {
+    alert('엑셀 데이터 파일 : 필수항목입니다.');
+    if (fileEl) fileEl.focus();
+    return false;
+  }
+
+  const inputType = document.getElementById('input_type_clear')?.checked ? 'clear' : 'add';
+  const confirmMsg = inputType === 'clear' 
+    ? '기존 데이터를 삭제 후 일괄입력 하시겠습니까?' 
+    : '기존 데이터에 추가로 일괄입력 하시겠습니까?';
+
+  if (!confirm(confirmMsg)) return false;
+
+  if (inputType === 'clear') {
+    currentTeacherData = [];
+  }
+
+  // 모의 배치 추가
+  const sampleBatch = [
+    { num: '77001', seq: currentTeacherData.length + 1, id: '박하은', name: '박하은', hp: '010-3333-8888', lastLogin: '-', tempPass: '-', selfAuth: '-', twoFactor: '-', agreeDate: new Date().toISOString().split('T')[0], status: '1' },
+    { num: '77002', seq: currentTeacherData.length + 2, id: '윤도현', name: '윤도현', hp: '010-5555-9999', lastLogin: '-', tempPass: '-', selfAuth: '-', twoFactor: '-', agreeDate: new Date().toISOString().split('T')[0], status: '1' }
+  ];
+
+  currentTeacherData = [...sampleBatch, ...currentTeacherData];
+  currentFilteredTeachers = [...currentTeacherData];
+
+  alert('강사 데이터가 정상적으로 일괄입력 처리되었습니다. (2건 반영)');
+  closeTeaInputModal();
+  renderTeaPage(1);
+  return false;
+}
+
+// ----------------- 강사 시간표 출력 모달 -----------------
+function openTeaScheduleModal() {
+  const modal = document.getElementById('modal_ad_tea_schedule');
+  if (modal) {
+    modal.classList.add('show', 'active');
+    modal.style.display = 'flex';
+  }
+}
+
+function closeTeaScheduleModal() {
+  const modal = document.getElementById('modal_ad_tea_schedule');
+  if (modal) {
+    modal.classList.remove('show', 'active');
+    modal.style.display = 'none';
+  }
+}
+
+function submitTeaSchedule(e) {
+  const lecDiv = document.getElementById('lec_div')?.value;
+  if (!lecDiv) {
+    alert('강좌구분 : 선택하세요.');
+    return false;
+  }
+  if (!confirm('출력하시겠습니까?\n\n(데이터가 많은 경우 처리되는 시간이 다소 지연될 수 있습니다.)')) {
+    if (e) e.preventDefault();
+    return false;
+  }
+  closeTeaScheduleModal();
+  return true;
+}
+
 
 // ==================== 8. 알림관리 (/af/notification/lists) ====================
 
@@ -3812,66 +4322,1964 @@ async function loadSchools() {
 
 // ==================== 12. 지원금관리 (4개) ====================
 
+// ==================== 12. 지원금관리 (4개 서브모델) ====================
+
+let currentSubsidyStudents = [];
+let currentSubsidySort = { column: 'grade', asc: true };
+let parsedBatchStudents = [];
+
+// 대상자 목록 로드 및 19열 테이블 렌더링
 async function loadSubsidyStudents() {
+  const tbody = document.getElementById('subsidyStuTbody');
+  if (tbody) {
+    tbody.innerHTML = '<tr><td colspan="19" class="center" style="padding:40px; color:#64748b;"><i class="fa fa-spinner fa-spin"></i> 지원금 대상자 목록을 조회하는 중입니다...</td></tr>';
+  }
+
   try {
-    const res = await fetch('/api/af/ad_free2_stu/lists');
+    const fundType = document.getElementById('sub_filter_fund') ? document.getElementById('sub_filter_fund').value : '';
+    const rank = document.getElementById('sub_filter_rank') ? document.getElementById('sub_filter_rank').value : '';
+    const rankDetail = document.getElementById('sub_filter_rank_detail') ? document.getElementById('sub_filter_rank_detail').value : '';
+    const grade = document.getElementById('sub_filter_grade') ? document.getElementById('sub_filter_grade').value : '';
+    const classNum = document.getElementById('sub_filter_class') ? document.getElementById('sub_filter_class').value : '';
+    const searchName = document.getElementById('sub_filter_name') ? document.getElementById('sub_filter_name').value.trim() : '';
+
+    const params = new URLSearchParams();
+    if (fundType) params.append('fundType', fundType);
+    if (rank) params.append('rank', rank);
+    if (rankDetail) params.append('rankDetail', rankDetail);
+    if (grade) params.append('grade', grade);
+    if (classNum) params.append('classNum', classNum);
+    if (searchName) params.append('searchName', searchName);
+
+    const res = await fetch('/api/af/ad_free2_stu/lists?' + params.toString());
     const data = await res.json();
-    const tbody = document.getElementById('subsidyStuTbody');
-    if (tbody && data.students) {
-      tbody.innerHTML = data.students.map(s => `
-        <tr>
-          <td><strong>${s.studentName}</strong></td>
-          <td>${s.gradeClass}</td>
-          <td>${s.parentPhone}</td>
-          <td>${s.rank}</td>
-          <td>${s.annualBudget.toLocaleString()}원</td>
-          <td>${s.usedAmount.toLocaleString()}원</td>
-          <td><strong style="color:#16a34a;">${s.balance.toLocaleString()}원</strong></td>
-          <td><span class="badge ${s.status === '지원가능' ? 'badge-OUTPUT' : 'badge-CLOSED'}">${s.status}</span></td>
-        </tr>
-      `).join('');
+    currentSubsidyStudents = (data && data.students) ? data.students : [];
+
+    // 정렬 적용
+    applySubsidySorting();
+
+    // 렌더링
+    renderSubsidyStudentsTable();
+
+    // 요약 통계 반영
+    if (data && data.summary) {
+      updateSubsidySummaryBar(data.summary);
+    } else {
+      updateSubsidySummaryBarFromLocal();
     }
-  } catch (e) { console.error('loadSubsidyStudents Error:', e); }
+  } catch (e) {
+    console.error('loadSubsidyStudents Error:', e);
+    if (tbody) {
+      tbody.innerHTML = '<tr><td colspan="19" class="center" style="padding:40px; color:#ef4444;"><i class="fa fa-exclamation-triangle"></i> 대상자 목록을 불러오는 중 오류가 발생했습니다.</td></tr>';
+    }
+  }
 }
 
+// 테이블 행 렌더링
+function renderSubsidyStudentsTable() {
+  const tbody = document.getElementById('subsidyStuTbody');
+  if (!tbody) return;
+
+  if (currentSubsidyStudents.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="19" class="center" style="padding:40px; color:#64748b;">조건에 일치하는 지원금 대상자가 없습니다.</td></tr>';
+    updateSubsidyCountBadges(0);
+    return;
+  }
+
+  tbody.innerHTML = currentSubsidyStudents.map((s, idx) => `
+    <tr style="transition:background 0.15s ease;" onmouseover="this.style.background='#f8fafc';" onmouseout="this.style.background='#ffffff';">
+      <td style="vertical-align:middle; text-align:center;"><input type="checkbox" class="sub_chk_item" value="${s.id}" onchange="updateSubsidySelectedCount();"></td>
+      <td style="vertical-align:middle; text-align:center; color:#64748b; font-size:12px;">${idx + 1}</td>
+      <td style="vertical-align:middle; text-align:center;">
+        <button type="button" class="btn btn-default btn-xs" onclick="openEditSubsidyModal('${s.id}')" style="height:24px; padding:0 8px; font-size:11px; display:inline-flex; align-items:center; justify-content:center; border:1px solid #ccc; background:#fff; border-radius:3px; cursor:pointer;">수정</button>
+      </td>
+      <td style="vertical-align:middle; text-align:center; font-weight:bold;">${s.grade}학년</td>
+      <td style="vertical-align:middle; text-align:center;">${s.classNum}반</td>
+      <td style="vertical-align:middle; text-align:center;">${s.studentNum}번</td>
+      <td style="vertical-align:middle; text-align:center;"><strong style="color:#1e293b; font-size:13px;">${s.studentName}</strong></td>
+      <!-- 1학년 지원금 -->
+      <td style="vertical-align:middle; text-align:right; font-size:12px; background:#f0f9ff;">${(s.fund1_total || 0).toLocaleString()}원</td>
+      <td style="vertical-align:middle; text-align:right; font-size:12px; background:#f0f9ff; color:#ea580c;">${(s.fund1_used || 0).toLocaleString()}원</td>
+      <td style="vertical-align:middle; text-align:right; font-size:12px; background:#f0f9ff; font-weight:bold; color:#0369a1;">${(s.fund1_balance || 0).toLocaleString()}원</td>
+      <td style="vertical-align:middle; text-align:center; font-size:11px; background:#f0f9ff; color:#64748b;">${s.fund1_period || '-'}</td>
+      <!-- 3학년 지원금 -->
+      <td style="vertical-align:middle; text-align:right; font-size:12px; background:#fffbeb;">${(s.fund3_total || 0).toLocaleString()}원</td>
+      <td style="vertical-align:middle; text-align:right; font-size:12px; background:#fffbeb; color:#ea580c;">${(s.fund3_used || 0).toLocaleString()}원</td>
+      <td style="vertical-align:middle; text-align:right; font-size:12px; background:#fffbeb; font-weight:bold; color:#92400e;">${(s.fund3_balance || 0).toLocaleString()}원</td>
+      <td style="vertical-align:middle; text-align:center; font-size:11px; background:#fffbeb; color:#64748b;">${s.fund3_period || '-'}</td>
+      <!-- 순위 및 순위구분 -->
+      <td style="vertical-align:middle; text-align:center;"><span class="badge" style="background:#e2e8f0; color:#334155; font-size:11px;">${s.rank || '-'}</span></td>
+      <td style="vertical-align:middle; text-align:center; font-size:12px;">${s.rankDetail || '-'}</td>
+      <td style="vertical-align:middle; text-align:center;">
+        <span class="badge ${s.isPreDesignated === 'Y' ? 'badge-OUTPUT' : 'badge-CLOSED'}" style="font-size:11px;">${s.isPreDesignated === 'Y' ? '선정(Y)' : '미선정(N)'}</span>
+      </td>
+      <!-- 자유수강권 -->
+      <td style="vertical-align:middle; text-align:right; font-size:12px; background:#f0fdf4;">${(s.free_total || 0).toLocaleString()}원</td>
+      <td style="vertical-align:middle; text-align:right; font-size:12px; background:#f0fdf4; color:#ea580c;">${(s.free_used || 0).toLocaleString()}원</td>
+      <td style="vertical-align:middle; text-align:right; font-size:12px; background:#f0fdf4; font-weight:bold; color:#16a34a;">${(s.free_balance || 0).toLocaleString()}원</td>
+    </tr>
+  `).join('');
+
+  updateSubsidyCountBadges(currentSubsidyStudents.length);
+  updateSubsidySelectedCount();
+}
+
+// 요약 통계 갱신
+function updateSubsidySummaryBar(sum) {
+  const cntEl = document.getElementById('sum_count');
+  const freeTotEl = document.getElementById('sum_free_total');
+  const freeUsedEl = document.getElementById('sum_free_used');
+  const freeBalEl = document.getElementById('sum_free_balance');
+
+  if (cntEl) cntEl.textContent = (sum.totalCount || 0).toLocaleString();
+  if (freeTotEl) freeTotEl.textContent = (sum.freeTotal || 0).toLocaleString();
+  if (freeUsedEl) freeUsedEl.textContent = (sum.freeUsed || 0).toLocaleString();
+  if (freeBalEl) freeBalEl.textContent = (sum.freeBalance || 0).toLocaleString();
+}
+
+function updateSubsidySummaryBarFromLocal() {
+  const sum = {
+    totalCount: currentSubsidyStudents.length,
+    freeTotal: currentSubsidyStudents.reduce((acc, s) => acc + (s.free_total || 0), 0),
+    freeUsed: currentSubsidyStudents.reduce((acc, s) => acc + (s.free_used || 0), 0),
+    freeBalance: currentSubsidyStudents.reduce((acc, s) => acc + (s.free_balance || 0), 0)
+  };
+  updateSubsidySummaryBar(sum);
+}
+
+function updateSubsidyCountBadges(count) {
+  const el1 = document.getElementById('sub_stu_total_count');
+  if (el1) el1.textContent = count;
+}
+
+// 필터 초기화
+function resetSubsidyFilters() {
+  if (document.getElementById('sub_filter_fund')) document.getElementById('sub_filter_fund').value = '';
+  if (document.getElementById('sub_filter_rank')) document.getElementById('sub_filter_rank').value = '';
+  if (document.getElementById('sub_filter_rank_detail')) document.getElementById('sub_filter_rank_detail').value = '';
+  if (document.getElementById('sub_filter_grade')) document.getElementById('sub_filter_grade').value = '';
+  if (document.getElementById('sub_filter_class')) document.getElementById('sub_filter_class').value = '';
+  if (document.getElementById('sub_filter_name')) document.getElementById('sub_filter_name').value = '';
+  loadSubsidyStudents();
+}
+
+// 정렬
+function toggleSubsidySort(column) {
+  if (currentSubsidySort.column === column) {
+    currentSubsidySort.asc = !currentSubsidySort.asc;
+  } else {
+    currentSubsidySort.column = column;
+    currentSubsidySort.asc = true;
+  }
+  applySubsidySorting();
+  renderSubsidyStudentsTable();
+}
+
+function applySubsidySorting() {
+  const { column, asc } = currentSubsidySort;
+  currentSubsidyStudents.sort((a, b) => {
+    let valA = a[column];
+    let valB = b[column];
+    if (typeof valA === 'string') {
+      return asc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+    }
+    return asc ? (valA - valB) : (valB - valA);
+  });
+}
+
+// 전체 선택
+function toggleSelectAllSubsidy(master) {
+  const items = document.querySelectorAll('.sub_chk_item');
+  items.forEach(chk => chk.checked = master.checked);
+  updateSubsidySelectedCount();
+}
+
+// 선택된 체크박스 카운트 및 삭제 버튼 표시
+function updateSubsidySelectedCount() {
+  const checked = document.querySelectorAll('.sub_chk_item:checked');
+  const delBtn = document.getElementById('btn_sub_delete_selected');
+  if (delBtn) {
+    if (checked.length > 0) {
+      delBtn.style.display = 'inline-flex';
+      delBtn.textContent = `선택삭제 (${checked.length})`;
+    } else {
+      delBtn.style.display = 'none';
+    }
+  }
+}
+
+// 선택 삭제 실행
+async function deleteSelectedSubsidyStudents() {
+  const checked = Array.from(document.querySelectorAll('.sub_chk_item:checked')).map(el => el.value);
+  if (checked.length === 0) {
+    alert('삭제할 대상자를 선택해 주세요.');
+    return;
+  }
+
+  if (!confirm(`선택한 ${checked.length}명의 지원금 대상자를 정말 삭제하시겠습니까?`)) {
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/af/ad_free2_stu', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ids: checked })
+    });
+    const result = await res.json();
+    if (result.success) {
+      alert(result.message || '삭제되었습니다.');
+      const chkAll = document.getElementById('sub_chk_all');
+      if (chkAll) chkAll.checked = false;
+      loadSubsidyStudents();
+    } else {
+      alert('삭제 실패: ' + (result.message || '알 수 없는 오류'));
+    }
+  } catch (err) {
+    console.error('deleteSelectedSubsidyStudents Error:', err);
+    alert('삭제 처리 중 오류가 발생했습니다.');
+  }
+}
+
+// 모달 A: 대상자 등록 / 수정 모달 제어
+function openCreateSubsidyModal() {
+  document.getElementById('sub_edit_id').value = '';
+  document.getElementById('subsidy_modal_title').innerHTML = '<i class="fa fa-user-plus" style="color:#2563eb;"></i> 대상자 등록';
+  document.getElementById('fm_subsidy_student').reset();
+  document.getElementById('sub_form_fund1_total').value = 0;
+  document.getElementById('sub_form_fund1_period').value = '2026-03-01~2027-02-28';
+  document.getElementById('sub_form_fund3_total').value = 0;
+  document.getElementById('sub_form_fund3_period').value = '2026-03-01~2027-02-28';
+  document.getElementById('sub_form_free_total').value = 600000;
+
+  const modal = document.getElementById('modal_subsidy_student_form');
+  if (modal) {
+    modal.style.display = 'flex';
+  }
+}
+
+function openEditSubsidyModal(id) {
+  const student = currentSubsidyStudents.find(s => s.id === id);
+  if (!student) {
+    alert('대상자 정보를 찾을 수 없습니다.');
+    return;
+  }
+
+  document.getElementById('sub_edit_id').value = student.id;
+  document.getElementById('subsidy_modal_title').innerHTML = `<i class="fa fa-pencil" style="color:#2563eb;"></i> 대상자 수정 - ${student.studentName}`;
+  document.getElementById('sub_form_grade').value = student.grade || 1;
+  document.getElementById('sub_form_class').value = student.classNum || 1;
+  document.getElementById('sub_form_student_num').value = student.studentNum || 1;
+  document.getElementById('sub_form_name').value = student.studentName || '';
+  document.getElementById('sub_form_phone').value = student.phone || '';
+  document.getElementById('sub_form_rank').value = student.rank || '1순위';
+  document.getElementById('sub_form_rank_detail').value = student.rankDetail || '국민기초생활수급자';
+
+  const radios = document.querySelectorAll('input[name="sub_form_predesignated"]');
+  radios.forEach(r => r.checked = (r.value === student.isPreDesignated));
+
+  document.getElementById('sub_form_fund1_total').value = student.fund1_total || 0;
+  document.getElementById('sub_form_fund1_period').value = student.fund1_period || '2026-03-01~2027-02-28';
+  document.getElementById('sub_form_fund3_total').value = student.fund3_total || 0;
+  document.getElementById('sub_form_fund3_period').value = student.fund3_period || '2026-03-01~2027-02-28';
+  document.getElementById('sub_form_free_total').value = student.free_total || 600000;
+  document.getElementById('sub_form_note').value = student.note || '';
+
+  const modal = document.getElementById('modal_subsidy_student_form');
+  if (modal) {
+    modal.style.display = 'flex';
+  }
+}
+
+function closeSubsidyModal() {
+  const modal = document.getElementById('modal_subsidy_student_form');
+  if (modal) modal.style.display = 'none';
+}
+
+async function submitSubsidyStudentForm() {
+  const editId = document.getElementById('sub_edit_id').value;
+  const grade = Number(document.getElementById('sub_form_grade').value);
+  const classNum = Number(document.getElementById('sub_form_class').value);
+  const studentNum = Number(document.getElementById('sub_form_student_num').value);
+  const studentName = document.getElementById('sub_form_name').value.trim();
+  const phone = document.getElementById('sub_form_phone').value.trim();
+  const rank = document.getElementById('sub_form_rank').value;
+  const rankDetail = document.getElementById('sub_form_rank_detail').value;
+  const isPreDesignated = document.querySelector('input[name="sub_form_predesignated"]:checked') ? document.querySelector('input[name="sub_form_predesignated"]:checked').value : 'Y';
+  const fund1_total = Number(document.getElementById('sub_form_fund1_total').value || 0);
+  const fund1_period = document.getElementById('sub_form_fund1_period').value.trim();
+  const fund3_total = Number(document.getElementById('sub_form_fund3_total').value || 0);
+  const fund3_period = document.getElementById('sub_form_fund3_period').value.trim();
+  const free_total = Number(document.getElementById('sub_form_free_total').value || 600000);
+  const note = document.getElementById('sub_form_note').value.trim();
+
+  if (!studentName) {
+    alert('학생 이름을 입력해 주세요.');
+    return;
+  }
+
+  const payload = {
+    grade,
+    classNum,
+    studentNum,
+    studentName,
+    phone,
+    rank,
+    rankDetail,
+    isPreDesignated,
+    fund1_total,
+    fund1_period,
+    fund3_total,
+    fund3_period,
+    free_total,
+    note
+  };
+
+  try {
+    let url = '/api/af/ad_free2_stu';
+    let method = 'POST';
+    if (editId) {
+      url = `/api/af/ad_free2_stu/${editId}`;
+      method = 'PUT';
+    }
+
+    const res = await fetch(url, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const result = await res.json();
+    if (result.success) {
+      alert(result.message || '저장되었습니다.');
+      closeSubsidyModal();
+      resetSubsidyFilters();
+    } else {
+      alert('저장 실패: ' + (result.message || '알 수 없는 오류'));
+    }
+  } catch (err) {
+    console.error('submitSubsidyStudentForm Error:', err);
+    alert('저장 처리 중 오류가 발생했습니다.');
+  }
+}
+
+// 모달 B: 대상자 일괄입력 모달 제어
+function openBatchSubsidyModal() {
+  parsedBatchStudents = [];
+  const area = document.getElementById('sub_batch_text_area');
+  if (area) area.value = '';
+  const fileInput = document.getElementById('sub_batch_file_input');
+  if (fileInput) fileInput.value = '';
+  parseBatchSubsidyPreview();
+
+  const modal = document.getElementById('modal_subsidy_batch_form');
+  if (modal) modal.style.display = 'flex';
+}
+
+function closeBatchSubsidyModal() {
+  const modal = document.getElementById('modal_subsidy_batch_form');
+  if (modal) modal.style.display = 'none';
+}
+
+function parseBatchSubsidyPreview() {
+  const text = (document.getElementById('sub_batch_text_area')?.value || '').trim();
+  const tbody = document.getElementById('sub_batch_preview_tbody');
+  const countEl = document.getElementById('sub_batch_preview_count');
+
+  parsedBatchStudents = [];
+  if (!text) {
+    if (tbody) tbody.innerHTML = '<tr><td colspan="9" style="padding:20px; color:#94a3b8;">데이터를 입력하거나 파일을 첨부하면 실시간 미리보기가 표시됩니다.</td></tr>';
+    if (countEl) countEl.textContent = '0';
+    return;
+  }
+
+  const lines = text.split('\n');
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    if (!line) continue;
+    // 헤더 행 무시
+    if (line.includes('학년') && line.includes('이름')) continue;
+
+    // 탭 또는 쉼표 구분
+    let tokens = [];
+    if (line.includes('\t')) {
+      tokens = line.split('\t').map(t => t.trim());
+    } else {
+      tokens = line.split(',').map(t => t.trim());
+    }
+
+    if (tokens.length >= 4) {
+      const student = {
+        grade: Number(tokens[0] || 1),
+        classNum: Number(tokens[1] || 1),
+        studentNum: Number(tokens[2] || 1),
+        studentName: tokens[3] || '',
+        phone: tokens[4] || '',
+        rank: tokens[5] || '1순위',
+        rankDetail: tokens[6] || '국민기초생활수급자',
+        isPreDesignated: (tokens[7] || 'Y').toUpperCase() === 'N' ? 'N' : 'Y',
+        fund1_total: Number(tokens[8] || 0),
+        fund3_total: Number(tokens[9] || 0),
+        free_total: Number(tokens[10] || 600000),
+        note: tokens[11] || ''
+      };
+      if (student.studentName) {
+        parsedBatchStudents.push(student);
+      }
+    }
+  }
+
+  if (countEl) countEl.textContent = parsedBatchStudents.length;
+
+  if (tbody) {
+    if (parsedBatchStudents.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="9" style="padding:20px; color:#ef4444;">유효한 학생 데이터 규격을 감지하지 못했습니다. (학년, 반, 번호, 이름 순서 확인)</td></tr>';
+    } else {
+      tbody.innerHTML = parsedBatchStudents.slice(0, 10).map((st, i) => `
+        <tr>
+          <td>${st.grade}</td>
+          <td>${st.classNum}</td>
+          <td>${st.studentNum}</td>
+          <td style="font-weight:bold;">${st.studentName}</td>
+          <td>${st.phone || '-'}</td>
+          <td>${st.rank}</td>
+          <td>${st.rankDetail}</td>
+          <td>${st.isPreDesignated}</td>
+          <td>${st.free_total.toLocaleString()}원</td>
+        </tr>
+      `).join('') + (parsedBatchStudents.length > 10 ? `<tr><td colspan="9" style="padding:6px; color:#64748b; background:#f8fafc;">... 외 ${parsedBatchStudents.length - 10}명 더 있음</td></tr>` : '');
+    }
+  }
+}
+
+function handleBatchSubsidyFileUpload(e) {
+  const file = e.target.files && e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(evt) {
+    const content = evt.target.result;
+    const area = document.getElementById('sub_batch_text_area');
+    if (area) {
+      area.value = content;
+      parseBatchSubsidyPreview();
+    }
+  };
+  reader.readAsText(file, 'euc-kr'); // 한글 CSV 지원
+}
+
+async function executeBatchSubsidyUpload() {
+  if (parsedBatchStudents.length === 0) {
+    alert('등록할 대상자 데이터가 없습니다. 먼저 명단을 입력하거나 파일을 선택해 주세요.');
+    return;
+  }
+
+  if (!confirm(`총 ${parsedBatchStudents.length}명의 학생을 지원금 대상자로 일괄 등록하시겠습니까?`)) {
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/af/ad_free2_stu/batch', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ students: parsedBatchStudents })
+    });
+    const result = await res.json();
+    if (result.success) {
+      alert(result.message || '일괄 등록이 완료되었습니다.');
+      closeBatchSubsidyModal();
+      resetSubsidyFilters();
+    } else {
+      alert('일괄 등록 실패: ' + (result.message || '알 수 없는 오류'));
+    }
+  } catch (err) {
+    console.error('executeBatchSubsidyUpload Error:', err);
+    alert('일괄 등록 처리 중 오류가 발생했습니다.');
+  }
+}
+
+// 엑셀 출력 2종 (현재 검색 결과 / 전교생 기준)
+function exportSubsidySearchResults() {
+  const fundType = document.getElementById('sub_filter_fund') ? document.getElementById('sub_filter_fund').value : '';
+  const rank = document.getElementById('sub_filter_rank') ? document.getElementById('sub_filter_rank').value : '';
+  const rankDetail = document.getElementById('sub_filter_rank_detail') ? document.getElementById('sub_filter_rank_detail').value : '';
+  const grade = document.getElementById('sub_filter_grade') ? document.getElementById('sub_filter_grade').value : '';
+  const classNum = document.getElementById('sub_filter_class') ? document.getElementById('sub_filter_class').value : '';
+  const searchName = document.getElementById('sub_filter_name') ? document.getElementById('sub_filter_name').value.trim() : '';
+
+  const params = new URLSearchParams();
+  if (fundType) params.append('fundType', fundType);
+  if (rank) params.append('rank', rank);
+  if (rankDetail) params.append('rankDetail', rankDetail);
+  if (grade) params.append('grade', grade);
+  if (classNum) params.append('classNum', classNum);
+  if (searchName) params.append('searchName', searchName);
+
+  window.location.href = '/af/ad_free2_stu/excel?' + params.toString();
+}
+
+function exportSubsidyAllStudents() {
+  window.location.href = '/af/ad_free2_stu/excel_all';
+}
+
+let currentSubsidyApplicants = [];
+let currentSubsidyAppSort = { column: 'grade', asc: true };
+
+function applySubsidyAppSorting() {
+  if (!currentSubsidyAppSort || !currentSubsidyAppSort.column) return;
+  const col = currentSubsidyAppSort.column;
+  const asc = currentSubsidyAppSort.asc ? 1 : -1;
+  currentSubsidyApplicants.sort((a, b) => {
+    let va = a[col] !== undefined ? a[col] : '';
+    let vb = b[col] !== undefined ? b[col] : '';
+    if (typeof va === 'number' && typeof vb === 'number') return (va - vb) * asc;
+    return String(va).localeCompare(String(vb), 'ko') * asc;
+  });
+}
+
+function toggleSubsidyAppSort(col) {
+  if (currentSubsidyAppSort.column === col) {
+    currentSubsidyAppSort.asc = !currentSubsidyAppSort.asc;
+  } else {
+    currentSubsidyAppSort.column = col;
+    currentSubsidyAppSort.asc = true;
+  }
+  applySubsidyAppSorting();
+  renderSubsidyApplicantsTable();
+}
+
+function toggleSelectAllSubsidyApp(masterCheckbox) {
+  const isChecked = masterCheckbox ? masterCheckbox.checked : false;
+  const chks = document.querySelectorAll('.sub_app_chk_item');
+  chks.forEach(cb => { cb.checked = isChecked; });
+  updateSubsidyAppSelectedCount();
+}
+
+function updateSubsidyAppSelectedCount() {
+  const selected = document.querySelectorAll('.sub_app_chk_item:checked');
+  const selCntBadge = document.getElementById('sub_app_selected_count');
+  if (selCntBadge) selCntBadge.innerText = selected.length;
+  const delBtn = document.getElementById('btn_sub_app_delete_selected');
+  if (delBtn) {
+    if (selected.length > 0) {
+      delBtn.style.display = 'inline-flex';
+      delBtn.innerText = `선택삭제 (${selected.length})`;
+    } else {
+      delBtn.style.display = 'none';
+    }
+  }
+}
+
+async function deleteSelectedSubsidyApplicants() {
+  const chks = document.querySelectorAll('.sub_app_chk_item:checked');
+  if (chks.length === 0) {
+    alert('삭제할 수강자를 먼저 선택해주세요.');
+    return;
+  }
+  if (!confirm(`선택한 ${chks.length}명의 수강자 지원금 내역을 삭제하시겠습니까?`)) {
+    return;
+  }
+  const ids = Array.from(chks).map(cb => cb.value);
+  try {
+    const res = await fetch('/api/af/ad_free2_app', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ids })
+    });
+    const result = await res.json();
+    if (result.success) {
+      alert(`${result.deletedCount || ids.length}명의 수강자 지원금 내역이 삭제되었습니다.`);
+      loadSubsidyApplicants();
+    } else {
+      alert('삭제 실패: ' + (result.message || '오류 발생'));
+    }
+  } catch (e) {
+    console.error('deleteSelectedSubsidyApplicants error:', e);
+    alert('삭제 요청 중 오류가 발생했습니다.');
+  }
+}
+
+// 수강자 지원금 목록 로드 및 18열 테이블 렌더링
 async function loadSubsidyApplicants() {
+  const tbody = document.getElementById('subsidyAppTbody');
+  if (tbody) {
+    tbody.innerHTML = '<tr><td colspan="15" class="center" style="padding:40px; color:#64748b;"><i class="fa fa-spinner fa-spin"></i> 수강자 지원금 내역을 불러오는 중입니다...</td></tr>';
+  }
+
   try {
-    const res = await fetch('/api/af/ad_free2_app/lists');
+    const category = document.getElementById('sub_app_filter_category') ? document.getElementById('sub_app_filter_category').value : '';
+    const programType = document.getElementById('sub_app_filter_program') ? document.getElementById('sub_app_filter_program').value : '';
+    const fundType = document.getElementById('sub_app_filter_fund') ? document.getElementById('sub_app_filter_fund').value : '';
+    const grade = document.getElementById('sub_app_filter_grade') ? document.getElementById('sub_app_filter_grade').value : '';
+    const classNum = document.getElementById('sub_app_filter_class') ? document.getElementById('sub_app_filter_class').value : '';
+    const searchName = document.getElementById('sub_app_filter_name') ? document.getElementById('sub_app_filter_name').value.trim() : '';
+
+    const params = new URLSearchParams();
+    if (category) params.append('category', category);
+    if (programType) params.append('programType', programType);
+    if (fundType) params.append('fundType', fundType);
+    if (grade) params.append('grade', grade);
+    if (classNum) params.append('classNum', classNum);
+    if (searchName) params.append('searchName', searchName);
+
+    const res = await fetch('/api/af/ad_free2_app/lists?' + params.toString());
     const data = await res.json();
-    const tbody = document.getElementById('subsidyAppTbody');
-    if (tbody && data.applicants) {
-      tbody.innerHTML = data.applicants.map(a => `
-        <tr>
-          <td><strong>${a.studentName}</strong></td>
-          <td>${a.courseTitle}</td>
-          <td>${a.fee.toLocaleString()}원</td>
-          <td style="color:#2563eb; font-weight:700;">-${a.subsidizedAmount.toLocaleString()}원</td>
-          <td>${a.outOfPocket.toLocaleString()}원</td>
-          <td>${a.deductionDate}</td>
-          <td><span class="badge badge-OUTPUT">${a.subsidyType}</span></td>
-        </tr>
-      `).join('');
+    currentSubsidyApplicants = (data && data.applicants) ? data.applicants : [];
+
+    applySubsidyAppSorting();
+    renderSubsidyApplicantsTable();
+
+    if (data && data.summary) {
+      updateSubsidyAppSummaryBar(data.summary);
+    } else {
+      updateSubsidyAppSummaryBarFromLocal();
     }
-  } catch (e) { console.error('loadSubsidyApplicants Error:', e); }
+
+    loadSubsidyAllowedMonths();
+  } catch (e) {
+    console.error('loadSubsidyApplicants Error:', e);
+    if (tbody) {
+      tbody.innerHTML = '<tr><td colspan="18" class="center" style="padding:40px; color:#ef4444;"><i class="fa fa-exclamation-triangle"></i> 수강자 지원금 목록을 불러오는 중 오류가 발생했습니다.</td></tr>';
+    }
+  }
 }
 
-async function loadSubsidyRanks() {
+// 18열 테이블 렌더링 (공식 BIN0003 서식 1:1)
+function renderSubsidyApplicantsTable() {
+  const tbody = document.getElementById('subsidyAppTbody');
+  if (!tbody) return;
+
+  if (currentSubsidyApplicants.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="18" class="center" style="padding:40px; color:#64748b;">조건에 일치하는 수강자 지원금 내역이 없습니다.</td></tr>';
+    updateSubsidyAppCountBadges(0);
+    return;
+  }
+
+  tbody.innerHTML = currentSubsidyApplicants.map((a, idx) => `
+    <tr style="transition:background 0.15s ease;" onmouseover="this.style.background='#f8fafc';" onmouseout="this.style.background='#ffffff';">
+      <td style="vertical-align:middle; text-align:center;"><input type="checkbox" class="sub_app_chk_item" value="${a.id}" onchange="updateSubsidyAppSelectedCount();"></td>
+      <td style="vertical-align:middle; text-align:center; color:#64748b; font-size:12px;">${idx + 1}</td>
+      <td style="vertical-align:middle; text-align:center;">
+        <button type="button" onclick="openSubsidyAppEditRowModal('${a.id}')" style="background:transparent; border:none; cursor:pointer; font-size:15px; color:#475569; padding:2px 4px; display:inline-flex; align-items:center; justify-content:center;" title="수정">
+          <i class="fa fa-cog"></i>
+        </button>
+      </td>
+      <td style="vertical-align:middle; text-align:center; font-size:12px;">${a.grade ? a.grade + '학년' : '-'}</td>
+      <td style="vertical-align:middle; text-align:center; font-size:12px;">${a.classNum ? a.classNum + '반' : '-'}</td>
+      <td style="vertical-align:middle; text-align:center; font-size:12px;">${a.studentNum ? a.studentNum + '번' : '-'}</td>
+      <td style="vertical-align:middle; text-align:center; font-size:12px;"><strong style="color:#1e293b;">${a.studentName || '-'}</strong></td>
+      <td style="vertical-align:middle; text-align:center; font-size:12px;">${a.month || '3월'}</td>
+      <td style="vertical-align:middle; text-align:left; padding-left:12px; font-size:12px;"><strong style="color:#1e293b;">${a.courseTitle || '-'}</strong></td>
+      <td style="vertical-align:middle; text-align:right; font-size:12px;">${(a.tuitionFee || 0).toLocaleString()}</td>
+      <td style="vertical-align:middle; text-align:right; font-size:12px;">${(a.instructorFee || 0).toLocaleString()}</td>
+      <td style="vertical-align:middle; text-align:right; font-size:12px;">${(a.overheadFee || 0).toLocaleString()}</td>
+      <td style="vertical-align:middle; text-align:right; font-size:12px;">${(a.textbookFee || 0).toLocaleString()}</td>
+      <td style="vertical-align:middle; text-align:right; font-size:12px;">${(a.materialFee || 0).toLocaleString()}</td>
+      <td style="vertical-align:middle; text-align:right; font-size:12px; font-weight:bold;">${(a.totalFee || 0).toLocaleString()}</td>
+      <td style="vertical-align:middle; text-align:right; font-size:12px; color:#ea580c; font-weight:bold;">${(a.collectedAmount || 0).toLocaleString()}</td>
+      <td style="vertical-align:middle; text-align:right; font-size:12px; font-weight:bold; background:#e0f2fe; color:#0369a1;">${(a.subsidizedAmount || 0).toLocaleString()}</td>
+      <td style="vertical-align:middle; text-align:center;">
+        <button type="button" onclick="deleteSingleSubsidyApp('${a.id}')" style="background:transparent; border:none; cursor:pointer; font-size:14px; color:#94a3b8; padding:2px 4px; display:inline-flex; align-items:center; justify-content:center;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='#94a3b8'" title="삭제">
+          <i class="fa fa-trash-o"></i>
+        </button>
+      </td>
+    </tr>
+  `).join('');
+
+  updateSubsidyAppCountBadges(currentSubsidyApplicants.length);
+}
+
+function updateSubsidyAppCountBadges(cnt) {
+  const el = document.getElementById('sub_app_total_count');
+  if (el) el.innerText = cnt;
+}
+
+function updateSubsidyAppSummaryBar(summary) {
+  if (!summary) return;
+  const cEl = document.getElementById('sub_app_sum_count');
+  const fEl = document.getElementById('sub_app_sum_fee');
+  const sEl = document.getElementById('sub_app_sum_subsidized');
+  const pEl = document.getElementById('sub_app_sum_pocket');
+
+  if (cEl) cEl.innerText = (summary.totalCount || 0).toLocaleString();
+  if (fEl) fEl.innerText = (summary.totalFee || 0).toLocaleString();
+  if (sEl) sEl.innerText = (summary.totalSubsidized || 0).toLocaleString();
+  if (pEl) pEl.innerText = (summary.totalCollected || 0).toLocaleString();
+}
+
+function updateSubsidyAppSummaryBarFromLocal() {
+  let fee = 0, sub = 0, pocket = 0;
+  currentSubsidyApplicants.forEach(a => {
+    fee += (a.totalFee || 0);
+    sub += (a.subsidizedAmount || 0);
+    pocket += (a.collectedAmount || 0);
+  });
+  updateSubsidyAppSummaryBar({
+    totalCount: currentSubsidyApplicants.length,
+    totalFee: fee,
+    totalSubsidized: sub,
+    totalCollected: pocket
+  });
+}
+
+// 상단 지원금 내역 조회 허용 월 로드 및 배지 렌더링
+let currentAllowedMonths = ['3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월'];
+
+async function loadSubsidyAllowedMonths() {
   try {
-    const res = await fetch('/api/af/ad_free2_cfg/free1');
+    const res = await fetch('/api/af/ad_free2_app/allowed_months');
     const data = await res.json();
-    const tbody = document.getElementById('subsidyRankTbody');
-    if (tbody && data.ranks) {
-      tbody.innerHTML = data.ranks.map(r => `
-        <tr>
-          <td><strong style="color:var(--primary-color);">${r.rankNumber}순위</strong></td>
-          <td><strong>${r.name}</strong></td>
-          <td>${r.limitAmount.toLocaleString()}원</td>
-          <td>${r.isPriority ? '<span class="badge badge-OUTPUT">우선배정</span>' : '일반'}</td>
-          <td>${r.note}</td>
-        </tr>
-      `).join('');
+    if (data.success && Array.isArray(data.allowedMonths)) {
+      currentAllowedMonths = data.allowedMonths;
     }
-  } catch (e) { console.error('loadSubsidyRanks Error:', e); }
+  } catch (e) {
+    console.error('loadSubsidyAllowedMonths error:', e);
+  }
+  renderAllowedMonthsBadges();
+}
+
+function renderAllowedMonthsBadges() {
+  const container = document.getElementById('sub_app_allowed_months_badges');
+  if (!container) return;
+  const allMonths = ['3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월', '1월', '2월'];
+  container.innerHTML = allMonths.map(m => {
+    const isAllowed = currentAllowedMonths.includes(m);
+    if (isAllowed) {
+      return `<span style="background-color:#f0ad4e; border:1px solid #eea236; color:#ffffff; font-weight:bold; font-size:11px; padding:2px 8px; border-radius:3px; display:inline-block;">${m}</span>`;
+    } else {
+      return `<span style="background-color:#ffffff; border:1px solid #d1d5db; color:#9ca3af; font-size:11px; padding:2px 8px; border-radius:3px; display:inline-block;">${m}</span>`;
+    }
+  }).join(' ');
+}
+
+// 1. 지원금 내역 조회 허용 모달
+function openSubsidyAllowMonthsModal() {
+  const modal = document.getElementById('modal_sub_app_allow_months');
+  const chks = document.querySelectorAll('.sub_allow_month_chk');
+  chks.forEach(cb => {
+    cb.checked = currentAllowedMonths.includes(cb.value);
+  });
+  if (modal) modal.style.display = 'flex';
+}
+
+function closeSubsidyAllowMonthsModal() {
+  const modal = document.getElementById('modal_sub_app_allow_months');
+  if (modal) modal.style.display = 'none';
+}
+
+async function submitSubsidyAllowMonths() {
+  const chks = document.querySelectorAll('.sub_allow_month_chk:checked');
+  const selected = Array.from(chks).map(cb => cb.value);
+  try {
+    const res = await fetch('/api/af/ad_free2_app/allowed_months', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ allowedMonths: selected })
+    });
+    const result = await res.json();
+    if (result.success) {
+      currentAllowedMonths = result.allowedMonths;
+      renderAllowedMonthsBadges();
+      closeSubsidyAllowMonthsModal();
+      alert('지원금 내역 조회 허용 월이 성공적으로 저장되었습니다.');
+    } else {
+      alert('저장 실패: ' + (result.message || '오류 발생'));
+    }
+  } catch (e) {
+    console.error('submitSubsidyAllowMonths error:', e);
+    alert('서버 저장 중 오류가 발생했습니다.');
+  }
+}
+
+// 2. 수강자 등록 모달 (공식 서식 1:1 정밀 매핑 및 계산 로직)
+var useCost = 'Y';
+
+function filterNum(str) {
+  if (typeof str !== 'string') str = String(str || 0);
+  return str.replace(/[^0-9-]/g, '') || '0';
+}
+
+function commaSplit(n) {
+  var parts = (n + '').split('.');
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return parts.join('.');
+}
+
+function chkMoney(obj) {
+  if (!obj) return;
+  var val = filterNum(obj.value);
+  obj.value = commaSplit(val);
+}
+
+function validate_required(elem) {
+  if (!elem) return false;
+  var val = elem.value ? elem.value.trim() : '';
+  return val.length > 0;
+}
+
+function chkSumFreeMoney(show_msg) {
+  // 지원금액 전체 합계, 징수금액 적용
+  var pay_list = {};
+  pay_list['lec_pay'] = 0;
+  if (useCost == 'Y') {		
+    pay_list['lec_tea_fee'] = 0;
+    pay_list['lec_use_cost'] = 0;
+  }
+  pay_list['lec_pay_item'] = 0;
+  pay_list['lec_pay_book'] = 0;
+  pay_list['deduct_pay'] = 0;
+
+  var freeInputs = document.querySelectorAll('#fm_edit input.free_pay');
+  freeInputs.forEach(function(inp) {
+    var free_key = inp.id.split('_')[0];
+    var free_pay_key = inp.id.replace(free_key + '_', "");
+    if (inp.value && pay_list[free_pay_key] !== undefined) {
+      pay_list[free_pay_key] += parseInt(filterNum(inp.value), 10);
+    }
+  });
+
+  var app_lec_pay_el = document.querySelector('#fm_edit #app_lec_pay');
+  var app_lec_pay = parseInt(filterNum(app_lec_pay_el ? app_lec_pay_el.value : '0'), 10);
+  var app_lec_tea_fee = 0;
+  var app_lec_use_cost = 0;
+  if (useCost == 'Y') {
+    var tea_el = document.querySelector('#fm_edit #app_lec_tea_fee');
+    var use_el = document.querySelector('#fm_edit #app_lec_use_cost');
+    app_lec_tea_fee = parseInt(filterNum(tea_el ? tea_el.value : '0'), 10);
+    app_lec_use_cost = parseInt(filterNum(use_el ? use_el.value : '0'), 10);	
+  }
+  var book_el = document.querySelector('#fm_edit #app_lec_pay_book');
+  var item_el = document.querySelector('#fm_edit #app_lec_pay_item');
+  var tot_el = document.querySelector('#fm_edit #tot_app_lec_pay');
+  var app_lec_pay_book = parseInt(filterNum(book_el ? book_el.value : '0'), 10);
+  var app_lec_pay_item = parseInt(filterNum(item_el ? item_el.value : '0'), 10);
+  var tot_app_lec_pay = parseInt(filterNum(tot_el ? tot_el.value : '0'), 10);
+  
+  // 지원금액 전체 합계 적용
+  var free_deduct_el = document.querySelector('#fm_edit #free_deduct_pay');
+  if (free_deduct_el) free_deduct_el.value = commaSplit(pay_list['deduct_pay']);
+
+  // { 징수금액 적용
+  var co_amount_pay_list = {};
+  co_amount_pay_list['lec_pay'] = app_lec_pay - pay_list['lec_pay'];
+  if (useCost == 'Y') {		
+    co_amount_pay_list['lec_tea_fee'] = app_lec_tea_fee - pay_list['lec_tea_fee'];
+    co_amount_pay_list['lec_use_cost'] = app_lec_use_cost - pay_list['lec_use_cost'];
+  }
+  co_amount_pay_list['lec_pay_book'] = app_lec_pay_book - pay_list['lec_pay_book'];
+  co_amount_pay_list['lec_pay_item'] = app_lec_pay_item - pay_list['lec_pay_item'];
+  co_amount_pay_list['pay'] = tot_app_lec_pay - pay_list['deduct_pay'];
+
+  var err_cnt = 0;
+  for (var key in pay_list) {
+    var checkKey = (key == 'deduct_pay') ? 'pay' : key;
+    var tmp = document.querySelector('#fm_edit #co_amount_' + checkKey);
+    if (tmp) {
+      tmp.value = commaSplit(co_amount_pay_list[checkKey]); // 징수금액에 변경값 적용
+      if (co_amount_pay_list[checkKey] < 0) {
+        tmp.style.color = 'red';
+        err_cnt++;
+      } else {
+        tmp.style.color = '';
+      }
+    }
+  }
+
+  if (err_cnt > 0) {
+    if (show_msg == true) {
+      alert('징수금액 : (-)로 계산된 금액을 확인해 주시기 바랍니다.');
+    }
+    return false;
+  }
+  return true;
+}
+
+function chkFreeMoney(obj) {						
+  if (!obj || !obj.id) return false;
+  var obj_id = obj.id;
+  if (!obj_id.startsWith('free')) {
+    return false; 
+  }
+
+  var free_key = obj_id.split('_')[0];
+  var free_lec_pay = 0;
+  var free_lec_tea_fee = 0;
+  var free_lec_use_cost = 0;		
+  var free_lec_pay_book = 0;
+  var free_lec_pay_item = 0;
+  var free_deduct_pay = 0;
+
+  if (useCost == 'Y') {
+    var tea_el = document.querySelector('#fm_edit #' + free_key + '_lec_tea_fee');
+    var use_el = document.querySelector('#fm_edit #' + free_key + '_lec_use_cost');
+    free_lec_tea_fee = parseInt(filterNum(tea_el ? tea_el.value : '0'), 10);
+    free_lec_use_cost = parseInt(filterNum(use_el ? use_el.value : '0'), 10);
+
+    if (obj_id == free_key + '_lec_tea_fee' || obj_id == free_key + '_lec_use_cost') {
+      // 수강료 = 강사료 + 수용비 처리
+      var lec_el = document.querySelector('#fm_edit #' + free_key + '_lec_pay');
+      if (lec_el) lec_el.value = commaSplit(free_lec_tea_fee + free_lec_use_cost);
+    }
+  }
+
+  var lec_el = document.querySelector('#fm_edit #' + free_key + '_lec_pay');
+  var book_el = document.querySelector('#fm_edit #' + free_key + '_lec_pay_book');
+  var item_el = document.querySelector('#fm_edit #' + free_key + '_lec_pay_item');
+
+  free_lec_pay = parseInt(filterNum(lec_el ? lec_el.value : '0'), 10);
+  free_lec_pay_book = parseInt(filterNum(book_el ? book_el.value : '0'), 10);
+  free_lec_pay_item = parseInt(filterNum(item_el ? item_el.value : '0'), 10);
+
+  free_deduct_pay = free_lec_pay + free_lec_pay_book + free_lec_pay_item;
+  var deduct_el = document.querySelector('#fm_edit #' + free_key + '_deduct_pay');
+  if (deduct_el) deduct_el.value = commaSplit(free_deduct_pay); // 합계에 변경값 적용
+
+  chkSumFreeMoney();
+}
+
+function openSubsidyAppRegisterModal() {
+  var modal = document.getElementById('modal_sub_app_register');
+  if (document.getElementById('app_num')) document.getElementById('app_num').value = '';
+  if (document.getElementById('sub_app_reg_applicant_id')) document.getElementById('sub_app_reg_applicant_id').value = '';
+  if (document.getElementById('app_mem_name')) document.getElementById('app_mem_name').innerText = '';
+  if (document.getElementById('sub_app_reg_student_name_label')) document.getElementById('sub_app_reg_student_name_label').innerText = '';
+  if (document.getElementById('app_mem_grade')) document.getElementById('app_mem_grade').innerText = '';
+  if (document.getElementById('sub_app_reg_grade_label')) document.getElementById('sub_app_reg_grade_label').innerText = '';
+  if (document.getElementById('app_mem_class')) document.getElementById('app_mem_class').innerText = '';
+  if (document.getElementById('sub_app_reg_class_label')) document.getElementById('sub_app_reg_class_label').innerText = '';
+  if (document.getElementById('app_mem_bunho')) document.getElementById('app_mem_bunho').innerText = '';
+  if (document.getElementById('sub_app_reg_num_label')) document.getElementById('sub_app_reg_num_label').innerText = '';
+  if (document.getElementById('lec_name')) document.getElementById('lec_name').innerText = '';
+  if (document.getElementById('sub_app_reg_course_label')) document.getElementById('sub_app_reg_course_label').innerText = '';
+
+  var resetFields = [
+    'app_lec_pay', 'app_lec_tea_fee', 'app_lec_use_cost', 'app_lec_pay_book', 'app_lec_pay_item', 'tot_app_lec_pay',
+    'free2_lec_pay', 'free2_lec_tea_fee', 'free2_lec_use_cost', 'free2_lec_pay_book', 'free2_lec_pay_item', 'free2_deduct_pay',
+    'free3_lec_pay', 'free3_lec_tea_fee', 'free3_lec_use_cost', 'free3_lec_pay_book', 'free3_lec_pay_item', 'free3_deduct_pay',
+    'free1_lec_pay', 'free1_lec_tea_fee', 'free1_lec_use_cost', 'free1_lec_pay_book', 'free1_lec_pay_item', 'free1_deduct_pay',
+    'free_deduct_pay',
+    'co_amount_lec_pay', 'co_amount_lec_tea_fee', 'co_amount_lec_use_cost', 'co_amount_lec_pay_book', 'co_amount_lec_pay_item', 'co_amount_pay'
+  ];
+  resetFields.forEach(function(fId) {
+    var el = document.getElementById(fId);
+    if (el) el.value = '0';
+  });
+
+  if (document.getElementById('max_support_pay')) document.getElementById('max_support_pay').value = '0';
+  if (document.getElementById('bigo')) document.getElementById('bigo').value = '';
+  if (document.getElementById('log_data')) document.getElementById('log_data').value = '';
+
+  if (modal) modal.style.display = 'flex';
+}
+
+function closeSubsidyAppRegisterModal() {
+  var modal = document.getElementById('modal_sub_app_register');
+  if (modal) modal.style.display = 'none';
+}
+
+async function fm_edit_check(fm) {
+  try {
+    if (!fm) fm = document.getElementById('fm_edit');
+    if (!validate_required(fm.month)) {
+      alert('대상 월 : 선택해 주세요.');
+      return false;
+    }
+
+    if (!validate_required(fm.app_num)) {
+      alert('신청자 정보 : 검색 후 선택해 주시기 바랍니다.');
+      return false;
+    }
+
+    if (!chkSumFreeMoney(true)) {
+      return false;
+    }
+
+    if (!confirm('적용하시겠습니까?')) {
+      return false;
+    }
+
+    var studentName = document.getElementById('app_mem_name') ? document.getElementById('app_mem_name').innerText.trim() : '';
+    var grade = parseInt(document.getElementById('app_mem_grade') ? document.getElementById('app_mem_grade').innerText : '1', 10) || 1;
+    var classNum = parseInt(document.getElementById('app_mem_class') ? document.getElementById('app_mem_class').innerText : '1', 10) || 1;
+    var studentNum = parseInt(document.getElementById('app_mem_bunho') ? document.getElementById('app_mem_bunho').innerText : '1', 10) || 1;
+    var courseTitle = document.getElementById('lec_name') ? document.getElementById('lec_name').innerText.trim() : '';
+
+    var monthVal = fm.month.value ? (fm.month.value.includes('월') ? fm.month.value : fm.month.value + '월') : '3월';
+    var tuitionFee = parseInt(filterNum(fm.app_lec_pay ? fm.app_lec_pay.value : '0'), 10);
+    var instructorFee = parseInt(filterNum(fm.app_lec_tea_fee ? fm.app_lec_tea_fee.value : '0'), 10);
+    var overheadFee = parseInt(filterNum(fm.app_lec_use_cost ? fm.app_lec_use_cost.value : '0'), 10);
+    var textbookFee = parseInt(filterNum(fm.app_lec_pay_book ? fm.app_lec_pay_book.value : '0'), 10);
+    var materialFee = parseInt(filterNum(fm.app_lec_pay_item ? fm.app_lec_pay_item.value : '0'), 10);
+    var totalFee = parseInt(filterNum(fm.tot_app_lec_pay ? fm.tot_app_lec_pay.value : '0'), 10) || (tuitionFee + textbookFee + materialFee);
+    var subsidizedAmount = parseInt(filterNum(fm.free_deduct_pay ? fm.free_deduct_pay.value : '0'), 10);
+    var collectedAmount = parseInt(filterNum(fm.co_amount_pay ? fm.co_amount_pay.value : '0'), 10);
+    var bigo = fm.bigo ? fm.bigo.value : '';
+
+    var payload = {
+      month: monthVal,
+      grade: grade,
+      classNum: classNum,
+      studentNum: studentNum,
+      studentName: studentName,
+      courseTitle: courseTitle,
+      tuitionFee: tuitionFee,
+      instructorFee: instructorFee,
+      overheadFee: overheadFee,
+      textbookFee: textbookFee,
+      materialFee: materialFee,
+      totalFee: totalFee,
+      collectedAmount: collectedAmount,
+      subsidizedAmount: subsidizedAmount,
+      note: bigo,
+      status: collectedAmount === 0 ? '차감완료' : '부분차감'
+    };
+
+    var res = await fetch('/api/af/ad_free2_app', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    var result = await res.json();
+    if (result.success) {
+      alert('수강자 지원금이 성공적으로 등록되었습니다.');
+      closeSubsidyAppRegisterModal();
+      if (typeof loadSubsidyApplicants === 'function') loadSubsidyApplicants();
+    } else {
+      alert('등록 실패: ' + (result.message || '오류 발생'));
+    }
+    return false;
+  } catch (error) {
+    console.error('fm_edit_check error:', error);
+    alert('서버 등록 중 오류가 발생했습니다.');
+    return false;
+  }
+}
+
+function submitSubsidyAppRegister() {
+  return fm_edit_check(document.getElementById('fm_edit'));
+}
+
+// 3. 신청자 검색 팝업 모달
+function openSubsidyAppSearchStudentModal() {
+  var modal = document.getElementById('modal_sub_app_search_student');
+  if (modal) modal.style.display = 'flex';
+  searchSubsidyApplicantsPopup();
+}
+
+function closeSubsidyAppSearchStudentModal() {
+  var modal = document.getElementById('modal_sub_app_search_student');
+  if (modal) modal.style.display = 'none';
+}
+
+async function searchSubsidyApplicantsPopup() {
+  var month = document.getElementById('sub_app_search_month') ? document.getElementById('sub_app_search_month').value : '';
+  var course = document.getElementById('sub_app_search_course') ? document.getElementById('sub_app_search_course').value : '';
+  var grade = document.getElementById('sub_app_search_grade') ? document.getElementById('sub_app_search_grade').value : '';
+  var classNum = document.getElementById('sub_app_search_class') ? document.getElementById('sub_app_search_class').value : '';
+  var keyword = document.getElementById('sub_app_search_keyword') ? document.getElementById('sub_app_search_keyword').value.trim() : '';
+
+  var params = new URLSearchParams();
+  if (month) params.append('month', month);
+  if (course) params.append('course', course);
+  if (grade) params.append('grade', grade);
+  if (classNum) params.append('classNum', classNum);
+  if (keyword) params.append('keyword', keyword);
+
+  try {
+    var res = await fetch('/api/af/ad_free2_app/applicant_search?' + params.toString());
+    var data = await res.json();
+    var list = data.list || [];
+    var tbody = document.getElementById('sub_app_search_results_tbody');
+    if (!tbody) return;
+
+    if (list.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" style="padding:24px; color:#64748b; font-size:12px;">검색 조건에 일치하는 신청자가 없습니다.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = list.map(function(item, idx) {
+      return `
+        <tr style="border-bottom:1px solid #e2e8f0; font-size:12px;">
+          <td style="padding:8px 4px; border:1px solid #cbd5e1;">${idx + 1}</td>
+          <td style="text-align:left; padding:8px 10px; font-weight:bold; color:#1e293b; border:1px solid #cbd5e1;">
+            ${item.courseTitle || ''} <span style="font-weight:normal; color:#64748b;">(${(item.fee || 32000).toLocaleString()}원)</span>
+          </td>
+          <td style="padding:8px 4px; border:1px solid #cbd5e1;">${item.grade || 1}학년</td>
+          <td style="padding:8px 4px; border:1px solid #cbd5e1;">${item.classNum || 1}반</td>
+          <td style="padding:8px 4px; border:1px solid #cbd5e1;">${item.studentNum || 1}번</td>
+          <td style="padding:8px 4px; font-weight:bold; border:1px solid #cbd5e1;">
+            <div style="display:flex; align-items:center; justify-content:center; gap:6px;">
+              <span>${item.studentName || ''}</span>
+              <button type="button" class="btn btn-primary btn-xs" onclick='selectSubsidyAppStudent(${JSON.stringify(item)})' style="height:24px; padding:0 10px; font-size:11px; font-weight:bold; background-color:#337ab7; border-color:#2e6da4; color:#fff; border-radius:3px; cursor:pointer;">선택</button>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  } catch (e) {
+    console.error('searchSubsidyApplicantsPopup error:', e);
+  }
+}
+
+function selectSubsidyAppStudent(item) {
+  var nameEl = document.getElementById('app_mem_name');
+  if (nameEl) nameEl.innerText = item.studentName || '';
+  var subNameEl = document.getElementById('sub_app_reg_student_name_label');
+  if (subNameEl) subNameEl.innerText = item.studentName || '';
+
+  var numEl = document.getElementById('app_num');
+  if (numEl) numEl.value = item.id || item.appNum || item.studentNum || '1';
+
+  var gradeEl = document.getElementById('app_mem_grade');
+  if (gradeEl) gradeEl.innerText = item.grade || '1';
+  var subGradeEl = document.getElementById('sub_app_reg_grade_label');
+  if (subGradeEl) subGradeEl.innerText = item.grade || '1';
+
+  var classEl = document.getElementById('app_mem_class');
+  if (classEl) classEl.innerText = item.classNum || '1';
+  var subClassEl = document.getElementById('sub_app_reg_class_label');
+  if (subClassEl) subClassEl.innerText = item.classNum || '1';
+
+  var bunhoEl = document.getElementById('app_mem_bunho');
+  if (bunhoEl) bunhoEl.innerText = item.studentNum || '1';
+  var subBunhoEl = document.getElementById('sub_app_reg_num_label');
+  if (subBunhoEl) subBunhoEl.innerText = item.studentNum || '1';
+
+  var courseEl = document.getElementById('lec_name');
+  if (courseEl) courseEl.innerText = item.courseTitle || '';
+  var subCourseEl = document.getElementById('sub_app_reg_course_label');
+  if (subCourseEl) subCourseEl.innerText = item.courseTitle || '';
+
+  var subIdEl = document.getElementById('sub_app_reg_applicant_id');
+  if (subIdEl) subIdEl.value = item.id || '';
+
+  var tuitionFee = Number(item.tuitionFee || item.fee || 32000);
+  var instructorFee = Number(item.instructorFee !== undefined ? item.instructorFee : Math.round(tuitionFee * 0.95));
+  var overheadFee = Number(item.overheadFee !== undefined ? item.overheadFee : (tuitionFee - instructorFee));
+  var textbookFee = Number(item.textbookFee !== undefined ? item.textbookFee : 30500);
+  var materialFee = Number(item.materialFee !== undefined ? item.materialFee : 5000);
+  var totalFee = tuitionFee + textbookFee + materialFee;
+
+  var appPay = document.getElementById('app_lec_pay');
+  if (appPay) appPay.value = commaSplit(tuitionFee);
+  var appTea = document.getElementById('app_lec_tea_fee');
+  if (appTea) appTea.value = commaSplit(instructorFee);
+  var appUse = document.getElementById('app_lec_use_cost');
+  if (appUse) appUse.value = commaSplit(overheadFee);
+  var appBook = document.getElementById('app_lec_pay_book');
+  if (appBook) appBook.value = commaSplit(textbookFee);
+  var appItem = document.getElementById('app_lec_pay_item');
+  if (appItem) appItem.value = commaSplit(materialFee);
+  var appTot = document.getElementById('tot_app_lec_pay');
+  if (appTot) appTot.value = commaSplit(totalFee);
+
+  var grade = Number(item.grade || 1);
+  var targetPrefix = (grade === 1) ? 'free2' : (grade === 3 ? 'free3' : 'free1');
+  
+  var teaInput = document.getElementById(targetPrefix + '_lec_tea_fee');
+  if (teaInput) teaInput.value = commaSplit(instructorFee);
+  var useInput = document.getElementById(targetPrefix + '_lec_use_cost');
+  if (useInput) useInput.value = commaSplit(overheadFee);
+  var lecInput = document.getElementById(targetPrefix + '_lec_pay');
+  if (lecInput) lecInput.value = commaSplit(tuitionFee);
+  var bookInput = document.getElementById(targetPrefix + '_lec_pay_book');
+  if (bookInput) bookInput.value = commaSplit(textbookFee);
+  var itemInput = document.getElementById(targetPrefix + '_lec_pay_item');
+  if (itemInput) itemInput.value = commaSplit(materialFee);
+  var deductInput = document.getElementById(targetPrefix + '_deduct_pay');
+  if (deductInput) deductInput.value = commaSplit(totalFee);
+
+  chkSumFreeMoney();
+  closeSubsidyAppSearchStudentModal();
+}
+
+// 4. 수강자 가져오기 모달 (공식 서식 BIN000E & 늘봄과정 연동 1:1)
+function openSubsidyAppImportModal(monthParam) {
+  const modal = document.getElementById('modal_sub_app_import');
+  if (modal) modal.style.display = 'flex';
+
+  let target = monthParam;
+  if (!target) {
+    const filterMonth = document.getElementById('sub_app_filter_month');
+    if (filterMonth && filterMonth.value) {
+      target = filterMonth.value;
+    }
+  }
+  if (!target) target = '3월';
+
+  const mSelect = document.getElementById('sub_app_import_month');
+  if (mSelect) {
+    const formatted = target.includes('월') ? target : `${target}월`;
+    mSelect.value = formatted;
+    onSubsidyImportMonthChange(formatted);
+  }
+}
+
+function onSubsidyImportMonthChange(val) {
+  const lbl = document.getElementById('sub_app_import_target_label');
+  if (lbl) lbl.innerText = val;
+  const chk = document.getElementById('sub_app_import_month_chk');
+  if (chk) chk.value = val;
+}
+
+function toggleSubsidyImportDivAll(master) {
+  const items = document.querySelectorAll('.sub_app_import_div_item');
+  items.forEach(cb => { cb.checked = master.checked; });
+}
+
+function updateSubsidyImportDivState() {
+  const items = document.querySelectorAll('.sub_app_import_div_item');
+  const checked = document.querySelectorAll('.sub_app_import_div_item:checked');
+  const master = document.getElementById('sub_app_import_div_all');
+  if (master) master.checked = items.length > 0 && items.length === checked.length;
+}
+
+function toggleSubsidyImportNeulbomAll(master) {
+  const items = document.querySelectorAll('.sub_app_import_neulbom_item');
+  items.forEach(cb => { cb.checked = master.checked; });
+}
+
+function updateSubsidyImportNeulbomState() {
+  const items = document.querySelectorAll('.sub_app_import_neulbom_item');
+  const checked = document.querySelectorAll('.sub_app_import_neulbom_item:checked');
+  const master = document.getElementById('sub_app_import_neulbom_all');
+  if (master) master.checked = items.length > 0 && items.length === checked.length;
+}
+
+function toggleSubsidyImportFundAll(master) {
+  const items = document.querySelectorAll('.sub_app_import_fund_item');
+  items.forEach(cb => { cb.checked = master.checked; });
+}
+
+function updateSubsidyImportFundState() {
+  const items = document.querySelectorAll('.sub_app_import_fund_item');
+  const checked = document.querySelectorAll('.sub_app_import_fund_item:checked');
+  const master = document.getElementById('sub_app_import_fund_all');
+  if (master) master.checked = items.length > 0 && items.length === checked.length;
+}
+
+function closeSubsidyAppImportModal() {
+  const modal = document.getElementById('modal_sub_app_import');
+  if (modal) modal.style.display = 'none';
+}
+
+async function executeSubsidyAppImport() {
+  const targetMonth = document.getElementById('sub_app_import_month').value;
+  const maxAmount = parseInt(document.getElementById('sub_app_import_max_amount').value, 10) || 0;
+
+  const neulbomTypes = Array.from(document.querySelectorAll('.sub_app_import_neulbom_item:checked')).map(cb => cb.value);
+  const courseDivs = Array.from(document.querySelectorAll('.sub_app_import_div_item:checked')).map(cb => cb.value);
+  const subsidyTypes = Array.from(document.querySelectorAll('.sub_app_import_fund_item:checked')).map(cb => cb.value);
+
+  if (neulbomTypes.length === 0) {
+    alert('가져올 늘봄과정을 하나 이상 선택해주세요.');
+    return;
+  }
+
+  if (!confirm(`[${targetMonth}]의 신청자를 바탕으로 수강자 가져오기 및 자동 정산을 진행하시겠습니까?\n늘봄과정: ${neulbomTypes.join(', ')}\n기존 ${targetMonth} 데이터는 새로 갱신됩니다.`)) {
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/af/ad_free2_app/import', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ targetMonth, maxAmount, neulbomTypes, courseDivs, subsidyTypes })
+    });
+    const result = await res.json();
+    if (result.success) {
+      alert(`[${targetMonth}] 수강자 가져오기가 완료되었습니다. (가져온 건수: ${result.count || 0}건)`);
+      closeSubsidyAppImportModal();
+      loadSubsidyApplicants();
+    } else {
+      alert('가져오기 실패: ' + (result.message || '오류 발생'));
+    }
+  } catch (e) {
+    console.error('executeSubsidyAppImport error:', e);
+    alert('수강자 가져오기 처리 중 오류가 발생했습니다.');
+  }
+}
+
+// 5. 엑셀 출력 연동들 (공식 1:1)
+function exportSubsidyAppResults() {
+  const month = document.getElementById('sub_app_filter_month') ? document.getElementById('sub_app_filter_month').value : '';
+  const course = document.getElementById('sub_app_filter_course') ? document.getElementById('sub_app_filter_course').value : '';
+  const grade = document.getElementById('sub_app_filter_grade') ? document.getElementById('sub_app_filter_grade').value : '';
+  const classNum = document.getElementById('sub_app_filter_class') ? document.getElementById('sub_app_filter_class').value : '';
+  const searchName = document.getElementById('sub_app_filter_name') ? document.getElementById('sub_app_filter_name').value.trim() : '';
+
+  const params = new URLSearchParams();
+  if (month) params.append('month', month);
+  if (course) params.append('course', course);
+  if (grade) params.append('grade', grade);
+  if (classNum) params.append('classNum', classNum);
+  if (searchName) params.append('searchName', searchName);
+
+  window.location.href = '/af/ad_free2_app/excel?' + params.toString();
+}
+
+function exportSubsidyAppAllCollect() {
+  window.location.href = '/af/ad_free2_app/excel_all_collect';
+}
+
+// 6. 월별현황 모달
+function openSubsidyAppMonthlyModal() {
+  const modal = document.getElementById('modal_sub_app_monthly_status');
+  if (modal) modal.style.display = 'flex';
+}
+
+function closeSubsidyAppMonthlyModal() {
+  const modal = document.getElementById('modal_sub_app_monthly_status');
+  if (modal) modal.style.display = 'none';
+}
+
+function submitSubsidyAppMonthly() {
+  window.location.href = '/af/ad_free2_app/excel_monthly';
+  closeSubsidyAppMonthlyModal();
+}
+
+// 7. 스쿨뱅킹현황 모달
+function openSubsidyAppBankingModal() {
+  const modal = document.getElementById('modal_sub_app_schoolbanking');
+  if (modal) modal.style.display = 'flex';
+}
+
+function closeSubsidyAppBankingModal() {
+  const modal = document.getElementById('modal_sub_app_schoolbanking');
+  if (modal) modal.style.display = 'none';
+}
+
+function submitSubsidyAppBanking() {
+  const month = document.getElementById('sub_app_banking_month').value;
+  window.location.href = `/af/ad_free2_app/excel_banking?month=${encodeURIComponent(month)}`;
+  closeSubsidyAppBankingModal();
+}
+
+// 8. 행정실용 모달
+function openSubsidyAppAdminOfficeModal() {
+  const modal = document.getElementById('modal_sub_app_admin_office');
+  if (modal) modal.style.display = 'flex';
+}
+
+function closeSubsidyAppAdminOfficeModal() {
+  const modal = document.getElementById('modal_sub_app_admin_office');
+  if (modal) modal.style.display = 'none';
+}
+
+function submitSubsidyAppAdminOffice() {
+  const month = document.getElementById('sub_app_admin_month').value;
+  window.location.href = `/af/ad_free2_app/excel_admin?month=${encodeURIComponent(month)}`;
+  closeSubsidyAppAdminOfficeModal();
+}
+
+// 9. 나이스용 모달
+function openSubsidyAppNeisModal() {
+  const modal = document.getElementById('modal_sub_app_neis');
+  if (modal) modal.style.display = 'flex';
+}
+
+function closeSubsidyAppNeisModal() {
+  const modal = document.getElementById('modal_sub_app_neis');
+  if (modal) modal.style.display = 'none';
+}
+
+function submitSubsidyAppNeis() {
+  const month = document.getElementById('sub_app_neis_month').value;
+  window.location.href = `/af/ad_free2_app/excel_neis?month=${encodeURIComponent(month)}`;
+  closeSubsidyAppNeisModal();
+}
+
+// 10. 단건 행 ⚙ 수정 모달
+function openSubsidyAppEditRowModal(id) {
+  const item = currentSubsidyApplicants.find(a => String(a.id) === String(id));
+  if (!item) return;
+
+  const modal = document.getElementById('modal_sub_app_edit_row');
+  document.getElementById('sub_app_edit_row_id').value = item.id;
+  document.getElementById('sub_app_edit_student_info').innerText = `${item.grade}학년 ${item.classNum}반 ${item.studentNum}번 ${item.studentName}`;
+  document.getElementById('sub_app_edit_course_info').innerText = `${item.courseTitle} (${item.month || '3월'})`;
+
+  document.getElementById('sub_app_edit_tuition_fee').value = item.tuitionFee || item.fee || 0;
+  document.getElementById('sub_app_edit_instructor_fee').value = item.instructorFee || 0;
+  document.getElementById('sub_app_edit_overhead_fee').value = item.overheadFee || 0;
+  document.getElementById('sub_app_edit_textbook_fee').value = item.textbookFee || 0;
+  document.getElementById('sub_app_edit_material_fee').value = item.materialFee || 0;
+  document.getElementById('sub_app_edit_collected_amount').value = item.collectedAmount || 0;
+  document.getElementById('sub_app_edit_subsidized_amount').value = item.subsidizedAmount || 0;
+
+  if (modal) modal.style.display = 'flex';
+}
+
+function closeSubsidyAppEditRowModal() {
+  const modal = document.getElementById('modal_sub_app_edit_row');
+  if (modal) modal.style.display = 'none';
+}
+
+async function submitSubsidyAppEditRow() {
+  const editId = document.getElementById('sub_app_edit_row_id').value;
+  const item = currentSubsidyApplicants.find(a => String(a.id) === String(editId));
+  if (!item) return;
+
+  const tuitionFee = parseInt(document.getElementById('sub_app_edit_tuition_fee').value, 10) || 0;
+  const instructorFee = parseInt(document.getElementById('sub_app_edit_instructor_fee').value, 10) || 0;
+  const overheadFee = parseInt(document.getElementById('sub_app_edit_overhead_fee').value, 10) || 0;
+  const textbookFee = parseInt(document.getElementById('sub_app_edit_textbook_fee').value, 10) || 0;
+  const materialFee = parseInt(document.getElementById('sub_app_edit_material_fee').value, 10) || 0;
+  const collectedAmount = parseInt(document.getElementById('sub_app_edit_collected_amount').value, 10) || 0;
+  const subsidizedAmount = parseInt(document.getElementById('sub_app_edit_subsidized_amount').value, 10) || 0;
+  const totalFee = tuitionFee + textbookFee + materialFee;
+
+  const payload = {
+    ...item,
+    tuitionFee,
+    instructorFee,
+    overheadFee,
+    textbookFee,
+    materialFee,
+    totalFee,
+    collectedAmount,
+    subsidizedAmount
+  };
+
+  try {
+    const res = await fetch(`/api/af/ad_free2_app/${editId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const result = await res.json();
+    if (result.success) {
+      alert('수정되었습니다.');
+      closeSubsidyAppEditRowModal();
+      loadSubsidyApplicants();
+    } else {
+      alert('수정 실패: ' + (result.message || '오류 발생'));
+    }
+  } catch (e) {
+    console.error('submitSubsidyAppEditRow error:', e);
+    alert('수정 중 오류가 발생했습니다.');
+  }
+}
+
+// 11. 단건 삭제
+async function deleteSingleSubsidyApp(id) {
+  if (!confirm('해당 수강자 지원금 내역을 삭제하시겠습니까?')) {
+    return;
+  }
+  try {
+    const res = await fetch('/api/af/ad_free2_app', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ids: [id] })
+    });
+    const result = await res.json();
+    if (result.success) {
+      loadSubsidyApplicants();
+    } else {
+      alert('삭제 실패: ' + (result.message || '오류 발생'));
+    }
+  } catch (e) {
+    console.error('deleteSingleSubsidyApp error:', e);
+    alert('삭제 요청 중 오류가 발생했습니다.');
+  }
+}
+
+function resetSubsidyAppFilters() {
+  const mEl = document.getElementById('sub_app_filter_month');
+  if (mEl) mEl.value = '';
+  const cEl = document.getElementById('sub_app_filter_course');
+  if (cEl) cEl.value = '';
+  const grEl = document.getElementById('sub_app_filter_grade');
+  if (grEl) grEl.value = '';
+  const clEl = document.getElementById('sub_app_filter_class');
+  if (clEl) clEl.value = '';
+  const nmEl = document.getElementById('sub_app_filter_name');
+  if (nmEl) nmEl.value = '';
+
+  loadSubsidyApplicants();
+}
+
+let currentSubsidyConfigs = {};
+let currentSubsidyDeductOrder = [];
+let currentActiveSubsidyKey = 'fund_1';
+
+// 지원금설정 로드 및 폼 반영
+async function loadSubsidyConfig() {
+  try {
+    const res = await fetch('/api/af/ad_free2_cfg/main');
+    const data = await res.json();
+    if (data.configs) {
+      currentSubsidyConfigs = data.configs;
+    }
+    if (data.order) {
+      currentSubsidyDeductOrder = data.order;
+    }
+    renderSubsidyConfigForm(currentActiveSubsidyKey);
+  } catch (e) {
+    console.error('loadSubsidyConfig Error:', e);
+  }
+}
+
+// 탭 전환
+function selectSubsidyTab(fundKey) {
+  currentActiveSubsidyKey = fundKey;
+  ['fund_1', 'fund_3', 'fund_free'].forEach(k => {
+    const btn = document.getElementById('tab_' + k);
+    if (btn) {
+      if (k === fundKey) {
+        btn.className = 'btn btn-primary btn-sm';
+        btn.style.backgroundColor = '#337ab7';
+        btn.style.borderColor = '#2e6da4';
+        btn.style.color = '#fff';
+      } else {
+        btn.className = 'btn btn-default btn-sm';
+        btn.style.backgroundColor = '#fff';
+        btn.style.borderColor = '#ccc';
+        btn.style.color = '#333';
+      }
+    }
+  });
+
+  renderSubsidyConfigForm(fundKey);
+}
+
+// 폼 렌더링
+function renderSubsidyConfigForm(fundKey) {
+  const cfg = currentSubsidyConfigs[fundKey] || {
+    name: fundKey === 'fund_1' ? '1학년 지원금' : (fundKey === 'fund_3' ? '3학년 지원금' : '자유수강권'),
+    used: '사용',
+    deductMode: '잔여 금액에서 차감',
+    months: ['3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월', '1월', '2월'],
+    items: { tuition: true, noTuitionFee: false, textbook: true, material: true },
+    monthlyLimit: fundKey === 'fund_1' ? 720000 : 600000,
+    annualLimit: fundKey === 'fund_1' ? 720000 : 600000,
+    priority: fundKey === 'fund_free' ? 1 : (fundKey === 'fund_1' ? 2 : 3)
+  };
+
+  const badge = document.getElementById('sub_cfg_current_badge');
+  if (badge) badge.innerText = `(${cfg.name})`;
+
+  const activeInput = document.getElementById('sub_cfg_active_fund_key');
+  if (activeInput) activeInput.value = fundKey;
+
+  const nameInput = document.getElementById('sub_cfg_name');
+  if (nameInput) nameInput.value = cfg.name || '';
+
+  const usedY = document.getElementById('sub_cfg_used_y');
+  const usedN = document.getElementById('sub_cfg_used_n');
+  if (usedY && usedN) {
+    if (cfg.used === '사용') usedY.checked = true;
+    else usedN.checked = true;
+  }
+
+  const modeRem = document.getElementById('sub_cfg_mode_rem');
+  const modeFix = document.getElementById('sub_cfg_mode_fix');
+  if (modeRem && modeFix) {
+    if (cfg.deductMode === '강좌별 고정 금액 차감') modeFix.checked = true;
+    else modeRem.checked = true;
+  }
+
+  const monthCbs = document.querySelectorAll('.sub_cfg_month');
+  const monthSet = new Set(cfg.months || []);
+  monthCbs.forEach(cb => {
+    cb.checked = monthSet.has(cb.value);
+  });
+
+  const tuitCb = document.getElementById('sub_cfg_item_tuition');
+  const noFeeCb = document.getElementById('sub_cfg_item_nofee');
+  const textCb = document.getElementById('sub_cfg_item_textbook');
+  const matCb = document.getElementById('sub_cfg_item_material');
+  if (tuitCb) tuitCb.checked = !!(cfg.items && cfg.items.tuition);
+  if (noFeeCb) noFeeCb.checked = !!(cfg.items && cfg.items.noTuitionFee);
+  if (textCb) textCb.checked = !!(cfg.items && cfg.items.textbook);
+  if (matCb) matCb.checked = !!(cfg.items && cfg.items.material);
+
+  const mLimitInput = document.getElementById('sub_cfg_month_limit');
+  if (mLimitInput) mLimitInput.value = cfg.monthlyLimit !== undefined ? cfg.monthlyLimit : 0;
+
+  const aLimitInput = document.getElementById('sub_cfg_annual_limit');
+  if (aLimitInput) aLimitInput.value = cfg.annualLimit !== undefined ? cfg.annualLimit : 600000;
+
+  const priSel = document.getElementById('sub_cfg_priority');
+  if (priSel) priSel.value = cfg.priority || '1';
+}
+
+// 지원금 설정 저장
+async function saveSubsidyConfig() {
+  const fundKey = document.getElementById('sub_cfg_active_fund_key').value || 'fund_1';
+  const name = document.getElementById('sub_cfg_name').value.trim();
+  const used = document.getElementById('sub_cfg_used_y').checked ? '사용' : '사용안함';
+  const deductMode = document.getElementById('sub_cfg_mode_fix').checked ? '강좌별 고정 금액 차감' : '잔여 금액에서 차감';
+
+  const months = [];
+  document.querySelectorAll('.sub_cfg_month:checked').forEach(cb => months.push(cb.value));
+
+  const items = {
+    tuition: document.getElementById('sub_cfg_item_tuition').checked,
+    noTuitionFee: document.getElementById('sub_cfg_item_nofee').checked,
+    textbook: document.getElementById('sub_cfg_item_textbook').checked,
+    material: document.getElementById('sub_cfg_item_material').checked
+  };
+
+  const monthlyLimit = parseInt(document.getElementById('sub_cfg_month_limit').value, 10) || 0;
+  const annualLimit = parseInt(document.getElementById('sub_cfg_annual_limit').value, 10) || 0;
+  const priority = parseInt(document.getElementById('sub_cfg_priority').value, 10) || 1;
+
+  const payload = {
+    fundKey,
+    configData: {
+      name,
+      used,
+      deductMode,
+      months,
+      items,
+      monthlyLimit,
+      annualLimit,
+      priority
+    }
+  };
+
+  try {
+    const res = await fetch('/api/af/ad_free2_cfg/main', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const result = await res.json();
+    if (result.success) {
+      alert(result.message || '지원금 설정이 성공적으로 저장되었습니다.');
+      currentSubsidyConfigs[fundKey] = result.config;
+      renderSubsidyConfigForm(fundKey);
+    } else {
+      alert('저장 실패: ' + (result.message || '오류 발생'));
+    }
+  } catch (e) {
+    console.error('saveSubsidyConfig Error:', e);
+    alert('설정 저장 중 오류가 발생했습니다.');
+  }
+}
+
+// 모달: 차감 순서 변경
+function openSubsidyOrderModal() {
+  const modal = document.getElementById('modal_subsidy_order_change');
+  if (modal) modal.style.display = 'flex';
+  renderSubsidyOrderList();
+}
+
+function closeSubsidyOrderModal() {
+  const modal = document.getElementById('modal_subsidy_order_change');
+  if (modal) modal.style.display = 'none';
+}
+
+function renderSubsidyOrderList() {
+  const container = document.getElementById('subsidy_order_list_container');
+  if (!container) return;
+
+  if (!currentSubsidyDeductOrder || currentSubsidyDeductOrder.length === 0) {
+    currentSubsidyDeductOrder = [
+      { id: 'fund_free', name: '자유수강권', order: 1 },
+      { id: 'fund_1', name: '1학년 지원금', order: 2 },
+      { id: 'fund_3', name: '3학년 지원금', order: 3 }
+    ];
+  }
+
+  container.innerHTML = currentSubsidyDeductOrder.map((item, idx) => `
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:#f8fafc; border:1px solid #cbd5e1; border-radius:4px;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span class="badge" style="background:#337ab7; color:#fff; font-size:12px; padding:4px 8px;">${idx + 1}순위</span>
+        <strong style="color:#1e293b; font-size:14px;">${item.name}</strong>
+      </div>
+      <div style="display:flex; gap:4px;">
+        <button type="button" class="btn btn-default btn-xs" onclick="moveSubsidyOrder(${idx}, -1)" ${idx === 0 ? 'disabled' : ''} style="height:26px; padding:0 8px; font-size:11px; cursor:pointer;">▲ 위로</button>
+        <button type="button" class="btn btn-default btn-xs" onclick="moveSubsidyOrder(${idx}, 1)" ${idx === currentSubsidyDeductOrder.length - 1 ? 'disabled' : ''} style="height:26px; padding:0 8px; font-size:11px; cursor:pointer;">▼ 아래로</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function moveSubsidyOrder(idx, dir) {
+  const targetIdx = idx + dir;
+  if (targetIdx < 0 || targetIdx >= currentSubsidyDeductOrder.length) return;
+  const temp = currentSubsidyDeductOrder[idx];
+  currentSubsidyDeductOrder[idx] = currentSubsidyDeductOrder[targetIdx];
+  currentSubsidyDeductOrder[targetIdx] = temp;
+
+  currentSubsidyDeductOrder.forEach((item, i) => { item.order = i + 1; });
+  renderSubsidyOrderList();
+}
+
+async function saveSubsidyOrder() {
+  try {
+    const res = await fetch('/api/af/ad_free2_cfg/order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ orderList: currentSubsidyDeductOrder })
+    });
+    const result = await res.json();
+    if (result.success) {
+      alert('지원금 차감 순서가 성공적으로 저장되었습니다.');
+      closeSubsidyOrderModal();
+    } else {
+      alert('순서 저장 실패: ' + (result.message || '오류 발생'));
+    }
+  } catch (e) {
+    console.error('saveSubsidyOrder Error:', e);
+    alert('차감 순서 저장 중 오류가 발생했습니다.');
+  }
+}
+
+let currentSubsidyRanks = [];
+let currentActiveRankTab = 'all';
+
+// 순위 구분 코드 로드
+async function loadSubsidyRanks() {
+  const tbody = document.getElementById('subsidyRankTbody');
+  if (tbody) {
+    tbody.innerHTML = '<tr><td colspan="9" class="center" style="padding:40px; color:#64748b;"><i class="fa fa-spinner fa-spin"></i> 순위 구분 코드를 불러오는 중입니다...</td></tr>';
+  }
+
+  try {
+    const params = new URLSearchParams();
+    if (currentActiveRankTab && currentActiveRankTab !== 'all') {
+      params.append('rank', currentActiveRankTab);
+    }
+
+    const res = await fetch('/api/af/ad_free2_cfg/free1?' + params.toString());
+    const data = await res.json();
+    currentSubsidyRanks = (data && data.ranks) ? data.ranks : [];
+
+    renderSubsidyRanksTable();
+
+    const countEl = document.getElementById('sub_rank_total_count');
+    if (countEl) countEl.innerText = currentSubsidyRanks.length;
+  } catch (e) {
+    console.error('loadSubsidyRanks Error:', e);
+    if (tbody) {
+      tbody.innerHTML = '<tr><td colspan="9" class="center" style="padding:40px; color:#ef4444;"><i class="fa fa-exclamation-triangle"></i> 순위 구분 코드를 불러오는 중 오류가 발생했습니다.</td></tr>';
+    }
+  }
+}
+
+// 순위 탭 필터링
+function filterSubsidyRankTab(tabKey) {
+  currentActiveRankTab = tabKey;
+  ['all', '1', '2', '3', '4', '5'].forEach(k => {
+    const btn = document.getElementById('tab_rank_' + k);
+    if (btn) {
+      if (k === tabKey) {
+        btn.className = 'btn btn-primary btn-sm';
+        btn.style.backgroundColor = '#337ab7';
+        btn.style.borderColor = '#2e6da4';
+        btn.style.color = '#fff';
+      } else {
+        btn.className = 'btn btn-default btn-sm';
+        btn.style.backgroundColor = '#fff';
+        btn.style.borderColor = '#ccc';
+        btn.style.color = '#333';
+      }
+    }
+  });
+
+  loadSubsidyRanks();
+}
+
+// 9열 테이블 렌더링
+function renderSubsidyRanksTable() {
+  const tbody = document.getElementById('subsidyRankTbody');
+  if (!tbody) return;
+
+  if (currentSubsidyRanks.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="9" class="center" style="padding:40px; color:#64748b;">등록된 순위 구분 코드가 없습니다.</td></tr>';
+    return;
+  }
+
+  const rankBadgeColors = {
+    1: { bg: '#dbeafe', color: '#1d4ed8' },
+    2: { bg: '#dcfce7', color: '#15803d' },
+    3: { bg: '#fef3c7', color: '#b45309' },
+    4: { bg: '#f3e8ff', color: '#7e22ce' },
+    5: { bg: '#f1f5f9', color: '#475569' }
+  };
+
+  tbody.innerHTML = currentSubsidyRanks.map((r, idx) => {
+    const badgeStyle = rankBadgeColors[r.rankNumber] || { bg: '#f1f5f9', color: '#475569' };
+    const rankLabel = r.rankNumber === 5 ? '기타' : `${r.rankNumber}순위`;
+
+    return `
+      <tr style="transition:background 0.15s ease;" onmouseover="this.style.background='#f8fafc';" onmouseout="this.style.background='#ffffff';">
+        <td style="vertical-align:middle; text-align:center; color:#64748b; font-size:12px;">${idx + 1}</td>
+        <td style="vertical-align:middle; text-align:center;">
+          <span class="badge" style="background:${badgeStyle.bg}; color:${badgeStyle.color}; font-weight:bold; font-size:11px; padding:3px 8px; border-radius:3px;">${rankLabel}</span>
+        </td>
+        <td style="vertical-align:middle; text-align:center;">
+          <span class="badge" style="background:${r.used === '사용' ? '#dcfce7' : '#fee2e2'}; color:${r.used === '사용' ? '#15803d' : '#b91c1c'}; font-size:11px;">${r.used || '사용'}</span>
+        </td>
+        <td style="vertical-align:middle; text-align:left; padding-left:14px;">
+          <strong style="color:#1e293b; font-size:13px;">${r.name || '-'}</strong>
+        </td>
+        <td style="vertical-align:middle; text-align:right; font-size:12px; font-weight:bold; color:#2563eb;">
+          ${(r.limitAmount || 0).toLocaleString()}원
+        </td>
+        <td style="vertical-align:middle; text-align:center;">
+          ${r.isPriority ? '<span class="badge" style="background:#ffedd5; color:#c2410c; font-size:11px;">우선배정</span>' : '<span style="color:#94a3b8; font-size:11px;">일반</span>'}
+        </td>
+        <td style="vertical-align:middle; text-align:center;">
+          <div style="display:inline-flex; gap:3px;">
+            <button type="button" class="btn btn-default btn-xs" onclick="moveSubsidyRankOrder(${idx}, -1)" ${idx === 0 ? 'disabled' : ''} style="height:22px; padding:0 6px; font-size:10px; cursor:pointer;">▲</button>
+            <button type="button" class="btn btn-default btn-xs" onclick="moveSubsidyRankOrder(${idx}, 1)" ${idx === currentSubsidyRanks.length - 1 ? 'disabled' : ''} style="height:22px; padding:0 6px; font-size:10px; cursor:pointer;">▼</button>
+          </div>
+        </td>
+        <td style="vertical-align:middle; text-align:left; padding-left:14px; font-size:12px; color:#475569;">
+          ${r.note || '-'}
+        </td>
+        <td style="vertical-align:middle; text-align:center;">
+          <div style="display:inline-flex; gap:4px;">
+            <button type="button" class="btn btn-default btn-xs" onclick="openEditSubsidyRankModal('${r.id}')" style="height:24px; padding:0 8px; font-size:11px; display:inline-flex; align-items:center; justify-content:center; border:1px solid #ccc; background:#fff; border-radius:3px; cursor:pointer;">수정</button>
+            <button type="button" class="btn btn-danger btn-xs" onclick="deleteSubsidyRank('${r.id}')" style="height:24px; padding:0 8px; font-size:11px; display:inline-flex; align-items:center; justify-content:center; border:1px solid #d43f3a; background:#d9534f; color:#fff; border-radius:3px; cursor:pointer;">삭제</button>
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+// 모달 제어: 등록/수정
+function openCreateSubsidyRankModal() {
+  const modal = document.getElementById('modal_subsidy_rank_form');
+  const title = document.getElementById('subsidy_rank_modal_title');
+  if (title) title.innerText = '순위 구분 코드 등록';
+
+  document.getElementById('sub_rnk_form_edit_id').value = '';
+  document.getElementById('sub_rnk_form_rank').value = currentActiveRankTab !== 'all' ? currentActiveRankTab : '1';
+  document.getElementById('sub_rnk_form_name').value = '';
+  document.getElementById('sub_rnk_form_limit').value = '600000';
+  document.getElementById('sub_rnk_form_priority').checked = true;
+  document.getElementById('sub_rnk_form_used_y').checked = true;
+  document.getElementById('sub_rnk_form_note').value = '';
+
+  if (modal) modal.style.display = 'flex';
+}
+
+function openEditSubsidyRankModal(id) {
+  const item = currentSubsidyRanks.find(r => String(r.id) === String(id));
+  if (!item) return;
+
+  const modal = document.getElementById('modal_subsidy_rank_form');
+  const title = document.getElementById('subsidy_rank_modal_title');
+  if (title) title.innerText = '순위 구분 코드 수정';
+
+  document.getElementById('sub_rnk_form_edit_id').value = item.id;
+  document.getElementById('sub_rnk_form_rank').value = item.rankNumber || 1;
+  document.getElementById('sub_rnk_form_name').value = item.name || '';
+  document.getElementById('sub_rnk_form_limit').value = item.limitAmount || 600000;
+  document.getElementById('sub_rnk_form_priority').checked = !!item.isPriority;
+  if (item.used === '사용') {
+    document.getElementById('sub_rnk_form_used_y').checked = true;
+  } else {
+    document.getElementById('sub_rnk_form_used_n').checked = true;
+  }
+  document.getElementById('sub_rnk_form_note').value = item.note || '';
+
+  if (modal) modal.style.display = 'flex';
+}
+
+function closeSubsidyRankModal() {
+  const modal = document.getElementById('modal_subsidy_rank_form');
+  if (modal) modal.style.display = 'none';
+}
+
+async function submitSubsidyRankForm() {
+  const editId = document.getElementById('sub_rnk_form_edit_id').value;
+  const rankNumber = parseInt(document.getElementById('sub_rnk_form_rank').value, 10) || 1;
+  const name = document.getElementById('sub_rnk_form_name').value.trim();
+  const limitAmount = parseInt(document.getElementById('sub_rnk_form_limit').value, 10) || 0;
+  const isPriority = document.getElementById('sub_rnk_form_priority').checked;
+  const used = document.getElementById('sub_rnk_form_used_y').checked ? '사용' : '미사용';
+  const note = document.getElementById('sub_rnk_form_note').value.trim();
+
+  if (!name) {
+    alert('순위 코드명을 입력해주세요.');
+    return;
+  }
+
+  const payload = {
+    rankNumber,
+    name,
+    limitAmount,
+    isPriority,
+    used,
+    note
+  };
+
+  try {
+    let url = '/api/af/ad_free2_cfg/free1';
+    let method = 'POST';
+    if (editId) {
+      url = `/api/af/ad_free2_cfg/free1/${editId}`;
+      method = 'PUT';
+    }
+
+    const res = await fetch(url, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const result = await res.json();
+    if (result.success) {
+      alert(editId ? '성공적으로 수정되었습니다.' : '성공적으로 등록되었습니다.');
+      closeSubsidyRankModal();
+      loadSubsidyRanks();
+    } else {
+      alert('저장 실패: ' + (result.message || '오류 발생'));
+    }
+  } catch (e) {
+    console.error('submitSubsidyRankForm Error:', e);
+    alert('서버 저장 중 오류가 발생했습니다.');
+  }
+}
+
+async function deleteSubsidyRank(id) {
+  if (!confirm('해당 순위 구분 코드를 삭제하시겠습니까?')) {
+    return;
+  }
+
+  try {
+    const res = await fetch(`/api/af/ad_free2_cfg/free1/${id}`, {
+      method: 'DELETE'
+    });
+    const result = await res.json();
+    if (result.success) {
+      alert('성공적으로 삭제되었습니다.');
+      loadSubsidyRanks();
+    } else {
+      alert('삭제 실패: ' + (result.message || '오류 발생'));
+    }
+  } catch (e) {
+    console.error('deleteSubsidyRank Error:', e);
+    alert('삭제 요청 중 오류가 발생했습니다.');
+  }
+}
+
+async function moveSubsidyRankOrder(idx, dir) {
+  const targetIdx = idx + dir;
+  if (targetIdx < 0 || targetIdx >= currentSubsidyRanks.length) return;
+
+  const temp = currentSubsidyRanks[idx];
+  currentSubsidyRanks[idx] = currentSubsidyRanks[targetIdx];
+  currentSubsidyRanks[targetIdx] = temp;
+
+  try {
+    const res = await fetch('/api/af/ad_free2_cfg/free1/order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ orderList: currentSubsidyRanks })
+    });
+    const result = await res.json();
+    if (result.success) {
+      renderSubsidyRanksTable();
+    }
+  } catch (e) {
+    console.error('moveSubsidyRankOrder Error:', e);
+  }
 }
 
 // ==================== 13. 설문관리 (2개) ====================
@@ -7649,7 +10057,56 @@ function checkInitialModalRoute() {
         const course = (selCourseEl && selCourseEl.value) || (typeof currentWaitlistData !== 'undefined' && currentWaitlistData[0] ? currentWaitlistData[0].courseTitle : '');
         openWaitMoveModal(course);
       }
-    }, 250);
+    }, 120);
+  } else if (path.includes('/af/ad_free2_app/apply')) {
+    const match = path.match(/smt\/(\d+)/);
+    const smtMonth = match ? `${match[1]}월` : '3월';
+    setTimeout(() => {
+      if (typeof switchSubmodelView === 'function') {
+        switchSubmodelView(null, 'ad_free2_app', path, false);
+      }
+      if (typeof openSubsidyAppImportModal === 'function') {
+        openSubsidyAppImportModal(smtMonth);
+      }
+    }, 150);
+  } else if (path.includes('/af/ad_rsch/write')) {
+    setTimeout(() => {
+      if (typeof switchSubmodelView === 'function') switchSubmodelView(null, 'ad_rsch_lists', path, false);
+      if (typeof openRschWriteModal === 'function') openRschWriteModal();
+    }, 120);
+  } else if (path.includes('/af/ad_rsch/input')) {
+    setTimeout(() => {
+      if (typeof switchSubmodelView === 'function') switchSubmodelView(null, 'ad_rsch_lists', path, false);
+      if (typeof openRschInputModal === 'function') openRschInputModal();
+    }, 120);
+  } else if (path.includes('/af/ad_abs/write')) {
+    setTimeout(() => {
+      if (typeof switchSubmodelView === 'function') switchSubmodelView(null, 'ad_abs_lists', path, false);
+      if (typeof openAbsWriteModal === 'function') openAbsWriteModal();
+
+    }, 120);
+  } else if (path.includes('/af/ad_tea/write')) {
+    setTimeout(() => {
+      if (typeof switchSubmodelView === 'function') switchSubmodelView(null, 'ad_tea_lists', path, false);
+      if (typeof openTeaWriteModal === 'function') openTeaWriteModal();
+    }, 120);
+  } else if (path.includes('/af/ad_tea/input')) {
+    setTimeout(() => {
+      if (typeof switchSubmodelView === 'function') switchSubmodelView(null, 'ad_tea_lists', path, false);
+      if (typeof openTeaInputModal === 'function') openTeaInputModal();
+    }, 120);
+  } else if (path.includes('/af/ad_tea/modify')) {
+    const match = path.match(/num\/(\d+)/);
+    const num = match ? match[1] : '';
+    setTimeout(() => {
+      if (typeof switchSubmodelView === 'function') switchSubmodelView(null, 'ad_tea_lists', path, false);
+      if (typeof openTeaModifyModal === 'function') openTeaModifyModal(num);
+    }, 120);
+  } else if (path.includes('/af/ad_tea/schedule')) {
+    setTimeout(() => {
+      if (typeof switchSubmodelView === 'function') switchSubmodelView(null, 'ad_tea_lists', path, false);
+      if (typeof openTeaScheduleModal === 'function') openTeaScheduleModal();
+    }, 120);
   }
 }
 
@@ -7704,4 +10161,82 @@ window.handleLectureBulkAction = handleLectureBulkAction;
 window.toggleSort = toggleSort;
 window.show_max_sin = show_max_sin;
 window.chk_del = chk_del;
+window.loadSubsidyApplicants = loadSubsidyApplicants;
+window.renderSubsidyApplicantsTable = renderSubsidyApplicantsTable;
+window.resetSubsidyAppFilters = resetSubsidyAppFilters;
+window.applySubsidyAppSorting = applySubsidyAppSorting;
+window.toggleSubsidyAppSort = toggleSubsidyAppSort;
+window.toggleSelectAllSubsidyApp = toggleSelectAllSubsidyApp;
+window.updateSubsidyAppSelectedCount = updateSubsidyAppSelectedCount;
+window.deleteSelectedSubsidyApplicants = deleteSelectedSubsidyApplicants;
+window.deleteSingleSubsidyApp = deleteSingleSubsidyApp;
+window.loadSubsidyAllowedMonths = loadSubsidyAllowedMonths;
+window.renderAllowedMonthsBadges = renderAllowedMonthsBadges;
+window.openSubsidyAllowMonthsModal = openSubsidyAllowMonthsModal;
+window.closeSubsidyAllowMonthsModal = closeSubsidyAllowMonthsModal;
+window.submitSubsidyAllowMonths = submitSubsidyAllowMonths;
+window.openSubsidyAppRegisterModal = openSubsidyAppRegisterModal;
+window.closeSubsidyAppRegisterModal = closeSubsidyAppRegisterModal;
+window.submitSubsidyAppRegister = submitSubsidyAppRegister;
+window.openSubsidyAppSearchStudentModal = openSubsidyAppSearchStudentModal;
+window.closeSubsidyAppSearchStudentModal = closeSubsidyAppSearchStudentModal;
+window.searchSubsidyApplicantsPopup = searchSubsidyApplicantsPopup;
+window.selectSubsidyAppStudent = selectSubsidyAppStudent;
+window.chkFreeMoney = chkFreeMoney;
+window.chkSumFreeMoney = chkSumFreeMoney;
+window.chkMoney = chkMoney;
+window.filterNum = filterNum;
+window.commaSplit = commaSplit;
+window.validate_required = validate_required;
+window.fm_edit_check = fm_edit_check;
+window.openSubsidyAppImportModal = openSubsidyAppImportModal;
+window.closeSubsidyAppImportModal = closeSubsidyAppImportModal;
+window.onSubsidyImportMonthChange = onSubsidyImportMonthChange;
+window.toggleSubsidyImportDivAll = toggleSubsidyImportDivAll;
+window.updateSubsidyImportDivState = updateSubsidyImportDivState;
+window.toggleSubsidyImportNeulbomAll = toggleSubsidyImportNeulbomAll;
+window.updateSubsidyImportNeulbomState = updateSubsidyImportNeulbomState;
+window.toggleSubsidyImportFundAll = toggleSubsidyImportFundAll;
+window.updateSubsidyImportFundState = updateSubsidyImportFundState;
+window.executeSubsidyAppImport = executeSubsidyAppImport;
+window.exportSubsidyAppResults = exportSubsidyAppResults;
+window.exportSubsidyAppAllCollect = exportSubsidyAppAllCollect;
+window.openSubsidyAppMonthlyModal = openSubsidyAppMonthlyModal;
+window.closeSubsidyAppMonthlyModal = closeSubsidyAppMonthlyModal;
+window.submitSubsidyAppMonthly = submitSubsidyAppMonthly;
+window.openSubsidyAppBankingModal = openSubsidyAppBankingModal;
+window.closeSubsidyAppBankingModal = closeSubsidyAppBankingModal;
+window.submitSubsidyAppBanking = submitSubsidyAppBanking;
+window.openSubsidyAppAdminOfficeModal = openSubsidyAppAdminOfficeModal;
+window.closeSubsidyAppAdminOfficeModal = closeSubsidyAppAdminOfficeModal;
+window.submitSubsidyAppAdminOffice = submitSubsidyAppAdminOffice;
+window.openSubsidyAppAdminModal = openSubsidyAppAdminOfficeModal;
+window.closeSubsidyAppAdminModal = closeSubsidyAppAdminOfficeModal;
+window.submitSubsidyAppAdmin = submitSubsidyAppAdminOffice;
+window.openSubsidyAppNeisModal = openSubsidyAppNeisModal;
+window.closeSubsidyAppNeisModal = closeSubsidyAppNeisModal;
+window.submitSubsidyAppNeis = submitSubsidyAppNeis;
+window.openSubsidyAppEditRowModal = openSubsidyAppEditRowModal;
+window.closeSubsidyAppEditRowModal = closeSubsidyAppEditRowModal;
+window.submitSubsidyAppEditRow = submitSubsidyAppEditRow;
+window.loadSubsidyConfig = loadSubsidyConfig;
+window.selectSubsidyTab = selectSubsidyTab;
+window.renderSubsidyConfigForm = renderSubsidyConfigForm;
+window.saveSubsidyConfig = saveSubsidyConfig;
+window.openSubsidyOrderModal = openSubsidyOrderModal;
+window.closeSubsidyOrderModal = closeSubsidyOrderModal;
+window.renderSubsidyOrderList = renderSubsidyOrderList;
+window.moveSubsidyOrder = moveSubsidyOrder;
+window.saveSubsidyOrder = saveSubsidyOrder;
+window.loadSubsidyRanks = loadSubsidyRanks;
+window.filterSubsidyRankTab = filterSubsidyRankTab;
+window.renderSubsidyRanksTable = renderSubsidyRanksTable;
+window.openCreateSubsidyRankModal = openCreateSubsidyRankModal;
+window.openEditSubsidyRankModal = openEditSubsidyRankModal;
+window.closeSubsidyRankModal = closeSubsidyRankModal;
+window.submitSubsidyRankForm = submitSubsidyRankForm;
+window.deleteSubsidyRank = deleteSubsidyRank;
+window.moveSubsidyRankOrder = moveSubsidyRankOrder;
+
+
 

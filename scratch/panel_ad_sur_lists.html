@@ -1,0 +1,74 @@
+<!-- ========================================================================================= -->
+<!-- [Cloned Panel] 04. 설문관리 > 설문 (ad_sur_lists) -->
+<!-- ========================================================================================= -->
+<div id="panel_ad_sur_lists" class="submodel-panel" style="display: none; padding: 15px;">
+  <!-- Header / Breadcrumb -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 2px solid #337ab7; padding-bottom: 8px;">
+    <div>
+      <h3 style="margin: 0; font-size: 18px; font-weight: bold; color: #333; display: flex; align-items: center; gap: 8px;">
+        <i class="fa fa-pie-chart" style="color: #337ab7;"></i> 설문관리
+        <span style="font-size: 13px; font-weight: normal; color: #777;">(설문 목록 및 결과 확인)</span>
+      </h3>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <!-- HWP 가정통신문 양식 다운로드 버튼 -->
+      <a href="/doc/faq/after/운영절차_21_가정통신문_방과후학교_설문참여_안내.hwp" download="방과후학교_설문참여_안내_가정통신문.hwp" 
+         class="btn btn-default" style="display: inline-flex; align-items: center; justify-content: center; height: 30px; padding: 0 12px; font-size: 12px; font-weight: bold; color: #2e6da4; border-color: #337ab7; line-height: 1;">
+        <i class="fa fa-file-word-o" style="margin-right: 5px; color: #2e6da4;"></i> 설문조사 가정통신문 HWP
+      </a>
+      <!-- 설문등록 버튼 -->
+      <button type="button" id="btn_open_sur_write" onclick="openSurWrite();" 
+              class="btn btn-primary" style="display: inline-flex; align-items: center; justify-content: center; height: 30px; padding: 0 16px; font-size: 12px; font-weight: bold; background-color: #337ab7; border-color: #2e6da4; line-height: 1;">
+        <i class="fa fa-plus" style="margin-right: 5px;"></i> 등록
+      </button>
+    </div>
+  </div>
+
+  <!-- Form & Main Table Container -->
+  <form id="fm_sur_list" name="fm_list" method="post" action="/af/ad_sur/del/p/1/sn/3267" onsubmit="return false;">
+    <input type="hidden" name="csrf_test_name" value="mock_csrf_token_sur">
+    <input type="hidden" name="form_open_date_use_chk_csrf" value="2026-10-02 15:15:26">
+
+    <!-- Table Responsive Wrap -->
+    <div class="table-responsive" style="background: #fff; border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); overflow-x: auto;">
+      <table id="surMainTable" class="table table-bordered table-hover text-center" style="margin-bottom: 0; font-size: 12px; vertical-align: middle;">
+        <thead style="background-color: #f5f5f5; border-bottom: 2px solid #ddd;">
+          <tr>
+            <th style="width: 38px; text-align: center; vertical-align: middle;">
+              <input type="checkbox" id="check_all_sur" onclick="toggleAllSurCheck(this);" style="cursor: pointer;">
+            </th>
+            <th style="width: 45px; text-align: center; vertical-align: middle;">연번</th>
+            <th style="width: 50px; text-align: center; vertical-align: middle;">수정</th>
+            <th style="width: 100px; text-align: center; vertical-align: middle;">설문구분</th>
+            <th style="width: 130px; text-align: center; vertical-align: middle;">강좌구분</th>
+            <th style="width: 90px; text-align: center; vertical-align: middle;">늘봄과정</th>
+            <th style="text-align: left; vertical-align: middle;">제목</th>
+            <th style="width: 75px; text-align: center; vertical-align: middle;">참여구분</th>
+            <th style="width: 85px; text-align: center; vertical-align: middle;">대상학년</th>
+            <th style="width: 60px; text-align: center; vertical-align: middle;">문항</th>
+            <th style="width: 65px; text-align: center; vertical-align: middle;">참여자</th>
+            <th style="width: 110px; text-align: center; vertical-align: middle;">설문기간</th>
+            <th style="width: 50px; text-align: center; vertical-align: middle;">삭제</th>
+          </tr>
+        </thead>
+        <tbody id="surTableTbody">
+          <!-- Dynamically populated via sur_logic.js -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Table Bottom Actions & Bulk Delete -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+      <div>
+        <button type="button" onclick="deleteSelectedSurveys();" class="btn btn-danger" style="display: inline-flex; align-items: center; justify-content: center; height: 30px; padding: 0 12px; font-size: 12px; line-height: 1;">
+          <i class="fa fa-trash-o" style="margin-right: 5px;"></i> 선택 삭제
+        </button>
+      </div>
+      <div id="surPagination" style="display: flex; align-items: center; gap: 4px;">
+        <ul class="pagination pagination-sm" style="margin: 0;">
+          <li class="active"><a href="#none;">1</a></li>
+        </ul>
+      </div>
+    </div>
+  </form>
+</div>

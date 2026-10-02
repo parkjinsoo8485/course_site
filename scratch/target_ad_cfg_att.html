@@ -1,0 +1,448 @@
+<div id="contents_box">
+			<div id="contents_title">
+				<i class="fa fa-file-text-o"></i> 환경설정 <br><span class="title">광주풍향초등학교 늘봄학교</span>
+	
+				
+				<p class="write_yun"><a href="https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267"><i class="fa fa-futbol-o"></i><br><span class="write">강좌관리</span></a></p>
+	
+
+
+			</div>
+			<div id="contents">
+			<div class="panel_main panel-default_main">    
+	<div class="panel-heading">출석부옵션</div>
+	<div class="panel-body" style="margin-bottom:-20px;">
+		<ul class="tapMenu">
+			<li><a href="https://www.dbdbschool.kr/af/ad_cfg/main/sn/3267">기본설정</a></li>
+			<li><a href="https://www.dbdbschool.kr/af/ad_cfg/tea/sn/3267">강사권한</a></li>
+			<li class="on"><a href="https://www.dbdbschool.kr/af/ad_cfg/att/sn/3267">출석부옵션</a></li>
+			<li><a href="https://www.dbdbschool.kr/af/ad_cfg/sms/sn/3267">문자설정</a></li>
+		</ul>		
+	</div>
+		
+<form action="https://www.dbdbschool.kr/af/ad_cfg/att/sn/3267" name="fm_edit" id="fm_edit" onsubmit="return fm_edit_check(this);" method="post" accept-charset="utf-8">
+<input type="hidden" name="csrf_test_name" value="4a1780fbc12d51eb33cb3ea82167f4e8">                                                                                                         
+<input type="hidden" name="form_open_date_use_chk_csrf" value="2026-10-02 16:02:04">
+	<table class="table table-bordered table-hover list MAT0">
+		
+		<tbody><tr>
+			<th rowspan="2" width="80">결재란<br>①</th>
+			<th width="80">결재자</th>
+			<td>
+				<input id="attApp1" name="attApp1" type="text" title="결재자" value="" class="form-control" maxlength="8" style="width:120px;">
+				<div class="error_msg"></div>
+			</td>		
+		</tr>
+		<tr>
+			<th>서명<br>이미지</th>
+			<td>
+				<div>
+					<input type="hidden" name="sign_data1" id="sign_data1" value="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=">
+					<span class="mobile_clear">
+						<span class="MAT5">
+							<img id="sign_preview1" style="border:1px solid #ccc; width:90px; height:60px; vertical-align:bottom; background:#FFF;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=">											
+							<button type="button" class="btn btn-default btn-sm" onclick="show_sign_modal(1);">만들기</button>
+						<span>						
+						<span class="MAT5">
+							<button type="button" class="btn btn-danger btn-sm" onclick="clear_sign(1);">지우기</button>
+							<button type="button" class="btn btn-default btn-sm" onclick="cancel_sign(1);">기존 서명 복원</button>
+						</span>
+					</span>
+				</span></span></div>
+				<div class="error_msg error_sign_data1"></div>
+			</td>		
+		</tr>		
+		
+		<tr>
+			<th rowspan="2" width="80">결재란<br>②</th>
+			<th width="80">결재자</th>
+			<td>
+				<input id="attApp2" name="attApp2" type="text" title="결재자" value="" class="form-control" maxlength="8" style="width:120px;">
+				<div class="error_msg"></div>
+			</td>		
+		</tr>
+		<tr>
+			<th>서명<br>이미지</th>
+			<td>
+				<div>
+					<input type="hidden" name="sign_data2" id="sign_data2" value="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=">
+					<span class="mobile_clear">
+						<span class="MAT5">
+							<img id="sign_preview2" style="border:1px solid #ccc; width:90px; height:60px; vertical-align:bottom; background:#FFF;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=">											
+							<button type="button" class="btn btn-default btn-sm" onclick="show_sign_modal(2);">만들기</button>
+						<span>						
+						<span class="MAT5">
+							<button type="button" class="btn btn-danger btn-sm" onclick="clear_sign(2);">지우기</button>
+							<button type="button" class="btn btn-default btn-sm" onclick="cancel_sign(2);">기존 서명 복원</button>
+						</span>
+					</span>
+				</span></span></div>
+				<div class="error_msg error_sign_data2"></div>
+			</td>		
+		</tr>		
+		
+		<tr>
+			<th rowspan="2" width="80">결재란<br>③</th>
+			<th width="80">결재자</th>
+			<td>
+				<input id="attApp3" name="attApp3" type="text" title="결재자" value="" class="form-control" maxlength="8" style="width:120px;">
+				<div class="error_msg"></div>
+			</td>		
+		</tr>
+		<tr>
+			<th>서명<br>이미지</th>
+			<td>
+				<div>
+					<input type="hidden" name="sign_data3" id="sign_data3" value="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=">
+					<span class="mobile_clear">
+						<span class="MAT5">
+							<img id="sign_preview3" style="border:1px solid #ccc; width:90px; height:60px; vertical-align:bottom; background:#FFF;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=">											
+							<button type="button" class="btn btn-default btn-sm" onclick="show_sign_modal(3);">만들기</button>
+						<span>						
+						<span class="MAT5">
+							<button type="button" class="btn btn-danger btn-sm" onclick="clear_sign(3);">지우기</button>
+							<button type="button" class="btn btn-default btn-sm" onclick="cancel_sign(3);">기존 서명 복원</button>
+						</span>
+					</span>
+				</span></span></div>
+				<div class="error_msg error_sign_data3"></div>
+			</td>		
+		</tr>		
+		
+		<tr>
+			<th rowspan="2" width="80">결재란<br>④</th>
+			<th width="80">결재자</th>
+			<td>
+				<input id="attApp4" name="attApp4" type="text" title="결재자" value="" class="form-control" maxlength="8" style="width:120px;">
+				<div class="error_msg"></div>
+			</td>		
+		</tr>
+		<tr>
+			<th>서명<br>이미지</th>
+			<td>
+				<div>
+					<input type="hidden" name="sign_data4" id="sign_data4" value="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=">
+					<span class="mobile_clear">
+						<span class="MAT5">
+							<img id="sign_preview4" style="border:1px solid #ccc; width:90px; height:60px; vertical-align:bottom; background:#FFF;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=">											
+							<button type="button" class="btn btn-default btn-sm" onclick="show_sign_modal(4);">만들기</button>
+						<span>						
+						<span class="MAT5">
+							<button type="button" class="btn btn-danger btn-sm" onclick="clear_sign(4);">지우기</button>
+							<button type="button" class="btn btn-default btn-sm" onclick="cancel_sign(4);">기존 서명 복원</button>
+						</span>
+					</span>
+				</span></span></div>
+				<div class="error_msg error_sign_data4"></div>
+			</td>		
+		</tr>		
+		
+		<tr>
+			<th colspan="2">수강생 연락처</th>
+			<td>
+				<input type="checkbox" name="attViewHp" id="attViewHp" value="Y" checked="checked"><label for="attViewHp">출석부 비고란에 수강생 연락처 <strong class="text-danger">출력</strong></label>
+				<div class="error_msg error_attViewHp"></div>		
+			</td>	
+		</tr>		
+		<tr>
+			<th colspan="2">인쇄 방향</th>
+			<td>
+				<span class="mobile_clear">			
+					<span>
+						<input type="radio" name="attPrDir" id="attPrDir_V" value="V" checked="checked"><label for="attPrDir_V">세로</label>&nbsp;
+						<input type="radio" name="attPrDir" id="attPrDir_H" value="H"><label for="attPrDir_H">가로</label>
+					</span>			
+				</span>			
+				<div class="error_msg error_attPrDir"></div>				
+			</td>	
+		</tr>		
+		<tr>
+			<th colspan="2">온라인 출석부</th>
+			<td>
+				<span class="mobile_clear">			
+					<span>
+						<input type="radio" name="attOnline" id="attOnline_Y" value="Y" onclick="chk_attOnline();"><label for="attOnline_Y">사용</label>
+						(&nbsp;<input type="checkbox" name="attViewStu" id="attViewStu" value="Y" disabled=""><label for="attViewStu">학생 화면에서 <strong class="text-danger">출결 내역 조회</strong></label>)<br>
+						<input type="radio" name="attOnline" id="attOnline_N" value="N" checked="checked" onclick="chk_attOnline();"><label for="attOnline_N">사용안함</label>
+					</span>			
+				</span>								
+				<div class="error_msg error_attPrDir"></div>				
+				<div class="error_msg error_attViewStu"></div>				
+			</td>	
+		</tr>						
+	</tbody></table>
+	<p class="text-center MAT30"><input type="button" onclick="history.back(-1); return false;" class="btn btn-default" value="취소"> <input type="submit" value="수정" data-loading-text="처리중 .." class="btn btn-primary"></p>
+</form>
+</div>
+
+<div class="help_box">
+	<ul>
+		<li>수강생 연락처, 인쇄 방향은 출석부 출력 화면에서도 변경할 수 있습니다.</li>
+	</ul>
+</div>	
+
+<!-- { 서명 -->
+<div id="signModal" style="display: none;"></div>
+<!-- } -->
+
+<script type="text/javascript" src="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/jquery.form.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/form_common.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/form_ajax.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/jsignature.js"></script>				
+<script type="text/javascript">
+
+	// sign {
+	var canvasDefWidth = 240;
+	var canvasDefHeight = 160;
+	var curr_sign_num = 0;
+	var empty_sign_data = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=';
+	var signModal_html = $('#signModal').html();
+	var  sign_file = null;
+
+	var old_sign_data_list = [];
+	old_sign_data_list[1] = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=';
+	old_sign_data_list[2] = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=';
+	old_sign_data_list[3] = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=';
+	old_sign_data_list[4] = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=';
+
+	$('#signModal').html(''); // id 중복 문제 없애기 위해
+
+	function show_sign_modal(sign_num) {
+		/*
+		if (curr_sign_num > 0) {
+			alert('현재 처리중인 서명이 있습니다.');
+			return false;
+		}
+		*/
+		curr_sign_num = sign_num;
+
+		$('#dynamicModalBox').html(signModal_html);
+		$('#dynamicModalBox').on('show.bs.modal', function (e) {
+			$(this).find('.modal-dialog').css({
+				'width': '400px', // 원하는 너비 설정
+				'max-width': '90%', // 원하는 너비 설정
+				'height': '300px', // 원하는 높이 설정
+				'margin': '30px auto' // 중앙 정렬 및 상단 여백 설정
+			});			
+		});
+				
+		$('#dynamicModalBox').modal('show');				
+
+		init_sign(sign_num);		
+	}	
+
+	function reset_sign() {
+		/*
+		// canvas 크기 조정
+		$('canvas.jSignature')
+			.attr('width', canvasDefWidth)
+			.attr('height', canvasDefHeight)
+			.css({ width: canvasDefWidth + 'px', height: canvasDefHeight + 'px' });
+
+		// box 크기 조정
+		$('#sign_box')
+			.css({ width: (canvasDefWidth+2) + 'px', height: (canvasDefHeight+2) + 'px' });
+		*/
+		// canvas 지우기
+		$("#sign_box").jSignature('reset');
+
+		// 이미지 파일 지우기
+		sign_file.value = '';
+	}	
+
+	function clear_sign(sign_num) {
+		// 서명 지우기
+		$("#sign_preview" + sign_num).attr('src', empty_sign_data); // 1x1 투명 픽셀 사용
+		$("#sign_data" + sign_num).val(empty_sign_data);
+	}	
+
+	function cancel_sign(sign_num) {
+		// 기존 서명 복원
+		$("#sign_preview" + sign_num).attr("src", old_sign_data_list[sign_num]);
+		$("#sign_data" + sign_num).val(old_sign_data_list[sign_num]);
+	}
+
+	function apply_sign() {
+		// 직접 그린 백터 데이터가 있는지 확인
+		var canvas = $("#sign_box").find("canvas")[0];		
+		var chkEmpData = $('#sign_box').jSignature("getData", "native");
+		let hasVector = false;
+		let hasImage = false;
+		
+		if (chkEmpData.length > 0) { 
+			hasVector = true;
+		} else if (canvas) { 
+			// 첨부 이미지에 의한 이미지가 있는지 확인			
+			const ctx1 = canvas.getContext('2d');
+			const imageData = ctx1.getImageData(0, 0, canvas.width, canvas.height).data;
+
+			for (let i = 0; i < imageData.length; i += 4) {
+				// 완전히 투명(알파=0)이 아니거나, 완전 흰색이 아니면 이미지가 있다고 판단
+				if (imageData[i+3] !== 0 && (imageData[i] !== 255 || imageData[i+1] !== 255 || imageData[i+2] !== 255)) {
+					hasImage = true;
+					break;
+				}
+			}
+		}
+
+		if (!hasImage && !hasVector) {
+			alert('서명된 내용이 없습니다.' + hasVector + ',' + hasImage);
+			$('#dynamicModalBox').modal('hide');
+			return; 				
+		}
+
+		// 60x40 캔버스 생성
+		var smallCanvas = document.createElement("canvas");
+		smallCanvas.width = 60;
+		smallCanvas.height = 40;
+		var ctx = smallCanvas.getContext("2d");
+
+		// 고품질 리샘플링(선명하게)
+		ctx.imageSmoothingEnabled = true;
+		ctx.imageSmoothingQuality = "high";
+
+		// 60 x 40으로 축소
+		// 중복해서 그리면 선이 찐해짐 ^^;		
+		// 축소 비율에 따라 그리기 반복 더...		
+		let drawCnt = parseInt(canvas.width / smallCanvas.width) - 2;
+		if (drawCnt < 1) { drawCnt = 1; }
+		for (let i = 1; i <= drawCnt; i++) {
+			ctx.drawImage(canvas, 0, 0, 60, 40);	
+		}
+
+		// 결과 적용
+		$("#sign_preview" + curr_sign_num).attr("src", smallCanvas.toDataURL("image/png"));		
+		$('#sign_data' + curr_sign_num).val($("#sign_preview" + curr_sign_num).attr("src"));
+		$("#sign_box").jSignature('reset');
+
+		$('#dynamicModalBox').modal('hide');
+
+		curr_sign_num = 0;		
+	}
+
+	function init_sign(sign_num) {
+		sign_file = document.getElementById('sign_file');
+
+		// jSignature 초기화 (투명 배경 등 옵션 설정)
+  		$('#sign_box').jSignature({
+			width: canvasDefWidth,
+			height: canvasDefHeight,
+			color: "#000",
+			backgroundColor: "rgba(0,0,0,0)",
+			lineWidth: 3
+		});
+
+		// { 첨부 이미지 적용
+		sign_file.addEventListener('change', function(e) {
+			const file = e.target.files[0];
+			const reader = new FileReader();
+
+			// PNG 파일만 허용
+			if ((file.type !== 'image/png' && file.type !== 'image/gif')
+				|| (!file.name.toLowerCase().endsWith('.png') && !file.name.toLowerCase().endsWith('.gif'))) 
+			{
+				alert('GIF, PNG 이미지만 적용할 수 있습니다.');
+				sign_file.value = '';
+				return;
+			}
+						
+			reader.onload = function(evt) {
+				const dataURL = evt.target.result;
+				
+				//reset_sign();
+				//$("#sign_box").jSignature("importData", dataURL); // 삽입
+				const img = new Image();
+				img.onload = function() {
+					// jSignature의 내부 캔버스 얻기
+					const canvas = $("#sign_box").find("canvas")[0];
+					const ctx = canvas.getContext('2d');
+
+					// 캔버스 크기와 이미지 크기
+					const canvasWidth = canvas.width;
+					const canvasHeight = canvas.height;
+					const imgWidth = img.width;
+					const imgHeight = img.height;
+					let x = 0;
+					let y = 0;
+					let drawWidth = canvasDefWidth;
+					let drawHeight = canvasDefHeight;
+
+					// { canvas는 고정 상태에서 이미지 비율에 따라 확대, 축소
+					if (0) { //imgWidth < canvasDefWidth && imgHeight < canvasDefHeight) {
+						// 이미지가 작으면 이미지 원본 크기로
+						drawWidth = imgWidth;
+						drawHeight = imgHeight;
+					} else {					
+						// 비율에 맞게 축소(캔버스 밖으로 나가지 않도록)
+						//const scale = Math.min(canvasDefWidth / imgWidth, canvasDefHeight / imgHeight, 1);
+
+						// 비율에 맞게 확대/축소
+						const scaleWidth = canvasDefWidth / imgWidth;
+  						const scaleHeight = canvasDefHeight / imgHeight;
+  						const scale = Math.min(scaleWidth, scaleHeight);
+
+						drawWidth = imgWidth * scale;
+						drawHeight = imgHeight * scale;
+
+						// 중앙 좌표 계산
+						x = (canvasDefWidth - drawWidth) / 2;
+						y = (canvasDefHeight - drawHeight) / 2;
+					}
+					// }
+
+					// { 이미지 크기에 따라 canvas 크기를 동적으로 조정
+					/*
+					$('canvas.jSignature')
+						.attr('width', drawWidth)
+						.attr('height', drawHeight)
+						.css({ width: drawWidth + 'px', height: drawHeight + 'px' });
+
+					$('#sign_box')
+						.css({ width: (drawWidth+2) + 'px', height: (drawHeight+2) + 'px' });						
+					*/
+					// }
+
+					// 기존 서명 지우기
+					$('#sign_box').jSignature('reset');
+					ctx.drawImage(img, x, y, drawWidth, drawHeight);
+				};			
+				img.src = dataURL;	
+			};
+			reader.readAsDataURL(file);
+		});		
+		// }
+	}
+	// }
+
+	function chk_attOnline() {
+		if($('#attOnline_Y').prop('checked')) {
+			$('#attViewStu').prop('disabled', false);
+		} else {
+			$('#attViewStu').prop('disabled', true);
+		}
+	}
+
+	function fm_edit_check(fm) {
+		try {
+			if(true){ //confirm('적용하시겠습니까?')) {
+				//return true;
+				fm_ajaxForm(fm);
+			}
+			return false;
+		} catch (error) {
+			console.error(error);
+    		return false;
+		}
+	}				
+	
+	$(document).ready(function(){
+		chk_attOnline();
+	});		
+</script>
+			</div>
+			
+			<div id="footer">
+				Copyright ⓒ <span class="copyright_name"><a href="http://www.xmecca.com" target="_blank" rel="noopener noreferrer"><strong>x</strong>mecca.com</a></span> All Rights Reserved.
+				<br><i class="fa fa-envelope"></i> dbdbschool@naver.com
+			</div>
+		</div>

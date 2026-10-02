@@ -1,0 +1,149 @@
+<!-- ==================== 결석/귀가신청 등록/수정 모달 (1:1 Target Clone) ==================== -->
+<div id="modal_ad_abs_write" class="modal" style="display:none; position:fixed !important; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:99999 !important; align-items:center; justify-content:center;">
+  <div class="modal-dialog" style="width:720px; max-width:95vw; max-height:92vh; display:flex; flex-direction:column; margin:0 auto; background:#fff; border-radius:6px; box-shadow:0 10px 30px rgba(0,0,0,0.3); overflow:hidden;">
+    
+    <!-- 모달 헤더 (로컬 블루 #337ab7 테마) -->
+    <div class="modal-header" style="background:#337ab7; color:#fff; padding:12px 20px; display:flex; justify-content:space-between; align-items:center;">
+      <h4 id="abs_write_modal_title" style="margin:0; font-size:16px; font-weight:bold; display:flex; align-items:center; gap:8px;">
+        <i class="fa fa-calendar-check-o"></i> 결석/귀가신청 등록
+      </h4>
+      <button type="button" class="close" onclick="closeAbsWriteModal();" style="color:#fff; opacity:0.9; font-size:24px; font-weight:bold; border:none; background:transparent; cursor:pointer;">&times;</button>
+    </div>
+
+    <!-- 모달 본문 (스크롤) -->
+    <div class="modal-body" style="padding:20px; overflow-y:auto; flex:1;">
+      <form id="fm_abs_edit" onsubmit="saveAbsData(event);" method="post" accept-charset="utf-8">
+        <input type="hidden" name="csrf_test_name" value="4a1780fbc12d51eb33cb3ea82167f4e8">
+        <input type="hidden" name="form_open_date_use_chk_csrf" value="2026-10-02 14:52:23">
+        <input type="hidden" id="abs_edit_idx" name="edit_idx" value="">
+
+        <div style="font-size:12px; color:#2563eb; margin-bottom:12px;">
+          <i class="fa fa-check-square-o"></i> 표시는 필수 입력 항목입니다.
+        </div>
+
+        <table class="table table-bordered table-hover" style="margin-bottom:16px;">
+          <tbody>
+            <!-- 1. 학생정보 -->
+            <tr>
+              <th style="width:130px; background:#f8fafc; vertical-align:middle;">
+                학생정보 <span class="text-danger">*</span>
+              </th>
+              <td>
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <input id="abs_mem_info" name="mem_info" type="text" title="학생정보" value="" class="form-control input-sm" style="flex:1; height:32px; background:#fff;" placeholder="[학생 검색] 버튼으로 학생을 선택하세요" readonly>
+                  <button type="button" class="btn btn-primary btn-sm" onclick="openAbsStuSearchModal();" style="height:32px; padding:0 14px; display:inline-flex; align-items:center; gap:4px;">
+                    <i class="fa fa-binoculars"></i> 검색하기
+                  </button>
+                  <input type="hidden" id="abs_mem_num" name="mem_num" value="">
+                </div>
+                <div class="error_msg error_mem_num" id="abs_error_mem_num" style="color:#ef4444; font-size:12px; margin-top:4px;"></div>
+              </td>
+            </tr>
+
+            <!-- 2. 신청유형 -->
+            <tr>
+              <th style="background:#f8fafc; vertical-align:middle;">
+                신청유형 <span class="text-danger">*</span>
+              </th>
+              <td>
+                <div style="display:flex; align-items:center; gap:16px;">
+                  <label style="margin:0; font-weight:normal; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+                    <input type="radio" name="sin_type" id="sin_type_1" value="1" checked onclick="chk_abs_sin_type();"> 결석
+                  </label>
+                  <label style="margin:0; font-weight:normal; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+                    <input type="radio" name="sin_type" id="sin_type_2" value="2" onclick="chk_abs_sin_type();"> 조기귀가
+                  </label>
+                </div>
+              </td>
+            </tr>
+
+            <!-- 3. 일자 -->
+            <tr>
+              <th style="background:#f8fafc; vertical-align:middle;">
+                일자 <span class="text-danger">*</span>
+              </th>
+              <td>
+                <input id="sin_date" name="sin_date" type="date" class="form-control input-sm" style="width:140px; height:32px;" value="2026-10-02">
+              </td>
+            </tr>
+
+            <!-- 4. 시간 (조기귀가 시 표시) -->
+            <tr id="tr_sin_time" style="display:none;">
+              <th style="background:#f8fafc; vertical-align:middle;">
+                시간 <span class="text-danger">*</span>
+              </th>
+              <td>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <select name="sin_time_hour" id="sin_time_hour" class="form-control input-sm" style="width:100px; height:32px; line-height:normal !important;">
+                    <option value="">=시=</option>
+                    <option value="09">09시</option><option value="10">10시</option><option value="11">11시</option>
+                    <option value="12">12시</option><option value="13">13시</option><option value="14" selected>14시</option>
+                    <option value="15">15시</option><option value="16">16시</option><option value="17">17시</option>
+                    <option value="18">18시</option><option value="19">19시</option><option value="20">20시</option>
+                  </select>
+                  <span>:</span>
+                  <select name="sin_time_min" id="sin_time_min" class="form-control input-sm" style="width:100px; height:32px; line-height:normal !important;">
+                    <option value="">=분=</option>
+                    <option value="00">00분</option><option value="10">10분</option><option value="20">20분</option>
+                    <option value="30">30분</option><option value="40">40분</option><option value="50" selected>50분</option>
+                  </select>
+                </div>
+              </td>
+            </tr>
+
+            <!-- 5. 사유 -->
+            <tr>
+              <th style="background:#f8fafc; vertical-align:middle;">
+                사유 <span class="text-danger">*</span>
+              </th>
+              <td>
+                <input id="sin_content" name="sin_content" type="text" class="form-control input-sm" style="width:100%; height:32px;" placeholder="결석 또는 조기귀가 사유 입력 (예: 감기 몸살, 병원 진료 등)" maxlength="50">
+              </td>
+            </tr>
+
+            <!-- 6. 귀가 동행자 (조기귀가 시 표시) -->
+            <tr id="tr_guardian" style="display:none;">
+              <th style="background:#f8fafc; vertical-align:middle;">
+                귀가 동행자 <span class="text-danger">*</span>
+              </th>
+              <td>
+                <input id="guardian" name="guardian" type="text" class="form-control input-sm" style="width:260px; height:32px;" placeholder="예: 엄마, 아빠, 자율귀가 등">
+                <div style="margin-top:6px; font-size:12px; color:#64748b;">
+                  빠른선택:
+                  <a href="javascript:void(0);" onclick="$('#guardian').val('엄마');" class="badge" style="background:#e2e8f0; color:#334155; text-decoration:none; margin-right:4px;">엄마</a>
+                  <a href="javascript:void(0);" onclick="$('#guardian').val('아빠');" class="badge" style="background:#e2e8f0; color:#334155; text-decoration:none; margin-right:4px;">아빠</a>
+                  <a href="javascript:void(0);" onclick="$('#guardian').val('자율귀가');" class="badge" style="background:#e2e8f0; color:#334155; text-decoration:none; margin-right:4px;">자율귀가</a>
+                  <a href="javascript:void(0);" onclick="$('#guardian').val('○○학원');" class="badge" style="background:#e2e8f0; color:#334155; text-decoration:none;">○○학원</a>
+                </div>
+              </td>
+            </tr>
+
+            <!-- 7. 동행자 연락처 (조기귀가 시 표시) -->
+            <tr id="tr_guardian_tel" style="display:none;">
+              <th style="background:#f8fafc; vertical-align:middle;">
+                연락처 <span class="text-danger">*</span>
+              </th>
+              <td>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <select name="guardian_tel_1" id="guardian_tel_1" class="form-control input-sm" style="width:90px; height:32px; line-height:normal !important;">
+                    <option value="">선택</option><option value="010" selected>010</option><option value="011">011</option><option value="02">02</option><option value="062">062</option>
+                  </select>
+                  <span>-</span>
+                  <input name="guardian_tel_2" id="guardian_tel_2" type="text" maxlength="4" class="form-control input-sm" style="width:80px; height:32px; text-align:center;">
+                  <span>-</span>
+                  <input name="guardian_tel_3" id="guardian_tel_3" type="text" maxlength="4" class="form-control input-sm" style="width:80px; height:32px; text-align:center;">
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 하단 액션 버튼 그룹 -->
+        <div style="text-align:center; display:flex; justify-content:center; gap:8px;">
+          <button type="button" class="btn btn-default" onclick="closeAbsWriteModal();" style="height:34px; padding:0 20px;">취소</button>
+          <button type="submit" class="btn btn-primary" style="height:34px; padding:0 24px; font-weight:bold;">저장</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,679 @@
+{
+  "lists": {
+    "forms": [
+      {
+        "name": "fm_list_search",
+        "action": "https://www.dbdbschool.kr/af/ad_abs/lists/sn/3267",
+        "method": "get"
+      },
+      {
+        "name": "fm_del",
+        "action": "https://www.dbdbschool.kr/af/ad_abs/del/p/1/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_login",
+        "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_auth2",
+        "action": "https://www.dbdbschool.kr/member/auth2/modal/Y/sn/3267",
+        "method": "post"
+      }
+    ],
+    "inputs": [
+      {
+        "type": "radio",
+        "name": "sdt",
+        "id": "sdt_0",
+        "value": "0"
+      },
+      {
+        "type": "radio",
+        "name": "sdt",
+        "id": "sdt_1",
+        "value": "1"
+      },
+      {
+        "type": "text",
+        "name": "ssd",
+        "id": "sdt_ssd",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "sed",
+        "id": "sdt_sed",
+        "value": ""
+      },
+      {
+        "type": "hidden",
+        "name": "st",
+        "id": "",
+        "value": "mem_name"
+      },
+      {
+        "type": "text",
+        "name": "sw",
+        "id": "s_word",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "",
+        "id": "",
+        "value": "검색"
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "전체"
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "검색결과출력"
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "등록"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 14:52:20"
+      },
+      {
+        "type": "hidden",
+        "name": "del_num",
+        "id": "del_num",
+        "value": ""
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 14:52:20"
+      },
+      {
+        "type": "text",
+        "name": "login_id",
+        "id": "login_id",
+        "value": ""
+      },
+      {
+        "type": "password",
+        "name": "login_passwd",
+        "id": "login_passwd",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "로그인"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 14:52:20"
+      },
+      {
+        "type": "text",
+        "name": "otp_num",
+        "id": "",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "2단계 인증"
+      }
+    ],
+    "selects": [
+      {
+        "name": "sst",
+        "id": "sst",
+        "optionsCount": 3,
+        "options": [
+          {
+            "value": "",
+            "text": "=신청유형="
+          },
+          {
+            "value": "1",
+            "text": "결석"
+          },
+          {
+            "value": "2",
+            "text": "조기귀가"
+          }
+        ]
+      },
+      {
+        "name": "sgr",
+        "id": "sgr",
+        "optionsCount": 7,
+        "options": [
+          {
+            "value": "",
+            "text": "=학년="
+          },
+          {
+            "value": "1",
+            "text": "1"
+          },
+          {
+            "value": "2",
+            "text": "2"
+          },
+          {
+            "value": "3",
+            "text": "3"
+          },
+          {
+            "value": "4",
+            "text": "4"
+          },
+          {
+            "value": "5",
+            "text": "5"
+          },
+          {
+            "value": "6",
+            "text": "6"
+          }
+        ]
+      },
+      {
+        "name": "scl",
+        "id": "scl",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=반="
+          },
+          {
+            "value": "1",
+            "text": "1"
+          },
+          {
+            "value": "2",
+            "text": "2"
+          },
+          {
+            "value": "3",
+            "text": "3"
+          },
+          {
+            "value": "4",
+            "text": "4"
+          },
+          {
+            "value": "5",
+            "text": "5"
+          },
+          {
+            "value": "6",
+            "text": "6"
+          },
+          {
+            "value": "7",
+            "text": "7"
+          },
+          {
+            "value": "8",
+            "text": "8"
+          },
+          {
+            "value": "9",
+            "text": "9"
+          },
+          {
+            "value": "10",
+            "text": "10"
+          },
+          {
+            "value": "11",
+            "text": "11"
+          },
+          {
+            "value": "12",
+            "text": "12"
+          }
+        ]
+      }
+    ],
+    "buttons": [
+      "×",
+      "×"
+    ],
+    "onclicks": []
+  },
+  "write": {
+    "forms": [
+      {
+        "name": "fm_edit",
+        "action": "https://www.dbdbschool.kr/af/ad_abs/write/p/1/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_login",
+        "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_auth2",
+        "action": "https://www.dbdbschool.kr/member/auth2/modal/Y/sn/3267",
+        "method": "post"
+      }
+    ],
+    "inputs": [
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 14:52:23"
+      },
+      {
+        "type": "text",
+        "name": "mem_info",
+        "id": "mem_info",
+        "value": ""
+      },
+      {
+        "type": "hidden",
+        "name": "mem_num",
+        "id": "mem_num",
+        "value": ""
+      },
+      {
+        "type": "radio",
+        "name": "sin_type",
+        "id": "sin_type_1",
+        "value": "1"
+      },
+      {
+        "type": "radio",
+        "name": "sin_type",
+        "id": "sin_type_2",
+        "value": "2"
+      },
+      {
+        "type": "text",
+        "name": "sin_date",
+        "id": "sin_date",
+        "value": "2026-10-02"
+      },
+      {
+        "type": "text",
+        "name": "sin_content",
+        "id": "sin_content",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "guardian",
+        "id": "guardian",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "guardian_tel_2",
+        "id": "guardian_tel_2",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "guardian_tel_3",
+        "id": "guardian_tel_3",
+        "value": ""
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "목록보기"
+      },
+      {
+        "type": "submit",
+        "name": "",
+        "id": "",
+        "value": "작성완료"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 14:52:23"
+      },
+      {
+        "type": "text",
+        "name": "login_id",
+        "id": "login_id",
+        "value": ""
+      },
+      {
+        "type": "password",
+        "name": "login_passwd",
+        "id": "login_passwd",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "로그인"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 14:52:23"
+      },
+      {
+        "type": "text",
+        "name": "otp_num",
+        "id": "",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "2단계 인증"
+      }
+    ],
+    "selects": [
+      {
+        "name": "sin_time_hour",
+        "id": "sin_time_hour",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=시="
+          },
+          {
+            "value": "09",
+            "text": "09시"
+          },
+          {
+            "value": "10",
+            "text": "10시"
+          },
+          {
+            "value": "11",
+            "text": "11시"
+          },
+          {
+            "value": "12",
+            "text": "12시"
+          },
+          {
+            "value": "13",
+            "text": "13시"
+          },
+          {
+            "value": "14",
+            "text": "14시"
+          },
+          {
+            "value": "15",
+            "text": "15시"
+          },
+          {
+            "value": "16",
+            "text": "16시"
+          },
+          {
+            "value": "17",
+            "text": "17시"
+          },
+          {
+            "value": "18",
+            "text": "18시"
+          },
+          {
+            "value": "19",
+            "text": "19시"
+          },
+          {
+            "value": "20",
+            "text": "20시"
+          }
+        ]
+      },
+      {
+        "name": "sin_time_min",
+        "id": "sin_time_min",
+        "optionsCount": 7,
+        "options": [
+          {
+            "value": "",
+            "text": "=분="
+          },
+          {
+            "value": "00",
+            "text": "00분"
+          },
+          {
+            "value": "10",
+            "text": "10분"
+          },
+          {
+            "value": "20",
+            "text": "20분"
+          },
+          {
+            "value": "30",
+            "text": "30분"
+          },
+          {
+            "value": "40",
+            "text": "40분"
+          },
+          {
+            "value": "50",
+            "text": "50분"
+          }
+        ]
+      },
+      {
+        "name": "guardian_tel_1",
+        "id": "guardian_tel_1",
+        "optionsCount": 33,
+        "options": [
+          {
+            "value": "",
+            "text": "선택"
+          },
+          {
+            "value": "010",
+            "text": "010"
+          },
+          {
+            "value": "011",
+            "text": "011"
+          },
+          {
+            "value": "012",
+            "text": "012"
+          },
+          {
+            "value": "016",
+            "text": "016"
+          },
+          {
+            "value": "017",
+            "text": "017"
+          },
+          {
+            "value": "018",
+            "text": "018"
+          },
+          {
+            "value": "019",
+            "text": "019"
+          },
+          {
+            "value": "090",
+            "text": "090"
+          },
+          {
+            "value": "091",
+            "text": "091"
+          },
+          {
+            "value": "092",
+            "text": "092"
+          },
+          {
+            "value": "093",
+            "text": "093"
+          },
+          {
+            "value": "094",
+            "text": "094"
+          },
+          {
+            "value": "096",
+            "text": "096"
+          },
+          {
+            "value": "098",
+            "text": "098"
+          },
+          {
+            "value": "02",
+            "text": "02"
+          },
+          {
+            "value": "031",
+            "text": "031"
+          },
+          {
+            "value": "032",
+            "text": "032"
+          },
+          {
+            "value": "033",
+            "text": "033"
+          },
+          {
+            "value": "041",
+            "text": "041"
+          },
+          {
+            "value": "042",
+            "text": "042"
+          },
+          {
+            "value": "043",
+            "text": "043"
+          },
+          {
+            "value": "044",
+            "text": "044"
+          },
+          {
+            "value": "051",
+            "text": "051"
+          },
+          {
+            "value": "052",
+            "text": "052"
+          },
+          {
+            "value": "053",
+            "text": "053"
+          },
+          {
+            "value": "054",
+            "text": "054"
+          },
+          {
+            "value": "055",
+            "text": "055"
+          },
+          {
+            "value": "061",
+            "text": "061"
+          },
+          {
+            "value": "062",
+            "text": "062"
+          },
+          {
+            "value": "063",
+            "text": "063"
+          },
+          {
+            "value": "064",
+            "text": "064"
+          },
+          {
+            "value": "070",
+            "text": "070"
+          }
+        ]
+      }
+    ],
+    "buttons": [
+      "×",
+      "×"
+    ],
+    "onclicks": [
+      "openStuWin(this.href); return false",
+      "$(",
+      "$(",
+      "$(",
+      "$("
+    ]
+  }
+}

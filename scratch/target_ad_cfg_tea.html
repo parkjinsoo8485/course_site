@@ -1,0 +1,224 @@
+<div id="contents_box">
+			<div id="contents_title">
+				<i class="fa fa-file-text-o"></i> 환경설정 <br><span class="title">광주풍향초등학교 늘봄학교</span>
+	
+				
+				<p class="write_yun"><a href="https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267"><i class="fa fa-futbol-o"></i><br><span class="write">강좌관리</span></a></p>
+	
+
+
+			</div>
+			<div id="contents">
+			<div class="panel_main panel-default_main">
+	<div class="new_help_manualbox hm_loca1">
+    	<p class="hm_title"><i class="fa fa-file-text-o" aria-hidden="true"></i>매뉴얼</p>
+        <ul>
+        	<li><a href="https://www.dbdbschool.kr/help/go_data/num/95/data/link1" target="_blank" class="manual_btn"><i class="fa fa-youtube-play"></i> 강사권한</a></li>
+        </ul>
+    </div>
+    
+	<div class="panel-heading">강사권한 설정</div>
+	<div class="panel-body" style="margin-bottom:-20px;">
+		<ul class="tapMenu">
+			<li><a href="https://www.dbdbschool.kr/af/ad_cfg/main/sn/3267">기본설정</a></li>
+			<li class="on"><a href="https://www.dbdbschool.kr/af/ad_cfg/tea/sn/3267">강사권한</a></li>
+			<li><a href="https://www.dbdbschool.kr/af/ad_cfg/att/sn/3267">출석부옵션</a></li>
+			<li><a href="https://www.dbdbschool.kr/af/ad_cfg/sms/sn/3267">문자설정</a></li>
+		</ul>		
+	</div>
+		
+<form action="https://www.dbdbschool.kr/af/ad_cfg/tea/sn/3267" name="fm_edit" id="fm_edit" onsubmit="return fm_edit_check(this);" method="post" accept-charset="utf-8">
+                                                                     <input type="hidden" name="csrf_test_name" value="4a1780fbc12d51eb33cb3ea82167f4e8">
+<input type="hidden" name="form_open_date_use_chk_csrf" value="2026-10-02 16:02:03">
+	<table class="table table-bordered table-hover list MAT0">
+		<tbody><tr>
+			<th width="160">'대기' 상태 강좌 출력</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="allowViWaitLec" id="allowViWaitLec_Y" value="Y" checked="checked"><label for="allowViWaitLec_Y">Yes</label>&nbsp;
+						<input type="radio" name="allowViWaitLec" id="allowViWaitLec_N" value="N"><label for="allowViWaitLec_N">No </label>
+					</span>
+					<br>('대기' 상태의 강좌를 강사 화면에 출력)
+				</span>
+				<div class="error_msg error_allowViWaitLec"></div>
+			</td>
+		</tr>						
+		<tr>
+			<th>강좌 등록 허용</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="allowWrLec" id="allowWrLec_Y" value="Y" checked="checked"><label for="allowWrLec_Y">Yes</label>&nbsp;
+						<input type="radio" name="allowWrLec" id="allowWrLec_N" value="N"><label for="allowWrLec_N">No </label>
+					</span>
+					<br>(강사에게 강좌를 등록할 수 있는 권한 부여, 대기 강좌도 강사의 강좌 관리 메뉴에 출력 됨)
+				</span>
+				<div class="error_msg error_allowWrLec"></div>
+			</td>
+		</tr>	
+		<tr>
+			<th>강좌 전체 조회</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="allowViAllLec" id="allowViAllLec_Y" value="Y"><label for="allowViAllLec_Y">Yes</label>&nbsp;
+						<input type="radio" name="allowViAllLec" id="allowViAllLec_N" value="N" checked="checked"><label for="allowViAllLec_N">No </label>
+					</span>
+					<br>(다른 강사의 강좌도 <strong class="text-danger">조회</strong>할 수 있는 권한 부여)
+				</span>
+				<div class="error_msg error_allowViAllLec"></div>
+			</td>
+		</tr>						
+		<tr>
+			<th>수강생 등록 허용</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="allowWrSin" id="allowWrSin_Y" value="Y" checked="checked" onclick="chk_wr_sin1();"><label for="allowWrSin_Y">Yes</label>
+						(&nbsp;<input type="checkbox" name="allowWrSin1" id="allowWrSin1" value="Y"><label for="allowWrSin1">수강신청 기간에만 허용</label>
+						&nbsp;<input type="checkbox" name="allowWrSin2" id="allowWrSin2" value="Y"><label for="allowWrSin2">수강신청 기간 종료 후에만 허용</label>)
+						<br><input type="radio" name="allowWrSin" id="allowWrSin_N" value="N" onclick="chk_wr_sin1();"><label for="allowWrSin_N">No </label>
+					</span>
+					<br>(해당 강좌의 강사에게 수강생 정보를 <strong class="text-danger">등록</strong>할 수 있는 권한 부여)
+				</span>
+				<div class="error_msg error_allowWrSin"></div>
+			</td>
+		</tr>		
+		<tr>
+			<th>수강생 삭제 허용</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="allowDelSin" id="allowDelSin_Y" value="Y" checked="checked"><label for="allowDelSin_Y">Yes</label>&nbsp;
+						<input type="radio" name="allowDelSin" id="allowDelSin_N" value="N"><label for="allowDelSin_N">No</label>
+					</span>
+					<br>(해당 강좌의 강사에게 수강생 정보를 <strong class="text-danger">삭제</strong>할 수 있는 권한 부여)
+				</span>
+				<div class="error_msg error_allowDelSin"></div>
+			</td>
+		</tr>
+		<tr>
+			<th>수강생 이동 허용</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="allowMoveSin" id="allowMoveSin_Y" value="Y" checked="checked"><label for="allowMoveSin_Y">Yes</label>&nbsp;
+						<input type="radio" name="allowMoveSin" id="allowMoveSin_N" value="N"><label for="allowMoveSin_N">No </label>
+					</span> 
+					<br>(해당 강좌의 강사에게 수강생 정보를 <strong class="text-danger">다른 강좌로 이동</strong>할 수 있는 권한 부여)
+				</span>
+				<div class="error_msg error_allowMoveSin"></div>
+			</td>
+		</tr>					
+		<tr>
+			<th>수강료 수정 허용</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="allowPayModify" id="allowPayModify_Y" value="Y" checked="checked"><label for="allowPayModify_Y">Yes</label>&nbsp;
+						<input type="radio" name="allowPayModify" id="allowPayModify_N" value="N"><label for="allowPayModify_N">No </label>
+					</span> 
+					<br>(해당 강좌의 강사에게 수강료, 교재비, 재료비를 <strong class="text-danger">수정</strong>할 수 있는 권한 부여)
+				</span>
+				<div class="error_msg error_allowPayModify"></div>
+			</td>
+		</tr>			
+		<tr>
+			<th>수강생 연락처 정보</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="allowHpView" id="allowHpView_Y" value="Y" checked="checked" onclick="chk_hp_view();"><label for="allowHpView_Y">Yes</label>(&nbsp;<input type="checkbox" name="allowHpEdit" id="allowHpEdit" value="Y" checked="checked"><label for="allowHpEdit">수강생 연락처 수정 허용</label>)&nbsp;
+						<input type="radio" name="allowHpView" id="allowHpView_N" value="N" onclick="chk_hp_view();"><label for="allowHpView_N">No </label>
+					</span>
+					<br>(해당 강좌의 강사에게 수강생 <strong class="text-danger">연락처 정보 출력</strong>)					
+				</span>
+				<div class="error_msg error_allowHpView"></div>
+			</td>
+		</tr>						
+	</tbody></table>
+	<p class="text-center MAT30"><input type="button" onclick="history.back(-1); return false;" class="btn btn-default" value="취소"> <input type="submit" value="수정" data-loading-text="처리중 .." class="btn btn-primary"></p>
+</form>
+</div>
+
+<script type="text/javascript" src="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/form_common.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/form_ajax.js" charset="utf-8"></script>
+<script type="text/javascript">
+	function chk_wr_sin1() {
+		if($('#allowWrSin_Y').prop('checked')) {
+			$('#allowWrSin1').prop('disabled', false);
+			$('#allowWrSin2').prop('disabled', false);
+		} else {
+			$('#allowWrSin1').prop('disabled', true);
+			$('#allowWrSin2').prop('disabled', true);
+		}
+	}
+
+	function chk_hp_view() {
+		if($('#allowHpView_Y').prop('checked')) {
+			$('#allowHpEdit').prop('disabled', false);
+		} else {
+			$('#allowHpEdit').prop('disabled', true);
+		}
+	}		
+	
+	function openMemWin(dest) 
+	{
+		window.name = ''; // 이름이 같은 경우 새창 안뜨는 문제 처리
+		win = window.open(dest, "trTeaSearchWin", "scrollbars=yes,toolbar=no,status=yes,location=no,directories=no,width=530,height=500,resizable=no,menubar=no,left=10,top=10");
+		win.focus();
+	}
+	function delAddMem() {
+		if(confirm('선택된 교직원을 관리자에서 삭제하시겠습니까?')) {
+			$('#addAdminList option:selected').each(function() {
+				$('#addAdminList option:eq(' + this.index + ')').remove();
+			});		
+		}
+	}	
+	
+	function fm_edit_check(fm) {
+		// { 서비스 관리자
+		var addAdminNum = '';
+		$('#addAdminList > option').each(function() {
+			if(addAdminNum) { addAdminNum = addAdminNum + ','; }
+			addAdminNum =  addAdminNum + this.value;
+		});
+		$('#addAdminNum').val(addAdminNum);
+		// }
+		
+		if(true){ //confirm('적용하시겠습니까?')) {
+			return true;
+			fm_ajax(fm);
+		}
+		return false;
+	}
+				
+	$('#link_survay_short').click(function (){
+	    var range, selection;
+
+	    if (window.getSelection && document.createRange) {
+	        selection = window.getSelection();
+	        range = document.createRange();
+	        range.selectNodeContents(this);
+	        selection.removeAllRanges();
+	        selection.addRange(range);
+	    } else if (document.selection && document.body.createTextRange) {
+	        range = document.body.createTextRange();
+	        range.moveToElementText(this);
+	        range.select();
+	    }
+	});		
+	
+	$(document).ready(function(){
+		chk_wr_sin1();
+		chk_hp_view();
+	});		
+</script>
+			</div>
+			
+			<div id="footer">
+				Copyright ⓒ <span class="copyright_name"><a href="http://www.xmecca.com" target="_blank" rel="noopener noreferrer"><strong>x</strong>mecca.com</a></span> All Rights Reserved.
+				<br><i class="fa fa-envelope"></i> dbdbschool@naver.com
+			</div>
+		</div>

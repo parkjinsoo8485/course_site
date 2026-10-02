@@ -1,0 +1,617 @@
+{
+  "lists": {
+    "forms": [
+      {
+        "name": "fm_list_search",
+        "action": "https://www.dbdbschool.kr/af/ad_tea/lists/sn/3267",
+        "method": "get"
+      },
+      {
+        "name": "fm_list",
+        "action": "https://www.dbdbschool.kr/af/ad_tea/lists/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_mem_status",
+        "action": "https://www.dbdbschool.kr/af/ad_tea/status/p/1/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_del",
+        "action": "https://www.dbdbschool.kr/af/ad_tea/del/p/1/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_login",
+        "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_auth2",
+        "action": "https://www.dbdbschool.kr/member/auth2/modal/Y/sn/3267",
+        "method": "post"
+      }
+    ],
+    "inputs": [
+      {
+        "type": "text",
+        "name": "sw",
+        "id": "s_word",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "",
+        "id": "",
+        "value": "검색"
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "전체"
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "강사 등록"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:12:16"
+      },
+      {
+        "type": "checkbox",
+        "name": "check_all",
+        "id": "check_all",
+        "value": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "data_checked[]",
+        "id": "",
+        "value": "55382"
+      },
+      {
+        "type": "checkbox",
+        "name": "data_checked[]",
+        "id": "",
+        "value": "55938"
+      },
+      {
+        "type": "checkbox",
+        "name": "data_checked[]",
+        "id": "",
+        "value": "55385"
+      },
+      {
+        "type": "checkbox",
+        "name": "data_checked[]",
+        "id": "",
+        "value": "55388"
+      },
+      {
+        "type": "checkbox",
+        "name": "data_checked[]",
+        "id": "",
+        "value": "55389"
+      },
+      {
+        "type": "checkbox",
+        "name": "data_checked[]",
+        "id": "",
+        "value": "66057"
+      },
+      {
+        "type": "checkbox",
+        "name": "data_checked[]",
+        "id": "",
+        "value": "55374"
+      },
+      {
+        "type": "checkbox",
+        "name": "data_checked[]",
+        "id": "",
+        "value": "66058"
+      },
+      {
+        "type": "checkbox",
+        "name": "data_checked[]",
+        "id": "",
+        "value": "55384"
+      },
+      {
+        "type": "checkbox",
+        "name": "data_checked[]",
+        "id": "",
+        "value": "55375"
+      },
+      {
+        "type": "submit",
+        "name": "",
+        "id": "",
+        "value": "적용하기"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:12:16"
+      },
+      {
+        "type": "hidden",
+        "name": "num",
+        "id": "mem_status_num",
+        "value": ""
+      },
+      {
+        "type": "hidden",
+        "name": "mem_status",
+        "id": "mem_status",
+        "value": ""
+      },
+      {
+        "type": "hidden",
+        "name": "mem_obj_id",
+        "id": "mem_obj_id",
+        "value": ""
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:12:16"
+      },
+      {
+        "type": "hidden",
+        "name": "num",
+        "id": "del_num",
+        "value": ""
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:12:16"
+      },
+      {
+        "type": "text",
+        "name": "login_id",
+        "id": "login_id",
+        "value": ""
+      },
+      {
+        "type": "password",
+        "name": "login_passwd",
+        "id": "login_passwd",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "로그인"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:12:16"
+      },
+      {
+        "type": "text",
+        "name": "otp_num",
+        "id": "",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "2단계 인증"
+      }
+    ],
+    "selects": [
+      {
+        "name": "st",
+        "id": "st",
+        "optionsCount": 2,
+        "options": [
+          {
+            "value": "mem_name",
+            "text": "이름"
+          },
+          {
+            "value": "mem_id",
+            "text": "아이디"
+          }
+        ]
+      },
+      {
+        "name": "update_type",
+        "id": "",
+        "optionsCount": 5,
+        "options": [
+          {
+            "value": "",
+            "text": "=== 일괄적용 ==="
+          },
+          {
+            "value": "status_1",
+            "text": "[상태변경] 사용"
+          },
+          {
+            "value": "status_0",
+            "text": "[상태변경] 대기"
+          },
+          {
+            "value": "",
+            "text": "---------------"
+          },
+          {
+            "value": "del",
+            "text": "삭제"
+          }
+        ]
+      }
+    ],
+    "buttons": [
+      "×",
+      "×"
+    ],
+    "onclicks": [
+      "chk_mem_status(55382, 0); return false;",
+      "chk_mem_status(55382, 1); return false;",
+      "chk_del(55382); return false;",
+      "chk_mem_status(55938, 0); return false;",
+      "chk_mem_status(55938, 1); return false;",
+      "chk_del(55938); return false;",
+      "chk_mem_status(55385, 0); return false;",
+      "chk_mem_status(55385, 1); return false;",
+      "chk_del(55385); return false;",
+      "chk_mem_status(55388, 0); return false;",
+      "chk_mem_status(55388, 1); return false;",
+      "chk_del(55388); return false;",
+      "chk_mem_status(55389, 0); return false;",
+      "chk_mem_status(55389, 1); return false;",
+      "chk_del(55389); return false;",
+      "chk_mem_status(66057, 0); return false;",
+      "chk_mem_status(66057, 1); return false;",
+      "chk_del(66057); return false;",
+      "chk_mem_status(55374, 0); return false;",
+      "chk_mem_status(55374, 1); return false;",
+      "chk_del(55374); return false;",
+      "chk_mem_status(66058, 0); return false;",
+      "chk_mem_status(66058, 1); return false;",
+      "chk_del(66058); return false;",
+      "chk_mem_status(55384, 0); return false;",
+      "chk_mem_status(55384, 1); return false;",
+      "chk_del(55384); return false;",
+      "chk_mem_status(55375, 0); return false;",
+      "chk_mem_status(55375, 1); return false;",
+      "chk_del(55375); return false;"
+    ]
+  },
+  "write": {
+    "forms": [
+      {
+        "name": "fm_edit",
+        "action": "https://www.dbdbschool.kr/af/ad_tea/write/p/1/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_chk_mem_id",
+        "action": "https://www.dbdbschool.kr/af/ad_tea/chk_id/p/1/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_login",
+        "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_auth2",
+        "action": "https://www.dbdbschool.kr/member/auth2/modal/Y/sn/3267",
+        "method": "post"
+      }
+    ],
+    "inputs": [
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:12:18"
+      },
+      {
+        "type": "text",
+        "name": "mem_id",
+        "id": "mem_id",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "mem_name",
+        "id": "mem_name",
+        "value": ""
+      },
+      {
+        "type": "password",
+        "name": "mem_passwd",
+        "id": "mem_passwd",
+        "value": ""
+      },
+      {
+        "type": "radio",
+        "name": "mem_status",
+        "id": "mem_status_1",
+        "value": "1"
+      },
+      {
+        "type": "radio",
+        "name": "mem_status",
+        "id": "mem_status_0",
+        "value": "0"
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "목록보기"
+      },
+      {
+        "type": "submit",
+        "name": "",
+        "id": "",
+        "value": "등록"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:12:18"
+      },
+      {
+        "type": "hidden",
+        "name": "chk_mem_id",
+        "id": "chk_mem_id",
+        "value": ""
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:12:18"
+      },
+      {
+        "type": "text",
+        "name": "login_id",
+        "id": "login_id",
+        "value": ""
+      },
+      {
+        "type": "password",
+        "name": "login_passwd",
+        "id": "login_passwd",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "로그인"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:12:18"
+      },
+      {
+        "type": "text",
+        "name": "otp_num",
+        "id": "",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "2단계 인증"
+      }
+    ],
+    "selects": [],
+    "buttons": [
+      "×",
+      "×"
+    ],
+    "onclicks": [
+      "chk_id(this); return false;"
+    ]
+  },
+  "input": {
+    "forms": [
+      {
+        "name": "fm_edit",
+        "action": "https://www.dbdbschool.kr/af/ad_tea/input/p/1/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_login",
+        "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_auth2",
+        "action": "https://www.dbdbschool.kr/member/auth2/modal/Y/sn/3267",
+        "method": "post"
+      }
+    ],
+    "inputs": [
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:12:21"
+      },
+      {
+        "type": "file",
+        "name": "userfile",
+        "id": "userfile",
+        "value": ""
+      },
+      {
+        "type": "radio",
+        "name": "input_type",
+        "id": "input_type_add",
+        "value": "add"
+      },
+      {
+        "type": "radio",
+        "name": "input_type",
+        "id": "input_type_clear",
+        "value": "clear"
+      },
+      {
+        "type": "password",
+        "name": "def_passwd",
+        "id": "def_passwd",
+        "value": ""
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "취소"
+      },
+      {
+        "type": "submit",
+        "name": "",
+        "id": "",
+        "value": "등록"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:12:21"
+      },
+      {
+        "type": "text",
+        "name": "login_id",
+        "id": "login_id",
+        "value": ""
+      },
+      {
+        "type": "password",
+        "name": "login_passwd",
+        "id": "login_passwd",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "로그인"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:12:21"
+      },
+      {
+        "type": "text",
+        "name": "otp_num",
+        "id": "",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "2단계 인증"
+      }
+    ],
+    "selects": [],
+    "buttons": [
+      "×",
+      "×"
+    ],
+    "onclicks": []
+  }
+}

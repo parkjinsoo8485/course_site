@@ -1,0 +1,1005 @@
+
+      <!-- ==================== 18. 환경설정 > 기본설정 (/af/ad_cfg/main) 1:1 Authentic Clone ==================== -->
+      <div class="submodel-panel" id="panel_ad_cfg_main" style="display: none;">
+        <div class="content-card" style="background:#fff; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.1); padding:20px;">
+          
+          <!-- 카드 상단 바 & 매뉴얼 -->
+          <div class="card-top-bar" style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #337ab7; padding-bottom:12px; margin-bottom:16px;">
+            <div class="section-title" id="cfg_section_title" style="font-size:18px; font-weight:bold; color:#333; display:flex; align-items:center; gap:8px;">
+              <i class="fa fa-cog" style="color:#337ab7;"></i> <span id="cfg_title_text">기본설정</span>
+              <span style="font-size:12px; color:#888; font-weight:normal;">광주풍향초등학교 늘봄학교</span>
+            </div>
+            <div class="helper-badges" style="display:flex; gap:6px;">
+              <a href="https://www.dbdbschool.kr/help/go_data/num/73/data/link1" target="_blank" class="btn btn-default btn-xs" style="height:28px; padding:0 10px; font-size:12px; display:inline-flex; align-items:center; gap:4px; border:1px solid #ccc; background:#fff;">
+                <i class="fa fa-youtube-play" style="color:#d9534f;"></i> 매뉴얼
+              </a>
+            </div>
+          </div>
+
+          <!-- 상단 4개 서브탭 메뉴 (1:1 탭 스위칭) -->
+          <div class="panel-body" style="padding:0; margin-bottom:16px;">
+            <ul class="tapMenu" id="cfg_tap_menu" style="display:flex; list-style:none; padding:0; margin:0; border-bottom:1px solid #ddd; gap:2px;">
+              <li class="on" id="tab_btn_main" style="margin-bottom:-1px;">
+                <a href="/af/ad_cfg/main/sn/3267" onclick="switchCfgTab('main', event);" style="display:block; padding:8px 20px; font-size:13px; font-weight:bold; text-decoration:none; color:#337ab7; border:1px solid #ddd; border-bottom:1px solid #fff; background:#fff; border-top:2px solid #337ab7; border-radius:3px 3px 0 0;">기본설정</a>
+              </li>
+              <li id="tab_btn_tea" style="margin-bottom:-1px;">
+                <a href="/af/ad_cfg/tea/sn/3267" onclick="switchCfgTab('tea', event);" style="display:block; padding:8px 20px; font-size:13px; text-decoration:none; color:#555; border:1px solid transparent; background:#f9f9f9; border-radius:3px 3px 0 0;">강사권한</a>
+              </li>
+              <li id="tab_btn_att" style="margin-bottom:-1px;">
+                <a href="/af/ad_cfg/att/sn/3267" onclick="switchCfgTab('att', event);" style="display:block; padding:8px 20px; font-size:13px; text-decoration:none; color:#555; border:1px solid transparent; background:#f9f9f9; border-radius:3px 3px 0 0;">출석부옵션</a>
+              </li>
+              <li id="tab_btn_sms" style="margin-bottom:-1px;">
+                <a href="/af/ad_cfg/sms/sn/3267" onclick="switchCfgTab('sms', event);" style="display:block; padding:8px 20px; font-size:13px; text-decoration:none; color:#555; border:1px solid transparent; background:#f9f9f9; border-radius:3px 3px 0 0;">문자설정</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 4개 탭 폼 컨테이너 -->
+          <div id="cfg_panes_wrapper">
+            
+    <!-- [Tab Pane: main] -->
+    <div id="cfg_pane_main" class="cfg-tab-pane" style="display: block;">
+      <form  action="/af/ad_cfg/main/sn/3267" name="fm_edit" id="fm_edit" onsubmit="return submitCfgForm(event, this, 'main');" method="post" accept-charset="utf-8" id="fm_cfg_main">
+        
+                                                                                                              <input type="hidden" name="csrf_test_name" value="4a1780fbc12d51eb33cb3ea82167f4e8">
+<input type="hidden" name="form_open_date_use_chk_csrf" value="2026-10-02 16:02:01">
+	<table class="table table-bordered table-hover list MAT0">
+		<tbody><tr>
+			<th style="min-width:73px;" colspan="2"><strong class="text-primary">학교명</strong></th>
+			<td>광주풍향초등학교</td>
+		</tr>
+		<tr>
+			<th colspan="2"><strong class="text-primary">서비스 이용 기간</strong></th>
+			<td>2025-05-09 ~ 2027-02-28</td>
+		</tr>
+		<tr>
+			<th colspan="2">서비스명 선택</th>
+			<td>
+				<span class="mobile_clear">			
+					<span>
+						<input type="radio" name="titleNum" id="titleNum_0" value="0"><label for="titleNum_0">방과후학교</label>&nbsp;
+						<input type="radio" name="titleNum" id="titleNum_1" value="1" checked="checked"><label for="titleNum_1">늘봄학교</label>
+						<input type="radio" name="titleNum" id="titleNum_2" value="2"><label for="titleNum_2">초등돌봄교육</label>
+						<input type="radio" name="titleNum" id="titleNum_3" value="3"><label for="titleNum_3">초등방과후돌봄</label>
+					</span>			
+				</span>			
+				<div class="error_msg error_titleNum"></div>
+			</td>
+		</tr>		
+		<tr>
+			<th colspan="2">서비스 관리자</th>
+			<td>				
+				<div style="float:left;">												
+					<select multiple="" id="addAdminList" name="addAdminList" size="4" class="form-control PAD0 select_box_menu_width" style="height:86px;  min-width:100px;">
+						<option value="133321">박진수</option>
+					</select>
+					<input type="hidden" id="addAdminNum" name="addAdminNum" value="133321">
+				</div>
+				<div style="float:left; padding:13px 0 0 5px">
+					<a href="https://www.dbdbschool.kr/teacher/search/sn/3267/tn/cfg_main_admin" onclick="openMemWin(this.href); return false" class="search_btn"><i class="fa fa-binoculars"></i>추가</a>&nbsp;
+					<br><br><a href="#none;" onclick="delAddMem(); return false;" class="delete_btn"><i class="fa fa-trash"></i>삭제</a>
+				</div>
+				<div class="ClearBoth">(서비스를 관리할 교직원을 지정합니다.)</div>
+				<div class="error_msg addAdminNum"></div>
+			</td>	
+		</tr>					
+		<tr>
+			<th colspan="2">강좌구분 기본 선택</th>
+			<td>
+				<span class="mobile_clear">		
+					<span>
+						<select name="defLecDiv" id="defLecDiv" class="form-control input-sm">
+							<option value="0">= 강좌구분(선택안함) =</option>
+							<option value="5">3월</option>
+<option value="6">26년 4월</option>
+<option value="7">26년 5월</option>
+<option value="8">26년 6월</option>
+<option value="9">26년 7월</option>
+<option value="10">26년 8월</option>
+<option value="11">26년 9월</option>
+<option value="12" selected="selected">26년 10월</option>
+						</select>	
+					</span>
+					<span>
+						<select name="defLecProType" id="defLecProType" class="form-control input-sm">
+							<option value="0">= 늘봄과정(선택안함) =</option>
+							<option value="1">방과후</option>
+<option value="2">맞춤형</option>
+<option value="3">돌봄</option>
+						</select>	
+					</span>		
+				</span>			
+				<br>※ 메뉴 클릭 시 기본으로 선택될 '강좌구분, 늘봄과정'을 지정합니다.
+				<br>※ 강좌구분을 선택한 경우에만 '늘봄과정'도 지정됩니다.
+				<div class="error_msg error_defLecDiv"></div>
+				<div class="error_msg error_defLecProType"></div>
+			</td>
+		</tr>		
+		<tr style="border-top:2px solid #B5B5B5 !important;">
+			<th colspan="2">귀가일정표 작성</th>
+			<td>
+				<div>
+					<span class="mobile_clear">			
+						<span>
+							<input type="radio" name="useRtnSch" id="useRtnSch_Y" value="Y" checked="checked"><label for="useRtnSch_Y">사용</label>&nbsp;
+							<input type="radio" name="useRtnSch" id="useRtnSch_N" value="N"><label for="useRtnSch_N">사용안함</label>
+						</span>			
+					</span>			
+				</div>
+				<div class="MAT5">
+					<select name="useRtnSchT" id="useRtnSchT" class="form-control input-sm">
+						<option value="5" selected="selected">5분</option>
+						<option value="10">10분</option>
+						<option value="30">30분</option>
+					</select> 단위로 분 선택
+				</div>
+				<div class="error_msg error_useRtnSch"></div>
+				<div class="error_msg error_useRtnSchT"></div>
+			</td>
+		</tr>	
+		<tr>
+			<th colspan="2">결석/조기귀가 신청</th>
+			<td>
+				<div>
+					<input type="radio" name="useAbs" id="useAbs_Y" value="Y" checked="checked"><label for="useAbs_Y">사용</label>
+					( <input type="checkbox" name="useAbsType2" id="useAbsType2" value="N"><label for="useAbsType2">조기귀가 신청은 <strong class="text-danger">불가능</strong></label> )
+					<br><input type="radio" name="useAbs" id="useAbs_N" value="N"><label for="useAbs_N">사용안함</label>		
+				</div>
+				<div class="MAT5">
+					<select name="useAbsT" id="useAbsT" class="form-control input-sm">
+						<option value="5">5분</option>
+						<option value="10" selected="selected">10분</option>
+						<option value="30">30분</option>
+					</select> 단위로 분 선택
+				</div>				
+				<div class="error_msg error_useAbs"></div>
+				<div class="error_msg error_useAbsType2"></div>
+				<div class="error_msg error_useAbs"></div>
+			</td>
+		</tr>					
+		<tr>
+			<th colspan="2">행정실용<br>출력 옵션</th>
+			<td>
+				<input id="exOpGrade" name="exOpGrade" type="text" title="학년명 문구" value="" size="10" maxlength="5" class="form-control size30" style="width:80px;"> (학년명 문구)
+				<br><input id="exOpClass" name="exOpClass" type="text" title="반명 문구" value="" size="10" maxlength="5" class="form-control size30" style="width:80px;"> (반명 문구)				
+				<br>(학년, 반 출력 시 문구도 함께 출력됨)	
+				<div class="error_msg error_exOpGrade"></div>
+				<div class="error_msg error_exOpClass"></div>
+			</td>
+		</tr>		
+		<tr>
+			<th colspan="2">설문 참여<br>비밀번호</th>
+			<td>
+				<input id="surveyPwd" name="surveyPwd" type="text" title="" value="1234" size="10" maxlength="8" class="form-control size30" style="width:120px;"> (8자 이하로 입력)
+				<p>(로그인 하지 않고 설문에 참여하기 위한 비밀번호)</p>		
+				<p style="padding:5px 0;"><i class="fa fa-external-link-square"></i> <a href="https://www.dbdbschool.kr/go/aso/0hc5dFL" target="_blank" class="link_type">단축 주소</a> : <span id="link_survay_short" style="padding:2px; border:1px #CCCCCC dashed; line-height:160%;">https://www.dbdbschool.kr/go/aso/0hc5dFL</span></p>
+				<div id="qr_container_1" title="https://www.dbdbschool.kr/go/aso/0hc5dFL"><canvas width="170" height="170" style="display: none;"></canvas><img src="data:image/png;base64,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" style="display: block;"></div>
+				<div class="error_msg error_surveyPwd"></div>
+			</td>
+		</tr>				
+		<tr style="border-top:2px solid #B5B5B5 !important;">
+			<th colspan="2">신청 제한 확인 범위</th>
+			<td>
+				<span class="mobile_clear">			
+					<span>
+						<input type="radio" name="appLiScDiv" id="appLiScDiv_N" value="N"><label for="appLiScDiv_N">등록된 모든 강좌</label>&nbsp;
+						<input type="radio" name="appLiScDiv" id="appLiScDiv_Y" value="Y" checked="checked"><label for="appLiScDiv_Y">같은 '강좌구분'에 등록된 강좌</label>
+					</span>			
+				</span>									
+				<br>※ 수강 신청 시 '신청 개수 제한', '중복제한그룹', '강사ID중복', '시간중복'의 확인 범위를 지정합니다.	
+				<br>※ <strong class="text-danger">'대기' 상태의 강좌는 신청 제한에 걸리지 않습니다.</strong>
+				<div class="error_msg error_appLiScDiv"></div>
+			</td>
+		</tr>					
+		<tr>
+			<th colspan="2">신청 개수 제한</th>
+			<td>
+				<input id="maxSin" name="maxSin" type="text" title="신청 개수 제한" value="0" size="3" maxlength="2" class="form-control size30 text-right" style="width:80px;"> 개 (0인 경우 제한 없음)
+				<br>(한사람이 신청할 수 있는 강좌 개수)		
+				<div class="error_msg error_maxSin"></div>
+			</td>
+		</tr>				
+		<tr>
+			<th colspan="2">강의시간 설정 구분</th>
+			<td>
+				<div>
+					<input type="radio" name="lecTimeType" id="lecTimeType_0" value="0"><label for="lecTimeType_0">코드명(6교시, 7교시)</label>
+					<br>※ 강좌의 강의시간(코드명)과 다른 강좌의 강의시간(코드명)이 정확히 일치하는 경우에만 <strong class="text-danger">'시간중복'</strong>으로 <strong class="text-danger">처리됩니다.</strong>
+				</div>
+				<div class="MAT10">
+					<input type="radio" name="lecTimeType" id="lecTimeType_1" value="1" checked="checked"><label for="lecTimeType_1">시간(13:00~13:50, 14:00~14:50)</label>
+					<br>※ 강좌의 '종료시간'과 다른 강좌의 '시작시간'이 일치하는 경우에는 <strong class="text-danger">'시간중복'</strong>으로 처리되지 <strong class="text-danger">않습니다.</strong>
+				</div>				
+				<div class="error_msg error_lecTimeType"></div>
+			</td>
+		</tr>		
+		<tr>
+			<th rowspan="2">강좌 출력 순서</th>		
+			<th>관리자</th>
+			<td>
+				<div>
+					<input type="radio" name="lecSort" id="lecSort_0" value="0"><label for="lecSort_0">등록순</label>
+					<br>※ 가장 최근에 등록된 강좌를 먼저 출력합니다.
+				</div>
+				<div class="MAT10">
+					<input type="radio" name="lecSort" id="lecSort_1" value="1" checked="checked"><label for="lecSort_1">가/나/다 순서</label>
+					<br>※ 강좌구분 선택 시 강좌명 기준 가/나/다 순서로 출력됩니다.
+				</div>				
+				<div class="error_msg error_lecSort"></div>
+			</td>
+		</tr>				
+		<tr>
+			<th>학생/강사</th>
+			<td>
+				강좌명 기준 가/나/다 순서로 출력됩니다.
+			</td>
+		</tr>	
+		<tr>
+			<th colspan="2">늘봄과정 구분</th>
+			<td>
+				<div>
+					<input type="radio" name="useLecPro" id="useLecPro_Y" value="Y" checked="checked"><label for="useLecPro_Y">사용</label>
+					(&nbsp;<input type="checkbox" name="lecProT1" id="lecProT1" value="2"><label for="lecProT1">화면에 <strong class="text-danger">'방과후'</strong>를 <strong class="text-danger">'선택형'</strong>으로 출력</label>)
+					<br>※ 강좌 등록시 <strong class="text-danger">'방과후'</strong>, <strong class="text-danger">'돌봄'</strong>, <strong class="text-danger">'맞춤형'</strong>을 입력하여 늘봄과정별로 조회할 수 있습니다.
+				</div>
+				<div class="MAT10">
+					<input type="radio" name="useLecPro" id="useLecPro_N" value="N"><label for="useLecPro_N">사용안함</label>
+				</div>			
+				<div class="error_msg error_useLecPro"></div>
+			</td>
+		</tr>					
+		<tr>
+			<th colspan="2">강사명 출력</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="viewTeaName" id="viewTeaName_Y" value="Y" checked="checked" onclick="chk_tea_name();"><label for="viewTeaName_Y">Yes</label>(&nbsp;<input type="checkbox" name="viewTeaHp" id="viewTeaHp" value="Y"><label for="viewTeaHp">강사 휴대폰 출력</label>)&nbsp;
+						<input type="radio" name="viewTeaName" id="viewTeaName_N" value="N" onclick="chk_tea_name();"><label for="viewTeaName_N">No </label>
+					</span>
+					<br>※ 학생 신청 화면에 강사명 출력 여부 지정(강사 연락처는 상세보기 화면에서 확인 가능)					
+				</span>
+				<div class="error_msg error_viewTeaName"></div>
+				<div class="error_msg error_viewTeaHp"></div>
+			</td>
+		</tr>			
+		<tr>
+			<th rowspan="2">신청자 수 출력</th>		
+			<th>학생</th>
+			<td>
+				<input type="checkbox" name="viewSinCnt" id="viewSinCnt" value="N"><label for="viewSinCnt">신청 화면에 신청자 수 출력 <strong class="text-danger">안함</strong></label>
+				<div class="error_msg error_viewSinCnt"></div>
+			</td>
+		</tr>				
+		<tr>
+			<th>담임</th>
+			<td>
+				<input type="checkbox" name="viewSinCnt1" id="viewSinCnt1" value="N"><label for="viewSinCnt1">강좌 조회 화면에 신청자 수 출력 <strong class="text-danger">안함</strong></label>
+				<div class="error_msg error_viewSinCnt1"></div>
+			</td>
+		</tr>							
+		<tr>
+			<th colspan="2">강사료 및 수용비 입력</th>
+			<td>
+				<span class="mobile_clear">			
+					<span>
+						<input type="radio" name="useCost" id="useCost_Y" value="Y" checked="checked"><label for="useCost_Y">사용</label>&nbsp;
+						<input type="radio" name="useCost" id="useCost_N" value="N"><label for="useCost_N">사용안함</label>
+					</span>			
+				</span>			
+				<div class="error_msg error_useCost"></div>
+			</td>
+		</tr>
+		<tr style="border-top:2px solid #B5B5B5 !important;">
+			<th colspan="2">수강료 산출 기능</th>
+			<td>
+				<span class="mobile_clear">			
+					<span>
+						<input type="radio" name="usePayCal" id="usePayCal_Y" value="Y"><label for="usePayCal_Y">사용(중/고등학교 전용)</label>&nbsp;
+						<input type="radio" name="usePayCal" id="usePayCal_N" value="N" checked="checked"><label for="usePayCal_N">사용안함</label>
+					</span>			
+				</span>			
+				<div class="error_msg error_usePayCal"></div>
+			</td>
+		</tr>		
+		<tr>
+			<th rowspan="4">추첨제</th>
+			<th>기능 사용</th>
+			<td>
+				<span class="mobile_clear">			
+					<span>
+						<input type="radio" name="useLottery" id="useLottery_Y" value="Y"><label for="useLottery_Y">사용</label>&nbsp;
+						<input type="radio" name="useLottery" id="useLottery_N" value="N" checked="checked"><label for="useLottery_N">사용안함(선착순 신청)</label>
+					</span>			
+				</span>			
+				<div class="error_msg error_useLottery"></div>
+			</td>
+		</tr>	
+		<tr>
+			<th>결재란</th>
+			<td>
+				<input id="lotApp" name="lotApp" type="text" title="결재란" value="" class="form-control size90" maxlength="100" style="width:30%;">&nbsp;
+				<span class="mobile_clear">예) 담당^교감 (^를 구분자로 하여 입력)</span>
+				<div class="error_msg"></div>				
+			</td>	
+		</tr>			
+		<tr>
+			<th>수강생<br>연락처</th>
+			<td>
+				<input type="checkbox" name="lotViewHp" id="lotViewHp" value="Y"><label for="lotViewHp">추첨결과 비고란에 수강생 연락처 <strong class="text-danger">출력</strong></label>
+				<div class="error_msg error_lotViewHp"></div>		
+			</td>	
+		</tr>		
+		<tr>
+			<th>자유수강권 대상자 우선</th>
+			<td>
+				<input type="checkbox" name="lotFree" id="lotFree" value="Y"><label for="lotFree">자유수강권 대상자 <strong class="text-danger">우선 추첨</strong></label>
+				<div class="error_msg error_lotFree"></div>
+			</td>
+		</tr>					
+		<tr>
+			<th rowspan="2">대기자 기능</th>
+			<th>기능 사용</th>			
+			<td>
+				<span class="mobile_clear">			
+					<span>
+						<input type="radio" name="useSinWait" id="useSinWait_Y" value="Y" checked="checked"><label for="useSinWait_Y">사용</label>&nbsp;
+						<input type="radio" name="useSinWait" id="useSinWait_N" value="N"><label for="useSinWait_N">사용안함</label>
+					</span>			
+					<br>※ 신청자 결원이 생기더라도 <strong class="text-danger">자동으로 대기자에서 신청자로 전환되지는 않습니다</strong>. 
+					<br>※ 대기자가 있으면 신청자 결원이 생기더라도 <strong class="text-danger">추가 신청은 불가능</strong>합니다(신청 취소는 가능).
+					<br>※ 관리자 또는 강사가 대기자에서 신청자로 이동시켜주는 방식입니다.
+				</span>			
+				<div class="error_msg error_useSinWait"></div>
+			</td>
+		</tr>			
+		<tr>
+			<th>대기 순번</th>
+			<td>
+				<input type="checkbox" name="viewWaitNum" id="viewWaitNum" value="Y"><label for="viewWaitNum">학생 화면에서 본인의 <strong class="text-danger">대기 순번 조회</strong></label>
+				<div class="error_msg error_viewWaitNum"></div>
+			</td>
+		</tr>			
+		<tr>
+			<th rowspan="5">지원금관리</th>
+			<th>기능 사용</th>
+			<td>
+				<span class="mobile_clear">			
+					<span>
+						<input type="radio" name="useFree2Stu" id="useFree2Stu_Y" value="Y" checked="checked"><label for="useFree2Stu_Y">사용</label>&nbsp;
+						<input type="radio" name="useFree2Stu" id="useFree2Stu_N" value="N"><label for="useFree2Stu_N">사용안함</label>
+					</span>			
+				</span>			
+				<div class="error_msg error_useFree2Stu"></div>
+			</td>
+		</tr>
+		<tr>
+			<th>지원금<br>처리 순서</th>
+			<td>
+				<span class="mobile_clear">			
+					<span>
+						<input type="radio" name="freeSortType" id="freeSortType_2" value="2"><label for="freeSortType_2"><strong>강좌명 &gt; 강좌구분(출력 순) 순으로 처리(<strong class="text-danger">권장 선택</strong>)</strong></label><br>
+						<input type="radio" name="freeSortType" id="freeSortType_3" value="3"><label for="freeSortType_3">강좌구분(출력 순) &gt; 강좌명 순으로 처리(3월/4월을 함께 가져오기 할 때 3월 강좌를 먼저 처리하고 싶을 때)</label><br>
+						<input type="radio" name="freeSortType" id="freeSortType_1" value="1" checked="checked"><label for="freeSortType_1">강좌명 &gt; 강좌구분(등록 순) 순으로 처리(기본 선택, <strong class="text-danger">2027년 3월 삭제 예정</strong>)</label>
+					</span>			
+				</span>			
+				<div class="error_msg error_freeSortType"></div>
+			</td>
+		</tr>
+		<tr>
+			<th>금액 차감 순서</th>
+			<td>
+				<input type="hidden" name="freePayOrder" id="freePayOrder" value="수강료,교재비,재료비">
+				<div style="display: inline-block;" class="free2_order">
+					<div class="mini-order-box">
+						<div class="mini-list" id="free2_order_miniList">
+							
+							<div class="mini-item" data-id="수강료" onclick="free2_order_selectMini(this)">1. 수강료</div>
+							
+							<div class="mini-item" data-id="교재비" onclick="free2_order_selectMini(this)">2. 교재비</div>
+							
+							<div class="mini-item" data-id="재료비" onclick="free2_order_selectMini(this)">3. 재료비</div>
+						
+						</div>
+						<div class="mini-btns">
+							<button class="m-btn" onclick="free2_order_miniUp(); return false;">▲</button>
+							<button class="m-btn" onclick="free2_order_miniDown(); return false;">▼</button>
+						</div>
+					</div>
+				</div>
+				<div class="error_msg error_freePayOrder"></div>
+			</td>
+		</tr>				
+		<tr>
+			<th>강사료<br>조정</th>
+			<td>
+				<span class="mobile_clear">			
+					<span>
+						<input type="radio" name="freeTeaRnd" id="freeTeaRnd_1" value="1" checked="checked"><label for="freeTeaRnd_1">1원 단위 <strong class="text-danger">올림</strong>(기본선택)</label><br>
+						<input type="radio" name="freeTeaRnd" id="freeTeaRnd_2" value="2"><label for="freeTeaRnd_2">1원 단위 <strong class="text-danger">내림</strong></label><br>
+						<input type="radio" name="freeTeaRnd" id="freeTeaRnd_3" value="3"><label for="freeTeaRnd_3">1원 단위 <strong class="text-danger">반올림</strong></label>
+					</span>			
+				</span>			
+				<br>※ 강사료와 수용비 비율 계산 시 강사료를 10원 단위로 만들기 위한 조정
+				<div class="error_msg error_freeTeaRnd"></div>
+			</td>
+		</tr>		
+		<tr>
+			<th>학생 조회</th>
+			<td>
+				<input type="checkbox" name="viewFree2App" id="viewFree2App" value="Y" checked="checked"><label for="viewFree2App">학생 화면에서 본인의 <strong class="text-danger">지원금 내역 조회</strong></label>
+				<div class="error_msg error_viewFree2App"></div>
+			</td>
+		</tr>				
+	
+		<tr>
+			<th rowspan="7">환불/취소</th>
+			<th>기능 사용</th>			
+			<td>
+				<span class="mobile_clear">			
+					<span>
+						<input type="radio" name="refundPay" id="refundPay_Y" value="Y" checked="checked"><label for="refundPay_Y">사용</label>&nbsp;
+						<input type="radio" name="refundPay" id="refundPay_N" value="N"><label for="refundPay_N">사용안함</label>
+					</span>			
+				</span>			
+				<div class="error_msg error_refundPay"></div>
+			</td>
+		</tr>			
+		<tr>
+			<th>학생 신청</th>
+			<td>
+				<input type="checkbox" name="viewRefund" id="viewRefund" value="Y"><label for="viewRefund">학생 화면에서 <strong class="text-danger">환불/취소 신청 가능</strong></label>
+				<div class="error_msg error_viewRefund"></div>
+			</td>
+		</tr>			
+		<tr>
+			<th width="80">환불계산<br>방식</th>
+			<td>
+				<span class="mobile_clear">	
+					<span>
+						<input type="radio" name="refCalGubun" id="refCalGubun_1" value="1"><label for="refCalGubun_1">분할</label>
+						<input type="radio" name="refCalGubun" id="refCalGubun_2" value="2" checked="checked"><label for="refCalGubun_2">일할</label>
+						<input type="radio" name="refCalGubun" id="refCalGubun_3" value="3"><label for="refCalGubun_3">기타</label>
+					</span>			
+				</span>			
+				<div class="error_msg error_refCalGubun"></div>										
+			</td>
+		</tr>
+		<tr>
+			<th>분할기준<br>선택</th>
+			<td>
+				<select name="refCalGubun1" id="refCalGubun1" class="form-control input-sm" readonly="readonly">
+					<option value="">= 선택하세요 =</option>
+					<option value="1">1/2경과 전 (1/2 환불)</option>
+					<option value="2" selected="selected">1/3경과 전 (2/3 환불), 1/2경과 전 (1/2 환불)</option>
+					<option value="7">1/3경과 전 (2/3 환불), 2/3경과 전 (1/3 환불)</option>
+					<option value="5">1/4경과 전 (3/4 환불), 1/2경과 전 (1/2 환불)</option>
+					<option value="3">1/4경과 전 (3/4 환불), 1/2경과 전 (1/2 환불), 3/4경과 전 (1/4 환불)</option>
+					<option value="4">1/4경과 전 (3/4 환불)</option>
+					<option value="6">1/4경과 전 (전액 환불)</option>
+					<option value="">----------------------------------------------------------</option>
+					<option value="11">1/2경과 이전 (1/2 환불)</option>
+					<option value="12">1/3경과 이전 (2/3 환불), 1/2경과 이전 (1/2 환불)</option>
+					<option value="17">1/3경과 이전 (2/3 환불), 2/3경과 이전 (1/3 환불)</option>
+					<option value="15">1/4경과 이전 (3/4 환불), 1/2경과 이전 (1/2 환불)</option>
+					<option value="13">1/4경과 이전 (3/4 환불), 1/2경과 이전 (1/2 환불), 3/4경과 이전 (1/4 환불)</option>					
+					<option value="14">1/4경과 이전 (3/4 환불)</option>					
+					<option value="16">1/4경과 이전 (전액 환불)</option>
+					<option value="">----------------------------------------------------------</option>
+					<option value="21">1/4경과 이전 (3/4 환불), 1/2경과 전 (1/2 환불)</option>
+				</select>						
+				<p>예1) <span class="text-danger">1/2경과 전</span>은 자신을 포함하지 않음(총 8회에서 4회를 들어도 환불 안함)</p>
+				<p>예2) <span class="text-danger">1/2경과 이전</span>은 자신을 포함(총 8회에서 4회를 들었다면 1/2 환불)</p>
+				<div class="error_msg error_refCalGubun1"></div>										
+			</td>
+		</tr>		
+		<tr>					
+			<th>환불금액<br>조정</th>
+			<td>
+				<div>
+					버림 : <input id="refFloor" name="refFloor" title="기준" placeholder="기준" type="text" size="8" value="5" class="form-control size40 text-right " maxlength="4" style="width:60px;"> 원 미만이면 버림
+				</div>			
+				<div class="error_msg error_refFloor"></div>
+				
+				<div>
+					올림 : <input id="refCeil" name="refCeil" title="기준" placeholder="기준" type="text" size="8" value="5" class="form-control size40 text-right " maxlength="4" style="width:60px;"> 원 이상이면 올림
+				</div>		
+				<div class="error_msg error_refCeil"></div>
+					
+				<div>※ 기준 금액이 0원인 경우 무시됩니다.</div>
+				<div>예1) “5원 미만이면 버림”, “5원 이상이면 올림”으로 설정하면 원단위 반올림이됩니다.</div> 
+				<div>예2) “10원 미만이면 버림”,  “0원 이상이면 올림”으로 설정하면 10원 미만 버림이됩니다.</div>
+							
+			</td>		
+		</tr>	
+		<tr>
+			<th>강사료<br>조정</th>
+			<td>
+				<span class="mobile_clear">			
+					<span>
+						<input type="radio" name="refTeaRnd" id="refTeaRnd_1" value="1" checked="checked"><label for="refTeaRnd_1">1원 단위 <strong class="text-danger">올림</strong>(기본선택)</label><br>
+						<input type="radio" name="refTeaRnd" id="refTeaRnd_2" value="2"><label for="refTeaRnd_2">1원 단위 <strong class="text-danger">내림</strong></label><br>
+						<input type="radio" name="refTeaRnd" id="refTeaRnd_3" value="3"><label for="refTeaRnd_3">1원 단위 <strong class="text-danger">반올림</strong></label>
+					</span>			
+				</span>			
+				<br>※ 강사료와 수용비 비율 계산 시 강사료를 10원 단위로 만들기 위한 조정
+				<div class="error_msg error_refTeaRnd"></div>
+			</td>
+		</tr>		
+		<tr>
+			<th>수용비<br>제외</th>
+			<td>
+				<input type="checkbox" name="refNotCost1" id="refNotCost1" value="Y"><label for="refNotCost1">분할계산 시 <strong class="text-danger">수용비 제외</strong></label><br>
+				<input type="checkbox" name="refNotCost" id="refNotCost" value="Y"><label for="refNotCost">일할계산 시 <strong class="text-danger">수용비 제외</strong></label>
+				<div class="error_msg error_refNotCost"></div>
+				<div class="error_msg error_refNotCost"></div>
+			</td>
+		</tr>	
+				
+	</tbody></table>
+	<p class="text-center MAT30"><input type="button" onclick="history.back(-1); return false;" class="btn btn-default" value="취소"> <input type="submit" value="수정" data-loading-text="처리중 .." class="btn btn-primary"></p>
+
+      </form>
+    </div>
+  
+            
+    <!-- [Tab Pane: tea] -->
+    <div id="cfg_pane_tea" class="cfg-tab-pane" style="display: none;">
+      <form  action="/af/ad_cfg/tea/sn/3267" name="fm_edit" id="fm_edit" onsubmit="return submitCfgForm(event, this, 'tea');" method="post" accept-charset="utf-8" id="fm_cfg_tea">
+        
+                                                                     <input type="hidden" name="csrf_test_name" value="4a1780fbc12d51eb33cb3ea82167f4e8">
+<input type="hidden" name="form_open_date_use_chk_csrf" value="2026-10-02 16:02:03">
+	<table class="table table-bordered table-hover list MAT0">
+		<tbody><tr>
+			<th width="160">'대기' 상태 강좌 출력</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="allowViWaitLec" id="allowViWaitLec_Y" value="Y" checked="checked"><label for="allowViWaitLec_Y">Yes</label>&nbsp;
+						<input type="radio" name="allowViWaitLec" id="allowViWaitLec_N" value="N"><label for="allowViWaitLec_N">No </label>
+					</span>
+					<br>('대기' 상태의 강좌를 강사 화면에 출력)
+				</span>
+				<div class="error_msg error_allowViWaitLec"></div>
+			</td>
+		</tr>						
+		<tr>
+			<th>강좌 등록 허용</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="allowWrLec" id="allowWrLec_Y" value="Y" checked="checked"><label for="allowWrLec_Y">Yes</label>&nbsp;
+						<input type="radio" name="allowWrLec" id="allowWrLec_N" value="N"><label for="allowWrLec_N">No </label>
+					</span>
+					<br>(강사에게 강좌를 등록할 수 있는 권한 부여, 대기 강좌도 강사의 강좌 관리 메뉴에 출력 됨)
+				</span>
+				<div class="error_msg error_allowWrLec"></div>
+			</td>
+		</tr>	
+		<tr>
+			<th>강좌 전체 조회</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="allowViAllLec" id="allowViAllLec_Y" value="Y"><label for="allowViAllLec_Y">Yes</label>&nbsp;
+						<input type="radio" name="allowViAllLec" id="allowViAllLec_N" value="N" checked="checked"><label for="allowViAllLec_N">No </label>
+					</span>
+					<br>(다른 강사의 강좌도 <strong class="text-danger">조회</strong>할 수 있는 권한 부여)
+				</span>
+				<div class="error_msg error_allowViAllLec"></div>
+			</td>
+		</tr>						
+		<tr>
+			<th>수강생 등록 허용</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="allowWrSin" id="allowWrSin_Y" value="Y" checked="checked" onclick="chk_wr_sin1();"><label for="allowWrSin_Y">Yes</label>
+						(&nbsp;<input type="checkbox" name="allowWrSin1" id="allowWrSin1" value="Y"><label for="allowWrSin1">수강신청 기간에만 허용</label>
+						&nbsp;<input type="checkbox" name="allowWrSin2" id="allowWrSin2" value="Y"><label for="allowWrSin2">수강신청 기간 종료 후에만 허용</label>)
+						<br><input type="radio" name="allowWrSin" id="allowWrSin_N" value="N" onclick="chk_wr_sin1();"><label for="allowWrSin_N">No </label>
+					</span>
+					<br>(해당 강좌의 강사에게 수강생 정보를 <strong class="text-danger">등록</strong>할 수 있는 권한 부여)
+				</span>
+				<div class="error_msg error_allowWrSin"></div>
+			</td>
+		</tr>		
+		<tr>
+			<th>수강생 삭제 허용</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="allowDelSin" id="allowDelSin_Y" value="Y" checked="checked"><label for="allowDelSin_Y">Yes</label>&nbsp;
+						<input type="radio" name="allowDelSin" id="allowDelSin_N" value="N"><label for="allowDelSin_N">No</label>
+					</span>
+					<br>(해당 강좌의 강사에게 수강생 정보를 <strong class="text-danger">삭제</strong>할 수 있는 권한 부여)
+				</span>
+				<div class="error_msg error_allowDelSin"></div>
+			</td>
+		</tr>
+		<tr>
+			<th>수강생 이동 허용</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="allowMoveSin" id="allowMoveSin_Y" value="Y" checked="checked"><label for="allowMoveSin_Y">Yes</label>&nbsp;
+						<input type="radio" name="allowMoveSin" id="allowMoveSin_N" value="N"><label for="allowMoveSin_N">No </label>
+					</span> 
+					<br>(해당 강좌의 강사에게 수강생 정보를 <strong class="text-danger">다른 강좌로 이동</strong>할 수 있는 권한 부여)
+				</span>
+				<div class="error_msg error_allowMoveSin"></div>
+			</td>
+		</tr>					
+		<tr>
+			<th>수강료 수정 허용</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="allowPayModify" id="allowPayModify_Y" value="Y" checked="checked"><label for="allowPayModify_Y">Yes</label>&nbsp;
+						<input type="radio" name="allowPayModify" id="allowPayModify_N" value="N"><label for="allowPayModify_N">No </label>
+					</span> 
+					<br>(해당 강좌의 강사에게 수강료, 교재비, 재료비를 <strong class="text-danger">수정</strong>할 수 있는 권한 부여)
+				</span>
+				<div class="error_msg error_allowPayModify"></div>
+			</td>
+		</tr>			
+		<tr>
+			<th>수강생 연락처 정보</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="allowHpView" id="allowHpView_Y" value="Y" checked="checked" onclick="chk_hp_view();"><label for="allowHpView_Y">Yes</label>(&nbsp;<input type="checkbox" name="allowHpEdit" id="allowHpEdit" value="Y" checked="checked"><label for="allowHpEdit">수강생 연락처 수정 허용</label>)&nbsp;
+						<input type="radio" name="allowHpView" id="allowHpView_N" value="N" onclick="chk_hp_view();"><label for="allowHpView_N">No </label>
+					</span>
+					<br>(해당 강좌의 강사에게 수강생 <strong class="text-danger">연락처 정보 출력</strong>)					
+				</span>
+				<div class="error_msg error_allowHpView"></div>
+			</td>
+		</tr>						
+	</tbody></table>
+	<p class="text-center MAT30"><input type="button" onclick="history.back(-1); return false;" class="btn btn-default" value="취소"> <input type="submit" value="수정" data-loading-text="처리중 .." class="btn btn-primary"></p>
+
+      </form>
+    </div>
+  
+            
+    <!-- [Tab Pane: att] -->
+    <div id="cfg_pane_att" class="cfg-tab-pane" style="display: none;">
+      <form  action="/af/ad_cfg/att/sn/3267" name="fm_edit" id="fm_edit" onsubmit="return submitCfgForm(event, this, 'att');" method="post" accept-charset="utf-8" id="fm_cfg_att">
+        
+<input type="hidden" name="csrf_test_name" value="4a1780fbc12d51eb33cb3ea82167f4e8">                                                                                                         
+<input type="hidden" name="form_open_date_use_chk_csrf" value="2026-10-02 16:02:04">
+	<table class="table table-bordered table-hover list MAT0">
+		
+		<tbody><tr>
+			<th rowspan="2" width="80">결재란<br>①</th>
+			<th width="80">결재자</th>
+			<td>
+				<input id="attApp1" name="attApp1" type="text" title="결재자" value="" class="form-control" maxlength="8" style="width:120px;">
+				<div class="error_msg"></div>
+			</td>		
+		</tr>
+		<tr>
+			<th>서명<br>이미지</th>
+			<td>
+				<div>
+					<input type="hidden" name="sign_data1" id="sign_data1" value="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=">
+					<span class="mobile_clear">
+						<span class="MAT5">
+							<img id="sign_preview1" style="border:1px solid #ccc; width:90px; height:60px; vertical-align:bottom; background:#FFF;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=">											
+							<button type="button" class="btn btn-default btn-sm" onclick="show_sign_modal(1);">만들기</button>
+						<span>						
+						<span class="MAT5">
+							<button type="button" class="btn btn-danger btn-sm" onclick="clear_sign(1);">지우기</button>
+							<button type="button" class="btn btn-default btn-sm" onclick="cancel_sign(1);">기존 서명 복원</button>
+						</span>
+					</span>
+				</span></span></div>
+				<div class="error_msg error_sign_data1"></div>
+			</td>		
+		</tr>		
+		
+		<tr>
+			<th rowspan="2" width="80">결재란<br>②</th>
+			<th width="80">결재자</th>
+			<td>
+				<input id="attApp2" name="attApp2" type="text" title="결재자" value="" class="form-control" maxlength="8" style="width:120px;">
+				<div class="error_msg"></div>
+			</td>		
+		</tr>
+		<tr>
+			<th>서명<br>이미지</th>
+			<td>
+				<div>
+					<input type="hidden" name="sign_data2" id="sign_data2" value="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=">
+					<span class="mobile_clear">
+						<span class="MAT5">
+							<img id="sign_preview2" style="border:1px solid #ccc; width:90px; height:60px; vertical-align:bottom; background:#FFF;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=">											
+							<button type="button" class="btn btn-default btn-sm" onclick="show_sign_modal(2);">만들기</button>
+						<span>						
+						<span class="MAT5">
+							<button type="button" class="btn btn-danger btn-sm" onclick="clear_sign(2);">지우기</button>
+							<button type="button" class="btn btn-default btn-sm" onclick="cancel_sign(2);">기존 서명 복원</button>
+						</span>
+					</span>
+				</span></span></div>
+				<div class="error_msg error_sign_data2"></div>
+			</td>		
+		</tr>		
+		
+		<tr>
+			<th rowspan="2" width="80">결재란<br>③</th>
+			<th width="80">결재자</th>
+			<td>
+				<input id="attApp3" name="attApp3" type="text" title="결재자" value="" class="form-control" maxlength="8" style="width:120px;">
+				<div class="error_msg"></div>
+			</td>		
+		</tr>
+		<tr>
+			<th>서명<br>이미지</th>
+			<td>
+				<div>
+					<input type="hidden" name="sign_data3" id="sign_data3" value="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=">
+					<span class="mobile_clear">
+						<span class="MAT5">
+							<img id="sign_preview3" style="border:1px solid #ccc; width:90px; height:60px; vertical-align:bottom; background:#FFF;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=">											
+							<button type="button" class="btn btn-default btn-sm" onclick="show_sign_modal(3);">만들기</button>
+						<span>						
+						<span class="MAT5">
+							<button type="button" class="btn btn-danger btn-sm" onclick="clear_sign(3);">지우기</button>
+							<button type="button" class="btn btn-default btn-sm" onclick="cancel_sign(3);">기존 서명 복원</button>
+						</span>
+					</span>
+				</span></span></div>
+				<div class="error_msg error_sign_data3"></div>
+			</td>		
+		</tr>		
+		
+		<tr>
+			<th rowspan="2" width="80">결재란<br>④</th>
+			<th width="80">결재자</th>
+			<td>
+				<input id="attApp4" name="attApp4" type="text" title="결재자" value="" class="form-control" maxlength="8" style="width:120px;">
+				<div class="error_msg"></div>
+			</td>		
+		</tr>
+		<tr>
+			<th>서명<br>이미지</th>
+			<td>
+				<div>
+					<input type="hidden" name="sign_data4" id="sign_data4" value="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=">
+					<span class="mobile_clear">
+						<span class="MAT5">
+							<img id="sign_preview4" style="border:1px solid #ccc; width:90px; height:60px; vertical-align:bottom; background:#FFF;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=">											
+							<button type="button" class="btn btn-default btn-sm" onclick="show_sign_modal(4);">만들기</button>
+						<span>						
+						<span class="MAT5">
+							<button type="button" class="btn btn-danger btn-sm" onclick="clear_sign(4);">지우기</button>
+							<button type="button" class="btn btn-default btn-sm" onclick="cancel_sign(4);">기존 서명 복원</button>
+						</span>
+					</span>
+				</span></span></div>
+				<div class="error_msg error_sign_data4"></div>
+			</td>		
+		</tr>		
+		
+		<tr>
+			<th colspan="2">수강생 연락처</th>
+			<td>
+				<input type="checkbox" name="attViewHp" id="attViewHp" value="Y" checked="checked"><label for="attViewHp">출석부 비고란에 수강생 연락처 <strong class="text-danger">출력</strong></label>
+				<div class="error_msg error_attViewHp"></div>		
+			</td>	
+		</tr>		
+		<tr>
+			<th colspan="2">인쇄 방향</th>
+			<td>
+				<span class="mobile_clear">			
+					<span>
+						<input type="radio" name="attPrDir" id="attPrDir_V" value="V" checked="checked"><label for="attPrDir_V">세로</label>&nbsp;
+						<input type="radio" name="attPrDir" id="attPrDir_H" value="H"><label for="attPrDir_H">가로</label>
+					</span>			
+				</span>			
+				<div class="error_msg error_attPrDir"></div>				
+			</td>	
+		</tr>		
+		<tr>
+			<th colspan="2">온라인 출석부</th>
+			<td>
+				<span class="mobile_clear">			
+					<span>
+						<input type="radio" name="attOnline" id="attOnline_Y" value="Y" onclick="chk_attOnline();"><label for="attOnline_Y">사용</label>
+						(&nbsp;<input type="checkbox" name="attViewStu" id="attViewStu" value="Y" disabled=""><label for="attViewStu">학생 화면에서 <strong class="text-danger">출결 내역 조회</strong></label>)<br>
+						<input type="radio" name="attOnline" id="attOnline_N" value="N" checked="checked" onclick="chk_attOnline();"><label for="attOnline_N">사용안함</label>
+					</span>			
+				</span>								
+				<div class="error_msg error_attPrDir"></div>				
+				<div class="error_msg error_attViewStu"></div>				
+			</td>	
+		</tr>						
+	</tbody></table>
+	<p class="text-center MAT30"><input type="button" onclick="history.back(-1); return false;" class="btn btn-default" value="취소"> <input type="submit" value="수정" data-loading-text="처리중 .." class="btn btn-primary"></p>
+
+      </form>
+    </div>
+  
+            
+    <!-- [Tab Pane: sms] -->
+    <div id="cfg_pane_sms" class="cfg-tab-pane" style="display: none;">
+      <form  action="/af/ad_cfg/sms/sn/3267" name="fm_edit" id="fm_edit" onsubmit="return submitCfgForm(event, this, 'sms');" method="post" accept-charset="utf-8" id="fm_cfg_sms">
+        
+                            <input type="hidden" name="csrf_test_name" value="4a1780fbc12d51eb33cb3ea82167f4e8">
+<input type="hidden" name="form_open_date_use_chk_csrf" value="2026-10-02 16:02:06">
+	<table class="table table-bordered table-hover list MAT0">
+		<tbody><tr>
+			<th colspan="2">문자발송 사용</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="smsUse" id="smsUse_Y" value="Y"><label for="smsUse_Y">Yes</label>&nbsp;
+						
+						<input type="radio" name="smsUse" id="smsUse_N" value="N" checked="checked"><label for="smsUse_N">No </label>
+							
+					</span>
+				</span>
+				<div><i class="fa fa-info-circle"></i> 강사 본인의 휴대폰으로 보내는 기능은 <u>설정과 무관하게 사용할 수 있습니다</u>.</div>				
+				<div class="error_msg error_smsUse3"></div>
+			</td>
+		</tr>		
+		<tr>
+			<th width="160" colspan="2">하단 공통 문구</th>
+			<td>
+				<span class="mobile_clear">
+					<input id="smsBoTxt" name="smsBoTxt" type="text" title="문자 하단 학교명" value="광주풍향초등학교" class="form-control size90" maxlength="30" style="width:30%;">&nbsp;
+					<br>※ 문자 내용 하단에 들어가는 공통 문구(SMS 문자 길이에 포함되므로 되도록이면 간단하게 입력하세요)
+					<br>※ 예) "- 한국고 -", "- 한국고 늘봄학교"
+				</span>
+				<div class="error_msg error_smsBoTxt"></div>
+			</td>
+		</tr>		
+		<tr>
+			<th colspan="2">대표번호</th>
+			<td>
+				<span class="mobile_clear">
+					<select name="smsDefNum" class="form-control input-sm PAD0">
+						<option value="">=발신번호=</option>
+											</select>
+					&nbsp;<a href="https://www.dbdbschool.kr/sczigi/sms_tel/lists/sn/3267" target="_blank" class="btn-default input-sm"><i class="fa fa-plus"></i> 발신번호등록</a>
+					<br>※ 문자 발송시 기본 발신번호로 지정
+					<br>※ 대표번호가 지정되지 않으면 <span class="text-danger">강사 문자발송이 불가능</span>합니다.
+				</span>
+				<div class="error_msg error_smsDefNum"></div>
+			</td>
+		</tr>						
+		<tr>
+			<th colspan="2">발송가능시간</th>
+			<td>
+				<span class="mobile_clear">
+					<select name="smsAmHour" id="smsAmHour" class="form-control input-sm PAD0">
+						<option value="">=오전=</option>
+						<option value="06">06시</option>
+<option value="07">07시</option>
+<option value="08">08시</option>
+<option value="09">09시</option>
+					</select> ~ 
+					<select name="smsPmHour" id="smsPmHour" class="form-control input-sm PAD0">
+						<option value="">=오후=</option>
+						<option value="17">17시</option>
+<option value="18">18시</option>
+<option value="19">19시</option>
+<option value="20">20시</option>
+<option value="21">21시</option>
+<option value="22">22시</option>
+<option value="23">23시</option>
+					</select>
+					<br>※ 설정된 시간 이내에만 발송 가능
+				</span>
+				<div class="error_msg error_smsAmHour"></div>
+				<div class="error_msg error_smsPmHour"></div>
+			</td>
+		</tr>	
+		<tr>
+			<th rowspan="2" width="60">강사</th>
+			<th width="80">출결<br>문자발송</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="smsAlTeaAt" id="smsAlTeaAt_Y" value="Y" onclick="chk_allow_tea();"><label for="smsAlTeaAt_Y">Yes</label>
+						(&nbsp;<input type="checkbox" name="smsAlTeaAt1" id="smsAlTeaAt1" value="Y" disabled=""><label for="smsAlTeaAt1">방과후(선택형)</label>
+						&nbsp;<input type="checkbox" name="smsAlTeaAt2" id="smsAlTeaAt2" value="Y" disabled=""><label for="smsAlTeaAt2">맞춤형</label>
+						&nbsp;<input type="checkbox" name="smsAlTeaAt3" id="smsAlTeaAt3" value="Y" disabled=""><label for="smsAlTeaAt3">돌봄</label>)
+						
+						<br><input type="radio" name="smsAlTeaAt" id="smsAlTeaAt_N" value="N" checked="checked" onclick="chk_allow_tea();"><label for="smsAlTeaAt_N">No </label>
+					</span>
+				</span>
+				<br>※ 수강생에게 출결 문자발송 허용
+				<div class="error_msg error_smsAlTeaAt"></div>
+				<div class="error_msg error_smsAlTeaAt1"></div>
+				<div class="error_msg error_smsAlTeaAt2"></div>
+				<div class="error_msg error_smsAlTeaAt3"></div>
+			</td>
+		</tr>	
+		<tr>
+			<th>수강생<br>문자발송</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="smsAlTeaLec" id="smsAlTeaLec_Y" value="Y" onclick="chk_allow_tea1();"><label for="smsAlTeaLec_Y">Yes</label>
+						(&nbsp;<input type="checkbox" name="smsAlTeaLec1" id="smsAlTeaLec1" value="Y"><label for="smsAlTeaLec1">방과후(선택형)</label>
+						&nbsp;<input type="checkbox" name="smsAlTeaLec2" id="smsAlTeaLec2" value="Y"><label for="smsAlTeaLec2">맞춤형</label>
+						&nbsp;<input type="checkbox" name="smsAlTeaLec3" id="smsAlTeaLec3" value="Y"><label for="smsAlTeaLec3">돌봄</label>)
+						
+						<br><input type="radio" name="smsAlTeaLec" id="smsAlTeaLec_N" value="N" checked="checked" onclick="chk_allow_tea1();"><label for="smsAlTeaLec_N">No </label>
+					</span>
+				</span>
+				<br>※ 수강생에게 문자발송 허용
+				<div class="error_msg error_smsAlTeaLec"></div>
+				<div class="error_msg error_smsAlTeaLec1"></div>
+				<div class="error_msg error_smsAlTeaLec2"></div>
+				<div class="error_msg error_smsAlTeaLec3"></div>
+			</td>
+		</tr>						
+	</tbody></table>
+	<p class="text-center MAT30"><input type="button" onclick="history.back(-1); return false;" class="btn btn-default" value="취소"> <input type="submit" value="수정" data-loading-text="처리중 .." class="btn btn-primary"></p>
+
+      </form>
+    </div>
+  
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ==================== [Modal] 출석부 결재란 전자 서명 패드 모달 ==================== -->
+      <div id="modal_sign_pad" class="modal-backdrop" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1050; align-items:center; justify-content:center;">
+        <div style="background:#fff; width:380px; border-radius:6px; box-shadow:0 5px 15px rgba(0,0,0,0.5); overflow:hidden;">
+          <div style="background:#337ab7; color:#fff; padding:12px 16px; display:flex; justify-content:space-between; align-items:center;">
+            <h4 style="margin:0; font-size:15px; font-weight:bold;"><i class="fa fa-pencil"></i> <span id="sign_modal_title">결재 서명 만들기</span></h4>
+            <button type="button" onclick="closeSignModal();" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer;">&times;</button>
+          </div>
+          <div style="padding:16px; text-align:center;">
+            <p style="font-size:12px; color:#666; margin-bottom:10px;">마우스나 터치로 서명을 그리신 후 [적용] 버튼을 눌러주세요.</p>
+            <div style="border:2px dashed #999; border-radius:4px; display:inline-block; background:#fff;">
+              <canvas id="sign_canvas" width="300" height="150" style="touch-action:none; cursor:crosshair;"></canvas>
+            </div>
+            <div style="margin-top:12px; display:flex; justify-content:center; gap:8px;">
+              <button type="button" class="btn btn-default btn-sm" onclick="clearSignCanvas();" style="height:30px; padding:0 14px;"><i class="fa fa-eraser"></i> 다시 그리기</button>
+              <button type="button" class="btn btn-primary btn-sm" onclick="applySignFromCanvas();" style="height:30px; padding:0 18px; font-weight:bold; background:#337ab7;"><i class="fa fa-check"></i> 서명 적용</button>
+              <button type="button" class="btn btn-default btn-sm" onclick="closeSignModal();" style="height:30px; padding:0 14px;">취소</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== [Modal] 서비스 관리자 교직원 추가 모달 ==================== -->
+      <div id="modal_admin_search" class="modal-backdrop" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1050; align-items:center; justify-content:center;">
+        <div style="background:#fff; width:480px; border-radius:6px; box-shadow:0 5px 15px rgba(0,0,0,0.5); overflow:hidden;">
+          <div style="background:#337ab7; color:#fff; padding:12px 16px; display:flex; justify-content:space-between; align-items:center;">
+            <h4 style="margin:0; font-size:15px; font-weight:bold;"><i class="fa fa-user-plus"></i> 서비스 관리자 교직원 검색</h4>
+            <button type="button" onclick="closeAdminSearchModal();" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer;">&times;</button>
+          </div>
+          <div style="padding:16px;">
+            <div style="display:flex; gap:6px; margin-bottom:12px;">
+              <input type="text" id="admin_search_keyword" class="form-control input-sm" placeholder="교직원 성명 또는 아이디 검색" style="height:30px;">
+              <button type="button" class="btn btn-primary btn-sm" onclick="searchTeachersForAdmin();" style="height:30px; padding:0 14px; background:#337ab7;"><i class="fa fa-search"></i> 검색</button>
+            </div>
+            <div style="max-height:220px; overflow-y:auto; border:1px solid #ddd; border-radius:3px;">
+              <table class="table table-bordered table-hover" style="margin:0; font-size:12px;">
+                <thead style="background:#f5f5f5;">
+                  <tr>
+                    <th style="width:40px; text-align:center;">선택</th>
+                    <th>교직원명</th>
+                    <th>아이디</th>
+                    <th>휴대폰</th>
+                  </tr>
+                </thead>
+                <tbody id="admin_search_tbody">
+                  <tr><td colspan="4" style="text-align:center; padding:20px; color:#888;">교직원명을 입력하고 검색해 주세요.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="margin-top:14px; text-align:center; display:flex; justify-content:center; gap:8px;">
+              <button type="button" class="btn btn-primary btn-sm" onclick="addSelectedTeacherToAdmin();" style="height:30px; padding:0 18px; font-weight:bold; background:#337ab7;">관리자로 추가</button>
+              <button type="button" class="btn btn-default btn-sm" onclick="closeAdminSearchModal();" style="height:30px; padding:0 14px;">닫기</button>
+            </div>
+          </div>
+        </div>
+      </div>

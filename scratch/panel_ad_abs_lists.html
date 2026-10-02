@@ -1,0 +1,114 @@
+<!-- ==================== 15.6 결석/귀가신청 (/af/ad_abs/lists) 1:1 Target Clone ==================== -->
+<div class="submodel-panel" id="panel_ad_abs_lists" style="display: none;">
+  <div class="content-card" style="background:#fff; border:1px solid #dcdcdc; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.05); margin-bottom:20px;">
+    
+    <!-- 패널 헤더 -->
+    <div class="card-top-bar" style="display:flex; justify-content:space-between; align-items:center; padding:12px 18px; border-bottom:1px solid #eee; background:#fafafa;">
+      <div class="section-title" style="font-size:16px; font-weight:bold; color:#333; display:flex; align-items:center; gap:8px;">
+        <i class="fa fa-calendar-o" style="color:#337ab7;"></i> 목록
+      </div>
+      <div class="helper-badges" style="display:flex; gap:6px;">
+        <a href="/af/ad_faq/main/sn/3267" class="btn btn-default btn-xs" style="height:26px; display:inline-flex; align-items:center; padding:0 8px; font-size:12px;" onclick="switchSubmodelView(event, 'ad_faq_main', '/af/ad_faq/main/sn/3267')">
+          <i class="fa fa-file-text-o" style="margin-right:4px;"></i> 매뉴얼
+        </a>
+      </div>
+    </div>
+
+    <!-- 검색 및 액션 버튼 바 (1:1 타깃 대조) -->
+    <div class="panel-search" style="padding:14px 18px; background:#fff; border-bottom:1px solid #eee;">
+      <form id="fm_abs_search" onsubmit="searchAbsList(event);" style="margin:0;">
+        
+        <!-- 1행: 일자 선택 라디오 및 기간 인풋 -->
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px; font-size:13px;">
+          <label style="margin:0; font-weight:normal; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+            <input id="sdt_0" name="sdt" type="radio" value="0" onclick="chk_abs_sdt();" checked> 일자전체
+          </label>
+          <label style="margin:0; font-weight:normal; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+            <input id="sdt_1" name="sdt" type="radio" value="1" onclick="chk_abs_sdt();"> 일자검색
+          </label>
+          <div style="display:inline-flex; align-items:center; gap:4px;">
+            <input type="date" name="ssd" id="sdt_ssd" class="form-control input-sm" style="width:130px; height:30px;" disabled>
+            <span>~</span>
+            <input type="date" name="sed" id="sdt_sed" class="form-control input-sm" style="width:130px; height:30px;" disabled>
+          </div>
+        </div>
+
+        <!-- 2행: 필터 셀렉트 및 검색/등록 버튼 -->
+        <div style="display:flex; flex-wrap:wrap; align-items:center; gap:8px;">
+          <!-- 신청유형 -->
+          <select name="sst" id="abs_sst" class="form-control input-sm" style="width:110px; height:30px; line-height:normal !important;" onchange="searchAbsList();">
+            <option value="">=신청유형=</option>
+            <option value="1">결석</option>
+            <option value="2">조기귀가</option>
+          </select>
+
+          <!-- 학년 -->
+          <select name="sgr" id="abs_sgr" class="form-control input-sm" style="width:90px; height:30px; line-height:normal !important;" onchange="searchAbsList();">
+            <option value="">=학년=</option>
+            <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+            <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+          </select>
+
+          <!-- 반 -->
+          <select name="scl" id="abs_scl" class="form-control input-sm" style="width:80px; height:30px; line-height:normal !important;" onchange="searchAbsList();">
+            <option value="">=반=</option>
+            <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+            <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+            <option value="7">7</option><option value="8">8</option><option value="9">9</option>
+            <option value="10">10</option><option value="11">11</option><option value="12">12</option>
+          </select>
+
+          <input type="hidden" name="st" value="mem_name">
+          <input type="text" name="sw" id="abs_s_word" class="form-control input-sm" style="width:140px; height:30px; padding:0 10px;" placeholder="이름">
+
+          <button type="submit" class="btn btn-default btn-sm" style="height:30px; padding:0 14px; display:inline-flex; align-items:center; justify-content:center; line-height:1;">검색</button>
+          <button type="button" class="btn btn-default btn-sm" style="height:30px; padding:0 14px; display:inline-flex; align-items:center; justify-content:center; line-height:1;" onclick="resetAbsSearch();">전체</button>
+
+          <!-- 우측 액션 버튼들 -->
+          <div style="margin-left:auto; display:flex; align-items:center; gap:6px;">
+            <a href="/af/ad_abs/excel/sn/3267" class="btn btn-success btn-sm" style="height:30px; padding:0 14px; display:inline-flex; align-items:center; justify-content:center; line-height:1;">
+              <i class="fa fa-file-excel-o" style="margin-right:4px;"></i> 검색결과출력
+            </a>
+            <button type="button" class="btn btn-primary btn-sm" style="height:30px; padding:0 14px; display:inline-flex; align-items:center; justify-content:center; line-height:1;" onclick="openAbsWriteModal();">
+              <i class="fa fa-pencil" style="margin-right:4px;"></i> 등록
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- 메인 결석/귀가신청 테이블 (1:1 타깃 원형 대조) -->
+    <div class="table-responsive-container" style="overflow-x:auto; padding:15px 18px;">
+      <table class="table AlignCenter table-hover_sm list MAT0" id="absMainTable" style="width:100%; min-width:1150px; border-collapse:collapse; margin-bottom:0;">
+        <thead>
+          <tr style="background:#f1f5f9; border-top:1px solid #cbd5e1; border-bottom:1px solid #cbd5e1;">
+            <th style="width:50px; text-align:center; padding:10px 4px; font-weight:bold; color:#334155;">연번</th>
+            <th style="width:50px; text-align:center; padding:10px 4px; font-weight:bold; color:#334155;">수정</th>
+            <th style="width:50px; text-align:center; padding:10px 4px; font-weight:bold; color:#334155;">학년</th>
+            <th style="width:50px; text-align:center; padding:10px 4px; font-weight:bold; color:#334155;">반</th>
+            <th style="width:50px; text-align:center; padding:10px 4px; font-weight:bold; color:#334155;">번호</th>
+            <th style="width:80px; text-align:center; padding:10px 4px; font-weight:bold; color:#334155;">이름</th>
+            <th style="width:90px; text-align:center; padding:10px 4px; font-weight:bold; color:#334155;">신청유형</th>
+            <th style="width:130px; text-align:center; padding:10px 4px; font-weight:bold; color:#334155;">일자<br>(시간)</th>
+            <th style="text-align:left; padding:10px 10px; font-weight:bold; color:#334155;">사유</th>
+            <th style="width:120px; text-align:center; padding:10px 4px; font-weight:bold; color:#334155;">귀가 동행자</th>
+            <th style="width:130px; text-align:center; padding:10px 4px; font-weight:bold; color:#334155;">연락처</th>
+            <th style="width:110px; text-align:center; padding:10px 4px; font-weight:bold; color:#334155;">등록일자</th>
+            <th style="width:50px; text-align:center; padding:10px 4px; font-weight:bold; color:#334155;">삭제</th>
+          </tr>
+        </thead>
+        <tbody id="absTableTbody">
+          <!-- JS 렌더링 -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 하단 상태 및 도움말 -->
+    <div style="padding:12px 18px; background:#fafafa; border-top:1px solid #eee; display:flex; justify-content:space-between; align-items:center; font-size:13px; color:#64748b;">
+      <div id="absTotalCountBadge">총 신청 건수: <strong>3</strong>건</div>
+      <div style="font-size:12px; color:#94a3b8;">
+        <i class="fa fa-info-circle"></i> 최근 1년 동안 접수된 결석 및 조기귀가 신청 내역을 확인하실 수 있습니다.
+      </div>
+    </div>
+  </div>
+</div>

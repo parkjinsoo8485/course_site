@@ -1,0 +1,185 @@
+<div id="contents_box">
+			<div id="contents_title">
+				<i class="fa fa-file-text-o"></i> 환경설정 <br><span class="title">광주풍향초등학교 늘봄학교</span>
+	
+				
+				<p class="write_yun"><a href="https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267"><i class="fa fa-futbol-o"></i><br><span class="write">강좌관리</span></a></p>
+	
+
+
+			</div>
+			<div id="contents">
+			<div class="panel_main panel-default_main">    
+	<div class="panel-heading">문자설정</div>
+	<div class="panel-body" style="margin-bottom:-20px;">
+		<ul class="tapMenu">
+			<li><a href="https://www.dbdbschool.kr/af/ad_cfg/main/sn/3267">기본설정</a></li>
+			<li><a href="https://www.dbdbschool.kr/af/ad_cfg/tea/sn/3267">강사권한</a></li>
+			<li><a href="https://www.dbdbschool.kr/af/ad_cfg/att/sn/3267">출석부옵션</a></li>
+			<li class="on"><a href="https://www.dbdbschool.kr/af/ad_cfg/sms/sn/3267">문자설정</a></li>
+		</ul>		
+	</div>
+		
+<form action="https://www.dbdbschool.kr/af/ad_cfg/sms/sn/3267" name="fm_edit" id="fm_edit" onsubmit="return fm_edit_check(this);" method="post" accept-charset="utf-8">
+                            <input type="hidden" name="csrf_test_name" value="4a1780fbc12d51eb33cb3ea82167f4e8">
+<input type="hidden" name="form_open_date_use_chk_csrf" value="2026-10-02 16:02:06">
+	<table class="table table-bordered table-hover list MAT0">
+		<tbody><tr>
+			<th colspan="2">문자발송 사용</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="smsUse" id="smsUse_Y" value="Y"><label for="smsUse_Y">Yes</label>&nbsp;
+						
+						<input type="radio" name="smsUse" id="smsUse_N" value="N" checked="checked"><label for="smsUse_N">No </label>
+							
+					</span>
+				</span>
+				<div><i class="fa fa-info-circle"></i> 강사 본인의 휴대폰으로 보내는 기능은 <u>설정과 무관하게 사용할 수 있습니다</u>.</div>				
+				<div class="error_msg error_smsUse3"></div>
+			</td>
+		</tr>		
+		<tr>
+			<th width="160" colspan="2">하단 공통 문구</th>
+			<td>
+				<span class="mobile_clear">
+					<input id="smsBoTxt" name="smsBoTxt" type="text" title="문자 하단 학교명" value="광주풍향초등학교" class="form-control size90" maxlength="30" style="width:30%;">&nbsp;
+					<br>※ 문자 내용 하단에 들어가는 공통 문구(SMS 문자 길이에 포함되므로 되도록이면 간단하게 입력하세요)
+					<br>※ 예) "- 한국고 -", "- 한국고 늘봄학교"
+				</span>
+				<div class="error_msg error_smsBoTxt"></div>
+			</td>
+		</tr>		
+		<tr>
+			<th colspan="2">대표번호</th>
+			<td>
+				<span class="mobile_clear">
+					<select name="smsDefNum" class="form-control input-sm PAD0">
+						<option value="">=발신번호=</option>
+											</select>
+					&nbsp;<a href="https://www.dbdbschool.kr/sczigi/sms_tel/lists/sn/3267" target="_blank" class="btn-default input-sm"><i class="fa fa-plus"></i> 발신번호등록</a>
+					<br>※ 문자 발송시 기본 발신번호로 지정
+					<br>※ 대표번호가 지정되지 않으면 <span class="text-danger">강사 문자발송이 불가능</span>합니다.
+				</span>
+				<div class="error_msg error_smsDefNum"></div>
+			</td>
+		</tr>						
+		<tr>
+			<th colspan="2">발송가능시간</th>
+			<td>
+				<span class="mobile_clear">
+					<select name="smsAmHour" id="smsAmHour" class="form-control input-sm PAD0">
+						<option value="">=오전=</option>
+						<option value="06">06시</option>
+<option value="07">07시</option>
+<option value="08">08시</option>
+<option value="09">09시</option>
+					</select> ~ 
+					<select name="smsPmHour" id="smsPmHour" class="form-control input-sm PAD0">
+						<option value="">=오후=</option>
+						<option value="17">17시</option>
+<option value="18">18시</option>
+<option value="19">19시</option>
+<option value="20">20시</option>
+<option value="21">21시</option>
+<option value="22">22시</option>
+<option value="23">23시</option>
+					</select>
+					<br>※ 설정된 시간 이내에만 발송 가능
+				</span>
+				<div class="error_msg error_smsAmHour"></div>
+				<div class="error_msg error_smsPmHour"></div>
+			</td>
+		</tr>	
+		<tr>
+			<th rowspan="2" width="60">강사</th>
+			<th width="80">출결<br>문자발송</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="smsAlTeaAt" id="smsAlTeaAt_Y" value="Y" onclick="chk_allow_tea();"><label for="smsAlTeaAt_Y">Yes</label>
+						(&nbsp;<input type="checkbox" name="smsAlTeaAt1" id="smsAlTeaAt1" value="Y" disabled=""><label for="smsAlTeaAt1">방과후(선택형)</label>
+						&nbsp;<input type="checkbox" name="smsAlTeaAt2" id="smsAlTeaAt2" value="Y" disabled=""><label for="smsAlTeaAt2">맞춤형</label>
+						&nbsp;<input type="checkbox" name="smsAlTeaAt3" id="smsAlTeaAt3" value="Y" disabled=""><label for="smsAlTeaAt3">돌봄</label>)
+						
+						<br><input type="radio" name="smsAlTeaAt" id="smsAlTeaAt_N" value="N" checked="checked" onclick="chk_allow_tea();"><label for="smsAlTeaAt_N">No </label>
+					</span>
+				</span>
+				<br>※ 수강생에게 출결 문자발송 허용
+				<div class="error_msg error_smsAlTeaAt"></div>
+				<div class="error_msg error_smsAlTeaAt1"></div>
+				<div class="error_msg error_smsAlTeaAt2"></div>
+				<div class="error_msg error_smsAlTeaAt3"></div>
+			</td>
+		</tr>	
+		<tr>
+			<th>수강생<br>문자발송</th>
+			<td>
+				<span class="mobile_clear">
+					<span>
+						<input type="radio" name="smsAlTeaLec" id="smsAlTeaLec_Y" value="Y" onclick="chk_allow_tea1();"><label for="smsAlTeaLec_Y">Yes</label>
+						(&nbsp;<input type="checkbox" name="smsAlTeaLec1" id="smsAlTeaLec1" value="Y"><label for="smsAlTeaLec1">방과후(선택형)</label>
+						&nbsp;<input type="checkbox" name="smsAlTeaLec2" id="smsAlTeaLec2" value="Y"><label for="smsAlTeaLec2">맞춤형</label>
+						&nbsp;<input type="checkbox" name="smsAlTeaLec3" id="smsAlTeaLec3" value="Y"><label for="smsAlTeaLec3">돌봄</label>)
+						
+						<br><input type="radio" name="smsAlTeaLec" id="smsAlTeaLec_N" value="N" checked="checked" onclick="chk_allow_tea1();"><label for="smsAlTeaLec_N">No </label>
+					</span>
+				</span>
+				<br>※ 수강생에게 문자발송 허용
+				<div class="error_msg error_smsAlTeaLec"></div>
+				<div class="error_msg error_smsAlTeaLec1"></div>
+				<div class="error_msg error_smsAlTeaLec2"></div>
+				<div class="error_msg error_smsAlTeaLec3"></div>
+			</td>
+		</tr>						
+	</tbody></table>
+	<p class="text-center MAT30"><input type="button" onclick="history.back(-1); return false;" class="btn btn-default" value="취소"> <input type="submit" value="수정" data-loading-text="처리중 .." class="btn btn-primary"></p>
+</form>
+</div>
+
+<script type="text/javascript" src="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/form_common.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/js/form_ajax.js" charset="utf-8"></script>
+<script type="text/javascript">		
+	function chk_allow_tea() {
+		if($('#smsAlTeaAt_Y').prop('checked')) {
+			$('#smsAlTeaAt1').prop('disabled', false);
+			$('#smsAlTeaAt2').prop('disabled', false);
+			$('#smsAlTeaAt3').prop('disabled', false);
+		} else {
+			$('#smsAlTeaAt1').prop('disabled', true);
+			$('#smsAlTeaAt2').prop('disabled', true);
+			$('#smsAlTeaAt3').prop('disabled', true);
+		}
+	}
+
+	function chk_allow_tea1() {
+		if($('#smsAlTeaLec_Y').prop('checked')) {
+			$('#smsAlTeaLec1').prop('disabled', false);
+			$('#smsAlTeaLec2').prop('disabled', false);
+			$('#smsAlTeaLec3').prop('disabled', false);
+		} else {
+			$('#smsAlTeaLec1').prop('disabled', true);
+			$('#smsAlTeaLec2').prop('disabled', true);
+			$('#smsAlTeaLec3').prop('disabled', true);
+		}
+	}
+
+	function fm_edit_check(fm) {
+		
+		if(true){ //confirm('적용하시겠습니까?')) {
+			return true;
+		}
+		return false;
+	}				
+	
+	$(document).ready(function(){
+		chk_allow_tea();
+	});		
+</script>
+			</div>
+			
+			<div id="footer">
+				Copyright ⓒ <span class="copyright_name"><a href="http://www.xmecca.com" target="_blank" rel="noopener noreferrer"><strong>x</strong>mecca.com</a></span> All Rights Reserved.
+				<br><i class="fa fa-envelope"></i> dbdbschool@naver.com
+			</div>
+		</div>

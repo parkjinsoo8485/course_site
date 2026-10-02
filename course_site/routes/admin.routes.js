@@ -980,32 +980,601 @@ router.get('/af/ad_extension/lists', (req, res) => {
   return res.json({ success: true, extensions });
 });
 
-// 9. 지원금관리 4개 서브엔드포인트
+// 9. 지원금관리 대상자관리 (ad_free2_stu) CRUD 및 출력 엔드포인트
 router.get('/af/ad_free2_stu/lists', (req, res) => {
-  const students = db.getSubsidyStudents('sch_1');
-  return res.json({ success: true, students });
+  const { grade, classNum, rank, rankDetail, fundType, searchName } = req.query;
+  const students = db.getSubsidyStudents('sch_1', { grade, classNum, rank, rankDetail, fundType, searchName });
+
+  // 통계 계산
+  const summary = {
+    totalCount: students.length,
+    fund1Total: students.reduce((acc, s) => acc + (s.fund1_total || 0), 0),
+    fund1Used: students.reduce((acc, s) => acc + (s.fund1_used || 0), 0),
+    fund1Balance: students.reduce((acc, s) => acc + (s.fund1_balance || 0), 0),
+    fund3Total: students.reduce((acc, s) => acc + (s.fund3_total || 0), 0),
+    fund3Used: students.reduce((acc, s) => acc + (s.fund3_used || 0), 0),
+    fund3Balance: students.reduce((acc, s) => acc + (s.fund3_balance || 0), 0),
+    freeTotal: students.reduce((acc, s) => acc + (s.free_total || 0), 0),
+    freeUsed: students.reduce((acc, s) => acc + (s.free_used || 0), 0),
+    freeBalance: students.reduce((acc, s) => acc + (s.free_balance || 0), 0)
+  };
+
+  return res.json({ success: true, students, summary });
 });
 
+// 단일 대상자 등록
+router.post('/af/ad_free2_stu', (req, res) => {
+  try {
+    const data = req.body;
+    if (!data.studentName || !data.studentName.trim()) {
+      return res.status(400).json({ success: false, message: '학생 이름을 입력해 주세요.' });
+    }
+    const student = db.addSubsidyStudent(data);
+    return res.json({ success: true, message: `${student.studentName} 학생이 대상자로 정상 등록되었습니다.`, student });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// 대상자 정보 수정
+router.put('/af/ad_free2_stu/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = req.body;
+    const updated = db.updateSubsidyStudent(id, data);
+    if (!updated) {
+      return res.status(404).json({ success: false, message: '해당 대상자를 찾을 수 없습니다.' });
+    }
+    return res.json({ success: true, message: `${updated.studentName} 학생의 정보가 성공적으로 수정되었습니다.`, student: updated });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// 대상자 삭제 (단일/일괄)
+router.delete('/af/ad_free2_stu', (req, res) => {
+  try {
+    const { ids } = req.body;
+    if (!ids || !Array.isArray(ids) || ids.length === 0) {
+      return res.status(400).json({ success: false, message: '삭제할 대상자를 선택해 주세요.' });
+    }
+    const deletedCount = db.deleteSubsidyStudents(ids);
+    return res.json({ success: true, message: `선택한 ${deletedCount}명의 대상자가 성공적으로 삭제되었습니다.`, deletedCount });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// 대상자 일괄 등록 (CSV / 텍스트 파싱)
+router.post('/af/ad_free2_stu/batch', (req, res) => {
+  try {
+    const { students } = req.body;
+    if (!students || !Array.isArray(students) || students.length === 0) {
+      return res.status(400).json({ success: false, message: '등록할 학생 데이터가 비어 있습니다.' });
+    }
+    const added = db.batchAddSubsidyStudents(students);
+    return res.json({ success: true, message: `총 ${added.length}명의 지원금 대상자가 성공적으로 일괄 등록되었습니다.`, count: added.length, added });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// 대상자 일괄입력 공식 CSV 샘플 파일 다운로드
+router.get('/af/ad_free2_stu/sample_csv', (req, res) => {
+  const sampleCsv = '\uFEFF' + [
+    '학년,반,번호,이름,연락처,순위,순위구분,선지정대상자,1학년지원총액,3학년지원총액,자유수강권총액,비고',
+    '1,1,5,김영희,010-1111-2222,1순위,국민기초생활수급자,Y,600000,0,600000,신입생 우선지원',
+    '2,2,10,이철수,010-3333-4444,2순위,한부모가족보호대상자,N,0,0,600000,',
+    '3,1,12,박지민,010-5555-7777,3순위,학교장추천,N,0,300000,300000,담임 추천'
+  ].join('\n');
+
+  res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+  res.setHeader('Content-Disposition', 'attachment; filename="subsidy_student_batch_sample.csv"');
+  return res.send(sampleCsv);
+});
+
+// 검색결과 엑셀 출력 (HTML Excel 규격)
+router.get('/af/ad_free2_stu/excel', (req, res) => {
+  const { grade, classNum, rank, rankDetail, fundType, searchName } = req.query;
+  const students = db.getSubsidyStudents('sch_1', { grade, classNum, rank, rankDetail, fundType, searchName });
+
+  const rowsHtml = students.map((s, idx) => `
+    <tr>
+      <td>${idx + 1}</td>
+      <td>${s.grade}</td>
+      <td>${s.classNum}</td>
+      <td>${s.studentNum}</td>
+      <td>${s.studentName}</td>
+      <td>${(s.fund1_total || 0).toLocaleString()}</td>
+      <td>${(s.fund1_used || 0).toLocaleString()}</td>
+      <td>${(s.fund1_balance || 0).toLocaleString()}</td>
+      <td>${s.fund1_period || '-'}</td>
+      <td>${(s.fund3_total || 0).toLocaleString()}</td>
+      <td>${(s.fund3_used || 0).toLocaleString()}</td>
+      <td>${(s.fund3_balance || 0).toLocaleString()}</td>
+      <td>${s.fund3_period || '-'}</td>
+      <td>${s.rank || ''}</td>
+      <td>${s.rankDetail || ''}</td>
+      <td>${s.isPreDesignated || 'N'}</td>
+      <td>${(s.free_total || 0).toLocaleString()}</td>
+      <td>${(s.free_used || 0).toLocaleString()}</td>
+      <td>${(s.free_balance || 0).toLocaleString()}</td>
+    </tr>
+  `).join('');
+
+  const excelHtml = `
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <style>
+    table { border-collapse: collapse; font-family: '맑은 고딕', sans-serif; font-size: 10pt; }
+    th { background-color: #dff0d8; border: 1px solid #ccc; padding: 6px 10px; font-weight: bold; text-align: center; }
+    td { border: 1px solid #ddd; padding: 5px 8px; vertical-align: middle; text-align: center; }
+    .title-cell { font-size: 16pt; font-weight: bold; text-align: center; color: #3c763d; padding: 12px; }
+  </style>
+</head>
+<body>
+  <table>
+    <tr><td colspan="19" class="title-cell">광주풍향초등학교 지원금 대상자 목록 (검색 결과)</td></tr>
+    <tr><td colspan="19" style="font-size:10pt; color:#666; padding:4px;">■ 출력 일시: ${new Date().toLocaleString('ko-KR')} | 총 인원: ${students.length}명</td></tr>
+    <tr>
+      <th rowspan="2">연번</th>
+      <th rowspan="2">학년</th>
+      <th rowspan="2">반</th>
+      <th rowspan="2">번호</th>
+      <th rowspan="2">이름</th>
+      <th colspan="4" style="background:#e0f2fe; color:#0369a1;">1학년 지원금</th>
+      <th colspan="4" style="background:#fef3c7; color:#92400e;">3학년 지원금</th>
+      <th rowspan="2">순위</th>
+      <th rowspan="2">순위구분</th>
+      <th rowspan="2">선지정대상자</th>
+      <th colspan="3" style="background:#dcfce7; color:#166534;">자유수강권</th>
+    </tr>
+    <tr>
+      <th>총액</th><th>사용액</th><th>잔액</th><th>지원기간</th>
+      <th>총액</th><th>사용액</th><th>잔액</th><th>지원기간</th>
+      <th>총액</th><th>사용액</th><th>잔액</th>
+    </tr>
+    ${rowsHtml}
+  </table>
+</body>
+</html>
+  `;
+
+  res.setHeader('Content-Type', 'application/vnd.ms-excel; charset=utf-8');
+  res.setHeader('Content-Disposition', 'attachment; filename="subsidy_students_search_result.xls"');
+  return res.send(excelHtml);
+});
+
+// 전교생 기준 대상자 엑셀 출력
+router.get('/af/ad_free2_stu/excel_all', (req, res) => {
+  const students = db.getSubsidyStudents('sch_1');
+  const allSchoolList = [];
+  
+  // 1학년~6학년 가상 전교생 풀 생성 (각 반 15명씩)
+  for (let g = 1; g <= 6; g++) {
+    for (let c = 1; c <= 3; c++) {
+      for (let n = 1; n <= 10; n++) {
+        const matched = students.find(s => s.grade === g && s.classNum === c && s.studentNum === n);
+        allSchoolList.push({
+          grade: g,
+          classNum: c,
+          studentNum: n,
+          studentName: matched ? matched.studentName : `학생_${g}-${c}-${n}`,
+          isTarget: matched ? '대상' : '일반',
+          rank: matched ? matched.rank : '-',
+          rankDetail: matched ? matched.rankDetail : '-',
+          freeTotal: matched ? matched.free_total : 0,
+          freeUsed: matched ? matched.free_used : 0,
+          freeBalance: matched ? matched.free_balance : 0
+        });
+      }
+    }
+  }
+
+  const rowsHtml = allSchoolList.map((st, idx) => `
+    <tr>
+      <td>${idx + 1}</td>
+      <td>${st.grade}</td>
+      <td>${st.classNum}</td>
+      <td>${st.studentNum}</td>
+      <td>${st.studentName}</td>
+      <td style="font-weight:bold; color:${st.isTarget === '대상' ? '#d9534f' : '#666'};">${st.isTarget}</td>
+      <td>${st.rank}</td>
+      <td>${st.rankDetail}</td>
+      <td>${st.freeTotal.toLocaleString()}</td>
+      <td>${st.freeUsed.toLocaleString()}</td>
+      <td>${st.freeBalance.toLocaleString()}</td>
+    </tr>
+  `).join('');
+
+  const excelHtml = `
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <style>
+    table { border-collapse: collapse; font-family: '맑은 고딕', sans-serif; font-size: 10pt; }
+    th { background-color: #d9edf7; border: 1px solid #ccc; padding: 6px 10px; font-weight: bold; text-align: center; }
+    td { border: 1px solid #ddd; padding: 5px 8px; vertical-align: middle; text-align: center; }
+    .title-cell { font-size: 16pt; font-weight: bold; text-align: center; color: #31708f; padding: 12px; }
+  </style>
+</head>
+<body>
+  <table>
+    <tr><td colspan="11" class="title-cell">광주풍향초등학교 전교생 기준 지원금 대상자 현황표</td></tr>
+    <tr><td colspan="11" style="font-size:10pt; color:#666; padding:4px;">■ 출력 일시: ${new Date().toLocaleString('ko-KR')} | 전교생: ${allSchoolList.length}명</td></tr>
+    <tr>
+      <th>연번</th>
+      <th>학년</th>
+      <th>반</th>
+      <th>번호</th>
+      <th>이름</th>
+      <th>대상자구분</th>
+      <th>순위</th>
+      <th>순위구분</th>
+      <th>자유수강권 총액</th>
+      <th>사용액</th>
+      <th>잔액</th>
+    </tr>
+    ${rowsHtml}
+  </table>
+</body>
+</html>
+  `;
+
+  res.setHeader('Content-Type', 'application/vnd.ms-excel; charset=utf-8');
+  res.setHeader('Content-Disposition', 'attachment; filename="subsidy_all_students_report.xls"');
+  return res.send(excelHtml);
+});
+
+// 10. 지원금관리 > 수강자관리 (ad_free2_app) CRUD, 일괄차감 및 엑셀 출력
 router.get('/af/ad_free2_app/lists', (req, res) => {
-  const applicants = db.getSubsidyApplicants('sch_1');
-  return res.json({ success: true, applicants });
+  try {
+    const filters = {
+      month: req.query.month || '',
+      courseTitle: req.query.courseTitle || '',
+      category: req.query.category || '',
+      programType: req.query.programType || '',
+      fundType: req.query.fundType || '',
+      grade: req.query.grade || '',
+      classNum: req.query.classNum || '',
+      searchName: req.query.searchName || ''
+    };
+    const applicants = db.getSubsidyApplicants('sch_1', filters);
+    const summary = {
+      totalCount: applicants.length,
+      totalFee: applicants.reduce((acc, s) => acc + (s.totalFee || s.fee || 0), 0),
+      totalTuition: applicants.reduce((acc, s) => acc + (s.tuitionFee || 0), 0),
+      totalInstructor: applicants.reduce((acc, s) => acc + (s.instructorFee || 0), 0),
+      totalOverhead: applicants.reduce((acc, s) => acc + (s.overheadFee || 0), 0),
+      totalTextbook: applicants.reduce((acc, s) => acc + (s.textbookFee || 0), 0),
+      totalMaterial: applicants.reduce((acc, s) => acc + (s.materialFee || 0), 0),
+      totalSubsidized: applicants.reduce((acc, s) => acc + (s.subsidizedAmount || 0), 0),
+      totalOutOfPocket: applicants.reduce((acc, s) => acc + (s.collectedAmount !== undefined ? s.collectedAmount : s.outOfPocket || 0), 0)
+    };
+    const allowedMonths = db.getSubsidyAllowedMonths();
+    return res.json({ success: true, applicants, summary, allowedMonths });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+router.get('/af/ad_free2_app/allowed_months', (req, res) => {
+  try {
+    const months = db.getSubsidyAllowedMonths();
+    return res.json({ success: true, months, allowedMonths: months });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+router.post('/af/ad_free2_app/allowed_months', (req, res) => {
+  try {
+    const months = req.body.months || req.body.allowedMonths || [];
+    const updated = db.setSubsidyAllowedMonths(months);
+    return res.json({ success: true, message: '학생 지원금 내역 조회 허용 월이 설정되었습니다.', months: updated, allowedMonths: updated });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+router.post('/af/ad_free2_app/import', (req, res) => {
+  try {
+    const { targetMonth, maxAmount, neulbomTypes, courseDivs, subsidyTypes } = req.body;
+    const count = db.importSubsidyApplicants(targetMonth || '3월', maxAmount || 0, { neulbomTypes, courseDivs, subsidyTypes });
+    return res.json({ success: true, message: `${targetMonth} 수강자 가져오기가 완료되었습니다. (${count}건 처리)`, count });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+router.get('/af/ad_free2_app/applicant_search', (req, res) => {
+  try {
+    const list = db.getApplicantSearchList(req.query);
+    return res.json({ success: true, list, applicants: list });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+router.post('/af/ad_free2_app', (req, res) => {
+  try {
+    const data = req.body;
+    if (!data.studentName) {
+      return res.status(400).json({ success: false, message: '학생명을 입력해 주세요.' });
+    }
+    const created = db.addSubsidyApplicant(data);
+    return res.json({ success: true, message: `${created.studentName} 수강자의 지원금 차감 내역이 등록되었습니다.`, applicant: created });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+router.put('/af/ad_free2_app/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    const updated = db.updateSubsidyApplicant(id, req.body);
+    if (!updated) {
+      return res.status(404).json({ success: false, message: '해당 수강자 차감 내역을 찾을 수 없습니다.' });
+    }
+    return res.json({ success: true, message: `${updated.studentName} 학생의 차감 내역이 수정되었습니다.`, applicant: updated });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+router.delete('/af/ad_free2_app', (req, res) => {
+  try {
+    const { ids } = req.body;
+    if (!ids || !Array.isArray(ids) || ids.length === 0) {
+      return res.status(400).json({ success: false, message: '삭제할 항목을 선택해 주세요.' });
+    }
+    const deletedCount = db.deleteSubsidyApplicants(ids);
+    return res.json({ success: true, message: `${deletedCount}건의 수강자 지원금 내역이 삭제되었습니다.`, count: deletedCount });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+router.post('/af/ad_free2_app/batch_deduct', (req, res) => {
+  try {
+    const { category, subsidyType } = req.body;
+    const count = db.batchDeductSubsidies(category || '26년 8월', subsidyType || '자유수강권');
+    return res.json({ success: true, message: `총 ${count}건의 수강자 지원금이 성공적으로 일괄 차감되었습니다.`, count });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// 수강자관리 검색결과 엑셀 출력
+router.get('/af/ad_free2_app/excel', (req, res) => {
+  const filters = {
+    category: req.query.category || '',
+    programType: req.query.programType || '',
+    fundType: req.query.fundType || '',
+    grade: req.query.grade || '',
+    classNum: req.query.classNum || '',
+    searchName: req.query.searchName || ''
+  };
+  const list = db.getSubsidyApplicants('sch_1', filters);
+  const rowsHtml = list.map((a, idx) => `
+    <tr>
+      <td>${idx + 1}</td>
+      <td>${a.category}</td>
+      <td>${a.programType}</td>
+      <td style="text-align:left;">${a.courseTitle}</td>
+      <td>${a.grade}</td>
+      <td>${a.classNum}</td>
+      <td>${a.studentNum}</td>
+      <td><strong>${a.studentName}</strong></td>
+      <td>${a.phone}</td>
+      <td style="text-align:right;">${(a.fee || 0).toLocaleString()}</td>
+      <td style="text-align:right; color:#2563eb; font-weight:bold;">-${(a.subsidizedAmount || 0).toLocaleString()}</td>
+      <td style="text-align:right;">${(a.outOfPocket || 0).toLocaleString()}</td>
+      <td>${a.subsidyType}</td>
+      <td>${a.deductionDate}</td>
+      <td>${a.status}</td>
+    </tr>
+  `).join('');
+
+  const excelHtml = `
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <style>
+    table { border-collapse: collapse; font-family: '맑은 고딕', sans-serif; font-size: 10pt; }
+    th { background-color: #fcf8e3; border: 1px solid #ccc; padding: 6px 10px; font-weight: bold; text-align: center; }
+    td { border: 1px solid #ddd; padding: 5px 8px; vertical-align: middle; text-align: center; }
+    .title-cell { font-size: 16pt; font-weight: bold; text-align: center; color: #8a6d3b; padding: 12px; }
+  </style>
+</head>
+<body>
+  <table>
+    <tr><td colspan="15" class="title-cell">광주풍향초등학교 지원금 수강자 차감 관리 내역</td></tr>
+    <tr><td colspan="15" style="font-size:10pt; color:#666; padding:4px;">■ 출력 일시: ${new Date().toLocaleString('ko-KR')} | 총 건수: ${list.length}건</td></tr>
+    <tr>
+      <th>연번</th>
+      <th>강좌구분</th>
+      <th>늘봄과정</th>
+      <th>강좌명</th>
+      <th>학년</th>
+      <th>반</th>
+      <th>번호</th>
+      <th>학생명</th>
+      <th>연락처</th>
+      <th>수강료</th>
+      <th>지원금차감액</th>
+      <th>본인부담금</th>
+      <th>지원구분</th>
+      <th>차감일자</th>
+      <th>상태</th>
+    </tr>
+    ${rowsHtml}
+  </table>
+</body>
+</html>
+  `.trim();
+
+  res.setHeader('Content-Type', 'application/vnd.ms-excel; charset=utf-8');
+  res.setHeader('Content-Disposition', 'attachment; filename="subsidy_applicants_list.xls"');
+  return res.send(excelHtml);
+});
+
+// 지원금정산출력 엑셀
+router.get('/af/ad_free2_app/excel_settle', (req, res) => {
+  const list = db.getSubsidyApplicants('sch_1');
+  const totalFee = list.reduce((a, c) => a + c.fee, 0);
+  const totalSub = list.reduce((a, c) => a + c.subsidizedAmount, 0);
+  const totalOut = list.reduce((a, c) => a + c.outOfPocket, 0);
+
+  const excelHtml = `
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <style>
+    table { border-collapse: collapse; font-family: '맑은 고딕', sans-serif; font-size: 10pt; }
+    th { background-color: #dff0d8; border: 1px solid #ccc; padding: 6px 10px; font-weight: bold; text-align: center; }
+    td { border: 1px solid #ddd; padding: 5px 8px; vertical-align: middle; text-align: center; }
+    .title-cell { font-size: 16pt; font-weight: bold; text-align: center; color: #3c763d; padding: 12px; }
+  </style>
+</head>
+<body>
+  <table>
+    <tr><td colspan="7" class="title-cell">2026학년도 방과후학교 지원금 정산 총괄표</td></tr>
+    <tr>
+      <th>구분</th>
+      <th>총 신청인원</th>
+      <th>총 수강료(A)</th>
+      <th>지원금 차감합계(B)</th>
+      <th>본인부담금 합계(A-B)</th>
+      <th>정산일자</th>
+      <th>비고</th>
+    </tr>
+    <tr>
+      <td><strong>풍향초 전 강좌 합계</strong></td>
+      <td><strong>${list.length}명</strong></td>
+      <td style="text-align:right;"><strong>${totalFee.toLocaleString()}원</strong></td>
+      <td style="text-align:right; color:#2563eb;"><strong>${totalSub.toLocaleString()}원</strong></td>
+      <td style="text-align:right; color:#ea580c;"><strong>${totalOut.toLocaleString()}원</strong></td>
+      <td>${new Date().toISOString().slice(0, 10)}</td>
+      <td>정상 집계</td>
+    </tr>
+  </table>
+</body>
+</html>
+  `.trim();
+
+  res.setHeader('Content-Type', 'application/vnd.ms-excel; charset=utf-8');
+  res.setHeader('Content-Disposition', 'attachment; filename="subsidy_settlement_report.xls"');
+  return res.send(excelHtml);
 });
 
 router.get('/af/ad_free2_cfg/main', (req, res) => {
-  return res.json({
-    success: true,
-    config: {
-      annualLimit: 600000,
-      priorityPolicy: '자유수강권 > 늘봄무상지원금 > 바우처',
-      autoDeduct: true,
-      excludeMaterials: false
+  try {
+    const configs = db.getSubsidyConfigs('sch_1');
+    const order = db.getSubsidyDeductOrder('sch_1');
+    return res.json({
+      success: true,
+      configs,
+      order,
+      config: {
+        annualLimit: (configs.fund_free && configs.fund_free.annualLimit) || 600000,
+        priorityPolicy: order.map(o => o.name).join(' > '),
+        autoDeduct: true,
+        excludeMaterials: false
+      }
+    });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+router.put('/af/ad_free2_cfg/main', (req, res) => {
+  try {
+    const { fundKey, configData } = req.body;
+    if (!fundKey || !configData) {
+      return res.status(400).json({ success: false, message: '지원금 식별자와 설정 데이터가 필요합니다.' });
     }
-  });
+    const updated = db.updateSubsidyConfig('sch_1', fundKey, configData);
+    return res.json({ success: true, message: `${updated.name || fundKey} 설정이 저장되었습니다.`, config: updated });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+router.post('/af/ad_free2_cfg/order', (req, res) => {
+  try {
+    const { orderList } = req.body;
+    if (!Array.isArray(orderList)) {
+      return res.status(400).json({ success: false, message: '올바른 순서 목록이 아닙니다.' });
+    }
+    const updated = db.updateSubsidyDeductOrder('sch_1', orderList);
+    return res.json({ success: true, message: '지원금 차감 순서가 변경되었습니다.', order: updated });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
 });
 
 router.get('/af/ad_free2_cfg/free1', (req, res) => {
-  const ranks = db.getSubsidyRanks('sch_1');
-  return res.json({ success: true, ranks });
+  try {
+    const { rank } = req.query;
+    const ranks = db.getSubsidyRanks('sch_1', rank);
+    return res.json({ success: true, ranks });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+router.post('/af/ad_free2_cfg/free1', (req, res) => {
+  try {
+    const data = req.body;
+    if (!data.name) {
+      return res.status(400).json({ success: false, message: '순위 코드명을 입력해 주세요.' });
+    }
+    const created = db.addSubsidyRank(data);
+    return res.json({ success: true, message: `${created.name} 순위 코드가 등록되었습니다.`, rank: created });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+router.put('/af/ad_free2_cfg/free1/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    const updated = db.updateSubsidyRank(id, req.body);
+    if (!updated) {
+      return res.status(404).json({ success: false, message: '해당 순위 코드를 찾을 수 없습니다.' });
+    }
+    return res.json({ success: true, message: '순위 코드가 수정되었습니다.', rank: updated });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+router.delete('/af/ad_free2_cfg/free1/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    const ok = db.deleteSubsidyRank(id);
+    if (!ok) {
+      return res.status(404).json({ success: false, message: '해당 순위 코드를 찾을 수 없습니다.' });
+    }
+    return res.json({ success: true, message: '순위 코드가 삭제되었습니다.' });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+router.post('/af/ad_free2_cfg/free1/order', (req, res) => {
+  try {
+    const { orderList } = req.body;
+    if (!Array.isArray(orderList)) {
+      return res.status(400).json({ success: false, message: '올바른 순서 목록이 아닙니다.' });
+    }
+    const updated = db.updateSubsidyRankOrder(orderList);
+    return res.json({ success: true, message: '출력 순서가 저장되었습니다.', ranks: updated });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
 });
 
 // 10. 설문관리 2개 서브엔드포인트

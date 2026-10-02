@@ -1,0 +1,398 @@
+<!-- ==================== 귀가일정 등록/수정 모달 (1:1 Target Clone & 가독성 극대화) ==================== -->
+<div id="modal_ad_rsch_write" class="modal" style="display:none; position:fixed !important; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:99999 !important; align-items:center; justify-content:center;">
+  <div class="modal-dialog" style="width:860px; max-width:95vw; max-height:92vh; display:flex; flex-direction:column; margin:0 auto; background:#fff; border-radius:6px; box-shadow:0 10px 30px rgba(0,0,0,0.3); overflow:hidden;">
+    
+    <!-- 모달 헤더 (로컬 블루 #337ab7 테마) -->
+    <div class="modal-header" style="background:#337ab7; color:#fff; padding:12px 20px; display:flex; justify-content:space-between; align-items:center;">
+      <h4 id="rsch_write_modal_title" style="margin:0; font-size:16px; font-weight:bold; display:flex; align-items:center; gap:8px;">
+        <i class="fa fa-calendar-check-o"></i> 귀가일정 등록
+      </h4>
+      <button type="button" class="close" onclick="closeRschWriteModal();" style="color:#fff; opacity:0.9; font-size:24px; font-weight:bold; border:none; background:transparent; cursor:pointer;">&times;</button>
+    </div>
+
+    <!-- 모달 본문 (스크롤 영역) -->
+    <div class="modal-body" style="padding:20px; overflow-y:auto; flex:1;">
+      <form id="fm_rsch_edit" onsubmit="saveRschData(event);" method="post" accept-charset="utf-8">
+        <input type="hidden" name="csrf_test_name" value="4a1780fbc12d51eb33cb3ea82167f4e8">
+        <input type="hidden" name="form_open_date_use_chk_csrf" value="2026-10-02 14:41:16">
+        <input type="hidden" id="rsch_edit_mode" name="edit_mode" value="write">
+
+        <!-- 1. 상단 학생정보 카드 (2열 배치) -->
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:14px; margin-bottom:16px;">
+          <div style="font-weight:bold; color:#1e293b; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+            <i class="fa fa-user" style="color:#337ab7;"></i> 대상 학생 정보 <span class="text-danger" style="font-size:12px;">* 필수선택</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <input id="mem_info" name="mem_info" type="text" title="학생정보" value="" class="form-control input-sm" style="flex:1; min-width:240px; height:32px; background:#fff;" placeholder="[학생 검색] 버튼을 클릭하여 학생을 선택하세요" readonly>
+            <button type="button" class="btn btn-primary btn-sm" onclick="openRschStuSearchModal();" style="height:32px; padding:0 14px; display:inline-flex; align-items:center; gap:4px;">
+              <i class="fa fa-binoculars"></i> 학생 검색
+            </button>
+            <input type="hidden" id="mem_num" name="mem_num" value="">
+          </div>
+          <div class="error_msg error_mem_num" style="color:#ef4444; font-size:12px; margin-top:4px;"></div>
+        </div>
+
+        <!-- 2. 요일별 귀가 설정 매트릭스 (가독성 탭/카드 5일분) -->
+        <div style="border:1px solid #e2e8f0; border-radius:6px; overflow:hidden;">
+          <div style="background:#f1f5f9; padding:10px 14px; border-bottom:1px solid #e2e8f0; font-weight:bold; color:#1e293b; display:flex; justify-content:space-between; align-items:center;">
+            <span><i class="fa fa-clock-o" style="color:#337ab7;"></i> 요일별 귀가시간 및 동행자 설정</span>
+            <span style="font-size:12px; color:#64748b; font-weight:normal;">시간을 설정한 요일만 일정표에 반영됩니다.</span>
+          </div>
+
+          <!-- 요일 탭 버튼 바 -->
+          <div style="display:flex; background:#fafafa; border-bottom:1px solid #e2e8f0;">
+            <button type="button" class="rsch-day-tab active" onclick="switchRschDayTab(1)" id="rsch_tab_1" style="flex:1; padding:10px 0; border:none; background:#fff; font-weight:bold; color:#1e40af; border-bottom:2px solid #337ab7; cursor:pointer;">월요일</button>
+            <button type="button" class="rsch-day-tab" onclick="switchRschDayTab(2)" id="rsch_tab_2" style="flex:1; padding:10px 0; border:none; background:#fafafa; font-weight:normal; color:#64748b; border-bottom:2px solid transparent; cursor:pointer;">화요일</button>
+            <button type="button" class="rsch-day-tab" onclick="switchRschDayTab(3)" id="rsch_tab_3" style="flex:1; padding:10px 0; border:none; background:#fafafa; font-weight:normal; color:#64748b; border-bottom:2px solid transparent; cursor:pointer;">수요일</button>
+            <button type="button" class="rsch-day-tab" onclick="switchRschDayTab(4)" id="rsch_tab_4" style="flex:1; padding:10px 0; border:none; background:#fafafa; font-weight:normal; color:#64748b; border-bottom:2px solid transparent; cursor:pointer;">목요일</button>
+            <button type="button" class="rsch-day-tab" onclick="switchRschDayTab(5)" id="rsch_tab_5" style="flex:1; padding:10px 0; border:none; background:#fafafa; font-weight:normal; color:#64748b; border-bottom:2px solid transparent; cursor:pointer;">금요일</button>
+          </div>
+
+          <!-- 요일별 입력 폼 패널들 (월~금) -->
+          <div style="padding:18px;">
+            
+            <!-- Loop 1 to 5 Days -->
+            <!-- Day 1: 월요일 -->
+            <div id="rsch_day_panel_1" class="rsch-day-panel" style="display:block;">
+              <div style="display:grid; grid-template-columns: 140px 1fr; gap:12px; align-items:center;">
+                <label style="font-weight:bold; color:#334155;">귀가시간</label>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <select name="yoil1_time_hour" id="time1_hour" class="form-control input-sm" style="width:100px; height:32px; line-height:normal !important;">
+                    <option value="">=시=</option>
+                    <option value="09">09시</option><option value="10">10시</option><option value="11">11시</option>
+                    <option value="12">12시</option><option value="13">13시</option><option value="14">14시</option>
+                    <option value="15">15시</option><option value="16">16시</option><option value="17">17시</option>
+                    <option value="18">18시</option><option value="19">19시</option><option value="20">20시</option>
+                  </select>
+                  <span>:</span>
+                  <select name="yoil1_time_min" id="time1_min" class="form-control input-sm" style="width:100px; height:32px; line-height:normal !important;">
+                    <option value="">=분=</option>
+                    <option value="00">00분</option><option value="05">05분</option><option value="10">10분</option>
+                    <option value="15">15분</option><option value="20">20분</option><option value="25">25분</option>
+                    <option value="30">30분</option><option value="35">35분</option><option value="40">40분</option>
+                    <option value="45">45분</option><option value="50">50분</option><option value="55">55분</option>
+                  </select>
+                </div>
+
+                <label style="font-weight:bold; color:#334155;">귀가 동행자</label>
+                <div>
+                  <input id="yoil1_guardian" name="yoil1_guardian" type="text" class="form-control input-sm" style="width:260px; height:32px;" placeholder="예: 엄마, 아빠, 자율귀가 등">
+                  <div style="margin-top:6px; font-size:12px; color:#64748b;">
+                    빠른선택:
+                    <a href="javascript:void(0);" onclick="$('#yoil1_guardian').val('엄마');" class="badge" style="background:#e2e8f0; color:#334155; text-decoration:none; margin-right:4px;">엄마</a>
+                    <a href="javascript:void(0);" onclick="$('#yoil1_guardian').val('아빠');" class="badge" style="background:#e2e8f0; color:#334155; text-decoration:none; margin-right:4px;">아빠</a>
+                    <a href="javascript:void(0);" onclick="$('#yoil1_guardian').val('자율귀가');" class="badge" style="background:#e2e8f0; color:#334155; text-decoration:none; margin-right:4px;">자율귀가</a>
+                    <a href="javascript:void(0);" onclick="$('#yoil1_guardian').val('학원차량');" class="badge" style="background:#e2e8f0; color:#334155; text-decoration:none;">학원차량</a>
+                  </div>
+                </div>
+
+                <label style="font-weight:bold; color:#334155;">동행자 연락처</label>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <select name="yoil1_tel_1" id="yoil1_tel_1" class="form-control input-sm" style="width:90px; height:32px; line-height:normal !important;">
+                    <option value="">선택</option><option value="010">010</option><option value="011">011</option><option value="02">02</option><option value="062">062</option><option value="070">070</option>
+                  </select>
+                  <span>-</span>
+                  <input name="yoil1_tel_2" id="yoil1_tel_2" type="text" maxlength="4" class="form-control input-sm" style="width:80px; height:32px; text-align:center;">
+                  <span>-</span>
+                  <input name="yoil1_tel_3" id="yoil1_tel_3" type="text" maxlength="4" class="form-control input-sm" style="width:80px; height:32px; text-align:center;">
+                </div>
+
+                <label style="font-weight:bold; color:#334155;">비고 / 메모</label>
+                <div>
+                  <input name="yoil1_memo" id="yoil1_memo" type="text" class="form-control input-sm" style="width:100%; height:32px;" placeholder="특이사항 (예: 외조모 010.2753.7348)">
+                </div>
+              </div>
+            </div>
+
+            <!-- Day 2: 화요일 -->
+            <div id="rsch_day_panel_2" class="rsch-day-panel" style="display:none;">
+              <div style="display:grid; grid-template-columns: 140px 1fr; gap:12px; align-items:center;">
+                <label style="font-weight:bold; color:#334155;">귀가시간</label>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <select name="yoil2_time_hour" id="time2_hour" class="form-control input-sm" style="width:100px; height:32px; line-height:normal !important;">
+                    <option value="">=시=</option>
+                    <option value="09">09시</option><option value="10">10시</option><option value="11">11시</option>
+                    <option value="12">12시</option><option value="13">13시</option><option value="14">14시</option>
+                    <option value="15">15시</option><option value="16">16시</option><option value="17">17시</option>
+                    <option value="18">18시</option><option value="19">19시</option><option value="20">20시</option>
+                  </select>
+                  <span>:</span>
+                  <select name="yoil2_time_min" id="time2_min" class="form-control input-sm" style="width:100px; height:32px; line-height:normal !important;">
+                    <option value="">=분=</option>
+                    <option value="00">00분</option><option value="05">05분</option><option value="10">10분</option>
+                    <option value="15">15분</option><option value="20">20분</option><option value="25">25분</option>
+                    <option value="30">30분</option><option value="35">35분</option><option value="40">40분</option>
+                    <option value="45">45분</option><option value="50">50분</option><option value="55">55분</option>
+                  </select>
+                </div>
+                <label style="font-weight:bold; color:#334155;">귀가 동행자</label>
+                <div>
+                  <input id="yoil2_guardian" name="yoil2_guardian" type="text" class="form-control input-sm" style="width:260px; height:32px;" placeholder="예: 엄마, 아빠, 자율귀가 등">
+                </div>
+                <label style="font-weight:bold; color:#334155;">동행자 연락처</label>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <select name="yoil2_tel_1" id="yoil2_tel_1" class="form-control input-sm" style="width:90px; height:32px; line-height:normal !important;">
+                    <option value="">선택</option><option value="010">010</option><option value="011">011</option><option value="02">02</option><option value="062">062</option>
+                  </select>
+                  <span>-</span>
+                  <input name="yoil2_tel_2" id="yoil2_tel_2" type="text" maxlength="4" class="form-control input-sm" style="width:80px; height:32px; text-align:center;">
+                  <span>-</span>
+                  <input name="yoil2_tel_3" id="yoil2_tel_3" type="text" maxlength="4" class="form-control input-sm" style="width:80px; height:32px; text-align:center;">
+                </div>
+                <label style="font-weight:bold; color:#334155;">비고 / 메모</label>
+                <div>
+                  <input name="yoil2_memo" id="yoil2_memo" type="text" class="form-control input-sm" style="width:100%; height:32px;">
+                </div>
+              </div>
+            </div>
+
+            <!-- Day 3: 수요일 -->
+            <div id="rsch_day_panel_3" class="rsch-day-panel" style="display:none;">
+              <div style="display:grid; grid-template-columns: 140px 1fr; gap:12px; align-items:center;">
+                <label style="font-weight:bold; color:#334155;">귀가시간</label>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <select name="yoil3_time_hour" id="time3_hour" class="form-control input-sm" style="width:100px; height:32px; line-height:normal !important;">
+                    <option value="">=시=</option>
+                    <option value="09">09시</option><option value="10">10시</option><option value="11">11시</option>
+                    <option value="12">12시</option><option value="13">13시</option><option value="14">14시</option>
+                    <option value="15">15시</option><option value="16">16시</option><option value="17">17시</option>
+                    <option value="18">18시</option><option value="19">19시</option><option value="20">20시</option>
+                  </select>
+                  <span>:</span>
+                  <select name="yoil3_time_min" id="time3_min" class="form-control input-sm" style="width:100px; height:32px; line-height:normal !important;">
+                    <option value="">=분=</option>
+                    <option value="00">00분</option><option value="05">05분</option><option value="10">10분</option>
+                    <option value="15">15분</option><option value="20">20분</option><option value="25">25분</option>
+                    <option value="30">30분</option><option value="35">35분</option><option value="40">40분</option>
+                    <option value="45">45분</option><option value="50">50분</option><option value="55">55분</option>
+                  </select>
+                </div>
+                <label style="font-weight:bold; color:#334155;">귀가 동행자</label>
+                <div>
+                  <input id="yoil3_guardian" name="yoil3_guardian" type="text" class="form-control input-sm" style="width:260px; height:32px;" placeholder="예: 엄마, 아빠, 자율귀가 등">
+                </div>
+                <label style="font-weight:bold; color:#334155;">동행자 연락처</label>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <select name="yoil3_tel_1" id="yoil3_tel_1" class="form-control input-sm" style="width:90px; height:32px; line-height:normal !important;">
+                    <option value="">선택</option><option value="010">010</option><option value="011">011</option><option value="02">02</option><option value="062">062</option>
+                  </select>
+                  <span>-</span>
+                  <input name="yoil3_tel_2" id="yoil3_tel_2" type="text" maxlength="4" class="form-control input-sm" style="width:80px; height:32px; text-align:center;">
+                  <span>-</span>
+                  <input name="yoil3_tel_3" id="yoil3_tel_3" type="text" maxlength="4" class="form-control input-sm" style="width:80px; height:32px; text-align:center;">
+                </div>
+                <label style="font-weight:bold; color:#334155;">비고 / 메모</label>
+                <div>
+                  <input name="yoil3_memo" id="yoil3_memo" type="text" class="form-control input-sm" style="width:100%; height:32px;">
+                </div>
+              </div>
+            </div>
+
+            <!-- Day 4: 목요일 -->
+            <div id="rsch_day_panel_4" class="rsch-day-panel" style="display:none;">
+              <div style="display:grid; grid-template-columns: 140px 1fr; gap:12px; align-items:center;">
+                <label style="font-weight:bold; color:#334155;">귀가시간</label>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <select name="yoil4_time_hour" id="time4_hour" class="form-control input-sm" style="width:100px; height:32px; line-height:normal !important;">
+                    <option value="">=시=</option>
+                    <option value="09">09시</option><option value="10">10시</option><option value="11">11시</option>
+                    <option value="12">12시</option><option value="13">13시</option><option value="14">14시</option>
+                    <option value="15">15시</option><option value="16">16시</option><option value="17">17시</option>
+                    <option value="18">18시</option><option value="19">19시</option><option value="20">20시</option>
+                  </select>
+                  <span>:</span>
+                  <select name="yoil4_time_min" id="time4_min" class="form-control input-sm" style="width:100px; height:32px; line-height:normal !important;">
+                    <option value="">=분=</option>
+                    <option value="00">00분</option><option value="05">05분</option><option value="10">10분</option>
+                    <option value="15">15분</option><option value="20">20분</option><option value="25">25분</option>
+                    <option value="30">30분</option><option value="35">35분</option><option value="40">40분</option>
+                    <option value="45">45분</option><option value="50">50분</option><option value="55">55분</option>
+                  </select>
+                </div>
+                <label style="font-weight:bold; color:#334155;">귀가 동행자</label>
+                <div>
+                  <input id="yoil4_guardian" name="yoil4_guardian" type="text" class="form-control input-sm" style="width:260px; height:32px;" placeholder="예: 엄마, 아빠, 자율귀가 등">
+                </div>
+                <label style="font-weight:bold; color:#334155;">동행자 연락처</label>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <select name="yoil4_tel_1" id="yoil4_tel_1" class="form-control input-sm" style="width:90px; height:32px; line-height:normal !important;">
+                    <option value="">선택</option><option value="010">010</option><option value="011">011</option><option value="02">02</option><option value="062">062</option>
+                  </select>
+                  <span>-</span>
+                  <input name="yoil4_tel_2" id="yoil4_tel_2" type="text" maxlength="4" class="form-control input-sm" style="width:80px; height:32px; text-align:center;">
+                  <span>-</span>
+                  <input name="yoil4_tel_3" id="yoil4_tel_3" type="text" maxlength="4" class="form-control input-sm" style="width:80px; height:32px; text-align:center;">
+                </div>
+                <label style="font-weight:bold; color:#334155;">비고 / 메모</label>
+                <div>
+                  <input name="yoil4_memo" id="yoil4_memo" type="text" class="form-control input-sm" style="width:100%; height:32px;">
+                </div>
+              </div>
+            </div>
+
+            <!-- Day 5: 금요일 -->
+            <div id="rsch_day_panel_5" class="rsch-day-panel" style="display:none;">
+              <div style="display:grid; grid-template-columns: 140px 1fr; gap:12px; align-items:center;">
+                <label style="font-weight:bold; color:#334155;">귀가시간</label>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <select name="yoil5_time_hour" id="time5_hour" class="form-control input-sm" style="width:100px; height:32px; line-height:normal !important;">
+                    <option value="">=시=</option>
+                    <option value="09">09시</option><option value="10">10시</option><option value="11">11시</option>
+                    <option value="12">12시</option><option value="13">13시</option><option value="14">14시</option>
+                    <option value="15">15시</option><option value="16">16시</option><option value="17">17시</option>
+                    <option value="18">18시</option><option value="19">19시</option><option value="20">20시</option>
+                  </select>
+                  <span>:</span>
+                  <select name="yoil5_time_min" id="time5_min" class="form-control input-sm" style="width:100px; height:32px; line-height:normal !important;">
+                    <option value="">=분=</option>
+                    <option value="00">00분</option><option value="05">05분</option><option value="10">10분</option>
+                    <option value="15">15분</option><option value="20">20분</option><option value="25">25분</option>
+                    <option value="30">30분</option><option value="35">35분</option><option value="40">40분</option>
+                    <option value="45">45분</option><option value="50">50분</option><option value="55">55분</option>
+                  </select>
+                </div>
+                <label style="font-weight:bold; color:#334155;">귀가 동행자</label>
+                <div>
+                  <input id="yoil5_guardian" name="yoil5_guardian" type="text" class="form-control input-sm" style="width:260px; height:32px;" placeholder="예: 엄마, 아빠, 자율귀가 등">
+                </div>
+                <label style="font-weight:bold; color:#334155;">동행자 연락처</label>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <select name="yoil5_tel_1" id="yoil5_tel_1" class="form-control input-sm" style="width:90px; height:32px; line-height:normal !important;">
+                    <option value="">선택</option><option value="010">010</option><option value="011">011</option><option value="02">02</option><option value="062">062</option>
+                  </select>
+                  <span>-</span>
+                  <input name="yoil5_tel_2" id="yoil5_tel_2" type="text" maxlength="4" class="form-control input-sm" style="width:80px; height:32px; text-align:center;">
+                  <span>-</span>
+                  <input name="yoil5_tel_3" id="yoil5_tel_3" type="text" maxlength="4" class="form-control input-sm" style="width:80px; height:32px; text-align:center;">
+                </div>
+                <label style="font-weight:bold; color:#334155;">비고 / 메모</label>
+                <div>
+                  <input name="yoil5_memo" id="yoil5_memo" type="text" class="form-control input-sm" style="width:100%; height:32px;">
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 하단 액션 버튼 그룹 -->
+        <div style="margin-top:20px; text-align:center; display:flex; justify-content:center; gap:8px;">
+          <button type="button" class="btn btn-default" onclick="closeRschWriteModal();" style="height:34px; padding:0 20px;">취소</button>
+          <button type="submit" class="btn btn-primary" style="height:34px; padding:0 24px; font-weight:bold;">저장</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 귀가일정 일괄입력 모달 (1:1 Target Clone) ==================== -->
+<div id="modal_ad_rsch_input" class="modal" style="display:none; position:fixed !important; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:99999 !important; align-items:center; justify-content:center;">
+  <div class="modal-dialog" style="width:720px; max-width:95vw; background:#fff; border-radius:6px; box-shadow:0 10px 30px rgba(0,0,0,0.3); overflow:hidden;">
+    <div class="modal-header" style="background:#337ab7; color:#fff; padding:12px 20px; display:flex; justify-content:space-between; align-items:center;">
+      <h4 style="margin:0; font-size:16px; font-weight:bold; display:flex; align-items:center; gap:8px;">
+        <i class="fa fa-upload"></i> 귀가일정 일괄입력
+      </h4>
+      <button type="button" class="close" onclick="closeRschInputModal();" style="color:#fff; opacity:0.9; font-size:24px; font-weight:bold; border:none; background:transparent; cursor:pointer;">&times;</button>
+    </div>
+
+    <div class="modal-body" style="padding:20px;">
+      <form id="fm_rsch_batch_input" onsubmit="handleRschBatchUpload(event);" enctype="multipart/form-data">
+        <table class="table table-bordered" style="margin-bottom:16px;">
+          <tbody>
+            <tr>
+              <th style="width:160px; background:#f8fafc; vertical-align:middle;">
+                엑셀 데이터 파일 <span class="text-danger">*</span>
+              </th>
+              <td>
+                <input id="userfile" name="userfile" type="file" accept=".xlsx, .xls" class="form-control" style="height:34px; padding:4px 8px;">
+                <div style="margin-top:8px; font-size:12px; color:#475569;">
+                  일괄입력 샘플 양식:
+                  <a href="/af/ad_rsch/sample_excel" class="link_type" style="color:#2563eb; font-weight:bold; text-decoration:underline;">
+                    <i class="fa fa-download"></i> afterRtnSchedule.xlsx
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th style="background:#f8fafc; vertical-align:middle;">
+                기존 데이터 처리 <span class="text-danger">*</span>
+              </th>
+              <td>
+                <label style="font-weight:normal; margin:0; cursor:pointer; display:inline-flex; align-items:center; gap:6px;">
+                  <input type="radio" name="input_type" id="input_type_add" value="add" checked>
+                  추가 입력 (기존 학생 데이터가 있을 경우 덮어쓰기 수정)
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <th style="background:#f8fafc; vertical-align:middle;">참고사항</th>
+              <td style="font-size:12px; color:#64748b; line-height:1.6;">
+                ※ 샘플파일(기본) 참고사항<br>
+                - <span class="text-danger">타이틀 행의 내용은 변경할 수 없습니다.</span><br>
+                - <span class="text-danger">학년, 반, 번호, 이름, 요일, 시간, 귀가동행자, 연락처</span>는 필수 항목입니다.<br>
+                - 학생 데이터가 등록되어 있지 않은 경우 입력되지 않습니다.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="text-align:center; display:flex; justify-content:center; gap:8px;">
+          <button type="button" class="btn btn-default" onclick="closeRschInputModal();" style="height:34px; padding:0 20px;">취소</button>
+          <button type="submit" class="btn btn-danger" style="height:34px; padding:0 24px; font-weight:bold;">일괄등록 실행</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 학생 주간 시간표 / 귀가 상세 모달 ==================== -->
+<div id="modal_ad_rsch_stu_schedule" class="modal" style="display:none; position:fixed !important; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:99999 !important; align-items:center; justify-content:center;">
+  <div class="modal-dialog" style="width:780px; max-width:95vw; background:#fff; border-radius:6px; box-shadow:0 10px 30px rgba(0,0,0,0.3); overflow:hidden;">
+    <div class="modal-header" style="background:#337ab7; color:#fff; padding:12px 20px; display:flex; justify-content:space-between; align-items:center;">
+      <h4 style="margin:0; font-size:16px; font-weight:bold; display:flex; align-items:center; gap:8px;">
+        <i class="fa fa-id-card-o"></i> <span id="rsch_stu_name_title">학생 주간 일정표</span>
+      </h4>
+      <button type="button" class="close" onclick="close_stu_schedule();" style="color:#fff; opacity:0.9; font-size:24px; font-weight:bold; border:none; background:transparent; cursor:pointer;">&times;</button>
+    </div>
+    <div class="modal-body" style="padding:20px;">
+      <div id="rsch_stu_schedule_content">
+        <!-- JS 렌더링 -->
+      </div>
+      <div style="text-align:center; margin-top:20px;">
+        <button type="button" class="btn btn-default" onclick="close_stu_schedule();" style="height:32px; padding:0 20px;">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 학생 검색 모달 (연계 팝업) ==================== -->
+<div id="modal_ad_rsch_search_student" class="modal" style="display:none; position:fixed !important; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.6); z-index:100000 !important; align-items:center; justify-content:center;">
+  <div class="modal-dialog" style="width:580px; max-width:90vw; background:#fff; border-radius:6px; box-shadow:0 10px 30px rgba(0,0,0,0.3); overflow:hidden;">
+    <div class="modal-header" style="background:#337ab7; color:#fff; padding:12px 18px; display:flex; justify-content:space-between; align-items:center;">
+      <h4 style="margin:0; font-size:15px; font-weight:bold;"><i class="fa fa-binoculars"></i> 학생 검색</h4>
+      <button type="button" class="close" onclick="closeRschStuSearchModal();" style="color:#fff; opacity:0.9; font-size:22px; border:none; background:transparent; cursor:pointer;">&times;</button>
+    </div>
+    <div class="modal-body" style="padding:16px;">
+      <div style="display:flex; gap:8px; margin-bottom:14px;">
+        <input type="text" id="rsch_search_stu_kw" class="form-control input-sm" style="height:32px;" placeholder="학생 이름 입력" onkeypress="if(event.keyCode===13) executeRschStuSearch();">
+        <button type="button" class="btn btn-primary btn-sm" onclick="executeRschStuSearch();" style="height:32px; padding:0 14px;">검색</button>
+      </div>
+      <div style="max-height:300px; overflow-y:auto; border:1px solid #e2e8f0; border-radius:4px;">
+        <table class="table table-hover" style="margin-bottom:0; font-size:13px; text-align:center;">
+          <thead style="background:#f8fafc;">
+            <tr>
+              <th>학년</th>
+              <th>반</th>
+              <th>번호</th>
+              <th>이름</th>
+              <th>선택</th>
+            </tr>
+          </thead>
+          <tbody id="rsch_search_stu_tbody">
+            <!-- 검색 결과 -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

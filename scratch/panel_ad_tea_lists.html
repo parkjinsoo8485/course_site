@@ -1,0 +1,516 @@
+<!-- ==================== 15.7 강사관리 (/af/ad_tea/lists) 1:1 Target Clone ==================== -->
+<div class="submodel-panel" id="panel_ad_tea_lists" style="display: none;">
+  <div class="panel_main panel-default_main" style="background:#fff; border:1px solid #dcdcdc; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.05); margin-bottom:20px;">
+    
+    <!-- 상단 매뉴얼 박스 (1:1 타깃 대조) -->
+    <div class="new_help_manualbox hm_loca1" style="padding:10px 15px; background:#f8fafc; border-bottom:1px solid #eee; display:flex; justify-content:space-between; align-items:center;">
+      <p class="hm_title" style="margin:0; font-size:13px; font-weight:bold; color:#475569;">
+        <i class="fa fa-file-text-o" aria-hidden="true" style="margin-right:4px;"></i>매뉴얼
+      </p>
+      <ul style="list-style:none; margin:0; padding:0; display:flex; gap:6px;">
+        <li>
+          <a href="https://www.dbdbschool.kr/help/go_data/num/72/data/link1" target="_blank" class="manual_btn btn btn-xs btn-default" style="font-size:12px; color:#337ab7; text-decoration:none;">
+            <i class="fa fa-youtube-play" style="color:#d9534f;"></i> 강사 등록
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 패널 헤더 -->
+    <div class="panel-heading" style="padding:12px 18px; font-size:16px; font-weight:bold; color:#333; background:#fafafa; border-bottom:1px solid #eee;">
+      목록
+    </div>
+
+    <!-- 검색 영역 (1:1 타깃 대조: fm_list_search, st, s_word) -->
+    <div class="panel-search" style="padding:14px 18px; background:#fff; border-bottom:1px solid #eee;">
+      <form name="fm_list_search" id="fm_list_search" method="get" onsubmit="searchTeaList(event);" accept-charset="utf-8" style="margin:0;">
+        <ul style="list-style:none; margin:0; padding:0; display:flex; justify-content:center; align-items:center; gap:6px;">
+          <li class="PAD0 select_box_menu_parent" style="text-align:center; display:inline-flex; align-items:center; gap:6px;">
+            <select name="st" id="st" class="form-control input-sm PAD0" style="width:100px; height:30px; line-height:normal !important; box-sizing:border-box !important; vertical-align:middle;">
+              <option value="mem_name">이름</option>
+              <option value="mem_id">아이디</option>
+            </select>
+            <input type="text" name="sw" id="s_word" value="" size="15" maxlength="15" class="form-control input-sm size35" style="width:200px; height:30px; ime-mode:active;" placeholder="검색어입력">
+            <input type="submit" value="검색" class="btn btn-default btn-sm" style="height:30px; padding:0 14px; display:inline-flex; align-items:center; justify-content:center; line-height:1;">
+            <input type="button" value="전체" class="btn btn-default btn-sm" onclick="resetTeaList();" style="height:30px; padding:0 14px; display:inline-flex; align-items:center; justify-content:center; line-height:1;">
+          </li>
+        </ul>
+      </form>
+    </div>
+
+    <!-- 상단 액션 버튼 바 (강사 등록, 추가기능: 강사 일괄입력, 검색결과엑셀출력, 시간표출력) -->
+    <div class="panel-body" style="padding:12px 18px; display:flex; justify-content:flex-end;">
+      <ul class="list-inline" style="margin:0; padding:0; display:flex; gap:6px;">
+        <li class="pull-right PAD0" style="position:relative;">
+          <input type="button" value="강사 등록" data-loading-text="처리중 .." class="btn btn-primary btn-sm" onclick="openTeaWriteModal();" style="height:30px; padding:0 14px; display:inline-flex; align-items:center; justify-content:center; line-height:1; font-weight:bold;">
+          <div class="btn-group" style="display:inline-block; position:relative;">
+            <a href="javascript:void(0);" id="main_control_box_btn02" class="main_control_box_btn btn btn-default btn-sm" onclick="toggleTeaControlBox(event);" style="height:30px; padding:0 14px; display:inline-flex; align-items:center; justify-content:center; line-height:1;">
+              추가기능.. <span class="fa fa-angle-down" style="margin-left:4px;"></span>
+            </a>
+            <span class="main_control_box_module" id="main_control_box_drop" style="display:none; position:absolute; right:0; top:32px; background:#fff; border:1px solid #ccc; border-radius:4px; box-shadow:0 3px 8px rgba(0,0,0,0.15); z-index:100; padding:6px 0; min-width:140px;">
+              <a href="javascript:void(0);" onclick="openTeaInputModal();" class="btn btn-warning btn-sm" style="display:block; width:100%; text-align:left; border-radius:0; border:none; margin:2px 0; padding:6px 12px; font-size:12px;">
+                <i class="fa fa-upload"></i> 강사 일괄입력
+              </a>
+              <a href="/af/ad_tea/excel/sn/3267" class="btn btn-success btn-sm" style="display:block; width:100%; text-align:left; border-radius:0; border:none; margin:2px 0; padding:6px 12px; font-size:12px;">
+                <i class="fa fa-file-excel-o"></i> 검색결과엑셀출력
+              </a>
+              <a href="javascript:void(0);" onclick="openTeaScheduleModal();" class="btn btn-success btn-sm" style="display:block; width:100%; text-align:left; border-radius:0; border:none; margin:2px 0; padding:6px 12px; font-size:12px;">
+                <i class="fa fa-calendar"></i> 시간표출력
+              </a>
+            </span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 메인 목록 테이블 (1:1 타깃 폼 및 속성 보존) -->
+    <form name="fm_list" id="fm_list" method="post" onsubmit="return fm_tea_list_check(this);" accept-charset="utf-8" style="margin:0;">
+      <input type="hidden" name="csrf_test_name" value="4a1780fbc12d51eb33cb3ea82167f4e8">
+      <input type="hidden" name="form_open_date_use_chk_csrf" value="2026-10-02 15:02:12">
+
+      <div id="main_table_responsive_container" class="table-responsive-container" style="overflow-x:auto;">
+        <table class="table AlignCenter table-hover_sm list MAT0" id="teaMainTable" style="width:100%; border-collapse:collapse; margin-bottom:0;">
+          <thead style="background:#f5f5f5;">
+            <tr style="--sticky-row-top: 0px; border-bottom:2px solid #ddd; height:38px;">
+              <th width="50" style="text-align:center; vertical-align:middle;"><input type="checkbox" name="check_all" id="check_all" value="" onclick="chk_all_tea(this);" title="전체선택/취소" style="float:none; cursor:pointer;"></th>
+              <th width="60" style="text-align:center; vertical-align:middle;">연번</th>
+              <th width="60" style="text-align:center; vertical-align:middle;">수정</th>
+              <th style="text-align:center; vertical-align:middle;">아이디</th>
+              <th style="text-align:center; vertical-align:middle;">이름</th>
+              <th width="140" style="text-align:center; vertical-align:middle;">휴대폰</th>
+              <th width="180" style="text-align:center; vertical-align:middle;">마지막 로그인</th>
+              <th width="60" style="text-align:center; vertical-align:middle;">임시<br>비번</th>
+              <th width="60" style="text-align:center; vertical-align:middle;">본인<br>인증</th>
+              <th width="60" style="text-align:center; vertical-align:middle;">2단계<br>인증</th>
+              <th width="100" style="text-align:center; vertical-align:middle;">약관동의</th>
+              <th width="120" style="text-align:center; vertical-align:middle;">상태</th>
+              <th width="60" style="text-align:center; vertical-align:middle;">삭제</th>
+            </tr>
+          </thead>
+          <tbody id="teaTableTbody" style="font-size:13px;">
+            <tr style="border-bottom:1px solid #eee; height:36px;">
+              <td style="text-align:center; vertical-align:middle;"><input type="checkbox" name="data_checked[]" value="55382" class="tea-check-item" style="cursor:pointer;"></td>
+              <td style="text-align:center; vertical-align:middle;">18</td>
+              <td style="text-align:center; vertical-align:middle;"><a href="javascript:void(0);" onclick="openTeaModifyModal('55382')" title="수정" style="color:#555; text-decoration:none;"><i class="fa fa-cog icon_btn" style="cursor:pointer; font-size:14px;"></i></a></td>
+              <td style="text-align:center; vertical-align:middle; font-weight:bold;">강태연</td>
+              <td style="text-align:center; vertical-align:middle;">강태연</td>
+              <td style="text-align:center; vertical-align:middle;">010-7222-1718</td>
+              <td style="text-align:center; vertical-align:middle; font-size:12px; color:#666;">2026-09-29 08:53:58</td>
+              <td style="text-align:center; vertical-align:middle;">-</td>
+              <td style="text-align:center; vertical-align:middle;">-</td>
+              <td style="text-align:center; vertical-align:middle;">-</td>
+              <td style="text-align:center; vertical-align:middle; font-size:12px;">2025-05-26</td>
+              <td style="text-align:center; vertical-align:middle;" width="95">
+                <div class="span04" style="position:relative; display:inline-block;">
+                  <span class="isu_status_1 isu_status_sm" id="view_mem_status_55382" style="padding:2px 8px; border-radius:3px; font-size:11px; font-weight:bold; background:#337ab7; color:#fff;">사용</span>
+                </div>
+              </td>
+              <td style="text-align:center; vertical-align:middle;"><a href="javascript:void(0);" onclick="chk_del('55382'); return false;" title="삭제" style="color:#d9534f; text-decoration:none;"><i class="fa fa-trash-o icon_btn" style="cursor:pointer; font-size:14px;"></i></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 하단 일괄적용 및 페이징 바 -->
+      <div class="panel-body MAT30" style="padding:14px 18px; border-top:1px solid #eee; display:flex; justify-content:space-between; align-items:center;">
+        <div class="PAD0 mobile_none" style="display:flex; align-items:center; gap:6px;">
+          <select name="update_type" id="update_type" class="form-control" style="width:160px; height:32px; font-size:12px; line-height:normal !important; box-sizing:border-box !important;">
+            <option value="">=== 일괄적용 ===</option>
+            <option value="status_1">[상태변경] 사용</option>
+            <option value="status_0">[상태변경] 대기</option>
+            <option value="">---------------</option>
+            <option value="del">삭제</option>
+          </select>
+          <input type="submit" class="btn btn-default" value="적용하기" style="height:32px; padding:0 14px; font-size:12px; display:inline-flex; align-items:center; justify-content:center;">
+        </div>
+        <div style="text-align:right;">
+          <ul class="pagination" id="teaPagination" style="margin:0; display:inline-flex; list-style:none; padding:0; gap:2px;">
+            <li class="active" style="padding:4px 10px; background:#337ab7; color:#fff; border-radius:3px; cursor:pointer;"><a href="javascript:void(0);" onclick="renderTeaPage(1)" style="color:#fff; text-decoration:none;">1</a></li>
+            <li style="padding:4px 10px; background:#eee; border-radius:3px; cursor:pointer;"><a href="javascript:void(0);" onclick="renderTeaPage(2)" style="color:#333; text-decoration:none;">2</a></li>
+          </ul>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- 도움말 박스 (1:1 타깃 안내) -->
+  <div class="help_box" style="padding:14px 18px; background:#f9fafb; border:1px solid #e5e7eb; border-radius:4px; font-size:12px; color:#4b5563; line-height:1.6;">
+    <ul style="margin:0; padding-left:20px;">
+      <li>강사를 삭제하더라도 이용 중인 서비스에 등록된 자료는 삭제되지 않습니다.</li>
+      <li>상태가 '대기'중인 강사는 로그인할 수 없습니다.</li>
+    </ul>
+  </div>
+
+  <!-- 숨겨진 상태변경 폼 (1:1 타깃 대조) -->
+  <form name="fm_mem_status" id="fm_mem_status" method="post" accept-charset="utf-8" style="display:none;">
+    <input type="hidden" name="csrf_test_name" value="4a1780fbc12d51eb33cb3ea82167f4e8">
+    <input type="hidden" name="form_open_date_use_chk_csrf" value="2026-10-02 15:02:12">
+    <input type="hidden" name="num" id="mem_status_num" value="">
+    <input type="hidden" name="mem_status" id="mem_status" value="">
+    <input type="hidden" name="mem_obj_id" id="mem_obj_id" value="">
+  </form>
+
+  <!-- 숨겨진 삭제 폼 (1:1 타깃 대조) -->
+  <form name="fm_del" id="fm_del" method="post" accept-charset="utf-8" style="display:none;">
+    <input type="hidden" name="csrf_test_name" value="4a1780fbc12d51eb33cb3ea82167f4e8">
+    <input type="hidden" name="form_open_date_use_chk_csrf" value="2026-10-02 15:02:12">
+    <input type="hidden" name="num" id="del_num" value="">
+  </form>
+</div>
+
+<!-- ==================== 1. 강사 등록 모달 (#modal_ad_tea_write) ==================== -->
+<div id="modal_ad_tea_write" class="modal-overlay" style="display: none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; justify-content:center; align-items:center;">
+  <div class="modal-window" style="background:#fff; width:95%; max-width:650px; border-radius:6px; box-shadow:0 8px 24px rgba(0,0,0,0.25); overflow:hidden; animation:modalFadeIn 0.2s ease-out;">
+    
+    <!-- 모달 헤더 (표준 #337ab7 블루 헤더) -->
+    <div style="background:#337ab7; color:#fff; padding:12px 18px; display:flex; justify-content:space-between; align-items:center;">
+      <h4 style="margin:0; font-size:15px; font-weight:bold; display:flex; align-items:center; gap:8px;">
+        <i class="fa fa-pencil-square-o"></i> 강사 등록
+      </h4>
+      <button type="button" onclick="closeTeaWriteModal();" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer; line-height:1;">&times;</button>
+    </div>
+
+    <!-- 모달 바디 (1:1 타깃 원본 필드) -->
+    <div style="padding:20px 24px; max-height:80vh; overflow-y:auto;">
+      <p style="margin-top:0; margin-bottom:14px; font-size:12px; color:#666;">
+        <i class="fa fa-asterisk text-danger" style="font-size:10px;"></i> 표시가 있는 항목은 반드시 입력해야 합니다.
+      </p>
+
+      <form id="fm_tea_write_modal" onsubmit="submitTeaWrite(event);">
+        <input type="hidden" name="csrf_test_name" value="4a1780fbc12d51eb33cb3ea82167f4e8">
+        <input type="hidden" name="form_open_date_use_chk_csrf" value="2026-10-02 15:02:15">
+
+        <table class="table table-bordered" style="margin-bottom:15px; font-size:13px;">
+          <tbody>
+            <tr>
+              <th width="150" style="background:#f9fafb; vertical-align:middle; text-align:right;">
+                아이디 <span class="text-danger">*</span>
+              </th>
+              <td>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <input type="text" name="mem_id" id="mem_id" title="아이디" size="11" maxlength="15" class="form-control input-sm" style="width:140px; height:30px;" placeholder="2~15자" required>
+                  <button type="button" class="btn btn-default btn-sm" onclick="chk_id();" style="height:30px; padding:0 10px; font-size:12px; display:inline-flex; align-items:center; gap:4px;">
+                    <i class="fa fa-binoculars"></i> 중복확인
+                  </button>
+                </div>
+                <div id="error_mem_id" class="error_msg text-danger font-12" style="margin-top:4px;"></div>
+              </td>
+            </tr>
+            <tr>
+              <th style="background:#f9fafb; vertical-align:middle; text-align:right;">
+                이름 <span class="text-danger">*</span>
+              </th>
+              <td>
+                <input type="text" name="mem_name" id="mem_name" title="이름" size="11" maxlength="15" class="form-control input-sm" style="width:140px; height:30px;" required>
+                <div style="font-size:11px; color:#888; margin-top:4px;">(휴대폰 본인인증을 위해 실명으로 입력해 주세요)</div>
+                <div id="error_mem_name" class="error_msg text-danger font-12" style="margin-top:4px;"></div>
+              </td>
+            </tr>
+            <tr>
+              <th style="background:#f9fafb; vertical-align:middle; text-align:right;">
+                비밀번호 <span class="text-danger">*</span>
+              </th>
+              <td>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <input id="mem_passwd" name="mem_passwd" type="password" title="비밀번호" style="width:140px; height:30px;" class="form-control input-sm" maxlength="15" required>
+                  <span style="font-size:11px; color:#888;">(4~15자 이내)</span>
+                </div>
+                <div style="font-size:11px; color:#888; margin-top:4px;">(등록된 임시 비밀번호는 로그인 후 반드시 변경해야 합니다.)</div>
+              </td>
+            </tr>
+            <tr>
+              <th style="background:#f9fafb; vertical-align:middle; text-align:right;">
+                상태 <span class="text-danger">*</span>
+              </th>
+              <td>
+                <label style="margin-right:15px; font-weight:normal; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+                  <input id="mem_status_1" name="mem_status" type="radio" value="1" checked> 사용
+                </label>
+                <label style="font-weight:normal; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+                  <input id="mem_status_0" name="mem_status" type="radio" value="0"> 대기
+                </label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="help_box" style="padding:10px 14px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:4px; font-size:11px; color:#64748b; margin-bottom:18px;">
+          <ul style="margin:0; padding-left:18px;">
+            <li>아이디는 2자~15자 이내의 한글, 영문, 숫자, 언더바(_), 대쉬(-)만 포함할 수 있습니다.</li>
+          </ul>
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:8px;">
+          <button type="button" class="btn btn-default" onclick="closeTeaWriteModal();" style="height:32px; padding:0 18px; font-size:13px;">목록보기/취소</button>
+          <button type="submit" class="btn btn-danger" style="height:32px; padding:0 22px; font-size:13px; font-weight:bold;">등록</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 2. 강사 수정 모달 (#modal_ad_tea_modify) ==================== -->
+<div id="modal_ad_tea_modify" class="modal-overlay" style="display: none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; justify-content:center; align-items:center;">
+  <div class="modal-window" style="background:#fff; width:95%; max-width:700px; border-radius:6px; box-shadow:0 8px 24px rgba(0,0,0,0.25); overflow:hidden; animation:modalFadeIn 0.2s ease-out;">
+    
+    <!-- 모달 헤더 -->
+    <div style="background:#337ab7; color:#fff; padding:12px 18px; display:flex; justify-content:space-between; align-items:center;">
+      <h4 style="margin:0; font-size:15px; font-weight:bold; display:flex; align-items:center; gap:8px;">
+        <i class="fa fa-cog"></i> 강사 정보 수정
+      </h4>
+      <button type="button" onclick="closeTeaModifyModal();" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer; line-height:1;">&times;</button>
+    </div>
+
+    <!-- 모달 바디 (1:1 타깃 수정 폼 필드) -->
+    <div style="padding:20px 24px; max-height:80vh; overflow-y:auto;">
+      <p style="margin-top:0; margin-bottom:14px; font-size:12px; color:#666;">
+        <i class="fa fa-asterisk text-danger" style="font-size:10px;"></i> 표시가 있는 항목은 반드시 입력해야 합니다.
+      </p>
+
+      <form id="fm_tea_modify_modal" onsubmit="submitTeaModify(event);">
+        <input type="hidden" name="csrf_test_name" value="4a1780fbc12d51eb33cb3ea82167f4e8">
+        <input type="hidden" name="form_open_date_use_chk_csrf" value="2026-10-02 15:02:32">
+        <input type="hidden" name="modify_num" id="modify_tea_num" value="">
+
+        <table class="table table-bordered" style="margin-bottom:15px; font-size:13px;">
+          <tbody>
+            <tr>
+              <th width="150" style="background:#f9fafb; vertical-align:middle; text-align:right;">아이디</th>
+              <td id="mod_view_mem_id" style="font-weight:bold; vertical-align:middle;">강태연</td>
+            </tr>
+            <tr>
+              <th style="background:#f9fafb; vertical-align:middle; text-align:right;">
+                이름 <span class="text-danger">*</span>
+              </th>
+              <td>
+                <input type="text" name="mem_name" id="mod_mem_name" title="이름" size="11" value="" maxlength="15" class="form-control input-sm" style="width:140px; height:30px;" readonly>
+                <div style="font-size:11px; color:#888; margin-top:4px;">(휴대폰 본인인증을 위해 실명으로 입력해 주세요)</div>
+                <div style="margin-top:4px;">
+                  <label for="change_mem_name" style="font-weight:normal; cursor:pointer; font-size:12px; display:inline-flex; align-items:center; gap:4px;">
+                    <input type="checkbox" name="change_mem_name" id="change_mem_name" value="1" onclick="chk_change_mem_name();">
+                    <span class="text-danger" style="font-weight:bold;">이름 변경</span> (기존 휴대폰 본인인증 정보는 삭제됩니다)
+                  </label>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th style="background:#f9fafb; vertical-align:middle; text-align:right;">비밀번호</th>
+              <td>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <input id="mod_mem_passwd" name="mem_passwd" type="password" title="비밀번호" value="" style="width:140px; height:30px;" class="form-control input-sm" maxlength="15">
+                  <span style="font-size:11px; color:#888;">(4~15자 이내)</span>
+                </div>
+                <div style="font-size:11px; color:#888; margin-top:4px;">(등록된 임시 비밀번호는 로그인 후 반드시 변경해야 합니다.)</div>
+              </td>
+            </tr>
+            <tr>
+              <th style="background:#f9fafb; vertical-align:middle; text-align:right;">휴대폰</th>
+              <td>
+                <div id="mod_view_hp" style="font-weight:bold; margin-bottom:4px;">010-7222-1718</div>
+                <label for="del_mem_hp" style="font-weight:normal; cursor:pointer; font-size:12px; display:inline-flex; align-items:center; gap:4px;">
+                  <input type="checkbox" name="del_mem_hp" id="del_mem_hp" value="1">
+                  <span class="text-danger" style="font-weight:bold;">휴대폰 번호 삭제</span> (기존 휴대폰 본인인증 정보는 삭제됩니다)
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <th style="background:#f9fafb; vertical-align:middle; text-align:right;">
+                상태 <span class="text-danger">*</span>
+              </th>
+              <td>
+                <label style="margin-right:15px; font-weight:normal; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+                  <input id="mod_mem_status_1" name="mem_status" type="radio" value="1"> 사용
+                </label>
+                <label style="font-weight:normal; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+                  <input id="mod_mem_status_0" name="mem_status" type="radio" value="0"> 대기
+                </label>
+              </td>
+            </tr>
+            <tr><th style="background:#f9fafb; text-align:right;">임시비밀번호</th><td id="mod_temp_pass">-</td></tr>
+            <tr><th style="background:#f9fafb; text-align:right;">본인인증</th><td id="mod_self_auth">-</td></tr>
+            <tr><th style="background:#f9fafb; text-align:right;">2단계인증</th><td id="mod_two_factor">-</td></tr>
+            <tr><th style="background:#f9fafb; text-align:right;">약관동의</th><td id="mod_agree_date">2025-05-26</td></tr>
+            <tr><th style="background:#f9fafb; text-align:right;">마지막로그인</th><td id="mod_last_login">2026-09-29 08:53:58</td></tr>
+            <tr><th style="background:#f9fafb; text-align:right;">등록일자</th><td id="mod_reg_date">2025-05-11 14:10:19</td></tr>
+            <tr><th style="background:#f9fafb; text-align:right;">마지막수정</th><td id="mod_upd_date">2026-09-29 08:56:42</td></tr>
+          </tbody>
+        </table>
+
+        <div style="display:flex; justify-content:center; gap:8px;">
+          <button type="button" class="btn btn-default" onclick="closeTeaModifyModal();" style="height:32px; padding:0 18px; font-size:13px;">목록보기/취소</button>
+          <button type="submit" class="btn btn-primary" style="height:32px; padding:0 22px; font-size:13px; font-weight:bold;">수정</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 3. 강사 일괄입력 모달 (#modal_ad_tea_input) ==================== -->
+<div id="modal_ad_tea_input" class="modal-overlay" style="display: none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; justify-content:center; align-items:center;">
+  <div class="modal-window" style="background:#fff; width:95%; max-width:700px; border-radius:6px; box-shadow:0 8px 24px rgba(0,0,0,0.25); overflow:hidden; animation:modalFadeIn 0.2s ease-out;">
+    
+    <!-- 모달 헤더 -->
+    <div style="background:#337ab7; color:#fff; padding:12px 18px; display:flex; justify-content:space-between; align-items:center;">
+      <h4 style="margin:0; font-size:15px; font-weight:bold; display:flex; align-items:center; gap:8px;">
+        <i class="fa fa-upload"></i> 강사 일괄입력
+      </h4>
+      <button type="button" onclick="closeTeaInputModal();" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer; line-height:1;">&times;</button>
+    </div>
+
+    <!-- 모달 바디 (1:1 타깃 원본 일괄입력 폼) -->
+    <div style="padding:20px 24px; max-height:80vh; overflow-y:auto;">
+      <p style="margin-top:0; margin-bottom:14px; font-size:12px; color:#666;">
+        <i class="fa fa-asterisk text-danger" style="font-size:10px;"></i> 표시가 있는 항목은 반드시 입력해야 합니다.
+      </p>
+
+      <form id="fm_tea_input_modal" onsubmit="submitTeaBatchInput(event);" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_test_name" value="4a1780fbc12d51eb33cb3ea82167f4e8">
+        <input type="hidden" name="form_open_date_use_chk_csrf" value="2026-10-02 15:03:01">
+
+        <table class="table table-bordered" style="margin-bottom:15px; font-size:13px;">
+          <tbody>
+            <tr>
+              <th width="160" style="background:#f9fafb; vertical-align:middle; text-align:right;">
+                엑셀 데이터 파일 <span class="text-danger">*</span>
+              </th>
+              <td>
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <input id="userfile" name="userfile" type="file" title="데이터파일" class="form-control input-sm" style="height:32px; width:260px;" accept=".xlsx,.xls,.csv" required>
+                  <a href="/doc/after/sample/afterTeaInput.xlsx" class="btn btn-xs btn-default" style="display:inline-flex; align-items:center; gap:4px; height:28px; padding:0 8px; font-size:12px; color:#337ab7;">
+                    <i class="fa fa-download"></i> 샘플 (afterTeaInput.xlsx)
+                  </a>
+                </div>
+                <div style="font-size:11px; color:#888; margin-top:4px;">
+                  <i class="fa fa-question-circle"></i> 한셀로 만들어진 엑셀파일은 일반 xlsx로 변환 후 사용할 수 있습니다.
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th style="background:#f9fafb; vertical-align:middle; text-align:right;">
+                기존 데이터 <span class="text-danger">*</span>
+              </th>
+              <td>
+                <label style="margin-right:15px; font-weight:normal; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+                  <input type="radio" name="input_type" id="input_type_add" value="add" checked> 추가 입력(수정)
+                </label>
+                <label style="font-weight:normal; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+                  <input type="radio" name="input_type" id="input_type_clear" value="clear"> 전체 삭제 후 입력
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <th style="background:#f9fafb; vertical-align:middle; text-align:right;">초기 비밀번호</th>
+              <td>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <input id="def_passwd" name="def_passwd" type="password" value="" maxlength="15" class="form-control input-sm" style="width:160px; height:30px;" placeholder="미입력시 기본값">
+                  <span style="font-size:11px; color:#888;">(4~15자 이내)</span>
+                </div>
+                <div style="font-size:11px; color:#888; margin-top:4px;">(엑셀 파일 안에 직접 입력되어 있지 않은 경우에만 사용됩니다.)</div>
+              </td>
+            </tr>
+            <tr>
+              <th style="background:#f9fafb; vertical-align:top; text-align:right;">참고사항</th>
+              <td style="font-size:12px; color:#555; line-height:1.6;">
+                - 샘플파일 <span class="text-danger">첫 번째 줄의 내용은 변경할 수 없습니다.</span><br>
+                - <span class="text-danger">아이디 : 필수</span> 항목입니다 (한글, 영문, 숫자, 언더바, 대쉬 2~15자)<br>
+                - <span class="text-danger">이름 : 필수</span> 항목입니다.<br>
+                - <span class="text-danger">비밀번호 : 선택</span> 항목입니다.<br>
+                - <span class="text-danger">아이디가 같은 데이터는 기존 정보가 수정</span>됩니다.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="display:flex; justify-content:center; gap:8px;">
+          <button type="button" class="btn btn-default" onclick="closeTeaInputModal();" style="height:32px; padding:0 18px; font-size:13px;">취소</button>
+          <button type="submit" class="btn btn-danger" style="height:32px; padding:0 22px; font-size:13px; font-weight:bold;">등록</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 4. 강사 시간표 출력 모달 (#modal_ad_tea_schedule) ==================== -->
+<div id="modal_ad_tea_schedule" class="modal-overlay" style="display: none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; justify-content:center; align-items:center;">
+  <div class="modal-window" style="background:#fff; width:95%; max-width:600px; border-radius:6px; box-shadow:0 8px 24px rgba(0,0,0,0.25); overflow:hidden; animation:modalFadeIn 0.2s ease-out;">
+    
+    <!-- 모달 헤더 -->
+    <div style="background:#337ab7; color:#fff; padding:12px 18px; display:flex; justify-content:space-between; align-items:center;">
+      <h4 style="margin:0; font-size:15px; font-weight:bold; display:flex; align-items:center; gap:8px;">
+        <i class="fa fa-calendar"></i> 강사 시간표 출력
+      </h4>
+      <button type="button" onclick="closeTeaScheduleModal();" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer; line-height:1;">&times;</button>
+    </div>
+
+    <!-- 모달 바디 (1:1 타깃 원본 시간표 폼) -->
+    <div style="padding:20px 24px;">
+      <p style="margin-top:0; margin-bottom:14px; font-size:12px; color:#666;">
+        <i class="fa fa-asterisk text-danger" style="font-size:10px;"></i> 표시가 있는 항목은 반드시 입력해야 합니다.
+      </p>
+
+      <form action="/af/ad_tea/schedule_excel/sn/3267" method="get" id="fm_tea_schedule_modal" onsubmit="return submitTeaSchedule(event);">
+        <table class="table table-bordered" style="margin-bottom:15px; font-size:13px;">
+          <tbody>
+            <tr>
+              <th width="150" style="background:#f9fafb; vertical-align:middle; text-align:right;">
+                강좌구분 <span class="text-danger">*</span>
+              </th>
+              <td>
+                <select name="lec_div" id="lec_div" class="form-control input-sm" style="width:100%; height:32px; line-height:normal !important;" required>
+                  <option value="">=선택=</option>
+                  <option value="5">3월</option>
+                  <option value="6">26년 4월</option>
+                  <option value="7">26년 5월</option>
+                  <option value="8">26년 6월</option>
+                  <option value="9">26년 7월</option>
+                  <option value="10">26년 8월</option>
+                  <option value="11">26년 9월</option>
+                  <option value="12" selected>26년 10월</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th style="background:#f9fafb; vertical-align:middle; text-align:right;">강사ID</th>
+              <td>
+                <select name="tea_id" id="tea_id" class="form-control input-sm" style="width:100%; height:32px; line-height:normal !important;">
+                  <option value="">=전체=</option>
+                  <option value="강태연">강태연</option>
+                  <option value="김경아">김경아</option>
+                  <option value="김언주">김언주</option>
+                  <option value="김윤정">김윤정</option>
+                  <option value="김재표">김재표</option>
+                  <option value="김지향">김지향</option>
+                  <option value="돌봄전담사">돌봄전담사</option>
+                  <option value="박경도">박경도</option>
+                  <option value="박은화">박은화</option>
+                  <option value="박지숙">박지숙</option>
+                  <option value="박지연">박지연</option>
+                  <option value="보조강사">보조강사</option>
+                  <option value="서인경">서인경</option>
+                  <option value="이금진">이금진</option>
+                  <option value="임은희">임은희</option>
+                  <option value="정진화">정진화</option>
+                  <option value="천윤아">천윤아</option>
+                  <option value="최정호">최정호</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="help_box" style="padding:10px 14px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:4px; font-size:11px; color:#64748b; margin-bottom:18px;">
+          <ul style="margin:0; padding-left:18px;">
+            <li>개설된 모든('대기중' 포함) 강좌를 기준으로 출력됩니다.</li>
+          </ul>
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:8px;">
+          <button type="button" class="btn btn-default" onclick="closeTeaScheduleModal();" style="height:32px; padding:0 18px; font-size:13px;">취소</button>
+          <button type="submit" class="btn btn-success" style="height:32px; padding:0 22px; font-size:13px; font-weight:bold;">
+            <i class="fa fa-file-excel-o"></i> 엑셀출력
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

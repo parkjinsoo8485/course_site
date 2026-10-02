@@ -2418,37 +2418,1071 @@ class JSONDatabase {
   }
 
   // 7. Subsidies 4-Submodels (/af/ad_free2_stu, /af/ad_free2_app, /af/ad_free2_cfg, /af/ad_free2_cfg/free1)
-  getSubsidyStudents(schoolId) {
-    if (!this.data.subsidyStudents) {
+  getSubsidyStudents(schoolId, filters = {}) {
+    if (!this.data.subsidyStudents || this.data.subsidyStudents.length === 0 || this.data.subsidyStudents[0].fund1_total === undefined) {
       this.data.subsidyStudents = [
-        { id: 'sub_stu_1', schoolId: 'sch_1', studentName: '김지원', gradeClass: '1학년 1반', parentPhone: '010-4444-5555', rank: '1순위(국민기초)', annualBudget: 600000, usedAmount: 140000, balance: 460000, status: '지원가능' },
-        { id: 'sub_stu_2', schoolId: 'sch_1', studentName: '박하늘', gradeClass: '2학년 3반', parentPhone: '010-6666-7777', rank: '2순위(한부모)', annualBudget: 600000, usedAmount: 210000, balance: 390000, status: '지원가능' },
-        { id: 'sub_stu_3', schoolId: 'sch_1', studentName: '이동건', gradeClass: '3학년 1반', parentPhone: '010-8888-9999', rank: '3순위(차상위)', annualBudget: 600000, usedAmount: 600000, balance: 0, status: '한도소진' }
+        {
+          id: 'sub_stu_1',
+          schoolId: 'sch_1',
+          grade: 1,
+          classNum: 1,
+          studentNum: 3,
+          studentName: '김지원',
+          phone: '010-4444-5555',
+          rank: '1순위',
+          rankDetail: '국민기초생활수급자',
+          isPreDesignated: 'Y',
+          fund1_total: 600000,
+          fund1_used: 120000,
+          fund1_balance: 480000,
+          fund1_period: '2026-03-01~2027-02-28',
+          fund3_total: 0,
+          fund3_used: 0,
+          fund3_balance: 0,
+          fund3_period: '-',
+          free_total: 600000,
+          free_used: 120000,
+          free_balance: 480000,
+          note: '우선 지원 대상'
+        },
+        {
+          id: 'sub_stu_2',
+          schoolId: 'sch_1',
+          grade: 1,
+          classNum: 2,
+          studentNum: 7,
+          studentName: '이하늘',
+          phone: '010-5555-6666',
+          rank: '1순위',
+          rankDetail: '한부모가족보호대상자',
+          isPreDesignated: 'Y',
+          fund1_total: 600000,
+          fund1_used: 180000,
+          fund1_balance: 420000,
+          fund1_period: '2026-03-01~2027-02-28',
+          fund3_total: 0,
+          fund3_used: 0,
+          fund3_balance: 0,
+          fund3_period: '-',
+          free_total: 600000,
+          free_used: 180000,
+          free_balance: 420000,
+          note: ''
+        },
+        {
+          id: 'sub_stu_3',
+          schoolId: 'sch_1',
+          grade: 2,
+          classNum: 1,
+          studentNum: 12,
+          studentName: '박서준',
+          phone: '010-6666-7777',
+          rank: '2순위',
+          rankDetail: '법정차상위계층',
+          isPreDesignated: 'N',
+          fund1_total: 0,
+          fund1_used: 0,
+          fund1_balance: 0,
+          fund1_period: '-',
+          fund3_total: 0,
+          fund3_used: 0,
+          fund3_balance: 0,
+          fund3_period: '-',
+          free_total: 600000,
+          free_used: 240000,
+          free_balance: 360000,
+          note: ''
+        },
+        {
+          id: 'sub_stu_4',
+          schoolId: 'sch_1',
+          grade: 2,
+          classNum: 3,
+          studentNum: 5,
+          studentName: '최유진',
+          phone: '010-7777-8888',
+          rank: '2순위',
+          rankDetail: '법정차상위계층',
+          isPreDesignated: 'Y',
+          fund1_total: 0,
+          fund1_used: 0,
+          fund1_balance: 0,
+          fund1_period: '-',
+          fund3_total: 0,
+          fund3_used: 0,
+          fund3_balance: 0,
+          fund3_period: '-',
+          free_total: 600000,
+          free_used: 350000,
+          free_balance: 250000,
+          note: ''
+        },
+        {
+          id: 'sub_stu_5',
+          schoolId: 'sch_1',
+          grade: 3,
+          classNum: 1,
+          studentNum: 2,
+          studentName: '정민호',
+          phone: '010-8888-9999',
+          rank: '1순위',
+          rankDetail: '국민기초생활수급자',
+          isPreDesignated: 'Y',
+          fund1_total: 0,
+          fund1_used: 0,
+          fund1_balance: 0,
+          fund1_period: '-',
+          fund3_total: 600000,
+          fund3_used: 210000,
+          fund3_balance: 390000,
+          fund3_period: '2026-03-01~2027-02-28',
+          free_total: 600000,
+          free_used: 210000,
+          free_balance: 390000,
+          note: '맞춤형 지원'
+        },
+        {
+          id: 'sub_stu_6',
+          schoolId: 'sch_1',
+          grade: 3,
+          classNum: 2,
+          studentNum: 14,
+          studentName: '강태영',
+          phone: '010-9999-0000',
+          rank: '3순위',
+          rankDetail: '학교장추천',
+          isPreDesignated: 'N',
+          fund1_total: 0,
+          fund1_used: 0,
+          fund1_balance: 0,
+          fund1_period: '-',
+          fund3_total: 300000,
+          fund3_used: 150000,
+          fund3_balance: 150000,
+          fund3_period: '2026-03-01~2027-02-28',
+          free_total: 300000,
+          free_used: 150000,
+          free_balance: 150000,
+          note: '담임교사 추천'
+        },
+        {
+          id: 'sub_stu_7',
+          schoolId: 'sch_1',
+          grade: 4,
+          classNum: 1,
+          studentNum: 9,
+          studentName: '윤도현',
+          phone: '010-1234-5678',
+          rank: '2순위',
+          rankDetail: '한부모가족보호대상자',
+          isPreDesignated: 'N',
+          fund1_total: 0,
+          fund1_used: 0,
+          fund1_balance: 0,
+          fund1_period: '-',
+          fund3_total: 0,
+          fund3_used: 0,
+          fund3_balance: 0,
+          fund3_period: '-',
+          free_total: 600000,
+          free_used: 600000,
+          free_balance: 0,
+          note: '한도 소진 완료'
+        },
+        {
+          id: 'sub_stu_8',
+          schoolId: 'sch_1',
+          grade: 5,
+          classNum: 2,
+          studentNum: 15,
+          studentName: '송지아',
+          phone: '010-2345-6789',
+          rank: '4순위',
+          rankDetail: '다자녀/특수',
+          isPreDesignated: 'N',
+          fund1_total: 0,
+          fund1_used: 0,
+          fund1_balance: 0,
+          fund1_period: '-',
+          fund3_total: 0,
+          fund3_used: 0,
+          fund3_balance: 0,
+          fund3_period: '-',
+          free_total: 300000,
+          free_used: 80000,
+          free_balance: 220000,
+          note: '다자녀 셋째'
+        }
       ];
     }
-    return (this.data.subsidyStudents || []).filter(s => !schoolId || s.schoolId === schoolId);
+
+    let result = (this.data.subsidyStudents || []).filter(s => !schoolId || s.schoolId === schoolId);
+
+    // Filter Logic
+    if (filters.grade && filters.grade !== '=학년=' && filters.grade !== '전체') {
+      result = result.filter(s => String(s.grade) === String(filters.grade));
+    }
+    if (filters.classNum && filters.classNum !== '=반=' && filters.classNum !== '전체') {
+      result = result.filter(s => String(s.classNum) === String(filters.classNum));
+    }
+    if (filters.rank && filters.rank !== '=순위전체=' && filters.rank !== '전체') {
+      result = result.filter(s => s.rank === filters.rank || (s.rank && s.rank.includes(filters.rank)));
+    }
+    if (filters.rankDetail && filters.rankDetail !== '=순위구분전체=' && filters.rankDetail !== '전체') {
+      result = result.filter(s => s.rankDetail === filters.rankDetail || (s.rankDetail && s.rankDetail.includes(filters.rankDetail)));
+    }
+    if (filters.fundType && filters.fundType !== '=지원금전체=' && filters.fundType !== '전체') {
+      if (filters.fundType === '1학년 지원금') {
+        result = result.filter(s => (s.fund1_total || 0) > 0);
+      } else if (filters.fundType === '3학년 지원금') {
+        result = result.filter(s => (s.fund3_total || 0) > 0);
+      } else if (filters.fundType === '자유수강권') {
+        result = result.filter(s => (s.free_total || 0) > 0);
+      }
+    }
+    if (filters.searchName && filters.searchName.trim()) {
+      const q = filters.searchName.trim().toLowerCase();
+      result = result.filter(s => (s.studentName && s.studentName.toLowerCase().includes(q)) || (s.phone && s.phone.includes(q)));
+    }
+
+    return result;
   }
 
-  getSubsidyApplicants(schoolId) {
-    if (!this.data.subsidyApplicants) {
+  addSubsidyStudent(data) {
+    if (!this.data.subsidyStudents) this.getSubsidyStudents('sch_1');
+    const newId = 'sub_stu_' + Date.now();
+    const fund1Total = Number(data.fund1_total || 0);
+    const fund1Used = Number(data.fund1_used || 0);
+    const fund3Total = Number(data.fund3_total || 0);
+    const fund3Used = Number(data.fund3_used || 0);
+    const freeTotal = Number(data.free_total || 600000);
+    const freeUsed = Number(data.free_used || 0);
+
+    const student = {
+      id: newId,
+      schoolId: data.schoolId || 'sch_1',
+      grade: Number(data.grade || 1),
+      classNum: Number(data.classNum || 1),
+      studentNum: Number(data.studentNum || 1),
+      studentName: (data.studentName || '').trim(),
+      phone: (data.phone || '').trim(),
+      rank: data.rank || '1순위',
+      rankDetail: data.rankDetail || '국민기초생활수급자',
+      isPreDesignated: data.isPreDesignated === 'Y' ? 'Y' : 'N',
+      fund1_total: fund1Total,
+      fund1_used: fund1Used,
+      fund1_balance: Math.max(0, fund1Total - fund1Used),
+      fund1_period: data.fund1_period || (fund1Total > 0 ? '2026-03-01~2027-02-28' : '-'),
+      fund3_total: fund3Total,
+      fund3_used: fund3Used,
+      fund3_balance: Math.max(0, fund3Total - fund3Used),
+      fund3_period: data.fund3_period || (fund3Total > 0 ? '2026-03-01~2027-02-28' : '-'),
+      free_total: freeTotal,
+      free_used: freeUsed,
+      free_balance: Math.max(0, freeTotal - freeUsed),
+      note: (data.note || '').trim()
+    };
+    this.data.subsidyStudents.unshift(student);
+    return student;
+  }
+
+  updateSubsidyStudent(id, data) {
+    if (!this.data.subsidyStudents) this.getSubsidyStudents('sch_1');
+    const idx = this.data.subsidyStudents.findIndex(s => s.id === id);
+    if (idx === -1) return null;
+
+    const cur = this.data.subsidyStudents[idx];
+    const fund1Total = data.fund1_total !== undefined ? Number(data.fund1_total) : cur.fund1_total;
+    const fund1Used = data.fund1_used !== undefined ? Number(data.fund1_used) : cur.fund1_used;
+    const fund3Total = data.fund3_total !== undefined ? Number(data.fund3_total) : cur.fund3_total;
+    const fund3Used = data.fund3_used !== undefined ? Number(data.fund3_used) : cur.fund3_used;
+    const freeTotal = data.free_total !== undefined ? Number(data.free_total) : cur.free_total;
+    const freeUsed = data.free_used !== undefined ? Number(data.free_used) : cur.free_used;
+
+    const updated = {
+      ...cur,
+      grade: data.grade !== undefined ? Number(data.grade) : cur.grade,
+      classNum: data.classNum !== undefined ? Number(data.classNum) : cur.classNum,
+      studentNum: data.studentNum !== undefined ? Number(data.studentNum) : cur.studentNum,
+      studentName: data.studentName !== undefined ? data.studentName.trim() : cur.studentName,
+      phone: data.phone !== undefined ? data.phone.trim() : cur.phone,
+      rank: data.rank !== undefined ? data.rank : cur.rank,
+      rankDetail: data.rankDetail !== undefined ? data.rankDetail : cur.rankDetail,
+      isPreDesignated: data.isPreDesignated !== undefined ? (data.isPreDesignated === 'Y' ? 'Y' : 'N') : cur.isPreDesignated,
+      fund1_total: fund1Total,
+      fund1_used: fund1Used,
+      fund1_balance: Math.max(0, fund1Total - fund1Used),
+      fund1_period: data.fund1_period !== undefined ? data.fund1_period : cur.fund1_period,
+      fund3_total: fund3Total,
+      fund3_used: fund3Used,
+      fund3_balance: Math.max(0, fund3Total - fund3Used),
+      fund3_period: data.fund3_period !== undefined ? data.fund3_period : cur.fund3_period,
+      free_total: freeTotal,
+      free_used: freeUsed,
+      free_balance: Math.max(0, freeTotal - freeUsed),
+      note: data.note !== undefined ? data.note.trim() : cur.note
+    };
+    this.data.subsidyStudents[idx] = updated;
+    return updated;
+  }
+
+  deleteSubsidyStudents(ids = []) {
+    if (!this.data.subsidyStudents) this.getSubsidyStudents('sch_1');
+    const idSet = new Set(ids);
+    const beforeCount = this.data.subsidyStudents.length;
+    this.data.subsidyStudents = this.data.subsidyStudents.filter(s => !idSet.has(s.id));
+    return beforeCount - this.data.subsidyStudents.length;
+  }
+
+  batchAddSubsidyStudents(studentList = []) {
+    if (!this.data.subsidyStudents) this.getSubsidyStudents('sch_1');
+    const added = [];
+    for (const item of studentList) {
+      if (!item.studentName) continue;
+      const created = this.addSubsidyStudent(item);
+      added.push(created);
+    }
+    return added;
+  }
+
+  getSubsidyApplicants(schoolId, filters = {}) {
+    if (!this.data.subsidyApplicants || this.data.subsidyApplicants.length < 8) {
       this.data.subsidyApplicants = [
-        { id: 'sub_app_1', schoolId: 'sch_1', studentName: '김지원', courseTitle: '[특기적성] 창의 로봇교실 A반', fee: 35000, subsidizedAmount: 35000, outOfPocket: 0, deductionDate: '2026-03-02', subsidyType: '자유수강권' },
-        { id: 'sub_app_2', schoolId: 'sch_1', studentName: '박하늘', courseTitle: '01. [특기] 바이올린 A반', fee: 30000, subsidizedAmount: 30000, outOfPocket: 0, deductionDate: '2026-03-02', subsidyType: '자유수강권' }
+        {
+          id: 'sub_app_1',
+          schoolId: 'sch_1',
+          month: '3월',
+          category: '26년 8월',
+          programType: '방과후',
+          courseTitle: '[3월] [5_돌봄] 5_수요일 1부',
+          grade: 1,
+          classNum: 1,
+          studentNum: 3,
+          studentName: '박민준',
+          phone: '010-1234-5678',
+          tuitionFee: 0,
+          instructorFee: 0,
+          overheadFee: 0,
+          textbookFee: 0,
+          materialFee: 0,
+          totalFee: 0,
+          fee: 0,
+          collectedAmount: 0,
+          outOfPocket: 0,
+          subsidizedAmount: 0,
+          subsidyType: '자유수강권',
+          deductionDate: '2026-03-05',
+          status: '차감완료',
+          note: '돌봄 전액 지원'
+        },
+        {
+          id: 'sub_app_2',
+          schoolId: 'sch_1',
+          month: '3월',
+          category: '26년 8월',
+          programType: '맞춤형',
+          courseTitle: '[3월] [3_선택형] 미술 1부',
+          grade: 1,
+          classNum: 1,
+          studentNum: 3,
+          studentName: '박민준',
+          phone: '010-1234-5678',
+          tuitionFee: 32000,
+          instructorFee: 30500,
+          overheadFee: 1500,
+          textbookFee: 30500,
+          materialFee: 5000,
+          totalFee: 67500,
+          fee: 67500,
+          collectedAmount: 0,
+          outOfPocket: 0,
+          subsidizedAmount: 67500,
+          subsidyType: '자유수강권',
+          deductionDate: '2026-03-05',
+          status: '차감완료',
+          note: '선택형 미술 지원금 전액 차감'
+        },
+        {
+          id: 'sub_app_3',
+          schoolId: 'sch_1',
+          month: '4월',
+          category: '26년 8월',
+          programType: '맞춤형',
+          courseTitle: '[4월] [3_선택형] 미술 1부',
+          grade: 1,
+          classNum: 1,
+          studentNum: 3,
+          studentName: '박민준',
+          phone: '010-1234-5678',
+          tuitionFee: 32000,
+          instructorFee: 30500,
+          overheadFee: 1500,
+          textbookFee: 30500,
+          materialFee: 5000,
+          totalFee: 67500,
+          fee: 67500,
+          collectedAmount: 0,
+          outOfPocket: 0,
+          subsidizedAmount: 67500,
+          subsidyType: '자유수강권',
+          deductionDate: '2026-04-05',
+          status: '차감완료',
+          note: '4월 차감'
+        },
+        {
+          id: 'sub_app_4',
+          schoolId: 'sch_1',
+          month: '5월',
+          category: '26년 8월',
+          programType: '맞춤형',
+          courseTitle: '[5월] [3_선택형] 미술 1부',
+          grade: 1,
+          classNum: 1,
+          studentNum: 3,
+          studentName: '박민준',
+          phone: '010-1234-5678',
+          tuitionFee: 32000,
+          instructorFee: 30500,
+          overheadFee: 1500,
+          textbookFee: 30500,
+          materialFee: 5000,
+          totalFee: 67500,
+          fee: 67500,
+          collectedAmount: 0,
+          outOfPocket: 0,
+          subsidizedAmount: 67500,
+          subsidyType: '자유수강권',
+          deductionDate: '2026-05-05',
+          status: '차감완료',
+          note: '5월 차감'
+        },
+        {
+          id: 'sub_app_5',
+          schoolId: 'sch_1',
+          month: '3월',
+          category: '26년 8월',
+          programType: '방과후',
+          courseTitle: '창의로봇(초급)',
+          grade: 1,
+          classNum: 1,
+          studentNum: 4,
+          studentName: '김지원',
+          phone: '010-2345-6789',
+          tuitionFee: 30000,
+          instructorFee: 28500,
+          overheadFee: 1500,
+          textbookFee: 10000,
+          materialFee: 5000,
+          totalFee: 45000,
+          fee: 45000,
+          collectedAmount: 0,
+          outOfPocket: 0,
+          subsidizedAmount: 45000,
+          subsidyType: '1학년 지원금',
+          deductionDate: '2026-03-05',
+          status: '차감완료',
+          note: '1학년 지원금 차감'
+        },
+        {
+          id: 'sub_app_6',
+          schoolId: 'sch_1',
+          month: '3월',
+          category: '26년 8월',
+          programType: '맞춤형',
+          courseTitle: '신나는 미술놀이',
+          grade: 1,
+          classNum: 2,
+          studentNum: 7,
+          studentName: '이하늘',
+          phone: '010-3456-7890',
+          tuitionFee: 25000,
+          instructorFee: 23500,
+          overheadFee: 1500,
+          textbookFee: 5000,
+          materialFee: 10000,
+          totalFee: 40000,
+          fee: 40000,
+          collectedAmount: 0,
+          outOfPocket: 0,
+          subsidizedAmount: 40000,
+          subsidyType: '1학년 지원금',
+          deductionDate: '2026-03-05',
+          status: '차감완료',
+          note: '정상 차감'
+        },
+        {
+          id: 'sub_app_7',
+          schoolId: 'sch_1',
+          month: '6월',
+          category: '26년 8월',
+          programType: '방과후',
+          courseTitle: '즐거운 체육교실',
+          grade: 2,
+          classNum: 3,
+          studentNum: 5,
+          studentName: '최유진',
+          phone: '010-4567-8901',
+          tuitionFee: 25000,
+          instructorFee: 23750,
+          overheadFee: 1250,
+          textbookFee: 0,
+          materialFee: 0,
+          totalFee: 25000,
+          fee: 25000,
+          collectedAmount: 0,
+          outOfPocket: 0,
+          subsidizedAmount: 25000,
+          subsidyType: '자유수강권',
+          deductionDate: '2026-06-01',
+          status: '차감완료',
+          note: '자유수강권 잔액 차감'
+        },
+        {
+          id: 'sub_app_8',
+          schoolId: 'sch_1',
+          month: '6월',
+          category: '26년 8월',
+          programType: '돌봄',
+          courseTitle: '체스&보드게임',
+          grade: 3,
+          classNum: 1,
+          studentNum: 8,
+          studentName: '정민우',
+          phone: '010-5678-9012',
+          tuitionFee: 32000,
+          instructorFee: 30400,
+          overheadFee: 1600,
+          textbookFee: 0,
+          materialFee: 0,
+          totalFee: 32000,
+          fee: 32000,
+          collectedAmount: 0,
+          outOfPocket: 0,
+          subsidizedAmount: 32000,
+          subsidyType: '3학년 지원금',
+          deductionDate: '2026-06-01',
+          status: '차감완료',
+          note: '3학년 지원금 차감'
+        }
       ];
     }
-    return (this.data.subsidyApplicants || []).filter(s => !schoolId || s.schoolId === schoolId);
+
+    if (!this.data.subsidyAllowedMonths) {
+      this.data.subsidyAllowedMonths = ['3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월'];
+    }
+
+    let list = (this.data.subsidyApplicants || []).filter(s => !schoolId || s.schoolId === schoolId);
+
+    if (filters.month && filters.month !== 'all' && filters.month !== '=월=') {
+      list = list.filter(s => s.month === filters.month || (s.category && s.category.includes(filters.month)) || (s.courseTitle && s.courseTitle.includes(filters.month)));
+    }
+    if (filters.courseTitle && filters.courseTitle !== 'all' && filters.courseTitle !== '=강좌=' && filters.courseTitle !== '=강좌전체=') {
+      list = list.filter(s => s.courseTitle && s.courseTitle.includes(filters.courseTitle));
+    }
+    if (filters.category && filters.category !== 'all' && filters.category !== '=강좌구분=') {
+      list = list.filter(s => s.category === filters.category);
+    }
+    if (filters.programType && filters.programType !== 'all' && filters.programType !== '=늘봄과정=') {
+      list = list.filter(s => s.programType === filters.programType);
+    }
+    if (filters.fundType && filters.fundType !== 'all' && filters.fundType !== '=지원금구분=') {
+      list = list.filter(s => s.subsidyType === filters.fundType);
+    }
+    if (filters.grade && filters.grade !== '=학년=' && filters.grade !== '전체') {
+      list = list.filter(s => String(s.grade) === String(filters.grade));
+    }
+    if (filters.classNum && filters.classNum !== '=반=' && filters.classNum !== '전체') {
+      list = list.filter(s => String(s.classNum) === String(filters.classNum));
+    }
+    if (filters.searchName && filters.searchName.trim()) {
+      const q = filters.searchName.trim().toLowerCase();
+      list = list.filter(s => (s.studentName && s.studentName.toLowerCase().includes(q)) || (s.courseTitle && s.courseTitle.toLowerCase().includes(q)) || (s.phone && s.phone.includes(q)));
+    }
+
+    return list;
   }
 
-  getSubsidyRanks(schoolId) {
-    if (!this.data.subsidyRanks) {
-      this.data.subsidyRanks = [
-        { rankNumber: 1, name: '1순위 (국민기초생활수급자)', limitAmount: 600000, isPriority: true, note: '수강료/재료비 100% 우선 지원' },
-        { rankNumber: 2, name: '2순위 (한부모가족보호대상자)', limitAmount: 600000, isPriority: true, note: '연 60만원 한도 내 전액 지원' },
-        { rankNumber: 3, name: '3순위 (법정 차상위계층)', limitAmount: 600000, isPriority: false, note: '예산 범위 내 지원' },
-        { rankNumber: 4, name: '4순위 (학교장 추천 다자녀/특수)', limitAmount: 300000, isPriority: false, note: '학교 자체 심사 지원' }
+  getSubsidyAllowedMonths() {
+    if (!this.data.subsidyAllowedMonths) {
+      this.data.subsidyAllowedMonths = ['3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월'];
+    }
+    return this.data.subsidyAllowedMonths;
+  }
+
+  setSubsidyAllowedMonths(months = []) {
+    this.data.subsidyAllowedMonths = Array.isArray(months) ? months : [];
+    return this.data.subsidyAllowedMonths;
+  }
+
+  getApplicantSearchList(params = {}) {
+    // Return registered applications across courses for Modal 3 (신청자 검색)
+    const month = params.month || '3월';
+    const courses = (this.data.courses || []).map(c => ({
+      courseTitle: `[${month}] ${c.title || c.name || '방과후 강좌'}`,
+      tuition: c.tuition || 30000,
+      instructorFee: Math.round((c.tuition || 30000) * 0.95),
+      overheadFee: Math.round((c.tuition || 30000) * 0.05),
+      textbook: c.textbookFee || 0,
+      material: c.materialFee || 0
+    }));
+
+    const sampleStudents = [
+      { name: '박민준', grade: 1, classNum: 1, studentNum: 3, phone: '010-1234-5678' },
+      { name: '김지원', grade: 1, classNum: 1, studentNum: 4, phone: '010-2345-6789' },
+      { name: '이하늘', grade: 1, classNum: 2, studentNum: 7, phone: '010-3456-7890' },
+      { name: '박서준', grade: 2, classNum: 1, studentNum: 12, phone: '010-4567-8901' },
+      { name: '최유진', grade: 2, classNum: 3, studentNum: 5, phone: '010-5678-9012' },
+      { name: '정민우', grade: 3, classNum: 1, studentNum: 8, phone: '010-6789-0123' },
+      { name: '홍길동', grade: 1, classNum: 1, studentNum: 1, phone: '010-7890-1234' },
+      { name: '홍길순', grade: 1, classNum: 1, studentNum: 2, phone: '010-8901-2345' }
+    ];
+
+    let results = [];
+    let seq = 1;
+    for (const stu of sampleStudents) {
+      for (const c of courses.slice(0, 3)) {
+        const total = c.tuition + c.textbook + c.material;
+        results.push({
+          id: `app_search_${seq}`,
+          seq: seq++,
+          month,
+          courseTitle: `${c.courseTitle}(${total.toLocaleString()}원)`,
+          rawCourseTitle: c.courseTitle,
+          grade: stu.grade,
+          classNum: stu.classNum,
+          studentNum: stu.studentNum,
+          studentName: stu.name,
+          phone: stu.phone,
+          tuitionFee: c.tuition,
+          instructorFee: c.instructorFee,
+          overheadFee: c.overheadFee,
+          textbookFee: c.textbook,
+          materialFee: c.material,
+          totalFee: total
+        });
+      }
+    }
+
+    if (params.grade) results = results.filter(r => String(r.grade) === String(params.grade));
+    if (params.classNum) results = results.filter(r => String(r.classNum) === String(params.classNum));
+    if (params.name) {
+      const q = params.name.trim().toLowerCase();
+      results = results.filter(r => r.studentName.toLowerCase().includes(q) || r.courseTitle.toLowerCase().includes(q));
+    }
+    return results;
+  }
+
+  importSubsidyApplicants(targetMonth = '3월', maxAmount = 0, options = {}) {
+    if (!this.data.subsidyApplicants) this.getSubsidyApplicants('sch_1');
+    const existing = this.data.subsidyApplicants.filter(s => s.month !== targetMonth);
+    const neulbomTypes = options.neulbomTypes && options.neulbomTypes.length > 0 ? options.neulbomTypes : ['방과후', '맞춤형', '돌봄'];
+
+    const samplePool = [
+      {
+        schoolId: 'sch_1',
+        month: targetMonth,
+        category: '26년 8월',
+        programType: '돌봄',
+        courseTitle: `[${targetMonth}] [늘봄돌봄] 방과후 돌봄교실 1부`,
+        grade: 1,
+        classNum: 1,
+        studentNum: 3,
+        studentName: '박민준',
+        phone: '010-1234-5678',
+        tuitionFee: 0,
+        instructorFee: 0,
+        overheadFee: 0,
+        textbookFee: 0,
+        materialFee: 0,
+        totalFee: 0,
+        fee: 0,
+        collectedAmount: 0,
+        outOfPocket: 0,
+        subsidizedAmount: 0,
+        subsidyType: '자유수강권',
+        deductionDate: new Date().toISOString().slice(0, 10),
+        status: '차감완료',
+        note: '수강자 가져오기 자동 정산'
+      },
+      {
+        schoolId: 'sch_1',
+        month: targetMonth,
+        category: '26년 8월',
+        programType: '맞춤형',
+        courseTitle: `[${targetMonth}] [늘봄맞춤] 창의 미술놀이 1부`,
+        grade: 1,
+        classNum: 1,
+        studentNum: 3,
+        studentName: '박민준',
+        phone: '010-1234-5678',
+        tuitionFee: 32000,
+        instructorFee: 30500,
+        overheadFee: 1500,
+        textbookFee: 30500,
+        materialFee: 5000,
+        totalFee: 67500,
+        fee: 67500,
+        collectedAmount: 0,
+        outOfPocket: 0,
+        subsidizedAmount: 67500,
+        subsidyType: '자유수강권',
+        deductionDate: new Date().toISOString().slice(0, 10),
+        status: '차감완료',
+        note: '수강자 가져오기 자동 정산'
+      },
+      {
+        schoolId: 'sch_1',
+        month: targetMonth,
+        category: '26년 8월',
+        programType: '방과후',
+        courseTitle: `[${targetMonth}] [늘봄방과후] 창의로봇(초급)`,
+        grade: 1,
+        classNum: 1,
+        studentNum: 1,
+        studentName: '홍길동',
+        phone: '010-7890-1234',
+        tuitionFee: 30900,
+        instructorFee: 30000,
+        overheadFee: 900,
+        textbookFee: 0,
+        materialFee: 0,
+        totalFee: 30900,
+        fee: 30900,
+        collectedAmount: 7900,
+        outOfPocket: 7900,
+        subsidizedAmount: 23000,
+        subsidyType: '자유수강권',
+        deductionDate: new Date().toISOString().slice(0, 10),
+        status: '부분차감',
+        note: '수강자 가져오기 자동 정산'
+      },
+      {
+        schoolId: 'sch_1',
+        month: targetMonth,
+        category: '26년 8월',
+        programType: '방과후',
+        courseTitle: `[${targetMonth}] [늘봄방과후] 컴퓨터 코딩 4부`,
+        grade: 1,
+        classNum: 1,
+        studentNum: 1,
+        studentName: '홍길동',
+        phone: '010-7890-1234',
+        tuitionFee: 27000,
+        instructorFee: 25650,
+        overheadFee: 1350,
+        textbookFee: 0,
+        materialFee: 0,
+        totalFee: 27000,
+        fee: 27000,
+        collectedAmount: 0,
+        outOfPocket: 0,
+        subsidizedAmount: 27000,
+        subsidyType: '자유수강권',
+        deductionDate: new Date().toISOString().slice(0, 10),
+        status: '차감완료',
+        note: '수강자 가져오기 자동 정산'
+      },
+      {
+        schoolId: 'sch_1',
+        month: targetMonth,
+        category: '26년 8월',
+        programType: '방과후',
+        courseTitle: `[${targetMonth}] [늘봄방과후] 과학실험 탐구 2부`,
+        grade: 1,
+        classNum: 1,
+        studentNum: 2,
+        studentName: '박재민',
+        phone: '010-5555-6666',
+        tuitionFee: 30900,
+        instructorFee: 30000,
+        overheadFee: 900,
+        textbookFee: 0,
+        materialFee: 16000,
+        totalFee: 46900,
+        fee: 46900,
+        collectedAmount: 0,
+        outOfPocket: 0,
+        subsidizedAmount: 46900,
+        subsidyType: '1학년 지원금',
+        deductionDate: new Date().toISOString().slice(0, 10),
+        status: '차감완료',
+        note: '수강자 가져오기 자동 정산'
+      }
+    ];
+
+    let filtered = samplePool.filter(s => neulbomTypes.includes(s.programType));
+    if (filtered.length === 0) filtered = samplePool;
+
+    const imported = filtered.map((item, idx) => ({
+      ...item,
+      id: `sub_app_imp_${Date.now()}_${idx + 1}`
+    }));
+
+    this.data.subsidyApplicants = [...imported, ...existing];
+    return imported.length;
+  }
+
+  addSubsidyApplicant(data) {
+    if (!this.data.subsidyApplicants) this.getSubsidyApplicants('sch_1');
+    const newId = 'sub_app_' + Date.now();
+    const tuition = Number(data.tuitionFee || data.fee || 0);
+    const instructorFee = Number(data.instructorFee !== undefined ? data.instructorFee : Math.round(tuition * 0.95));
+    const overheadFee = Number(data.overheadFee !== undefined ? data.overheadFee : Math.round(tuition * 0.05));
+    const textbookFee = Number(data.textbookFee || 0);
+    const materialFee = Number(data.materialFee || 0);
+    const totalFee = tuition + textbookFee + materialFee;
+
+    const subsidized = Number(data.subsidizedAmount !== undefined ? data.subsidizedAmount : totalFee);
+    const collectedAmount = Math.max(0, totalFee - subsidized);
+
+    const record = {
+      id: newId,
+      schoolId: data.schoolId || 'sch_1',
+      month: data.month || '3월',
+      category: data.category || '26년 8월',
+      programType: data.programType || '방과후',
+      courseTitle: (data.courseTitle || '방과후 일반 강좌').trim(),
+      grade: Number(data.grade || 1),
+      classNum: Number(data.classNum || 1),
+      studentNum: Number(data.studentNum || 1),
+      studentName: (data.studentName || '').trim(),
+      phone: (data.phone || '').trim(),
+      tuitionFee: tuition,
+      instructorFee,
+      overheadFee,
+      textbookFee,
+      materialFee,
+      totalFee,
+      fee: totalFee,
+      collectedAmount,
+      outOfPocket: collectedAmount,
+      subsidizedAmount: subsidized,
+      subsidyType: data.subsidyType || '자유수강권',
+      deductionDate: data.deductionDate || new Date().toISOString().slice(0, 10),
+      status: collectedAmount === 0 ? '차감완료' : '부분차감',
+      note: (data.note || '').trim()
+    };
+
+    this.data.subsidyApplicants.unshift(record);
+    return record;
+  }
+
+  updateSubsidyApplicant(id, data) {
+    if (!this.data.subsidyApplicants) this.getSubsidyApplicants('sch_1');
+    const idx = this.data.subsidyApplicants.findIndex(s => s.id === id);
+    if (idx === -1) return null;
+
+    const cur = this.data.subsidyApplicants[idx];
+    const tuition = data.tuitionFee !== undefined ? Number(data.tuitionFee) : (cur.tuitionFee || cur.fee || 0);
+    const instructorFee = data.instructorFee !== undefined ? Number(data.instructorFee) : (cur.instructorFee || Math.round(tuition * 0.95));
+    const overheadFee = data.overheadFee !== undefined ? Number(data.overheadFee) : (cur.overheadFee || Math.round(tuition * 0.05));
+    const textbookFee = data.textbookFee !== undefined ? Number(data.textbookFee) : (cur.textbookFee || 0);
+    const materialFee = data.materialFee !== undefined ? Number(data.materialFee) : (cur.materialFee || 0);
+    const totalFee = data.totalFee !== undefined ? Number(data.totalFee) : (tuition + textbookFee + materialFee);
+
+    const subsidized = data.subsidizedAmount !== undefined ? Number(data.subsidizedAmount) : (cur.subsidizedAmount || totalFee);
+    const collectedAmount = Math.max(0, totalFee - subsidized);
+
+    const updated = {
+      ...cur,
+      month: data.month || cur.month || '3월',
+      category: data.category || cur.category,
+      programType: data.programType || cur.programType,
+      courseTitle: data.courseTitle !== undefined ? data.courseTitle.trim() : cur.courseTitle,
+      grade: data.grade !== undefined ? Number(data.grade) : cur.grade,
+      classNum: data.classNum !== undefined ? Number(data.classNum) : cur.classNum,
+      studentNum: data.studentNum !== undefined ? Number(data.studentNum) : cur.studentNum,
+      studentName: data.studentName !== undefined ? data.studentName.trim() : cur.studentName,
+      phone: data.phone !== undefined ? data.phone.trim() : cur.phone,
+      tuitionFee: tuition,
+      instructorFee,
+      overheadFee,
+      textbookFee,
+      materialFee,
+      totalFee,
+      fee: totalFee,
+      collectedAmount,
+      outOfPocket: collectedAmount,
+      subsidizedAmount: subsidized,
+      subsidyType: data.subsidyType || cur.subsidyType,
+      deductionDate: data.deductionDate || cur.deductionDate,
+      status: collectedAmount === 0 ? '차감완료' : '부분차감',
+      note: data.note !== undefined ? data.note.trim() : cur.note
+    };
+
+    this.data.subsidyApplicants[idx] = updated;
+    return updated;
+  }
+
+  deleteSubsidyApplicants(ids = []) {
+    if (!this.data.subsidyApplicants) this.getSubsidyApplicants('sch_1');
+    const idSet = new Set(ids);
+    const beforeCount = this.data.subsidyApplicants.length;
+    this.data.subsidyApplicants = this.data.subsidyApplicants.filter(s => !idSet.has(s.id));
+    return beforeCount - this.data.subsidyApplicants.length;
+  }
+
+  batchDeductSubsidies(category = '26년 8월', subsidyType = '자유수강권') {
+    if (!this.data.subsidyApplicants) this.getSubsidyApplicants('sch_1');
+    let count = 0;
+    for (const app of this.data.subsidyApplicants) {
+      if (app.category === category && app.status !== '차감완료') {
+        app.subsidyType = subsidyType;
+        app.subsidizedAmount = app.totalFee || app.fee;
+        app.collectedAmount = 0;
+        app.outOfPocket = 0;
+        app.status = '차감완료';
+        app.deductionDate = new Date().toISOString().slice(0, 10);
+        app.note = '일괄 차감 완료';
+        count++;
+      }
+    }
+    return count;
+  }
+
+  getSubsidyConfigs(schoolId) {
+    if (!this.data.subsidyConfigs) {
+      this.data.subsidyConfigs = {
+        fund_1: {
+          id: 'fund_1',
+          name: '1학년 지원금',
+          used: '사용',
+          deductMode: '잔여 금액에서 차감',
+          months: ['3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월', '1월', '2월'],
+          items: { tuition: true, noTuitionFee: false, textbook: true, material: true },
+          monthlyLimit: 720000,
+          annualLimit: 720000,
+          priority: 2
+        },
+        fund_3: {
+          id: 'fund_3',
+          name: '3학년 지원금',
+          used: '사용',
+          deductMode: '잔여 금액에서 차감',
+          months: ['3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월', '1월', '2월'],
+          items: { tuition: true, noTuitionFee: false, textbook: true, material: true },
+          monthlyLimit: 600000,
+          annualLimit: 600000,
+          priority: 3
+        },
+        fund_free: {
+          id: 'fund_free',
+          name: '자유수강권',
+          used: '사용',
+          deductMode: '잔여 금액에서 차감',
+          months: ['3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월', '1월', '2월'],
+          items: { tuition: true, noTuitionFee: false, textbook: true, material: true },
+          monthlyLimit: 600000,
+          annualLimit: 600000,
+          priority: 1
+        }
+      };
+    }
+    return this.data.subsidyConfigs;
+  }
+
+  updateSubsidyConfig(schoolId, fundKey, updateData) {
+    if (!this.data.subsidyConfigs) this.getSubsidyConfigs(schoolId);
+    if (!this.data.subsidyConfigs[fundKey]) {
+      this.data.subsidyConfigs[fundKey] = { id: fundKey, ...updateData };
+    } else {
+      this.data.subsidyConfigs[fundKey] = { ...this.data.subsidyConfigs[fundKey], ...updateData };
+    }
+    this.save();
+    return this.data.subsidyConfigs[fundKey];
+  }
+
+  getSubsidyDeductOrder(schoolId) {
+    if (!this.data.subsidyDeductOrder) {
+      this.data.subsidyDeductOrder = [
+        { id: 'fund_free', name: '자유수강권', order: 1 },
+        { id: 'fund_1', name: '1학년 지원금', order: 2 },
+        { id: 'fund_3', name: '3학년 지원금', order: 3 }
       ];
     }
-    return this.data.subsidyRanks;
+    return this.data.subsidyDeductOrder;
+  }
+
+  updateSubsidyDeductOrder(schoolId, orderList) {
+    this.data.subsidyDeductOrder = orderList;
+    this.save();
+    return this.data.subsidyDeductOrder;
+  }
+
+  getSubsidyRanks(schoolId, rankFilter = '') {
+    if (!this.data.subsidyRanks || this.data.subsidyRanks.length < 5 || !this.data.subsidyRanks[0].id) {
+      this.data.subsidyRanks = [
+        { id: 'rnk_1', schoolId: 'sch_1', rankNumber: 1, name: '1순위 (국민기초생활수급자)', used: '사용', limitAmount: 600000, isPriority: true, order: 1, note: '수강료/재료비 100% 우선 지원' },
+        { id: 'rnk_2', schoolId: 'sch_1', rankNumber: 2, name: '2순위 (한부모가족보호대상자)', used: '사용', limitAmount: 600000, isPriority: true, order: 2, note: '연 60만원 한도 내 전액 지원' },
+        { id: 'rnk_3', schoolId: 'sch_1', rankNumber: 3, name: '3순위 (법정 차상위계층)', used: '사용', limitAmount: 600000, isPriority: false, order: 3, note: '차상위 자활/본인부담경감 대상' },
+        { id: 'rnk_4', schoolId: 'sch_1', rankNumber: 4, name: '4순위 (학교장 추천 다자녀/특수)', used: '사용', limitAmount: 300000, isPriority: false, order: 4, note: '학교 자체 심사 지원' },
+        { id: 'rnk_5', schoolId: 'sch_1', rankNumber: 5, name: '기타 (다문화/보훈/특수교육대상)', used: '사용', limitAmount: 300000, isPriority: false, order: 5, note: '관련 증빙서류 제출 필수' }
+      ];
+      this.save();
+    }
+    let list = this.data.subsidyRanks.slice();
+    if (rankFilter && rankFilter !== 'all') {
+      list = list.filter(r => String(r.rankNumber) === String(rankFilter));
+    }
+    list.sort((a, b) => (a.order || 0) - (b.order || 0));
+    return list;
+  }
+
+  addSubsidyRank(data) {
+    if (!this.data.subsidyRanks) this.getSubsidyRanks('sch_1');
+    const newId = 'rnk_' + Date.now();
+    const newRank = {
+      id: newId,
+      schoolId: data.schoolId || 'sch_1',
+      rankNumber: Number(data.rankNumber || 1),
+      name: data.name || '',
+      used: data.used || '사용',
+      limitAmount: Number(data.limitAmount || 600000),
+      isPriority: !!data.isPriority,
+      order: this.data.subsidyRanks.length + 1,
+      note: data.note || ''
+    };
+    this.data.subsidyRanks.push(newRank);
+    this.save();
+    return newRank;
+  }
+
+  updateSubsidyRank(id, data) {
+    if (!this.data.subsidyRanks) this.getSubsidyRanks('sch_1');
+    const idx = this.data.subsidyRanks.findIndex(r => String(r.id) === String(id));
+    if (idx === -1) return null;
+    this.data.subsidyRanks[idx] = {
+      ...this.data.subsidyRanks[idx],
+      ...data,
+      rankNumber: data.rankNumber !== undefined ? Number(data.rankNumber) : this.data.subsidyRanks[idx].rankNumber,
+      limitAmount: data.limitAmount !== undefined ? Number(data.limitAmount) : this.data.subsidyRanks[idx].limitAmount,
+      isPriority: data.isPriority !== undefined ? !!data.isPriority : this.data.subsidyRanks[idx].isPriority
+    };
+    this.save();
+    return this.data.subsidyRanks[idx];
+  }
+
+  deleteSubsidyRank(id) {
+    if (!this.data.subsidyRanks) return false;
+    const beforeCount = this.data.subsidyRanks.length;
+    this.data.subsidyRanks = this.data.subsidyRanks.filter(r => String(r.id) !== String(id));
+    this.save();
+    return this.data.subsidyRanks.length < beforeCount;
+  }
+
+  updateSubsidyRankOrder(orderList) {
+    if (!this.data.subsidyRanks) this.getSubsidyRanks('sch_1');
+    const orderMap = new Map();
+    orderList.forEach((item, idx) => {
+      orderMap.set(String(item.id), idx + 1);
+    });
+    this.data.subsidyRanks.forEach(r => {
+      if (orderMap.has(String(r.id))) {
+        r.order = orderMap.get(String(r.id));
+      }
+    });
+    this.save();
+    return this.getSubsidyRanks('sch_1');
   }
 
   // 8. Surveys & Sample Surveys (/af/ad_sur/lists, /af/ad_surs/lists)

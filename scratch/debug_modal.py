@@ -3,26 +3,14 @@ from playwright.sync_api import sync_playwright
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=True)
     page = browser.new_page()
-
-    page.on("pageerror", lambda err: print("PAGE ERROR:", err))
-    page.on("console", lambda msg: print("CONSOLE:", msg.text))
-
-    page.goto('http://localhost:3005/af/ad_app/lists/sn/3267', wait_until='networkidle')
-
-    res = page.evaluate("""() => {
-        try {
-            console.log('Type of openAppSinModal:', typeof window.openAppSinModal);
-            console.log('Type of openAppCreateModal:', typeof window.openAppCreateModal);
-            const m = document.getElementById('modalAppCreate');
-            console.log('modalAppCreate element:', m ? 'EXISTS' : 'NOT FOUND');
-            window.openAppSinModal();
-            return {
-                display: m ? m.style.display : null,
-                classes: m ? m.className : null
-            };
-        } catch(e) {
-            return { error: e.message, stack: e.stack };
-        }
-    }""")
-    print('Eval result:', res)
+    page.goto('http://localhost:3005/af/ad_tea/lists/sn/3267', wait_until='networkidle')
+    
+    # 클릭 전
+    print("Before click style:", page.evaluate('document.getElementById("modal_ad_tea_write").getAttribute("style")'))
+    
+    # 버튼 클릭
+    page.locator("#panel_ad_tea_lists input[value='강사 등록']").click()
+    page.wait_for_timeout(300)
+    
+    print("After click style:", page.evaluate('document.getElementById("modal_ad_tea_write").getAttribute("style")'))
     browser.close()

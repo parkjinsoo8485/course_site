@@ -1,0 +1,54 @@
+<!-- ========================================================================================= -->
+<!-- [Cloned Panel] 05. 설문관리 > 샘플설문 (ad_surs_lists) -->
+<!-- ========================================================================================= -->
+<div id="panel_ad_surs_lists" class="submodel-panel" style="display: none; padding: 15px;">
+  <!-- Header / Breadcrumb -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 2px solid #337ab7; padding-bottom: 8px;">
+    <div>
+      <h3 style="margin: 0; font-size: 18px; font-weight: bold; color: #333; display: flex; align-items: center; gap: 8px;">
+        <i class="fa fa-folder-open-o" style="color: #337ab7;"></i> 샘플설문
+        <span style="font-size: 13px; font-weight: normal; color: #777;">(기존 우수 설문 양식을 확인하고 내 설문으로 간편하게 복사할 수 있습니다)</span>
+      </h3>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <button type="button" onclick="openSurWrite();" class="btn btn-primary" style="display: inline-flex; align-items: center; justify-content: center; height: 30px; padding: 0 16px; font-size: 12px; font-weight: bold; background-color: #337ab7; border-color: #2e6da4; line-height: 1;">
+        <i class="fa fa-plus" style="margin-right: 5px;"></i> 신규 설문등록
+      </button>
+    </div>
+  </div>
+
+  <!-- Form & Main Table Container -->
+  <form id="fm_surs_list" name="fm_surs_list" method="post" action="/af/ad_surs/lists/sn/3267" onsubmit="return false;">
+    <input type="hidden" name="csrf_test_name" value="mock_csrf_token_surs">
+    <input type="hidden" name="form_open_date_use_chk_csrf" value="2026-10-02 15:15:26">
+
+    <div class="table-responsive" style="background: #fff; border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); overflow-x: auto;">
+      <table id="sursMainTable" class="table table-bordered table-hover text-center" style="margin-bottom: 0; font-size: 12px; vertical-align: middle;">
+        <thead style="background-color: #f5f5f5; border-bottom: 2px solid #ddd;">
+          <tr>
+            <th style="width: 50px; text-align: center; vertical-align: middle;">연번</th>
+            <th style="width: 80px; text-align: center; vertical-align: middle;">수정(복사)</th>
+            <th style="width: 80px; text-align: center; vertical-align: middle;">등록구분</th>
+            <th style="width: 85px; text-align: center; vertical-align: middle;">설문구분</th>
+            <th style="text-align: left; vertical-align: middle;">제목</th>
+            <th style="width: 65px; text-align: center; vertical-align: middle;">문항</th>
+            <th style="width: 60px; text-align: center; vertical-align: middle;">삭제</th>
+          </tr>
+        </thead>
+        <tbody id="sursTableTbody">
+          <!-- Dynamically populated via surs_logic.js -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Table Bottom Actions & Pagination -->
+    <div style="display: flex; justify-content: flex-end; align-items: center; margin-top: 10px;">
+      <div id="sursPagination" style="display: flex; align-items: center; gap: 4px;">
+        <ul class="pagination pagination-sm" style="margin: 0;">
+          <li class="active"><a href="#none;">1</a></li>
+          <li><a href="#none;">2</a></li>
+        </ul>
+      </div>
+    </div>
+  </form>
+</div>

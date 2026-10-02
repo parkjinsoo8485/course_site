@@ -1,0 +1,3441 @@
+{
+  "lists": {
+    "forms": [
+      {
+        "name": "fm_list_search",
+        "action": "https://www.dbdbschool.kr/af/ad_rsch/lists/sn/3267",
+        "method": "get"
+      },
+      {
+        "name": "fm_del",
+        "action": "https://www.dbdbschool.kr/af/ad_rsch/del/p/1/sn/3267/sof/sud/sot/desc",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_login",
+        "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_auth2",
+        "action": "https://www.dbdbschool.kr/member/auth2/modal/Y/sn/3267",
+        "method": "post"
+      }
+    ],
+    "inputs": [
+      {
+        "type": "hidden",
+        "name": "st",
+        "id": "",
+        "value": "mem_name"
+      },
+      {
+        "type": "text",
+        "name": "sw",
+        "id": "s_word",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "",
+        "id": "",
+        "value": "검색"
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "전체"
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "등록"
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "일괄입력"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 14:40:49"
+      },
+      {
+        "type": "hidden",
+        "name": "del_mem_num",
+        "id": "del_mem_num",
+        "value": ""
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 14:40:49"
+      },
+      {
+        "type": "text",
+        "name": "login_id",
+        "id": "login_id",
+        "value": ""
+      },
+      {
+        "type": "password",
+        "name": "login_passwd",
+        "id": "login_passwd",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "로그인"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 14:40:49"
+      },
+      {
+        "type": "text",
+        "name": "otp_num",
+        "id": "",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "2단계 인증"
+      }
+    ],
+    "selects": [
+      {
+        "name": "sgr",
+        "id": "sgr",
+        "optionsCount": 7,
+        "options": [
+          {
+            "value": "",
+            "text": "=학년="
+          },
+          {
+            "value": "1",
+            "text": "1"
+          },
+          {
+            "value": "2",
+            "text": "2"
+          },
+          {
+            "value": "3",
+            "text": "3"
+          },
+          {
+            "value": "4",
+            "text": "4"
+          },
+          {
+            "value": "5",
+            "text": "5"
+          },
+          {
+            "value": "6",
+            "text": "6"
+          }
+        ]
+      },
+      {
+        "name": "scl",
+        "id": "scl",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=반="
+          },
+          {
+            "value": "1",
+            "text": "1"
+          },
+          {
+            "value": "2",
+            "text": "2"
+          },
+          {
+            "value": "3",
+            "text": "3"
+          },
+          {
+            "value": "4",
+            "text": "4"
+          },
+          {
+            "value": "5",
+            "text": "5"
+          },
+          {
+            "value": "6",
+            "text": "6"
+          },
+          {
+            "value": "7",
+            "text": "7"
+          },
+          {
+            "value": "8",
+            "text": "8"
+          },
+          {
+            "value": "9",
+            "text": "9"
+          },
+          {
+            "value": "10",
+            "text": "10"
+          },
+          {
+            "value": "11",
+            "text": "11"
+          },
+          {
+            "value": "12",
+            "text": "12"
+          }
+        ]
+      }
+    ],
+    "buttons": [
+      "×",
+      "×"
+    ],
+    "onclicks": [
+      "return chk_excel();",
+      "open_stu_schedule(4842028);",
+      "chk_del(4842028); return false;"
+    ]
+  },
+  "write": {
+    "forms": [
+      {
+        "name": "fm_edit",
+        "action": "https://www.dbdbschool.kr/af/ad_rsch/write/p/1/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_login",
+        "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_auth2",
+        "action": "https://www.dbdbschool.kr/member/auth2/modal/Y/sn/3267",
+        "method": "post"
+      }
+    ],
+    "inputs": [
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 14:41:16"
+      },
+      {
+        "type": "text",
+        "name": "mem_info",
+        "id": "mem_info",
+        "value": ""
+      },
+      {
+        "type": "hidden",
+        "name": "mem_num",
+        "id": "mem_num",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "yoil1_guardian",
+        "id": "yoil1_guardian",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "yoil1_tel_2",
+        "id": "yoil1_tel_2",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "yoil1_tel_3",
+        "id": "yoilv_tel_3",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "yoil1_content",
+        "id": "yoil1_content",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "yoil2_guardian",
+        "id": "yoil2_guardian",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "yoil2_tel_2",
+        "id": "yoil2_tel_2",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "yoil2_tel_3",
+        "id": "yoilv_tel_3",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "yoil2_content",
+        "id": "yoil2_content",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "yoil3_guardian",
+        "id": "yoil3_guardian",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "yoil3_tel_2",
+        "id": "yoil3_tel_2",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "yoil3_tel_3",
+        "id": "yoilv_tel_3",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "yoil3_content",
+        "id": "yoil3_content",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "yoil4_guardian",
+        "id": "yoil4_guardian",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "yoil4_tel_2",
+        "id": "yoil4_tel_2",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "yoil4_tel_3",
+        "id": "yoilv_tel_3",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "yoil4_content",
+        "id": "yoil4_content",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "yoil5_guardian",
+        "id": "yoil5_guardian",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "yoil5_tel_2",
+        "id": "yoil5_tel_2",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "yoil5_tel_3",
+        "id": "yoilv_tel_3",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "yoil5_content",
+        "id": "yoil5_content",
+        "value": ""
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "목록보기"
+      },
+      {
+        "type": "submit",
+        "name": "",
+        "id": "",
+        "value": "작성완료"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 14:41:16"
+      },
+      {
+        "type": "text",
+        "name": "login_id",
+        "id": "login_id",
+        "value": ""
+      },
+      {
+        "type": "password",
+        "name": "login_passwd",
+        "id": "login_passwd",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "로그인"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 14:41:16"
+      },
+      {
+        "type": "text",
+        "name": "otp_num",
+        "id": "",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "2단계 인증"
+      }
+    ],
+    "selects": [
+      {
+        "name": "yoil1_time_hour",
+        "id": "time1_hour",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=시="
+          },
+          {
+            "value": "09",
+            "text": "09시"
+          },
+          {
+            "value": "10",
+            "text": "10시"
+          },
+          {
+            "value": "11",
+            "text": "11시"
+          },
+          {
+            "value": "12",
+            "text": "12시"
+          },
+          {
+            "value": "13",
+            "text": "13시"
+          },
+          {
+            "value": "14",
+            "text": "14시"
+          },
+          {
+            "value": "15",
+            "text": "15시"
+          },
+          {
+            "value": "16",
+            "text": "16시"
+          },
+          {
+            "value": "17",
+            "text": "17시"
+          },
+          {
+            "value": "18",
+            "text": "18시"
+          },
+          {
+            "value": "19",
+            "text": "19시"
+          },
+          {
+            "value": "20",
+            "text": "20시"
+          }
+        ]
+      },
+      {
+        "name": "yoil1_time_min",
+        "id": "time1_min",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=분="
+          },
+          {
+            "value": "00",
+            "text": "00분"
+          },
+          {
+            "value": "05",
+            "text": "05분"
+          },
+          {
+            "value": "10",
+            "text": "10분"
+          },
+          {
+            "value": "15",
+            "text": "15분"
+          },
+          {
+            "value": "20",
+            "text": "20분"
+          },
+          {
+            "value": "25",
+            "text": "25분"
+          },
+          {
+            "value": "30",
+            "text": "30분"
+          },
+          {
+            "value": "35",
+            "text": "35분"
+          },
+          {
+            "value": "40",
+            "text": "40분"
+          },
+          {
+            "value": "45",
+            "text": "45분"
+          },
+          {
+            "value": "50",
+            "text": "50분"
+          },
+          {
+            "value": "55",
+            "text": "55분"
+          }
+        ]
+      },
+      {
+        "name": "yoil1_tel_1",
+        "id": "yoil1_tel_1",
+        "optionsCount": 33,
+        "options": [
+          {
+            "value": "",
+            "text": "선택"
+          },
+          {
+            "value": "010",
+            "text": "010"
+          },
+          {
+            "value": "011",
+            "text": "011"
+          },
+          {
+            "value": "012",
+            "text": "012"
+          },
+          {
+            "value": "016",
+            "text": "016"
+          },
+          {
+            "value": "017",
+            "text": "017"
+          },
+          {
+            "value": "018",
+            "text": "018"
+          },
+          {
+            "value": "019",
+            "text": "019"
+          },
+          {
+            "value": "090",
+            "text": "090"
+          },
+          {
+            "value": "091",
+            "text": "091"
+          },
+          {
+            "value": "092",
+            "text": "092"
+          },
+          {
+            "value": "093",
+            "text": "093"
+          },
+          {
+            "value": "094",
+            "text": "094"
+          },
+          {
+            "value": "096",
+            "text": "096"
+          },
+          {
+            "value": "098",
+            "text": "098"
+          },
+          {
+            "value": "02",
+            "text": "02"
+          },
+          {
+            "value": "031",
+            "text": "031"
+          },
+          {
+            "value": "032",
+            "text": "032"
+          },
+          {
+            "value": "033",
+            "text": "033"
+          },
+          {
+            "value": "041",
+            "text": "041"
+          },
+          {
+            "value": "042",
+            "text": "042"
+          },
+          {
+            "value": "043",
+            "text": "043"
+          },
+          {
+            "value": "044",
+            "text": "044"
+          },
+          {
+            "value": "051",
+            "text": "051"
+          },
+          {
+            "value": "052",
+            "text": "052"
+          },
+          {
+            "value": "053",
+            "text": "053"
+          },
+          {
+            "value": "054",
+            "text": "054"
+          },
+          {
+            "value": "055",
+            "text": "055"
+          },
+          {
+            "value": "061",
+            "text": "061"
+          },
+          {
+            "value": "062",
+            "text": "062"
+          },
+          {
+            "value": "063",
+            "text": "063"
+          },
+          {
+            "value": "064",
+            "text": "064"
+          },
+          {
+            "value": "070",
+            "text": "070"
+          }
+        ]
+      },
+      {
+        "name": "yoil2_time_hour",
+        "id": "time2_hour",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=시="
+          },
+          {
+            "value": "09",
+            "text": "09시"
+          },
+          {
+            "value": "10",
+            "text": "10시"
+          },
+          {
+            "value": "11",
+            "text": "11시"
+          },
+          {
+            "value": "12",
+            "text": "12시"
+          },
+          {
+            "value": "13",
+            "text": "13시"
+          },
+          {
+            "value": "14",
+            "text": "14시"
+          },
+          {
+            "value": "15",
+            "text": "15시"
+          },
+          {
+            "value": "16",
+            "text": "16시"
+          },
+          {
+            "value": "17",
+            "text": "17시"
+          },
+          {
+            "value": "18",
+            "text": "18시"
+          },
+          {
+            "value": "19",
+            "text": "19시"
+          },
+          {
+            "value": "20",
+            "text": "20시"
+          }
+        ]
+      },
+      {
+        "name": "yoil2_time_min",
+        "id": "time2_min",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=분="
+          },
+          {
+            "value": "00",
+            "text": "00분"
+          },
+          {
+            "value": "05",
+            "text": "05분"
+          },
+          {
+            "value": "10",
+            "text": "10분"
+          },
+          {
+            "value": "15",
+            "text": "15분"
+          },
+          {
+            "value": "20",
+            "text": "20분"
+          },
+          {
+            "value": "25",
+            "text": "25분"
+          },
+          {
+            "value": "30",
+            "text": "30분"
+          },
+          {
+            "value": "35",
+            "text": "35분"
+          },
+          {
+            "value": "40",
+            "text": "40분"
+          },
+          {
+            "value": "45",
+            "text": "45분"
+          },
+          {
+            "value": "50",
+            "text": "50분"
+          },
+          {
+            "value": "55",
+            "text": "55분"
+          }
+        ]
+      },
+      {
+        "name": "yoil2_tel_1",
+        "id": "yoil2_tel_1",
+        "optionsCount": 33,
+        "options": [
+          {
+            "value": "",
+            "text": "선택"
+          },
+          {
+            "value": "010",
+            "text": "010"
+          },
+          {
+            "value": "011",
+            "text": "011"
+          },
+          {
+            "value": "012",
+            "text": "012"
+          },
+          {
+            "value": "016",
+            "text": "016"
+          },
+          {
+            "value": "017",
+            "text": "017"
+          },
+          {
+            "value": "018",
+            "text": "018"
+          },
+          {
+            "value": "019",
+            "text": "019"
+          },
+          {
+            "value": "090",
+            "text": "090"
+          },
+          {
+            "value": "091",
+            "text": "091"
+          },
+          {
+            "value": "092",
+            "text": "092"
+          },
+          {
+            "value": "093",
+            "text": "093"
+          },
+          {
+            "value": "094",
+            "text": "094"
+          },
+          {
+            "value": "096",
+            "text": "096"
+          },
+          {
+            "value": "098",
+            "text": "098"
+          },
+          {
+            "value": "02",
+            "text": "02"
+          },
+          {
+            "value": "031",
+            "text": "031"
+          },
+          {
+            "value": "032",
+            "text": "032"
+          },
+          {
+            "value": "033",
+            "text": "033"
+          },
+          {
+            "value": "041",
+            "text": "041"
+          },
+          {
+            "value": "042",
+            "text": "042"
+          },
+          {
+            "value": "043",
+            "text": "043"
+          },
+          {
+            "value": "044",
+            "text": "044"
+          },
+          {
+            "value": "051",
+            "text": "051"
+          },
+          {
+            "value": "052",
+            "text": "052"
+          },
+          {
+            "value": "053",
+            "text": "053"
+          },
+          {
+            "value": "054",
+            "text": "054"
+          },
+          {
+            "value": "055",
+            "text": "055"
+          },
+          {
+            "value": "061",
+            "text": "061"
+          },
+          {
+            "value": "062",
+            "text": "062"
+          },
+          {
+            "value": "063",
+            "text": "063"
+          },
+          {
+            "value": "064",
+            "text": "064"
+          },
+          {
+            "value": "070",
+            "text": "070"
+          }
+        ]
+      },
+      {
+        "name": "yoil3_time_hour",
+        "id": "time3_hour",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=시="
+          },
+          {
+            "value": "09",
+            "text": "09시"
+          },
+          {
+            "value": "10",
+            "text": "10시"
+          },
+          {
+            "value": "11",
+            "text": "11시"
+          },
+          {
+            "value": "12",
+            "text": "12시"
+          },
+          {
+            "value": "13",
+            "text": "13시"
+          },
+          {
+            "value": "14",
+            "text": "14시"
+          },
+          {
+            "value": "15",
+            "text": "15시"
+          },
+          {
+            "value": "16",
+            "text": "16시"
+          },
+          {
+            "value": "17",
+            "text": "17시"
+          },
+          {
+            "value": "18",
+            "text": "18시"
+          },
+          {
+            "value": "19",
+            "text": "19시"
+          },
+          {
+            "value": "20",
+            "text": "20시"
+          }
+        ]
+      },
+      {
+        "name": "yoil3_time_min",
+        "id": "time3_min",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=분="
+          },
+          {
+            "value": "00",
+            "text": "00분"
+          },
+          {
+            "value": "05",
+            "text": "05분"
+          },
+          {
+            "value": "10",
+            "text": "10분"
+          },
+          {
+            "value": "15",
+            "text": "15분"
+          },
+          {
+            "value": "20",
+            "text": "20분"
+          },
+          {
+            "value": "25",
+            "text": "25분"
+          },
+          {
+            "value": "30",
+            "text": "30분"
+          },
+          {
+            "value": "35",
+            "text": "35분"
+          },
+          {
+            "value": "40",
+            "text": "40분"
+          },
+          {
+            "value": "45",
+            "text": "45분"
+          },
+          {
+            "value": "50",
+            "text": "50분"
+          },
+          {
+            "value": "55",
+            "text": "55분"
+          }
+        ]
+      },
+      {
+        "name": "yoil3_tel_1",
+        "id": "yoil3_tel_1",
+        "optionsCount": 33,
+        "options": [
+          {
+            "value": "",
+            "text": "선택"
+          },
+          {
+            "value": "010",
+            "text": "010"
+          },
+          {
+            "value": "011",
+            "text": "011"
+          },
+          {
+            "value": "012",
+            "text": "012"
+          },
+          {
+            "value": "016",
+            "text": "016"
+          },
+          {
+            "value": "017",
+            "text": "017"
+          },
+          {
+            "value": "018",
+            "text": "018"
+          },
+          {
+            "value": "019",
+            "text": "019"
+          },
+          {
+            "value": "090",
+            "text": "090"
+          },
+          {
+            "value": "091",
+            "text": "091"
+          },
+          {
+            "value": "092",
+            "text": "092"
+          },
+          {
+            "value": "093",
+            "text": "093"
+          },
+          {
+            "value": "094",
+            "text": "094"
+          },
+          {
+            "value": "096",
+            "text": "096"
+          },
+          {
+            "value": "098",
+            "text": "098"
+          },
+          {
+            "value": "02",
+            "text": "02"
+          },
+          {
+            "value": "031",
+            "text": "031"
+          },
+          {
+            "value": "032",
+            "text": "032"
+          },
+          {
+            "value": "033",
+            "text": "033"
+          },
+          {
+            "value": "041",
+            "text": "041"
+          },
+          {
+            "value": "042",
+            "text": "042"
+          },
+          {
+            "value": "043",
+            "text": "043"
+          },
+          {
+            "value": "044",
+            "text": "044"
+          },
+          {
+            "value": "051",
+            "text": "051"
+          },
+          {
+            "value": "052",
+            "text": "052"
+          },
+          {
+            "value": "053",
+            "text": "053"
+          },
+          {
+            "value": "054",
+            "text": "054"
+          },
+          {
+            "value": "055",
+            "text": "055"
+          },
+          {
+            "value": "061",
+            "text": "061"
+          },
+          {
+            "value": "062",
+            "text": "062"
+          },
+          {
+            "value": "063",
+            "text": "063"
+          },
+          {
+            "value": "064",
+            "text": "064"
+          },
+          {
+            "value": "070",
+            "text": "070"
+          }
+        ]
+      },
+      {
+        "name": "yoil4_time_hour",
+        "id": "time4_hour",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=시="
+          },
+          {
+            "value": "09",
+            "text": "09시"
+          },
+          {
+            "value": "10",
+            "text": "10시"
+          },
+          {
+            "value": "11",
+            "text": "11시"
+          },
+          {
+            "value": "12",
+            "text": "12시"
+          },
+          {
+            "value": "13",
+            "text": "13시"
+          },
+          {
+            "value": "14",
+            "text": "14시"
+          },
+          {
+            "value": "15",
+            "text": "15시"
+          },
+          {
+            "value": "16",
+            "text": "16시"
+          },
+          {
+            "value": "17",
+            "text": "17시"
+          },
+          {
+            "value": "18",
+            "text": "18시"
+          },
+          {
+            "value": "19",
+            "text": "19시"
+          },
+          {
+            "value": "20",
+            "text": "20시"
+          }
+        ]
+      },
+      {
+        "name": "yoil4_time_min",
+        "id": "time4_min",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=분="
+          },
+          {
+            "value": "00",
+            "text": "00분"
+          },
+          {
+            "value": "05",
+            "text": "05분"
+          },
+          {
+            "value": "10",
+            "text": "10분"
+          },
+          {
+            "value": "15",
+            "text": "15분"
+          },
+          {
+            "value": "20",
+            "text": "20분"
+          },
+          {
+            "value": "25",
+            "text": "25분"
+          },
+          {
+            "value": "30",
+            "text": "30분"
+          },
+          {
+            "value": "35",
+            "text": "35분"
+          },
+          {
+            "value": "40",
+            "text": "40분"
+          },
+          {
+            "value": "45",
+            "text": "45분"
+          },
+          {
+            "value": "50",
+            "text": "50분"
+          },
+          {
+            "value": "55",
+            "text": "55분"
+          }
+        ]
+      },
+      {
+        "name": "yoil4_tel_1",
+        "id": "yoil4_tel_1",
+        "optionsCount": 33,
+        "options": [
+          {
+            "value": "",
+            "text": "선택"
+          },
+          {
+            "value": "010",
+            "text": "010"
+          },
+          {
+            "value": "011",
+            "text": "011"
+          },
+          {
+            "value": "012",
+            "text": "012"
+          },
+          {
+            "value": "016",
+            "text": "016"
+          },
+          {
+            "value": "017",
+            "text": "017"
+          },
+          {
+            "value": "018",
+            "text": "018"
+          },
+          {
+            "value": "019",
+            "text": "019"
+          },
+          {
+            "value": "090",
+            "text": "090"
+          },
+          {
+            "value": "091",
+            "text": "091"
+          },
+          {
+            "value": "092",
+            "text": "092"
+          },
+          {
+            "value": "093",
+            "text": "093"
+          },
+          {
+            "value": "094",
+            "text": "094"
+          },
+          {
+            "value": "096",
+            "text": "096"
+          },
+          {
+            "value": "098",
+            "text": "098"
+          },
+          {
+            "value": "02",
+            "text": "02"
+          },
+          {
+            "value": "031",
+            "text": "031"
+          },
+          {
+            "value": "032",
+            "text": "032"
+          },
+          {
+            "value": "033",
+            "text": "033"
+          },
+          {
+            "value": "041",
+            "text": "041"
+          },
+          {
+            "value": "042",
+            "text": "042"
+          },
+          {
+            "value": "043",
+            "text": "043"
+          },
+          {
+            "value": "044",
+            "text": "044"
+          },
+          {
+            "value": "051",
+            "text": "051"
+          },
+          {
+            "value": "052",
+            "text": "052"
+          },
+          {
+            "value": "053",
+            "text": "053"
+          },
+          {
+            "value": "054",
+            "text": "054"
+          },
+          {
+            "value": "055",
+            "text": "055"
+          },
+          {
+            "value": "061",
+            "text": "061"
+          },
+          {
+            "value": "062",
+            "text": "062"
+          },
+          {
+            "value": "063",
+            "text": "063"
+          },
+          {
+            "value": "064",
+            "text": "064"
+          },
+          {
+            "value": "070",
+            "text": "070"
+          }
+        ]
+      },
+      {
+        "name": "yoil5_time_hour",
+        "id": "time5_hour",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=시="
+          },
+          {
+            "value": "09",
+            "text": "09시"
+          },
+          {
+            "value": "10",
+            "text": "10시"
+          },
+          {
+            "value": "11",
+            "text": "11시"
+          },
+          {
+            "value": "12",
+            "text": "12시"
+          },
+          {
+            "value": "13",
+            "text": "13시"
+          },
+          {
+            "value": "14",
+            "text": "14시"
+          },
+          {
+            "value": "15",
+            "text": "15시"
+          },
+          {
+            "value": "16",
+            "text": "16시"
+          },
+          {
+            "value": "17",
+            "text": "17시"
+          },
+          {
+            "value": "18",
+            "text": "18시"
+          },
+          {
+            "value": "19",
+            "text": "19시"
+          },
+          {
+            "value": "20",
+            "text": "20시"
+          }
+        ]
+      },
+      {
+        "name": "yoil5_time_min",
+        "id": "time5_min",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=분="
+          },
+          {
+            "value": "00",
+            "text": "00분"
+          },
+          {
+            "value": "05",
+            "text": "05분"
+          },
+          {
+            "value": "10",
+            "text": "10분"
+          },
+          {
+            "value": "15",
+            "text": "15분"
+          },
+          {
+            "value": "20",
+            "text": "20분"
+          },
+          {
+            "value": "25",
+            "text": "25분"
+          },
+          {
+            "value": "30",
+            "text": "30분"
+          },
+          {
+            "value": "35",
+            "text": "35분"
+          },
+          {
+            "value": "40",
+            "text": "40분"
+          },
+          {
+            "value": "45",
+            "text": "45분"
+          },
+          {
+            "value": "50",
+            "text": "50분"
+          },
+          {
+            "value": "55",
+            "text": "55분"
+          }
+        ]
+      },
+      {
+        "name": "yoil5_tel_1",
+        "id": "yoil5_tel_1",
+        "optionsCount": 33,
+        "options": [
+          {
+            "value": "",
+            "text": "선택"
+          },
+          {
+            "value": "010",
+            "text": "010"
+          },
+          {
+            "value": "011",
+            "text": "011"
+          },
+          {
+            "value": "012",
+            "text": "012"
+          },
+          {
+            "value": "016",
+            "text": "016"
+          },
+          {
+            "value": "017",
+            "text": "017"
+          },
+          {
+            "value": "018",
+            "text": "018"
+          },
+          {
+            "value": "019",
+            "text": "019"
+          },
+          {
+            "value": "090",
+            "text": "090"
+          },
+          {
+            "value": "091",
+            "text": "091"
+          },
+          {
+            "value": "092",
+            "text": "092"
+          },
+          {
+            "value": "093",
+            "text": "093"
+          },
+          {
+            "value": "094",
+            "text": "094"
+          },
+          {
+            "value": "096",
+            "text": "096"
+          },
+          {
+            "value": "098",
+            "text": "098"
+          },
+          {
+            "value": "02",
+            "text": "02"
+          },
+          {
+            "value": "031",
+            "text": "031"
+          },
+          {
+            "value": "032",
+            "text": "032"
+          },
+          {
+            "value": "033",
+            "text": "033"
+          },
+          {
+            "value": "041",
+            "text": "041"
+          },
+          {
+            "value": "042",
+            "text": "042"
+          },
+          {
+            "value": "043",
+            "text": "043"
+          },
+          {
+            "value": "044",
+            "text": "044"
+          },
+          {
+            "value": "051",
+            "text": "051"
+          },
+          {
+            "value": "052",
+            "text": "052"
+          },
+          {
+            "value": "053",
+            "text": "053"
+          },
+          {
+            "value": "054",
+            "text": "054"
+          },
+          {
+            "value": "055",
+            "text": "055"
+          },
+          {
+            "value": "061",
+            "text": "061"
+          },
+          {
+            "value": "062",
+            "text": "062"
+          },
+          {
+            "value": "063",
+            "text": "063"
+          },
+          {
+            "value": "064",
+            "text": "064"
+          },
+          {
+            "value": "070",
+            "text": "070"
+          }
+        ]
+      }
+    ],
+    "buttons": [
+      "×",
+      "×"
+    ],
+    "onclicks": [
+      "openStuWin(this.href); return false",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$("
+    ]
+  },
+  "input": {
+    "forms": [
+      {
+        "name": "fm_edit",
+        "action": "https://www.dbdbschool.kr/af/ad_rsch/input/p/1/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_login",
+        "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_auth2",
+        "action": "https://www.dbdbschool.kr/member/auth2/modal/Y/sn/3267",
+        "method": "post"
+      }
+    ],
+    "inputs": [
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 14:41:19"
+      },
+      {
+        "type": "file",
+        "name": "userfile",
+        "id": "userfile",
+        "value": ""
+      },
+      {
+        "type": "radio",
+        "name": "input_type",
+        "id": "input_type_add",
+        "value": "add"
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "취소"
+      },
+      {
+        "type": "submit",
+        "name": "",
+        "id": "",
+        "value": "등록"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 14:41:19"
+      },
+      {
+        "type": "text",
+        "name": "login_id",
+        "id": "login_id",
+        "value": ""
+      },
+      {
+        "type": "password",
+        "name": "login_passwd",
+        "id": "login_passwd",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "로그인"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 14:41:19"
+      },
+      {
+        "type": "text",
+        "name": "otp_num",
+        "id": "",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "2단계 인증"
+      }
+    ],
+    "selects": [],
+    "buttons": [
+      "×",
+      "×"
+    ],
+    "onclicks": []
+  },
+  "modify": {
+    "forms": [
+      {
+        "name": "fm_edit",
+        "action": "https://www.dbdbschool.kr/af/ad_rsch/modify/mem_num/4842028/p/1/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_login",
+        "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_auth2",
+        "action": "https://www.dbdbschool.kr/member/auth2/modal/Y/sn/3267",
+        "method": "post"
+      }
+    ],
+    "inputs": [
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 14:41:22"
+      },
+      {
+        "type": "hidden",
+        "name": "mem_num",
+        "id": "mem_num",
+        "value": "4842028"
+      },
+      {
+        "type": "text",
+        "name": "yoil1_guardian",
+        "id": "yoil1_guardian",
+        "value": "엄마 또는 외조모"
+      },
+      {
+        "type": "text",
+        "name": "yoil1_tel_2",
+        "id": "yoil1_tel_2",
+        "value": "9443"
+      },
+      {
+        "type": "text",
+        "name": "yoil1_tel_3",
+        "id": "yoilv_tel_3",
+        "value": "7348"
+      },
+      {
+        "type": "text",
+        "name": "yoil1_content",
+        "id": "yoil1_content",
+        "value": "외조모) 010.2753.7348"
+      },
+      {
+        "type": "text",
+        "name": "yoil2_guardian",
+        "id": "yoil2_guardian",
+        "value": "엄마 또는 외조모"
+      },
+      {
+        "type": "text",
+        "name": "yoil2_tel_2",
+        "id": "yoil2_tel_2",
+        "value": "9443"
+      },
+      {
+        "type": "text",
+        "name": "yoil2_tel_3",
+        "id": "yoilv_tel_3",
+        "value": "7348"
+      },
+      {
+        "type": "text",
+        "name": "yoil2_content",
+        "id": "yoil2_content",
+        "value": "외조모) 010.2753.7348"
+      },
+      {
+        "type": "text",
+        "name": "yoil3_guardian",
+        "id": "yoil3_guardian",
+        "value": "엄마 또는 외조모"
+      },
+      {
+        "type": "text",
+        "name": "yoil3_tel_2",
+        "id": "yoil3_tel_2",
+        "value": "9443"
+      },
+      {
+        "type": "text",
+        "name": "yoil3_tel_3",
+        "id": "yoilv_tel_3",
+        "value": "7348"
+      },
+      {
+        "type": "text",
+        "name": "yoil3_content",
+        "id": "yoil3_content",
+        "value": "외조모) 010.2753.7348"
+      },
+      {
+        "type": "text",
+        "name": "yoil4_guardian",
+        "id": "yoil4_guardian",
+        "value": "엄마 또는 외조모"
+      },
+      {
+        "type": "text",
+        "name": "yoil4_tel_2",
+        "id": "yoil4_tel_2",
+        "value": "9443"
+      },
+      {
+        "type": "text",
+        "name": "yoil4_tel_3",
+        "id": "yoilv_tel_3",
+        "value": "7348"
+      },
+      {
+        "type": "text",
+        "name": "yoil4_content",
+        "id": "yoil4_content",
+        "value": "외조모) 010.2753.7348"
+      },
+      {
+        "type": "text",
+        "name": "yoil5_guardian",
+        "id": "yoil5_guardian",
+        "value": "엄마 또는 외조모"
+      },
+      {
+        "type": "text",
+        "name": "yoil5_tel_2",
+        "id": "yoil5_tel_2",
+        "value": "9443"
+      },
+      {
+        "type": "text",
+        "name": "yoil5_tel_3",
+        "id": "yoilv_tel_3",
+        "value": "7348"
+      },
+      {
+        "type": "text",
+        "name": "yoil5_content",
+        "id": "yoil5_content",
+        "value": "외조모) 010.2753.7348"
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "목록보기"
+      },
+      {
+        "type": "submit",
+        "name": "",
+        "id": "",
+        "value": "작성완료"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 14:41:22"
+      },
+      {
+        "type": "text",
+        "name": "login_id",
+        "id": "login_id",
+        "value": ""
+      },
+      {
+        "type": "password",
+        "name": "login_passwd",
+        "id": "login_passwd",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "로그인"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 14:41:22"
+      },
+      {
+        "type": "text",
+        "name": "otp_num",
+        "id": "",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "2단계 인증"
+      }
+    ],
+    "selects": [
+      {
+        "name": "yoil1_time_hour",
+        "id": "time1_hour",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=시="
+          },
+          {
+            "value": "09",
+            "text": "09시"
+          },
+          {
+            "value": "10",
+            "text": "10시"
+          },
+          {
+            "value": "11",
+            "text": "11시"
+          },
+          {
+            "value": "12",
+            "text": "12시"
+          },
+          {
+            "value": "13",
+            "text": "13시"
+          },
+          {
+            "value": "14",
+            "text": "14시"
+          },
+          {
+            "value": "15",
+            "text": "15시"
+          },
+          {
+            "value": "16",
+            "text": "16시"
+          },
+          {
+            "value": "17",
+            "text": "17시"
+          },
+          {
+            "value": "18",
+            "text": "18시"
+          },
+          {
+            "value": "19",
+            "text": "19시"
+          },
+          {
+            "value": "20",
+            "text": "20시"
+          }
+        ]
+      },
+      {
+        "name": "yoil1_time_min",
+        "id": "time1_min",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=분="
+          },
+          {
+            "value": "00",
+            "text": "00분"
+          },
+          {
+            "value": "05",
+            "text": "05분"
+          },
+          {
+            "value": "10",
+            "text": "10분"
+          },
+          {
+            "value": "15",
+            "text": "15분"
+          },
+          {
+            "value": "20",
+            "text": "20분"
+          },
+          {
+            "value": "25",
+            "text": "25분"
+          },
+          {
+            "value": "30",
+            "text": "30분"
+          },
+          {
+            "value": "35",
+            "text": "35분"
+          },
+          {
+            "value": "40",
+            "text": "40분"
+          },
+          {
+            "value": "45",
+            "text": "45분"
+          },
+          {
+            "value": "50",
+            "text": "50분"
+          },
+          {
+            "value": "55",
+            "text": "55분"
+          }
+        ]
+      },
+      {
+        "name": "yoil1_tel_1",
+        "id": "yoil1_tel_1",
+        "optionsCount": 33,
+        "options": [
+          {
+            "value": "",
+            "text": "선택"
+          },
+          {
+            "value": "010",
+            "text": "010"
+          },
+          {
+            "value": "011",
+            "text": "011"
+          },
+          {
+            "value": "012",
+            "text": "012"
+          },
+          {
+            "value": "016",
+            "text": "016"
+          },
+          {
+            "value": "017",
+            "text": "017"
+          },
+          {
+            "value": "018",
+            "text": "018"
+          },
+          {
+            "value": "019",
+            "text": "019"
+          },
+          {
+            "value": "090",
+            "text": "090"
+          },
+          {
+            "value": "091",
+            "text": "091"
+          },
+          {
+            "value": "092",
+            "text": "092"
+          },
+          {
+            "value": "093",
+            "text": "093"
+          },
+          {
+            "value": "094",
+            "text": "094"
+          },
+          {
+            "value": "096",
+            "text": "096"
+          },
+          {
+            "value": "098",
+            "text": "098"
+          },
+          {
+            "value": "02",
+            "text": "02"
+          },
+          {
+            "value": "031",
+            "text": "031"
+          },
+          {
+            "value": "032",
+            "text": "032"
+          },
+          {
+            "value": "033",
+            "text": "033"
+          },
+          {
+            "value": "041",
+            "text": "041"
+          },
+          {
+            "value": "042",
+            "text": "042"
+          },
+          {
+            "value": "043",
+            "text": "043"
+          },
+          {
+            "value": "044",
+            "text": "044"
+          },
+          {
+            "value": "051",
+            "text": "051"
+          },
+          {
+            "value": "052",
+            "text": "052"
+          },
+          {
+            "value": "053",
+            "text": "053"
+          },
+          {
+            "value": "054",
+            "text": "054"
+          },
+          {
+            "value": "055",
+            "text": "055"
+          },
+          {
+            "value": "061",
+            "text": "061"
+          },
+          {
+            "value": "062",
+            "text": "062"
+          },
+          {
+            "value": "063",
+            "text": "063"
+          },
+          {
+            "value": "064",
+            "text": "064"
+          },
+          {
+            "value": "070",
+            "text": "070"
+          }
+        ]
+      },
+      {
+        "name": "yoil2_time_hour",
+        "id": "time2_hour",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=시="
+          },
+          {
+            "value": "09",
+            "text": "09시"
+          },
+          {
+            "value": "10",
+            "text": "10시"
+          },
+          {
+            "value": "11",
+            "text": "11시"
+          },
+          {
+            "value": "12",
+            "text": "12시"
+          },
+          {
+            "value": "13",
+            "text": "13시"
+          },
+          {
+            "value": "14",
+            "text": "14시"
+          },
+          {
+            "value": "15",
+            "text": "15시"
+          },
+          {
+            "value": "16",
+            "text": "16시"
+          },
+          {
+            "value": "17",
+            "text": "17시"
+          },
+          {
+            "value": "18",
+            "text": "18시"
+          },
+          {
+            "value": "19",
+            "text": "19시"
+          },
+          {
+            "value": "20",
+            "text": "20시"
+          }
+        ]
+      },
+      {
+        "name": "yoil2_time_min",
+        "id": "time2_min",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=분="
+          },
+          {
+            "value": "00",
+            "text": "00분"
+          },
+          {
+            "value": "05",
+            "text": "05분"
+          },
+          {
+            "value": "10",
+            "text": "10분"
+          },
+          {
+            "value": "15",
+            "text": "15분"
+          },
+          {
+            "value": "20",
+            "text": "20분"
+          },
+          {
+            "value": "25",
+            "text": "25분"
+          },
+          {
+            "value": "30",
+            "text": "30분"
+          },
+          {
+            "value": "35",
+            "text": "35분"
+          },
+          {
+            "value": "40",
+            "text": "40분"
+          },
+          {
+            "value": "45",
+            "text": "45분"
+          },
+          {
+            "value": "50",
+            "text": "50분"
+          },
+          {
+            "value": "55",
+            "text": "55분"
+          }
+        ]
+      },
+      {
+        "name": "yoil2_tel_1",
+        "id": "yoil2_tel_1",
+        "optionsCount": 33,
+        "options": [
+          {
+            "value": "",
+            "text": "선택"
+          },
+          {
+            "value": "010",
+            "text": "010"
+          },
+          {
+            "value": "011",
+            "text": "011"
+          },
+          {
+            "value": "012",
+            "text": "012"
+          },
+          {
+            "value": "016",
+            "text": "016"
+          },
+          {
+            "value": "017",
+            "text": "017"
+          },
+          {
+            "value": "018",
+            "text": "018"
+          },
+          {
+            "value": "019",
+            "text": "019"
+          },
+          {
+            "value": "090",
+            "text": "090"
+          },
+          {
+            "value": "091",
+            "text": "091"
+          },
+          {
+            "value": "092",
+            "text": "092"
+          },
+          {
+            "value": "093",
+            "text": "093"
+          },
+          {
+            "value": "094",
+            "text": "094"
+          },
+          {
+            "value": "096",
+            "text": "096"
+          },
+          {
+            "value": "098",
+            "text": "098"
+          },
+          {
+            "value": "02",
+            "text": "02"
+          },
+          {
+            "value": "031",
+            "text": "031"
+          },
+          {
+            "value": "032",
+            "text": "032"
+          },
+          {
+            "value": "033",
+            "text": "033"
+          },
+          {
+            "value": "041",
+            "text": "041"
+          },
+          {
+            "value": "042",
+            "text": "042"
+          },
+          {
+            "value": "043",
+            "text": "043"
+          },
+          {
+            "value": "044",
+            "text": "044"
+          },
+          {
+            "value": "051",
+            "text": "051"
+          },
+          {
+            "value": "052",
+            "text": "052"
+          },
+          {
+            "value": "053",
+            "text": "053"
+          },
+          {
+            "value": "054",
+            "text": "054"
+          },
+          {
+            "value": "055",
+            "text": "055"
+          },
+          {
+            "value": "061",
+            "text": "061"
+          },
+          {
+            "value": "062",
+            "text": "062"
+          },
+          {
+            "value": "063",
+            "text": "063"
+          },
+          {
+            "value": "064",
+            "text": "064"
+          },
+          {
+            "value": "070",
+            "text": "070"
+          }
+        ]
+      },
+      {
+        "name": "yoil3_time_hour",
+        "id": "time3_hour",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=시="
+          },
+          {
+            "value": "09",
+            "text": "09시"
+          },
+          {
+            "value": "10",
+            "text": "10시"
+          },
+          {
+            "value": "11",
+            "text": "11시"
+          },
+          {
+            "value": "12",
+            "text": "12시"
+          },
+          {
+            "value": "13",
+            "text": "13시"
+          },
+          {
+            "value": "14",
+            "text": "14시"
+          },
+          {
+            "value": "15",
+            "text": "15시"
+          },
+          {
+            "value": "16",
+            "text": "16시"
+          },
+          {
+            "value": "17",
+            "text": "17시"
+          },
+          {
+            "value": "18",
+            "text": "18시"
+          },
+          {
+            "value": "19",
+            "text": "19시"
+          },
+          {
+            "value": "20",
+            "text": "20시"
+          }
+        ]
+      },
+      {
+        "name": "yoil3_time_min",
+        "id": "time3_min",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=분="
+          },
+          {
+            "value": "00",
+            "text": "00분"
+          },
+          {
+            "value": "05",
+            "text": "05분"
+          },
+          {
+            "value": "10",
+            "text": "10분"
+          },
+          {
+            "value": "15",
+            "text": "15분"
+          },
+          {
+            "value": "20",
+            "text": "20분"
+          },
+          {
+            "value": "25",
+            "text": "25분"
+          },
+          {
+            "value": "30",
+            "text": "30분"
+          },
+          {
+            "value": "35",
+            "text": "35분"
+          },
+          {
+            "value": "40",
+            "text": "40분"
+          },
+          {
+            "value": "45",
+            "text": "45분"
+          },
+          {
+            "value": "50",
+            "text": "50분"
+          },
+          {
+            "value": "55",
+            "text": "55분"
+          }
+        ]
+      },
+      {
+        "name": "yoil3_tel_1",
+        "id": "yoil3_tel_1",
+        "optionsCount": 33,
+        "options": [
+          {
+            "value": "",
+            "text": "선택"
+          },
+          {
+            "value": "010",
+            "text": "010"
+          },
+          {
+            "value": "011",
+            "text": "011"
+          },
+          {
+            "value": "012",
+            "text": "012"
+          },
+          {
+            "value": "016",
+            "text": "016"
+          },
+          {
+            "value": "017",
+            "text": "017"
+          },
+          {
+            "value": "018",
+            "text": "018"
+          },
+          {
+            "value": "019",
+            "text": "019"
+          },
+          {
+            "value": "090",
+            "text": "090"
+          },
+          {
+            "value": "091",
+            "text": "091"
+          },
+          {
+            "value": "092",
+            "text": "092"
+          },
+          {
+            "value": "093",
+            "text": "093"
+          },
+          {
+            "value": "094",
+            "text": "094"
+          },
+          {
+            "value": "096",
+            "text": "096"
+          },
+          {
+            "value": "098",
+            "text": "098"
+          },
+          {
+            "value": "02",
+            "text": "02"
+          },
+          {
+            "value": "031",
+            "text": "031"
+          },
+          {
+            "value": "032",
+            "text": "032"
+          },
+          {
+            "value": "033",
+            "text": "033"
+          },
+          {
+            "value": "041",
+            "text": "041"
+          },
+          {
+            "value": "042",
+            "text": "042"
+          },
+          {
+            "value": "043",
+            "text": "043"
+          },
+          {
+            "value": "044",
+            "text": "044"
+          },
+          {
+            "value": "051",
+            "text": "051"
+          },
+          {
+            "value": "052",
+            "text": "052"
+          },
+          {
+            "value": "053",
+            "text": "053"
+          },
+          {
+            "value": "054",
+            "text": "054"
+          },
+          {
+            "value": "055",
+            "text": "055"
+          },
+          {
+            "value": "061",
+            "text": "061"
+          },
+          {
+            "value": "062",
+            "text": "062"
+          },
+          {
+            "value": "063",
+            "text": "063"
+          },
+          {
+            "value": "064",
+            "text": "064"
+          },
+          {
+            "value": "070",
+            "text": "070"
+          }
+        ]
+      },
+      {
+        "name": "yoil4_time_hour",
+        "id": "time4_hour",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=시="
+          },
+          {
+            "value": "09",
+            "text": "09시"
+          },
+          {
+            "value": "10",
+            "text": "10시"
+          },
+          {
+            "value": "11",
+            "text": "11시"
+          },
+          {
+            "value": "12",
+            "text": "12시"
+          },
+          {
+            "value": "13",
+            "text": "13시"
+          },
+          {
+            "value": "14",
+            "text": "14시"
+          },
+          {
+            "value": "15",
+            "text": "15시"
+          },
+          {
+            "value": "16",
+            "text": "16시"
+          },
+          {
+            "value": "17",
+            "text": "17시"
+          },
+          {
+            "value": "18",
+            "text": "18시"
+          },
+          {
+            "value": "19",
+            "text": "19시"
+          },
+          {
+            "value": "20",
+            "text": "20시"
+          }
+        ]
+      },
+      {
+        "name": "yoil4_time_min",
+        "id": "time4_min",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=분="
+          },
+          {
+            "value": "00",
+            "text": "00분"
+          },
+          {
+            "value": "05",
+            "text": "05분"
+          },
+          {
+            "value": "10",
+            "text": "10분"
+          },
+          {
+            "value": "15",
+            "text": "15분"
+          },
+          {
+            "value": "20",
+            "text": "20분"
+          },
+          {
+            "value": "25",
+            "text": "25분"
+          },
+          {
+            "value": "30",
+            "text": "30분"
+          },
+          {
+            "value": "35",
+            "text": "35분"
+          },
+          {
+            "value": "40",
+            "text": "40분"
+          },
+          {
+            "value": "45",
+            "text": "45분"
+          },
+          {
+            "value": "50",
+            "text": "50분"
+          },
+          {
+            "value": "55",
+            "text": "55분"
+          }
+        ]
+      },
+      {
+        "name": "yoil4_tel_1",
+        "id": "yoil4_tel_1",
+        "optionsCount": 33,
+        "options": [
+          {
+            "value": "",
+            "text": "선택"
+          },
+          {
+            "value": "010",
+            "text": "010"
+          },
+          {
+            "value": "011",
+            "text": "011"
+          },
+          {
+            "value": "012",
+            "text": "012"
+          },
+          {
+            "value": "016",
+            "text": "016"
+          },
+          {
+            "value": "017",
+            "text": "017"
+          },
+          {
+            "value": "018",
+            "text": "018"
+          },
+          {
+            "value": "019",
+            "text": "019"
+          },
+          {
+            "value": "090",
+            "text": "090"
+          },
+          {
+            "value": "091",
+            "text": "091"
+          },
+          {
+            "value": "092",
+            "text": "092"
+          },
+          {
+            "value": "093",
+            "text": "093"
+          },
+          {
+            "value": "094",
+            "text": "094"
+          },
+          {
+            "value": "096",
+            "text": "096"
+          },
+          {
+            "value": "098",
+            "text": "098"
+          },
+          {
+            "value": "02",
+            "text": "02"
+          },
+          {
+            "value": "031",
+            "text": "031"
+          },
+          {
+            "value": "032",
+            "text": "032"
+          },
+          {
+            "value": "033",
+            "text": "033"
+          },
+          {
+            "value": "041",
+            "text": "041"
+          },
+          {
+            "value": "042",
+            "text": "042"
+          },
+          {
+            "value": "043",
+            "text": "043"
+          },
+          {
+            "value": "044",
+            "text": "044"
+          },
+          {
+            "value": "051",
+            "text": "051"
+          },
+          {
+            "value": "052",
+            "text": "052"
+          },
+          {
+            "value": "053",
+            "text": "053"
+          },
+          {
+            "value": "054",
+            "text": "054"
+          },
+          {
+            "value": "055",
+            "text": "055"
+          },
+          {
+            "value": "061",
+            "text": "061"
+          },
+          {
+            "value": "062",
+            "text": "062"
+          },
+          {
+            "value": "063",
+            "text": "063"
+          },
+          {
+            "value": "064",
+            "text": "064"
+          },
+          {
+            "value": "070",
+            "text": "070"
+          }
+        ]
+      },
+      {
+        "name": "yoil5_time_hour",
+        "id": "time5_hour",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=시="
+          },
+          {
+            "value": "09",
+            "text": "09시"
+          },
+          {
+            "value": "10",
+            "text": "10시"
+          },
+          {
+            "value": "11",
+            "text": "11시"
+          },
+          {
+            "value": "12",
+            "text": "12시"
+          },
+          {
+            "value": "13",
+            "text": "13시"
+          },
+          {
+            "value": "14",
+            "text": "14시"
+          },
+          {
+            "value": "15",
+            "text": "15시"
+          },
+          {
+            "value": "16",
+            "text": "16시"
+          },
+          {
+            "value": "17",
+            "text": "17시"
+          },
+          {
+            "value": "18",
+            "text": "18시"
+          },
+          {
+            "value": "19",
+            "text": "19시"
+          },
+          {
+            "value": "20",
+            "text": "20시"
+          }
+        ]
+      },
+      {
+        "name": "yoil5_time_min",
+        "id": "time5_min",
+        "optionsCount": 13,
+        "options": [
+          {
+            "value": "",
+            "text": "=분="
+          },
+          {
+            "value": "00",
+            "text": "00분"
+          },
+          {
+            "value": "05",
+            "text": "05분"
+          },
+          {
+            "value": "10",
+            "text": "10분"
+          },
+          {
+            "value": "15",
+            "text": "15분"
+          },
+          {
+            "value": "20",
+            "text": "20분"
+          },
+          {
+            "value": "25",
+            "text": "25분"
+          },
+          {
+            "value": "30",
+            "text": "30분"
+          },
+          {
+            "value": "35",
+            "text": "35분"
+          },
+          {
+            "value": "40",
+            "text": "40분"
+          },
+          {
+            "value": "45",
+            "text": "45분"
+          },
+          {
+            "value": "50",
+            "text": "50분"
+          },
+          {
+            "value": "55",
+            "text": "55분"
+          }
+        ]
+      },
+      {
+        "name": "yoil5_tel_1",
+        "id": "yoil5_tel_1",
+        "optionsCount": 33,
+        "options": [
+          {
+            "value": "",
+            "text": "선택"
+          },
+          {
+            "value": "010",
+            "text": "010"
+          },
+          {
+            "value": "011",
+            "text": "011"
+          },
+          {
+            "value": "012",
+            "text": "012"
+          },
+          {
+            "value": "016",
+            "text": "016"
+          },
+          {
+            "value": "017",
+            "text": "017"
+          },
+          {
+            "value": "018",
+            "text": "018"
+          },
+          {
+            "value": "019",
+            "text": "019"
+          },
+          {
+            "value": "090",
+            "text": "090"
+          },
+          {
+            "value": "091",
+            "text": "091"
+          },
+          {
+            "value": "092",
+            "text": "092"
+          },
+          {
+            "value": "093",
+            "text": "093"
+          },
+          {
+            "value": "094",
+            "text": "094"
+          },
+          {
+            "value": "096",
+            "text": "096"
+          },
+          {
+            "value": "098",
+            "text": "098"
+          },
+          {
+            "value": "02",
+            "text": "02"
+          },
+          {
+            "value": "031",
+            "text": "031"
+          },
+          {
+            "value": "032",
+            "text": "032"
+          },
+          {
+            "value": "033",
+            "text": "033"
+          },
+          {
+            "value": "041",
+            "text": "041"
+          },
+          {
+            "value": "042",
+            "text": "042"
+          },
+          {
+            "value": "043",
+            "text": "043"
+          },
+          {
+            "value": "044",
+            "text": "044"
+          },
+          {
+            "value": "051",
+            "text": "051"
+          },
+          {
+            "value": "052",
+            "text": "052"
+          },
+          {
+            "value": "053",
+            "text": "053"
+          },
+          {
+            "value": "054",
+            "text": "054"
+          },
+          {
+            "value": "055",
+            "text": "055"
+          },
+          {
+            "value": "061",
+            "text": "061"
+          },
+          {
+            "value": "062",
+            "text": "062"
+          },
+          {
+            "value": "063",
+            "text": "063"
+          },
+          {
+            "value": "064",
+            "text": "064"
+          },
+          {
+            "value": "070",
+            "text": "070"
+          }
+        ]
+      }
+    ],
+    "buttons": [
+      "×",
+      "×"
+    ],
+    "onclicks": [
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$(",
+      "$("
+    ]
+  }
+}

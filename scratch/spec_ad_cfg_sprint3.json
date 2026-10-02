@@ -1,0 +1,1335 @@
+{
+  "main": {
+    "forms": [
+      {
+        "name": "fm_edit",
+        "id": "fm_edit",
+        "action": "https://www.dbdbschool.kr/af/ad_cfg/main/sn/3267",
+        "method": "post"
+      }
+    ],
+    "inputCount": 67,
+    "inputs": [
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "checked": false
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 16:02:01",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "titleNum",
+        "id": "titleNum_0",
+        "value": "0",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "titleNum",
+        "id": "titleNum_1",
+        "value": "1",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "titleNum",
+        "id": "titleNum_2",
+        "value": "2",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "titleNum",
+        "id": "titleNum_3",
+        "value": "3",
+        "checked": false
+      },
+      {
+        "type": "hidden",
+        "name": "addAdminNum",
+        "id": "addAdminNum",
+        "value": "133321",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "useRtnSch",
+        "id": "useRtnSch_Y",
+        "value": "Y",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "useRtnSch",
+        "id": "useRtnSch_N",
+        "value": "N",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "useAbs",
+        "id": "useAbs_Y",
+        "value": "Y",
+        "checked": true
+      },
+      {
+        "type": "checkbox",
+        "name": "useAbsType2",
+        "id": "useAbsType2",
+        "value": "N",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "useAbs",
+        "id": "useAbs_N",
+        "value": "N",
+        "checked": false
+      },
+      {
+        "type": "text",
+        "name": "exOpGrade",
+        "id": "exOpGrade",
+        "value": "",
+        "checked": false
+      },
+      {
+        "type": "text",
+        "name": "exOpClass",
+        "id": "exOpClass",
+        "value": "",
+        "checked": false
+      },
+      {
+        "type": "text",
+        "name": "surveyPwd",
+        "id": "surveyPwd",
+        "value": "1234",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "appLiScDiv",
+        "id": "appLiScDiv_N",
+        "value": "N",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "appLiScDiv",
+        "id": "appLiScDiv_Y",
+        "value": "Y",
+        "checked": true
+      },
+      {
+        "type": "text",
+        "name": "maxSin",
+        "id": "maxSin",
+        "value": "0",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "lecTimeType",
+        "id": "lecTimeType_0",
+        "value": "0",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "lecTimeType",
+        "id": "lecTimeType_1",
+        "value": "1",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "lecSort",
+        "id": "lecSort_0",
+        "value": "0",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "lecSort",
+        "id": "lecSort_1",
+        "value": "1",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "useLecPro",
+        "id": "useLecPro_Y",
+        "value": "Y",
+        "checked": true
+      },
+      {
+        "type": "checkbox",
+        "name": "lecProT1",
+        "id": "lecProT1",
+        "value": "2",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "useLecPro",
+        "id": "useLecPro_N",
+        "value": "N",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "viewTeaName",
+        "id": "viewTeaName_Y",
+        "value": "Y",
+        "checked": true
+      },
+      {
+        "type": "checkbox",
+        "name": "viewTeaHp",
+        "id": "viewTeaHp",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "viewTeaName",
+        "id": "viewTeaName_N",
+        "value": "N",
+        "checked": false
+      },
+      {
+        "type": "checkbox",
+        "name": "viewSinCnt",
+        "id": "viewSinCnt",
+        "value": "N",
+        "checked": false
+      },
+      {
+        "type": "checkbox",
+        "name": "viewSinCnt1",
+        "id": "viewSinCnt1",
+        "value": "N",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "useCost",
+        "id": "useCost_Y",
+        "value": "Y",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "useCost",
+        "id": "useCost_N",
+        "value": "N",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "usePayCal",
+        "id": "usePayCal_Y",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "usePayCal",
+        "id": "usePayCal_N",
+        "value": "N",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "useLottery",
+        "id": "useLottery_Y",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "useLottery",
+        "id": "useLottery_N",
+        "value": "N",
+        "checked": true
+      },
+      {
+        "type": "text",
+        "name": "lotApp",
+        "id": "lotApp",
+        "value": "",
+        "checked": false
+      },
+      {
+        "type": "checkbox",
+        "name": "lotViewHp",
+        "id": "lotViewHp",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "checkbox",
+        "name": "lotFree",
+        "id": "lotFree",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "useSinWait",
+        "id": "useSinWait_Y",
+        "value": "Y",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "useSinWait",
+        "id": "useSinWait_N",
+        "value": "N",
+        "checked": false
+      },
+      {
+        "type": "checkbox",
+        "name": "viewWaitNum",
+        "id": "viewWaitNum",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "useFree2Stu",
+        "id": "useFree2Stu_Y",
+        "value": "Y",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "useFree2Stu",
+        "id": "useFree2Stu_N",
+        "value": "N",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "freeSortType",
+        "id": "freeSortType_2",
+        "value": "2",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "freeSortType",
+        "id": "freeSortType_3",
+        "value": "3",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "freeSortType",
+        "id": "freeSortType_1",
+        "value": "1",
+        "checked": true
+      },
+      {
+        "type": "hidden",
+        "name": "freePayOrder",
+        "id": "freePayOrder",
+        "value": "수강료,교재비,재료비",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "freeTeaRnd",
+        "id": "freeTeaRnd_1",
+        "value": "1",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "freeTeaRnd",
+        "id": "freeTeaRnd_2",
+        "value": "2",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "freeTeaRnd",
+        "id": "freeTeaRnd_3",
+        "value": "3",
+        "checked": false
+      },
+      {
+        "type": "checkbox",
+        "name": "viewFree2App",
+        "id": "viewFree2App",
+        "value": "Y",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "refundPay",
+        "id": "refundPay_Y",
+        "value": "Y",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "refundPay",
+        "id": "refundPay_N",
+        "value": "N",
+        "checked": false
+      },
+      {
+        "type": "checkbox",
+        "name": "viewRefund",
+        "id": "viewRefund",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "refCalGubun",
+        "id": "refCalGubun_1",
+        "value": "1",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "refCalGubun",
+        "id": "refCalGubun_2",
+        "value": "2",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "refCalGubun",
+        "id": "refCalGubun_3",
+        "value": "3",
+        "checked": false
+      },
+      {
+        "type": "text",
+        "name": "refFloor",
+        "id": "refFloor",
+        "value": "5",
+        "checked": false
+      },
+      {
+        "type": "text",
+        "name": "refCeil",
+        "id": "refCeil",
+        "value": "5",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "refTeaRnd",
+        "id": "refTeaRnd_1",
+        "value": "1",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "refTeaRnd",
+        "id": "refTeaRnd_2",
+        "value": "2",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "refTeaRnd",
+        "id": "refTeaRnd_3",
+        "value": "3",
+        "checked": false
+      },
+      {
+        "type": "checkbox",
+        "name": "refNotCost1",
+        "id": "refNotCost1",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "checkbox",
+        "name": "refNotCost",
+        "id": "refNotCost",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "취소",
+        "checked": false
+      },
+      {
+        "type": "submit",
+        "name": "",
+        "id": "",
+        "value": "수정",
+        "checked": false
+      }
+    ],
+    "selectCount": 6,
+    "selects": [
+      {
+        "name": "addAdminList",
+        "id": "addAdminList",
+        "options": [
+          {
+            "val": "133321",
+            "text": "박진수"
+          }
+        ]
+      },
+      {
+        "name": "defLecDiv",
+        "id": "defLecDiv",
+        "options": [
+          {
+            "val": "0",
+            "text": "= 강좌구분(선택안함) ="
+          },
+          {
+            "val": "5",
+            "text": "3월"
+          },
+          {
+            "val": "6",
+            "text": "26년 4월"
+          },
+          {
+            "val": "7",
+            "text": "26년 5월"
+          },
+          {
+            "val": "8",
+            "text": "26년 6월"
+          },
+          {
+            "val": "9",
+            "text": "26년 7월"
+          },
+          {
+            "val": "10",
+            "text": "26년 8월"
+          },
+          {
+            "val": "11",
+            "text": "26년 9월"
+          },
+          {
+            "val": "12",
+            "text": "26년 10월"
+          }
+        ]
+      },
+      {
+        "name": "defLecProType",
+        "id": "defLecProType",
+        "options": [
+          {
+            "val": "0",
+            "text": "= 늘봄과정(선택안함) ="
+          },
+          {
+            "val": "1",
+            "text": "방과후"
+          },
+          {
+            "val": "2",
+            "text": "맞춤형"
+          },
+          {
+            "val": "3",
+            "text": "돌봄"
+          }
+        ]
+      },
+      {
+        "name": "useRtnSchT",
+        "id": "useRtnSchT",
+        "options": [
+          {
+            "val": "5",
+            "text": "5분"
+          },
+          {
+            "val": "10",
+            "text": "10분"
+          },
+          {
+            "val": "30",
+            "text": "30분"
+          }
+        ]
+      },
+      {
+        "name": "useAbsT",
+        "id": "useAbsT",
+        "options": [
+          {
+            "val": "5",
+            "text": "5분"
+          },
+          {
+            "val": "10",
+            "text": "10분"
+          },
+          {
+            "val": "30",
+            "text": "30분"
+          }
+        ]
+      },
+      {
+        "name": "refCalGubun1",
+        "id": "refCalGubun1",
+        "options": [
+          {
+            "val": "",
+            "text": "= 선택하세요 ="
+          },
+          {
+            "val": "1",
+            "text": "1/2경과 전 (1/2 환불)"
+          },
+          {
+            "val": "2",
+            "text": "1/3경과 전 (2/3 환불), 1/2경과 전 (1/2 환불)"
+          },
+          {
+            "val": "7",
+            "text": "1/3경과 전 (2/3 환불), 2/3경과 전 (1/3 환불)"
+          },
+          {
+            "val": "5",
+            "text": "1/4경과 전 (3/4 환불), 1/2경과 전 (1/2 환불)"
+          },
+          {
+            "val": "3",
+            "text": "1/4경과 전 (3/4 환불), 1/2경과 전 (1/2 환불), 3/4경과 전 (1/4 환불)"
+          },
+          {
+            "val": "4",
+            "text": "1/4경과 전 (3/4 환불)"
+          },
+          {
+            "val": "6",
+            "text": "1/4경과 전 (전액 환불)"
+          },
+          {
+            "val": "",
+            "text": "----------------------------------------------------------"
+          },
+          {
+            "val": "11",
+            "text": "1/2경과 이전 (1/2 환불)"
+          },
+          {
+            "val": "12",
+            "text": "1/3경과 이전 (2/3 환불), 1/2경과 이전 (1/2 환불)"
+          },
+          {
+            "val": "17",
+            "text": "1/3경과 이전 (2/3 환불), 2/3경과 이전 (1/3 환불)"
+          },
+          {
+            "val": "15",
+            "text": "1/4경과 이전 (3/4 환불), 1/2경과 이전 (1/2 환불)"
+          },
+          {
+            "val": "13",
+            "text": "1/4경과 이전 (3/4 환불), 1/2경과 이전 (1/2 환불), 3/4경과 이전 (1/4 환불)"
+          },
+          {
+            "val": "14",
+            "text": "1/4경과 이전 (3/4 환불)"
+          },
+          {
+            "val": "16",
+            "text": "1/4경과 이전 (전액 환불)"
+          },
+          {
+            "val": "",
+            "text": "----------------------------------------------------------"
+          },
+          {
+            "val": "21",
+            "text": "1/4경과 이전 (3/4 환불), 1/2경과 전 (1/2 환불)"
+          }
+        ]
+      }
+    ],
+    "textareaCount": 0,
+    "textareas": [],
+    "buttonCount": 5,
+    "buttons": [
+      {
+        "tag": "a",
+        "id": "",
+        "onclick": "",
+        "text": "기본설정"
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "onclick": "openMemWin(this.href); return false",
+        "text": "추가"
+      },
+      {
+        "tag": "a",
+        "id": "",
+        "onclick": "delAddMem(); return false;",
+        "text": "삭제"
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "onclick": "free2_order_miniUp(); return false;",
+        "text": "▲"
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "onclick": "free2_order_miniDown(); return false;",
+        "text": "▼"
+      }
+    ]
+  },
+  "tea": {
+    "forms": [
+      {
+        "name": "fm_edit",
+        "id": "fm_edit",
+        "action": "https://www.dbdbschool.kr/af/ad_cfg/tea/sn/3267",
+        "method": "post"
+      }
+    ],
+    "inputCount": 23,
+    "inputs": [
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "checked": false
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 16:02:03",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "allowViWaitLec",
+        "id": "allowViWaitLec_Y",
+        "value": "Y",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "allowViWaitLec",
+        "id": "allowViWaitLec_N",
+        "value": "N",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "allowWrLec",
+        "id": "allowWrLec_Y",
+        "value": "Y",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "allowWrLec",
+        "id": "allowWrLec_N",
+        "value": "N",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "allowViAllLec",
+        "id": "allowViAllLec_Y",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "allowViAllLec",
+        "id": "allowViAllLec_N",
+        "value": "N",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "allowWrSin",
+        "id": "allowWrSin_Y",
+        "value": "Y",
+        "checked": true
+      },
+      {
+        "type": "checkbox",
+        "name": "allowWrSin1",
+        "id": "allowWrSin1",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "checkbox",
+        "name": "allowWrSin2",
+        "id": "allowWrSin2",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "allowWrSin",
+        "id": "allowWrSin_N",
+        "value": "N",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "allowDelSin",
+        "id": "allowDelSin_Y",
+        "value": "Y",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "allowDelSin",
+        "id": "allowDelSin_N",
+        "value": "N",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "allowMoveSin",
+        "id": "allowMoveSin_Y",
+        "value": "Y",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "allowMoveSin",
+        "id": "allowMoveSin_N",
+        "value": "N",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "allowPayModify",
+        "id": "allowPayModify_Y",
+        "value": "Y",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "allowPayModify",
+        "id": "allowPayModify_N",
+        "value": "N",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "allowHpView",
+        "id": "allowHpView_Y",
+        "value": "Y",
+        "checked": true
+      },
+      {
+        "type": "checkbox",
+        "name": "allowHpEdit",
+        "id": "allowHpEdit",
+        "value": "Y",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "allowHpView",
+        "id": "allowHpView_N",
+        "value": "N",
+        "checked": false
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "취소",
+        "checked": false
+      },
+      {
+        "type": "submit",
+        "name": "",
+        "id": "",
+        "value": "수정",
+        "checked": false
+      }
+    ],
+    "selectCount": 0,
+    "selects": [],
+    "textareaCount": 0,
+    "textareas": [],
+    "buttonCount": 1,
+    "buttons": [
+      {
+        "tag": "a",
+        "id": "",
+        "onclick": "",
+        "text": "강사권한"
+      }
+    ]
+  },
+  "att": {
+    "forms": [
+      {
+        "name": "fm_edit",
+        "id": "fm_edit",
+        "action": "https://www.dbdbschool.kr/af/ad_cfg/att/sn/3267",
+        "method": "post"
+      }
+    ],
+    "inputCount": 18,
+    "inputs": [
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "checked": false
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 16:02:04",
+        "checked": false
+      },
+      {
+        "type": "text",
+        "name": "attApp1",
+        "id": "attApp1",
+        "value": "",
+        "checked": false
+      },
+      {
+        "type": "hidden",
+        "name": "sign_data1",
+        "id": "sign_data1",
+        "value": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=",
+        "checked": false
+      },
+      {
+        "type": "text",
+        "name": "attApp2",
+        "id": "attApp2",
+        "value": "",
+        "checked": false
+      },
+      {
+        "type": "hidden",
+        "name": "sign_data2",
+        "id": "sign_data2",
+        "value": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=",
+        "checked": false
+      },
+      {
+        "type": "text",
+        "name": "attApp3",
+        "id": "attApp3",
+        "value": "",
+        "checked": false
+      },
+      {
+        "type": "hidden",
+        "name": "sign_data3",
+        "id": "sign_data3",
+        "value": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=",
+        "checked": false
+      },
+      {
+        "type": "text",
+        "name": "attApp4",
+        "id": "attApp4",
+        "value": "",
+        "checked": false
+      },
+      {
+        "type": "hidden",
+        "name": "sign_data4",
+        "id": "sign_data4",
+        "value": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAoCAYAAACiu5n/AAAAIElEQVR4nO3BMQEAAADCoPVPbQo/oAAAAAAAAAAAAHgaJagAAcHRYpIAAAAASUVORK5CYII=",
+        "checked": false
+      },
+      {
+        "type": "checkbox",
+        "name": "attViewHp",
+        "id": "attViewHp",
+        "value": "Y",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "attPrDir",
+        "id": "attPrDir_V",
+        "value": "V",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "attPrDir",
+        "id": "attPrDir_H",
+        "value": "H",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "attOnline",
+        "id": "attOnline_Y",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "checkbox",
+        "name": "attViewStu",
+        "id": "attViewStu",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "attOnline",
+        "id": "attOnline_N",
+        "value": "N",
+        "checked": true
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "취소",
+        "checked": false
+      },
+      {
+        "type": "submit",
+        "name": "",
+        "id": "",
+        "value": "수정",
+        "checked": false
+      }
+    ],
+    "selectCount": 0,
+    "selects": [],
+    "textareaCount": 0,
+    "textareas": [],
+    "buttonCount": 12,
+    "buttons": [
+      {
+        "tag": "button",
+        "id": "",
+        "onclick": "show_sign_modal(1);",
+        "text": "만들기"
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "onclick": "clear_sign(1);",
+        "text": "지우기"
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "onclick": "cancel_sign(1);",
+        "text": "기존 서명 복원"
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "onclick": "show_sign_modal(2);",
+        "text": "만들기"
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "onclick": "clear_sign(2);",
+        "text": "지우기"
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "onclick": "cancel_sign(2);",
+        "text": "기존 서명 복원"
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "onclick": "show_sign_modal(3);",
+        "text": "만들기"
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "onclick": "clear_sign(3);",
+        "text": "지우기"
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "onclick": "cancel_sign(3);",
+        "text": "기존 서명 복원"
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "onclick": "show_sign_modal(4);",
+        "text": "만들기"
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "onclick": "clear_sign(4);",
+        "text": "지우기"
+      },
+      {
+        "tag": "button",
+        "id": "",
+        "onclick": "cancel_sign(4);",
+        "text": "기존 서명 복원"
+      }
+    ]
+  },
+  "sms": {
+    "forms": [
+      {
+        "name": "fm_edit",
+        "id": "fm_edit",
+        "action": "https://www.dbdbschool.kr/af/ad_cfg/sms/sn/3267",
+        "method": "post"
+      }
+    ],
+    "inputCount": 17,
+    "inputs": [
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "checked": false
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 16:02:06",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "smsUse",
+        "id": "smsUse_Y",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "smsUse",
+        "id": "smsUse_N",
+        "value": "N",
+        "checked": true
+      },
+      {
+        "type": "text",
+        "name": "smsBoTxt",
+        "id": "smsBoTxt",
+        "value": "광주풍향초등학교",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "smsAlTeaAt",
+        "id": "smsAlTeaAt_Y",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "checkbox",
+        "name": "smsAlTeaAt1",
+        "id": "smsAlTeaAt1",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "checkbox",
+        "name": "smsAlTeaAt2",
+        "id": "smsAlTeaAt2",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "checkbox",
+        "name": "smsAlTeaAt3",
+        "id": "smsAlTeaAt3",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "smsAlTeaAt",
+        "id": "smsAlTeaAt_N",
+        "value": "N",
+        "checked": true
+      },
+      {
+        "type": "radio",
+        "name": "smsAlTeaLec",
+        "id": "smsAlTeaLec_Y",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "checkbox",
+        "name": "smsAlTeaLec1",
+        "id": "smsAlTeaLec1",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "checkbox",
+        "name": "smsAlTeaLec2",
+        "id": "smsAlTeaLec2",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "checkbox",
+        "name": "smsAlTeaLec3",
+        "id": "smsAlTeaLec3",
+        "value": "Y",
+        "checked": false
+      },
+      {
+        "type": "radio",
+        "name": "smsAlTeaLec",
+        "id": "smsAlTeaLec_N",
+        "value": "N",
+        "checked": true
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "취소",
+        "checked": false
+      },
+      {
+        "type": "submit",
+        "name": "",
+        "id": "",
+        "value": "수정",
+        "checked": false
+      }
+    ],
+    "selectCount": 3,
+    "selects": [
+      {
+        "name": "smsDefNum",
+        "id": "",
+        "options": [
+          {
+            "val": "",
+            "text": "=발신번호="
+          }
+        ]
+      },
+      {
+        "name": "smsAmHour",
+        "id": "smsAmHour",
+        "options": [
+          {
+            "val": "",
+            "text": "=오전="
+          },
+          {
+            "val": "06",
+            "text": "06시"
+          },
+          {
+            "val": "07",
+            "text": "07시"
+          },
+          {
+            "val": "08",
+            "text": "08시"
+          },
+          {
+            "val": "09",
+            "text": "09시"
+          }
+        ]
+      },
+      {
+        "name": "smsPmHour",
+        "id": "smsPmHour",
+        "options": [
+          {
+            "val": "",
+            "text": "=오후="
+          },
+          {
+            "val": "17",
+            "text": "17시"
+          },
+          {
+            "val": "18",
+            "text": "18시"
+          },
+          {
+            "val": "19",
+            "text": "19시"
+          },
+          {
+            "val": "20",
+            "text": "20시"
+          },
+          {
+            "val": "21",
+            "text": "21시"
+          },
+          {
+            "val": "22",
+            "text": "22시"
+          },
+          {
+            "val": "23",
+            "text": "23시"
+          }
+        ]
+      }
+    ],
+    "textareaCount": 0,
+    "textareas": [],
+    "buttonCount": 1,
+    "buttons": [
+      {
+        "tag": "a",
+        "id": "",
+        "onclick": "",
+        "text": "발신번호등록"
+      }
+    ]
+  }
+}

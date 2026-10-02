@@ -1,0 +1,7788 @@
+{
+  "lists": {
+    "forms": [
+      {
+        "name": "fm_list",
+        "id": "fm_list",
+        "action": "https://www.dbdbschool.kr/af/ad_sur/lists/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_del",
+        "id": "fm_del",
+        "action": "https://www.dbdbschool.kr/af/ad_sur/del/p/1/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_login",
+        "id": "fm_comm_login",
+        "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_auth2",
+        "id": "fm_comm_auth2",
+        "action": "https://www.dbdbschool.kr/member/auth2/modal/Y/sn/3267",
+        "method": "post"
+      }
+    ],
+    "inputs": [
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:15:18"
+      },
+      {
+        "type": "checkbox",
+        "name": "check_all",
+        "id": "check_all",
+        "value": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "data_checked[]",
+        "id": "",
+        "value": "11977"
+      },
+      {
+        "type": "checkbox",
+        "name": "data_checked[]",
+        "id": "",
+        "value": "11976"
+      },
+      {
+        "type": "checkbox",
+        "name": "data_checked[]",
+        "id": "",
+        "value": "11975"
+      },
+      {
+        "type": "checkbox",
+        "name": "data_checked[]",
+        "id": "",
+        "value": "11974"
+      },
+      {
+        "type": "submit",
+        "name": "",
+        "id": "",
+        "value": "적용하기"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:15:18"
+      },
+      {
+        "type": "hidden",
+        "name": "num",
+        "id": "del_num",
+        "value": ""
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:15:18"
+      },
+      {
+        "type": "text",
+        "name": "login_id",
+        "id": "login_id",
+        "value": ""
+      },
+      {
+        "type": "password",
+        "name": "login_passwd",
+        "id": "login_passwd",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "로그인"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:15:18"
+      },
+      {
+        "type": "text",
+        "name": "otp_num",
+        "id": "",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "2단계 인증"
+      }
+    ],
+    "selects": [
+      {
+        "name": "update_type",
+        "id": "",
+        "options": [
+          {
+            "val": "",
+            "text": "=== 일괄적용 ==="
+          },
+          {
+            "val": "del",
+            "text": "설문 삭제"
+          },
+          {
+            "val": "",
+            "text": "-------------------"
+          },
+          {
+            "val": "ans_del",
+            "text": "참여결과 삭제"
+          }
+        ]
+      }
+    ],
+    "textareas": [],
+    "actions": [
+      {
+        "tag": "a",
+        "label": "광주풍향초등학교",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "늘봄학교",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "늘봄학교",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "다른 서비스 둘러보기",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "3",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/notification/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[로그아웃]",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/member/logout/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[정보수정]",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/member/modify/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "홈으로",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌등록",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/write/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "매뉴얼",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_faq/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "고객지원 게시판",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/qanda/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "학교관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/sczigi/service/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "신청자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_app/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "대기자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_wait/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "환불/취소관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_ref/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "지원금관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_stu/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "대상자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_stu/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "수강자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_app/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "지원금설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_cfg/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "순위구분설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_cfg/free1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "귀가일정표",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_rsch/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "결석/귀가신청",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_abs/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강사관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_tea/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "설문관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "설문",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "샘플설문",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "환경설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "기본설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "신청기간",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_time/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강의시간",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/period/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌구분",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/afDiv/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "중복제한그룹",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/appLiGrp/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "학적검증",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_verify/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "나이스/에듀파인 설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_neis_edufine/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "안내글설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/message/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "초기화",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/clear/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "담당자정보",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_info/modify/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "알림관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/notification/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "푸시알림관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/spush/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "연장신청149일 남음",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_extension/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "설문관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/help/go_data/num/87/data/link1",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "설문조사 가정통신문",
+        "id": "",
+        "name": "",
+        "href": "https://s3-ap-northeast-2.amazonaws.com/www.dbdbschool.kr/doc/faq/after/%EC%9A%B4%EC%98%81%EC%A0%88%EC%B0%A8_21_%EA%B0%80%EC%A0%95%ED%86%B5%EC%8B%A0%EB%AC%B8_%EB%B0%A9%EA%B3%BC%ED%9B%84%ED%95%99%EA%B5%90%20%EC%84%A4%EB%AC%B8%EC%B0%B8%EC%97%AC%20%EC%95%88%EB%82%B4.hwp",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "등록",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur/write/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "id": "",
+        "name": "csrf_test_name",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2026-10-02 15:15:18",
+        "id": "",
+        "name": "form_open_date_use_chk_csrf",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "",
+        "id": "check_all",
+        "name": "check_all",
+        "href": "",
+        "onclick": "chk_all(this);"
+      },
+      {
+        "tag": "input",
+        "label": "11977",
+        "id": "",
+        "name": "data_checked[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur/modify/num/11977/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "비밀번호 사용\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t[2026년] 늘봄학교 강사 만족도 조사 설문지(학부모용)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur_que/lists/sur_num/11977/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "7",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur_que/lists/sur_num/11977/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "129",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur_ans/lists/sur_num/11977/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "chk_del(11977); return false;"
+      },
+      {
+        "tag": "input",
+        "label": "11976",
+        "id": "",
+        "name": "data_checked[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur/modify/num/11976/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "비밀번호 사용\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t[2026년] 늘봄학교 강사 만족도 조사 설문지(학생용)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur_que/lists/sur_num/11976/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "5",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur_que/lists/sur_num/11976/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "86",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur_ans/lists/sur_num/11976/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "chk_del(11976); return false;"
+      },
+      {
+        "tag": "input",
+        "label": "11975",
+        "id": "",
+        "name": "data_checked[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur/modify/num/11975/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "비밀번호 사용\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t[2026년] 늘봄학교 만족도 조사 설문지(학부모용)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur_que/lists/sur_num/11975/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "5",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur_que/lists/sur_num/11975/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "34",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur_ans/lists/sur_num/11975/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "chk_del(11975); return false;"
+      },
+      {
+        "tag": "input",
+        "label": "11974",
+        "id": "",
+        "name": "data_checked[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur/modify/num/11974/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "비밀번호 사용\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t[2026년] 늘봄학교 만족도 조사 설문지(학생용)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur_que/lists/sur_num/11974/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "5",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur_que/lists/sur_num/11974/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "22",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur_ans/lists/sur_num/11974/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "chk_del(11974); return false;"
+      },
+      {
+        "tag": "input",
+        "label": "적용하기",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "id": "",
+        "name": "csrf_test_name",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2026-10-02 15:15:18",
+        "id": "",
+        "name": "form_open_date_use_chk_csrf",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "xmecca.com",
+        "id": "",
+        "name": "",
+        "href": "http://www.xmecca.com",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "id": "",
+        "name": "csrf_test_name",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2026-10-02 15:15:18",
+        "id": "",
+        "name": "form_open_date_use_chk_csrf",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "로그인",
+        "id": "",
+        "name": "submit",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "button",
+        "label": "×",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "id": "",
+        "name": "csrf_test_name",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2026-10-02 15:15:18",
+        "id": "",
+        "name": "form_open_date_use_chk_csrf",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2단계 인증",
+        "id": "",
+        "name": "submit",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "button",
+        "label": "×",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "확인",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": ""
+      }
+    ],
+    "thHeaders": [
+      "연번",
+      "수정",
+      "설문구분",
+      "강좌구분",
+      "늘봄과정",
+      "제목",
+      "참여구분",
+      "대상학년",
+      "문항",
+      "참여자",
+      "설문기간",
+      "삭제"
+    ]
+  },
+  "write": {
+    "forms": [
+      {
+        "name": "sample",
+        "id": "fm_sample",
+        "action": "https://www.dbdbschool.kr/af/ad_sur/write/p/1/sn/3267",
+        "method": "get"
+      },
+      {
+        "name": "fm_edit",
+        "id": "fm_edit",
+        "action": "https://www.dbdbschool.kr/af/ad_sur/write/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_login",
+        "id": "fm_comm_login",
+        "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_auth2",
+        "id": "fm_comm_auth2",
+        "action": "https://www.dbdbschool.kr/member/auth2/modal/Y/sn/3267",
+        "method": "post"
+      }
+    ],
+    "inputs": [
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:15:21"
+      },
+      {
+        "type": "hidden",
+        "name": "s_sur_num",
+        "id": "",
+        "value": "0"
+      },
+      {
+        "type": "text",
+        "name": "sur_title",
+        "id": "sur_title",
+        "value": ""
+      },
+      {
+        "type": "radio",
+        "name": "sur_type",
+        "id": "sur_type_1",
+        "value": "1"
+      },
+      {
+        "type": "radio",
+        "name": "sur_type",
+        "id": "sur_type_2",
+        "value": "2"
+      },
+      {
+        "type": "radio",
+        "name": "sur_type",
+        "id": "sur_type_3",
+        "value": "3"
+      },
+      {
+        "type": "checkbox",
+        "name": "check_all_lec_div",
+        "id": "check_all_lec_div",
+        "value": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_div[]",
+        "id": "lec_div_afDiv_5",
+        "value": "5"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_div[]",
+        "id": "lec_div_afDiv_6",
+        "value": "6"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_div[]",
+        "id": "lec_div_afDiv_7",
+        "value": "7"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_div[]",
+        "id": "lec_div_afDiv_8",
+        "value": "8"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_div[]",
+        "id": "lec_div_afDiv_9",
+        "value": "9"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_div[]",
+        "id": "lec_div_afDiv_10",
+        "value": "10"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_div[]",
+        "id": "lec_div_afDiv_11",
+        "value": "11"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_div[]",
+        "id": "lec_div_afDiv_12",
+        "value": "12"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_pro_type_all",
+        "id": "lec_pro_type_all",
+        "value": "all"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_pro_type_list[]",
+        "id": "lec_pro_type_1",
+        "value": "1"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_pro_type_list[]",
+        "id": "lec_pro_type_2",
+        "value": "2"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_pro_type_list[]",
+        "id": "lec_pro_type_3",
+        "value": "3"
+      },
+      {
+        "type": "radio",
+        "name": "ans_grp",
+        "id": "ans_grp_2",
+        "value": "2"
+      },
+      {
+        "type": "radio",
+        "name": "ans_grp",
+        "id": "ans_grp_102",
+        "value": "102"
+      },
+      {
+        "type": "radio",
+        "name": "ans_grp",
+        "id": "ans_grp_4",
+        "value": "4"
+      },
+      {
+        "type": "radio",
+        "name": "ans_grp",
+        "id": "ans_grp_1",
+        "value": "1"
+      },
+      {
+        "type": "checkbox",
+        "name": "check_all_grade",
+        "id": "check_all_grade",
+        "value": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "ans_grade[]",
+        "id": "ans_grade_grade_1",
+        "value": "1"
+      },
+      {
+        "type": "checkbox",
+        "name": "ans_grade[]",
+        "id": "ans_grade_grade_2",
+        "value": "2"
+      },
+      {
+        "type": "checkbox",
+        "name": "ans_grade[]",
+        "id": "ans_grade_grade_3",
+        "value": "3"
+      },
+      {
+        "type": "checkbox",
+        "name": "ans_grade[]",
+        "id": "ans_grade_grade_4",
+        "value": "4"
+      },
+      {
+        "type": "checkbox",
+        "name": "ans_grade[]",
+        "id": "ans_grade_grade_5",
+        "value": "5"
+      },
+      {
+        "type": "checkbox",
+        "name": "ans_grade[]",
+        "id": "ans_grade_grade_6",
+        "value": "6"
+      },
+      {
+        "type": "checkbox",
+        "name": "use_open_pwd",
+        "id": "use_open_pwd",
+        "value": "Y"
+      },
+      {
+        "type": "text",
+        "name": "sur_sdate",
+        "id": "sur_sdate",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "sur_edate",
+        "id": "sur_edate",
+        "value": ""
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "취소"
+      },
+      {
+        "type": "submit",
+        "name": "",
+        "id": "",
+        "value": "등록"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:15:21"
+      },
+      {
+        "type": "text",
+        "name": "login_id",
+        "id": "login_id",
+        "value": ""
+      },
+      {
+        "type": "password",
+        "name": "login_passwd",
+        "id": "login_passwd",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "로그인"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:15:21"
+      },
+      {
+        "type": "text",
+        "name": "otp_num",
+        "id": "",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "2단계 인증"
+      }
+    ],
+    "selects": [
+      {
+        "name": "s_sur_num",
+        "id": "",
+        "options": [
+          {
+            "val": "",
+            "text": "== 선택 =="
+          },
+          {
+            "val": "1310",
+            "text": "[서비스_종합]00월 늘봄학교 귀가 및 이용 서약서"
+          },
+          {
+            "val": "1090",
+            "text": "[서비스_종합]2024년 방과후 프로그램 참여 만족도 조사 설문지(학부모용)"
+          },
+          {
+            "val": "1089",
+            "text": "[서비스_종합]2024년 방과후 프로그램 참여 만족도 조사 설문지(학생용)"
+          },
+          {
+            "val": "1769",
+            "text": "[서비스_종합]2026년 늘봄학교 운영계획 수립을 위한 설문"
+          },
+          {
+            "val": "1941",
+            "text": "[서비스_종합]2026학년도 늘봄학교 늘봄과정 본 수요조사 안내 (1~5학년)"
+          },
+          {
+            "val": "1304",
+            "text": "[서비스_종합]3월 4일(화) 1학년 입학식 이후 긴급 돌봄 희망자 신청"
+          },
+          {
+            "val": "2373",
+            "text": "[서비스_종합][경기2] 2026 2학기 프로그램 운영 만족도 조사 설문 (학부모)- 돌봄"
+          },
+          {
+            "val": "2374",
+            "text": "[서비스_종합][경기2] 2026 2학기 프로그램 운영 만족도 조사 설문 (학부모)- 방과후"
+          },
+          {
+            "val": "2372",
+            "text": "[서비스_종합][경기2] 2026 2학기 프로그램 운영 만족도 조사 설문 (학부모)- 초1~2 맞춤형"
+          },
+          {
+            "val": "2371",
+            "text": "[서비스_종합][경기2] 2026 2학기 프로그램 운영 만족도 조사 설문 - 방과후"
+          },
+          {
+            "val": "2375",
+            "text": "[서비스_종합][경기2] 초1~2 맞춤형/ 돌봄/ 수익자 방과후&gt; 2027학년도 운영을 위한 기초 수요조사 설문 (학부모 대상)"
+          },
+          {
+            "val": "2116",
+            "text": "[서비스_종합][광주 2026년] 늘봄학교 만족도 조사 설문지(학부모용)"
+          },
+          {
+            "val": "2115",
+            "text": "[서비스_종합][광주 2026년] 늘봄학교 만족도 조사 설문지(학생용)"
+          },
+          {
+            "val": "1221",
+            "text": "[서비스_종합][광주] 2025년 늘봄학교 운영을 위한 기초 수요 조사"
+          },
+          {
+            "val": "1242",
+            "text": "[서비스_종합][광주]늘봄과정 본 수요조사 안내 (현재 1학년 대상)"
+          },
+          {
+            "val": "1250",
+            "text": "[서비스_종합][광주]늘봄과정 본 수요조사 안내 (현재 2~5학년 대상)"
+          },
+          {
+            "val": "1704",
+            "text": "[서비스_종합]늘봄학교 공개수업 참관 신청 및 참관 후기 작성 [미술부][수강생이 아닌 학부모도 참여]"
+          },
+          {
+            "val": "708",
+            "text": "[서비스_종합]방과후학교 기초조사 설문"
+          },
+          {
+            "val": "5",
+            "text": "[서비스_종합]방과후학교 연간 운영 만족도 설문지(교사용)"
+          },
+          {
+            "val": "501",
+            "text": "[서비스_종합]방과후학교 연간 운영 만족도 설문지(교사용) (2020년)"
+          },
+          {
+            "val": "3",
+            "text": "[서비스_종합]방과후학교 연간 운영 만족도 설문지(학부모용)"
+          },
+          {
+            "val": "2",
+            "text": "[서비스_종합]방과후학교 연간 운영 만족도 설문지(학생용)"
+          },
+          {
+            "val": "707",
+            "text": "[서비스_종합]방과후학교 프로그램 개설을 위한 설문조사"
+          },
+          {
+            "val": "2068",
+            "text": "[서비스_종합]학생 지역아동센터 참여 여부 설문조사"
+          },
+          {
+            "val": "2299",
+            "text": "[서비스_강좌(강사기준)][경기1] 2026학년도 1학기 방과후 프로그램 및 강사 만족도 조사 (3~6 학년 학생용)"
+          },
+          {
+            "val": "2300",
+            "text": "[서비스_강좌(강사기준)][경기1] 2026학년도 1학기 방과후, 맞춤형 프로그램 및 강사 만족도 조사 (학부모용)"
+          },
+          {
+            "val": "2370",
+            "text": "[서비스_강좌(강사기준)][경기2] 2026 2학기 프로그램 강사 만족도 조사 설문 - 방과후"
+          },
+          {
+            "val": "2367",
+            "text": "[서비스_강좌(강사기준)][경기2] 2026학년도 2학기 방과후 프로그램 및 강사 만족도 조사 설문 (학부모용) - 돌봄"
+          },
+          {
+            "val": "2272",
+            "text": "[서비스_강좌(강사기준)][경북]  2026학년도 초등돌봄･교육 만족도 조사 설문지(학부모용)"
+          },
+          {
+            "val": "2274",
+            "text": "[서비스_강좌(강사기준)][경북]  2026학년도 초등돌봄･교육 만족도 조사 설문지(학생용)"
+          },
+          {
+            "val": "2118",
+            "text": "[서비스_강좌(강사기준)][광주 2026년] 늘봄학교 강사 만족도 조사 설문지(학부모용)"
+          },
+          {
+            "val": "2117",
+            "text": "[서비스_강좌(강사기준)][광주 2026년] 늘봄학교 강사 만족도 조사 설문지(학생용)"
+          },
+          {
+            "val": "1784",
+            "text": "[서비스_강좌(강사기준)]늘봄학교 공개수업 참관 후기 작성 [수강생 대상]"
+          },
+          {
+            "val": "1363",
+            "text": "[서비스_강좌(강사기준)]늘봄학교 프로그램 및 강사 만족도 설문지(학부모용) (2025년)"
+          },
+          {
+            "val": "1364",
+            "text": "[서비스_강좌(강사기준)]늘봄학교 프로그램 및 강사 만족도 설문지(학생용) (2025년)"
+          },
+          {
+            "val": "500",
+            "text": "[서비스_강좌(강사기준)]방과후학교 운영 만족도 설문지(학부모용) (2020년)"
+          },
+          {
+            "val": "499",
+            "text": "[서비스_강좌(강사기준)]방과후학교 운영 만족도 설문지(학생용) (2020년)"
+          },
+          {
+            "val": "617",
+            "text": "[서비스_강좌(강사기준)]방과후학교 프로그램 및 강사 만족도 설문지(학부모용) (2024년)"
+          },
+          {
+            "val": "616",
+            "text": "[서비스_강좌(강사기준)]방과후학교 프로그램 및 강사 만족도 설문지(학생용) (2024년)"
+          },
+          {
+            "val": "4",
+            "text": "[서비스_강좌(강사기준)]방과후학교 학부모 만족도 조사지"
+          },
+          {
+            "val": "6",
+            "text": "[서비스_강좌(강사기준)]방과후학교 학생 만족도 조사지(초등 1-3학년용)"
+          },
+          {
+            "val": "7",
+            "text": "[서비스_강좌(강사기준)]방과후학교 학생 만족도 조사지(초등 4-6학년용)"
+          }
+        ]
+      }
+    ],
+    "textareas": [
+      {
+        "name": "sur_content",
+        "id": "ckeditor"
+      }
+    ],
+    "actions": [
+      {
+        "tag": "a",
+        "label": "광주풍향초등학교",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "늘봄학교",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "늘봄학교",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "다른 서비스 둘러보기",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "3",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/notification/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[로그아웃]",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/member/logout/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[정보수정]",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/member/modify/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "홈으로",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌등록",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/write/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "매뉴얼",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_faq/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "고객지원 게시판",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/qanda/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "학교관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/sczigi/service/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "신청자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_app/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "대기자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_wait/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "환불/취소관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_ref/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "지원금관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_stu/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "대상자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_stu/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "수강자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_app/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "지원금설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_cfg/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "순위구분설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_cfg/free1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "귀가일정표",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_rsch/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "결석/귀가신청",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_abs/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강사관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_tea/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "설문관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "설문",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "샘플설문",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "환경설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "기본설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "신청기간",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_time/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강의시간",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/period/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌구분",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/afDiv/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "중복제한그룹",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/appLiGrp/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "학적검증",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_verify/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "나이스/에듀파인 설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_neis_edufine/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "안내글설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/message/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "초기화",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/clear/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "담당자정보",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_info/modify/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "알림관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/notification/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "푸시알림관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/spush/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "연장신청149일 남음",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_extension/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "id": "",
+        "name": "csrf_test_name",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2026-10-02 15:15:21",
+        "id": "",
+        "name": "form_open_date_use_chk_csrf",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "0",
+        "id": "",
+        "name": "s_sur_num",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "1",
+        "id": "sur_type_1",
+        "name": "sur_type",
+        "href": "",
+        "onclick": "chk_sur_type();"
+      },
+      {
+        "tag": "input",
+        "label": "2",
+        "id": "sur_type_2",
+        "name": "sur_type",
+        "href": "",
+        "onclick": "chk_sur_type();"
+      },
+      {
+        "tag": "input",
+        "label": "3",
+        "id": "sur_type_3",
+        "name": "sur_type",
+        "href": "",
+        "onclick": "chk_sur_type();"
+      },
+      {
+        "tag": "input",
+        "label": "",
+        "id": "check_all_lec_div",
+        "name": "check_all_lec_div",
+        "href": "",
+        "onclick": "chk_all(this);"
+      },
+      {
+        "tag": "input",
+        "label": "5",
+        "id": "lec_div_afDiv_5",
+        "name": "lec_div[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "6",
+        "id": "lec_div_afDiv_6",
+        "name": "lec_div[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "7",
+        "id": "lec_div_afDiv_7",
+        "name": "lec_div[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "8",
+        "id": "lec_div_afDiv_8",
+        "name": "lec_div[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "9",
+        "id": "lec_div_afDiv_9",
+        "name": "lec_div[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "10",
+        "id": "lec_div_afDiv_10",
+        "name": "lec_div[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "11",
+        "id": "lec_div_afDiv_11",
+        "name": "lec_div[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "12",
+        "id": "lec_div_afDiv_12",
+        "name": "lec_div[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "all",
+        "id": "lec_pro_type_all",
+        "name": "lec_pro_type_all",
+        "href": "",
+        "onclick": "chk_lec_pro_type_all();"
+      },
+      {
+        "tag": "input",
+        "label": "1",
+        "id": "lec_pro_type_1",
+        "name": "lec_pro_type_list[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2",
+        "id": "lec_pro_type_2",
+        "name": "lec_pro_type_list[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "3",
+        "id": "lec_pro_type_3",
+        "name": "lec_pro_type_list[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2",
+        "id": "ans_grp_2",
+        "name": "ans_grp",
+        "href": "",
+        "onclick": "chk_ans_grp();"
+      },
+      {
+        "tag": "input",
+        "label": "102",
+        "id": "ans_grp_102",
+        "name": "ans_grp",
+        "href": "",
+        "onclick": "chk_ans_grp();"
+      },
+      {
+        "tag": "input",
+        "label": "4",
+        "id": "ans_grp_4",
+        "name": "ans_grp",
+        "href": "",
+        "onclick": "chk_ans_grp();"
+      },
+      {
+        "tag": "input",
+        "label": "1",
+        "id": "ans_grp_1",
+        "name": "ans_grp",
+        "href": "",
+        "onclick": "chk_ans_grp();"
+      },
+      {
+        "tag": "input",
+        "label": "",
+        "id": "check_all_grade",
+        "name": "check_all_grade",
+        "href": "",
+        "onclick": "chk_all(this);"
+      },
+      {
+        "tag": "input",
+        "label": "1",
+        "id": "ans_grade_grade_1",
+        "name": "ans_grade[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2",
+        "id": "ans_grade_grade_2",
+        "name": "ans_grade[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "3",
+        "id": "ans_grade_grade_3",
+        "name": "ans_grade[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4",
+        "id": "ans_grade_grade_4",
+        "name": "ans_grade[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "5",
+        "id": "ans_grade_grade_5",
+        "name": "ans_grade[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "6",
+        "id": "ans_grade_grade_6",
+        "name": "ans_grade[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "Y",
+        "id": "use_open_pwd",
+        "name": "use_open_pwd",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;새 페이지",
+        "id": "cke_18",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(4,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;미리보기",
+        "id": "cke_19",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(7,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;템플릿",
+        "id": "cke_20",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(10,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;잘라내기키보드 단축키 컨트롤+X",
+        "id": "cke_22",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(13,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;복사키보드 단축키 컨트롤+C",
+        "id": "cke_23",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(16,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;붙여넣기키보드 단축키 컨트롤+V",
+        "id": "cke_24",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(19,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;텍스트로 붙여넣기키보드 단축키 컨트롤+시프트+V",
+        "id": "cke_25",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(22,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;MS Word 에서 붙여넣기",
+        "id": "cke_26",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(25,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;인쇄",
+        "id": "cke_27",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(28,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;Spell Check As You Type",
+        "id": "cke_28",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(31,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;실행 취소키보드 단축키 컨트롤+Z",
+        "id": "cke_30",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(34,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;다시 실행키보드 단축키 컨트롤+Y",
+        "id": "cke_31",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(37,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;찾기",
+        "id": "cke_32",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(40,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;바꾸기",
+        "id": "cke_33",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(43,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;모두 선택",
+        "id": "cke_34",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(46,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;형식 지우기",
+        "id": "cke_35",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(49,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;굵게키보드 단축키 컨트롤+B",
+        "id": "cke_37",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(52,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;기울임꼴키보드 단축키 컨트롤+I",
+        "id": "cke_38",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(55,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;밑줄키보드 단축키 컨트롤+U",
+        "id": "cke_39",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(58,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;취소선",
+        "id": "cke_40",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(61,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;아래 첨자",
+        "id": "cke_41",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(64,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;위 첨자",
+        "id": "cke_42",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(67,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;순서 있는 목록",
+        "id": "cke_44",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(70,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;순서 없는 목록",
+        "id": "cke_45",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(73,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;내어쓰기",
+        "id": "cke_46",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(76,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;들여쓰기",
+        "id": "cke_47",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(79,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;인용 단락",
+        "id": "cke_48",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(82,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;왼쪽 정렬",
+        "id": "cke_50",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(85,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;중앙",
+        "id": "cke_51",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(88,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;오른쪽 정렬",
+        "id": "cke_52",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(91,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;양쪽 정렬",
+        "id": "cke_53",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(94,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;링크 삽입/변경키보드 단축키 컨트롤+K",
+        "id": "cke_55",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(97,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;링크 지우기",
+        "id": "cke_56",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(100,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;책갈피",
+        "id": "cke_57",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(103,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;이미지",
+        "id": "cke_59",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(106,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;이미지 업로드",
+        "id": "cke_60",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(109,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;플래시",
+        "id": "cke_61",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(112,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;표",
+        "id": "cke_62",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(115,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;가로 줄 삽입",
+        "id": "cke_63",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(118,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;이모티콘",
+        "id": "cke_64",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(121,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;특수문자 삽입",
+        "id": "cke_65",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(124,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;인쇄시 페이지 나누기 삽입",
+        "id": "cke_66",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(127,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "스타일",
+        "id": "",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(128,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "문단",
+        "id": "",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(131,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "글꼴",
+        "id": "",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(134,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "크기",
+        "id": "",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(137,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;글자 색상",
+        "id": "cke_69",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(142,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;배경 색상",
+        "id": "cke_70",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(145,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;최대화",
+        "id": "cke_72",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(148,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;블록 보기",
+        "id": "cke_73",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(151,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;CKEditor 에 대하여",
+        "id": "cke_74",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(154,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "▲",
+        "id": "cke_1_toolbar_collapser",
+        "name": "",
+        "href": "",
+        "onclick": "CKEDITOR.tools.callFunction(155)"
+      },
+      {
+        "tag": "input",
+        "label": "취소",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": "history.back(-1); return false;"
+      },
+      {
+        "tag": "input",
+        "label": "등록",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "xmecca.com",
+        "id": "",
+        "name": "",
+        "href": "http://www.xmecca.com",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "id": "",
+        "name": "csrf_test_name",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2026-10-02 15:15:21",
+        "id": "",
+        "name": "form_open_date_use_chk_csrf",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "로그인",
+        "id": "",
+        "name": "submit",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "button",
+        "label": "×",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "id": "",
+        "name": "csrf_test_name",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2026-10-02 15:15:21",
+        "id": "",
+        "name": "form_open_date_use_chk_csrf",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2단계 인증",
+        "id": "",
+        "name": "submit",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "button",
+        "label": "×",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "확인",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": ""
+      }
+    ],
+    "thHeaders": [
+      "샘플설문",
+      "제목",
+      "설문구분",
+      "강좌구분",
+      "늘봄과정",
+      "참여구분",
+      "대상학년",
+      "참여 비밀번호사용",
+      "설문기간",
+      "안내글"
+    ]
+  },
+  "modify": {
+    "forms": [
+      {
+        "name": "sample",
+        "id": "fm_sample",
+        "action": "https://www.dbdbschool.kr/af/ad_sur/write/p/1/sn/3267",
+        "method": "get"
+      },
+      {
+        "name": "fm_edit",
+        "id": "fm_edit",
+        "action": "https://www.dbdbschool.kr/af/ad_sur/modify/num/11977/p/1/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_login",
+        "id": "fm_comm_login",
+        "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_auth2",
+        "id": "fm_comm_auth2",
+        "action": "https://www.dbdbschool.kr/member/auth2/modal/Y/sn/3267",
+        "method": "post"
+      }
+    ],
+    "inputs": [
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:15:29"
+      },
+      {
+        "type": "hidden",
+        "name": "s_sur_num",
+        "id": "",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "name": "sur_title",
+        "id": "sur_title",
+        "value": "[2026년] 늘봄학교 강사 만족도 조사 설문지(학부모용)"
+      },
+      {
+        "type": "radio",
+        "name": "sur_type",
+        "id": "sur_type_1",
+        "value": "1"
+      },
+      {
+        "type": "radio",
+        "name": "sur_type",
+        "id": "sur_type_2",
+        "value": "2"
+      },
+      {
+        "type": "radio",
+        "name": "sur_type",
+        "id": "sur_type_3",
+        "value": "3"
+      },
+      {
+        "type": "checkbox",
+        "name": "check_all_lec_div",
+        "id": "check_all_lec_div",
+        "value": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_div[]",
+        "id": "lec_div_afDiv_5",
+        "value": "5"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_div[]",
+        "id": "lec_div_afDiv_6",
+        "value": "6"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_div[]",
+        "id": "lec_div_afDiv_7",
+        "value": "7"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_div[]",
+        "id": "lec_div_afDiv_8",
+        "value": "8"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_div[]",
+        "id": "lec_div_afDiv_9",
+        "value": "9"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_div[]",
+        "id": "lec_div_afDiv_10",
+        "value": "10"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_div[]",
+        "id": "lec_div_afDiv_11",
+        "value": "11"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_div[]",
+        "id": "lec_div_afDiv_12",
+        "value": "12"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_pro_type_all",
+        "id": "lec_pro_type_all",
+        "value": "all"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_pro_type_list[]",
+        "id": "lec_pro_type_1",
+        "value": "1"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_pro_type_list[]",
+        "id": "lec_pro_type_2",
+        "value": "2"
+      },
+      {
+        "type": "checkbox",
+        "name": "lec_pro_type_list[]",
+        "id": "lec_pro_type_3",
+        "value": "3"
+      },
+      {
+        "type": "radio",
+        "name": "ans_grp",
+        "id": "ans_grp_2",
+        "value": "2"
+      },
+      {
+        "type": "radio",
+        "name": "ans_grp",
+        "id": "ans_grp_102",
+        "value": "102"
+      },
+      {
+        "type": "radio",
+        "name": "ans_grp",
+        "id": "ans_grp_4",
+        "value": "4"
+      },
+      {
+        "type": "radio",
+        "name": "ans_grp",
+        "id": "ans_grp_1",
+        "value": "1"
+      },
+      {
+        "type": "checkbox",
+        "name": "check_all_grade",
+        "id": "check_all_grade",
+        "value": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "ans_grade[]",
+        "id": "ans_grade_grade_1",
+        "value": "1"
+      },
+      {
+        "type": "checkbox",
+        "name": "ans_grade[]",
+        "id": "ans_grade_grade_2",
+        "value": "2"
+      },
+      {
+        "type": "checkbox",
+        "name": "ans_grade[]",
+        "id": "ans_grade_grade_3",
+        "value": "3"
+      },
+      {
+        "type": "checkbox",
+        "name": "ans_grade[]",
+        "id": "ans_grade_grade_4",
+        "value": "4"
+      },
+      {
+        "type": "checkbox",
+        "name": "ans_grade[]",
+        "id": "ans_grade_grade_5",
+        "value": "5"
+      },
+      {
+        "type": "checkbox",
+        "name": "ans_grade[]",
+        "id": "ans_grade_grade_6",
+        "value": "6"
+      },
+      {
+        "type": "checkbox",
+        "name": "use_open_pwd",
+        "id": "use_open_pwd",
+        "value": "Y"
+      },
+      {
+        "type": "text",
+        "name": "sur_sdate",
+        "id": "sur_sdate",
+        "value": "2026-06-10"
+      },
+      {
+        "type": "text",
+        "name": "sur_edate",
+        "id": "sur_edate",
+        "value": "2026-06-15"
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "취소"
+      },
+      {
+        "type": "submit",
+        "name": "",
+        "id": "",
+        "value": "수정"
+      },
+      {
+        "type": "checkbox",
+        "name": "copy_survey",
+        "id": "copy_survey",
+        "value": "1"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:15:29"
+      },
+      {
+        "type": "text",
+        "name": "login_id",
+        "id": "login_id",
+        "value": ""
+      },
+      {
+        "type": "password",
+        "name": "login_passwd",
+        "id": "login_passwd",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "로그인"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:15:29"
+      },
+      {
+        "type": "text",
+        "name": "otp_num",
+        "id": "",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "2단계 인증"
+      }
+    ],
+    "selects": [],
+    "textareas": [
+      {
+        "name": "sur_content",
+        "id": "ckeditor"
+      }
+    ],
+    "actions": [
+      {
+        "tag": "a",
+        "label": "광주풍향초등학교",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "늘봄학교",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "늘봄학교",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "다른 서비스 둘러보기",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "3",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/notification/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[로그아웃]",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/member/logout/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[정보수정]",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/member/modify/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "홈으로",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌등록",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/write/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "매뉴얼",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_faq/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "고객지원 게시판",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/qanda/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "학교관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/sczigi/service/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "신청자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_app/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "대기자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_wait/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "환불/취소관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_ref/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "지원금관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_stu/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "대상자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_stu/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "수강자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_app/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "지원금설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_cfg/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "순위구분설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_cfg/free1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "귀가일정표",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_rsch/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "결석/귀가신청",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_abs/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강사관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_tea/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "설문관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "설문",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "샘플설문",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "환경설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "기본설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "신청기간",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_time/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강의시간",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/period/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌구분",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/afDiv/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "중복제한그룹",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/appLiGrp/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "학적검증",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_verify/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "나이스/에듀파인 설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_neis_edufine/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "안내글설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/message/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "초기화",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/clear/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "담당자정보",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_info/modify/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "알림관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/notification/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "푸시알림관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/spush/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "연장신청149일 남음",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_extension/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "id": "",
+        "name": "csrf_test_name",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2026-10-02 15:15:29",
+        "id": "",
+        "name": "form_open_date_use_chk_csrf",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "[2026년] 늘봄학교 강사 만족도 조사 설문지(학부모용)",
+        "id": "sur_title",
+        "name": "sur_title",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "1",
+        "id": "sur_type_1",
+        "name": "sur_type",
+        "href": "",
+        "onclick": "chk_sur_type();"
+      },
+      {
+        "tag": "input",
+        "label": "2",
+        "id": "sur_type_2",
+        "name": "sur_type",
+        "href": "",
+        "onclick": "chk_sur_type();"
+      },
+      {
+        "tag": "input",
+        "label": "3",
+        "id": "sur_type_3",
+        "name": "sur_type",
+        "href": "",
+        "onclick": "chk_sur_type();"
+      },
+      {
+        "tag": "input",
+        "label": "",
+        "id": "check_all_lec_div",
+        "name": "check_all_lec_div",
+        "href": "",
+        "onclick": "chk_all(this);"
+      },
+      {
+        "tag": "input",
+        "label": "5",
+        "id": "lec_div_afDiv_5",
+        "name": "lec_div[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "6",
+        "id": "lec_div_afDiv_6",
+        "name": "lec_div[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "7",
+        "id": "lec_div_afDiv_7",
+        "name": "lec_div[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "8",
+        "id": "lec_div_afDiv_8",
+        "name": "lec_div[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "9",
+        "id": "lec_div_afDiv_9",
+        "name": "lec_div[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "10",
+        "id": "lec_div_afDiv_10",
+        "name": "lec_div[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "11",
+        "id": "lec_div_afDiv_11",
+        "name": "lec_div[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "12",
+        "id": "lec_div_afDiv_12",
+        "name": "lec_div[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "all",
+        "id": "lec_pro_type_all",
+        "name": "lec_pro_type_all",
+        "href": "",
+        "onclick": "chk_lec_pro_type_all();"
+      },
+      {
+        "tag": "input",
+        "label": "1",
+        "id": "lec_pro_type_1",
+        "name": "lec_pro_type_list[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2",
+        "id": "lec_pro_type_2",
+        "name": "lec_pro_type_list[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "3",
+        "id": "lec_pro_type_3",
+        "name": "lec_pro_type_list[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2",
+        "id": "ans_grp_2",
+        "name": "ans_grp",
+        "href": "",
+        "onclick": "chk_ans_grp();"
+      },
+      {
+        "tag": "input",
+        "label": "102",
+        "id": "ans_grp_102",
+        "name": "ans_grp",
+        "href": "",
+        "onclick": "chk_ans_grp();"
+      },
+      {
+        "tag": "input",
+        "label": "4",
+        "id": "ans_grp_4",
+        "name": "ans_grp",
+        "href": "",
+        "onclick": "chk_ans_grp();"
+      },
+      {
+        "tag": "input",
+        "label": "1",
+        "id": "ans_grp_1",
+        "name": "ans_grp",
+        "href": "",
+        "onclick": "chk_ans_grp();"
+      },
+      {
+        "tag": "input",
+        "label": "",
+        "id": "check_all_grade",
+        "name": "check_all_grade",
+        "href": "",
+        "onclick": "chk_all(this);"
+      },
+      {
+        "tag": "input",
+        "label": "1",
+        "id": "ans_grade_grade_1",
+        "name": "ans_grade[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2",
+        "id": "ans_grade_grade_2",
+        "name": "ans_grade[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "3",
+        "id": "ans_grade_grade_3",
+        "name": "ans_grade[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4",
+        "id": "ans_grade_grade_4",
+        "name": "ans_grade[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "5",
+        "id": "ans_grade_grade_5",
+        "name": "ans_grade[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "6",
+        "id": "ans_grade_grade_6",
+        "name": "ans_grade[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "Y",
+        "id": "use_open_pwd",
+        "name": "use_open_pwd",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2026-06-10",
+        "id": "sur_sdate",
+        "name": "sur_sdate",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2026-06-15",
+        "id": "sur_edate",
+        "name": "sur_edate",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;새 페이지",
+        "id": "cke_18",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(4,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;미리보기",
+        "id": "cke_19",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(7,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;템플릿",
+        "id": "cke_20",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(10,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;잘라내기키보드 단축키 컨트롤+X",
+        "id": "cke_22",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(13,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;복사키보드 단축키 컨트롤+C",
+        "id": "cke_23",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(16,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;붙여넣기키보드 단축키 컨트롤+V",
+        "id": "cke_24",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(19,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;텍스트로 붙여넣기키보드 단축키 컨트롤+시프트+V",
+        "id": "cke_25",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(22,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;MS Word 에서 붙여넣기",
+        "id": "cke_26",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(25,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;인쇄",
+        "id": "cke_27",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(28,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;Spell Check As You Type",
+        "id": "cke_28",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(31,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;실행 취소키보드 단축키 컨트롤+Z",
+        "id": "cke_30",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(34,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;다시 실행키보드 단축키 컨트롤+Y",
+        "id": "cke_31",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(37,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;찾기",
+        "id": "cke_32",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(40,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;바꾸기",
+        "id": "cke_33",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(43,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;모두 선택",
+        "id": "cke_34",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(46,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;형식 지우기",
+        "id": "cke_35",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(49,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;굵게키보드 단축키 컨트롤+B",
+        "id": "cke_37",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(52,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;기울임꼴키보드 단축키 컨트롤+I",
+        "id": "cke_38",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(55,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;밑줄키보드 단축키 컨트롤+U",
+        "id": "cke_39",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(58,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;취소선",
+        "id": "cke_40",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(61,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;아래 첨자",
+        "id": "cke_41",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(64,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;위 첨자",
+        "id": "cke_42",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(67,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;순서 있는 목록",
+        "id": "cke_44",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(70,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;순서 없는 목록",
+        "id": "cke_45",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(73,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;내어쓰기",
+        "id": "cke_46",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(76,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;들여쓰기",
+        "id": "cke_47",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(79,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;인용 단락",
+        "id": "cke_48",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(82,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;왼쪽 정렬",
+        "id": "cke_50",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(85,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;중앙",
+        "id": "cke_51",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(88,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;오른쪽 정렬",
+        "id": "cke_52",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(91,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;양쪽 정렬",
+        "id": "cke_53",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(94,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;링크 삽입/변경키보드 단축키 컨트롤+K",
+        "id": "cke_55",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(97,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;링크 지우기",
+        "id": "cke_56",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(100,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;책갈피",
+        "id": "cke_57",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(103,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;이미지",
+        "id": "cke_59",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(106,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;이미지 업로드",
+        "id": "cke_60",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(109,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;플래시",
+        "id": "cke_61",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(112,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;표",
+        "id": "cke_62",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(115,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;가로 줄 삽입",
+        "id": "cke_63",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(118,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;이모티콘",
+        "id": "cke_64",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(121,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;특수문자 삽입",
+        "id": "cke_65",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(124,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;인쇄시 페이지 나누기 삽입",
+        "id": "cke_66",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(127,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "스타일",
+        "id": "",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(128,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "문단",
+        "id": "",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(131,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "글꼴",
+        "id": "",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(134,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "크기",
+        "id": "",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(137,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;글자 색상",
+        "id": "cke_69",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(142,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;배경 색상",
+        "id": "cke_70",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(145,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;최대화",
+        "id": "cke_72",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(148,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;블록 보기",
+        "id": "cke_73",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(151,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "&nbsp;CKEditor 에 대하여",
+        "id": "cke_74",
+        "name": "",
+        "href": "javascript:void(",
+        "onclick": "CKEDITOR.tools.callFunction(154,this);return false;"
+      },
+      {
+        "tag": "a",
+        "label": "▲",
+        "id": "cke_1_toolbar_collapser",
+        "name": "",
+        "href": "",
+        "onclick": "CKEDITOR.tools.callFunction(155)"
+      },
+      {
+        "tag": "input",
+        "label": "취소",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": "history.back(-1); return false;"
+      },
+      {
+        "tag": "input",
+        "label": "수정",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "1",
+        "id": "copy_survey",
+        "name": "copy_survey",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "xmecca.com",
+        "id": "",
+        "name": "",
+        "href": "http://www.xmecca.com",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "id": "",
+        "name": "csrf_test_name",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2026-10-02 15:15:29",
+        "id": "",
+        "name": "form_open_date_use_chk_csrf",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "로그인",
+        "id": "",
+        "name": "submit",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "button",
+        "label": "×",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "id": "",
+        "name": "csrf_test_name",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2026-10-02 15:15:29",
+        "id": "",
+        "name": "form_open_date_use_chk_csrf",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2단계 인증",
+        "id": "",
+        "name": "submit",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "button",
+        "label": "×",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "확인",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": ""
+      }
+    ],
+    "thHeaders": [
+      "제목",
+      "설문구분",
+      "강좌구분",
+      "늘봄과정",
+      "참여구분",
+      "대상학년",
+      "참여 비밀번호사용",
+      "설문기간",
+      "안내글"
+    ]
+  },
+  "que": {
+    "forms": [
+      {
+        "name": "fm_list_search",
+        "id": "fm_list_search",
+        "action": "https://www.dbdbschool.kr/af/ad_sur_que/lists/sn/3267",
+        "method": "get"
+      },
+      {
+        "name": "fm_del",
+        "id": "fm_del",
+        "action": "https://www.dbdbschool.kr/af/ad_sur_que/del/sn/3267/sur_num/11977",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_login",
+        "id": "fm_comm_login",
+        "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_auth2",
+        "id": "fm_comm_auth2",
+        "action": "https://www.dbdbschool.kr/member/auth2/modal/Y/sn/3267",
+        "method": "post"
+      }
+    ],
+    "inputs": [
+      {
+        "type": "radio",
+        "name": "que_90448",
+        "id": "que_90448_1",
+        "value": "5"
+      },
+      {
+        "type": "radio",
+        "name": "que_90448",
+        "id": "que_90448_2",
+        "value": "4"
+      },
+      {
+        "type": "radio",
+        "name": "que_90448",
+        "id": "que_90448_3",
+        "value": "3"
+      },
+      {
+        "type": "radio",
+        "name": "que_90448",
+        "id": "que_90448_4",
+        "value": "2"
+      },
+      {
+        "type": "radio",
+        "name": "que_90448",
+        "id": "que_90448_5",
+        "value": "1"
+      },
+      {
+        "type": "radio",
+        "name": "que_90449",
+        "id": "que_90449_1",
+        "value": "5"
+      },
+      {
+        "type": "radio",
+        "name": "que_90449",
+        "id": "que_90449_2",
+        "value": "4"
+      },
+      {
+        "type": "radio",
+        "name": "que_90449",
+        "id": "que_90449_3",
+        "value": "3"
+      },
+      {
+        "type": "radio",
+        "name": "que_90449",
+        "id": "que_90449_4",
+        "value": "2"
+      },
+      {
+        "type": "radio",
+        "name": "que_90449",
+        "id": "que_90449_5",
+        "value": "1"
+      },
+      {
+        "type": "radio",
+        "name": "que_90450",
+        "id": "que_90450_1",
+        "value": "5"
+      },
+      {
+        "type": "radio",
+        "name": "que_90450",
+        "id": "que_90450_2",
+        "value": "4"
+      },
+      {
+        "type": "radio",
+        "name": "que_90450",
+        "id": "que_90450_3",
+        "value": "3"
+      },
+      {
+        "type": "radio",
+        "name": "que_90450",
+        "id": "que_90450_4",
+        "value": "2"
+      },
+      {
+        "type": "radio",
+        "name": "que_90450",
+        "id": "que_90450_5",
+        "value": "1"
+      },
+      {
+        "type": "radio",
+        "name": "que_90451",
+        "id": "que_90451_1",
+        "value": "5"
+      },
+      {
+        "type": "radio",
+        "name": "que_90451",
+        "id": "que_90451_2",
+        "value": "4"
+      },
+      {
+        "type": "radio",
+        "name": "que_90451",
+        "id": "que_90451_3",
+        "value": "3"
+      },
+      {
+        "type": "radio",
+        "name": "que_90451",
+        "id": "que_90451_4",
+        "value": "2"
+      },
+      {
+        "type": "radio",
+        "name": "que_90451",
+        "id": "que_90451_5",
+        "value": "1"
+      },
+      {
+        "type": "radio",
+        "name": "que_90452",
+        "id": "que_90452_1",
+        "value": "5"
+      },
+      {
+        "type": "radio",
+        "name": "que_90452",
+        "id": "que_90452_2",
+        "value": "4"
+      },
+      {
+        "type": "radio",
+        "name": "que_90452",
+        "id": "que_90452_3",
+        "value": "3"
+      },
+      {
+        "type": "radio",
+        "name": "que_90452",
+        "id": "que_90452_4",
+        "value": "2"
+      },
+      {
+        "type": "radio",
+        "name": "que_90452",
+        "id": "que_90452_5",
+        "value": "1"
+      },
+      {
+        "type": "radio",
+        "name": "que_90453",
+        "id": "que_90453_1",
+        "value": "5"
+      },
+      {
+        "type": "radio",
+        "name": "que_90453",
+        "id": "que_90453_2",
+        "value": "4"
+      },
+      {
+        "type": "radio",
+        "name": "que_90453",
+        "id": "que_90453_3",
+        "value": "3"
+      },
+      {
+        "type": "radio",
+        "name": "que_90453",
+        "id": "que_90453_4",
+        "value": "2"
+      },
+      {
+        "type": "radio",
+        "name": "que_90453",
+        "id": "que_90453_5",
+        "value": "1"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:15:24"
+      },
+      {
+        "type": "hidden",
+        "name": "num",
+        "id": "del_num",
+        "value": ""
+      },
+      {
+        "type": "hidden",
+        "name": "sur_num",
+        "id": "sur_num",
+        "value": "11977"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:15:24"
+      },
+      {
+        "type": "text",
+        "name": "login_id",
+        "id": "login_id",
+        "value": ""
+      },
+      {
+        "type": "password",
+        "name": "login_passwd",
+        "id": "login_passwd",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "로그인"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:15:24"
+      },
+      {
+        "type": "text",
+        "name": "otp_num",
+        "id": "",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "2단계 인증"
+      }
+    ],
+    "selects": [
+      {
+        "name": "sur_num",
+        "id": "",
+        "options": [
+          {
+            "val": "11975",
+            "text": "[종합] [2026년] 늘봄학교 만족도 조사 설문지(학부모용)"
+          },
+          {
+            "val": "11974",
+            "text": "[종합] [2026년] 늘봄학교 만족도 조사 설문지(학생용)"
+          },
+          {
+            "val": "11977",
+            "text": "[강좌(강사기준)_3월,26년 4월,26년 5월,26년 6월] [2026년] 늘봄학교 강사 만족도 조사 설문지(학부모용)"
+          },
+          {
+            "val": "11976",
+            "text": "[강좌(강사기준)_3월,26년 4월,26년 5월,26년 6월] [2026년] 늘봄학교 강사 만족도 조사 설문지(학생용)"
+          }
+        ]
+      }
+    ],
+    "textareas": [
+      {
+        "name": "que_90454",
+        "id": "que_90454"
+      }
+    ],
+    "actions": [
+      {
+        "tag": "a",
+        "label": "광주풍향초등학교",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "늘봄학교",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "늘봄학교",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "다른 서비스 둘러보기",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "3",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/notification/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[로그아웃]",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/member/logout/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[정보수정]",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/member/modify/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "홈으로",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌등록",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/write/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "매뉴얼",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_faq/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "고객지원 게시판",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/qanda/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "학교관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/sczigi/service/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "신청자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_app/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "대기자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_wait/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "환불/취소관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_ref/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "지원금관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_stu/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "대상자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_stu/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "수강자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_app/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "지원금설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_cfg/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "순위구분설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_cfg/free1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "귀가일정표",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_rsch/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "결석/귀가신청",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_abs/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강사관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_tea/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "설문관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "설문",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "샘플설문",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "환경설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "기본설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "신청기간",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_time/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강의시간",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/period/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌구분",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/afDiv/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "중복제한그룹",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/appLiGrp/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "학적검증",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_verify/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "나이스/에듀파인 설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_neis_edufine/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "안내글설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/message/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "초기화",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/clear/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "담당자정보",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_info/modify/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "알림관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/notification/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "푸시알림관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/spush/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "연장신청149일 남음",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_extension/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "문항등록",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "location.href="
+      },
+      {
+        "tag": "a",
+        "label": "출력순서 변경",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "openSortWin("
+      },
+      {
+        "tag": "a",
+        "label": "결과보기",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "location.href="
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur_que/modify/num/90448/sn/3267/sur_num/11977",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "chk_del("
+      },
+      {
+        "tag": "input",
+        "label": "5",
+        "id": "que_90448_1",
+        "name": "que_90448",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4",
+        "id": "que_90448_2",
+        "name": "que_90448",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "3",
+        "id": "que_90448_3",
+        "name": "que_90448",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2",
+        "id": "que_90448_4",
+        "name": "que_90448",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "1",
+        "id": "que_90448_5",
+        "name": "que_90448",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur_que/modify/num/90449/sn/3267/sur_num/11977",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "chk_del("
+      },
+      {
+        "tag": "input",
+        "label": "5",
+        "id": "que_90449_1",
+        "name": "que_90449",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4",
+        "id": "que_90449_2",
+        "name": "que_90449",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "3",
+        "id": "que_90449_3",
+        "name": "que_90449",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2",
+        "id": "que_90449_4",
+        "name": "que_90449",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "1",
+        "id": "que_90449_5",
+        "name": "que_90449",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur_que/modify/num/90450/sn/3267/sur_num/11977",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "chk_del("
+      },
+      {
+        "tag": "input",
+        "label": "5",
+        "id": "que_90450_1",
+        "name": "que_90450",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4",
+        "id": "que_90450_2",
+        "name": "que_90450",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "3",
+        "id": "que_90450_3",
+        "name": "que_90450",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2",
+        "id": "que_90450_4",
+        "name": "que_90450",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "1",
+        "id": "que_90450_5",
+        "name": "que_90450",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur_que/modify/num/90451/sn/3267/sur_num/11977",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "chk_del("
+      },
+      {
+        "tag": "input",
+        "label": "5",
+        "id": "que_90451_1",
+        "name": "que_90451",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4",
+        "id": "que_90451_2",
+        "name": "que_90451",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "3",
+        "id": "que_90451_3",
+        "name": "que_90451",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2",
+        "id": "que_90451_4",
+        "name": "que_90451",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "1",
+        "id": "que_90451_5",
+        "name": "que_90451",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur_que/modify/num/90452/sn/3267/sur_num/11977",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "chk_del("
+      },
+      {
+        "tag": "input",
+        "label": "5",
+        "id": "que_90452_1",
+        "name": "que_90452",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4",
+        "id": "que_90452_2",
+        "name": "que_90452",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "3",
+        "id": "que_90452_3",
+        "name": "que_90452",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2",
+        "id": "que_90452_4",
+        "name": "que_90452",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "1",
+        "id": "que_90452_5",
+        "name": "que_90452",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur_que/modify/num/90453/sn/3267/sur_num/11977",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "chk_del("
+      },
+      {
+        "tag": "input",
+        "label": "5",
+        "id": "que_90453_1",
+        "name": "que_90453",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4",
+        "id": "que_90453_2",
+        "name": "que_90453",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "3",
+        "id": "que_90453_3",
+        "name": "que_90453",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2",
+        "id": "que_90453_4",
+        "name": "que_90453",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "1",
+        "id": "que_90453_5",
+        "name": "que_90453",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur_que/modify/num/90454/sn/3267/sur_num/11977",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "chk_del("
+      },
+      {
+        "tag": "a",
+        "label": "문항등록",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "location.href="
+      },
+      {
+        "tag": "a",
+        "label": "출력순서 변경",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "openSortWin("
+      },
+      {
+        "tag": "a",
+        "label": "결과보기",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "location.href="
+      },
+      {
+        "tag": "input",
+        "label": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "id": "",
+        "name": "csrf_test_name",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2026-10-02 15:15:24",
+        "id": "",
+        "name": "form_open_date_use_chk_csrf",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "11977",
+        "id": "sur_num",
+        "name": "sur_num",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "xmecca.com",
+        "id": "",
+        "name": "",
+        "href": "http://www.xmecca.com",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "id": "",
+        "name": "csrf_test_name",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2026-10-02 15:15:24",
+        "id": "",
+        "name": "form_open_date_use_chk_csrf",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "로그인",
+        "id": "",
+        "name": "submit",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "button",
+        "label": "×",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "id": "",
+        "name": "csrf_test_name",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2026-10-02 15:15:24",
+        "id": "",
+        "name": "form_open_date_use_chk_csrf",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2단계 인증",
+        "id": "",
+        "name": "submit",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "button",
+        "label": "×",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "확인",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": ""
+      }
+    ],
+    "thHeaders": [
+      "설문"
+    ]
+  },
+  "ans": {
+    "forms": [
+      {
+        "name": "fm_list_search",
+        "id": "fm_list_search",
+        "action": "https://www.dbdbschool.kr/af/ad_sur_ans/lists/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_login",
+        "id": "fm_comm_login",
+        "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_auth2",
+        "id": "fm_comm_auth2",
+        "action": "https://www.dbdbschool.kr/member/auth2/modal/Y/sn/3267",
+        "method": "post"
+      }
+    ],
+    "inputs": [
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:15:26"
+      },
+      {
+        "type": "checkbox",
+        "name": "check_all",
+        "id": "check_all",
+        "value": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "s_lec_list[]",
+        "id": "s_lec_list_박지숙",
+        "value": "박지숙"
+      },
+      {
+        "type": "checkbox",
+        "name": "s_lec_list[]",
+        "id": "s_lec_list_강태연",
+        "value": "강태연"
+      },
+      {
+        "type": "checkbox",
+        "name": "s_lec_list[]",
+        "id": "s_lec_list_박지연",
+        "value": "박지연"
+      },
+      {
+        "type": "checkbox",
+        "name": "s_lec_list[]",
+        "id": "s_lec_list_김지향",
+        "value": "김지향"
+      },
+      {
+        "type": "checkbox",
+        "name": "s_lec_list[]",
+        "id": "s_lec_list_임은희",
+        "value": "임은희"
+      },
+      {
+        "type": "checkbox",
+        "name": "s_lec_list[]",
+        "id": "s_lec_list_최정호",
+        "value": "최정호"
+      },
+      {
+        "type": "checkbox",
+        "name": "s_lec_list[]",
+        "id": "s_lec_list_박경도",
+        "value": "박경도"
+      },
+      {
+        "type": "checkbox",
+        "name": "s_lec_list[]",
+        "id": "s_lec_list_천윤아",
+        "value": "천윤아"
+      },
+      {
+        "type": "checkbox",
+        "name": "s_lec_list[]",
+        "id": "s_lec_list_서인경",
+        "value": "서인경"
+      },
+      {
+        "type": "checkbox",
+        "name": "s_lec_list[]",
+        "id": "s_lec_list_박은화",
+        "value": "박은화"
+      },
+      {
+        "type": "checkbox",
+        "name": "s_lec_list[]",
+        "id": "s_lec_list_김언주",
+        "value": "김언주"
+      },
+      {
+        "type": "checkbox",
+        "name": "s_lec_list[]",
+        "id": "s_lec_list_정진화",
+        "value": "정진화"
+      },
+      {
+        "type": "checkbox",
+        "name": "s_lec_list[]",
+        "id": "s_lec_list_김경아",
+        "value": "김경아"
+      },
+      {
+        "type": "checkbox",
+        "name": "s_lec_list[]",
+        "id": "s_lec_list_김윤정",
+        "value": "김윤정"
+      },
+      {
+        "type": "checkbox",
+        "name": "s_lec_list[]",
+        "id": "s_lec_list_김재표",
+        "value": "김재표"
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "검색"
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "전체"
+      },
+      {
+        "type": "radio",
+        "name": "excel_lec_all",
+        "id": "excel_lec_all_0",
+        "value": "0"
+      },
+      {
+        "type": "radio",
+        "name": "excel_lec_all",
+        "id": "excel_lec_all_3",
+        "value": "3"
+      },
+      {
+        "type": "radio",
+        "name": "excel_lec_all",
+        "id": "excel_lec_all_1",
+        "value": "1"
+      },
+      {
+        "type": "radio",
+        "name": "excel_lec_all",
+        "id": "excel_lec_all_2",
+        "value": "2"
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "취소"
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "확인"
+      },
+      {
+        "type": "radio",
+        "name": "excel_result_type",
+        "id": "excel_result_type_0",
+        "value": "0"
+      },
+      {
+        "type": "radio",
+        "name": "excel_result_type",
+        "id": "excel_result_type_1",
+        "value": "1"
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "취소"
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "확인"
+      },
+      {
+        "type": "radio",
+        "name": "excel1_gubun",
+        "id": "excel1_gubun_0",
+        "value": "0"
+      },
+      {
+        "type": "radio",
+        "name": "excel1_gubun",
+        "id": "excel1_gubun_1",
+        "value": "1"
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "취소"
+      },
+      {
+        "type": "button",
+        "name": "",
+        "id": "",
+        "value": "확인"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:15:26"
+      },
+      {
+        "type": "text",
+        "name": "login_id",
+        "id": "login_id",
+        "value": ""
+      },
+      {
+        "type": "password",
+        "name": "login_passwd",
+        "id": "login_passwd",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "로그인"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:15:26"
+      },
+      {
+        "type": "text",
+        "name": "otp_num",
+        "id": "",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "2단계 인증"
+      }
+    ],
+    "selects": [
+      {
+        "name": "sur_num",
+        "id": "",
+        "options": [
+          {
+            "val": "11975",
+            "text": "[종합] [2026년] 늘봄학교 만족도 조사 설문지(학부모용)"
+          },
+          {
+            "val": "11974",
+            "text": "[종합] [2026년] 늘봄학교 만족도 조사 설문지(학생용)"
+          },
+          {
+            "val": "11977",
+            "text": "[강좌(강사기준)_3월,26년 4월,26년 5월,26년 6월] [2026년] 늘봄학교 강사 만족도 조사 설문지(학부모용)"
+          },
+          {
+            "val": "11976",
+            "text": "[강좌(강사기준)_3월,26년 4월,26년 5월,26년 6월] [2026년] 늘봄학교 강사 만족도 조사 설문지(학생용)"
+          }
+        ]
+      },
+      {
+        "name": "sgr",
+        "id": "sgr",
+        "options": [
+          {
+            "val": "",
+            "text": "=학년="
+          },
+          {
+            "val": "1",
+            "text": "1"
+          },
+          {
+            "val": "2",
+            "text": "2"
+          },
+          {
+            "val": "3",
+            "text": "3"
+          },
+          {
+            "val": "4",
+            "text": "4"
+          },
+          {
+            "val": "5",
+            "text": "5"
+          },
+          {
+            "val": "6",
+            "text": "6"
+          }
+        ]
+      },
+      {
+        "name": "scl",
+        "id": "scl",
+        "options": [
+          {
+            "val": "",
+            "text": "=반="
+          },
+          {
+            "val": "1",
+            "text": "1"
+          },
+          {
+            "val": "2",
+            "text": "2"
+          },
+          {
+            "val": "3",
+            "text": "3"
+          },
+          {
+            "val": "4",
+            "text": "4"
+          },
+          {
+            "val": "5",
+            "text": "5"
+          },
+          {
+            "val": "6",
+            "text": "6"
+          },
+          {
+            "val": "7",
+            "text": "7"
+          },
+          {
+            "val": "8",
+            "text": "8"
+          },
+          {
+            "val": "9",
+            "text": "9"
+          },
+          {
+            "val": "10",
+            "text": "10"
+          },
+          {
+            "val": "11",
+            "text": "11"
+          },
+          {
+            "val": "12",
+            "text": "12"
+          }
+        ]
+      }
+    ],
+    "textareas": [],
+    "actions": [
+      {
+        "tag": "a",
+        "label": "광주풍향초등학교",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "늘봄학교",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "늘봄학교",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "다른 서비스 둘러보기",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "3",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/notification/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[로그아웃]",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/member/logout/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[정보수정]",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/member/modify/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "홈으로",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌등록",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/write/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "매뉴얼",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_faq/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "고객지원 게시판",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/qanda/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "학교관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/sczigi/service/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "신청자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_app/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "대기자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_wait/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "환불/취소관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_ref/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "지원금관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_stu/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "대상자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_stu/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "수강자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_app/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "지원금설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_cfg/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "순위구분설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_cfg/free1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "귀가일정표",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_rsch/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "결석/귀가신청",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_abs/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강사관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_tea/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "설문관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "설문",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "샘플설문",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "환경설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "기본설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "신청기간",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_time/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강의시간",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/period/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌구분",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/afDiv/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "중복제한그룹",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/appLiGrp/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "학적검증",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_verify/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "나이스/에듀파인 설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_neis_edufine/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "안내글설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/message/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "초기화",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/clear/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "담당자정보",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_info/modify/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "알림관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/notification/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "푸시알림관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/spush/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "연장신청149일 남음",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_extension/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "id": "",
+        "name": "csrf_test_name",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2026-10-02 15:15:26",
+        "id": "",
+        "name": "form_open_date_use_chk_csrf",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "",
+        "id": "check_all",
+        "name": "check_all",
+        "href": "",
+        "onclick": "chk_all(this);"
+      },
+      {
+        "tag": "input",
+        "label": "박지숙",
+        "id": "s_lec_list_박지숙",
+        "name": "s_lec_list[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "강태연",
+        "id": "s_lec_list_강태연",
+        "name": "s_lec_list[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "박지연",
+        "id": "s_lec_list_박지연",
+        "name": "s_lec_list[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "김지향",
+        "id": "s_lec_list_김지향",
+        "name": "s_lec_list[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "임은희",
+        "id": "s_lec_list_임은희",
+        "name": "s_lec_list[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "최정호",
+        "id": "s_lec_list_최정호",
+        "name": "s_lec_list[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "박경도",
+        "id": "s_lec_list_박경도",
+        "name": "s_lec_list[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "천윤아",
+        "id": "s_lec_list_천윤아",
+        "name": "s_lec_list[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "서인경",
+        "id": "s_lec_list_서인경",
+        "name": "s_lec_list[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "박은화",
+        "id": "s_lec_list_박은화",
+        "name": "s_lec_list[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "김언주",
+        "id": "s_lec_list_김언주",
+        "name": "s_lec_list[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "정진화",
+        "id": "s_lec_list_정진화",
+        "name": "s_lec_list[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "김경아",
+        "id": "s_lec_list_김경아",
+        "name": "s_lec_list[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "김윤정",
+        "id": "s_lec_list_김윤정",
+        "name": "s_lec_list[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "김재표",
+        "id": "s_lec_list_김재표",
+        "name": "s_lec_list[]",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "검색",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": "chk_list(); "
+      },
+      {
+        "tag": "input",
+        "label": "전체",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur_ans/lists/sn/3267/sur_num/11977",
+        "onclick": "location.href="
+      },
+      {
+        "tag": "a",
+        "label": "문항목록",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "location.href="
+      },
+      {
+        "tag": "a",
+        "label": "참여자조회",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "location.href="
+      },
+      {
+        "tag": "a",
+        "label": "결과 엑셀출력",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "chk_excel("
+      },
+      {
+        "tag": "a",
+        "label": "대상자 엑셀출력",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "return chk_excel3();"
+      },
+      {
+        "tag": "a",
+        "label": "참여현황 엑셀출력",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "chk_excel1("
+      },
+      {
+        "tag": "a",
+        "label": "화면인쇄",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "chk_listp();"
+      },
+      {
+        "tag": "input",
+        "label": "0",
+        "id": "excel_lec_all_0",
+        "name": "excel_lec_all",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "3",
+        "id": "excel_lec_all_3",
+        "name": "excel_lec_all",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "1",
+        "id": "excel_lec_all_1",
+        "name": "excel_lec_all",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2",
+        "id": "excel_lec_all_2",
+        "name": "excel_lec_all",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "취소",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": "chk_excel("
+      },
+      {
+        "tag": "input",
+        "label": "확인",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": "chk_excel("
+      },
+      {
+        "tag": "input",
+        "label": "0",
+        "id": "excel_result_type_0",
+        "name": "excel_result_type",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "1",
+        "id": "excel_result_type_1",
+        "name": "excel_result_type",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "취소",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": "chk_excel("
+      },
+      {
+        "tag": "input",
+        "label": "확인",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": "chk_excel("
+      },
+      {
+        "tag": "input",
+        "label": "0",
+        "id": "excel1_gubun_0",
+        "name": "excel1_gubun",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "1",
+        "id": "excel1_gubun_1",
+        "name": "excel1_gubun",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "취소",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": "chk_excel1("
+      },
+      {
+        "tag": "input",
+        "label": "확인",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": "chk_excel1("
+      },
+      {
+        "tag": "a",
+        "label": "xmecca.com",
+        "id": "",
+        "name": "",
+        "href": "http://www.xmecca.com",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "id": "",
+        "name": "csrf_test_name",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2026-10-02 15:15:26",
+        "id": "",
+        "name": "form_open_date_use_chk_csrf",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "로그인",
+        "id": "",
+        "name": "submit",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "button",
+        "label": "×",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "id": "",
+        "name": "csrf_test_name",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2026-10-02 15:15:26",
+        "id": "",
+        "name": "form_open_date_use_chk_csrf",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2단계 인증",
+        "id": "",
+        "name": "submit",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "button",
+        "label": "×",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "확인",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": ""
+      }
+    ],
+    "thHeaders": [
+      "설문",
+      "강좌",
+      "학생",
+      "출력 옵션",
+      "출력 옵션",
+      "출력 옵션"
+    ]
+  },
+  "surs_lists": {
+    "forms": [
+      {
+        "name": "fm_del",
+        "id": "fm_del",
+        "action": "https://www.dbdbschool.kr/af/ad_surs/del/p/1/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_login",
+        "id": "fm_comm_login",
+        "action": "https://www.dbdbschool.kr/member/login/sn/3267",
+        "method": "post"
+      },
+      {
+        "name": "fm_comm_auth2",
+        "id": "fm_comm_auth2",
+        "action": "https://www.dbdbschool.kr/member/auth2/modal/Y/sn/3267",
+        "method": "post"
+      }
+    ],
+    "inputs": [
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:15:31"
+      },
+      {
+        "type": "hidden",
+        "name": "num",
+        "id": "del_num",
+        "value": ""
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:15:31"
+      },
+      {
+        "type": "text",
+        "name": "login_id",
+        "id": "login_id",
+        "value": ""
+      },
+      {
+        "type": "password",
+        "name": "login_passwd",
+        "id": "login_passwd",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "로그인"
+      },
+      {
+        "type": "hidden",
+        "name": "csrf_test_name",
+        "id": "",
+        "value": "4a1780fbc12d51eb33cb3ea82167f4e8"
+      },
+      {
+        "type": "hidden",
+        "name": "form_open_date_use_chk_csrf",
+        "id": "",
+        "value": "2026-10-02 15:15:31"
+      },
+      {
+        "type": "text",
+        "name": "otp_num",
+        "id": "",
+        "value": ""
+      },
+      {
+        "type": "submit",
+        "name": "submit",
+        "id": "",
+        "value": "2단계 인증"
+      }
+    ],
+    "selects": [],
+    "textareas": [],
+    "actions": [
+      {
+        "tag": "a",
+        "label": "광주풍향초등학교",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "늘봄학교",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "늘봄학교",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "다른 서비스 둘러보기",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "3",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/notification/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[로그아웃]",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/member/logout/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[정보수정]",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/member/modify/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "홈으로",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌등록",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/write/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "매뉴얼",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_faq/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "고객지원 게시판",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/qanda/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "학교관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/sczigi/service/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "신청자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_app/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "대기자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_wait/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "환불/취소관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_ref/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "지원금관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_stu/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "대상자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_stu/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "수강자관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_app/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "지원금설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_cfg/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "순위구분설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_free2_cfg/free1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "귀가일정표",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_rsch/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "결석/귀가신청",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_abs/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강사관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_tea/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "설문관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "설문",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_sur/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "샘플설문",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "환경설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "기본설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "신청기간",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_time/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강의시간",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/period/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌구분",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/afDiv/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "중복제한그룹",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/appLiGrp/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "학적검증",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_verify/main/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "나이스/에듀파인 설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_neis_edufine/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "안내글설정",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/message/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "초기화",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_cfg/clear/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "담당자정보",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_info/modify/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "알림관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/notification/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "푸시알림관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/spush/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "연장신청149일 남음",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_extension/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "강좌관리",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_lec/lists/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "샘플설문",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/help/go_data/num/99/data/link1",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "등록",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": "location.href="
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/2375/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[경기2] 초1~2 맞춤형/ 돌봄/ 수익자 방과후&gt; 2027학년도 운영을 위한 기초 수요조사 설문 (학부모 대상)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2375/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "8",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2375/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/2374/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[경기2] 2026 2학기 프로그램 운영 만족도 조사 설문 (학부모)- 방과후",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2374/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "6",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2374/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/2373/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[경기2] 2026 2학기 프로그램 운영 만족도 조사 설문 (학부모)- 돌봄",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2373/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "6",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2373/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/2372/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[경기2] 2026 2학기 프로그램 운영 만족도 조사 설문 (학부모)- 초1~2 맞춤형",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2372/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "6",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2372/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/2371/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[경기2] 2026 2학기 프로그램 운영 만족도 조사 설문 - 방과후",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2371/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "5",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2371/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/2116/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[광주 2026년] 늘봄학교 만족도 조사 설문지(학부모용)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2116/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "5",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2116/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/2115/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[광주 2026년] 늘봄학교 만족도 조사 설문지(학생용)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2115/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "5",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2115/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/2068/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "학생 지역아동센터 참여 여부 설문조사",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2068/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "2",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2068/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/1941/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "2026학년도 늘봄학교 늘봄과정 본 수요조사 안내 (1~5학년)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1941/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "10",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1941/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/1769/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "2026년 늘봄학교 운영계획 수립을 위한 설문",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1769/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "4",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1769/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/1704/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "늘봄학교 공개수업 참관 신청 및 참관 후기 작성 [미술부][수강생이 아닌 학부모도 참여]",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1704/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "13",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1704/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/1310/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "00월 늘봄학교 귀가 및 이용 서약서",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1310/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "10",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1310/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/1304/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "3월 4일(화) 1학년 입학식 이후 긴급 돌봄 희망자 신청",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1304/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "1",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1304/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/1250/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[광주]늘봄과정 본 수요조사 안내 (현재 2~5학년 대상)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1250/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "9",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1250/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/1242/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[광주]늘봄과정 본 수요조사 안내 (현재 1학년 대상)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1242/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "9",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1242/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/1221/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[광주] 2025년 늘봄학교 운영을 위한 기초 수요 조사",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1221/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "6",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1221/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/1090/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "2024년 방과후 프로그램 참여 만족도 조사 설문지(학부모용)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1090/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "3",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1090/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/1089/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "2024년 방과후 프로그램 참여 만족도 조사 설문지(학생용)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1089/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "3",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1089/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/708/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "방과후학교 기초조사 설문",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/708/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "5",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/708/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/707/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "방과후학교 프로그램 개설을 위한 설문조사",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/707/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "7",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/707/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/501/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "방과후학교 연간 운영 만족도 설문지(교사용) (2020년)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/501/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "6",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/501/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/5/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "방과후학교 연간 운영 만족도 설문지(교사용)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/5/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "10",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/5/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/3/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "방과후학교 연간 운영 만족도 설문지(학부모용)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/3/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "9",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/3/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/2/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "방과후학교 연간 운영 만족도 설문지(학생용)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "8",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/2370/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[경기2] 2026 2학기 프로그램 강사 만족도 조사 설문 - 방과후",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2370/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "7",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2370/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/2367/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[경기2] 2026학년도 2학기 방과후 프로그램 및 강사 만족도 조사 설문 (학부모용) - 돌봄",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2367/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "7",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2367/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/2300/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[경기1] 2026학년도 1학기 방과후, 맞춤형 프로그램 및 강사 만족도 조사 (학부모용)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2300/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "9",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2300/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/2299/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[경기1] 2026학년도 1학기 방과후 프로그램 및 강사 만족도 조사 (3~6 학년 학생용)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2299/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "5",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2299/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/2274/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[경북]  2026학년도 초등돌봄･교육 만족도 조사 설문지(학생용)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2274/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "6",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2274/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/2272/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[경북]  2026학년도 초등돌봄･교육 만족도 조사 설문지(학부모용)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2272/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "6",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2272/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/2118/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[광주 2026년] 늘봄학교 강사 만족도 조사 설문지(학부모용)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2118/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "7",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2118/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/2117/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "[광주 2026년] 늘봄학교 강사 만족도 조사 설문지(학생용)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2117/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "5",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/2117/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/1784/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "늘봄학교 공개수업 참관 후기 작성 [수강생 대상]",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1784/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "13",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1784/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/1364/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "늘봄학교 프로그램 및 강사 만족도 설문지(학생용) (2025년)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1364/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "10",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1364/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/1363/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "늘봄학교 프로그램 및 강사 만족도 설문지(학부모용) (2025년)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1363/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "10",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/1363/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/617/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "방과후학교 프로그램 및 강사 만족도 설문지(학부모용) (2024년)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/617/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "10",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/617/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/616/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "방과후학교 프로그램 및 강사 만족도 설문지(학생용) (2024년)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/616/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "10",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/616/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/500/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "방과후학교 운영 만족도 설문지(학부모용) (2020년)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/500/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "7",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/500/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/499/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "방과후학교 운영 만족도 설문지(학생용) (2020년)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/499/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "7",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/499/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/7/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "방과후학교 학생 만족도 조사지(초등 4-6학년용)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/7/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "11",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/7/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/6/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "방과후학교 학생 만족도 조사지(초등 1-3학년용)",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/6/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "11",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/6/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs/modify/num/4/p/1/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "방과후학교 학부모 만족도 조사지",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/4/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "6",
+        "id": "",
+        "name": "",
+        "href": "https://www.dbdbschool.kr/af/ad_surs_que/lists/sur_num/4/sn/3267",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "id": "",
+        "name": "csrf_test_name",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2026-10-02 15:15:31",
+        "id": "",
+        "name": "form_open_date_use_chk_csrf",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "xmecca.com",
+        "id": "",
+        "name": "",
+        "href": "http://www.xmecca.com",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "id": "",
+        "name": "csrf_test_name",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2026-10-02 15:15:31",
+        "id": "",
+        "name": "form_open_date_use_chk_csrf",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "로그인",
+        "id": "",
+        "name": "submit",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "button",
+        "label": "×",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "4a1780fbc12d51eb33cb3ea82167f4e8",
+        "id": "",
+        "name": "csrf_test_name",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2026-10-02 15:15:31",
+        "id": "",
+        "name": "form_open_date_use_chk_csrf",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "input",
+        "label": "2단계 인증",
+        "id": "",
+        "name": "submit",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "button",
+        "label": "×",
+        "id": "",
+        "name": "",
+        "href": "",
+        "onclick": ""
+      },
+      {
+        "tag": "a",
+        "label": "확인",
+        "id": "",
+        "name": "",
+        "href": "#none;",
+        "onclick": ""
+      }
+    ],
+    "thHeaders": [
+      "연번",
+      "수정(복사)",
+      "등록구분",
+      "설문구분",
+      "제목",
+      "문항",
+      "삭제"
+    ]
+  }
+}
