@@ -279,6 +279,12 @@ function loadSubmodelData(key) {
     case 'ad_cfg_message':
       loadNoticeSettings();
       break;
+    case 'ad_verify_main':
+      if (typeof loadAcademicVerification === 'function') loadAcademicVerification();
+      break;
+    case 'ad_neis_edufine_lists':
+      if (typeof loadNeisEdufineSettings === 'function') loadNeisEdufineSettings();
+      break;
     case 'ad_info_modify':
       loadManagerInfo();
       break;

@@ -16,27 +16,31 @@
   * 기본설정, 강사권한, 출석부옵션, 문자설정 4개 서브탭 1:1 완벽 패널 통합
   * 전자 서명 캔버스 패드 모달 (`#modal_sign_pad`) 및 교직원 관리자 검색 모달 (`#modal_admin_search`) 탑재
   * `cfg_logic.js` 및 서버 API 5종 (`/api/ad_cfg/*`), 자동화 하네스 (`test_verify_ad_cfg.js`) 17/17 PASS
+* ✅ **Sprint 4 (환경설정 파트 B - 운영 규칙 및 연동)**:
+  * 신청기간, 강의시간, 강좌구분, 중복제한그룹, 학적검증, 나이스/에듀파인, 안내글, 초기화, 담당자정보 7개 서브모델 & 4종 모달 완벽 탑재
+  * `cfg_part_b_logic.js` 26개 클라이언트 함수 및 서버 REST API 16종 + 프리미엄 학적검증 엑셀 리포트 구현
+  * 자동화 테스트 하네스 (`test_verify_ad_cfg_part_b.js`) 34/34 100% ALL PASS
 
 ---
 
-## 2. 다음 즉시 실행할 작업 대상: [Sprint 4] 환경설정 파트 B (운영 규칙 및 연동)
+## 2. 다음 즉시 실행할 작업 대상: [Sprint 5] 알림관리 / 푸시알림관리 / 연장신청 및 학부모·강사 포털
 
 사용자가 **"이어서 계속해"**를 입력하면, AI는 즉시 아래 1번 타깃부터 파이프라인을 가동한다:
 
 ### 타깃 목록:
-1. **신청기간 설정** (`https://www.dbdbschool.kr/af/ad_time/lists/sn/3267` ➔ 로컬: `/af/ad_time/lists/sn/3267`)
-   * 학년별(1~6학년) 수강신청 시작일시 ~ 종료일시 Date/Time Picker, 취소/정정 기간, 저장 API
-2. **강의시간 설정** (`https://www.dbdbschool.kr/af/ad_cfg/period/sn/3267` ➔ 로컬: `/af/ad_cfg/period/sn/3267`)
-   * 교시 목록 그리드 (1교시~N교시: 시작~종료), 순서 변경(▲/▽), 추가/삭제/일괄생성 모달
-3. **강좌구분 설정** (`https://www.dbdbschool.kr/af/ad_cfg/afDiv/sn/3267` ➔ 로컬: `/af/ad_cfg/afDiv/sn/3267`)
-   * 강좌 구분 코드 그리드 (구분코드, 구분명, 사용여부), 추가/수정/삭제/일괄저장
-4. **중복제한그룹 설정** (`https://www.dbdbschool.kr/af/ad_cfg/appLiGrp/sn/3267` ➔ 로컬: `/af/ad_cfg/appLiGrp/sn/3267`)
-   * 그룹 목록, 그룹추가 모달, 강좌선택 체크박스 모달, 저장 API
-5. **학적검증** (`https://www.dbdbschool.kr/af/ad_verify/main/sn/3267` ➔ 로컬: `/af/ad_verify/main/sn/3267`)
-   * 학적 불일치 대조 그리드, 검증 실행, 엑셀 출력 (`/af/ad_verify/excel`), 동기화 API
-6. **나이스/에듀파인 설정** (`https://www.dbdbschool.kr/af/ad_neis_edufine/lists/sn/3267` ➔ 로컬: `/af/ad_neis_edufine/lists/sn/3267`)
-   * 과목/강좌 코드 매핑, 엑셀 양식 다운로드, 엑셀 일괄 업로드, 매핑 저장
-7. **안내글설정, 초기화, 담당자정보** (`/af/ad_cfg/message`, `/af/ad_cfg/clear`, `/af/ad_info/modify`)
+1. **알림관리 (SMS/알림톡)** (`/af/notification/lists/sn/3267` ➔ `panel_notification_lists`)
+   - 발송 내역 조회, 신규 알림 작성 모달, 수신자 선택 모달, 발송 예약, 충전/잔여건수 연동
+   - *(사양서: [docs/NOTIFICATION_PUSH_MESSAGING_SPEC.md](file:///c:/My_Project/course/course_site/docs/NOTIFICATION_PUSH_MESSAGING_SPEC.md) 참조)*
+2. **푸시알림관리 (Smart Push)** (`/af/spush/lists/sn/3267` ➔ `panel_spush_lists`)
+   - 100% 무료 스마트 웹 푸시(Web Push) 엔진 + 무료 테스트(Mock)/실제 SMS 듀얼 발송 모달 (`#modal_spush_send`)
+   - 학년/반/강좌별 타겟팅 필터링, 치환 변수(`#{학생명}` 등) 원클릭 삽입, 즉시/예약 발송
+   - *(사양서: [docs/NOTIFICATION_PUSH_MESSAGING_SPEC.md](file:///c:/My_Project/course/course_site/docs/NOTIFICATION_PUSH_MESSAGING_SPEC.md) 참조)*
+3. **연장신청 (SaaS 구독 갱신)** (`/af/ad_extension/lists/sn/3267` ➔ `panel_ad_extension_lists`)
+   - 학교 서비스 이용 기간 연장 신청, 요금제 선택, 결제/계좌이체 요청 모달
+4. **학부모 포털 (Parent LMS)** (`/af/main/index/sn/3267`, `/af/af_sub_app/main/sn/3267`)
+   - 온라인 수강신청, 내 자녀 수강/대기 현황, 결석/귀가 온라인 신청, 실시간 출결 알림
+5. **강사 포털 (Teacher Portal)** (`/af/tc_attend/main/sn/3267`, `/af/tc_lesson/main/sn/3267`)
+   - 모바일 출석체크 웹앱, 차시별 교육일지 작성, 강사료 정산 명세서 조회
 
 ---
 
